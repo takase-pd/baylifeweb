@@ -351,41 +351,6 @@ class _LoginPageWidgetState extends State<LoginPageWidget> {
                                                 borderRadius:
                                                     BorderRadius.circular(50),
                                               ),
-                                              child: Padding(
-                                                padding: EdgeInsets.fromLTRB(
-                                                    2, 2, 2, 2),
-                                                child: InkWell(
-                                                  onTap: () async {
-                                                    final user =
-                                                        await signInWithGoogle(
-                                                            context);
-                                                    if (user == null) {
-                                                      return;
-                                                    }
-                                                    await Navigator
-                                                        .pushAndRemoveUntil(
-                                                      context,
-                                                      MaterialPageRoute(
-                                                        builder: (context) =>
-                                                            HomePageWidget(),
-                                                      ),
-                                                      (r) => false,
-                                                    );
-                                                  },
-                                                  child: Container(
-                                                    width: 50,
-                                                    height: 50,
-                                                    clipBehavior:
-                                                        Clip.antiAlias,
-                                                    decoration: BoxDecoration(
-                                                      shape: BoxShape.circle,
-                                                    ),
-                                                    child: Image.asset(
-                                                      'assets/images/social_GoogleWhite.svg',
-                                                    ),
-                                                  ),
-                                                ),
-                                              ),
                                             ),
                                           )
                                         ],
