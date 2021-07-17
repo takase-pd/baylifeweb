@@ -3,19 +3,18 @@ import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
 import '../home_page/home_page_widget.dart';
-import '../signup_page/signup_page_widget.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class LoginPageWidget extends StatefulWidget {
-  LoginPageWidget({Key key}) : super(key: key);
+class SignupPageWidget extends StatefulWidget {
+  SignupPageWidget({Key key}) : super(key: key);
 
   @override
-  _LoginPageWidgetState createState() => _LoginPageWidgetState();
+  _SignupPageWidgetState createState() => _SignupPageWidgetState();
 }
 
-class _LoginPageWidgetState extends State<LoginPageWidget> {
+class _SignupPageWidgetState extends State<SignupPageWidget> {
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
@@ -56,23 +55,48 @@ class _LoginPageWidgetState extends State<LoginPageWidget> {
               mainAxisSize: MainAxisSize.max,
               children: [
                 Padding(
-                  padding: EdgeInsets.fromLTRB(0, 8, 0, 0),
-                  child: InkWell(
-                    onTap: () async {
-                      await Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => SignupPageWidget(),
-                        ),
-                      );
+                  padding: EdgeInsets.fromLTRB(0, 20, 0, 0),
+                  child: FFButtonWidget(
+                    onPressed: () {
+                      print('loginButton pressed ...');
                     },
-                    child: AutoSizeText(
-                      'Sign up',
-                      textAlign: TextAlign.center,
-                      style: FlutterFlowTheme.bodyText2.override(
+                    text: 'Create Account',
+                    options: FFButtonOptions(
+                      width: 230,
+                      height: 50,
+                      color: Color(0xFF090F13),
+                      textStyle: FlutterFlowTheme.subtitle2.override(
                         fontFamily: 'Poppins',
-                        color: FlutterFlowTheme.primaryColor,
+                        color: Colors.white,
                       ),
+                      elevation: 3,
+                      borderSide: BorderSide(
+                        color: Colors.transparent,
+                        width: 1,
+                      ),
+                      borderRadius: 8,
+                    ),
+                  ),
+                ),
+                Padding(
+                  padding: EdgeInsets.fromLTRB(0, 16, 0, 0),
+                  child: AutoSizeText(
+                    'OR',
+                    textAlign: TextAlign.center,
+                    style: FlutterFlowTheme.title2.override(
+                      fontFamily: 'Poppins',
+                      color: FlutterFlowTheme.secondaryColor,
+                    ),
+                  ),
+                ),
+                Padding(
+                  padding: EdgeInsets.fromLTRB(0, 8, 0, 0),
+                  child: AutoSizeText(
+                    'Use a Social Platform to Create Account',
+                    textAlign: TextAlign.center,
+                    style: FlutterFlowTheme.bodyText2.override(
+                      fontFamily: 'Poppins',
+                      color: FlutterFlowTheme.primaryColor,
                     ),
                   ),
                 ),
@@ -99,7 +123,7 @@ class _LoginPageWidgetState extends State<LoginPageWidget> {
                                 (r) => false,
                               );
                             },
-                            text: 'Sign in with Google',
+                            text: 'Sign up with Google',
                             icon: Icon(
                               Icons.add,
                               color: Colors.transparent,
