@@ -5,10 +5,15 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "baylifeweb",
+            "name": "BLW(Chrome)",
             "request": "launch",
             "type": "dart",
-            "args": ["--web-port", "5000"]
+            "args": ["-d", "chrome", "--web-port", "5000"]
+        },
+        {
+            "name": "baylifeweb",
+            "request": "launch",
+            "type": "dart"
         },
         {
             "name": "baylifeweb (profile mode)",
