@@ -1,7 +1,10 @@
 import '../auth/auth_util.dart';
 import '../backend/backend.dart';
+import '../backend/firebase_storage/storage.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
+import '../flutter_flow/flutter_flow_widgets.dart';
+import '../flutter_flow/upload_media.dart';
 import '../login_page/login_page_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -14,6 +17,7 @@ class HomePageWidget extends StatefulWidget {
 }
 
 class _HomePageWidgetState extends State<HomePageWidget> {
+  String uploadedFileUrl = '';
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
@@ -154,6 +158,45 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                           ),
                         );
                       },
+                    ),
+                    FFButtonWidget(
+                      onPressed: () async {
+                        final selectedMedia = await selectMedia(
+                          maxWidth: 500.00,
+                          maxHeight: 500.00,
+                        );
+                        if (selectedMedia != null &&
+                            validateFileFormat(
+                                selectedMedia.storagePath, context)) {
+                          showUploadMessage(context, 'Uploading file...',
+                              showLoading: true);
+                          final downloadUrl = await uploadData(
+                              selectedMedia.storagePath, selectedMedia.bytes);
+                          ScaffoldMessenger.of(context).hideCurrentSnackBar();
+                          if (downloadUrl != null) {
+                            setState(() => uploadedFileUrl = downloadUrl);
+                            showUploadMessage(context, 'Success!');
+                          } else {
+                            showUploadMessage(
+                                context, 'Failed to upload media');
+                          }
+                        }
+                      },
+                      text: 'Upload',
+                      options: FFButtonOptions(
+                        width: 130,
+                        height: 40,
+                        color: FlutterFlowTheme.primaryColor,
+                        textStyle: FlutterFlowTheme.subtitle2.override(
+                          fontFamily: 'Poppins',
+                          color: Colors.white,
+                        ),
+                        borderSide: BorderSide(
+                          color: Colors.transparent,
+                          width: 1,
+                        ),
+                        borderRadius: 12,
+                      ),
                     )
                   ],
                 ),

@@ -562,7 +562,7 @@ class _LoginPageWidgetState extends State<LoginPageWidget> {
                                         (r) => false,
                                       );
                                     },
-                                    text: 'Create Account\\n',
+                                    text: 'Create Account',
                                     options: FFButtonOptions(
                                       width: 230,
                                       height: 60,
