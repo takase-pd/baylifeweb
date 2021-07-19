@@ -21,9 +21,13 @@ class _HomePageWidgetState extends State<HomePageWidget> {
     return Scaffold(
       key: scaffoldKey,
       backgroundColor: FlutterFlowTheme.tertiaryColor,
+      drawer: Drawer(
+        elevation: 16,
+      ),
       body: Column(
         mainAxisSize: MainAxisSize.max,
-        crossAxisAlignment: CrossAxisAlignment.stretch,
+        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Container(
             width: double.infinity,
@@ -40,11 +44,29 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                 mainAxisSize: MainAxisSize.max,
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text(
-                    'MAKUHARI Bay Life',
-                    style: FlutterFlowTheme.title3.override(
-                      fontFamily: 'Poppins',
-                    ),
+                  Row(
+                    mainAxisSize: MainAxisSize.max,
+                    children: [
+                      Padding(
+                        padding: EdgeInsets.fromLTRB(0, 0, 20, 0),
+                        child: InkWell(
+                          onTap: () async {
+                            scaffoldKey.currentState.openDrawer();
+                          },
+                          child: Icon(
+                            Icons.menu,
+                            color: Colors.black,
+                            size: 24,
+                          ),
+                        ),
+                      ),
+                      Text(
+                        'MAKUHARI Bay Life',
+                        style: FlutterFlowTheme.title3.override(
+                          fontFamily: 'Poppins',
+                        ),
+                      )
+                    ],
                   ),
                   InkWell(
                     onTap: () async {
@@ -69,22 +91,15 @@ class _HomePageWidgetState extends State<HomePageWidget> {
           ),
           Row(
             mainAxisSize: MainAxisSize.max,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Container(
-                width: 240,
-                height: MediaQuery.of(context).size.height * 1,
-                decoration: BoxDecoration(
-                  color: FlutterFlowTheme.tertiaryColor,
-                  border: Border.all(
-                    width: 0.05,
-                  ),
-                ),
-              ),
               Padding(
                 padding: EdgeInsets.fromLTRB(20, 20, 10, 10),
                 child: Column(
                   mainAxisSize: MainAxisSize.max,
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     StreamBuilder<List<InfoAdminRecord>>(
                       stream: queryInfoAdminRecord(
@@ -120,6 +135,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                           padding: EdgeInsets.fromLTRB(0, 0, 0, 20),
                           child: Column(
                             mainAxisSize: MainAxisSize.max,
+                            mainAxisAlignment: MainAxisAlignment.start,
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
@@ -138,10 +154,6 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                           ),
                         );
                       },
-                    ),
-                    Column(
-                      mainAxisSize: MainAxisSize.max,
-                      children: [],
                     )
                   ],
                 ),
