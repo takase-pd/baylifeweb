@@ -41,6 +41,8 @@ dependencies:
   intl:
   json_serializable: ^3.5.1
   page_transition:
+  rxdart: ^0.25.0
+  sign_in_with_apple: ^2.5.4
   timeago:
   url_launcher:
   http_parser: ^4.0.0

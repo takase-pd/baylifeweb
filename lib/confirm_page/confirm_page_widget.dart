@@ -1,4 +1,6 @@
+import '../auth/auth_util.dart';
 import '../backend/backend.dart';
+import '../components/main_menu_widget.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
@@ -52,78 +54,7 @@ class _ConfirmPageWidgetState extends State<ConfirmPageWidget> {
       body: Row(
         mainAxisSize: MainAxisSize.max,
         children: [
-          Container(
-            width: 240,
-            height: double.infinity,
-            decoration: BoxDecoration(
-              color: FlutterFlowTheme.tertiaryColor,
-              border: Border.all(
-                width: 0.05,
-              ),
-            ),
-            child: Column(
-              mainAxisSize: MainAxisSize.max,
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Padding(
-                  padding: EdgeInsets.fromLTRB(10, 20, 10, 20),
-                  child: Row(
-                    mainAxisSize: MainAxisSize.max,
-                    children: [
-                      Text(
-                        'MAKUHARI Bay Life',
-                        style: FlutterFlowTheme.title3.override(
-                          fontFamily: 'Poppins',
-                        ),
-                      )
-                    ],
-                  ),
-                ),
-                Container(
-                  width: 220,
-                  height: 800,
-                  decoration: BoxDecoration(
-                    color: Color(0xFFEEEEEE),
-                  ),
-                  child: Padding(
-                    padding: EdgeInsets.fromLTRB(10, 0, 10, 0),
-                    child: Column(
-                      mainAxisSize: MainAxisSize.max,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          '投稿',
-                          style: FlutterFlowTheme.bodyText1.override(
-                            fontFamily: 'Poppins',
-                          ),
-                        )
-                      ],
-                    ),
-                  ),
-                ),
-                Padding(
-                  padding: EdgeInsets.fromLTRB(10, 10, 10, 20),
-                  child: Row(
-                    mainAxisSize: MainAxisSize.max,
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        'Logout',
-                        style: FlutterFlowTheme.bodyText1.override(
-                          fontFamily: 'Poppins',
-                        ),
-                      ),
-                      Icon(
-                        Icons.logout,
-                        color: Colors.black,
-                        size: 24,
-                      )
-                    ],
-                  ),
-                )
-              ],
-            ),
-          ),
+          MainMenuWidget(),
           SingleChildScrollView(
             child: Column(
               mainAxisSize: MainAxisSize.max,
