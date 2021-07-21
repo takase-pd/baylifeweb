@@ -42,39 +42,44 @@ class _LoginPageWidgetState extends State<LoginPageWidget> {
   Widget build(BuildContext context) {
     return Scaffold(
       key: scaffoldKey,
+      appBar: PreferredSize(
+        preferredSize: Size.fromHeight(80),
+        child: AppBar(
+          automaticallyImplyLeading: true,
+          flexibleSpace: Container(
+            width: double.infinity,
+            height: 100,
+            decoration: BoxDecoration(
+              color: FlutterFlowTheme.tertiaryColor,
+            ),
+            child: Padding(
+              padding: EdgeInsets.fromLTRB(10, 10, 10, 10),
+              child: Row(
+                mainAxisSize: MainAxisSize.max,
+                children: [
+                  Text(
+                    'MAKUHARI Bay Life',
+                    style: FlutterFlowTheme.title3.override(
+                      fontFamily: 'Poppins',
+                    ),
+                  )
+                ],
+              ),
+            ),
+          ),
+          actions: [],
+          elevation: 4,
+        ),
+      ),
       backgroundColor: FlutterFlowTheme.tertiaryColor,
       body: SafeArea(
         child: Column(
           mainAxisSize: MainAxisSize.max,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            Container(
-              width: double.infinity,
-              height: 80,
-              decoration: BoxDecoration(
-                color: FlutterFlowTheme.tertiaryColor,
-                border: Border.all(
-                  width: 0.05,
-                ),
-              ),
-              child: Padding(
-                padding: EdgeInsets.fromLTRB(10, 10, 10, 10),
-                child: Row(
-                  mainAxisSize: MainAxisSize.max,
-                  children: [
-                    Text(
-                      'MAKUHARI Bay Life',
-                      style: FlutterFlowTheme.title3.override(
-                        fontFamily: 'Poppins',
-                      ),
-                    )
-                  ],
-                ),
-              ),
-            ),
             Expanded(
               child: Padding(
-                padding: EdgeInsets.fromLTRB(100, 0, 100, 0),
+                padding: EdgeInsets.fromLTRB(300, 50, 300, 0),
                 child: DefaultTabController(
                   length: 2,
                   initialIndex: 0,

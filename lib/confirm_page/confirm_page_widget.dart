@@ -1,5 +1,6 @@
 import '../auth/auth_util.dart';
 import '../backend/backend.dart';
+import '../components/header_widget.dart';
 import '../components/main_menu_widget.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
@@ -50,651 +51,650 @@ class _ConfirmPageWidgetState extends State<ConfirmPageWidget> {
   Widget build(BuildContext context) {
     return Scaffold(
       key: scaffoldKey,
+      appBar: PreferredSize(
+        preferredSize: Size.fromHeight(80),
+        child: AppBar(
+          automaticallyImplyLeading: true,
+          flexibleSpace: HeaderWidget(),
+          actions: [],
+          elevation: 4,
+        ),
+      ),
       backgroundColor: FlutterFlowTheme.tertiaryColor,
-      body: Row(
-        mainAxisSize: MainAxisSize.max,
-        children: [
-          MainMenuWidget(),
-          SingleChildScrollView(
-            child: Column(
-              mainAxisSize: MainAxisSize.max,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Padding(
-                  padding: EdgeInsets.fromLTRB(20, 0, 20, 20),
-                  child: Column(
+      endDrawer: Drawer(
+        elevation: 16,
+        child: MainMenuWidget(),
+      ),
+      body: SingleChildScrollView(
+        child: Column(
+          mainAxisSize: MainAxisSize.max,
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            Padding(
+              padding: EdgeInsets.fromLTRB(20, 0, 20, 20),
+              child: Column(
+                mainAxisSize: MainAxisSize.max,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Row(
                     mainAxisSize: MainAxisSize.max,
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Row(
-                        mainAxisSize: MainAxisSize.max,
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          StreamBuilder<List<InfoAdminRecord>>(
-                            stream: queryInfoAdminRecord(
-                              singleRecord: true,
-                            ),
-                            builder: (context, snapshot) {
-                              // Customize what your widget looks like when it's loading.
-                              if (!snapshot.hasData) {
-                                return Center(
-                                  child: SizedBox(
-                                    width: 50,
-                                    height: 50,
-                                    child: CircularProgressIndicator(
-                                      color: FlutterFlowTheme.primaryColor,
-                                    ),
-                                  ),
-                                );
-                              }
-                              List<InfoAdminRecord> columnInfoAdminRecordList =
-                                  snapshot.data;
-                              // Customize what your widget looks like with no query results.
-                              if (snapshot.data.isEmpty) {
-                                return Container(
+                      StreamBuilder<List<InfoAdminRecord>>(
+                        stream: queryInfoAdminRecord(
+                          singleRecord: true,
+                        ),
+                        builder: (context, snapshot) {
+                          // Customize what your widget looks like when it's loading.
+                          if (!snapshot.hasData) {
+                            return Center(
+                              child: SizedBox(
+                                width: 50,
+                                height: 50,
+                                child: CircularProgressIndicator(
+                                  color: FlutterFlowTheme.primaryColor,
+                                ),
+                              ),
+                            );
+                          }
+                          List<InfoAdminRecord> columnInfoAdminRecordList =
+                              snapshot.data;
+                          // Customize what your widget looks like with no query results.
+                          if (snapshot.data.isEmpty) {
+                            return Container(
+                              height: 100,
+                              child: Center(
+                                child: Text('No results.'),
+                              ),
+                            );
+                          }
+                          final columnInfoAdminRecord =
+                              columnInfoAdminRecordList.first;
+                          return Padding(
+                            padding: EdgeInsets.fromLTRB(0, 0, 0, 20),
+                            child: Column(
+                              mainAxisSize: MainAxisSize.max,
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Container(
+                                  width: 1000,
                                   height: 100,
-                                  child: Center(
-                                    child: Text('No results.'),
+                                  constraints: BoxConstraints(
+                                    maxWidth: double.infinity,
                                   ),
-                                );
-                              }
-                              final columnInfoAdminRecord =
-                                  columnInfoAdminRecordList.first;
-                              return Padding(
-                                padding: EdgeInsets.fromLTRB(0, 0, 0, 20),
-                                child: Column(
-                                  mainAxisSize: MainAxisSize.max,
-                                  mainAxisAlignment: MainAxisAlignment.start,
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Container(
-                                      width: 1000,
-                                      height: 100,
-                                      constraints: BoxConstraints(
-                                        maxWidth: double.infinity,
-                                      ),
-                                      decoration: BoxDecoration(
-                                        color: FlutterFlowTheme.tertiaryColor,
-                                      ),
-                                      child: Padding(
-                                        padding:
-                                            EdgeInsets.fromLTRB(0, 20, 20, 10),
-                                        child: Column(
-                                          mainAxisSize: MainAxisSize.max,
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          children: [
-                                            Text(
-                                              '投稿 確認',
-                                              style: FlutterFlowTheme.title1
-                                                  .override(
-                                                fontFamily: 'Poppins',
-                                              ),
-                                            ),
-                                            Text(
-                                              columnInfoAdminRecord.postInfo,
-                                              style: FlutterFlowTheme.bodyText1
-                                                  .override(
-                                                fontFamily: 'Poppins',
-                                              ),
-                                            )
-                                          ],
-                                        ),
-                                      ),
-                                    )
-                                  ],
-                                ),
-                              );
-                            },
-                          )
-                        ],
-                      ),
-                      Padding(
-                        padding: EdgeInsets.fromLTRB(0, 0, 0, 16),
-                        child: Text(
-                          '投稿内容',
-                          style: FlutterFlowTheme.title3.override(
-                            fontFamily: 'Poppins',
-                          ),
-                        ),
-                      ),
-                      Padding(
-                        padding: EdgeInsets.fromLTRB(0, 0, 0, 16),
-                        child: Text(
-                          '投稿に表示されます。機密情報などは記載しないでください。',
-                          style: FlutterFlowTheme.bodyText1.override(
-                            fontFamily: 'Poppins',
-                          ),
-                        ),
-                      ),
-                      Padding(
-                        padding: EdgeInsets.fromLTRB(0, 0, 0, 12),
-                        child: Row(
-                          mainAxisSize: MainAxisSize.max,
-                          children: [
-                            Container(
-                              width: 500,
-                              height: 60,
-                              decoration: BoxDecoration(
-                                color: FlutterFlowTheme.tertiaryColor,
-                                borderRadius: BorderRadius.circular(8),
-                                border: Border.all(
-                                  color: FlutterFlowTheme.primaryColor,
-                                ),
-                              ),
-                              child: Padding(
-                                padding: EdgeInsets.fromLTRB(16, 12, 0, 10),
-                                child: Text(
-                                  widget.catName,
-                                  style: FlutterFlowTheme.bodyText1.override(
-                                    fontFamily: 'Poppins',
-                                    color: Color(0xFF8B97A2),
-                                  ),
-                                ),
-                              ),
-                            )
-                          ],
-                        ),
-                      ),
-                      Padding(
-                        padding: EdgeInsets.fromLTRB(0, 0, 0, 12),
-                        child: Row(
-                          mainAxisSize: MainAxisSize.max,
-                          children: [
-                            Container(
-                              width: 500,
-                              height: 60,
-                              decoration: BoxDecoration(
-                                color: FlutterFlowTheme.tertiaryColor,
-                                borderRadius: BorderRadius.circular(8),
-                                border: Border.all(
-                                  color: FlutterFlowTheme.primaryColor,
-                                ),
-                              ),
-                              child: Padding(
-                                padding: EdgeInsets.fromLTRB(16, 12, 0, 10),
-                                child: Text(
-                                  widget.catNameAdd,
-                                  style: FlutterFlowTheme.bodyText1.override(
-                                    fontFamily: 'Poppins',
-                                    color: Color(0xFF8B97A2),
-                                  ),
-                                ),
-                              ),
-                            )
-                          ],
-                        ),
-                      ),
-                      Padding(
-                        padding: EdgeInsets.fromLTRB(0, 0, 0, 12),
-                        child: Row(
-                          mainAxisSize: MainAxisSize.max,
-                          children: [
-                            Container(
-                              width: 500,
-                              height: 60,
-                              decoration: BoxDecoration(
-                                color: FlutterFlowTheme.tertiaryColor,
-                                borderRadius: BorderRadius.circular(8),
-                                border: Border.all(
-                                  color: FlutterFlowTheme.primaryColor,
-                                ),
-                              ),
-                              child: Padding(
-                                padding: EdgeInsets.fromLTRB(16, 12, 0, 10),
-                                child: Text(
-                                  widget.title,
-                                  style: FlutterFlowTheme.bodyText1.override(
-                                    fontFamily: 'Poppins',
-                                    color: Color(0xFF8B97A2),
-                                  ),
-                                ),
-                              ),
-                            )
-                          ],
-                        ),
-                      ),
-                      Padding(
-                        padding: EdgeInsets.fromLTRB(0, 0, 0, 12),
-                        child: Row(
-                          mainAxisSize: MainAxisSize.max,
-                          children: [
-                            Container(
-                              width: 500,
-                              height: 120,
-                              decoration: BoxDecoration(
-                                color: FlutterFlowTheme.tertiaryColor,
-                                borderRadius: BorderRadius.circular(8),
-                                border: Border.all(
-                                  color: FlutterFlowTheme.primaryColor,
-                                ),
-                              ),
-                              child: Padding(
-                                padding: EdgeInsets.fromLTRB(16, 12, 0, 10),
-                                child: Text(
-                                  widget.overview,
-                                  style: FlutterFlowTheme.bodyText1.override(
-                                    fontFamily: 'Poppins',
-                                    color: Color(0xFF8B97A2),
-                                  ),
-                                ),
-                              ),
-                            )
-                          ],
-                        ),
-                      ),
-                      Padding(
-                        padding: EdgeInsets.fromLTRB(0, 0, 0, 12),
-                        child: Row(
-                          mainAxisSize: MainAxisSize.max,
-                          children: [
-                            Container(
-                              width: 500,
-                              height: 300,
-                              decoration: BoxDecoration(
-                                color: FlutterFlowTheme.tertiaryColor,
-                                borderRadius: BorderRadius.circular(8),
-                                border: Border.all(
-                                  color: FlutterFlowTheme.primaryColor,
-                                ),
-                              ),
-                              child: Padding(
-                                padding: EdgeInsets.fromLTRB(16, 12, 0, 10),
-                                child: Text(
-                                  widget.detail,
-                                  style: FlutterFlowTheme.bodyText1.override(
-                                    fontFamily: 'Poppins',
-                                    color: Color(0xFF8B97A2),
-                                  ),
-                                ),
-                              ),
-                            )
-                          ],
-                        ),
-                      ),
-                      Padding(
-                        padding: EdgeInsets.fromLTRB(0, 0, 0, 12),
-                        child: Row(
-                          mainAxisSize: MainAxisSize.max,
-                          children: [
-                            Container(
-                              width: 500,
-                              height: 60,
-                              decoration: BoxDecoration(
-                                color: FlutterFlowTheme.tertiaryColor,
-                                borderRadius: BorderRadius.circular(8),
-                                border: Border.all(
-                                  color: FlutterFlowTheme.primaryColor,
-                                ),
-                              ),
-                              child: Padding(
-                                padding: EdgeInsets.fromLTRB(16, 12, 0, 10),
-                                child: Row(
-                                  mainAxisSize: MainAxisSize.max,
-                                  children: [
-                                    Padding(
-                                      padding: EdgeInsets.fromLTRB(0, 0, 16, 0),
-                                      child: Text(
-                                        '開始日',
-                                        style:
-                                            FlutterFlowTheme.bodyText1.override(
-                                          fontFamily: 'Poppins',
-                                          color: Color(0xFF8B97A2),
-                                        ),
-                                      ),
-                                    ),
-                                    Text(
-                                      dateTimeFormat('yMMMd', widget.startDay),
-                                      style:
-                                          FlutterFlowTheme.bodyText1.override(
-                                        fontFamily: 'Poppins',
-                                        color: Color(0xFF8B97A2),
-                                      ),
-                                    )
-                                  ],
-                                ),
-                              ),
-                            )
-                          ],
-                        ),
-                      ),
-                      Padding(
-                        padding: EdgeInsets.fromLTRB(0, 0, 0, 12),
-                        child: Row(
-                          mainAxisSize: MainAxisSize.max,
-                          children: [
-                            Container(
-                              width: 500,
-                              height: 60,
-                              decoration: BoxDecoration(
-                                color: FlutterFlowTheme.tertiaryColor,
-                                borderRadius: BorderRadius.circular(8),
-                                border: Border.all(
-                                  color: FlutterFlowTheme.primaryColor,
-                                ),
-                              ),
-                              child: Padding(
-                                padding: EdgeInsets.fromLTRB(16, 12, 0, 10),
-                                child: Row(
-                                  mainAxisSize: MainAxisSize.max,
-                                  children: [
-                                    Padding(
-                                      padding: EdgeInsets.fromLTRB(0, 0, 16, 0),
-                                      child: Text(
-                                        '終了日',
-                                        style:
-                                            FlutterFlowTheme.bodyText1.override(
-                                          fontFamily: 'Poppins',
-                                          color: Color(0xFF8B97A2),
-                                        ),
-                                      ),
-                                    ),
-                                    Text(
-                                      dateTimeFormat('yMMMd', widget.finalDay),
-                                      style:
-                                          FlutterFlowTheme.bodyText1.override(
-                                        fontFamily: 'Poppins',
-                                        color: Color(0xFF8B97A2),
-                                      ),
-                                    )
-                                  ],
-                                ),
-                              ),
-                            )
-                          ],
-                        ),
-                      ),
-                      Padding(
-                        padding: EdgeInsets.fromLTRB(0, 0, 0, 12),
-                        child: Row(
-                          mainAxisSize: MainAxisSize.max,
-                          children: [
-                            Container(
-                              width: 500,
-                              height: 60,
-                              decoration: BoxDecoration(
-                                color: FlutterFlowTheme.tertiaryColor,
-                                borderRadius: BorderRadius.circular(8),
-                                border: Border.all(
-                                  color: FlutterFlowTheme.primaryColor,
-                                ),
-                              ),
-                              child: Padding(
-                                padding: EdgeInsets.fromLTRB(16, 12, 0, 10),
-                                child: Text(
-                                  widget.address,
-                                  style: FlutterFlowTheme.bodyText1.override(
-                                    fontFamily: 'Poppins',
-                                    color: Color(0xFF8B97A2),
-                                  ),
-                                ),
-                              ),
-                            )
-                          ],
-                        ),
-                      ),
-                      Padding(
-                        padding: EdgeInsets.fromLTRB(0, 0, 0, 12),
-                        child: Row(
-                          mainAxisSize: MainAxisSize.max,
-                          children: [
-                            Container(
-                              width: 500,
-                              height: 60,
-                              decoration: BoxDecoration(
-                                color: FlutterFlowTheme.tertiaryColor,
-                                borderRadius: BorderRadius.circular(8),
-                                border: Border.all(
-                                  color: FlutterFlowTheme.primaryColor,
-                                ),
-                              ),
-                              child: Padding(
-                                padding: EdgeInsets.fromLTRB(16, 12, 0, 10),
-                                child: Text(
-                                  widget.organizer,
-                                  style: FlutterFlowTheme.bodyText1.override(
-                                    fontFamily: 'Poppins',
-                                    color: Color(0xFF8B97A2),
-                                  ),
-                                ),
-                              ),
-                            )
-                          ],
-                        ),
-                      ),
-                      Padding(
-                        padding: EdgeInsets.fromLTRB(0, 0, 0, 12),
-                        child: Row(
-                          mainAxisSize: MainAxisSize.max,
-                          children: [
-                            Container(
-                              width: 500,
-                              height: 60,
-                              decoration: BoxDecoration(
-                                color: FlutterFlowTheme.tertiaryColor,
-                                borderRadius: BorderRadius.circular(8),
-                                border: Border.all(
-                                  color: FlutterFlowTheme.primaryColor,
-                                ),
-                              ),
-                              child: Padding(
-                                padding: EdgeInsets.fromLTRB(16, 12, 0, 10),
-                                child: Text(
-                                  widget.contact,
-                                  style: FlutterFlowTheme.bodyText1.override(
-                                    fontFamily: 'Poppins',
-                                    color: Color(0xFF8B97A2),
-                                  ),
-                                ),
-                              ),
-                            )
-                          ],
-                        ),
-                      ),
-                      Padding(
-                        padding: EdgeInsets.fromLTRB(0, 0, 0, 12),
-                        child: Row(
-                          mainAxisSize: MainAxisSize.max,
-                          children: [
-                            Container(
-                              width: 500,
-                              height: 60,
-                              decoration: BoxDecoration(
-                                color: FlutterFlowTheme.tertiaryColor,
-                                borderRadius: BorderRadius.circular(8),
-                                border: Border.all(
-                                  color: FlutterFlowTheme.primaryColor,
-                                ),
-                              ),
-                              child: Padding(
-                                padding: EdgeInsets.fromLTRB(16, 12, 0, 10),
-                                child: Text(
-                                  widget.homepage,
-                                  style: FlutterFlowTheme.bodyText1.override(
-                                    fontFamily: 'Poppins',
-                                    color: Color(0xFF8B97A2),
-                                  ),
-                                ),
-                              ),
-                            )
-                          ],
-                        ),
-                      )
-                    ],
-                  ),
-                ),
-                Padding(
-                  padding: EdgeInsets.fromLTRB(20, 0, 20, 20),
-                  child: Column(
-                    mainAxisSize: MainAxisSize.max,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        '＊利用規約に従い投稿します。',
-                        style: FlutterFlowTheme.bodyText1.override(
-                          fontFamily: 'Poppins',
-                        ),
-                      ),
-                      Padding(
-                        padding: EdgeInsets.fromLTRB(0, 12, 0, 12),
-                        child: Container(
-                          width: 500,
-                          decoration: BoxDecoration(),
-                          child: CheckboxListTile(
-                            value: checkboxListTileValue ?? widget.permission,
-                            onChanged: (newValue) => setState(
-                                () => checkboxListTileValue = newValue),
-                            title: Text(
-                              '上記内容に同意',
-                              style: FlutterFlowTheme.bodyText2.override(
-                                fontFamily: 'Poppins',
-                              ),
-                            ),
-                            tileColor: FlutterFlowTheme.tertiaryColor,
-                            dense: false,
-                            controlAffinity: ListTileControlAffinity.trailing,
-                          ),
-                        ),
-                      ),
-                      Container(
-                        width: 500,
-                        decoration: BoxDecoration(
-                          color: FlutterFlowTheme.tertiaryColor,
-                        ),
-                        child: Row(
-                          mainAxisSize: MainAxisSize.max,
-                          mainAxisAlignment: MainAxisAlignment.end,
-                          children: [
-                            Padding(
-                              padding: EdgeInsets.fromLTRB(0, 0, 20, 0),
-                              child: Container(
-                                width: 140,
-                                height: 40,
-                                decoration: BoxDecoration(
-                                  color: FlutterFlowTheme.tertiaryColor,
-                                ),
-                                child: FFButtonWidget(
-                                  onPressed: () async {
-                                    Navigator.pop(context);
-                                  },
-                                  text: '戻る',
-                                  options: FFButtonOptions(
-                                    width: 130,
-                                    height: 40,
-                                    color: Color(0xFFDCDCDC),
-                                    textStyle:
-                                        FlutterFlowTheme.subtitle2.override(
-                                      fontFamily: 'Poppins',
-                                      color: Colors.white,
-                                    ),
-                                    borderSide: BorderSide(
-                                      color: Colors.transparent,
-                                      width: 1,
-                                    ),
-                                    borderRadius: 12,
-                                  ),
-                                ),
-                              ),
-                            ),
-                            StreamBuilder<List<CategoriesRecord>>(
-                              stream: queryCategoriesRecord(
-                                queryBuilder: (categoriesRecord) =>
-                                    categoriesRecord.where('cat_name',
-                                        isEqualTo: widget.catName),
-                                singleRecord: true,
-                              ),
-                              builder: (context, snapshot) {
-                                // Customize what your widget looks like when it's loading.
-                                if (!snapshot.hasData) {
-                                  return Center(
-                                    child: SizedBox(
-                                      width: 50,
-                                      height: 50,
-                                      child: CircularProgressIndicator(
-                                        color: FlutterFlowTheme.primaryColor,
-                                      ),
-                                    ),
-                                  );
-                                }
-                                List<CategoriesRecord>
-                                    containerCategoriesRecordList =
-                                    snapshot.data;
-                                // Customize what your widget looks like with no query results.
-                                if (snapshot.data.isEmpty) {
-                                  return Container(
-                                    height: 100,
-                                    child: Center(
-                                      child: Text('No results.'),
-                                    ),
-                                  );
-                                }
-                                final containerCategoriesRecord =
-                                    containerCategoriesRecordList.first;
-                                return Container(
-                                  width: 140,
-                                  height: 40,
                                   decoration: BoxDecoration(
                                     color: FlutterFlowTheme.tertiaryColor,
-                                    borderRadius: BorderRadius.circular(0),
                                   ),
-                                  child: FFButtonWidget(
-                                    onPressed: () async {
-                                      final contentsCreateData = {
-                                        ...createContentsRecordData(
-                                          category: containerCategoriesRecord
-                                              .reference,
-                                          catAdd: widget.catNameAdd,
-                                          title: widget.title,
-                                          overview: widget.overview,
-                                          detail: widget.detail,
-                                          startDay: widget.startDay,
-                                          finalDay: widget.finalDay,
-                                          address: widget.address,
-                                          organizer: widget.organizer,
-                                          contact: widget.contact,
-                                          homepage: widget.homepage,
-                                          permission: widget.permission,
-                                          display: false,
-                                          posted: getCurrentTimestamp,
+                                  child: Padding(
+                                    padding: EdgeInsets.fromLTRB(0, 20, 20, 10),
+                                    child: Column(
+                                      mainAxisSize: MainAxisSize.max,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Text(
+                                          '投稿 確認',
+                                          style:
+                                              FlutterFlowTheme.title1.override(
+                                            fontFamily: 'Poppins',
+                                          ),
                                         ),
-                                        'bccUids': FieldValue.arrayUnion(
-                                            ['brfikPQtv3KqXdTdm5cH']),
-                                      };
-                                      await ContentsRecord.collection
-                                          .doc()
-                                          .set(contentsCreateData);
-                                    },
-                                    text: '送信',
-                                    options: FFButtonOptions(
-                                      width: 130,
-                                      height: 40,
-                                      color: FlutterFlowTheme.primaryColor,
-                                      textStyle:
-                                          FlutterFlowTheme.subtitle2.override(
-                                        fontFamily: 'Poppins',
-                                        color: Colors.white,
-                                      ),
-                                      borderSide: BorderSide(
-                                        color: Colors.transparent,
-                                        width: 1,
-                                      ),
-                                      borderRadius: 12,
+                                        Text(
+                                          columnInfoAdminRecord.postInfo,
+                                          style: FlutterFlowTheme.bodyText1
+                                              .override(
+                                            fontFamily: 'Poppins',
+                                          ),
+                                        )
+                                      ],
                                     ),
                                   ),
-                                );
-                              },
-                            )
-                          ],
-                        ),
+                                )
+                              ],
+                            ),
+                          );
+                        },
                       )
                     ],
                   ),
-                )
-              ],
+                  Padding(
+                    padding: EdgeInsets.fromLTRB(0, 0, 0, 16),
+                    child: Text(
+                      '投稿内容',
+                      style: FlutterFlowTheme.title3.override(
+                        fontFamily: 'Poppins',
+                      ),
+                    ),
+                  ),
+                  Padding(
+                    padding: EdgeInsets.fromLTRB(0, 0, 0, 16),
+                    child: Text(
+                      '投稿に表示されます。機密情報などは記載しないでください。',
+                      style: FlutterFlowTheme.bodyText1.override(
+                        fontFamily: 'Poppins',
+                      ),
+                    ),
+                  ),
+                  Padding(
+                    padding: EdgeInsets.fromLTRB(0, 0, 0, 12),
+                    child: Row(
+                      mainAxisSize: MainAxisSize.max,
+                      children: [
+                        Container(
+                          width: 500,
+                          height: 60,
+                          decoration: BoxDecoration(
+                            color: FlutterFlowTheme.tertiaryColor,
+                            borderRadius: BorderRadius.circular(8),
+                            border: Border.all(
+                              color: FlutterFlowTheme.primaryColor,
+                            ),
+                          ),
+                          child: Padding(
+                            padding: EdgeInsets.fromLTRB(16, 12, 0, 10),
+                            child: Text(
+                              widget.catName,
+                              style: FlutterFlowTheme.bodyText1.override(
+                                fontFamily: 'Poppins',
+                                color: Color(0xFF8B97A2),
+                              ),
+                            ),
+                          ),
+                        )
+                      ],
+                    ),
+                  ),
+                  Padding(
+                    padding: EdgeInsets.fromLTRB(0, 0, 0, 12),
+                    child: Row(
+                      mainAxisSize: MainAxisSize.max,
+                      children: [
+                        Container(
+                          width: 500,
+                          height: 60,
+                          decoration: BoxDecoration(
+                            color: FlutterFlowTheme.tertiaryColor,
+                            borderRadius: BorderRadius.circular(8),
+                            border: Border.all(
+                              color: FlutterFlowTheme.primaryColor,
+                            ),
+                          ),
+                          child: Padding(
+                            padding: EdgeInsets.fromLTRB(16, 12, 0, 10),
+                            child: Text(
+                              widget.catNameAdd,
+                              style: FlutterFlowTheme.bodyText1.override(
+                                fontFamily: 'Poppins',
+                                color: Color(0xFF8B97A2),
+                              ),
+                            ),
+                          ),
+                        )
+                      ],
+                    ),
+                  ),
+                  Padding(
+                    padding: EdgeInsets.fromLTRB(0, 0, 0, 12),
+                    child: Row(
+                      mainAxisSize: MainAxisSize.max,
+                      children: [
+                        Container(
+                          width: 500,
+                          height: 60,
+                          decoration: BoxDecoration(
+                            color: FlutterFlowTheme.tertiaryColor,
+                            borderRadius: BorderRadius.circular(8),
+                            border: Border.all(
+                              color: FlutterFlowTheme.primaryColor,
+                            ),
+                          ),
+                          child: Padding(
+                            padding: EdgeInsets.fromLTRB(16, 12, 0, 10),
+                            child: Text(
+                              widget.title,
+                              style: FlutterFlowTheme.bodyText1.override(
+                                fontFamily: 'Poppins',
+                                color: Color(0xFF8B97A2),
+                              ),
+                            ),
+                          ),
+                        )
+                      ],
+                    ),
+                  ),
+                  Padding(
+                    padding: EdgeInsets.fromLTRB(0, 0, 0, 12),
+                    child: Row(
+                      mainAxisSize: MainAxisSize.max,
+                      children: [
+                        Container(
+                          width: 500,
+                          height: 120,
+                          decoration: BoxDecoration(
+                            color: FlutterFlowTheme.tertiaryColor,
+                            borderRadius: BorderRadius.circular(8),
+                            border: Border.all(
+                              color: FlutterFlowTheme.primaryColor,
+                            ),
+                          ),
+                          child: Padding(
+                            padding: EdgeInsets.fromLTRB(16, 12, 0, 10),
+                            child: Text(
+                              widget.overview,
+                              style: FlutterFlowTheme.bodyText1.override(
+                                fontFamily: 'Poppins',
+                                color: Color(0xFF8B97A2),
+                              ),
+                            ),
+                          ),
+                        )
+                      ],
+                    ),
+                  ),
+                  Padding(
+                    padding: EdgeInsets.fromLTRB(0, 0, 0, 12),
+                    child: Row(
+                      mainAxisSize: MainAxisSize.max,
+                      children: [
+                        Container(
+                          width: 500,
+                          height: 300,
+                          decoration: BoxDecoration(
+                            color: FlutterFlowTheme.tertiaryColor,
+                            borderRadius: BorderRadius.circular(8),
+                            border: Border.all(
+                              color: FlutterFlowTheme.primaryColor,
+                            ),
+                          ),
+                          child: Padding(
+                            padding: EdgeInsets.fromLTRB(16, 12, 0, 10),
+                            child: Text(
+                              widget.detail,
+                              style: FlutterFlowTheme.bodyText1.override(
+                                fontFamily: 'Poppins',
+                                color: Color(0xFF8B97A2),
+                              ),
+                            ),
+                          ),
+                        )
+                      ],
+                    ),
+                  ),
+                  Padding(
+                    padding: EdgeInsets.fromLTRB(0, 0, 0, 12),
+                    child: Row(
+                      mainAxisSize: MainAxisSize.max,
+                      children: [
+                        Container(
+                          width: 500,
+                          height: 60,
+                          decoration: BoxDecoration(
+                            color: FlutterFlowTheme.tertiaryColor,
+                            borderRadius: BorderRadius.circular(8),
+                            border: Border.all(
+                              color: FlutterFlowTheme.primaryColor,
+                            ),
+                          ),
+                          child: Padding(
+                            padding: EdgeInsets.fromLTRB(16, 12, 0, 10),
+                            child: Row(
+                              mainAxisSize: MainAxisSize.max,
+                              children: [
+                                Padding(
+                                  padding: EdgeInsets.fromLTRB(0, 0, 16, 0),
+                                  child: Text(
+                                    '開始日',
+                                    style: FlutterFlowTheme.bodyText1.override(
+                                      fontFamily: 'Poppins',
+                                      color: Color(0xFF8B97A2),
+                                    ),
+                                  ),
+                                ),
+                                Text(
+                                  dateTimeFormat('yMMMd', widget.startDay),
+                                  style: FlutterFlowTheme.bodyText1.override(
+                                    fontFamily: 'Poppins',
+                                    color: Color(0xFF8B97A2),
+                                  ),
+                                )
+                              ],
+                            ),
+                          ),
+                        )
+                      ],
+                    ),
+                  ),
+                  Padding(
+                    padding: EdgeInsets.fromLTRB(0, 0, 0, 12),
+                    child: Row(
+                      mainAxisSize: MainAxisSize.max,
+                      children: [
+                        Container(
+                          width: 500,
+                          height: 60,
+                          decoration: BoxDecoration(
+                            color: FlutterFlowTheme.tertiaryColor,
+                            borderRadius: BorderRadius.circular(8),
+                            border: Border.all(
+                              color: FlutterFlowTheme.primaryColor,
+                            ),
+                          ),
+                          child: Padding(
+                            padding: EdgeInsets.fromLTRB(16, 12, 0, 10),
+                            child: Row(
+                              mainAxisSize: MainAxisSize.max,
+                              children: [
+                                Padding(
+                                  padding: EdgeInsets.fromLTRB(0, 0, 16, 0),
+                                  child: Text(
+                                    '終了日',
+                                    style: FlutterFlowTheme.bodyText1.override(
+                                      fontFamily: 'Poppins',
+                                      color: Color(0xFF8B97A2),
+                                    ),
+                                  ),
+                                ),
+                                Text(
+                                  dateTimeFormat('yMMMd', widget.finalDay),
+                                  style: FlutterFlowTheme.bodyText1.override(
+                                    fontFamily: 'Poppins',
+                                    color: Color(0xFF8B97A2),
+                                  ),
+                                )
+                              ],
+                            ),
+                          ),
+                        )
+                      ],
+                    ),
+                  ),
+                  Padding(
+                    padding: EdgeInsets.fromLTRB(0, 0, 0, 12),
+                    child: Row(
+                      mainAxisSize: MainAxisSize.max,
+                      children: [
+                        Container(
+                          width: 500,
+                          height: 60,
+                          decoration: BoxDecoration(
+                            color: FlutterFlowTheme.tertiaryColor,
+                            borderRadius: BorderRadius.circular(8),
+                            border: Border.all(
+                              color: FlutterFlowTheme.primaryColor,
+                            ),
+                          ),
+                          child: Padding(
+                            padding: EdgeInsets.fromLTRB(16, 12, 0, 10),
+                            child: Text(
+                              widget.address,
+                              style: FlutterFlowTheme.bodyText1.override(
+                                fontFamily: 'Poppins',
+                                color: Color(0xFF8B97A2),
+                              ),
+                            ),
+                          ),
+                        )
+                      ],
+                    ),
+                  ),
+                  Padding(
+                    padding: EdgeInsets.fromLTRB(0, 0, 0, 12),
+                    child: Row(
+                      mainAxisSize: MainAxisSize.max,
+                      children: [
+                        Container(
+                          width: 500,
+                          height: 60,
+                          decoration: BoxDecoration(
+                            color: FlutterFlowTheme.tertiaryColor,
+                            borderRadius: BorderRadius.circular(8),
+                            border: Border.all(
+                              color: FlutterFlowTheme.primaryColor,
+                            ),
+                          ),
+                          child: Padding(
+                            padding: EdgeInsets.fromLTRB(16, 12, 0, 10),
+                            child: Text(
+                              widget.organizer,
+                              style: FlutterFlowTheme.bodyText1.override(
+                                fontFamily: 'Poppins',
+                                color: Color(0xFF8B97A2),
+                              ),
+                            ),
+                          ),
+                        )
+                      ],
+                    ),
+                  ),
+                  Padding(
+                    padding: EdgeInsets.fromLTRB(0, 0, 0, 12),
+                    child: Row(
+                      mainAxisSize: MainAxisSize.max,
+                      children: [
+                        Container(
+                          width: 500,
+                          height: 60,
+                          decoration: BoxDecoration(
+                            color: FlutterFlowTheme.tertiaryColor,
+                            borderRadius: BorderRadius.circular(8),
+                            border: Border.all(
+                              color: FlutterFlowTheme.primaryColor,
+                            ),
+                          ),
+                          child: Padding(
+                            padding: EdgeInsets.fromLTRB(16, 12, 0, 10),
+                            child: Text(
+                              widget.contact,
+                              style: FlutterFlowTheme.bodyText1.override(
+                                fontFamily: 'Poppins',
+                                color: Color(0xFF8B97A2),
+                              ),
+                            ),
+                          ),
+                        )
+                      ],
+                    ),
+                  ),
+                  Padding(
+                    padding: EdgeInsets.fromLTRB(0, 0, 0, 12),
+                    child: Row(
+                      mainAxisSize: MainAxisSize.max,
+                      children: [
+                        Container(
+                          width: 500,
+                          height: 60,
+                          decoration: BoxDecoration(
+                            color: FlutterFlowTheme.tertiaryColor,
+                            borderRadius: BorderRadius.circular(8),
+                            border: Border.all(
+                              color: FlutterFlowTheme.primaryColor,
+                            ),
+                          ),
+                          child: Padding(
+                            padding: EdgeInsets.fromLTRB(16, 12, 0, 10),
+                            child: Text(
+                              widget.homepage,
+                              style: FlutterFlowTheme.bodyText1.override(
+                                fontFamily: 'Poppins',
+                                color: Color(0xFF8B97A2),
+                              ),
+                            ),
+                          ),
+                        )
+                      ],
+                    ),
+                  )
+                ],
+              ),
             ),
-          )
-        ],
+            Padding(
+              padding: EdgeInsets.fromLTRB(20, 0, 20, 20),
+              child: Column(
+                mainAxisSize: MainAxisSize.max,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    '＊利用規約に従い投稿します。',
+                    style: FlutterFlowTheme.bodyText1.override(
+                      fontFamily: 'Poppins',
+                    ),
+                  ),
+                  Padding(
+                    padding: EdgeInsets.fromLTRB(0, 12, 0, 12),
+                    child: Container(
+                      width: 500,
+                      decoration: BoxDecoration(),
+                      child: CheckboxListTile(
+                        value: checkboxListTileValue ?? widget.permission,
+                        onChanged: (newValue) =>
+                            setState(() => checkboxListTileValue = newValue),
+                        title: Text(
+                          '上記内容に同意',
+                          style: FlutterFlowTheme.bodyText2.override(
+                            fontFamily: 'Poppins',
+                          ),
+                        ),
+                        tileColor: FlutterFlowTheme.tertiaryColor,
+                        dense: false,
+                        controlAffinity: ListTileControlAffinity.trailing,
+                      ),
+                    ),
+                  ),
+                  Container(
+                    width: 500,
+                    decoration: BoxDecoration(
+                      color: FlutterFlowTheme.tertiaryColor,
+                    ),
+                    child: Row(
+                      mainAxisSize: MainAxisSize.max,
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: [
+                        Padding(
+                          padding: EdgeInsets.fromLTRB(0, 0, 20, 0),
+                          child: Container(
+                            width: 140,
+                            height: 40,
+                            decoration: BoxDecoration(
+                              color: FlutterFlowTheme.tertiaryColor,
+                            ),
+                            child: FFButtonWidget(
+                              onPressed: () async {
+                                Navigator.pop(context);
+                              },
+                              text: '戻る',
+                              options: FFButtonOptions(
+                                width: 130,
+                                height: 40,
+                                color: Color(0xFFDCDCDC),
+                                textStyle: FlutterFlowTheme.subtitle2.override(
+                                  fontFamily: 'Poppins',
+                                  color: Colors.white,
+                                ),
+                                borderSide: BorderSide(
+                                  color: Colors.transparent,
+                                  width: 1,
+                                ),
+                                borderRadius: 12,
+                              ),
+                            ),
+                          ),
+                        ),
+                        StreamBuilder<List<CategoriesRecord>>(
+                          stream: queryCategoriesRecord(
+                            queryBuilder: (categoriesRecord) => categoriesRecord
+                                .where('cat_name', isEqualTo: widget.catName),
+                            singleRecord: true,
+                          ),
+                          builder: (context, snapshot) {
+                            // Customize what your widget looks like when it's loading.
+                            if (!snapshot.hasData) {
+                              return Center(
+                                child: SizedBox(
+                                  width: 50,
+                                  height: 50,
+                                  child: CircularProgressIndicator(
+                                    color: FlutterFlowTheme.primaryColor,
+                                  ),
+                                ),
+                              );
+                            }
+                            List<CategoriesRecord>
+                                containerCategoriesRecordList = snapshot.data;
+                            // Customize what your widget looks like with no query results.
+                            if (snapshot.data.isEmpty) {
+                              return Container(
+                                height: 100,
+                                child: Center(
+                                  child: Text('No results.'),
+                                ),
+                              );
+                            }
+                            final containerCategoriesRecord =
+                                containerCategoriesRecordList.first;
+                            return Container(
+                              width: 140,
+                              height: 40,
+                              decoration: BoxDecoration(
+                                color: FlutterFlowTheme.tertiaryColor,
+                                borderRadius: BorderRadius.circular(0),
+                              ),
+                              child: FFButtonWidget(
+                                onPressed: () async {
+                                  final contentsCreateData = {
+                                    ...createContentsRecordData(
+                                      category:
+                                          containerCategoriesRecord.reference,
+                                      catAdd: widget.catNameAdd,
+                                      title: widget.title,
+                                      overview: widget.overview,
+                                      detail: widget.detail,
+                                      startDay: widget.startDay,
+                                      finalDay: widget.finalDay,
+                                      address: widget.address,
+                                      organizer: widget.organizer,
+                                      contact: widget.contact,
+                                      homepage: widget.homepage,
+                                      permission: widget.permission,
+                                      display: false,
+                                      posted: getCurrentTimestamp,
+                                    ),
+                                    'bccUids': FieldValue.arrayUnion(
+                                        ['brfikPQtv3KqXdTdm5cH']),
+                                  };
+                                  await ContentsRecord.collection
+                                      .doc()
+                                      .set(contentsCreateData);
+                                },
+                                text: '送信',
+                                options: FFButtonOptions(
+                                  width: 130,
+                                  height: 40,
+                                  color: FlutterFlowTheme.primaryColor,
+                                  textStyle:
+                                      FlutterFlowTheme.subtitle2.override(
+                                    fontFamily: 'Poppins',
+                                    color: Colors.white,
+                                  ),
+                                  borderSide: BorderSide(
+                                    color: Colors.transparent,
+                                    width: 1,
+                                  ),
+                                  borderRadius: 12,
+                                ),
+                              ),
+                            );
+                          },
+                        )
+                      ],
+                    ),
+                  )
+                ],
+              ),
+            )
+          ],
+        ),
       ),
     );
   }
