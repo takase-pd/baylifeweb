@@ -12,27 +12,73 @@ abstract class ContentsRecord
       _$contentsRecordSerializer;
 
   @nullable
+  DocumentReference get category;
+
+  @nullable
+  @BuiltValueField(wireName: 'cat_add')
+  String get catAdd;
+
+  @nullable
   String get title;
 
   @nullable
-  DateTime get posted;
+  String get overview;
+
+  @nullable
+  String get detail;
+
+  @nullable
+  @BuiltValueField(wireName: 'start_day')
+  DateTime get startDay;
+
+  @nullable
+  @BuiltValueField(wireName: 'final_day')
+  DateTime get finalDay;
+
+  @nullable
+  String get address;
+
+  @nullable
+  String get organizer;
+
+  @nullable
+  String get contact;
+
+  @nullable
+  String get homepage;
+
+  @nullable
+  bool get permission;
 
   @nullable
   bool get display;
 
   @nullable
-  DocumentReference get category;
+  DateTime get posted;
 
   @nullable
-  DocumentReference get user;
+  BuiltList<String> get bccUids;
+
+  @nullable
+  String get to;
 
   @nullable
   @BuiltValueField(wireName: kDocumentReferenceField)
   DocumentReference get reference;
 
   static void _initializeBuilder(ContentsRecordBuilder builder) => builder
+    ..catAdd = ''
     ..title = ''
-    ..display = false;
+    ..overview = ''
+    ..detail = ''
+    ..address = ''
+    ..organizer = ''
+    ..contact = ''
+    ..homepage = ''
+    ..permission = false
+    ..display = false
+    ..bccUids = ListBuilder()
+    ..to = '';
 
   static CollectionReference get collection =>
       FirebaseFirestore.instance.collection('contents');
@@ -52,17 +98,38 @@ abstract class ContentsRecord
 }
 
 Map<String, dynamic> createContentsRecordData({
-  String title,
-  DateTime posted,
-  bool display,
   DocumentReference category,
-  DocumentReference user,
+  String catAdd,
+  String title,
+  String overview,
+  String detail,
+  DateTime startDay,
+  DateTime finalDay,
+  String address,
+  String organizer,
+  String contact,
+  String homepage,
+  bool permission,
+  bool display,
+  DateTime posted,
+  String to,
 }) =>
     serializers.toFirestore(
         ContentsRecord.serializer,
         ContentsRecord((c) => c
-          ..title = title
-          ..posted = posted
-          ..display = display
           ..category = category
-          ..user = user));
+          ..catAdd = catAdd
+          ..title = title
+          ..overview = overview
+          ..detail = detail
+          ..startDay = startDay
+          ..finalDay = finalDay
+          ..address = address
+          ..organizer = organizer
+          ..contact = contact
+          ..homepage = homepage
+          ..permission = permission
+          ..display = display
+          ..posted = posted
+          ..bccUids = null
+          ..to = to));
