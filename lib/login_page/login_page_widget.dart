@@ -1,9 +1,6 @@
-import '../auth/auth_util.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
-import '../home_page/home_page_widget.dart';
-import '../signup_page/signup_page_widget.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -199,24 +196,8 @@ class _LoginPageWidgetState extends State<LoginPageWidget> {
                                 Padding(
                                   padding: EdgeInsets.fromLTRB(0, 0, 0, 16),
                                   child: FFButtonWidget(
-                                    onPressed: () async {
-                                      final user = await signInWithEmail(
-                                        context,
-                                        emailAddressController.text,
-                                        passwordController.text,
-                                      );
-                                      if (user == null) {
-                                        return;
-                                      }
-
-                                      await Navigator.pushAndRemoveUntil(
-                                        context,
-                                        MaterialPageRoute(
-                                          builder: (context) =>
-                                              HomePageWidget(),
-                                        ),
-                                        (r) => false,
-                                      );
+                                    onPressed: () {
+                                      print('Button pressed ...');
                                     },
                                     text: 'Login',
                                     options: FFButtonOptions(
@@ -239,22 +220,8 @@ class _LoginPageWidgetState extends State<LoginPageWidget> {
                                 Padding(
                                   padding: EdgeInsets.fromLTRB(0, 0, 0, 20),
                                   child: FFButtonWidget(
-                                    onPressed: () async {
-                                      if (emailAddressController.text.isEmpty) {
-                                        ScaffoldMessenger.of(context)
-                                            .showSnackBar(
-                                          SnackBar(
-                                            content: Text(
-                                              'Email required!',
-                                            ),
-                                          ),
-                                        );
-                                        return;
-                                      }
-                                      await resetPassword(
-                                        email: emailAddressController.text,
-                                        context: context,
-                                      );
+                                    onPressed: () {
+                                      print('Button pressed ...');
                                     },
                                     text: 'Forget Password?',
                                     options: FFButtonOptions(
@@ -276,24 +243,12 @@ class _LoginPageWidgetState extends State<LoginPageWidget> {
                                 ),
                                 Padding(
                                   padding: EdgeInsets.fromLTRB(0, 8, 0, 16),
-                                  child: InkWell(
-                                    onTap: () async {
-                                      await Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                          builder: (context) =>
-                                              SignupPageWidget(),
-                                        ),
-                                      );
-                                    },
-                                    child: AutoSizeText(
-                                      'Or use a social account to login',
-                                      textAlign: TextAlign.center,
-                                      style:
-                                          FlutterFlowTheme.bodyText2.override(
-                                        fontFamily: 'Poppins',
-                                        color: FlutterFlowTheme.primaryColor,
-                                      ),
+                                  child: AutoSizeText(
+                                    'Or use a social account to login',
+                                    textAlign: TextAlign.center,
+                                    style: FlutterFlowTheme.bodyText2.override(
+                                      fontFamily: 'Poppins',
+                                      color: FlutterFlowTheme.primaryColor,
                                     ),
                                   ),
                                 ),
@@ -307,22 +262,8 @@ class _LoginPageWidgetState extends State<LoginPageWidget> {
                                         Align(
                                           alignment: Alignment(0, 0),
                                           child: FFButtonWidget(
-                                            onPressed: () async {
-                                              final user =
-                                                  await signInWithGoogle(
-                                                      context);
-                                              if (user == null) {
-                                                return;
-                                              }
-                                              await Navigator
-                                                  .pushAndRemoveUntil(
-                                                context,
-                                                MaterialPageRoute(
-                                                  builder: (context) =>
-                                                      HomePageWidget(),
-                                                ),
-                                                (r) => false,
-                                              );
+                                            onPressed: () {
+                                              print('Button pressed ...');
                                             },
                                             text: 'Sign in with Google',
                                             icon: Icon(
@@ -530,37 +471,8 @@ class _LoginPageWidgetState extends State<LoginPageWidget> {
                                 Padding(
                                   padding: EdgeInsets.fromLTRB(0, 0, 0, 16),
                                   child: FFButtonWidget(
-                                    onPressed: () async {
-                                      if (crPasswordController.text !=
-                                          crPasswordConfirmController.text) {
-                                        ScaffoldMessenger.of(context)
-                                            .showSnackBar(
-                                          SnackBar(
-                                            content: Text(
-                                              "Passwords don't match!",
-                                            ),
-                                          ),
-                                        );
-                                        return;
-                                      }
-
-                                      final user = await createAccountWithEmail(
-                                        context,
-                                        crEmailAddressController.text,
-                                        crPasswordController.text,
-                                      );
-                                      if (user == null) {
-                                        return;
-                                      }
-
-                                      await Navigator.pushAndRemoveUntil(
-                                        context,
-                                        MaterialPageRoute(
-                                          builder: (context) =>
-                                              HomePageWidget(),
-                                        ),
-                                        (r) => false,
-                                      );
+                                    onPressed: () {
+                                      print('Button pressed ...');
                                     },
                                     text: 'Create Account',
                                     options: FFButtonOptions(
@@ -582,24 +494,12 @@ class _LoginPageWidgetState extends State<LoginPageWidget> {
                                 ),
                                 Padding(
                                   padding: EdgeInsets.fromLTRB(0, 8, 0, 16),
-                                  child: InkWell(
-                                    onTap: () async {
-                                      await Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                          builder: (context) =>
-                                              SignupPageWidget(),
-                                        ),
-                                      );
-                                    },
-                                    child: AutoSizeText(
-                                      'Or use a social account to create account',
-                                      textAlign: TextAlign.center,
-                                      style:
-                                          FlutterFlowTheme.bodyText2.override(
-                                        fontFamily: 'Poppins',
-                                        color: FlutterFlowTheme.primaryColor,
-                                      ),
+                                  child: AutoSizeText(
+                                    'Or use a social account to create account',
+                                    textAlign: TextAlign.center,
+                                    style: FlutterFlowTheme.bodyText2.override(
+                                      fontFamily: 'Poppins',
+                                      color: FlutterFlowTheme.primaryColor,
                                     ),
                                   ),
                                 ),
@@ -613,22 +513,8 @@ class _LoginPageWidgetState extends State<LoginPageWidget> {
                                         Align(
                                           alignment: Alignment(0, 0),
                                           child: FFButtonWidget(
-                                            onPressed: () async {
-                                              final user =
-                                                  await signInWithGoogle(
-                                                      context);
-                                              if (user == null) {
-                                                return;
-                                              }
-                                              await Navigator
-                                                  .pushAndRemoveUntil(
-                                                context,
-                                                MaterialPageRoute(
-                                                  builder: (context) =>
-                                                      HomePageWidget(),
-                                                ),
-                                                (r) => false,
-                                              );
+                                            onPressed: () {
+                                              print('Button pressed ...');
                                             },
                                             text: 'Sign up with Google',
                                             icon: Icon(

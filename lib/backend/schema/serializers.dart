@@ -3,6 +3,8 @@ import 'package:built_value/standard_json_plugin.dart';
 import 'categories_record.dart';
 import 'info_admin_record.dart';
 import 'users_record.dart';
+import 'cat_dd_record.dart';
+import 'contents_record.dart';
 
 import 'index.dart';
 
@@ -16,6 +18,8 @@ const kDocumentReferenceField = 'Document__Reference__Field';
   CategoriesRecord,
   InfoAdminRecord,
   UsersRecord,
+  CatDdRecord,
+  ContentsRecord,
 ])
 final Serializers serializers = (_$serializers.toBuilder()
       ..add(DocumentReferenceSerializer())
@@ -118,9 +122,11 @@ extension LatLngExtension on GeoPoint {
 
 DocumentReference toRef(String ref) => FirebaseFirestore.instance.doc(ref);
 
-T safeGet<T>(T Function() func) {
+T safeGet<T>(T Function() func, [Function(dynamic) reportError]) {
   try {
     return func();
-  } catch (_) {}
+  } catch (e) {
+    reportError?.call(e);
+  }
   return null;
 }
