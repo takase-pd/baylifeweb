@@ -21,27 +21,6 @@ class _$ContentsRecordSerializer
       {FullType specifiedType = FullType.unspecified}) {
     final result = <Object>[];
     Object value;
-    value = object.title;
-    if (value != null) {
-      result
-        ..add('title')
-        ..add(serializers.serialize(value,
-            specifiedType: const FullType(String)));
-    }
-    value = object.posted;
-    if (value != null) {
-      result
-        ..add('posted')
-        ..add(serializers.serialize(value,
-            specifiedType: const FullType(DateTime)));
-    }
-    value = object.display;
-    if (value != null) {
-      result
-        ..add('display')
-        ..add(
-            serializers.serialize(value, specifiedType: const FullType(bool)));
-    }
     value = object.category;
     if (value != null) {
       result
@@ -50,13 +29,111 @@ class _$ContentsRecordSerializer
             specifiedType: const FullType(
                 DocumentReference, const [const FullType(Object)])));
     }
-    value = object.user;
+    value = object.catAdd;
     if (value != null) {
       result
-        ..add('user')
+        ..add('cat_add')
         ..add(serializers.serialize(value,
-            specifiedType: const FullType(
-                DocumentReference, const [const FullType(Object)])));
+            specifiedType: const FullType(String)));
+    }
+    value = object.title;
+    if (value != null) {
+      result
+        ..add('title')
+        ..add(serializers.serialize(value,
+            specifiedType: const FullType(String)));
+    }
+    value = object.overview;
+    if (value != null) {
+      result
+        ..add('overview')
+        ..add(serializers.serialize(value,
+            specifiedType: const FullType(String)));
+    }
+    value = object.detail;
+    if (value != null) {
+      result
+        ..add('detail')
+        ..add(serializers.serialize(value,
+            specifiedType: const FullType(String)));
+    }
+    value = object.startDay;
+    if (value != null) {
+      result
+        ..add('start_day')
+        ..add(serializers.serialize(value,
+            specifiedType: const FullType(DateTime)));
+    }
+    value = object.finalDay;
+    if (value != null) {
+      result
+        ..add('final_day')
+        ..add(serializers.serialize(value,
+            specifiedType: const FullType(DateTime)));
+    }
+    value = object.address;
+    if (value != null) {
+      result
+        ..add('address')
+        ..add(serializers.serialize(value,
+            specifiedType: const FullType(String)));
+    }
+    value = object.organizer;
+    if (value != null) {
+      result
+        ..add('organizer')
+        ..add(serializers.serialize(value,
+            specifiedType: const FullType(String)));
+    }
+    value = object.contact;
+    if (value != null) {
+      result
+        ..add('contact')
+        ..add(serializers.serialize(value,
+            specifiedType: const FullType(String)));
+    }
+    value = object.homepage;
+    if (value != null) {
+      result
+        ..add('homepage')
+        ..add(serializers.serialize(value,
+            specifiedType: const FullType(String)));
+    }
+    value = object.permission;
+    if (value != null) {
+      result
+        ..add('permission')
+        ..add(
+            serializers.serialize(value, specifiedType: const FullType(bool)));
+    }
+    value = object.display;
+    if (value != null) {
+      result
+        ..add('display')
+        ..add(
+            serializers.serialize(value, specifiedType: const FullType(bool)));
+    }
+    value = object.posted;
+    if (value != null) {
+      result
+        ..add('posted')
+        ..add(serializers.serialize(value,
+            specifiedType: const FullType(DateTime)));
+    }
+    value = object.bccUids;
+    if (value != null) {
+      result
+        ..add('bccUids')
+        ..add(serializers.serialize(value,
+            specifiedType:
+                const FullType(BuiltList, const [const FullType(String)])));
+    }
+    value = object.to;
+    if (value != null) {
+      result
+        ..add('to')
+        ..add(serializers.serialize(value,
+            specifiedType: const FullType(String)));
     }
     value = object.reference;
     if (value != null) {
@@ -81,29 +158,73 @@ class _$ContentsRecordSerializer
       iterator.moveNext();
       final Object value = iterator.current;
       switch (key) {
-        case 'title':
-          result.title = serializers.deserialize(value,
-              specifiedType: const FullType(String)) as String;
-          break;
-        case 'posted':
-          result.posted = serializers.deserialize(value,
-              specifiedType: const FullType(DateTime)) as DateTime;
-          break;
-        case 'display':
-          result.display = serializers.deserialize(value,
-              specifiedType: const FullType(bool)) as bool;
-          break;
         case 'category':
           result.category = serializers.deserialize(value,
                   specifiedType: const FullType(
                       DocumentReference, const [const FullType(Object)]))
               as DocumentReference<Object>;
           break;
-        case 'user':
-          result.user = serializers.deserialize(value,
-                  specifiedType: const FullType(
-                      DocumentReference, const [const FullType(Object)]))
-              as DocumentReference<Object>;
+        case 'cat_add':
+          result.catAdd = serializers.deserialize(value,
+              specifiedType: const FullType(String)) as String;
+          break;
+        case 'title':
+          result.title = serializers.deserialize(value,
+              specifiedType: const FullType(String)) as String;
+          break;
+        case 'overview':
+          result.overview = serializers.deserialize(value,
+              specifiedType: const FullType(String)) as String;
+          break;
+        case 'detail':
+          result.detail = serializers.deserialize(value,
+              specifiedType: const FullType(String)) as String;
+          break;
+        case 'start_day':
+          result.startDay = serializers.deserialize(value,
+              specifiedType: const FullType(DateTime)) as DateTime;
+          break;
+        case 'final_day':
+          result.finalDay = serializers.deserialize(value,
+              specifiedType: const FullType(DateTime)) as DateTime;
+          break;
+        case 'address':
+          result.address = serializers.deserialize(value,
+              specifiedType: const FullType(String)) as String;
+          break;
+        case 'organizer':
+          result.organizer = serializers.deserialize(value,
+              specifiedType: const FullType(String)) as String;
+          break;
+        case 'contact':
+          result.contact = serializers.deserialize(value,
+              specifiedType: const FullType(String)) as String;
+          break;
+        case 'homepage':
+          result.homepage = serializers.deserialize(value,
+              specifiedType: const FullType(String)) as String;
+          break;
+        case 'permission':
+          result.permission = serializers.deserialize(value,
+              specifiedType: const FullType(bool)) as bool;
+          break;
+        case 'display':
+          result.display = serializers.deserialize(value,
+              specifiedType: const FullType(bool)) as bool;
+          break;
+        case 'posted':
+          result.posted = serializers.deserialize(value,
+              specifiedType: const FullType(DateTime)) as DateTime;
+          break;
+        case 'bccUids':
+          result.bccUids.replace(serializers.deserialize(value,
+                  specifiedType:
+                      const FullType(BuiltList, const [const FullType(String)]))
+              as BuiltList<Object>);
+          break;
+        case 'to':
+          result.to = serializers.deserialize(value,
+              specifiedType: const FullType(String)) as String;
           break;
         case 'Document__Reference__Field':
           result.reference = serializers.deserialize(value,
@@ -120,15 +241,37 @@ class _$ContentsRecordSerializer
 
 class _$ContentsRecord extends ContentsRecord {
   @override
+  final DocumentReference<Object> category;
+  @override
+  final String catAdd;
+  @override
   final String title;
   @override
-  final DateTime posted;
+  final String overview;
+  @override
+  final String detail;
+  @override
+  final DateTime startDay;
+  @override
+  final DateTime finalDay;
+  @override
+  final String address;
+  @override
+  final String organizer;
+  @override
+  final String contact;
+  @override
+  final String homepage;
+  @override
+  final bool permission;
   @override
   final bool display;
   @override
-  final DocumentReference<Object> category;
+  final DateTime posted;
   @override
-  final DocumentReference<Object> user;
+  final BuiltList<String> bccUids;
+  @override
+  final String to;
   @override
   final DocumentReference<Object> reference;
 
@@ -136,11 +279,22 @@ class _$ContentsRecord extends ContentsRecord {
       (new ContentsRecordBuilder()..update(updates)).build();
 
   _$ContentsRecord._(
-      {this.title,
-      this.posted,
+      {this.category,
+      this.catAdd,
+      this.title,
+      this.overview,
+      this.detail,
+      this.startDay,
+      this.finalDay,
+      this.address,
+      this.organizer,
+      this.contact,
+      this.homepage,
+      this.permission,
       this.display,
-      this.category,
-      this.user,
+      this.posted,
+      this.bccUids,
+      this.to,
       this.reference})
       : super._();
 
@@ -156,11 +310,22 @@ class _$ContentsRecord extends ContentsRecord {
   bool operator ==(Object other) {
     if (identical(other, this)) return true;
     return other is ContentsRecord &&
-        title == other.title &&
-        posted == other.posted &&
-        display == other.display &&
         category == other.category &&
-        user == other.user &&
+        catAdd == other.catAdd &&
+        title == other.title &&
+        overview == other.overview &&
+        detail == other.detail &&
+        startDay == other.startDay &&
+        finalDay == other.finalDay &&
+        address == other.address &&
+        organizer == other.organizer &&
+        contact == other.contact &&
+        homepage == other.homepage &&
+        permission == other.permission &&
+        display == other.display &&
+        posted == other.posted &&
+        bccUids == other.bccUids &&
+        to == other.to &&
         reference == other.reference;
   }
 
@@ -169,21 +334,61 @@ class _$ContentsRecord extends ContentsRecord {
     return $jf($jc(
         $jc(
             $jc(
-                $jc($jc($jc(0, title.hashCode), posted.hashCode),
-                    display.hashCode),
-                category.hashCode),
-            user.hashCode),
+                $jc(
+                    $jc(
+                        $jc(
+                            $jc(
+                                $jc(
+                                    $jc(
+                                        $jc(
+                                            $jc(
+                                                $jc(
+                                                    $jc(
+                                                        $jc(
+                                                            $jc(
+                                                                $jc(
+                                                                    $jc(
+                                                                        0,
+                                                                        category
+                                                                            .hashCode),
+                                                                    catAdd
+                                                                        .hashCode),
+                                                                title.hashCode),
+                                                            overview.hashCode),
+                                                        detail.hashCode),
+                                                    startDay.hashCode),
+                                                finalDay.hashCode),
+                                            address.hashCode),
+                                        organizer.hashCode),
+                                    contact.hashCode),
+                                homepage.hashCode),
+                            permission.hashCode),
+                        display.hashCode),
+                    posted.hashCode),
+                bccUids.hashCode),
+            to.hashCode),
         reference.hashCode));
   }
 
   @override
   String toString() {
     return (newBuiltValueToStringHelper('ContentsRecord')
-          ..add('title', title)
-          ..add('posted', posted)
-          ..add('display', display)
           ..add('category', category)
-          ..add('user', user)
+          ..add('catAdd', catAdd)
+          ..add('title', title)
+          ..add('overview', overview)
+          ..add('detail', detail)
+          ..add('startDay', startDay)
+          ..add('finalDay', finalDay)
+          ..add('address', address)
+          ..add('organizer', organizer)
+          ..add('contact', contact)
+          ..add('homepage', homepage)
+          ..add('permission', permission)
+          ..add('display', display)
+          ..add('posted', posted)
+          ..add('bccUids', bccUids)
+          ..add('to', to)
           ..add('reference', reference))
         .toString();
   }
@@ -193,26 +398,71 @@ class ContentsRecordBuilder
     implements Builder<ContentsRecord, ContentsRecordBuilder> {
   _$ContentsRecord _$v;
 
-  String _title;
-  String get title => _$this._title;
-  set title(String title) => _$this._title = title;
-
-  DateTime _posted;
-  DateTime get posted => _$this._posted;
-  set posted(DateTime posted) => _$this._posted = posted;
-
-  bool _display;
-  bool get display => _$this._display;
-  set display(bool display) => _$this._display = display;
-
   DocumentReference<Object> _category;
   DocumentReference<Object> get category => _$this._category;
   set category(DocumentReference<Object> category) =>
       _$this._category = category;
 
-  DocumentReference<Object> _user;
-  DocumentReference<Object> get user => _$this._user;
-  set user(DocumentReference<Object> user) => _$this._user = user;
+  String _catAdd;
+  String get catAdd => _$this._catAdd;
+  set catAdd(String catAdd) => _$this._catAdd = catAdd;
+
+  String _title;
+  String get title => _$this._title;
+  set title(String title) => _$this._title = title;
+
+  String _overview;
+  String get overview => _$this._overview;
+  set overview(String overview) => _$this._overview = overview;
+
+  String _detail;
+  String get detail => _$this._detail;
+  set detail(String detail) => _$this._detail = detail;
+
+  DateTime _startDay;
+  DateTime get startDay => _$this._startDay;
+  set startDay(DateTime startDay) => _$this._startDay = startDay;
+
+  DateTime _finalDay;
+  DateTime get finalDay => _$this._finalDay;
+  set finalDay(DateTime finalDay) => _$this._finalDay = finalDay;
+
+  String _address;
+  String get address => _$this._address;
+  set address(String address) => _$this._address = address;
+
+  String _organizer;
+  String get organizer => _$this._organizer;
+  set organizer(String organizer) => _$this._organizer = organizer;
+
+  String _contact;
+  String get contact => _$this._contact;
+  set contact(String contact) => _$this._contact = contact;
+
+  String _homepage;
+  String get homepage => _$this._homepage;
+  set homepage(String homepage) => _$this._homepage = homepage;
+
+  bool _permission;
+  bool get permission => _$this._permission;
+  set permission(bool permission) => _$this._permission = permission;
+
+  bool _display;
+  bool get display => _$this._display;
+  set display(bool display) => _$this._display = display;
+
+  DateTime _posted;
+  DateTime get posted => _$this._posted;
+  set posted(DateTime posted) => _$this._posted = posted;
+
+  ListBuilder<String> _bccUids;
+  ListBuilder<String> get bccUids =>
+      _$this._bccUids ??= new ListBuilder<String>();
+  set bccUids(ListBuilder<String> bccUids) => _$this._bccUids = bccUids;
+
+  String _to;
+  String get to => _$this._to;
+  set to(String to) => _$this._to = to;
 
   DocumentReference<Object> _reference;
   DocumentReference<Object> get reference => _$this._reference;
@@ -226,11 +476,22 @@ class ContentsRecordBuilder
   ContentsRecordBuilder get _$this {
     final $v = _$v;
     if ($v != null) {
-      _title = $v.title;
-      _posted = $v.posted;
-      _display = $v.display;
       _category = $v.category;
-      _user = $v.user;
+      _catAdd = $v.catAdd;
+      _title = $v.title;
+      _overview = $v.overview;
+      _detail = $v.detail;
+      _startDay = $v.startDay;
+      _finalDay = $v.finalDay;
+      _address = $v.address;
+      _organizer = $v.organizer;
+      _contact = $v.contact;
+      _homepage = $v.homepage;
+      _permission = $v.permission;
+      _display = $v.display;
+      _posted = $v.posted;
+      _bccUids = $v.bccUids?.toBuilder();
+      _to = $v.to;
       _reference = $v.reference;
       _$v = null;
     }
@@ -250,14 +511,38 @@ class ContentsRecordBuilder
 
   @override
   _$ContentsRecord build() {
-    final _$result = _$v ??
-        new _$ContentsRecord._(
-            title: title,
-            posted: posted,
-            display: display,
-            category: category,
-            user: user,
-            reference: reference);
+    _$ContentsRecord _$result;
+    try {
+      _$result = _$v ??
+          new _$ContentsRecord._(
+              category: category,
+              catAdd: catAdd,
+              title: title,
+              overview: overview,
+              detail: detail,
+              startDay: startDay,
+              finalDay: finalDay,
+              address: address,
+              organizer: organizer,
+              contact: contact,
+              homepage: homepage,
+              permission: permission,
+              display: display,
+              posted: posted,
+              bccUids: _bccUids?.build(),
+              to: to,
+              reference: reference);
+    } catch (_) {
+      String _$failedField;
+      try {
+        _$failedField = 'bccUids';
+        _bccUids?.build();
+      } catch (e) {
+        throw new BuiltValueNestedFieldError(
+            'ContentsRecord', _$failedField, e.toString());
+      }
+      rethrow;
+    }
     replace(_$result);
     return _$result;
   }
