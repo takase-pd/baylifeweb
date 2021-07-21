@@ -66,19 +66,49 @@ class _MainMenuWidgetState extends State<MainMenuWidget> {
                 mainAxisSize: MainAxisSize.max,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  InkWell(
-                    onTap: () async {
-                      await Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => PostPageWidget(),
+                  Container(
+                    width: 200,
+                    height: 50,
+                    decoration: BoxDecoration(
+                      color: FlutterFlowTheme.tertiaryColor,
+                    ),
+                    child: InkWell(
+                      onTap: () async {
+                        await Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => HomePageWidget(),
+                          ),
+                        );
+                      },
+                      child: Text(
+                        'ホーム',
+                        style: FlutterFlowTheme.subtitle1.override(
+                          fontFamily: 'Poppins',
                         ),
-                      );
-                    },
-                    child: Text(
-                      '投稿',
-                      style: FlutterFlowTheme.subtitle1.override(
-                        fontFamily: 'Poppins',
+                      ),
+                    ),
+                  ),
+                  Container(
+                    width: 200,
+                    height: 50,
+                    decoration: BoxDecoration(
+                      color: FlutterFlowTheme.tertiaryColor,
+                    ),
+                    child: InkWell(
+                      onTap: () async {
+                        await Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => PostPageWidget(),
+                          ),
+                        );
+                      },
+                      child: Text(
+                        '投稿',
+                        style: FlutterFlowTheme.subtitle1.override(
+                          fontFamily: 'Poppins',
+                        ),
                       ),
                     ),
                   )

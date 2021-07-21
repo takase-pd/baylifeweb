@@ -1,11 +1,10 @@
-import '../auth/auth_util.dart';
 import '../backend/backend.dart';
+import '../components/main_menu_widget.dart';
 import '../confirm_page/confirm_page_widget.dart';
 import '../flutter_flow/flutter_flow_drop_down_template.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
-import '../login_page/login_page_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -59,74 +58,7 @@ class _PostPageWidgetState extends State<PostPageWidget> {
             mainAxisSize: MainAxisSize.max,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Container(
-                width: 240,
-                height: double.infinity,
-                decoration: BoxDecoration(
-                  color: FlutterFlowTheme.tertiaryColor,
-                  border: Border.all(
-                    width: 0.05,
-                  ),
-                ),
-                child: Column(
-                  mainAxisSize: MainAxisSize.max,
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Padding(
-                      padding: EdgeInsets.fromLTRB(10, 20, 10, 20),
-                      child: Row(
-                        mainAxisSize: MainAxisSize.max,
-                        children: [
-                          Text(
-                            'MAKUHARI Bay Life',
-                            style: FlutterFlowTheme.title3.override(
-                              fontFamily: 'Poppins',
-                            ),
-                          )
-                        ],
-                      ),
-                    ),
-                    Text(
-                      '投稿',
-                      style: FlutterFlowTheme.bodyText1.override(
-                        fontFamily: 'Poppins',
-                      ),
-                    ),
-                    Padding(
-                      padding: EdgeInsets.fromLTRB(10, 10, 10, 20),
-                      child: Row(
-                        mainAxisSize: MainAxisSize.max,
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(
-                            'Logout',
-                            style: FlutterFlowTheme.bodyText1.override(
-                              fontFamily: 'Poppins',
-                            ),
-                          ),
-                          InkWell(
-                            onTap: () async {
-                              await signOut();
-                              await Navigator.pushAndRemoveUntil(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => LoginPageWidget(),
-                                ),
-                                (r) => false,
-                              );
-                            },
-                            child: Icon(
-                              Icons.logout,
-                              color: Colors.black,
-                              size: 24,
-                            ),
-                          )
-                        ],
-                      ),
-                    )
-                  ],
-                ),
-              ),
+              MainMenuWidget(),
               SingleChildScrollView(
                 child: Column(
                   mainAxisSize: MainAxisSize.max,
@@ -183,7 +115,7 @@ class _PostPageWidgetState extends State<PostPageWidget> {
                                           CrossAxisAlignment.start,
                                       children: [
                                         Container(
-                                          width: 1000,
+                                          width: 600,
                                           height: 100,
                                           constraints: BoxConstraints(
                                             maxWidth: double.infinity,
