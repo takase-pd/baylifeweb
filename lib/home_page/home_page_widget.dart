@@ -139,7 +139,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
               ],
             ),
             Text(
-              'Hello World',
+              getJsonField(aaa, r'$.data').toString(),
               style: FlutterFlowTheme.bodyText1.override(
                 fontFamily: 'Poppins',
               ),
