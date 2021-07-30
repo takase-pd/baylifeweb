@@ -18,3 +18,13 @@ Future<dynamic> registContentCall({
       },
       returnResponse: true,
     );
+
+Future<dynamic> helloWorldCall() => ApiManager.instance.makeApiCall(
+      callName: 'helloWorld',
+      apiDomain: 'us-central1-baylife-ff782.cloudfunctions.net',
+      apiEndpoint: 'helloWorld',
+      callType: ApiCallType.POST,
+      headers: {},
+      params: {},
+      returnResponse: true,
+    );
