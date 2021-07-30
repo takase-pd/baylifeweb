@@ -16,6 +16,7 @@ class HomePageWidget extends StatefulWidget {
 
 class _HomePageWidgetState extends State<HomePageWidget> {
   dynamic aaa;
+  dynamic bbb;
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
@@ -116,8 +117,10 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                     borderRadius: BorderRadius.circular(0),
                   ),
                   child: FFButtonWidget(
-                    onPressed: () {
-                      print('Button pressed ...');
+                    onPressed: () async {
+                      bbb = await firestoreCall();
+
+                      setState(() {});
                     },
                     text: 'API',
                     options: FFButtonOptions(
@@ -140,6 +143,12 @@ class _HomePageWidgetState extends State<HomePageWidget> {
             ),
             Text(
               getJsonField(aaa, r'$.data').toString(),
+              style: FlutterFlowTheme.bodyText1.override(
+                fontFamily: 'Poppins',
+              ),
+            ),
+            Text(
+              getJsonField(bbb, r'S.cat_name').toString(),
               style: FlutterFlowTheme.bodyText1.override(
                 fontFamily: 'Poppins',
               ),

@@ -28,3 +28,13 @@ Future<dynamic> helloWorldCall() => ApiManager.instance.makeApiCall(
       params: {},
       returnResponse: true,
     );
+
+Future<dynamic> firestoreCall() => ApiManager.instance.makeApiCall(
+      callName: 'Firestore',
+      apiDomain: 'us-central1-baylife-ff782.cloudfunctions.net',
+      apiEndpoint: 'firstStore',
+      callType: ApiCallType.POST,
+      headers: {},
+      params: {},
+      returnResponse: true,
+    );
