@@ -1,4 +1,5 @@
 import '../auth/auth_util.dart';
+import '../backend/api_requests/api_calls.dart';
 import '../backend/backend.dart';
 import '../components/header_widget.dart';
 import '../components/main_menu_widget.dart';
@@ -81,39 +82,39 @@ class _ConfirmPageWidgetState extends State<ConfirmPageWidget> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      StreamBuilder<List<InfoAdminRecord>>(
-                        stream: queryInfoAdminRecord(
-                          singleRecord: true,
-                        ),
-                        builder: (context, snapshot) {
-                          // Customize what your widget looks like when it's loading.
-                          if (!snapshot.hasData) {
-                            return Center(
-                              child: SizedBox(
-                                width: 50,
-                                height: 50,
-                                child: CircularProgressIndicator(
-                                  color: FlutterFlowTheme.primaryColor,
+                      Padding(
+                        padding: EdgeInsets.fromLTRB(0, 0, 0, 20),
+                        child: StreamBuilder<List<InfoAdminRecord>>(
+                          stream: queryInfoAdminRecord(
+                            singleRecord: true,
+                          ),
+                          builder: (context, snapshot) {
+                            // Customize what your widget looks like when it's loading.
+                            if (!snapshot.hasData) {
+                              return Center(
+                                child: SizedBox(
+                                  width: 50,
+                                  height: 50,
+                                  child: CircularProgressIndicator(
+                                    color: FlutterFlowTheme.primaryColor,
+                                  ),
                                 ),
-                              ),
-                            );
-                          }
-                          List<InfoAdminRecord> columnInfoAdminRecordList =
-                              snapshot.data;
-                          // Customize what your widget looks like with no query results.
-                          if (snapshot.data.isEmpty) {
-                            return Container(
-                              height: 100,
-                              child: Center(
-                                child: Text('No results.'),
-                              ),
-                            );
-                          }
-                          final columnInfoAdminRecord =
-                              columnInfoAdminRecordList.first;
-                          return Padding(
-                            padding: EdgeInsets.fromLTRB(0, 0, 0, 20),
-                            child: Column(
+                              );
+                            }
+                            List<InfoAdminRecord> columnInfoAdminRecordList =
+                                snapshot.data;
+                            // Customize what your widget looks like with no query results.
+                            if (snapshot.data.isEmpty) {
+                              return Container(
+                                height: 100,
+                                child: Center(
+                                  child: Text('No results.'),
+                                ),
+                              );
+                            }
+                            final columnInfoAdminRecord =
+                                columnInfoAdminRecordList.first;
+                            return Column(
                               mainAxisSize: MainAxisSize.max,
                               mainAxisAlignment: MainAxisAlignment.start,
                               crossAxisAlignment: CrossAxisAlignment.start,
@@ -153,9 +154,9 @@ class _ConfirmPageWidgetState extends State<ConfirmPageWidget> {
                                   ),
                                 )
                               ],
-                            ),
-                          );
-                        },
+                            );
+                          },
+                        ),
                       )
                     ],
                   ),
@@ -668,6 +669,73 @@ class _ConfirmPageWidgetState extends State<ConfirmPageWidget> {
                                       .set(contentsCreateData);
                                 },
                                 text: '送信',
+                                options: FFButtonOptions(
+                                  width: 130,
+                                  height: 40,
+                                  color: FlutterFlowTheme.primaryColor,
+                                  textStyle:
+                                      FlutterFlowTheme.subtitle2.override(
+                                    fontFamily: 'Poppins',
+                                    color: Colors.white,
+                                  ),
+                                  borderSide: BorderSide(
+                                    color: Colors.transparent,
+                                    width: 1,
+                                  ),
+                                  borderRadius: 12,
+                                ),
+                              ),
+                            );
+                          },
+                        ),
+                        StreamBuilder<List<CategoriesRecord>>(
+                          stream: queryCategoriesRecord(
+                            queryBuilder: (categoriesRecord) => categoriesRecord
+                                .where('cat_name', isEqualTo: widget.catName),
+                            singleRecord: true,
+                          ),
+                          builder: (context, snapshot) {
+                            // Customize what your widget looks like when it's loading.
+                            if (!snapshot.hasData) {
+                              return Center(
+                                child: SizedBox(
+                                  width: 50,
+                                  height: 50,
+                                  child: CircularProgressIndicator(
+                                    color: FlutterFlowTheme.primaryColor,
+                                  ),
+                                ),
+                              );
+                            }
+                            List<CategoriesRecord>
+                                containerCategoriesRecordList = snapshot.data;
+                            // Customize what your widget looks like with no query results.
+                            if (snapshot.data.isEmpty) {
+                              return Container(
+                                height: 100,
+                                child: Center(
+                                  child: Text('No results.'),
+                                ),
+                              );
+                            }
+                            final containerCategoriesRecord =
+                                containerCategoriesRecordList.first;
+                            return Container(
+                              width: 140,
+                              height: 40,
+                              decoration: BoxDecoration(
+                                color: FlutterFlowTheme.tertiaryColor,
+                                borderRadius: BorderRadius.circular(0),
+                              ),
+                              child: FFButtonWidget(
+                                onPressed: () async {
+                                  await registContentCall(
+                                    name: 'Yuji Takase',
+                                    email: 'yuji.takase@particledrawing.com',
+                                    content: 'テスト送信',
+                                  );
+                                },
+                                text: 'API',
                                 options: FFButtonOptions(
                                   width: 130,
                                   height: 40,

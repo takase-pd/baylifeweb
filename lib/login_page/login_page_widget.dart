@@ -45,7 +45,7 @@ class _LoginPageWidgetState extends State<LoginPageWidget> {
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(80),
         child: AppBar(
-          automaticallyImplyLeading: true,
+          automaticallyImplyLeading: false,
           flexibleSpace: Container(
             width: double.infinity,
             height: 100,

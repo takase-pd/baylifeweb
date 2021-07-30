@@ -82,39 +82,39 @@ class _PostPageWidgetState extends State<PostPageWidget> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        StreamBuilder<List<InfoAdminRecord>>(
-                          stream: queryInfoAdminRecord(
-                            singleRecord: true,
-                          ),
-                          builder: (context, snapshot) {
-                            // Customize what your widget looks like when it's loading.
-                            if (!snapshot.hasData) {
-                              return Center(
-                                child: SizedBox(
-                                  width: 50,
-                                  height: 50,
-                                  child: CircularProgressIndicator(
-                                    color: FlutterFlowTheme.primaryColor,
+                        Padding(
+                          padding: EdgeInsets.fromLTRB(0, 0, 0, 20),
+                          child: StreamBuilder<List<InfoAdminRecord>>(
+                            stream: queryInfoAdminRecord(
+                              singleRecord: true,
+                            ),
+                            builder: (context, snapshot) {
+                              // Customize what your widget looks like when it's loading.
+                              if (!snapshot.hasData) {
+                                return Center(
+                                  child: SizedBox(
+                                    width: 50,
+                                    height: 50,
+                                    child: CircularProgressIndicator(
+                                      color: FlutterFlowTheme.primaryColor,
+                                    ),
                                   ),
-                                ),
-                              );
-                            }
-                            List<InfoAdminRecord> columnInfoAdminRecordList =
-                                snapshot.data;
-                            // Customize what your widget looks like with no query results.
-                            if (snapshot.data.isEmpty) {
-                              return Container(
-                                height: 100,
-                                child: Center(
-                                  child: Text('No results.'),
-                                ),
-                              );
-                            }
-                            final columnInfoAdminRecord =
-                                columnInfoAdminRecordList.first;
-                            return Padding(
-                              padding: EdgeInsets.fromLTRB(0, 0, 0, 20),
-                              child: Column(
+                                );
+                              }
+                              List<InfoAdminRecord> columnInfoAdminRecordList =
+                                  snapshot.data;
+                              // Customize what your widget looks like with no query results.
+                              if (snapshot.data.isEmpty) {
+                                return Container(
+                                  height: 100,
+                                  child: Center(
+                                    child: Text('No results.'),
+                                  ),
+                                );
+                              }
+                              final columnInfoAdminRecord =
+                                  columnInfoAdminRecordList.first;
+                              return Column(
                                 mainAxisSize: MainAxisSize.max,
                                 mainAxisAlignment: MainAxisAlignment.start,
                                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -155,9 +155,9 @@ class _PostPageWidgetState extends State<PostPageWidget> {
                                     ),
                                   )
                                 ],
-                              ),
-                            );
-                          },
+                              );
+                            },
+                          ),
                         )
                       ],
                     ),
@@ -194,39 +194,39 @@ class _PostPageWidgetState extends State<PostPageWidget> {
                                 color: FlutterFlowTheme.primaryColor,
                               ),
                             ),
-                            child: StreamBuilder<List<CatDdRecord>>(
-                              stream: queryCatDdRecord(
-                                singleRecord: true,
-                              ),
-                              builder: (context, snapshot) {
-                                // Customize what your widget looks like when it's loading.
-                                if (!snapshot.hasData) {
-                                  return Center(
-                                    child: SizedBox(
-                                      width: 50,
-                                      height: 50,
-                                      child: CircularProgressIndicator(
-                                        color: FlutterFlowTheme.primaryColor,
+                            child: Padding(
+                              padding: EdgeInsets.fromLTRB(8, 8, 8, 8),
+                              child: StreamBuilder<List<CatDdRecord>>(
+                                stream: queryCatDdRecord(
+                                  singleRecord: true,
+                                ),
+                                builder: (context, snapshot) {
+                                  // Customize what your widget looks like when it's loading.
+                                  if (!snapshot.hasData) {
+                                    return Center(
+                                      child: SizedBox(
+                                        width: 50,
+                                        height: 50,
+                                        child: CircularProgressIndicator(
+                                          color: FlutterFlowTheme.primaryColor,
+                                        ),
                                       ),
-                                    ),
-                                  );
-                                }
-                                List<CatDdRecord> dropDownCatDdRecordList =
-                                    snapshot.data;
-                                // Customize what your widget looks like with no query results.
-                                if (snapshot.data.isEmpty) {
-                                  return Container(
-                                    height: 100,
-                                    child: Center(
-                                      child: Text('No results.'),
-                                    ),
-                                  );
-                                }
-                                final dropDownCatDdRecord =
-                                    dropDownCatDdRecordList.first;
-                                return Padding(
-                                  padding: EdgeInsets.fromLTRB(8, 8, 8, 8),
-                                  child: FlutterFlowDropDown(
+                                    );
+                                  }
+                                  List<CatDdRecord> dropDownCatDdRecordList =
+                                      snapshot.data;
+                                  // Customize what your widget looks like with no query results.
+                                  if (snapshot.data.isEmpty) {
+                                    return Container(
+                                      height: 100,
+                                      child: Center(
+                                        child: Text('No results.'),
+                                      ),
+                                    );
+                                  }
+                                  final dropDownCatDdRecord =
+                                      dropDownCatDdRecordList.first;
+                                  return FlutterFlowDropDown(
                                     options: dropDownCatDdRecord.cats.toList(),
                                     onChanged: (value) {
                                       setState(() => dropDownValue = value);
@@ -244,9 +244,9 @@ class _PostPageWidgetState extends State<PostPageWidget> {
                                     borderWidth: 0,
                                     borderRadius: 0,
                                     margin: EdgeInsets.fromLTRB(8, 4, 8, 4),
-                                  ),
-                                );
-                              },
+                                  );
+                                },
+                              ),
                             ),
                           )
                         ],
