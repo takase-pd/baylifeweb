@@ -148,7 +148,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
               ),
             ),
             Text(
-              getJsonField(bbb, r'S.cat_name').toString(),
+              getJsonField(bbb, r'$.cat_name').toString(),
               style: FlutterFlowTheme.bodyText1.override(
                 fontFamily: 'Poppins',
               ),
