@@ -15,7 +15,6 @@ class HomePageWidget extends StatefulWidget {
 }
 
 class _HomePageWidgetState extends State<HomePageWidget> {
-  dynamic aaa;
   dynamic bbb;
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
@@ -88,9 +87,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                   ),
                   child: FFButtonWidget(
                     onPressed: () async {
-                      aaa = await helloWorldCall();
-
-                      setState(() {});
+                      await testCallCall();
                     },
                     text: 'API',
                     options: FFButtonOptions(
@@ -142,7 +139,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
               ],
             ),
             Text(
-              getJsonField(aaa, r'$.data').toString(),
+              'Hello World',
               style: FlutterFlowTheme.bodyText1.override(
                 fontFamily: 'Poppins',
               ),

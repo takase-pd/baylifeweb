@@ -40,3 +40,15 @@ Future<dynamic> registContentCall({
       },
       returnResponse: true,
     );
+
+Future<dynamic> testCallCall() => ApiManager.instance.makeApiCall(
+      callName: 'TestCall',
+      apiDomain: 'us-central1-baylife-ff782.cloudfunctions.net',
+      apiEndpoint: 'testCall',
+      callType: ApiCallType.POST,
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      params: {},
+      returnResponse: true,
+    );
