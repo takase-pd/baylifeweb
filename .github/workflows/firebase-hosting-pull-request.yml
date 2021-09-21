@@ -17,7 +17,9 @@ jobs:
       # PATH
       - name: Add path
         run: echo "$(pwd)/flutter/bin" >> $GITHUB_PATH
+        
       - run: flutter doctor -v
+      - run: flutter clean
 
       # Download pakages
       - name: Download Flutter packages
