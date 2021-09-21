@@ -29,18 +29,10 @@ class _HomePageWidgetState extends State<HomePageWidget> {
           elevation: 4,
         ),
       ),
-      backgroundColor: FlutterFlowTheme.tertiaryColor,
-      endDrawer: Drawer(
-        elevation: 16,
-        child: MainMenuWidget(),
-      ),
-      body: SingleChildScrollView(
-        child: Column(
-          mainAxisSize: MainAxisSize.max,
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [],
-        ),
+      backgroundColor: FlutterFlowTheme.grayLight,
+      body: Row(
+        mainAxisSize: MainAxisSize.max,
+        children: [MainMenuWidget()],
       ),
     );
   }

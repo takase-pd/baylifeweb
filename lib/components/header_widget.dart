@@ -23,7 +23,7 @@ class _HeaderWidgetState extends State<HeaderWidget> {
         ),
       ),
       child: Padding(
-        padding: EdgeInsets.fromLTRB(10, 10, 10, 10),
+        padding: EdgeInsetsDirectional.fromSTEB(10, 10, 10, 10),
         child: Row(
           mainAxisSize: MainAxisSize.max,
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
