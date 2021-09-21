@@ -17,6 +17,7 @@ jobs:
       # PATH
       - name: Add path
         run: echo "$(pwd)/flutter/bin" >> $GITHUB_PATH
+      - run: flutter channel beta
 
       # Download pakages
       - name: Download Flutter packages
