@@ -17,13 +17,14 @@ jobs:
       # PATH
       - name: Add path
         run: echo "$(pwd)/flutter/bin" >> $GITHUB_PATH
-        
+
       - run: flutter doctor -v
       - run: flutter clean
 
       # Download pakages
       - name: Download Flutter packages
         run: flutter pub get
+      - run: flutter packages pub run build_runner build --delete-conflicting-outputs
 
       - run: flutter --version
       - run: flutter build web
