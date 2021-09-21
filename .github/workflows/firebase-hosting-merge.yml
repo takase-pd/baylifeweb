@@ -19,7 +19,7 @@ jobs:
       # PATH
       - name: Add path
         run: echo "$(pwd)/flutter/bin" >> $GITHUB_PATH
-      - run: flutter channel beta
+      - run: flutter doctor -v
 
       # Download pakages
       - name: Download Flutter packages
