@@ -21,7 +21,7 @@ class _MainMenuWidgetState extends State<MainMenuWidget> {
       width: 240,
       height: double.infinity,
       decoration: BoxDecoration(
-        color: FlutterFlowTheme.tertiaryColor,
+        color: FlutterFlowTheme.grayLight,
         border: Border.all(
           width: 0.05,
         ),
@@ -30,38 +30,14 @@ class _MainMenuWidgetState extends State<MainMenuWidget> {
         mainAxisSize: MainAxisSize.max,
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Padding(
-            padding: EdgeInsets.fromLTRB(10, 20, 10, 20),
-            child: Row(
-              mainAxisSize: MainAxisSize.max,
-              children: [
-                InkWell(
-                  onTap: () async {
-                    await Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => HomePageWidget(),
-                      ),
-                    );
-                  },
-                  child: Text(
-                    'MAKUHARI Bay Life',
-                    style: FlutterFlowTheme.title3.override(
-                      fontFamily: 'Poppins',
-                    ),
-                  ),
-                )
-              ],
-            ),
-          ),
           Container(
             width: 220,
             height: 800,
             decoration: BoxDecoration(
-              color: FlutterFlowTheme.tertiaryColor,
+              color: FlutterFlowTheme.grayLight,
             ),
             child: Padding(
-              padding: EdgeInsets.fromLTRB(10, 0, 10, 0),
+              padding: EdgeInsetsDirectional.fromSTEB(10, 0, 10, 0),
               child: Column(
                 mainAxisSize: MainAxisSize.max,
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -70,7 +46,7 @@ class _MainMenuWidgetState extends State<MainMenuWidget> {
                     width: 200,
                     height: 50,
                     decoration: BoxDecoration(
-                      color: FlutterFlowTheme.tertiaryColor,
+                      color: FlutterFlowTheme.grayLight,
                     ),
                     child: InkWell(
                       onTap: () async {
@@ -93,7 +69,7 @@ class _MainMenuWidgetState extends State<MainMenuWidget> {
                     width: 200,
                     height: 50,
                     decoration: BoxDecoration(
-                      color: FlutterFlowTheme.tertiaryColor,
+                      color: FlutterFlowTheme.grayLight,
                     ),
                     child: InkWell(
                       onTap: () async {
@@ -117,7 +93,7 @@ class _MainMenuWidgetState extends State<MainMenuWidget> {
             ),
           ),
           Padding(
-            padding: EdgeInsets.fromLTRB(10, 10, 10, 20),
+            padding: EdgeInsetsDirectional.fromSTEB(10, 10, 10, 20),
             child: Row(
               mainAxisSize: MainAxisSize.max,
               mainAxisAlignment: MainAxisAlignment.spaceBetween,

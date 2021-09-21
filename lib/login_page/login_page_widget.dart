@@ -53,7 +53,7 @@ class _LoginPageWidgetState extends State<LoginPageWidget> {
               color: FlutterFlowTheme.tertiaryColor,
             ),
             child: Padding(
-              padding: EdgeInsets.fromLTRB(10, 10, 10, 10),
+              padding: EdgeInsetsDirectional.fromSTEB(10, 10, 10, 10),
               child: Row(
                 mainAxisSize: MainAxisSize.max,
                 children: [
@@ -71,7 +71,7 @@ class _LoginPageWidgetState extends State<LoginPageWidget> {
           elevation: 4,
         ),
       ),
-      backgroundColor: FlutterFlowTheme.tertiaryColor,
+      backgroundColor: FlutterFlowTheme.grayLight,
       body: SafeArea(
         child: Column(
           mainAxisSize: MainAxisSize.max,
@@ -79,7 +79,7 @@ class _LoginPageWidgetState extends State<LoginPageWidget> {
           children: [
             Expanded(
               child: Padding(
-                padding: EdgeInsets.fromLTRB(300, 50, 300, 0),
+                padding: EdgeInsetsDirectional.fromSTEB(300, 50, 300, 0),
                 child: DefaultTabController(
                   length: 2,
                   initialIndex: 0,
@@ -101,12 +101,14 @@ class _LoginPageWidgetState extends State<LoginPageWidget> {
                         child: TabBarView(
                           children: [
                             Padding(
-                              padding: EdgeInsets.fromLTRB(20, 20, 20, 0),
+                              padding:
+                                  EdgeInsetsDirectional.fromSTEB(20, 20, 20, 0),
                               child: Column(
                                 mainAxisSize: MainAxisSize.max,
                                 children: [
                                   Padding(
-                                    padding: EdgeInsets.fromLTRB(20, 0, 20, 16),
+                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                        20, 0, 20, 16),
                                     child: TextFormField(
                                       controller: emailAddressController,
                                       obscureText: false,
@@ -149,7 +151,8 @@ class _LoginPageWidgetState extends State<LoginPageWidget> {
                                     ),
                                   ),
                                   Padding(
-                                    padding: EdgeInsets.fromLTRB(20, 0, 20, 16),
+                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                        20, 0, 20, 16),
                                     child: TextFormField(
                                       controller: passwordController,
                                       obscureText: !passwordVisibility,
@@ -205,7 +208,8 @@ class _LoginPageWidgetState extends State<LoginPageWidget> {
                                     ),
                                   ),
                                   Padding(
-                                    padding: EdgeInsets.fromLTRB(0, 0, 0, 16),
+                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                        0, 0, 0, 16),
                                     child: FFButtonWidget(
                                       onPressed: () async {
                                         final user = await signInWithEmail(
@@ -245,7 +249,8 @@ class _LoginPageWidgetState extends State<LoginPageWidget> {
                                     ),
                                   ),
                                   Padding(
-                                    padding: EdgeInsets.fromLTRB(0, 0, 0, 20),
+                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                        0, 0, 0, 20),
                                     child: FFButtonWidget(
                                       onPressed: () async {
                                         if (emailAddressController
@@ -284,7 +289,8 @@ class _LoginPageWidgetState extends State<LoginPageWidget> {
                                     ),
                                   ),
                                   Padding(
-                                    padding: EdgeInsets.fromLTRB(0, 8, 0, 16),
+                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                        0, 8, 0, 16),
                                     child: AutoSizeText(
                                       'Or use a social account to login',
                                       textAlign: TextAlign.center,
@@ -296,14 +302,15 @@ class _LoginPageWidgetState extends State<LoginPageWidget> {
                                     ),
                                   ),
                                   Align(
-                                    alignment: Alignment(0, 0),
+                                    alignment: AlignmentDirectional(0, 0),
                                     child: Container(
                                       width: 230,
                                       height: 44,
                                       child: Stack(
                                         children: [
                                           Align(
-                                            alignment: Alignment(0, 0),
+                                            alignment:
+                                                AlignmentDirectional(0, 0),
                                             child: FFButtonWidget(
                                               onPressed: () async {
                                                 final user =
@@ -347,7 +354,8 @@ class _LoginPageWidgetState extends State<LoginPageWidget> {
                                             ),
                                           ),
                                           Align(
-                                            alignment: Alignment(-0.83, 0),
+                                            alignment:
+                                                AlignmentDirectional(-0.83, 0),
                                             child: Container(
                                               width: 22,
                                               height: 22,
@@ -369,12 +377,14 @@ class _LoginPageWidgetState extends State<LoginPageWidget> {
                               ),
                             ),
                             Padding(
-                              padding: EdgeInsets.fromLTRB(20, 20, 20, 0),
+                              padding:
+                                  EdgeInsetsDirectional.fromSTEB(20, 20, 20, 0),
                               child: Column(
                                 mainAxisSize: MainAxisSize.max,
                                 children: [
                                   Padding(
-                                    padding: EdgeInsets.fromLTRB(20, 0, 20, 16),
+                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                        20, 0, 20, 16),
                                     child: TextFormField(
                                       controller: crEmailAddressController,
                                       obscureText: false,
@@ -417,7 +427,8 @@ class _LoginPageWidgetState extends State<LoginPageWidget> {
                                     ),
                                   ),
                                   Padding(
-                                    padding: EdgeInsets.fromLTRB(20, 0, 20, 16),
+                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                        20, 0, 20, 16),
                                     child: TextFormField(
                                       controller: crPasswordController,
                                       obscureText: !crPasswordVisibility,
@@ -473,7 +484,8 @@ class _LoginPageWidgetState extends State<LoginPageWidget> {
                                     ),
                                   ),
                                   Padding(
-                                    padding: EdgeInsets.fromLTRB(20, 0, 20, 16),
+                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                        20, 0, 20, 16),
                                     child: TextFormField(
                                       controller: crPasswordConfirmController,
                                       obscureText: !crPasswordConfirmVisibility,
@@ -529,7 +541,8 @@ class _LoginPageWidgetState extends State<LoginPageWidget> {
                                     ),
                                   ),
                                   Padding(
-                                    padding: EdgeInsets.fromLTRB(0, 0, 0, 16),
+                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                        0, 0, 0, 16),
                                     child: FFButtonWidget(
                                       onPressed: () async {
                                         if (crPasswordController.text !=
@@ -583,7 +596,8 @@ class _LoginPageWidgetState extends State<LoginPageWidget> {
                                     ),
                                   ),
                                   Padding(
-                                    padding: EdgeInsets.fromLTRB(0, 8, 0, 16),
+                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                        0, 8, 0, 16),
                                     child: AutoSizeText(
                                       'Or use a social account to create account',
                                       textAlign: TextAlign.center,
@@ -595,14 +609,15 @@ class _LoginPageWidgetState extends State<LoginPageWidget> {
                                     ),
                                   ),
                                   Align(
-                                    alignment: Alignment(0, 0),
+                                    alignment: AlignmentDirectional(0, 0),
                                     child: Container(
                                       width: 230,
                                       height: 44,
                                       child: Stack(
                                         children: [
                                           Align(
-                                            alignment: Alignment(0, 0),
+                                            alignment:
+                                                AlignmentDirectional(0, 0),
                                             child: FFButtonWidget(
                                               onPressed: () async {
                                                 final user =
@@ -646,7 +661,8 @@ class _LoginPageWidgetState extends State<LoginPageWidget> {
                                             ),
                                           ),
                                           Align(
-                                            alignment: Alignment(-0.83, 0),
+                                            alignment:
+                                                AlignmentDirectional(-0.83, 0),
                                             child: Container(
                                               width: 22,
                                               height: 22,

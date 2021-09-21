@@ -1,9 +1,7 @@
-import '../backend/api_requests/api_calls.dart';
 import '../components/header_widget.dart';
 import '../components/main_menu_widget.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
-import '../flutter_flow/flutter_flow_widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -15,7 +13,6 @@ class HomePageWidget extends StatefulWidget {
 }
 
 class _HomePageWidgetState extends State<HomePageWidget> {
-  dynamic bbb;
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
@@ -32,126 +29,10 @@ class _HomePageWidgetState extends State<HomePageWidget> {
           elevation: 4,
         ),
       ),
-      backgroundColor: FlutterFlowTheme.tertiaryColor,
-      endDrawer: Drawer(
-        elevation: 16,
-        child: MainMenuWidget(),
-      ),
-      body: SingleChildScrollView(
-        child: Column(
-          mainAxisSize: MainAxisSize.max,
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            Row(
-              mainAxisSize: MainAxisSize.max,
-              children: [
-                Container(
-                  width: 140,
-                  height: 40,
-                  decoration: BoxDecoration(
-                    color: FlutterFlowTheme.tertiaryColor,
-                    borderRadius: BorderRadius.circular(0),
-                  ),
-                  child: FFButtonWidget(
-                    onPressed: () async {
-                      await registContentCall(
-                        name: 'Yuji Takase',
-                        email: 'yuji.takase@particledrawing.com',
-                        content: 'テスト送信',
-                      );
-                    },
-                    text: 'API',
-                    options: FFButtonOptions(
-                      width: 130,
-                      height: 40,
-                      color: FlutterFlowTheme.primaryColor,
-                      textStyle: FlutterFlowTheme.subtitle2.override(
-                        fontFamily: 'Poppins',
-                        color: Colors.white,
-                      ),
-                      borderSide: BorderSide(
-                        color: Colors.transparent,
-                        width: 1,
-                      ),
-                      borderRadius: 12,
-                    ),
-                  ),
-                ),
-                Container(
-                  width: 140,
-                  height: 40,
-                  decoration: BoxDecoration(
-                    color: FlutterFlowTheme.tertiaryColor,
-                    borderRadius: BorderRadius.circular(0),
-                  ),
-                  child: FFButtonWidget(
-                    onPressed: () async {
-                      await testCallCall();
-                    },
-                    text: 'API',
-                    options: FFButtonOptions(
-                      width: 130,
-                      height: 40,
-                      color: FlutterFlowTheme.primaryColor,
-                      textStyle: FlutterFlowTheme.subtitle2.override(
-                        fontFamily: 'Poppins',
-                        color: Colors.white,
-                      ),
-                      borderSide: BorderSide(
-                        color: Colors.transparent,
-                        width: 1,
-                      ),
-                      borderRadius: 12,
-                    ),
-                  ),
-                ),
-                Container(
-                  width: 140,
-                  height: 40,
-                  decoration: BoxDecoration(
-                    color: FlutterFlowTheme.tertiaryColor,
-                    borderRadius: BorderRadius.circular(0),
-                  ),
-                  child: FFButtonWidget(
-                    onPressed: () async {
-                      bbb = await firestoreCall();
-
-                      setState(() {});
-                    },
-                    text: 'API',
-                    options: FFButtonOptions(
-                      width: 130,
-                      height: 40,
-                      color: FlutterFlowTheme.primaryColor,
-                      textStyle: FlutterFlowTheme.subtitle2.override(
-                        fontFamily: 'Poppins',
-                        color: Colors.white,
-                      ),
-                      borderSide: BorderSide(
-                        color: Colors.transparent,
-                        width: 1,
-                      ),
-                      borderRadius: 12,
-                    ),
-                  ),
-                )
-              ],
-            ),
-            Text(
-              'Hello World',
-              style: FlutterFlowTheme.bodyText1.override(
-                fontFamily: 'Poppins',
-              ),
-            ),
-            Text(
-              getJsonField(bbb, r'$.cat_name').toString(),
-              style: FlutterFlowTheme.bodyText1.override(
-                fontFamily: 'Poppins',
-              ),
-            )
-          ],
-        ),
+      backgroundColor: FlutterFlowTheme.grayLight,
+      body: Row(
+        mainAxisSize: MainAxisSize.max,
+        children: [MainMenuWidget()],
       ),
     );
   }
