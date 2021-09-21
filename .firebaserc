@@ -1,5 +1,6 @@
 {
   "projects": {
-    "default": "baylifeweb"
-  }
+    "default": "baylife-ff782"
+  },
+  "targets": {}
 }
