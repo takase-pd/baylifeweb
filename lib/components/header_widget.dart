@@ -17,7 +17,7 @@ class _HeaderWidgetState extends State<HeaderWidget> {
       width: double.infinity,
       height: 80,
       decoration: BoxDecoration(
-        color: FlutterFlowTheme.tertiaryColor,
+        color: FlutterFlowTheme.primaryColor,
         border: Border.all(
           width: 0.05,
         ),
@@ -32,6 +32,7 @@ class _HeaderWidgetState extends State<HeaderWidget> {
               'MAKUHARI Bay Life',
               style: FlutterFlowTheme.title3.override(
                 fontFamily: 'Poppins',
+                color: FlutterFlowTheme.textPrimary,
               ),
             )
           ],
