@@ -116,3 +116,4 @@ lib/backend/schema/contents_record.g.dart
 lib/backend/schema/info_admin_record.g.dart
 lib/backend/schema/serializers.g.dart
 lib/backend/schema/users_record.g.dart
+pubspec.lock
