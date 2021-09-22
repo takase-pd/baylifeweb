@@ -18,6 +18,7 @@ jobs:
       - name: Add path
         run: echo "$(pwd)/flutter/bin" >> $GITHUB_PATH
       - run: cd "$(pwd)/flutter"
+      - run: git tag
       - run: git checkout 2.2.1
       - run: flutter doctor
       - run: cd -
