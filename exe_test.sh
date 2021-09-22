@@ -1,10 +1,10 @@
 # get the latest FlutterFlow version
-git checkout flutterflow
-git fetch
-git checkout .
-git clean -df .
-git checkout main
-git merge origin/flutterflow
+# git checkout flutterflow
+# git fetch
+# git checkout .
+# git clean -df .
+# git checkout main
+# git merge origin/flutterflow
 
 # Flutter compile
 flutter pub get
