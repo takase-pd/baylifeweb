@@ -2,7 +2,7 @@ import '../backend/backend.dart';
 import '../components/header_widget.dart';
 import '../components/main_menu_widget.dart';
 import '../confirm_page/confirm_page_widget.dart';
-import '../flutter_flow/flutter_flow_drop_down_template.dart';
+import '../flutter_flow/flutter_flow_drop_down.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
@@ -233,9 +233,8 @@ class _PostPageWidgetState extends State<PostPageWidget> {
                                       dropDownCatDdRecordList.first;
                                   return FlutterFlowDropDown(
                                     options: dropDownCatDdRecord.cats.toList(),
-                                    onChanged: (value) {
-                                      setState(() => dropDownValue = value);
-                                    },
+                                    onChanged: (val) =>
+                                        setState(() => dropDownValue = val),
                                     width: 130,
                                     height: 40,
                                     textStyle:

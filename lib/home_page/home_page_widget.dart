@@ -1,3 +1,5 @@
+import '../auth/auth_util.dart';
+import '../backend/backend.dart';
 import '../components/header_widget.dart';
 import '../components/main_menu_widget.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
@@ -32,7 +34,67 @@ class _HomePageWidgetState extends State<HomePageWidget> {
       backgroundColor: FlutterFlowTheme.grayLight,
       body: Row(
         mainAxisSize: MainAxisSize.max,
-        children: [MainMenuWidget()],
+        children: [
+          MainMenuWidget(),
+          Expanded(
+            child: Padding(
+              padding: EdgeInsetsDirectional.fromSTEB(10, 40, 10, 10),
+              child: StreamBuilder<List<ContentsRecord>>(
+                stream: queryContentsRecord(
+                  queryBuilder: (contentsRecord) => contentsRecord.where('uid',
+                      isEqualTo: currentUserReference),
+                ),
+                builder: (context, snapshot) {
+                  // Customize what your widget looks like when it's loading.
+                  if (!snapshot.hasData) {
+                    return Center(
+                      child: SizedBox(
+                        width: 50,
+                        height: 50,
+                        child: CircularProgressIndicator(
+                          color: FlutterFlowTheme.primaryColor,
+                        ),
+                      ),
+                    );
+                  }
+                  List<ContentsRecord> listViewContentsRecordList =
+                      snapshot.data;
+                  // Customize what your widget looks like with no query results.
+                  if (snapshot.data.isEmpty) {
+                    return Material(
+                      child: Container(
+                        height: 100,
+                        child: Center(
+                          child: Text('No results.'),
+                        ),
+                      ),
+                    );
+                  }
+                  return ListView.builder(
+                    padding: EdgeInsets.zero,
+                    scrollDirection: Axis.vertical,
+                    itemCount: listViewContentsRecordList.length,
+                    itemBuilder: (context, listViewIndex) {
+                      final listViewContentsRecord =
+                          listViewContentsRecordList[listViewIndex];
+                      return Row(
+                        mainAxisSize: MainAxisSize.max,
+                        children: [
+                          Text(
+                            listViewContentsRecord.title,
+                            style: FlutterFlowTheme.bodyText1.override(
+                              fontFamily: 'Poppins',
+                            ),
+                          )
+                        ],
+                      );
+                    },
+                  );
+                },
+              ),
+            ),
+          )
+        ],
       ),
     );
   }
