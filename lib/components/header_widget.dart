@@ -33,16 +33,6 @@ class _HeaderWidgetState extends State<HeaderWidget> {
               style: FlutterFlowTheme.title3.override(
                 fontFamily: 'Poppins',
               ),
-            ),
-            InkWell(
-              onTap: () async {
-                Scaffold.of(context).openEndDrawer();
-              },
-              child: Icon(
-                Icons.menu,
-                color: Colors.black,
-                size: 24,
-              ),
             )
           ],
         ),
