@@ -77,24 +77,31 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                     itemBuilder: (context, listViewIndex) {
                       final listViewContentsRecord =
                           listViewContentsRecordList[listViewIndex];
-                      return Row(
+                      return Column(
                         mainAxisSize: MainAxisSize.max,
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text(
-                            dateTimeFormat(
-                                'yMMMd', listViewContentsRecord.posted),
-                            style: FlutterFlowTheme.subtitle1.override(
-                              fontFamily: 'Poppins',
-                            ),
+                          Row(
+                            mainAxisSize: MainAxisSize.max,
+                            children: [
+                              Text(
+                                listViewContentsRecord.title,
+                                style: FlutterFlowTheme.subtitle1.override(
+                                  fontFamily: 'Poppins',
+                                ),
+                              ),
+                              Text(
+                                dateTimeFormat(
+                                    'yMMMd', listViewContentsRecord.posted),
+                                style: FlutterFlowTheme.subtitle1.override(
+                                  fontFamily: 'Poppins',
+                                ),
+                              )
+                            ],
                           ),
                           Text(
-                            listViewContentsRecord.title,
-                            style: FlutterFlowTheme.subtitle1.override(
-                              fontFamily: 'Poppins',
-                            ),
-                          ),
-                          Text(
-                            listViewContentsRecord.overview,
+                            listViewContentsRecord.overview
+                                .maybeHandleOverflow(maxChars: 30),
                             style: FlutterFlowTheme.subtitle1.override(
                               fontFamily: 'Poppins',
                             ),
