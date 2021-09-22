@@ -83,55 +83,19 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                           Text(
                             dateTimeFormat(
                                 'yMMMd', listViewContentsRecord.posted),
-                            style: FlutterFlowTheme.bodyText1.override(
+                            style: FlutterFlowTheme.subtitle1.override(
                               fontFamily: 'Poppins',
                             ),
                           ),
                           Text(
                             listViewContentsRecord.title,
-                            style: FlutterFlowTheme.bodyText1.override(
+                            style: FlutterFlowTheme.subtitle1.override(
                               fontFamily: 'Poppins',
                             ),
                           ),
                           Text(
-                            listViewContentsRecord.contact,
-                            style: FlutterFlowTheme.bodyText1.override(
-                              fontFamily: 'Poppins',
-                            ),
-                          ),
-                          Text(
-                            listViewContentsRecord.address,
-                            style: FlutterFlowTheme.bodyText1.override(
-                              fontFamily: 'Poppins',
-                            ),
-                          ),
-                          Text(
-                            listViewContentsRecord.startDay.toString(),
-                            style: FlutterFlowTheme.bodyText1.override(
-                              fontFamily: 'Poppins',
-                            ),
-                          ),
-                          Text(
-                            listViewContentsRecord.finalDay.toString(),
-                            style: FlutterFlowTheme.bodyText1.override(
-                              fontFamily: 'Poppins',
-                            ),
-                          ),
-                          Text(
-                            listViewContentsRecord.organizer,
-                            style: FlutterFlowTheme.bodyText1.override(
-                              fontFamily: 'Poppins',
-                            ),
-                          ),
-                          Text(
-                            listViewContentsRecord.contact,
-                            style: FlutterFlowTheme.bodyText1.override(
-                              fontFamily: 'Poppins',
-                            ),
-                          ),
-                          Text(
-                            listViewContentsRecord.homepage,
-                            style: FlutterFlowTheme.bodyText1.override(
+                            listViewContentsRecord.overview,
+                            style: FlutterFlowTheme.subtitle1.override(
                               fontFamily: 'Poppins',
                             ),
                           )
