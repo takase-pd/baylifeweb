@@ -2,5 +2,13 @@
   "projects": {
     "default": "baylife-ff782"
   },
-  "targets": {}
+  "targets": {
+    "baylife-ff782": {
+      "hosting": {
+        "web": [
+          "baylife-web-dev"
+        ]
+      }
+    }
+  }
 }
