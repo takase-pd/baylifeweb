@@ -73,57 +73,57 @@ class _PostPageWidgetState extends State<PostPageWidget> {
                   padding: EdgeInsets.zero,
                   scrollDirection: Axis.vertical,
                   children: [
-                    StreamBuilder<List<InfoAdminRecord>>(
-                      stream: queryInfoAdminRecord(
-                        singleRecord: true,
-                      ),
-                      builder: (context, snapshot) {
-                        // Customize what your widget looks like when it's loading.
-                        if (!snapshot.hasData) {
-                          return Center(
-                            child: SizedBox(
-                              width: 50,
-                              height: 50,
-                              child: CircularProgressIndicator(
-                                color: FlutterFlowTheme.primaryColor,
-                              ),
-                            ),
-                          );
-                        }
-                        List<InfoAdminRecord> columnInfoAdminRecordList =
-                            snapshot.data;
-                        // Customize what your widget looks like with no query results.
-                        if (snapshot.data.isEmpty) {
-                          return Material(
-                            child: Container(
-                              height: 100,
-                              child: Center(
-                                child: Text('No results.'),
-                              ),
-                            ),
-                          );
-                        }
-                        final columnInfoAdminRecord =
-                            columnInfoAdminRecordList.first;
-                        return Column(
-                          mainAxisSize: MainAxisSize.max,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              '投稿',
-                              style: FlutterFlowTheme.title1.override(
-                                fontFamily: 'Poppins',
-                              ),
-                            ),
-                            Text(
-                              columnInfoAdminRecord.postInfo,
+                    Column(
+                      mainAxisSize: MainAxisSize.max,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          '投稿',
+                          style: FlutterFlowTheme.title1.override(
+                            fontFamily: 'Poppins',
+                          ),
+                        ),
+                        StreamBuilder<List<InfoAdminRecord>>(
+                          stream: queryInfoAdminRecord(
+                            singleRecord: true,
+                          ),
+                          builder: (context, snapshot) {
+                            // Customize what your widget looks like when it's loading.
+                            if (!snapshot.hasData) {
+                              return Center(
+                                child: SizedBox(
+                                  width: 50,
+                                  height: 50,
+                                  child: CircularProgressIndicator(
+                                    color: FlutterFlowTheme.primaryColor,
+                                  ),
+                                ),
+                              );
+                            }
+                            List<InfoAdminRecord> textInfoAdminRecordList =
+                                snapshot.data;
+                            // Customize what your widget looks like with no query results.
+                            if (snapshot.data.isEmpty) {
+                              return Material(
+                                child: Container(
+                                  height: 100,
+                                  child: Center(
+                                    child: Text('No results.'),
+                                  ),
+                                ),
+                              );
+                            }
+                            final textInfoAdminRecord =
+                                textInfoAdminRecordList.first;
+                            return Text(
+                              textInfoAdminRecord.postInfo,
                               style: FlutterFlowTheme.bodyText1.override(
                                 fontFamily: 'Poppins',
                               ),
-                            )
-                          ],
-                        );
-                      },
+                            );
+                          },
+                        )
+                      ],
                     ),
                     Padding(
                       padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 16),
