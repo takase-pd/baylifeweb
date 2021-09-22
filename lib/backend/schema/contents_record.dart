@@ -63,6 +63,9 @@ abstract class ContentsRecord
   String get to;
 
   @nullable
+  DocumentReference get uid;
+
+  @nullable
   @BuiltValueField(wireName: kDocumentReferenceField)
   DocumentReference get reference;
 
@@ -113,6 +116,7 @@ Map<String, dynamic> createContentsRecordData({
   bool display,
   DateTime posted,
   String to,
+  DocumentReference uid,
 }) =>
     serializers.toFirestore(
         ContentsRecord.serializer,
@@ -132,4 +136,5 @@ Map<String, dynamic> createContentsRecordData({
           ..display = display
           ..posted = posted
           ..bccUids = null
-          ..to = to));
+          ..to = to
+          ..uid = uid));
