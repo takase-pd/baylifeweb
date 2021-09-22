@@ -78,46 +78,54 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                       final listViewContentsRecord =
                           listViewContentsRecordList[listViewIndex];
                       return Padding(
-                        padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 15),
+                        padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 10),
                         child: Container(
                           height: 70,
-                          decoration: BoxDecoration(),
-                          child: Column(
-                            mainAxisSize: MainAxisSize.max,
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Row(
-                                mainAxisSize: MainAxisSize.max,
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Text(
-                                    listViewContentsRecord.title,
-                                    style: FlutterFlowTheme.subtitle1.override(
-                                      fontFamily: 'Poppins',
+                          decoration: BoxDecoration(
+                            color: FlutterFlowTheme.grayDark,
+                          ),
+                          child: Padding(
+                            padding:
+                                EdgeInsetsDirectional.fromSTEB(10, 5, 10, 5),
+                            child: Column(
+                              mainAxisSize: MainAxisSize.max,
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Row(
+                                  mainAxisSize: MainAxisSize.max,
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Text(
+                                      listViewContentsRecord.title,
+                                      style:
+                                          FlutterFlowTheme.subtitle1.override(
+                                        fontFamily: 'Poppins',
+                                      ),
                                     ),
+                                    Text(
+                                      dateTimeFormat('yMMMd',
+                                          listViewContentsRecord.posted),
+                                      style:
+                                          FlutterFlowTheme.subtitle2.override(
+                                        fontFamily: 'Poppins',
+                                      ),
+                                    )
+                                  ],
+                                ),
+                                Text(
+                                  listViewContentsRecord.overview
+                                      .maybeHandleOverflow(
+                                    maxChars: 70,
+                                    replacement: '…',
                                   ),
-                                  Text(
-                                    dateTimeFormat(
-                                        'yMMMd', listViewContentsRecord.posted),
-                                    style: FlutterFlowTheme.subtitle1.override(
-                                      fontFamily: 'Poppins',
-                                    ),
-                                  )
-                                ],
-                              ),
-                              Text(
-                                listViewContentsRecord.overview
-                                    .maybeHandleOverflow(
-                                  maxChars: 100,
-                                  replacement: '…',
-                                ),
-                                style: FlutterFlowTheme.bodyText1.override(
-                                  fontFamily: 'Poppins',
-                                ),
-                              )
-                            ],
+                                  style: FlutterFlowTheme.bodyText1.override(
+                                    fontFamily: 'Poppins',
+                                  ),
+                                )
+                              ],
+                            ),
                           ),
                         ),
                       );
