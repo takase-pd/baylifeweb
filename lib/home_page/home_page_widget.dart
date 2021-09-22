@@ -89,6 +89,8 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                             children: [
                               Row(
                                 mainAxisSize: MainAxisSize.max,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
                                 children: [
                                   Text(
                                     listViewContentsRecord.title,
