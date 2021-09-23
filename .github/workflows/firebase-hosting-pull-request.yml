@@ -20,7 +20,7 @@ jobs:
       - run: flutter packages pub run build_runner build --delete-conflicting-outputs
 
       - run: flutter --version
-      - run: flutter build web --no-sound-null-safety
+      - run: flutter build web
 #       - uses: FirebaseExtended/action-hosting-deploy@v0
 #         with:
 #           repoToken: "${{ secrets.GITHUB_TOKEN }}"
