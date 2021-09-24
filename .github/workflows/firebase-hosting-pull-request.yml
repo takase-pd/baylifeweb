@@ -21,8 +21,10 @@ jobs:
 
       - run: flutter --version
       - run: flutter build web
-#       - uses: FirebaseExtended/action-hosting-deploy@v0
-#         with:
-#           repoToken: "${{ secrets.GITHUB_TOKEN }}"
-#           firebaseServiceAccount: "${{ secrets.FIREBASE_SERVICE_ACCOUNT_BAYLIFE_FF782 }}"
-#           projectId: baylife-ff782
+      - uses: FirebaseExtended/action-hosting-deploy@v0
+        with:
+          repoToken: "${{ secrets.GITHUB_TOKEN }}"
+          firebaseServiceAccount: "${{ secrets.FIREBASE_SERVICE_ACCOUNT_BAYLIFE_FF782 }}"
+          projectId: baylife-ff782
+          target: web
+
