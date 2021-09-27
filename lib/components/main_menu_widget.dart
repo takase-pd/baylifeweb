@@ -21,33 +21,23 @@ class _MainMenuWidgetState extends State<MainMenuWidget> {
       width: 240,
       height: double.infinity,
       decoration: BoxDecoration(
-        color: FlutterFlowTheme.grayLight,
-        border: Border.all(
-          width: 0.05,
-        ),
+        color: FlutterFlowTheme.grayDark,
       ),
       child: Column(
         mainAxisSize: MainAxisSize.max,
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Container(
-            width: 220,
-            height: 800,
-            decoration: BoxDecoration(
-              color: FlutterFlowTheme.grayLight,
-            ),
+          Expanded(
             child: Padding(
-              padding: EdgeInsetsDirectional.fromSTEB(10, 0, 10, 0),
-              child: Column(
-                mainAxisSize: MainAxisSize.max,
-                crossAxisAlignment: CrossAxisAlignment.start,
+              padding: EdgeInsetsDirectional.fromSTEB(20, 40, 20, 20),
+              child: ListView(
+                padding: EdgeInsets.zero,
+                scrollDirection: Axis.vertical,
                 children: [
                   Container(
                     width: 200,
                     height: 50,
-                    decoration: BoxDecoration(
-                      color: FlutterFlowTheme.grayLight,
-                    ),
+                    decoration: BoxDecoration(),
                     child: InkWell(
                       onTap: () async {
                         await Navigator.push(
@@ -61,6 +51,7 @@ class _MainMenuWidgetState extends State<MainMenuWidget> {
                         'ホーム',
                         style: FlutterFlowTheme.subtitle1.override(
                           fontFamily: 'Poppins',
+                          color: FlutterFlowTheme.textPrimary,
                         ),
                       ),
                     ),
@@ -68,9 +59,7 @@ class _MainMenuWidgetState extends State<MainMenuWidget> {
                   Container(
                     width: 200,
                     height: 50,
-                    decoration: BoxDecoration(
-                      color: FlutterFlowTheme.grayLight,
-                    ),
+                    decoration: BoxDecoration(),
                     child: InkWell(
                       onTap: () async {
                         await Navigator.push(
@@ -84,6 +73,7 @@ class _MainMenuWidgetState extends State<MainMenuWidget> {
                         '投稿',
                         style: FlutterFlowTheme.subtitle1.override(
                           fontFamily: 'Poppins',
+                          color: FlutterFlowTheme.textPrimary,
                         ),
                       ),
                     ),
@@ -102,6 +92,7 @@ class _MainMenuWidgetState extends State<MainMenuWidget> {
                   'Logout',
                   style: FlutterFlowTheme.bodyText1.override(
                     fontFamily: 'Poppins',
+                    color: FlutterFlowTheme.textDark,
                   ),
                 ),
                 InkWell(

@@ -10,24 +10,27 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-      # Install Flutter with clone
-      - name: Install Flutter
-        run: git clone https://github.com/flutter/flutter.git -b stable
+      - uses: subosito/flutter-action@v1
+        with:
+          flutter-version:  '2.2.3'
 
-      # PATH
-      - name: Add path
-        run: echo "$(pwd)/flutter/bin" >> $GITHUB_PATH
-      - run: flutter channel master
-
-      # Download pakages
       - name: Download Flutter packages
         run: flutter pub get
       - run: flutter packages pub run build_runner build --delete-conflicting-outputs
-
-      - run: flutter --version
       - run: flutter build web
+
+      - if: github.ref == 'refs/heads/main'
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
-          repoToken: "${{ secrets.GITHUB_TOKEN }}"
-          firebaseServiceAccount: "${{ secrets.FIREBASE_SERVICE_ACCOUNT_BAYLIFE_FF782 }}"
+          repoToken: '${{ secrets.GITHUB_TOKEN }}'
+          firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_BAYLIFE_FF782 }}'
           projectId: baylife-ff782
+          target: web
+
+      - if: github.ref == 'refs/heads/develop'
+      - uses: FirebaseExtended/action-hosting-deploy@v0
+        with:
+          repoToken: '${{ secrets.GITHUB_TOKEN }}'
+          firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_BAYLIFE_FF782 }}'
+          projectId: baylife-ff782
+          target: web

@@ -1,6 +1,5 @@
 import '../backend/backend.dart';
 import '../components/header_widget.dart';
-import '../components/main_menu_widget.dart';
 import '../confirm_page/confirm_page_widget.dart';
 import '../flutter_flow/flutter_flow_drop_down.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
@@ -10,22 +9,22 @@ import 'package:flutter/material.dart';
 import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class PostPageWidget extends StatefulWidget {
-  PostPageWidget({Key key}) : super(key: key);
+class PostPageCopyWidget extends StatefulWidget {
+  PostPageCopyWidget({Key key}) : super(key: key);
 
   @override
-  _PostPageWidgetState createState() => _PostPageWidgetState();
+  _PostPageCopyWidgetState createState() => _PostPageCopyWidgetState();
 }
 
-class _PostPageWidgetState extends State<PostPageWidget> {
+class _PostPageCopyWidgetState extends State<PostPageCopyWidget> {
   DateTime datePicked1;
   String dropDownValue;
   TextEditingController textController1;
   TextEditingController textController2;
   TextEditingController textController3;
   TextEditingController textController4;
-  TextEditingController textController5;
   DateTime datePicked2;
+  TextEditingController textController5;
   TextEditingController textController6;
   TextEditingController textController7;
   TextEditingController textController8;
@@ -61,67 +60,101 @@ class _PostPageWidgetState extends State<PostPageWidget> {
             elevation: 4,
           ),
         ),
-        backgroundColor: FlutterFlowTheme.grayLight,
-        body: Row(
-          mainAxisSize: MainAxisSize.max,
-          children: [
-            MainMenuWidget(),
-            Expanded(
-              child: Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(10, 40, 10, 10),
-                child: ListView(
-                  padding: EdgeInsets.zero,
-                  scrollDirection: Axis.vertical,
+        backgroundColor: FlutterFlowTheme.tertiaryColor,
+        body: SingleChildScrollView(
+          child: Column(
+            mainAxisSize: MainAxisSize.max,
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              Padding(
+                padding: EdgeInsetsDirectional.fromSTEB(20, 0, 20, 20),
+                child: Column(
+                  mainAxisSize: MainAxisSize.max,
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Column(
+                    Row(
                       mainAxisSize: MainAxisSize.max,
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(
-                          '投稿',
-                          style: FlutterFlowTheme.title1.override(
-                            fontFamily: 'Poppins',
-                          ),
-                        ),
-                        StreamBuilder<List<InfoAdminRecord>>(
-                          stream: queryInfoAdminRecord(
-                            singleRecord: true,
-                          ),
-                          builder: (context, snapshot) {
-                            // Customize what your widget looks like when it's loading.
-                            if (!snapshot.hasData) {
-                              return Center(
-                                child: SizedBox(
-                                  width: 50,
-                                  height: 50,
-                                  child: CircularProgressIndicator(
-                                    color: FlutterFlowTheme.primaryColor,
+                        Padding(
+                          padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 20),
+                          child: StreamBuilder<List<InfoAdminRecord>>(
+                            stream: queryInfoAdminRecord(
+                              singleRecord: true,
+                            ),
+                            builder: (context, snapshot) {
+                              // Customize what your widget looks like when it's loading.
+                              if (!snapshot.hasData) {
+                                return Center(
+                                  child: SizedBox(
+                                    width: 50,
+                                    height: 50,
+                                    child: CircularProgressIndicator(
+                                      color: FlutterFlowTheme.primaryColor,
+                                    ),
                                   ),
-                                ),
-                              );
-                            }
-                            List<InfoAdminRecord> textInfoAdminRecordList =
-                                snapshot.data;
-                            // Customize what your widget looks like with no query results.
-                            if (snapshot.data.isEmpty) {
-                              return Material(
-                                child: Container(
-                                  height: 100,
-                                  child: Center(
-                                    child: Text('No results.'),
+                                );
+                              }
+                              List<InfoAdminRecord> columnInfoAdminRecordList =
+                                  snapshot.data;
+                              // Customize what your widget looks like with no query results.
+                              if (snapshot.data.isEmpty) {
+                                return Material(
+                                  child: Container(
+                                    height: 100,
+                                    child: Center(
+                                      child: Text('No results.'),
+                                    ),
                                   ),
-                                ),
+                                );
+                              }
+                              final columnInfoAdminRecord =
+                                  columnInfoAdminRecordList.first;
+                              return Column(
+                                mainAxisSize: MainAxisSize.max,
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Container(
+                                    width: 600,
+                                    height: 100,
+                                    constraints: BoxConstraints(
+                                      maxWidth: double.infinity,
+                                    ),
+                                    decoration: BoxDecoration(
+                                      color: FlutterFlowTheme.tertiaryColor,
+                                    ),
+                                    child: Padding(
+                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                          0, 20, 20, 0),
+                                      child: Column(
+                                        mainAxisSize: MainAxisSize.max,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Text(
+                                            '投稿',
+                                            style: FlutterFlowTheme.title1
+                                                .override(
+                                              fontFamily: 'Poppins',
+                                            ),
+                                          ),
+                                          Text(
+                                            columnInfoAdminRecord.postInfo,
+                                            style: FlutterFlowTheme.bodyText1
+                                                .override(
+                                              fontFamily: 'Poppins',
+                                            ),
+                                          )
+                                        ],
+                                      ),
+                                    ),
+                                  )
+                                ],
                               );
-                            }
-                            final textInfoAdminRecord =
-                                textInfoAdminRecordList.first;
-                            return Text(
-                              textInfoAdminRecord.postInfo,
-                              style: FlutterFlowTheme.bodyText1.override(
-                                fontFamily: 'Poppins',
-                              ),
-                            );
-                          },
+                            },
+                          ),
                         )
                       ],
                     ),
@@ -147,13 +180,12 @@ class _PostPageWidgetState extends State<PostPageWidget> {
                       padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 12),
                       child: Row(
                         mainAxisSize: MainAxisSize.max,
-                        mainAxisAlignment: MainAxisAlignment.start,
                         children: [
                           Container(
-                            width: MediaQuery.of(context).size.width * 0.7,
+                            width: 500,
                             height: 60,
                             decoration: BoxDecoration(
-                              color: FlutterFlowTheme.grayLight,
+                              color: FlutterFlowTheme.tertiaryColor,
                               borderRadius: BorderRadius.circular(8),
                               border: Border.all(
                                 color: FlutterFlowTheme.primaryColor,
@@ -226,10 +258,10 @@ class _PostPageWidgetState extends State<PostPageWidget> {
                         mainAxisSize: MainAxisSize.max,
                         children: [
                           Container(
-                            width: MediaQuery.of(context).size.width * 0.7,
+                            width: 500,
                             height: 60,
                             decoration: BoxDecoration(
-                              color: FlutterFlowTheme.grayLight,
+                              color: FlutterFlowTheme.tertiaryColor,
                               borderRadius: BorderRadius.circular(8),
                               border: Border.all(
                                 color: FlutterFlowTheme.primaryColor,
@@ -287,10 +319,10 @@ class _PostPageWidgetState extends State<PostPageWidget> {
                         mainAxisSize: MainAxisSize.max,
                         children: [
                           Container(
-                            width: MediaQuery.of(context).size.width * 0.7,
+                            width: 500,
                             height: 60,
                             decoration: BoxDecoration(
-                              color: FlutterFlowTheme.grayLight,
+                              color: FlutterFlowTheme.tertiaryColor,
                               borderRadius: BorderRadius.circular(8),
                               border: Border.all(
                                 color: FlutterFlowTheme.primaryColor,
@@ -355,10 +387,10 @@ class _PostPageWidgetState extends State<PostPageWidget> {
                         mainAxisSize: MainAxisSize.max,
                         children: [
                           Container(
-                            width: MediaQuery.of(context).size.width * 0.7,
+                            width: 500,
                             height: 120,
                             decoration: BoxDecoration(
-                              color: FlutterFlowTheme.grayLight,
+                              color: FlutterFlowTheme.tertiaryColor,
                               borderRadius: BorderRadius.circular(8),
                               border: Border.all(
                                 color: FlutterFlowTheme.primaryColor,
@@ -425,10 +457,10 @@ class _PostPageWidgetState extends State<PostPageWidget> {
                         mainAxisSize: MainAxisSize.max,
                         children: [
                           Container(
-                            width: MediaQuery.of(context).size.width * 0.7,
+                            width: 500,
                             height: 330,
                             decoration: BoxDecoration(
-                              color: FlutterFlowTheme.grayLight,
+                              color: FlutterFlowTheme.tertiaryColor,
                               borderRadius: BorderRadius.circular(8),
                               border: Border.all(
                                 color: FlutterFlowTheme.primaryColor,
@@ -495,78 +527,10 @@ class _PostPageWidgetState extends State<PostPageWidget> {
                         mainAxisSize: MainAxisSize.max,
                         children: [
                           Container(
-                            width: MediaQuery.of(context).size.width * 0.7,
+                            width: 500,
                             height: 60,
                             decoration: BoxDecoration(
-                              color: FlutterFlowTheme.grayLight,
-                              borderRadius: BorderRadius.circular(8),
-                              border: Border.all(
-                                color: FlutterFlowTheme.primaryColor,
-                              ),
-                            ),
-                            child: Padding(
-                              padding:
-                                  EdgeInsetsDirectional.fromSTEB(16, 0, 0, 0),
-                              child: TextFormField(
-                                controller: textController5,
-                                obscureText: false,
-                                decoration: InputDecoration(
-                                  labelText: '開催場所',
-                                  labelStyle:
-                                      FlutterFlowTheme.bodyText2.override(
-                                    fontFamily: 'Montserrat',
-                                    color: Color(0xFF8B97A2),
-                                    fontWeight: FontWeight.w500,
-                                  ),
-                                  enabledBorder: UnderlineInputBorder(
-                                    borderSide: BorderSide(
-                                      color: Color(0x00000000),
-                                      width: 1,
-                                    ),
-                                    borderRadius: const BorderRadius.only(
-                                      topLeft: Radius.circular(4.0),
-                                      topRight: Radius.circular(4.0),
-                                    ),
-                                  ),
-                                  focusedBorder: UnderlineInputBorder(
-                                    borderSide: BorderSide(
-                                      color: Color(0x00000000),
-                                      width: 1,
-                                    ),
-                                    borderRadius: const BorderRadius.only(
-                                      topLeft: Radius.circular(4.0),
-                                      topRight: Radius.circular(4.0),
-                                    ),
-                                  ),
-                                ),
-                                style: FlutterFlowTheme.bodyText2.override(
-                                  fontFamily: 'Montserrat',
-                                  color: Color(0xFF8B97A2),
-                                  fontWeight: FontWeight.w500,
-                                ),
-                                validator: (val) {
-                                  if (val.isEmpty) {
-                                    return '住所を入力してください。';
-                                  }
-
-                                  return null;
-                                },
-                              ),
-                            ),
-                          )
-                        ],
-                      ),
-                    ),
-                    Padding(
-                      padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 12),
-                      child: Row(
-                        mainAxisSize: MainAxisSize.max,
-                        children: [
-                          Container(
-                            width: MediaQuery.of(context).size.width * 0.7,
-                            height: 60,
-                            decoration: BoxDecoration(
-                              color: FlutterFlowTheme.grayLight,
+                              color: FlutterFlowTheme.tertiaryColor,
                               borderRadius: BorderRadius.circular(8),
                               border: Border.all(
                                 color: FlutterFlowTheme.primaryColor,
@@ -652,10 +616,10 @@ class _PostPageWidgetState extends State<PostPageWidget> {
                         mainAxisSize: MainAxisSize.max,
                         children: [
                           Container(
-                            width: MediaQuery.of(context).size.width * 0.7,
+                            width: 500,
                             height: 60,
                             decoration: BoxDecoration(
-                              color: FlutterFlowTheme.grayLight,
+                              color: FlutterFlowTheme.tertiaryColor,
                               borderRadius: BorderRadius.circular(8),
                               border: Border.all(
                                 color: FlutterFlowTheme.primaryColor,
@@ -741,10 +705,78 @@ class _PostPageWidgetState extends State<PostPageWidget> {
                         mainAxisSize: MainAxisSize.max,
                         children: [
                           Container(
-                            width: MediaQuery.of(context).size.width * 0.7,
+                            width: 500,
                             height: 60,
                             decoration: BoxDecoration(
-                              color: FlutterFlowTheme.grayLight,
+                              color: FlutterFlowTheme.tertiaryColor,
+                              borderRadius: BorderRadius.circular(8),
+                              border: Border.all(
+                                color: FlutterFlowTheme.primaryColor,
+                              ),
+                            ),
+                            child: Padding(
+                              padding:
+                                  EdgeInsetsDirectional.fromSTEB(16, 0, 0, 0),
+                              child: TextFormField(
+                                controller: textController5,
+                                obscureText: false,
+                                decoration: InputDecoration(
+                                  labelText: '住所',
+                                  labelStyle:
+                                      FlutterFlowTheme.bodyText2.override(
+                                    fontFamily: 'Montserrat',
+                                    color: Color(0xFF8B97A2),
+                                    fontWeight: FontWeight.w500,
+                                  ),
+                                  enabledBorder: UnderlineInputBorder(
+                                    borderSide: BorderSide(
+                                      color: Color(0x00000000),
+                                      width: 1,
+                                    ),
+                                    borderRadius: const BorderRadius.only(
+                                      topLeft: Radius.circular(4.0),
+                                      topRight: Radius.circular(4.0),
+                                    ),
+                                  ),
+                                  focusedBorder: UnderlineInputBorder(
+                                    borderSide: BorderSide(
+                                      color: Color(0x00000000),
+                                      width: 1,
+                                    ),
+                                    borderRadius: const BorderRadius.only(
+                                      topLeft: Radius.circular(4.0),
+                                      topRight: Radius.circular(4.0),
+                                    ),
+                                  ),
+                                ),
+                                style: FlutterFlowTheme.bodyText2.override(
+                                  fontFamily: 'Montserrat',
+                                  color: Color(0xFF8B97A2),
+                                  fontWeight: FontWeight.w500,
+                                ),
+                                validator: (val) {
+                                  if (val.isEmpty) {
+                                    return '住所を入力してください。';
+                                  }
+
+                                  return null;
+                                },
+                              ),
+                            ),
+                          )
+                        ],
+                      ),
+                    ),
+                    Padding(
+                      padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 12),
+                      child: Row(
+                        mainAxisSize: MainAxisSize.max,
+                        children: [
+                          Container(
+                            width: 500,
+                            height: 60,
+                            decoration: BoxDecoration(
+                              color: FlutterFlowTheme.tertiaryColor,
                               borderRadius: BorderRadius.circular(8),
                               border: Border.all(
                                 color: FlutterFlowTheme.primaryColor,
@@ -809,10 +841,10 @@ class _PostPageWidgetState extends State<PostPageWidget> {
                         mainAxisSize: MainAxisSize.max,
                         children: [
                           Container(
-                            width: MediaQuery.of(context).size.width * 0.7,
+                            width: 500,
                             height: 60,
                             decoration: BoxDecoration(
-                              color: FlutterFlowTheme.grayLight,
+                              color: FlutterFlowTheme.tertiaryColor,
                               borderRadius: BorderRadius.circular(8),
                               border: Border.all(
                                 color: FlutterFlowTheme.primaryColor,
@@ -825,7 +857,7 @@ class _PostPageWidgetState extends State<PostPageWidget> {
                                 controller: textController7,
                                 obscureText: false,
                                 decoration: InputDecoration(
-                                  labelText: '問い合わせ先（担当者名・部署など）',
+                                  labelText: '問い合わせ先（担当者・部署など）',
                                   labelStyle:
                                       FlutterFlowTheme.bodyText2.override(
                                     fontFamily: 'Montserrat',
@@ -870,10 +902,10 @@ class _PostPageWidgetState extends State<PostPageWidget> {
                         mainAxisSize: MainAxisSize.max,
                         children: [
                           Container(
-                            width: MediaQuery.of(context).size.width * 0.7,
+                            width: 500,
                             height: 60,
                             decoration: BoxDecoration(
-                              color: FlutterFlowTheme.grayLight,
+                              color: FlutterFlowTheme.tertiaryColor,
                               borderRadius: BorderRadius.circular(8),
                               border: Border.all(
                                 color: FlutterFlowTheme.primaryColor,
@@ -925,108 +957,102 @@ class _PostPageWidgetState extends State<PostPageWidget> {
                           )
                         ],
                       ),
-                    ),
+                    )
+                  ],
+                ),
+              ),
+              Padding(
+                padding: EdgeInsetsDirectional.fromSTEB(20, 0, 20, 20),
+                child: Column(
+                  mainAxisSize: MainAxisSize.max,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
                     Text(
                       '＊利用規約に従い投稿します。',
                       style: FlutterFlowTheme.bodyText1.override(
                         fontFamily: 'Poppins',
                       ),
                     ),
-                    Row(
-                      mainAxisSize: MainAxisSize.max,
-                      children: [
-                        Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(0, 12, 0, 12),
-                          child: Container(
-                            width: MediaQuery.of(context).size.width * 0.7,
-                            decoration: BoxDecoration(
-                              color: FlutterFlowTheme.grayLight,
-                            ),
-                            child: CheckboxListTile(
-                              value: checkboxListTileValue ??= false,
-                              onChanged: (newValue) => setState(
-                                  () => checkboxListTileValue = newValue),
-                              title: Text(
-                                '上記内容に同意',
-                                style: FlutterFlowTheme.bodyText2.override(
-                                  fontFamily: 'Poppins',
-                                ),
-                              ),
-                              tileColor: FlutterFlowTheme.grayLight,
-                              dense: false,
-                              controlAffinity: ListTileControlAffinity.trailing,
+                    Padding(
+                      padding: EdgeInsetsDirectional.fromSTEB(0, 12, 0, 12),
+                      child: Container(
+                        width: 500,
+                        decoration: BoxDecoration(),
+                        child: CheckboxListTile(
+                          value: checkboxListTileValue ??= false,
+                          onChanged: (newValue) =>
+                              setState(() => checkboxListTileValue = newValue),
+                          title: Text(
+                            '上記内容に同意',
+                            style: FlutterFlowTheme.bodyText2.override(
+                              fontFamily: 'Poppins',
                             ),
                           ),
-                        )
-                      ],
+                          tileColor: FlutterFlowTheme.tertiaryColor,
+                          dense: false,
+                          controlAffinity: ListTileControlAffinity.trailing,
+                        ),
+                      ),
                     ),
-                    Row(
-                      mainAxisSize: MainAxisSize.max,
-                      children: [
-                        Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(0, 12, 0, 12),
-                          child: Container(
-                            width: MediaQuery.of(context).size.width * 0.7,
-                            decoration: BoxDecoration(
-                              color: FlutterFlowTheme.grayLight,
-                            ),
-                            child: Row(
-                              mainAxisSize: MainAxisSize.max,
-                              mainAxisAlignment: MainAxisAlignment.end,
-                              children: [
-                                FFButtonWidget(
-                                  onPressed: () async {
-                                    if (!formKey.currentState.validate()) {
-                                      return;
-                                    }
-                                    await Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                        builder: (context) => ConfirmPageWidget(
-                                          catName: dropDownValue,
-                                          catNameAdd: textController1.text,
-                                          title: textController2.text,
-                                          overview: textController3.text,
-                                          detail: textController4.text,
-                                          startDay: datePicked1,
-                                          finalDay: datePicked2,
-                                          address: textController5.text,
-                                          organizer: textController6.text,
-                                          contact: textController7.text,
-                                          homepage: textController8.text,
-                                          permission: checkboxListTileValue,
-                                        ),
-                                      ),
-                                    );
-                                  },
-                                  text: '確認',
-                                  options: FFButtonOptions(
-                                    width: 130,
-                                    height: 40,
-                                    color: FlutterFlowTheme.primaryColor,
-                                    textStyle:
-                                        FlutterFlowTheme.subtitle2.override(
-                                      fontFamily: 'Poppins',
-                                      color: Colors.white,
+                    Padding(
+                      padding: EdgeInsetsDirectional.fromSTEB(0, 12, 0, 12),
+                      child: Container(
+                        width: 500,
+                        decoration: BoxDecoration(),
+                        child: Row(
+                          mainAxisSize: MainAxisSize.max,
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          children: [
+                            FFButtonWidget(
+                              onPressed: () async {
+                                if (!formKey.currentState.validate()) {
+                                  return;
+                                }
+                                await Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => ConfirmPageWidget(
+                                      catName: dropDownValue,
+                                      catNameAdd: textController1.text,
+                                      title: textController2.text,
+                                      overview: textController3.text,
+                                      detail: textController4.text,
+                                      startDay: datePicked1,
+                                      finalDay: datePicked2,
+                                      address: textController5.text,
+                                      organizer: textController6.text,
+                                      contact: textController7.text,
+                                      homepage: textController8.text,
+                                      permission: checkboxListTileValue,
                                     ),
-                                    borderSide: BorderSide(
-                                      color: Colors.transparent,
-                                      width: 1,
-                                    ),
-                                    borderRadius: 12,
                                   ),
-                                )
-                              ],
-                            ),
-                          ),
-                        )
-                      ],
+                                );
+                              },
+                              text: '確認',
+                              options: FFButtonOptions(
+                                width: 130,
+                                height: 40,
+                                color: FlutterFlowTheme.primaryColor,
+                                textStyle: FlutterFlowTheme.subtitle2.override(
+                                  fontFamily: 'Poppins',
+                                  color: Colors.white,
+                                ),
+                                borderSide: BorderSide(
+                                  color: Colors.transparent,
+                                  width: 1,
+                                ),
+                                borderRadius: 12,
+                              ),
+                            )
+                          ],
+                        ),
+                      ),
                     )
                   ],
                 ),
-              ),
-            )
-          ],
+              )
+            ],
+          ),
         ),
       ),
     );
