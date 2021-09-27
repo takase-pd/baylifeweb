@@ -1,5 +1,6 @@
 {
   "projects": {
+    "default": "baylifedev",
     "prod": "baylife-ff782",
     "dev": "baylifedev"
   },
