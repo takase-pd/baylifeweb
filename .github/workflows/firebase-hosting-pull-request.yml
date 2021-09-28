@@ -19,17 +19,9 @@ jobs:
       - run: flutter packages pub run build_runner build --delete-conflicting-outputs
       - run: flutter build web
 
-      - if: github.ref == 'refs/heads/main'
-        uses: FirebaseExtended/action-hosting-deploy@v0
+      - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
           repoToken: '${{ secrets.GITHUB_TOKEN }}'
           firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_BAYLIFE_FF782 }}'
           projectId: baylife-ff782
           target: web
-
-      - if: github.ref == 'refs/heads/develop'
-        uses: FirebaseExtended/action-hosting-deploy@v0
-        with:
-          repoToken: '${{ secrets.GITHUB_TOKEN }}'
-          firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_BAYLIFEDEV }}'
-          projectId: baylifedev
