@@ -11,6 +11,14 @@
           "baylife-web-dev"
         ]
       }
+    },
+    "baylifedev": {
+      "hosting": {
+        "web": [
+          "baylifedev"
+        ]
+      }
     }
+
   }
 }

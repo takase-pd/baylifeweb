@@ -1,17 +1,6 @@
 {
   "hosting": [
     {
-      "site": "baylifedev",
-      "public": "build/web",
-      "ignore": ["firebase.json", "**/.*", "**/node_modules/**"],
-      "rewrites": [
-        {
-          "source": "**",
-          "destination": "/index.html"
-        }
-      ]
-    },
-    {
       "target": "web",
       "public": "build/web",
       "ignore": ["firebase.json", "**/.*", "**/node_modules/**"],
