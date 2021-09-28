@@ -12,7 +12,6 @@
       ]
     },
     {
-      "site": "baylife-web-dev",
       "target": "web",
       "public": "build/web",
       "ignore": ["firebase.json", "**/.*", "**/node_modules/**"],
