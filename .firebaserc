@@ -14,11 +14,10 @@
     },
     "baylifedev": {
       "hosting": {
-        "web": [
+        "baylifedev": [
           "baylifedev"
         ]
       }
     }
-
   }
 }
