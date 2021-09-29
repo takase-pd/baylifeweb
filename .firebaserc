@@ -1,6 +1,6 @@
 {
   "projects": {
-    "default": "baylife-ff782",
+    "default": "baylifedev",
     "prod": "baylife-ff782",
     "dev": "baylifedev"
   },
@@ -9,6 +9,13 @@
       "hosting": {
         "web": [
           "baylife-web-dev"
+        ]
+      }
+    },
+    "baylifedev": {
+      "hosting": {
+        "baylifedev": [
+          "baylifedev"
         ]
       }
     }
