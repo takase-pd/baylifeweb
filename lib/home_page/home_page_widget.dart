@@ -81,7 +81,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                       return Padding(
                         padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 10),
                         child: Container(
-                          height: 70,
+                          height: 80,
                           decoration: BoxDecoration(
                             color: FlutterFlowTheme.grayDark,
                           ),

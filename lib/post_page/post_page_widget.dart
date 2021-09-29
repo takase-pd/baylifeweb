@@ -1,3 +1,4 @@
+import '../auth/auth_util.dart';
 import '../backend/backend.dart';
 import '../components/header_widget.dart';
 import '../components/main_menu_widget.dart';
@@ -29,6 +30,11 @@ class _PostPageWidgetState extends State<PostPageWidget> {
   TextEditingController textController6;
   TextEditingController textController7;
   TextEditingController textController8;
+  TextEditingController textController9;
+  TextEditingController textController10;
+  TextEditingController textController11;
+  TextEditingController textController12;
+  TextEditingController textController13;
   bool checkboxListTileValue;
   final formKey = GlobalKey<FormState>();
   final scaffoldKey = GlobalKey<ScaffoldState>();
@@ -44,6 +50,11 @@ class _PostPageWidgetState extends State<PostPageWidget> {
     textController6 = TextEditingController();
     textController7 = TextEditingController();
     textController8 = TextEditingController();
+    textController9 = TextEditingController(text: currentUserDisplayName);
+    textController10 = TextEditingController(text: currentUserEmail);
+    textController11 = TextEditingController();
+    textController12 = TextEditingController();
+    textController13 = TextEditingController();
   }
 
   @override
@@ -626,7 +637,7 @@ class _PostPageWidgetState extends State<PostPageWidget> {
                                     options: FFButtonOptions(
                                       width: 130,
                                       height: 40,
-                                      color: FlutterFlowTheme.primaryColor,
+                                      color: FlutterFlowTheme.secondaryDark,
                                       textStyle:
                                           FlutterFlowTheme.subtitle2.override(
                                         fontFamily: 'Poppins',
@@ -715,7 +726,7 @@ class _PostPageWidgetState extends State<PostPageWidget> {
                                     options: FFButtonOptions(
                                       width: 130,
                                       height: 40,
-                                      color: FlutterFlowTheme.primaryColor,
+                                      color: FlutterFlowTheme.secondaryDark,
                                       textStyle:
                                           FlutterFlowTheme.subtitle2.override(
                                         fontFamily: 'Poppins',
@@ -926,10 +937,339 @@ class _PostPageWidgetState extends State<PostPageWidget> {
                         ],
                       ),
                     ),
-                    Text(
-                      '＊利用規約に従い投稿します。',
-                      style: FlutterFlowTheme.bodyText1.override(
-                        fontFamily: 'Poppins',
+                    Padding(
+                      padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 16),
+                      child: Text(
+                        '投稿者情報',
+                        style: FlutterFlowTheme.title3.override(
+                          fontFamily: 'Poppins',
+                        ),
+                      ),
+                    ),
+                    Padding(
+                      padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 16),
+                      child: Text(
+                        '投稿には表示されません。管理者が投稿の確認、連絡などに使用します。',
+                        style: FlutterFlowTheme.bodyText1.override(
+                          fontFamily: 'Poppins',
+                        ),
+                      ),
+                    ),
+                    Padding(
+                      padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 12),
+                      child: Row(
+                        mainAxisSize: MainAxisSize.max,
+                        children: [
+                          Container(
+                            width: MediaQuery.of(context).size.width * 0.7,
+                            height: 60,
+                            decoration: BoxDecoration(
+                              color: FlutterFlowTheme.grayLight,
+                              borderRadius: BorderRadius.circular(8),
+                              border: Border.all(
+                                color: FlutterFlowTheme.primaryColor,
+                              ),
+                            ),
+                            child: Padding(
+                              padding:
+                                  EdgeInsetsDirectional.fromSTEB(16, 0, 0, 0),
+                              child: AuthUserStreamWidget(
+                                child: TextFormField(
+                                  controller: textController9,
+                                  obscureText: false,
+                                  decoration: InputDecoration(
+                                    enabledBorder: UnderlineInputBorder(
+                                      borderSide: BorderSide(
+                                        color: Color(0x00000000),
+                                        width: 1,
+                                      ),
+                                      borderRadius: const BorderRadius.only(
+                                        topLeft: Radius.circular(4.0),
+                                        topRight: Radius.circular(4.0),
+                                      ),
+                                    ),
+                                    focusedBorder: UnderlineInputBorder(
+                                      borderSide: BorderSide(
+                                        color: Color(0x00000000),
+                                        width: 1,
+                                      ),
+                                      borderRadius: const BorderRadius.only(
+                                        topLeft: Radius.circular(4.0),
+                                        topRight: Radius.circular(4.0),
+                                      ),
+                                    ),
+                                  ),
+                                  style: FlutterFlowTheme.bodyText2.override(
+                                    fontFamily: 'Montserrat',
+                                    color: Color(0xFF8B97A2),
+                                    fontWeight: FontWeight.w500,
+                                  ),
+                                ),
+                              ),
+                            ),
+                          )
+                        ],
+                      ),
+                    ),
+                    Padding(
+                      padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 12),
+                      child: Row(
+                        mainAxisSize: MainAxisSize.max,
+                        children: [
+                          Container(
+                            width: MediaQuery.of(context).size.width * 0.7,
+                            height: 60,
+                            decoration: BoxDecoration(
+                              color: FlutterFlowTheme.grayLight,
+                              borderRadius: BorderRadius.circular(8),
+                              border: Border.all(
+                                color: FlutterFlowTheme.primaryColor,
+                              ),
+                            ),
+                            child: Padding(
+                              padding:
+                                  EdgeInsetsDirectional.fromSTEB(16, 0, 0, 0),
+                              child: AuthUserStreamWidget(
+                                child: TextFormField(
+                                  controller: textController10,
+                                  obscureText: false,
+                                  decoration: InputDecoration(
+                                    enabledBorder: UnderlineInputBorder(
+                                      borderSide: BorderSide(
+                                        color: Color(0x00000000),
+                                        width: 1,
+                                      ),
+                                      borderRadius: const BorderRadius.only(
+                                        topLeft: Radius.circular(4.0),
+                                        topRight: Radius.circular(4.0),
+                                      ),
+                                    ),
+                                    focusedBorder: UnderlineInputBorder(
+                                      borderSide: BorderSide(
+                                        color: Color(0x00000000),
+                                        width: 1,
+                                      ),
+                                      borderRadius: const BorderRadius.only(
+                                        topLeft: Radius.circular(4.0),
+                                        topRight: Radius.circular(4.0),
+                                      ),
+                                    ),
+                                  ),
+                                  style: FlutterFlowTheme.bodyText2.override(
+                                    fontFamily: 'Montserrat',
+                                    color: Color(0xFF8B97A2),
+                                    fontWeight: FontWeight.w500,
+                                  ),
+                                ),
+                              ),
+                            ),
+                          )
+                        ],
+                      ),
+                    ),
+                    Padding(
+                      padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 12),
+                      child: Row(
+                        mainAxisSize: MainAxisSize.max,
+                        children: [
+                          Container(
+                            width: MediaQuery.of(context).size.width * 0.7,
+                            height: 60,
+                            decoration: BoxDecoration(
+                              color: FlutterFlowTheme.grayLight,
+                              borderRadius: BorderRadius.circular(8),
+                              border: Border.all(
+                                color: FlutterFlowTheme.primaryColor,
+                              ),
+                            ),
+                            child: Padding(
+                              padding:
+                                  EdgeInsetsDirectional.fromSTEB(16, 0, 0, 0),
+                              child: TextFormField(
+                                controller: textController11,
+                                obscureText: false,
+                                decoration: InputDecoration(
+                                  labelText: '電話番号',
+                                  labelStyle:
+                                      FlutterFlowTheme.bodyText2.override(
+                                    fontFamily: 'Montserrat',
+                                    color: Color(0xFF8B97A2),
+                                    fontWeight: FontWeight.w500,
+                                  ),
+                                  enabledBorder: UnderlineInputBorder(
+                                    borderSide: BorderSide(
+                                      color: Color(0x00000000),
+                                      width: 1,
+                                    ),
+                                    borderRadius: const BorderRadius.only(
+                                      topLeft: Radius.circular(4.0),
+                                      topRight: Radius.circular(4.0),
+                                    ),
+                                  ),
+                                  focusedBorder: UnderlineInputBorder(
+                                    borderSide: BorderSide(
+                                      color: Color(0x00000000),
+                                      width: 1,
+                                    ),
+                                    borderRadius: const BorderRadius.only(
+                                      topLeft: Radius.circular(4.0),
+                                      topRight: Radius.circular(4.0),
+                                    ),
+                                  ),
+                                ),
+                                style: FlutterFlowTheme.bodyText2.override(
+                                  fontFamily: 'Montserrat',
+                                  color: Color(0xFF8B97A2),
+                                  fontWeight: FontWeight.w500,
+                                ),
+                                keyboardType: TextInputType.phone,
+                              ),
+                            ),
+                          )
+                        ],
+                      ),
+                    ),
+                    Padding(
+                      padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 12),
+                      child: Row(
+                        mainAxisSize: MainAxisSize.max,
+                        children: [
+                          Container(
+                            width: MediaQuery.of(context).size.width * 0.7,
+                            height: 60,
+                            decoration: BoxDecoration(
+                              color: FlutterFlowTheme.grayLight,
+                              borderRadius: BorderRadius.circular(8),
+                              border: Border.all(
+                                color: FlutterFlowTheme.primaryColor,
+                              ),
+                            ),
+                            child: Padding(
+                              padding:
+                                  EdgeInsetsDirectional.fromSTEB(16, 0, 0, 0),
+                              child: TextFormField(
+                                controller: textController12,
+                                obscureText: false,
+                                decoration: InputDecoration(
+                                  labelText: '所属',
+                                  labelStyle:
+                                      FlutterFlowTheme.bodyText2.override(
+                                    fontFamily: 'Montserrat',
+                                    color: Color(0xFF8B97A2),
+                                    fontWeight: FontWeight.w500,
+                                  ),
+                                  enabledBorder: UnderlineInputBorder(
+                                    borderSide: BorderSide(
+                                      color: Color(0x00000000),
+                                      width: 1,
+                                    ),
+                                    borderRadius: const BorderRadius.only(
+                                      topLeft: Radius.circular(4.0),
+                                      topRight: Radius.circular(4.0),
+                                    ),
+                                  ),
+                                  focusedBorder: UnderlineInputBorder(
+                                    borderSide: BorderSide(
+                                      color: Color(0x00000000),
+                                      width: 1,
+                                    ),
+                                    borderRadius: const BorderRadius.only(
+                                      topLeft: Radius.circular(4.0),
+                                      topRight: Radius.circular(4.0),
+                                    ),
+                                  ),
+                                ),
+                                style: FlutterFlowTheme.bodyText2.override(
+                                  fontFamily: 'Montserrat',
+                                  color: Color(0xFF8B97A2),
+                                  fontWeight: FontWeight.w500,
+                                ),
+                              ),
+                            ),
+                          )
+                        ],
+                      ),
+                    ),
+                    Padding(
+                      padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 12),
+                      child: Row(
+                        mainAxisSize: MainAxisSize.max,
+                        children: [
+                          Container(
+                            width: MediaQuery.of(context).size.width * 0.7,
+                            height: 120,
+                            decoration: BoxDecoration(
+                              color: FlutterFlowTheme.grayLight,
+                              borderRadius: BorderRadius.circular(8),
+                              border: Border.all(
+                                color: FlutterFlowTheme.primaryColor,
+                              ),
+                            ),
+                            child: Padding(
+                              padding:
+                                  EdgeInsetsDirectional.fromSTEB(16, 0, 0, 0),
+                              child: TextFormField(
+                                controller: textController13,
+                                obscureText: false,
+                                decoration: InputDecoration(
+                                  labelText: '備考',
+                                  labelStyle:
+                                      FlutterFlowTheme.bodyText2.override(
+                                    fontFamily: 'Montserrat',
+                                    color: Color(0xFF8B97A2),
+                                    fontWeight: FontWeight.w500,
+                                  ),
+                                  enabledBorder: UnderlineInputBorder(
+                                    borderSide: BorderSide(
+                                      color: Color(0x00000000),
+                                      width: 1,
+                                    ),
+                                    borderRadius: const BorderRadius.only(
+                                      topLeft: Radius.circular(4.0),
+                                      topRight: Radius.circular(4.0),
+                                    ),
+                                  ),
+                                  focusedBorder: UnderlineInputBorder(
+                                    borderSide: BorderSide(
+                                      color: Color(0x00000000),
+                                      width: 1,
+                                    ),
+                                    borderRadius: const BorderRadius.only(
+                                      topLeft: Radius.circular(4.0),
+                                      topRight: Radius.circular(4.0),
+                                    ),
+                                  ),
+                                ),
+                                style: FlutterFlowTheme.bodyText2.override(
+                                  fontFamily: 'Montserrat',
+                                  color: Color(0xFF8B97A2),
+                                  fontWeight: FontWeight.w500,
+                                ),
+                                maxLines: 10,
+                                keyboardType: TextInputType.multiline,
+                                validator: (val) {
+                                  if (val.isEmpty) {
+                                    return '概要を入力してください。';
+                                  }
+
+                                  return null;
+                                },
+                              ),
+                            ),
+                          )
+                        ],
+                      ),
+                    ),
+                    InkWell(
+                      onTap: () async {
+                        await launchURL(
+                            'https://baylife-ff782.web.app/terms.html');
+                      },
+                      child: Text(
+                        '＊利用規約に従い投稿します。',
+                        style: FlutterFlowTheme.bodyText1.override(
+                          fontFamily: 'Poppins',
+                        ),
                       ),
                     ),
                     Row(
@@ -967,6 +1307,7 @@ class _PostPageWidgetState extends State<PostPageWidget> {
                           padding: EdgeInsetsDirectional.fromSTEB(0, 12, 0, 12),
                           child: Container(
                             width: MediaQuery.of(context).size.width * 0.7,
+                            height: 60,
                             decoration: BoxDecoration(
                               color: FlutterFlowTheme.grayLight,
                             ),
@@ -995,6 +1336,11 @@ class _PostPageWidgetState extends State<PostPageWidget> {
                                           contact: textController7.text,
                                           homepage: textController8.text,
                                           permission: checkboxListTileValue,
+                                          postName: textController9.text,
+                                          postEmail: textController10.text,
+                                          postPhone: textController11.text,
+                                          postOccupation: textController12.text,
+                                          postRemarks: textController13.text,
                                         ),
                                       ),
                                     );
@@ -1002,8 +1348,8 @@ class _PostPageWidgetState extends State<PostPageWidget> {
                                   text: '確認',
                                   options: FFButtonOptions(
                                     width: 130,
-                                    height: 40,
-                                    color: FlutterFlowTheme.primaryColor,
+                                    height: 60,
+                                    color: FlutterFlowTheme.secondaryDark,
                                     textStyle:
                                         FlutterFlowTheme.subtitle2.override(
                                       fontFamily: 'Poppins',

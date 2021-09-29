@@ -6,6 +6,7 @@ import 'package:geolocator/geolocator.dart';
 import 'package:intl/intl.dart';
 import 'package:timeago/timeago.dart' as timeago;
 import 'package:url_launcher/url_launcher.dart';
+import 'package:json_path/json_path.dart';
 
 import 'lat_lng.dart';
 
@@ -28,14 +29,19 @@ String dateTimeFormat(String format, DateTime dateTime) {
 
 Future launchURL(String url) async {
   var uri = Uri.parse(url).toString();
-  if (await canLaunch(uri)) {
+  try {
     await launch(uri);
-  } else {
-    throw 'Could not launch $uri';
+  } catch (e) {
+    throw 'Could not launch $uri: $e';
   }
 }
 
 DateTime get getCurrentTimestamp => DateTime.now();
+
+dynamic getJsonField(dynamic response, String jsonPath) {
+  final field = JsonPath(jsonPath).read(response);
+  return field.isNotEmpty ? field.first.value : null;
+}
 
 bool get isIos => !kIsWeb && Platform.isIOS;
 
