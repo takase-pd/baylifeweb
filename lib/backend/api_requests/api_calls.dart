@@ -44,7 +44,7 @@ Future<dynamic> registContentsCall({
 }''';
   return ApiManager.instance.makeApiCall(
     callName: 'Regist Contents',
-    apiUrl: 'https://asia-northeast1-baylifedev.cloudfunctions.net/sendMail ',
+    apiUrl: 'https://asia-northeast1-baylifedev.cloudfunctions.net/sendMail',
     callType: ApiCallType.POST,
     headers: {
       'Content-Type': 'application/json',
