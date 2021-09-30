@@ -40,30 +40,31 @@
     <!-- This script installs service_worker.js to provide PWA functionality to
        application. For more information, see:
        https://developers.google.com/web/fundamentals/primers/service-workers -->
-    <script>
-      if ("serviceWorker" in navigator) {
-        window.addEventListener("flutter-first-frame", function () {
-          navigator.serviceWorker.register("flutter_service_worker.js");
-        });
-      }
-    </script>
-    <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-auth.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-firestore.js"></script>
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('flutter-first-frame', function () {
+        navigator.serviceWorker.register('flutter_service_worker.js');
+      });
+    }
+  </script>
+  <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-firestore.js"></script>
+  
 
-    <script>
-      const firebaseConfig = {
-        apiKey: "AIzaSyBw0IaiLuNctEO-tSDLOyz8jGXLCveH6xU",
-        authDomain: "baylifedev.firebaseapp.com",
-        projectId: "baylifedev",
-        storageBucket: "baylifedev.appspot.com",
-        messagingSenderId: "201447539334",
-        appId: "1:201447539334:web:d540e2fda01c7df7958707",
-        measurementId: "G-T1Q723LD39",
-      };
-      firebase.initializeApp(firebaseConfig);
-    </script>
-
-    <script src="main.dart.js" type="application/javascript"></script>
-  </body>
+  <script>
+    const firebaseConfig = {
+    apiKey: "AIzaSyBw0IaiLuNctEO-tSDLOyz8jGXLCveH6xU",
+    authDomain: "baylifedev.firebaseapp.com",
+    projectId: "baylifedev",
+    storageBucket: "baylifedev.appspot.com",
+    messagingSenderId: "201447539334",
+    appId: "1:201447539334:web:d540e2fda01c7df7958707",
+    measurementId: "G-T1Q723LD39"
+  }
+    firebase.initializeApp(firebaseConfig);
+  </script>
+  
+  <script src="main.dart.js" type="application/javascript"></script>
+</body>
 </html>
