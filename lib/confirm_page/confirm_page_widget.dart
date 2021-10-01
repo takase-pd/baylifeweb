@@ -793,6 +793,7 @@ class _ConfirmPageWidgetState extends State<ConfirmPageWidget> {
                                         finalDay: dateTimeFormat(
                                             'yMMMd', widget.finalDay),
                                         postRemarks: widget.postRemarks,
+                                        uid: currentUserUid,
                                       );
                                       await Navigator.pushAndRemoveUntil(
                                         context,

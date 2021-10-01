@@ -18,6 +18,7 @@ Future<dynamic> registContentsCall({
   String startDay = '',
   String finalDay = '',
   String postRemarks = '',
+  String uid = '',
 }) {
   final body = '''
 {
@@ -39,7 +40,8 @@ Future<dynamic> registContentsCall({
     "startDay": "$startDay",
     "finalDay": "$finalDay",
     "filePath": "<filePath>",
-    "postRemarks": "$postRemarks"
+    "postRemarks": "$postRemarks",
+    "uid": "$uid"
   }
 }''';
   return ApiManager.instance.makeApiCall(
@@ -67,6 +69,7 @@ Future<dynamic> registContentsCall({
       'startDay': startDay,
       'finalDay': finalDay,
       'postRemarks': postRemarks,
+      'uid': uid,
     },
     body: body,
     bodyType: BodyType.JSON,
