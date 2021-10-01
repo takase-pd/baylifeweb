@@ -34,7 +34,7 @@ Future<dynamic> registContentsCall({
     "postEmail": "$postEmail",
     "postPhone": "$postPhone",
     "postOccupation": "$postOccupation",
-    "permission": "$permission",
+    "permission": $permission,
     "address": "$address",
     "startDay": "$startDay",
     "finalDay": "$finalDay",
