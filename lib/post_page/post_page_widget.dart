@@ -1,5 +1,6 @@
 import '../auth/auth_util.dart';
 import '../backend/backend.dart';
+import '../backend/firebase_storage/storage.dart';
 import '../components/header_widget.dart';
 import '../components/main_menu_widget.dart';
 import '../confirm_page/confirm_page_widget.dart';
@@ -7,6 +8,7 @@ import '../flutter_flow/flutter_flow_drop_down.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
+import '../flutter_flow/upload_media.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -20,13 +22,17 @@ class PostPageWidget extends StatefulWidget {
 
 class _PostPageWidgetState extends State<PostPageWidget> {
   DateTime datePicked1;
+  bool _loadingButton2 = false;
   String dropDownValue;
   TextEditingController textController1;
   TextEditingController textController2;
   TextEditingController textController3;
   TextEditingController textController4;
+  String uploadedFileUrl = '';
+  bool _loadingButton1 = false;
   TextEditingController textController5;
   DateTime datePicked2;
+  bool _loadingButton3 = false;
   TextEditingController textController6;
   TextEditingController textController7;
   TextEditingController textController8;
@@ -36,6 +42,7 @@ class _PostPageWidgetState extends State<PostPageWidget> {
   TextEditingController textController12;
   TextEditingController textController13;
   bool checkboxListTileValue;
+  bool _loadingButton4 = false;
   final formKey = GlobalKey<FormState>();
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
@@ -113,19 +120,14 @@ class _PostPageWidgetState extends State<PostPageWidget> {
                             }
                             List<InfoAdminRecord> textInfoAdminRecordList =
                                 snapshot.data;
-                            // Customize what your widget looks like with no query results.
+                            // Return an empty Container when the document does not exist.
                             if (snapshot.data.isEmpty) {
-                              return Material(
-                                child: Container(
-                                  height: 100,
-                                  child: Center(
-                                    child: Text('No results.'),
-                                  ),
-                                ),
-                              );
+                              return Container();
                             }
                             final textInfoAdminRecord =
-                                textInfoAdminRecordList.first;
+                                textInfoAdminRecordList.isNotEmpty
+                                    ? textInfoAdminRecordList.first
+                                    : null;
                             return Text(
                               textInfoAdminRecord.postInfo,
                               style: FlutterFlowTheme.bodyText1.override(
@@ -192,19 +194,14 @@ class _PostPageWidgetState extends State<PostPageWidget> {
                                   }
                                   List<CatDdRecord> dropDownCatDdRecordList =
                                       snapshot.data;
-                                  // Customize what your widget looks like with no query results.
+                                  // Return an empty Container when the document does not exist.
                                   if (snapshot.data.isEmpty) {
-                                    return Material(
-                                      child: Container(
-                                        height: 100,
-                                        child: Center(
-                                          child: Text('No results.'),
-                                        ),
-                                      ),
-                                    );
+                                    return Container();
                                   }
                                   final dropDownCatDdRecord =
-                                      dropDownCatDdRecordList.first;
+                                      dropDownCatDdRecordList.isNotEmpty
+                                          ? dropDownCatDdRecordList.first
+                                          : null;
                                   return FlutterFlowDropDown(
                                     options: dropDownCatDdRecord.cats.toList(),
                                     onChanged: (val) =>
@@ -517,6 +514,118 @@ class _PostPageWidgetState extends State<PostPageWidget> {
                             ),
                             child: Padding(
                               padding:
+                                  EdgeInsetsDirectional.fromSTEB(16, 0, 10, 0),
+                              child: Row(
+                                mainAxisSize: MainAxisSize.max,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Column(
+                                    mainAxisSize: MainAxisSize.max,
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        '添付画像 300X300px以内',
+                                        style:
+                                            FlutterFlowTheme.bodyText2.override(
+                                          fontFamily: 'Poppins',
+                                          fontWeight: FontWeight.w500,
+                                        ),
+                                      ),
+                                      Padding(
+                                        padding: EdgeInsetsDirectional.fromSTEB(
+                                            0, 3, 0, 0),
+                                        child: Text(
+                                          '画像は次のページで確認できます。',
+                                          style: FlutterFlowTheme.bodyText2
+                                              .override(
+                                            fontFamily: 'Poppins',
+                                            fontSize: 10,
+                                          ),
+                                        ),
+                                      )
+                                    ],
+                                  ),
+                                  FFButtonWidget(
+                                    onPressed: () async {
+                                      setState(() => _loadingButton1 = true);
+                                      try {
+                                        final selectedMedia = await selectMedia(
+                                          maxWidth: 300.00,
+                                          maxHeight: 300.00,
+                                          mediaSource: MediaSource.photoGallery,
+                                        );
+                                        if (selectedMedia != null &&
+                                            validateFileFormat(
+                                                selectedMedia.storagePath,
+                                                context)) {
+                                          showUploadMessage(
+                                              context, 'Uploading file...',
+                                              showLoading: true);
+                                          final downloadUrl = await uploadData(
+                                              selectedMedia.storagePath,
+                                              selectedMedia.bytes);
+                                          ScaffoldMessenger.of(context)
+                                              .hideCurrentSnackBar();
+                                          if (downloadUrl != null) {
+                                            setState(() =>
+                                                uploadedFileUrl = downloadUrl);
+                                            showUploadMessage(
+                                                context, 'Success!');
+                                          } else {
+                                            showUploadMessage(context,
+                                                'Failed to upload media');
+                                            return;
+                                          }
+                                        }
+                                      } finally {
+                                        setState(() => _loadingButton1 = false);
+                                      }
+                                    },
+                                    text: '選択',
+                                    options: FFButtonOptions(
+                                      width: 130,
+                                      height: 40,
+                                      color: FlutterFlowTheme.secondaryDark,
+                                      textStyle:
+                                          FlutterFlowTheme.subtitle2.override(
+                                        fontFamily: 'Poppins',
+                                        color: Colors.white,
+                                      ),
+                                      borderSide: BorderSide(
+                                        color: Colors.transparent,
+                                        width: 1,
+                                      ),
+                                      borderRadius: 12,
+                                    ),
+                                    loading: _loadingButton1,
+                                  )
+                                ],
+                              ),
+                            ),
+                          )
+                        ],
+                      ),
+                    ),
+                    Padding(
+                      padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 12),
+                      child: Row(
+                        mainAxisSize: MainAxisSize.max,
+                        children: [
+                          Container(
+                            width: MediaQuery.of(context).size.width * 0.7,
+                            height: 60,
+                            decoration: BoxDecoration(
+                              color: FlutterFlowTheme.grayLight,
+                              borderRadius: BorderRadius.circular(8),
+                              border: Border.all(
+                                color: FlutterFlowTheme.primaryColor,
+                              ),
+                            ),
+                            child: Padding(
+                              padding:
                                   EdgeInsetsDirectional.fromSTEB(16, 0, 0, 0),
                               child: TextFormField(
                                 controller: textController5,
@@ -624,14 +733,19 @@ class _PostPageWidgetState extends State<PostPageWidget> {
                                   ),
                                   FFButtonWidget(
                                     onPressed: () async {
-                                      await DatePicker.showDatePicker(
-                                        context,
-                                        showTitleActions: true,
-                                        onConfirm: (date) {
-                                          setState(() => datePicked1 = date);
-                                        },
-                                        currentTime: DateTime.now(),
-                                      );
+                                      setState(() => _loadingButton2 = true);
+                                      try {
+                                        await DatePicker.showDatePicker(
+                                          context,
+                                          showTitleActions: true,
+                                          onConfirm: (date) {
+                                            setState(() => datePicked1 = date);
+                                          },
+                                          currentTime: DateTime.now(),
+                                        );
+                                      } finally {
+                                        setState(() => _loadingButton2 = false);
+                                      }
                                     },
                                     text: '日付',
                                     options: FFButtonOptions(
@@ -649,6 +763,7 @@ class _PostPageWidgetState extends State<PostPageWidget> {
                                       ),
                                       borderRadius: 12,
                                     ),
+                                    loading: _loadingButton2,
                                   )
                                 ],
                               ),
@@ -713,14 +828,19 @@ class _PostPageWidgetState extends State<PostPageWidget> {
                                   ),
                                   FFButtonWidget(
                                     onPressed: () async {
-                                      await DatePicker.showDatePicker(
-                                        context,
-                                        showTitleActions: true,
-                                        onConfirm: (date) {
-                                          setState(() => datePicked2 = date);
-                                        },
-                                        currentTime: DateTime.now(),
-                                      );
+                                      setState(() => _loadingButton3 = true);
+                                      try {
+                                        await DatePicker.showDatePicker(
+                                          context,
+                                          showTitleActions: true,
+                                          onConfirm: (date) {
+                                            setState(() => datePicked2 = date);
+                                          },
+                                          currentTime: DateTime.now(),
+                                        );
+                                      } finally {
+                                        setState(() => _loadingButton3 = false);
+                                      }
                                     },
                                     text: '日付',
                                     options: FFButtonOptions(
@@ -738,6 +858,7 @@ class _PostPageWidgetState extends State<PostPageWidget> {
                                       ),
                                       borderRadius: 12,
                                     ),
+                                    loading: _loadingButton3,
                                   )
                                 ],
                               ),
@@ -1317,33 +1438,40 @@ class _PostPageWidgetState extends State<PostPageWidget> {
                               children: [
                                 FFButtonWidget(
                                   onPressed: () async {
-                                    if (!formKey.currentState.validate()) {
-                                      return;
-                                    }
-                                    await Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                        builder: (context) => ConfirmPageWidget(
-                                          catName: dropDownValue,
-                                          catNameAdd: textController1.text,
-                                          title: textController2.text,
-                                          overview: textController3.text,
-                                          detail: textController4.text,
-                                          startDay: datePicked1,
-                                          finalDay: datePicked2,
-                                          address: textController5.text,
-                                          organizer: textController6.text,
-                                          contact: textController7.text,
-                                          homepage: textController8.text,
-                                          permission: checkboxListTileValue,
-                                          postName: textController9.text,
-                                          postEmail: textController10.text,
-                                          postPhone: textController11.text,
-                                          postOccupation: textController12.text,
-                                          postRemarks: textController13.text,
+                                    setState(() => _loadingButton4 = true);
+                                    try {
+                                      if (!formKey.currentState.validate()) {
+                                        return;
+                                      }
+                                      await Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (context) =>
+                                              ConfirmPageWidget(
+                                            catName: dropDownValue,
+                                            catNameAdd: textController1.text,
+                                            title: textController2.text,
+                                            overview: textController3.text,
+                                            detail: textController4.text,
+                                            startDay: datePicked1,
+                                            finalDay: datePicked2,
+                                            address: textController5.text,
+                                            organizer: textController6.text,
+                                            contact: textController7.text,
+                                            homepage: textController8.text,
+                                            permission: checkboxListTileValue,
+                                            postName: textController9.text,
+                                            postEmail: textController10.text,
+                                            postPhone: textController11.text,
+                                            postOccupation:
+                                                textController12.text,
+                                            postRemarks: textController13.text,
+                                          ),
                                         ),
-                                      ),
-                                    );
+                                      );
+                                    } finally {
+                                      setState(() => _loadingButton4 = false);
+                                    }
                                   },
                                   text: '確認',
                                   options: FFButtonOptions(
@@ -1361,6 +1489,7 @@ class _PostPageWidgetState extends State<PostPageWidget> {
                                     ),
                                     borderRadius: 12,
                                   ),
+                                  loading: _loadingButton4,
                                 )
                               ],
                             ),

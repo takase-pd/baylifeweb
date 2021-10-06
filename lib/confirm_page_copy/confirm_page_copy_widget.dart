@@ -43,6 +43,8 @@ class ConfirmPageCopyWidget extends StatefulWidget {
 }
 
 class _ConfirmPageCopyWidgetState extends State<ConfirmPageCopyWidget> {
+  bool _loadingButton1 = false;
+  bool _loadingButton2 = false;
   bool checkboxListTileValue;
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
@@ -97,19 +99,14 @@ class _ConfirmPageCopyWidgetState extends State<ConfirmPageCopyWidget> {
                             }
                             List<InfoAdminRecord> columnInfoAdminRecordList =
                                 snapshot.data;
-                            // Customize what your widget looks like with no query results.
+                            // Return an empty Container when the document does not exist.
                             if (snapshot.data.isEmpty) {
-                              return Material(
-                                child: Container(
-                                  height: 100,
-                                  child: Center(
-                                    child: Text('No results.'),
-                                  ),
-                                ),
-                              );
+                              return Container();
                             }
                             final columnInfoAdminRecord =
-                                columnInfoAdminRecordList.first;
+                                columnInfoAdminRecordList.isNotEmpty
+                                    ? columnInfoAdminRecordList.first
+                                    : null;
                             return Column(
                               mainAxisSize: MainAxisSize.max,
                               mainAxisAlignment: MainAxisAlignment.start,
@@ -592,7 +589,12 @@ class _ConfirmPageCopyWidgetState extends State<ConfirmPageCopyWidget> {
                             ),
                             child: FFButtonWidget(
                               onPressed: () async {
-                                Navigator.pop(context);
+                                setState(() => _loadingButton1 = true);
+                                try {
+                                  Navigator.pop(context);
+                                } finally {
+                                  setState(() => _loadingButton1 = false);
+                                }
                               },
                               text: '戻る',
                               options: FFButtonOptions(
@@ -609,6 +611,7 @@ class _ConfirmPageCopyWidgetState extends State<ConfirmPageCopyWidget> {
                                 ),
                                 borderRadius: 12,
                               ),
+                              loading: _loadingButton1,
                             ),
                           ),
                         ),
@@ -633,19 +636,14 @@ class _ConfirmPageCopyWidgetState extends State<ConfirmPageCopyWidget> {
                             }
                             List<CategoriesRecord>
                                 containerCategoriesRecordList = snapshot.data;
-                            // Customize what your widget looks like with no query results.
+                            // Return an empty Container when the document does not exist.
                             if (snapshot.data.isEmpty) {
-                              return Material(
-                                child: Container(
-                                  height: 100,
-                                  child: Center(
-                                    child: Text('No results.'),
-                                  ),
-                                ),
-                              );
+                              return Container();
                             }
                             final containerCategoriesRecord =
-                                containerCategoriesRecordList.first;
+                                containerCategoriesRecordList.isNotEmpty
+                                    ? containerCategoriesRecordList.first
+                                    : null;
                             return Container(
                               width: 140,
                               height: 40,
@@ -655,30 +653,35 @@ class _ConfirmPageCopyWidgetState extends State<ConfirmPageCopyWidget> {
                               ),
                               child: FFButtonWidget(
                                 onPressed: () async {
-                                  final contentsCreateData = {
-                                    ...createContentsRecordData(
-                                      category:
-                                          containerCategoriesRecord.reference,
-                                      catAdd: widget.catNameAdd,
-                                      title: widget.title,
-                                      overview: widget.overview,
-                                      detail: widget.detail,
-                                      startDay: widget.startDay,
-                                      finalDay: widget.finalDay,
-                                      address: widget.address,
-                                      organizer: widget.organizer,
-                                      contact: widget.contact,
-                                      homepage: widget.homepage,
-                                      permission: widget.permission,
-                                      display: false,
-                                      posted: getCurrentTimestamp,
-                                    ),
-                                    'bccUids': FieldValue.arrayUnion(
-                                        ['brfikPQtv3KqXdTdm5cH']),
-                                  };
-                                  await ContentsRecord.collection
-                                      .doc()
-                                      .set(contentsCreateData);
+                                  setState(() => _loadingButton2 = true);
+                                  try {
+                                    final contentsCreateData = {
+                                      ...createContentsRecordData(
+                                        category:
+                                            containerCategoriesRecord.reference,
+                                        catAdd: widget.catNameAdd,
+                                        title: widget.title,
+                                        overview: widget.overview,
+                                        detail: widget.detail,
+                                        startDay: widget.startDay,
+                                        finalDay: widget.finalDay,
+                                        address: widget.address,
+                                        organizer: widget.organizer,
+                                        contact: widget.contact,
+                                        homepage: widget.homepage,
+                                        permission: widget.permission,
+                                        display: false,
+                                        posted: getCurrentTimestamp,
+                                      ),
+                                      'bccUids': FieldValue.arrayUnion(
+                                          ['brfikPQtv3KqXdTdm5cH']),
+                                    };
+                                    await ContentsRecord.collection
+                                        .doc()
+                                        .set(contentsCreateData);
+                                  } finally {
+                                    setState(() => _loadingButton2 = false);
+                                  }
                                 },
                                 text: '送信',
                                 options: FFButtonOptions(
@@ -696,6 +699,7 @@ class _ConfirmPageCopyWidgetState extends State<ConfirmPageCopyWidget> {
                                   ),
                                   borderRadius: 12,
                                 ),
+                                loading: _loadingButton2,
                               ),
                             );
                           },
