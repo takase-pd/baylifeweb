@@ -335,7 +335,7 @@ class _ConfirmPageWidgetState extends State<ConfirmPageWidget> {
                                 Image.network(
                                   widget.filePath,
                                   width: 100,
-                                  height: 100,
+                                  height: 60,
                                   fit: BoxFit.cover,
                                 )
                               ],
