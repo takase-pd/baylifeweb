@@ -55,6 +55,8 @@ class ConfirmPageWidget extends StatefulWidget {
 }
 
 class _ConfirmPageWidgetState extends State<ConfirmPageWidget> {
+  bool _loadingButton1 = false;
+  bool _loadingButton2 = false;
   bool checkboxListTileValue;
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
@@ -112,19 +114,14 @@ class _ConfirmPageWidgetState extends State<ConfirmPageWidget> {
                           }
                           List<InfoAdminRecord> textInfoAdminRecordList =
                               snapshot.data;
-                          // Customize what your widget looks like with no query results.
+                          // Return an empty Container when the document does not exist.
                           if (snapshot.data.isEmpty) {
-                            return Material(
-                              child: Container(
-                                height: 100,
-                                child: Center(
-                                  child: Text('No results.'),
-                                ),
-                              ),
-                            );
+                            return Container();
                           }
                           final textInfoAdminRecord =
-                              textInfoAdminRecordList.first;
+                              textInfoAdminRecordList.isNotEmpty
+                                  ? textInfoAdminRecordList.first
+                                  : null;
                           return Text(
                             textInfoAdminRecord.postInfo,
                             style: FlutterFlowTheme.bodyText1.override(
@@ -297,6 +294,49 @@ class _ConfirmPageWidgetState extends State<ConfirmPageWidget> {
                                 fontFamily: 'Poppins',
                                 color: Color(0xFF8B97A2),
                               ),
+                            ),
+                          ),
+                        )
+                      ],
+                    ),
+                  ),
+                  Padding(
+                    padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 12),
+                    child: Row(
+                      mainAxisSize: MainAxisSize.max,
+                      children: [
+                        Container(
+                          width: MediaQuery.of(context).size.width * 0.7,
+                          height: 60,
+                          decoration: BoxDecoration(
+                            color: FlutterFlowTheme.grayLight,
+                            borderRadius: BorderRadius.circular(8),
+                            border: Border.all(
+                              color: FlutterFlowTheme.primaryColor,
+                            ),
+                          ),
+                          child: Padding(
+                            padding:
+                                EdgeInsetsDirectional.fromSTEB(16, 0, 10, 0),
+                            child: Row(
+                              mainAxisSize: MainAxisSize.max,
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text(
+                                  '添付画像',
+                                  style: FlutterFlowTheme.bodyText2.override(
+                                    fontFamily: 'Poppins',
+                                    color: Color(0xFF8BA79B),
+                                    fontWeight: FontWeight.w500,
+                                  ),
+                                ),
+                                Image.network(
+                                  'https://picsum.photos/seed/902/600',
+                                  width: 100,
+                                  height: 100,
+                                  fit: BoxFit.cover,
+                                )
+                              ],
                             ),
                           ),
                         )
@@ -708,31 +748,37 @@ class _ConfirmPageWidgetState extends State<ConfirmPageWidget> {
                                 decoration: BoxDecoration(),
                                 child: FFButtonWidget(
                                   onPressed: () async {
-                                    Navigator.pop(context);
-                                    await showDialog(
-                                      context: context,
-                                      builder: (alertDialogContext) {
-                                        return AlertDialog(
-                                          title: Text('送信完了'),
-                                          content: Text(
-                                              '投稿ありがとうございます。投稿内容を審査しますので、お待ち下さい。'),
-                                          actions: [
-                                            TextButton(
-                                              onPressed: () => Navigator.pop(
-                                                  alertDialogContext),
-                                              child: Text('Ok'),
-                                            ),
-                                          ],
-                                        );
-                                      },
-                                    );
-                                    await Navigator.pushAndRemoveUntil(
-                                      context,
-                                      MaterialPageRoute(
-                                        builder: (context) => HomePageWidget(),
-                                      ),
-                                      (r) => false,
-                                    );
+                                    setState(() => _loadingButton1 = true);
+                                    try {
+                                      Navigator.pop(context);
+                                      await showDialog(
+                                        context: context,
+                                        builder: (alertDialogContext) {
+                                          return AlertDialog(
+                                            title: Text('送信完了'),
+                                            content: Text(
+                                                '投稿ありがとうございます。投稿内容を審査しますので、お待ち下さい。'),
+                                            actions: [
+                                              TextButton(
+                                                onPressed: () => Navigator.pop(
+                                                    alertDialogContext),
+                                                child: Text('Ok'),
+                                              ),
+                                            ],
+                                          );
+                                        },
+                                      );
+                                      await Navigator.pushAndRemoveUntil(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (context) =>
+                                              HomePageWidget(),
+                                        ),
+                                        (r) => false,
+                                      );
+                                    } finally {
+                                      setState(() => _loadingButton1 = false);
+                                    }
                                   },
                                   text: '戻る',
                                   options: FFButtonOptions(
@@ -750,6 +796,7 @@ class _ConfirmPageWidgetState extends State<ConfirmPageWidget> {
                                     ),
                                     borderRadius: 12,
                                   ),
+                                  loading: _loadingButton1,
                                 ),
                               ),
                             ),
@@ -776,19 +823,14 @@ class _ConfirmPageWidgetState extends State<ConfirmPageWidget> {
                                 List<CategoriesRecord>
                                     containerCategoriesRecordList =
                                     snapshot.data;
-                                // Customize what your widget looks like with no query results.
+                                // Return an empty Container when the document does not exist.
                                 if (snapshot.data.isEmpty) {
-                                  return Material(
-                                    child: Container(
-                                      height: 100,
-                                      child: Center(
-                                        child: Text('No results.'),
-                                      ),
-                                    ),
-                                  );
+                                  return Container();
                                 }
                                 final containerCategoriesRecord =
-                                    containerCategoriesRecordList.first;
+                                    containerCategoriesRecordList.isNotEmpty
+                                        ? containerCategoriesRecordList.first
+                                        : null;
                                 return Container(
                                   width: 140,
                                   height: 60,
@@ -797,36 +839,41 @@ class _ConfirmPageWidgetState extends State<ConfirmPageWidget> {
                                   ),
                                   child: FFButtonWidget(
                                     onPressed: () async {
-                                      await registContentsCall(
-                                        catName: widget.catName,
-                                        catNameAdd: widget.catNameAdd,
-                                        title: widget.title,
-                                        overview: widget.overview,
-                                        detail: widget.detail,
-                                        organizer: widget.organizer,
-                                        contact: widget.contact,
-                                        homepage: widget.homepage,
-                                        postName: currentUserDisplayName,
-                                        postEmail: widget.postEmail,
-                                        postPhone: widget.postPhone,
-                                        postOccupation: widget.postOccupation,
-                                        permission: widget.permission,
-                                        address: widget.address,
-                                        startDay: dateTimeFormat(
-                                            'yMMMd', widget.startDay),
-                                        finalDay: dateTimeFormat(
-                                            'yMMMd', widget.finalDay),
-                                        postRemarks: widget.postRemarks,
-                                        uid: currentUserUid,
-                                      );
-                                      await Navigator.pushAndRemoveUntil(
-                                        context,
-                                        MaterialPageRoute(
-                                          builder: (context) =>
-                                              HomePageWidget(),
-                                        ),
-                                        (r) => false,
-                                      );
+                                      setState(() => _loadingButton2 = true);
+                                      try {
+                                        await registContentsCall(
+                                          catName: widget.catName,
+                                          catNameAdd: widget.catNameAdd,
+                                          title: widget.title,
+                                          overview: widget.overview,
+                                          detail: widget.detail,
+                                          organizer: widget.organizer,
+                                          contact: widget.contact,
+                                          homepage: widget.homepage,
+                                          postName: currentUserDisplayName,
+                                          postEmail: widget.postEmail,
+                                          postPhone: widget.postPhone,
+                                          postOccupation: widget.postOccupation,
+                                          permission: widget.permission,
+                                          address: widget.address,
+                                          startDay: dateTimeFormat(
+                                              'yMMMd', widget.startDay),
+                                          finalDay: dateTimeFormat(
+                                              'yMMMd', widget.finalDay),
+                                          postRemarks: widget.postRemarks,
+                                          uid: currentUserUid,
+                                        );
+                                        await Navigator.pushAndRemoveUntil(
+                                          context,
+                                          MaterialPageRoute(
+                                            builder: (context) =>
+                                                HomePageWidget(),
+                                          ),
+                                          (r) => false,
+                                        );
+                                      } finally {
+                                        setState(() => _loadingButton2 = false);
+                                      }
                                     },
                                     text: '送信',
                                     options: FFButtonOptions(
@@ -844,6 +891,7 @@ class _ConfirmPageWidgetState extends State<ConfirmPageWidget> {
                                       ),
                                       borderRadius: 12,
                                     ),
+                                    loading: _loadingButton2,
                                   ),
                                 );
                               },

@@ -18,16 +18,19 @@ class PostPageCopyWidget extends StatefulWidget {
 
 class _PostPageCopyWidgetState extends State<PostPageCopyWidget> {
   DateTime datePicked1;
+  bool _loadingButton1 = false;
   String dropDownValue;
   TextEditingController textController1;
   TextEditingController textController2;
   TextEditingController textController3;
   TextEditingController textController4;
   DateTime datePicked2;
+  bool _loadingButton2 = false;
   TextEditingController textController5;
   TextEditingController textController6;
   TextEditingController textController7;
   TextEditingController textController8;
+  bool _loadingButton3 = false;
   bool checkboxListTileValue;
   final formKey = GlobalKey<FormState>();
   final scaffoldKey = GlobalKey<ScaffoldState>();
@@ -98,19 +101,14 @@ class _PostPageCopyWidgetState extends State<PostPageCopyWidget> {
                               }
                               List<InfoAdminRecord> columnInfoAdminRecordList =
                                   snapshot.data;
-                              // Customize what your widget looks like with no query results.
+                              // Return an empty Container when the document does not exist.
                               if (snapshot.data.isEmpty) {
-                                return Material(
-                                  child: Container(
-                                    height: 100,
-                                    child: Center(
-                                      child: Text('No results.'),
-                                    ),
-                                  ),
-                                );
+                                return Container();
                               }
                               final columnInfoAdminRecord =
-                                  columnInfoAdminRecordList.first;
+                                  columnInfoAdminRecordList.isNotEmpty
+                                      ? columnInfoAdminRecordList.first
+                                      : null;
                               return Column(
                                 mainAxisSize: MainAxisSize.max,
                                 mainAxisAlignment: MainAxisAlignment.start,
@@ -213,19 +211,14 @@ class _PostPageCopyWidgetState extends State<PostPageCopyWidget> {
                                   }
                                   List<CatDdRecord> dropDownCatDdRecordList =
                                       snapshot.data;
-                                  // Customize what your widget looks like with no query results.
+                                  // Return an empty Container when the document does not exist.
                                   if (snapshot.data.isEmpty) {
-                                    return Material(
-                                      child: Container(
-                                        height: 100,
-                                        child: Center(
-                                          child: Text('No results.'),
-                                        ),
-                                      ),
-                                    );
+                                    return Container();
                                   }
                                   final dropDownCatDdRecord =
-                                      dropDownCatDdRecordList.first;
+                                      dropDownCatDdRecordList.isNotEmpty
+                                          ? dropDownCatDdRecordList.first
+                                          : null;
                                   return FlutterFlowDropDown(
                                     options: dropDownCatDdRecord.cats.toList(),
                                     onChanged: (val) =>
@@ -577,14 +570,19 @@ class _PostPageCopyWidgetState extends State<PostPageCopyWidget> {
                                   ),
                                   FFButtonWidget(
                                     onPressed: () async {
-                                      await DatePicker.showDatePicker(
-                                        context,
-                                        showTitleActions: true,
-                                        onConfirm: (date) {
-                                          setState(() => datePicked1 = date);
-                                        },
-                                        currentTime: DateTime.now(),
-                                      );
+                                      setState(() => _loadingButton1 = true);
+                                      try {
+                                        await DatePicker.showDatePicker(
+                                          context,
+                                          showTitleActions: true,
+                                          onConfirm: (date) {
+                                            setState(() => datePicked1 = date);
+                                          },
+                                          currentTime: DateTime.now(),
+                                        );
+                                      } finally {
+                                        setState(() => _loadingButton1 = false);
+                                      }
                                     },
                                     text: '日付',
                                     options: FFButtonOptions(
@@ -602,6 +600,7 @@ class _PostPageCopyWidgetState extends State<PostPageCopyWidget> {
                                       ),
                                       borderRadius: 12,
                                     ),
+                                    loading: _loadingButton1,
                                   )
                                 ],
                               ),
@@ -666,14 +665,19 @@ class _PostPageCopyWidgetState extends State<PostPageCopyWidget> {
                                   ),
                                   FFButtonWidget(
                                     onPressed: () async {
-                                      await DatePicker.showDatePicker(
-                                        context,
-                                        showTitleActions: true,
-                                        onConfirm: (date) {
-                                          setState(() => datePicked2 = date);
-                                        },
-                                        currentTime: DateTime.now(),
-                                      );
+                                      setState(() => _loadingButton2 = true);
+                                      try {
+                                        await DatePicker.showDatePicker(
+                                          context,
+                                          showTitleActions: true,
+                                          onConfirm: (date) {
+                                            setState(() => datePicked2 = date);
+                                          },
+                                          currentTime: DateTime.now(),
+                                        );
+                                      } finally {
+                                        setState(() => _loadingButton2 = false);
+                                      }
                                     },
                                     text: '日付',
                                     options: FFButtonOptions(
@@ -691,6 +695,7 @@ class _PostPageCopyWidgetState extends State<PostPageCopyWidget> {
                                       ),
                                       borderRadius: 12,
                                     ),
+                                    loading: _loadingButton2,
                                   )
                                 ],
                               ),
@@ -1005,28 +1010,33 @@ class _PostPageCopyWidgetState extends State<PostPageCopyWidget> {
                           children: [
                             FFButtonWidget(
                               onPressed: () async {
-                                if (!formKey.currentState.validate()) {
-                                  return;
-                                }
-                                await Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) => ConfirmPageWidget(
-                                      catName: dropDownValue,
-                                      catNameAdd: textController1.text,
-                                      title: textController2.text,
-                                      overview: textController3.text,
-                                      detail: textController4.text,
-                                      startDay: datePicked1,
-                                      finalDay: datePicked2,
-                                      address: textController5.text,
-                                      organizer: textController6.text,
-                                      contact: textController7.text,
-                                      homepage: textController8.text,
-                                      permission: checkboxListTileValue,
+                                setState(() => _loadingButton3 = true);
+                                try {
+                                  if (!formKey.currentState.validate()) {
+                                    return;
+                                  }
+                                  await Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => ConfirmPageWidget(
+                                        catName: dropDownValue,
+                                        catNameAdd: textController1.text,
+                                        title: textController2.text,
+                                        overview: textController3.text,
+                                        detail: textController4.text,
+                                        startDay: datePicked1,
+                                        finalDay: datePicked2,
+                                        address: textController5.text,
+                                        organizer: textController6.text,
+                                        contact: textController7.text,
+                                        homepage: textController8.text,
+                                        permission: checkboxListTileValue,
+                                      ),
                                     ),
-                                  ),
-                                );
+                                  );
+                                } finally {
+                                  setState(() => _loadingButton3 = false);
+                                }
                               },
                               text: '確認',
                               options: FFButtonOptions(
@@ -1043,6 +1053,7 @@ class _PostPageCopyWidgetState extends State<PostPageCopyWidget> {
                                 ),
                                 borderRadius: 12,
                               ),
+                              loading: _loadingButton3,
                             )
                           ],
                         ),
