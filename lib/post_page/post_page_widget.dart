@@ -1466,6 +1466,7 @@ class _PostPageWidgetState extends State<PostPageWidget> {
                                             postOccupation:
                                                 textController12.text,
                                             postRemarks: textController13.text,
+                                            filePath: uploadedFileUrl,
                                           ),
                                         ),
                                       );
