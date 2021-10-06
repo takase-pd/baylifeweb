@@ -990,6 +990,13 @@ class _PostPageWidgetState extends State<PostPageWidget> {
                                   color: Color(0xFF8B97A2),
                                   fontWeight: FontWeight.w500,
                                 ),
+                                validator: (val) {
+                                  if (val.isEmpty) {
+                                    return '問い合わせ先を入力してください。';
+                                  }
+
+                                  return null;
+                                },
                               ),
                             ),
                           )
@@ -1368,13 +1375,6 @@ class _PostPageWidgetState extends State<PostPageWidget> {
                                 ),
                                 maxLines: 10,
                                 keyboardType: TextInputType.multiline,
-                                validator: (val) {
-                                  if (val.isEmpty) {
-                                    return '概要を入力してください。';
-                                  }
-
-                                  return null;
-                                },
                               ),
                             ),
                           )
