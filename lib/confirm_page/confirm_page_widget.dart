@@ -30,6 +30,7 @@ class ConfirmPageWidget extends StatefulWidget {
     this.postPhone,
     this.postOccupation,
     this.postRemarks,
+    this.filePath,
   }) : super(key: key);
 
   final String catName;
@@ -49,6 +50,7 @@ class ConfirmPageWidget extends StatefulWidget {
   final String postPhone;
   final String postOccupation;
   final String postRemarks;
+  final String filePath;
 
   @override
   _ConfirmPageWidgetState createState() => _ConfirmPageWidgetState();
@@ -331,7 +333,7 @@ class _ConfirmPageWidgetState extends State<ConfirmPageWidget> {
                                   ),
                                 ),
                                 Image.network(
-                                  'https://picsum.photos/seed/902/600',
+                                  widget.filePath,
                                   width: 100,
                                   height: 100,
                                   fit: BoxFit.cover,
