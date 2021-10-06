@@ -19,6 +19,7 @@ Future<dynamic> registContentsCall({
   String finalDay = '',
   String postRemarks = '',
   String uid = '',
+  String filePath = '',
 }) {
   final body = '''
 {
@@ -39,7 +40,7 @@ Future<dynamic> registContentsCall({
     "address": "$address",
     "startDay": "$startDay",
     "finalDay": "$finalDay",
-    "filePath": "<filePath>",
+    "filePath": "$filePath",
     "postRemarks": "$postRemarks",
     "uid": "$uid"
   }
@@ -70,6 +71,7 @@ Future<dynamic> registContentsCall({
       'finalDay': finalDay,
       'postRemarks': postRemarks,
       'uid': uid,
+      'filePath': filePath,
     },
     body: body,
     bodyType: BodyType.JSON,
