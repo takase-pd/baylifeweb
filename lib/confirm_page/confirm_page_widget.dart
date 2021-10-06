@@ -753,31 +753,6 @@ class _ConfirmPageWidgetState extends State<ConfirmPageWidget> {
                                     setState(() => _loadingButton1 = true);
                                     try {
                                       Navigator.pop(context);
-                                      await showDialog(
-                                        context: context,
-                                        builder: (alertDialogContext) {
-                                          return AlertDialog(
-                                            title: Text('送信完了'),
-                                            content: Text(
-                                                '投稿ありがとうございます。投稿内容を審査しますので、お待ち下さい。'),
-                                            actions: [
-                                              TextButton(
-                                                onPressed: () => Navigator.pop(
-                                                    alertDialogContext),
-                                                child: Text('Ok'),
-                                              ),
-                                            ],
-                                          );
-                                        },
-                                      );
-                                      await Navigator.pushAndRemoveUntil(
-                                        context,
-                                        MaterialPageRoute(
-                                          builder: (context) =>
-                                              HomePageWidget(),
-                                        ),
-                                        (r) => false,
-                                      );
                                     } finally {
                                       setState(() => _loadingButton1 = false);
                                     }
@@ -864,6 +839,25 @@ class _ConfirmPageWidgetState extends State<ConfirmPageWidget> {
                                               'yMMMd', widget.finalDay),
                                           postRemarks: widget.postRemarks,
                                           uid: currentUserUid,
+                                          filePath: widget.filePath,
+                                        );
+                                        await showDialog(
+                                          context: context,
+                                          builder: (alertDialogContext) {
+                                            return AlertDialog(
+                                              title: Text('送信完了'),
+                                              content: Text(
+                                                  '投稿ありがとうございます。投稿内容を審査しますので、お待ち下さい。'),
+                                              actions: [
+                                                TextButton(
+                                                  onPressed: () =>
+                                                      Navigator.pop(
+                                                          alertDialogContext),
+                                                  child: Text('OK'),
+                                                ),
+                                              ],
+                                            );
+                                          },
                                         );
                                         await Navigator.pushAndRemoveUntil(
                                           context,
