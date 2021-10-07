@@ -1,4 +1,5 @@
 import '../auth/auth_util.dart';
+import '../components/header_widget.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
@@ -50,28 +51,9 @@ class _LoginPageWidgetState extends State<LoginPageWidget> {
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(80),
         child: AppBar(
+          backgroundColor: FlutterFlowTheme.primaryColor,
           automaticallyImplyLeading: false,
-          flexibleSpace: Container(
-            width: double.infinity,
-            height: 100,
-            decoration: BoxDecoration(
-              color: FlutterFlowTheme.tertiaryColor,
-            ),
-            child: Padding(
-              padding: EdgeInsetsDirectional.fromSTEB(10, 10, 10, 10),
-              child: Row(
-                mainAxisSize: MainAxisSize.max,
-                children: [
-                  Text(
-                    'MAKUHARI Bay Life',
-                    style: FlutterFlowTheme.title3.override(
-                      fontFamily: 'Poppins',
-                    ),
-                  )
-                ],
-              ),
-            ),
-          ),
+          flexibleSpace: HeaderWidget(),
           actions: [],
           elevation: 4,
         ),
