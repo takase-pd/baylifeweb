@@ -7,6 +7,6 @@ import 'place.dart';
 import '../backend/backend.dart';
 import '../../auth/auth_util.dart';
 
-String getDetail(String detail) {
-  return detail.replaceAll(RegExp(r'\n'), r'\n');
+String getMultilineText(String multilineText) {
+  return multilineText.replaceAll(RegExp(r'\n'), r'\n');
 }

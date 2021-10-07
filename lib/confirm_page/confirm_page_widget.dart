@@ -823,9 +823,10 @@ class _ConfirmPageWidgetState extends State<ConfirmPageWidget> {
                                           catName: widget.catName,
                                           catNameAdd: widget.catNameAdd,
                                           title: widget.title,
-                                          overview: widget.overview,
+                                          overview: functions.getMultilineText(
+                                              widget.overview),
                                           detail: functions
-                                              .getDetail(widget.detail),
+                                              .getMultilineText(widget.detail),
                                           organizer: widget.organizer,
                                           contact: widget.contact,
                                           homepage: widget.homepage,
