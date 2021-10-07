@@ -8,6 +8,5 @@ import '../backend/backend.dart';
 import '../../auth/auth_util.dart';
 
 String getDetail(String detail) {
-  print(detail.trim());
-  return detail.trim();
+  return detail.replaceAll(RegExp(r'\n'), r'\n');
 }
