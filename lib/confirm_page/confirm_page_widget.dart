@@ -7,6 +7,7 @@ import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
 import '../home_page/home_page_widget.dart';
+import '../flutter_flow/custom_functions.dart' as functions;
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -823,7 +824,8 @@ class _ConfirmPageWidgetState extends State<ConfirmPageWidget> {
                                           catNameAdd: widget.catNameAdd,
                                           title: widget.title,
                                           overview: widget.overview,
-                                          detail: widget.detail,
+                                          detail: functions
+                                              .getDetail(widget.detail),
                                           organizer: widget.organizer,
                                           contact: widget.contact,
                                           homepage: widget.homepage,
