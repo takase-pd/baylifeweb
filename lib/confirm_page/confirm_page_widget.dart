@@ -292,7 +292,7 @@ class _ConfirmPageWidgetState extends State<ConfirmPageWidget> {
                             padding:
                                 EdgeInsetsDirectional.fromSTEB(16, 12, 0, 10),
                             child: Text(
-                              widget.detail,
+                              functions.getDetail(widget.detail),
                               style: FlutterFlowTheme.bodyText1.override(
                                 fontFamily: 'Poppins',
                                 color: Color(0xFF8B97A2),
