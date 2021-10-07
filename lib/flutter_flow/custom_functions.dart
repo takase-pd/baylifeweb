@@ -8,7 +8,6 @@ import '../backend/backend.dart';
 import '../../auth/auth_util.dart';
 
 String getDetail(String detail) {
-  print(detail);
-  print('''${detail}''');
-  return '''${detail}''';
+  print(detail.trim());
+  return detail.trim();
 }
