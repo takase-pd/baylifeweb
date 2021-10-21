@@ -10,6 +10,9 @@ name: Deploy to Firebase Hosting on merge
 jobs:
   build_and_deploy:
     runs-on: ubuntu-latest
+    env:
+      SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
+
     steps:
       - uses: actions/checkout@v2
 
@@ -39,3 +42,19 @@ jobs:
             channelId: live
             projectId: baylifedev
             target: baylifedev
+
+      - name: Slack Notification on Success
+        if: success()
+        uses: rtCamp/action-slack-notify@v2.0.2
+        env:
+          SLACK_CHANNEL: build_app
+          SLACK_TITLE: Deploy Web Success! MAKUHARI Bay Life
+          SLACK_COLOR: good
+
+      - name: Slack Notification on Failure
+        uses: rtCamp/action-slack-notify@v2.0.2
+        if: failure()
+        env:
+          SLACK_CHANNEL: build_app
+          SLACK_TITLE: Deploy Web Failure! MAKUHARI Bay Life
+          SLACK_COLOR: danger

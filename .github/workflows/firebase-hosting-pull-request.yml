@@ -7,6 +7,9 @@ jobs:
   build_and_preview:
     if: "${{ github.event.pull_request.head.repo.full_name == github.repository }}"
     runs-on: ubuntu-latest
+    env:
+      SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
+
     steps:
       - uses: actions/checkout@v2
 
@@ -25,3 +28,19 @@ jobs:
           firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_BAYLIFE_FF782 }}'
           projectId: baylife-ff782
           target: web
+
+      - name: Slack Notification on Success
+        if: success()
+        uses: rtCamp/action-slack-notify@v2.0.2
+        env:
+          SLACK_CHANNEL: build_app
+          SLACK_TITLE: Deploy Web Success! MAKUHARI Bay Life
+          SLACK_COLOR: good
+
+      - name: Slack Notification on Failure
+        uses: rtCamp/action-slack-notify@v2.0.2
+        if: failure()
+        env:
+          SLACK_CHANNEL: build_app
+          SLACK_TITLE: Deploy Web Failure! MAKUHARI Bay Life
+          SLACK_COLOR: danger
