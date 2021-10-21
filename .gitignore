@@ -97,6 +97,10 @@ node_modules/
 .pub/
 /build/
 
+# Firebase – this is necessary if you use Firebase since it could otherwise 
+# lead to leaking of private certificates to your repository, which is no bueno.
+.firebase/
+
 # Web related
 lib/generated_plugin_registrant.dart
 
@@ -117,3 +121,6 @@ lib/backend/schema/info_admin_record.g.dart
 lib/backend/schema/serializers.g.dart
 lib/backend/schema/users_record.g.dart
 pubspec.lock
+android/app/src/main/java/io/flutter/plugins/GeneratedPluginRegistrant.java
+ios/Runner/GeneratedPluginRegistrant.h
+ios/Runner/GeneratedPluginRegistrant.m

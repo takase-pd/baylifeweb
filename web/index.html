@@ -1,8 +1,7 @@
 <!DOCTYPE html>
 <html>
-
-<head>
-  <!--
+  <head>
+    <!--
     If you are serving your web app in a path other than the root, change the
     href value below to reflect the base path you are serving from.
 
@@ -12,31 +11,33 @@
     Fore more details:
     * https://developer.mozilla.org/en-US/docs/Web/HTML/Element/base
   -->
-  <base href="/">
+    <base href="/" />
 
-  <meta charset="UTF-8">
-  <meta content="IE=Edge" http-equiv="X-UA-Compatible">
-  <meta name="description" content="A new Flutter project.">
+    <meta charset="UTF-8" />
+    <meta content="IE=Edge" http-equiv="X-UA-Compatible" />
+    <meta name="description" content="A new Flutter project." />
 
-  <!-- Google Auth -->
-  <meta name="google-signin-client_id"
-    content="317803933569-vmk8ms4eaaejdtmfkiq10efmgadcl43c.apps.googleusercontent.com">
+    <!-- Google Auth -->
+    <meta
+      name="google-signin-client_id"
+      content="201447539334-u7bg08jh5jd3q4chbibpisckkmsuadlj.apps.googleusercontent.com"
+    />
 
-  <!-- iOS meta tags & icons -->
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black">
-  <meta name="apple-mobile-web-app-title" content="bay_life_web">
-  <link rel="apple-touch-icon" href="icons/Icon-192.png">
+    <!-- iOS meta tags & icons -->
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <meta name="apple-mobile-web-app-title" content="bay_life_web" />
+    <link rel="apple-touch-icon" href="icons/Icon-192.png" />
 
-  <!-- Favicon -->
-  <link rel="icon" type="image/png" href="favicon.png" />
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="favicon.png" />
 
-  <title>bay_life_web</title>
-  <link rel="manifest" href="manifest.json">
-</head>
+    <title>bay_life_web</title>
+    <link rel="manifest" href="manifest.json" />
+  </head>
 
-<body>
-  <!-- This script installs service_worker.js to provide PWA functionality to
+  <body>
+    <!-- This script installs service_worker.js to provide PWA functionality to
        application. For more information, see:
        https://developers.google.com/web/fundamentals/primers/service-workers -->
   <script>
@@ -49,22 +50,22 @@
   <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-app.js"></script>
   <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-auth.js"></script>
   <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-firestore.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-storage.js"></script>
   
 
   <script>
     const firebaseConfig = {
-    apiKey: "AIzaSyDGm6QZtA95DtzH5r8kQBjRRl9ioi-5X98",
-    authDomain: "baylife-ff782.firebaseapp.com",
-    projectId: "baylife-ff782",
-    storageBucket: "baylife-ff782.appspot.com",
-    messagingSenderId: "317803933569",
-    appId: "1:317803933569:web:e41b820ed9ecc84e6e8280",
-    measurementId: "G-6VKK0VGL90"
+    apiKey: "AIzaSyBw0IaiLuNctEO-tSDLOyz8jGXLCveH6xU",
+    authDomain: "baylifedev.firebaseapp.com",
+    projectId: "baylifedev",
+    storageBucket: "baylifedev.appspot.com",
+    messagingSenderId: "201447539334",
+    appId: "1:201447539334:web:d540e2fda01c7df7958707",
+    measurementId: "G-T1Q723LD39"
   }
     firebase.initializeApp(firebaseConfig);
   </script>
   
   <script src="main.dart.js" type="application/javascript"></script>
 </body>
-
 </html>

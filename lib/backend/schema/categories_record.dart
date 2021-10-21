@@ -16,11 +16,16 @@ abstract class CategoriesRecord
   String get catName;
 
   @nullable
+  @BuiltValueField(wireName: 'cat_id')
+  int get catId;
+
+  @nullable
   @BuiltValueField(wireName: kDocumentReferenceField)
   DocumentReference get reference;
 
-  static void _initializeBuilder(CategoriesRecordBuilder builder) =>
-      builder..catName = '';
+  static void _initializeBuilder(CategoriesRecordBuilder builder) => builder
+    ..catName = ''
+    ..catId = 0;
 
   static CollectionReference get collection =>
       FirebaseFirestore.instance.collection('categories');
@@ -35,12 +40,16 @@ abstract class CategoriesRecord
 
   static CategoriesRecord getDocumentFromData(
           Map<String, dynamic> data, DocumentReference reference) =>
-      serializers.deserializeWith(
-          serializer, {...data, kDocumentReferenceField: reference});
+      serializers.deserializeWith(serializer,
+          {...mapFromFirestore(data), kDocumentReferenceField: reference});
 }
 
 Map<String, dynamic> createCategoriesRecordData({
   String catName,
+  int catId,
 }) =>
-    serializers.toFirestore(CategoriesRecord.serializer,
-        CategoriesRecord((c) => c..catName = catName));
+    serializers.toFirestore(
+        CategoriesRecord.serializer,
+        CategoriesRecord((c) => c
+          ..catName = catName
+          ..catId = catId));

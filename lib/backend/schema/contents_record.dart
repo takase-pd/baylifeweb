@@ -66,6 +66,9 @@ abstract class ContentsRecord
   DocumentReference get uid;
 
   @nullable
+  String get postRemarks;
+
+  @nullable
   @BuiltValueField(wireName: kDocumentReferenceField)
   DocumentReference get reference;
 
@@ -81,7 +84,8 @@ abstract class ContentsRecord
     ..permission = false
     ..display = false
     ..bccUids = ListBuilder()
-    ..to = '';
+    ..to = ''
+    ..postRemarks = '';
 
   static CollectionReference get collection =>
       FirebaseFirestore.instance.collection('contents');
@@ -96,8 +100,8 @@ abstract class ContentsRecord
 
   static ContentsRecord getDocumentFromData(
           Map<String, dynamic> data, DocumentReference reference) =>
-      serializers.deserializeWith(
-          serializer, {...data, kDocumentReferenceField: reference});
+      serializers.deserializeWith(serializer,
+          {...mapFromFirestore(data), kDocumentReferenceField: reference});
 }
 
 Map<String, dynamic> createContentsRecordData({
@@ -117,6 +121,7 @@ Map<String, dynamic> createContentsRecordData({
   DateTime posted,
   String to,
   DocumentReference uid,
+  String postRemarks,
 }) =>
     serializers.toFirestore(
         ContentsRecord.serializer,
@@ -137,4 +142,5 @@ Map<String, dynamic> createContentsRecordData({
           ..posted = posted
           ..bccUids = null
           ..to = to
-          ..uid = uid));
+          ..uid = uid
+          ..postRemarks = postRemarks));
