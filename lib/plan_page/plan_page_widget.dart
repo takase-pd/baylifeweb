@@ -1,3 +1,4 @@
+import '../backend/api_requests/api_calls.dart';
 import '../components/header_widget.dart';
 import '../components/main_menu_widget.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
@@ -18,6 +19,7 @@ class PlanPageWidget extends StatefulWidget {
 }
 
 class _PlanPageWidgetState extends State<PlanPageWidget> {
+  dynamic subs;
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
@@ -46,49 +48,68 @@ class _PlanPageWidgetState extends State<PlanPageWidget> {
                 padding: EdgeInsets.zero,
                 scrollDirection: Axis.vertical,
                 children: [
-                  Card(
-                    clipBehavior: Clip.antiAliasWithSaveLayer,
-                    color: FlutterFlowTheme.grayDark,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                    child: Padding(
-                      padding: EdgeInsetsDirectional.fromSTEB(10, 20, 10, 20),
-                      child: Column(
-                        mainAxisSize: MainAxisSize.max,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            getJsonField(
-                                    widget.plans, r'''$.result.plans[1].name''')
-                                .toString(),
-                            style: FlutterFlowTheme.bodyText1,
-                          ),
-                          Text(
-                            getJsonField(widget.plans,
-                                    r'''$.result.plans[1].prices[0].unitAmount''')
-                                .toString(),
-                            style: FlutterFlowTheme.bodyText1,
-                          ),
-                          Text(
-                            getJsonField(widget.plans,
-                                    r'''$.result.plans[1].prices[0]. currency''')
-                                .toString(),
-                            style: FlutterFlowTheme.bodyText1,
-                          ),
-                          Text(
-                            getJsonField(widget.plans,
-                                    r'''$.result.plans[1].prices[0]. interval''')
-                                .toString(),
-                            style: FlutterFlowTheme.bodyText1,
-                          ),
-                          Text(
-                            getJsonField(widget.plans,
-                                    r'''$.result.plans[1].prices[0]. intervalCount''')
-                                .toString(),
-                            style: FlutterFlowTheme.bodyText1,
-                          )
-                        ],
+                  InkWell(
+                    onTap: () async {
+                      subs = await subscribeCall(
+                        priceId: getJsonField(widget.plans,
+                                r'''$.result.plans[1].prices[0]. priceId''')
+                            .toString(),
+                        url: 'http://localhost:5000/',
+                      );
+
+                      setState(() {});
+                    },
+                    child: Card(
+                      clipBehavior: Clip.antiAliasWithSaveLayer,
+                      color: FlutterFlowTheme.grayDark,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      child: Padding(
+                        padding: EdgeInsetsDirectional.fromSTEB(10, 20, 10, 20),
+                        child: Column(
+                          mainAxisSize: MainAxisSize.max,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              getJsonField(widget.plans,
+                                      r'''$.result.plans[1].name''')
+                                  .toString(),
+                              style: FlutterFlowTheme.bodyText1,
+                            ),
+                            Text(
+                              getJsonField(widget.plans,
+                                      r'''$.result.plans[1].prices[0].unitAmount''')
+                                  .toString(),
+                              style: FlutterFlowTheme.bodyText1,
+                            ),
+                            Text(
+                              getJsonField(widget.plans,
+                                      r'''$.result.plans[1].prices[0]. currency''')
+                                  .toString(),
+                              style: FlutterFlowTheme.bodyText1,
+                            ),
+                            Text(
+                              getJsonField(widget.plans,
+                                      r'''$.result.plans[1].prices[0]. interval''')
+                                  .toString(),
+                              style: FlutterFlowTheme.bodyText1,
+                            ),
+                            Text(
+                              getJsonField(widget.plans,
+                                      r'''$.result.plans[1].prices[0]. intervalCount''')
+                                  .toString(),
+                              style: FlutterFlowTheme.bodyText1,
+                            ),
+                            Text(
+                              valueOrDefault<String>(
+                                getJsonField(subs, r'''$.data''').toString(),
+                                'Session ID',
+                              ),
+                              style: FlutterFlowTheme.bodyText1,
+                            )
+                          ],
+                        ),
                       ),
                     ),
                   )
