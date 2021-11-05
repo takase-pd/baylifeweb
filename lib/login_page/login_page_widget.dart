@@ -74,6 +74,9 @@ class _LoginPageWidgetState extends State<LoginPageWidget> {
                     children: [
                       TabBar(
                         labelColor: FlutterFlowTheme.primaryColor,
+                        labelStyle: GoogleFonts.getFont(
+                          'Roboto',
+                        ),
                         indicatorColor: FlutterFlowTheme.secondaryColor,
                         tabs: [
                           Tab(
@@ -101,15 +104,9 @@ class _LoginPageWidgetState extends State<LoginPageWidget> {
                                       obscureText: false,
                                       decoration: InputDecoration(
                                         labelText: 'Email Address',
-                                        labelStyle:
-                                            FlutterFlowTheme.bodyText1.override(
-                                          fontFamily: 'Poppins',
-                                        ),
+                                        labelStyle: FlutterFlowTheme.bodyText1,
                                         hintText: 'Enter your email...',
-                                        hintStyle:
-                                            FlutterFlowTheme.bodyText1.override(
-                                          fontFamily: 'Poppins',
-                                        ),
+                                        hintStyle: FlutterFlowTheme.bodyText1,
                                         enabledBorder: UnderlineInputBorder(
                                           borderSide: BorderSide(
                                             color: Color(0x00000000),
@@ -131,10 +128,7 @@ class _LoginPageWidgetState extends State<LoginPageWidget> {
                                           ),
                                         ),
                                       ),
-                                      style:
-                                          FlutterFlowTheme.bodyText1.override(
-                                        fontFamily: 'Poppins',
-                                      ),
+                                      style: FlutterFlowTheme.bodyText1,
                                     ),
                                   ),
                                   Padding(
@@ -145,15 +139,9 @@ class _LoginPageWidgetState extends State<LoginPageWidget> {
                                       obscureText: !passwordVisibility,
                                       decoration: InputDecoration(
                                         labelText: 'Password',
-                                        labelStyle:
-                                            FlutterFlowTheme.bodyText1.override(
-                                          fontFamily: 'Poppins',
-                                        ),
+                                        labelStyle: FlutterFlowTheme.bodyText1,
                                         hintText: 'Enter your password...',
-                                        hintStyle:
-                                            FlutterFlowTheme.bodyText1.override(
-                                          fontFamily: 'Poppins',
-                                        ),
+                                        hintStyle: FlutterFlowTheme.bodyText1,
                                         enabledBorder: UnderlineInputBorder(
                                           borderSide: BorderSide(
                                             color: Color(0x00000000),
@@ -188,10 +176,7 @@ class _LoginPageWidgetState extends State<LoginPageWidget> {
                                           ),
                                         ),
                                       ),
-                                      style:
-                                          FlutterFlowTheme.bodyText1.override(
-                                        fontFamily: 'Poppins',
-                                      ),
+                                      style: FlutterFlowTheme.bodyText1,
                                     ),
                                   ),
                                   Padding(
@@ -399,15 +384,9 @@ class _LoginPageWidgetState extends State<LoginPageWidget> {
                                       obscureText: false,
                                       decoration: InputDecoration(
                                         labelText: 'Email Address',
-                                        labelStyle:
-                                            FlutterFlowTheme.bodyText1.override(
-                                          fontFamily: 'Poppins',
-                                        ),
+                                        labelStyle: FlutterFlowTheme.bodyText1,
                                         hintText: 'Enter your email...',
-                                        hintStyle:
-                                            FlutterFlowTheme.bodyText1.override(
-                                          fontFamily: 'Poppins',
-                                        ),
+                                        hintStyle: FlutterFlowTheme.bodyText1,
                                         enabledBorder: UnderlineInputBorder(
                                           borderSide: BorderSide(
                                             color: Color(0x00000000),
@@ -429,10 +408,7 @@ class _LoginPageWidgetState extends State<LoginPageWidget> {
                                           ),
                                         ),
                                       ),
-                                      style:
-                                          FlutterFlowTheme.bodyText1.override(
-                                        fontFamily: 'Poppins',
-                                      ),
+                                      style: FlutterFlowTheme.bodyText1,
                                     ),
                                   ),
                                   Padding(
@@ -443,15 +419,9 @@ class _LoginPageWidgetState extends State<LoginPageWidget> {
                                       obscureText: !crPasswordVisibility,
                                       decoration: InputDecoration(
                                         labelText: 'Password',
-                                        labelStyle:
-                                            FlutterFlowTheme.bodyText1.override(
-                                          fontFamily: 'Poppins',
-                                        ),
+                                        labelStyle: FlutterFlowTheme.bodyText1,
                                         hintText: 'Enter your password...',
-                                        hintStyle:
-                                            FlutterFlowTheme.bodyText1.override(
-                                          fontFamily: 'Poppins',
-                                        ),
+                                        hintStyle: FlutterFlowTheme.bodyText1,
                                         enabledBorder: UnderlineInputBorder(
                                           borderSide: BorderSide(
                                             color: Color(0x00000000),
@@ -486,10 +456,7 @@ class _LoginPageWidgetState extends State<LoginPageWidget> {
                                           ),
                                         ),
                                       ),
-                                      style:
-                                          FlutterFlowTheme.bodyText1.override(
-                                        fontFamily: 'Poppins',
-                                      ),
+                                      style: FlutterFlowTheme.bodyText1,
                                     ),
                                   ),
                                   Padding(
@@ -500,15 +467,9 @@ class _LoginPageWidgetState extends State<LoginPageWidget> {
                                       obscureText: !crPasswordConfirmVisibility,
                                       decoration: InputDecoration(
                                         labelText: 'Confirm Password',
-                                        labelStyle:
-                                            FlutterFlowTheme.bodyText1.override(
-                                          fontFamily: 'Poppins',
-                                        ),
+                                        labelStyle: FlutterFlowTheme.bodyText1,
                                         hintText: 'Confirm password...',
-                                        hintStyle:
-                                            FlutterFlowTheme.bodyText1.override(
-                                          fontFamily: 'Poppins',
-                                        ),
+                                        hintStyle: FlutterFlowTheme.bodyText1,
                                         enabledBorder: UnderlineInputBorder(
                                           borderSide: BorderSide(
                                             color: Color(0x00000000),
@@ -543,10 +504,7 @@ class _LoginPageWidgetState extends State<LoginPageWidget> {
                                           ),
                                         ),
                                       ),
-                                      style:
-                                          FlutterFlowTheme.bodyText1.override(
-                                        fontFamily: 'Poppins',
-                                      ),
+                                      style: FlutterFlowTheme.bodyText1,
                                     ),
                                   ),
                                   Padding(

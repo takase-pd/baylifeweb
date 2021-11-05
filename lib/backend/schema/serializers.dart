@@ -5,6 +5,7 @@ import 'info_admin_record.dart';
 import 'users_record.dart';
 import 'cat_dd_record.dart';
 import 'contents_record.dart';
+import 'email_members_record.dart';
 
 import 'index.dart';
 
@@ -20,6 +21,7 @@ const kDocumentReferenceField = 'Document__Reference__Field';
   UsersRecord,
   CatDdRecord,
   ContentsRecord,
+  EmailMembersRecord,
 ])
 final Serializers serializers = (_$serializers.toBuilder()
       ..add(DocumentReferenceSerializer())

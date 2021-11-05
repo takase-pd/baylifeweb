@@ -97,9 +97,7 @@ class _PostPageWidgetState extends State<PostPageWidget> {
                       children: [
                         Text(
                           '投稿',
-                          style: FlutterFlowTheme.title1.override(
-                            fontFamily: 'Poppins',
-                          ),
+                          style: FlutterFlowTheme.title1,
                         ),
                         StreamBuilder<List<InfoAdminRecord>>(
                           stream: queryInfoAdminRecord(
@@ -130,9 +128,7 @@ class _PostPageWidgetState extends State<PostPageWidget> {
                                     : null;
                             return Text(
                               textInfoAdminRecord.postInfo,
-                              style: FlutterFlowTheme.bodyText1.override(
-                                fontFamily: 'Poppins',
-                              ),
+                              style: FlutterFlowTheme.bodyText1,
                             );
                           },
                         )
@@ -142,18 +138,14 @@ class _PostPageWidgetState extends State<PostPageWidget> {
                       padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 16),
                       child: Text(
                         '投稿内容',
-                        style: FlutterFlowTheme.title3.override(
-                          fontFamily: 'Poppins',
-                        ),
+                        style: FlutterFlowTheme.title3,
                       ),
                     ),
                     Padding(
                       padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 16),
                       child: Text(
                         '投稿に表示されます。機密情報などは記載しないでください。',
-                        style: FlutterFlowTheme.bodyText1.override(
-                          fontFamily: 'Poppins',
-                        ),
+                        style: FlutterFlowTheme.bodyText1,
                       ),
                     ),
                     Padding(
@@ -741,7 +733,7 @@ class _PostPageWidgetState extends State<PostPageWidget> {
                                           onConfirm: (date) {
                                             setState(() => datePicked1 = date);
                                           },
-                                          currentTime: DateTime.now(),
+                                          currentTime: getCurrentTimestamp,
                                         );
                                       } finally {
                                         setState(() => _loadingButton2 = false);
@@ -836,7 +828,7 @@ class _PostPageWidgetState extends State<PostPageWidget> {
                                           onConfirm: (date) {
                                             setState(() => datePicked2 = date);
                                           },
-                                          currentTime: DateTime.now(),
+                                          currentTime: getCurrentTimestamp,
                                         );
                                       } finally {
                                         setState(() => _loadingButton3 = false);
@@ -1069,18 +1061,14 @@ class _PostPageWidgetState extends State<PostPageWidget> {
                       padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 16),
                       child: Text(
                         '投稿者情報',
-                        style: FlutterFlowTheme.title3.override(
-                          fontFamily: 'Poppins',
-                        ),
+                        style: FlutterFlowTheme.title3,
                       ),
                     ),
                     Padding(
                       padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 16),
                       child: Text(
                         '投稿には表示されません。管理者が投稿の確認、連絡などに使用します。',
-                        style: FlutterFlowTheme.bodyText1.override(
-                          fontFamily: 'Poppins',
-                        ),
+                        style: FlutterFlowTheme.bodyText1,
                       ),
                     ),
                     Padding(
@@ -1388,9 +1376,7 @@ class _PostPageWidgetState extends State<PostPageWidget> {
                       },
                       child: Text(
                         '＊利用規約に従い投稿します。',
-                        style: FlutterFlowTheme.bodyText1.override(
-                          fontFamily: 'Poppins',
-                        ),
+                        style: FlutterFlowTheme.bodyText1,
                       ),
                     ),
                     Row(
@@ -1409,9 +1395,7 @@ class _PostPageWidgetState extends State<PostPageWidget> {
                                   () => checkboxListTileValue = newValue),
                               title: Text(
                                 '上記内容に同意',
-                                style: FlutterFlowTheme.bodyText2.override(
-                                  fontFamily: 'Poppins',
-                                ),
+                                style: FlutterFlowTheme.bodyText2,
                               ),
                               tileColor: FlutterFlowTheme.grayLight,
                               dense: false,
@@ -1468,7 +1452,7 @@ class _PostPageWidgetState extends State<PostPageWidget> {
                                             postRemarks: textController13.text,
                                             filePath: valueOrDefault<String>(
                                               uploadedFileUrl,
-                                              'https://firebasestorage.googleapis.com/v0/b/baylifedev.appspot.com/o/assets%2FNoImage.png?alt=media&token=16c12fc7-9de4-4531-9b81-c4b0e7a07945',
+                                              'https://firebasestorage.googleapis.com/v0/b/baylife-ff782.appspot.com/o/assets%2FNoImage.png?alt=media&token=cfb3d70b-69d2-4f7f-be63-f429cc9872da',
                                             ),
                                           ),
                                         ),

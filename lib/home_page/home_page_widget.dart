@@ -89,10 +89,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                   children: [
                                     Text(
                                       listViewContentsRecord.title,
-                                      style:
-                                          FlutterFlowTheme.subtitle1.override(
-                                        fontFamily: 'Poppins',
-                                      ),
+                                      style: FlutterFlowTheme.subtitle1,
                                     ),
                                     Row(
                                       mainAxisSize: MainAxisSize.max,
@@ -102,10 +99,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                         Text(
                                           dateTimeFormat('yMMMd',
                                               listViewContentsRecord.posted),
-                                          style: FlutterFlowTheme.subtitle2
-                                              .override(
-                                            fontFamily: 'Poppins',
-                                          ),
+                                          style: FlutterFlowTheme.subtitle2,
                                         ),
                                         ToggleIcon(
                                           onPressed: () async {
@@ -140,9 +134,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                     maxChars: 70,
                                     replacement: '…',
                                   ),
-                                  style: FlutterFlowTheme.bodyText1.override(
-                                    fontFamily: 'Poppins',
-                                  ),
+                                  style: FlutterFlowTheme.bodyText1,
                                 )
                               ],
                             ),
