@@ -49,10 +49,41 @@ class _PlanPageWidgetState extends State<PlanPageWidget> {
                   Card(
                     clipBehavior: Clip.antiAliasWithSaveLayer,
                     color: FlutterFlowTheme.grayDark,
-                    child: Text(
-                      getJsonField(widget.plans, r'''$.result.plans[:1].id''')
-                          .toString(),
-                      style: FlutterFlowTheme.bodyText1,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    child: Padding(
+                      padding: EdgeInsetsDirectional.fromSTEB(10, 20, 10, 20),
+                      child: Column(
+                        mainAxisSize: MainAxisSize.max,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            getJsonField(
+                                    widget.plans, r'''$.result.plans[1].name''')
+                                .toString(),
+                            style: FlutterFlowTheme.bodyText1,
+                          ),
+                          Text(
+                            getJsonField(widget.plans,
+                                    r'''$.result.plans[1].prices[0].unitAmount''')
+                                .toString(),
+                            style: FlutterFlowTheme.bodyText1,
+                          ),
+                          Text(
+                            getJsonField(widget.plans,
+                                    r'''$.result.plans[1].prices[0]. interval''')
+                                .toString(),
+                            style: FlutterFlowTheme.bodyText1,
+                          ),
+                          Text(
+                            getJsonField(widget.plans,
+                                    r'''$.result.plans[1].prices[0]. intervalCount''')
+                                .toString(),
+                            style: FlutterFlowTheme.bodyText1,
+                          )
+                        ],
+                      ),
                     ),
                   )
                 ],
