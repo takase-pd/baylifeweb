@@ -72,6 +72,12 @@ class _PlanPageWidgetState extends State<PlanPageWidget> {
                           ),
                           Text(
                             getJsonField(widget.plans,
+                                    r'''$.result.plans[1].prices[0]. currency''')
+                                .toString(),
+                            style: FlutterFlowTheme.bodyText1,
+                          ),
+                          Text(
+                            getJsonField(widget.plans,
                                     r'''$.result.plans[1].prices[0]. interval''')
                                 .toString(),
                             style: FlutterFlowTheme.bodyText1,
