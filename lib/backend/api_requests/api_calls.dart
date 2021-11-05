@@ -97,3 +97,31 @@ Future<dynamic> getPlanCall() {
     returnResponse: true,
   );
 }
+
+Future<dynamic> subscribeCall({
+  String priceId = '',
+  String url = 'https://baylifedev.web.app/',
+}) {
+  final body = '''
+{
+  "data": {
+    "priceId": "${priceId}",
+    "url": "${url}"
+  }
+}''';
+  return ApiManager.instance.makeApiCall(
+    callName: 'Subscribe',
+    apiUrl: 'https://asia-northeast1-baylifedev.cloudfunctions.net/subscribeV0',
+    callType: ApiCallType.POST,
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    params: {
+      'priceId': priceId,
+      'url': url,
+    },
+    body: body,
+    bodyType: BodyType.JSON,
+    returnResponse: true,
+  );
+}
