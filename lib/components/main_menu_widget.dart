@@ -1,8 +1,10 @@
 import '../auth/auth_util.dart';
+import '../backend/api_requests/api_calls.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../home_page/home_page_widget.dart';
 import '../login_page/login_page_widget.dart';
+import '../plan_page/plan_page_widget.dart';
 import '../post_page/post_page_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -15,6 +17,8 @@ class MainMenuWidget extends StatefulWidget {
 }
 
 class _MainMenuWidgetState extends State<MainMenuWidget> {
+  dynamic plans;
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -71,6 +75,33 @@ class _MainMenuWidgetState extends State<MainMenuWidget> {
                       },
                       child: Text(
                         '投稿',
+                        style: FlutterFlowTheme.subtitle1.override(
+                          fontFamily: 'Poppins',
+                          color: FlutterFlowTheme.textPrimary,
+                        ),
+                      ),
+                    ),
+                  ),
+                  Container(
+                    width: 200,
+                    height: 50,
+                    decoration: BoxDecoration(),
+                    child: InkWell(
+                      onTap: () async {
+                        plans = await getPlanCall();
+                        await Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => PlanPageWidget(
+                              plans: plans,
+                            ),
+                          ),
+                        );
+
+                        setState(() {});
+                      },
+                      child: Text(
+                        'プラン',
                         style: FlutterFlowTheme.subtitle1.override(
                           fontFamily: 'Poppins',
                           color: FlutterFlowTheme.textPrimary,

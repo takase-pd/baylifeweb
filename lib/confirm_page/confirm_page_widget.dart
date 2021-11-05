@@ -60,6 +60,7 @@ class ConfirmPageWidget extends StatefulWidget {
 class _ConfirmPageWidgetState extends State<ConfirmPageWidget> {
   bool _loadingButton1 = false;
   bool _loadingButton2 = false;
+  dynamic aaa;
   bool checkboxListTileValue;
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
@@ -94,9 +95,7 @@ class _ConfirmPageWidgetState extends State<ConfirmPageWidget> {
                     children: [
                       Text(
                         '投稿 確認',
-                        style: FlutterFlowTheme.title1.override(
-                          fontFamily: 'Poppins',
-                        ),
+                        style: FlutterFlowTheme.title1,
                       ),
                       StreamBuilder<List<InfoAdminRecord>>(
                         stream: queryInfoAdminRecord(
@@ -127,9 +126,7 @@ class _ConfirmPageWidgetState extends State<ConfirmPageWidget> {
                                   : null;
                           return Text(
                             textInfoAdminRecord.postInfo,
-                            style: FlutterFlowTheme.bodyText1.override(
-                              fontFamily: 'Poppins',
-                            ),
+                            style: FlutterFlowTheme.bodyText1,
                           );
                         },
                       )
@@ -139,18 +136,14 @@ class _ConfirmPageWidgetState extends State<ConfirmPageWidget> {
                     padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 16),
                     child: Text(
                       '投稿内容',
-                      style: FlutterFlowTheme.title3.override(
-                        fontFamily: 'Poppins',
-                      ),
+                      style: FlutterFlowTheme.title3,
                     ),
                   ),
                   Padding(
                     padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 16),
                     child: Text(
                       '投稿に表示されます。機密情報などは記載しないでください。',
-                      style: FlutterFlowTheme.bodyText1.override(
-                        fontFamily: 'Poppins',
-                      ),
+                      style: FlutterFlowTheme.bodyText1,
                     ),
                   ),
                   Padding(
@@ -334,7 +327,10 @@ class _ConfirmPageWidgetState extends State<ConfirmPageWidget> {
                                   ),
                                 ),
                                 Image.network(
-                                  widget.filePath,
+                                  valueOrDefault<String>(
+                                    widget.filePath,
+                                    'https://firebasestorage.googleapis.com/v0/b/baylife-ff782.appspot.com/o/assets%2FNoImage.png?alt=media&token=cfb3d70b-69d2-4f7f-be63-f429cc9872da',
+                                  ),
                                   width: 100,
                                   height: 60,
                                   fit: BoxFit.cover,
@@ -562,18 +558,14 @@ class _ConfirmPageWidgetState extends State<ConfirmPageWidget> {
                     padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 16),
                     child: Text(
                       '投稿者情報',
-                      style: FlutterFlowTheme.title3.override(
-                        fontFamily: 'Poppins',
-                      ),
+                      style: FlutterFlowTheme.title3,
                     ),
                   ),
                   Padding(
                     padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 16),
                     child: Text(
                       '投稿には表示されません。管理者が投稿の確認、連絡などに使用します。',
-                      style: FlutterFlowTheme.bodyText1.override(
-                        fontFamily: 'Poppins',
-                      ),
+                      style: FlutterFlowTheme.bodyText1,
                     ),
                   ),
                   Padding(
@@ -698,9 +690,7 @@ class _ConfirmPageWidgetState extends State<ConfirmPageWidget> {
                   ),
                   Text(
                     '＊利用規約に従い投稿します。',
-                    style: FlutterFlowTheme.bodyText1.override(
-                      fontFamily: 'Poppins',
-                    ),
+                    style: FlutterFlowTheme.bodyText1,
                   ),
                   Row(
                     mainAxisSize: MainAxisSize.max,
@@ -718,9 +708,7 @@ class _ConfirmPageWidgetState extends State<ConfirmPageWidget> {
                                 () => checkboxListTileValue = newValue),
                             title: Text(
                               '上記内容に同意',
-                              style: FlutterFlowTheme.bodyText2.override(
-                                fontFamily: 'Poppins',
-                              ),
+                              style: FlutterFlowTheme.bodyText2,
                             ),
                             dense: false,
                             controlAffinity: ListTileControlAffinity.trailing,
@@ -819,7 +807,7 @@ class _ConfirmPageWidgetState extends State<ConfirmPageWidget> {
                                     onPressed: () async {
                                       setState(() => _loadingButton2 = true);
                                       try {
-                                        await registContentsCall(
+                                        aaa = await registContentsCall(
                                           catName: widget.catName,
                                           catNameAdd: widget.catNameAdd,
                                           title: widget.title,
@@ -830,7 +818,7 @@ class _ConfirmPageWidgetState extends State<ConfirmPageWidget> {
                                           organizer: widget.organizer,
                                           contact: widget.contact,
                                           homepage: widget.homepage,
-                                          postName: currentUserDisplayName,
+                                          postName: widget.postName,
                                           postEmail: widget.postEmail,
                                           postPhone: widget.postPhone,
                                           postOccupation: widget.postOccupation,
@@ -870,6 +858,8 @@ class _ConfirmPageWidgetState extends State<ConfirmPageWidget> {
                                           ),
                                           (r) => false,
                                         );
+
+                                        setState(() {});
                                       } finally {
                                         setState(() => _loadingButton2 = false);
                                       }
@@ -894,6 +884,10 @@ class _ConfirmPageWidgetState extends State<ConfirmPageWidget> {
                                   ),
                                 );
                               },
+                            ),
+                            Text(
+                              'Hello World',
+                              style: FlutterFlowTheme.bodyText1,
                             )
                           ],
                         ),
