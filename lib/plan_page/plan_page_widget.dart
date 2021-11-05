@@ -50,7 +50,7 @@ class _PlanPageWidgetState extends State<PlanPageWidget> {
                     clipBehavior: Clip.antiAliasWithSaveLayer,
                     color: FlutterFlowTheme.grayDark,
                     child: Text(
-                      getJsonField(widget.plans, r'''$.result[:1}.id''')
+                      getJsonField(widget.plans, r'''$.result.plans[:1].id''')
                           .toString(),
                       style: FlutterFlowTheme.bodyText1,
                     ),
