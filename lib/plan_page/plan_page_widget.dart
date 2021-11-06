@@ -103,7 +103,8 @@ class _PlanPageWidgetState extends State<PlanPageWidget> {
                             ),
                             Text(
                               valueOrDefault<String>(
-                                getJsonField(subs, r'''$.data''').toString(),
+                                getJsonField(subs, r'''$.result.subscribe''')
+                                    .toString(),
                                 'Session ID',
                               ),
                               style: FlutterFlowTheme.bodyText1,
