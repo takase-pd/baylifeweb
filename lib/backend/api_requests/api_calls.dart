@@ -101,12 +101,14 @@ Future<dynamic> getPlanCall() {
 Future<dynamic> subscribeCall({
   String priceId = '',
   String url = 'https://baylifedev.web.app/',
+  String uid = '',
 }) {
   final body = '''
 {
   "data": {
     "priceId": "${priceId}",
-    "url": "${url}"
+    "url": "${url}",
+    "uid": "${uid}"
   }
 }''';
   return ApiManager.instance.makeApiCall(
@@ -119,6 +121,7 @@ Future<dynamic> subscribeCall({
     params: {
       'priceId': priceId,
       'url': url,
+      'uid': uid,
     },
     body: body,
     bodyType: BodyType.JSON,
