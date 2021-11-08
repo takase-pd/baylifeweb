@@ -1,3 +1,4 @@
+import '../auth/auth_util.dart';
 import '../backend/api_requests/api_calls.dart';
 import '../components/header_widget.dart';
 import '../components/main_menu_widget.dart';
@@ -52,9 +53,10 @@ class _PlanPageWidgetState extends State<PlanPageWidget> {
                     onTap: () async {
                       subs = await subscribeCall(
                         priceId: getJsonField(widget.plans,
-                                r'''$.result.plans[1].prices[0]. priceId''')
+                                r'''$.result.plans[1].prices[0].priceId''')
                             .toString(),
                         url: 'http://localhost:5000/',
+                        uid: currentUserUid,
                       );
 
                       setState(() {});
