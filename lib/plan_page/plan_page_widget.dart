@@ -1,3 +1,6 @@
+@JS()
+library stripe;
+
 import '../auth/auth_util.dart';
 import '../backend/api_requests/api_calls.dart';
 import '../components/header_widget.dart';
@@ -6,6 +9,11 @@ import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+
+import 'package:js/js.dart';
+
+const apiKey =
+    'pk_test_51ITgUwGe7bJktEzT6F1RcOf7aH2lrjK1jlIne0tpyoWXbdxAa0GpTBjyJp1CIn4EElYQFA7T39wLpRzdBlBCj1zg00TPUJYvsl';
 
 class PlanPageWidget extends StatefulWidget {
   PlanPageWidget({
@@ -58,7 +66,13 @@ class _PlanPageWidgetState extends State<PlanPageWidget> {
                         url: 'http://localhost:5000/',
                         uid: currentUserUid,
                       );
-
+                      final stripe = Stripe(apiKey);
+                      final sessionId =
+                          getJsonField(subs, r'''$.result.subscribe''')
+                              .toString();
+                      stripe.redirectToCheckout(CheckoutOptions(
+                        sessionId: sessionId,
+                      ));
                       setState(() {});
                     },
                     child: Card(
@@ -124,4 +138,18 @@ class _PlanPageWidgetState extends State<PlanPageWidget> {
       ),
     );
   }
+}
+
+@JS()
+class Stripe {
+  external Stripe(String key);
+  external redirectToCheckout(CheckoutOptions options);
+}
+
+@JS()
+@anonymous
+class CheckoutOptions {
+  external factory CheckoutOptions({
+    String sessionId,
+  });
 }
