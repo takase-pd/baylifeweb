@@ -1,8 +1,3 @@
-@JS()
-library stripe;
-
-import '../auth/auth_util.dart';
-import '../backend/api_requests/api_calls.dart';
 import '../components/top_page_header_widget.dart';
 import '../create_account_page/create_account_page_widget.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
@@ -28,7 +23,6 @@ class PlanPageWidget extends StatefulWidget {
 }
 
 class _PlanPageWidgetState extends State<PlanPageWidget> {
-  dynamic subs;
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
@@ -100,22 +94,17 @@ class _PlanPageWidgetState extends State<PlanPageWidget> {
                             children: [
                               InkWell(
                                 onTap: () async {
-                                  subs = await subscribeCall(
-                                    priceId: getJsonField(widget.plans,
-                                            r'''$.result.plans[1].prices[0].priceId''')
-                                        .toString(),
-                                    url: 'https://localhost:5000/',
-                                    uid: currentUserUid,
+                                  await Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) =>
+                                          CreateAccountPageWidget(
+                                        priceId: getJsonField(widget.plans,
+                                                r'''$.result.plans[1].prices[0].priceId''')
+                                            .toString(),
+                                      ),
+                                    ),
                                   );
-                                  final stripe = Stripe(apiKey);
-                                  final sessionId = getJsonField(
-                                          subs, r'''$.result.subscribe''')
-                                      .toString();
-                                  stripe.redirectToCheckout(CheckoutOptions(
-                                    sessionId: sessionId,
-                                  ));
-
-                                  setState(() {});
                                 },
                                 child: Card(
                                   clipBehavior: Clip.antiAliasWithSaveLayer,
@@ -123,72 +112,57 @@ class _PlanPageWidgetState extends State<PlanPageWidget> {
                                   shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(10),
                                   ),
-                                  child: InkWell(
-                                    onTap: () async {
-                                      await Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                          builder: (context) =>
-                                              CreateAccountPageWidget(
-                                            priceId: getJsonField(widget.plans,
-                                                    r'''$.result.plans[1].prices[0].priceId''')
+                                  child: Container(
+                                    width: 500,
+                                    height: 300,
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(5),
+                                    ),
+                                    child: Padding(
+                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                          30, 30, 30, 30),
+                                      child: Column(
+                                        mainAxisSize: MainAxisSize.max,
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceAround,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Text(
+                                            getJsonField(widget.plans,
+                                                    r'''$.result.plans[1].name''')
                                                 .toString(),
+                                            style: FlutterFlowTheme.title2,
                                           ),
-                                        ),
-                                      );
-                                    },
-                                    child: Container(
-                                      width: 500,
-                                      height: 300,
-                                      decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(5),
-                                      ),
-                                      child: Padding(
-                                        padding: EdgeInsetsDirectional.fromSTEB(
-                                            30, 30, 30, 30),
-                                        child: Column(
-                                          mainAxisSize: MainAxisSize.max,
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceAround,
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          children: [
-                                            Text(
-                                              getJsonField(widget.plans,
-                                                      r'''$.result.plans[1].name''')
-                                                  .toString(),
-                                              style: FlutterFlowTheme.title2,
-                                            ),
-                                            Text(
-                                              getJsonField(widget.plans,
-                                                      r'''$.result.plans[1].prices[0].unitAmount''')
-                                                  .toString(),
-                                              style: FlutterFlowTheme.bodyText1,
-                                            ),
-                                            Text(
-                                              getJsonField(widget.plans,
-                                                      r'''$.result.plans[1].prices[0]. currency''')
-                                                  .toString(),
-                                              style: FlutterFlowTheme.bodyText1,
-                                            ),
-                                            Text(
-                                              getJsonField(widget.plans,
-                                                      r'''$.result.plans[1].prices[0]. interval''')
-                                                  .toString(),
-                                              style: FlutterFlowTheme.bodyText1,
-                                            ),
-                                            Text(
-                                              getJsonField(widget.plans,
-                                                      r'''$.result.plans[1].prices[0]. intervalCount''')
-                                                  .toString(),
-                                              style: FlutterFlowTheme.bodyText1,
-                                            ),
-                                            Text(
-                                              '申し込みを希望の方は、こちらをクリックしてください。',
-                                              style: FlutterFlowTheme.bodyText1,
-                                            )
-                                          ],
-                                        ),
+                                          Text(
+                                            getJsonField(widget.plans,
+                                                    r'''$.result.plans[1].prices[0].unitAmount''')
+                                                .toString(),
+                                            style: FlutterFlowTheme.bodyText1,
+                                          ),
+                                          Text(
+                                            getJsonField(widget.plans,
+                                                    r'''$.result.plans[1].prices[0]. currency''')
+                                                .toString(),
+                                            style: FlutterFlowTheme.bodyText1,
+                                          ),
+                                          Text(
+                                            getJsonField(widget.plans,
+                                                    r'''$.result.plans[1].prices[0]. interval''')
+                                                .toString(),
+                                            style: FlutterFlowTheme.bodyText1,
+                                          ),
+                                          Text(
+                                            getJsonField(widget.plans,
+                                                    r'''$.result.plans[1].prices[0]. intervalCount''')
+                                                .toString(),
+                                            style: FlutterFlowTheme.bodyText1,
+                                          ),
+                                          Text(
+                                            '申し込みを希望の方は、こちらをクリックしてください。',
+                                            style: FlutterFlowTheme.bodyText1,
+                                          )
+                                        ],
                                       ),
                                     ),
                                   ),
@@ -208,18 +182,4 @@ class _PlanPageWidgetState extends State<PlanPageWidget> {
       ),
     );
   }
-}
-
-@JS()
-class Stripe {
-  external Stripe(String key);
-  external redirectToCheckout(CheckoutOptions options);
-}
-
-@JS()
-@anonymous
-class CheckoutOptions {
-  external factory CheckoutOptions({
-    String sessionId,
-  });
 }
