@@ -20,7 +20,7 @@ class _HeaderWidgetState extends State<HeaderWidget> {
         color: FlutterFlowTheme.primaryColor,
       ),
       child: Padding(
-        padding: EdgeInsetsDirectional.fromSTEB(10, 10, 10, 10),
+        padding: EdgeInsetsDirectional.fromSTEB(20, 10, 20, 10),
         child: Row(
           mainAxisSize: MainAxisSize.max,
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -30,6 +30,7 @@ class _HeaderWidgetState extends State<HeaderWidget> {
               style: FlutterFlowTheme.title3.override(
                 fontFamily: 'Poppins',
                 color: FlutterFlowTheme.textPrimary,
+                fontSize: 24,
               ),
             )
           ],
