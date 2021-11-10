@@ -10,8 +10,8 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class CreateUserPageWidget extends StatefulWidget {
-  CreateUserPageWidget({
+class CreateAccountPageWidget extends StatefulWidget {
+  CreateAccountPageWidget({
     Key key,
     this.priceId,
   }) : super(key: key);
@@ -19,10 +19,11 @@ class CreateUserPageWidget extends StatefulWidget {
   final String priceId;
 
   @override
-  _CreateUserPageWidgetState createState() => _CreateUserPageWidgetState();
+  _CreateAccountPageWidgetState createState() =>
+      _CreateAccountPageWidgetState();
 }
 
-class _CreateUserPageWidgetState extends State<CreateUserPageWidget> {
+class _CreateAccountPageWidgetState extends State<CreateAccountPageWidget> {
   TextEditingController emailAddressController;
   TextEditingController passwordController;
   bool passwordVisibility;
@@ -61,9 +62,14 @@ class _CreateUserPageWidgetState extends State<CreateUserPageWidget> {
                     Column(
                       mainAxisSize: MainAxisSize.max,
                       children: [
+                        AutoSizeText(
+                          'ユーザー作成後、決済ページが開きます。',
+                          textAlign: TextAlign.center,
+                          style: FlutterFlowTheme.subtitle2,
+                        ),
                         Padding(
                           padding:
-                              EdgeInsetsDirectional.fromSTEB(20, 0, 20, 16),
+                              EdgeInsetsDirectional.fromSTEB(20, 50, 20, 16),
                           child: TextFormField(
                             controller: emailAddressController,
                             obscureText: false,
