@@ -1,4 +1,6 @@
 import '../auth/auth_util.dart';
+import '../backend/api_requests/api_calls.dart';
+import '../backend/backend.dart';
 import '../components/top_page_header_widget.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
@@ -8,20 +10,26 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class LoginPageWidget extends StatefulWidget {
-  LoginPageWidget({Key key}) : super(key: key);
+class CreateUserPageWidget extends StatefulWidget {
+  CreateUserPageWidget({
+    Key key,
+    this.priceId,
+  }) : super(key: key);
+
+  final String priceId;
 
   @override
-  _LoginPageWidgetState createState() => _LoginPageWidgetState();
+  _CreateUserPageWidgetState createState() => _CreateUserPageWidgetState();
 }
 
-class _LoginPageWidgetState extends State<LoginPageWidget> {
+class _CreateUserPageWidgetState extends State<CreateUserPageWidget> {
   TextEditingController emailAddressController;
   TextEditingController passwordController;
   bool passwordVisibility;
   bool _loadingButton1 = false;
+  dynamic subsEmail;
   bool _loadingButton2 = false;
-  bool _loadingButton3 = false;
+  dynamic subsGoogle;
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
@@ -142,7 +150,7 @@ class _LoginPageWidgetState extends State<LoginPageWidget> {
                             onPressed: () async {
                               setState(() => _loadingButton1 = true);
                               try {
-                                final user = await signInWithEmail(
+                                final user = await createAccountWithEmail(
                                   context,
                                   emailAddressController.text,
                                   passwordController.text,
@@ -151,6 +159,18 @@ class _LoginPageWidgetState extends State<LoginPageWidget> {
                                   return;
                                 }
 
+                                final usersCreateData = createUsersRecordData(
+                                  email: emailAddressController.text,
+                                );
+                                await UsersRecord.collection
+                                    .doc(user.uid)
+                                    .update(usersCreateData);
+
+                                subsEmail = await subscribeCall(
+                                  priceId: widget.priceId,
+                                  url: 'https://baylifedev.web.app/',
+                                  uid: currentUserUid,
+                                );
                                 await Navigator.pushAndRemoveUntil(
                                   context,
                                   MaterialPageRoute(
@@ -158,11 +178,13 @@ class _LoginPageWidgetState extends State<LoginPageWidget> {
                                   ),
                                   (r) => false,
                                 );
+
+                                setState(() {});
                               } finally {
                                 setState(() => _loadingButton1 = false);
                               }
                             },
-                            text: 'Login',
+                            text: 'ユーザー作成',
                             options: FFButtonOptions(
                               width: 230,
                               height: 60,
@@ -181,51 +203,9 @@ class _LoginPageWidgetState extends State<LoginPageWidget> {
                           ),
                         ),
                         Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 20),
-                          child: FFButtonWidget(
-                            onPressed: () async {
-                              setState(() => _loadingButton2 = true);
-                              try {
-                                if (emailAddressController.text.isEmpty) {
-                                  ScaffoldMessenger.of(context).showSnackBar(
-                                    SnackBar(
-                                      content: Text(
-                                        'Email required!',
-                                      ),
-                                    ),
-                                  );
-                                  return;
-                                }
-                                await resetPassword(
-                                  email: emailAddressController.text,
-                                  context: context,
-                                );
-                              } finally {
-                                setState(() => _loadingButton2 = false);
-                              }
-                            },
-                            text: 'Forget Password?',
-                            options: FFButtonOptions(
-                              width: 170,
-                              height: 40,
-                              color: FlutterFlowTheme.primaryColor,
-                              textStyle: FlutterFlowTheme.subtitle2.override(
-                                fontFamily: 'Poppins',
-                                color: Colors.white,
-                              ),
-                              borderSide: BorderSide(
-                                color: Colors.transparent,
-                                width: 1,
-                              ),
-                              borderRadius: 12,
-                            ),
-                            loading: _loadingButton2,
-                          ),
-                        ),
-                        Padding(
                           padding: EdgeInsetsDirectional.fromSTEB(0, 8, 0, 16),
                           child: AutoSizeText(
-                            'Or use a social account to login',
+                            'Or use a social account to create user',
                             textAlign: TextAlign.center,
                             style: FlutterFlowTheme.bodyText2.override(
                               fontFamily: 'Poppins',
@@ -244,13 +224,18 @@ class _LoginPageWidgetState extends State<LoginPageWidget> {
                                   alignment: AlignmentDirectional(0, 0),
                                   child: FFButtonWidget(
                                     onPressed: () async {
-                                      setState(() => _loadingButton3 = true);
+                                      setState(() => _loadingButton2 = true);
                                       try {
                                         final user =
                                             await signInWithGoogle(context);
                                         if (user == null) {
                                           return;
                                         }
+                                        subsGoogle = await subscribeCall(
+                                          priceId: widget.priceId,
+                                          url: 'https://baylifedev.web.app/',
+                                          uid: currentUserUid,
+                                        );
                                         await Navigator.pushAndRemoveUntil(
                                           context,
                                           MaterialPageRoute(
@@ -259,11 +244,13 @@ class _LoginPageWidgetState extends State<LoginPageWidget> {
                                           ),
                                           (r) => false,
                                         );
+
+                                        setState(() {});
                                       } finally {
-                                        setState(() => _loadingButton3 = false);
+                                        setState(() => _loadingButton2 = false);
                                       }
                                     },
-                                    text: 'Sign in with Google',
+                                    text: 'Sign up with Google',
                                     icon: Icon(
                                       Icons.add,
                                       color: Colors.transparent,
@@ -285,7 +272,7 @@ class _LoginPageWidgetState extends State<LoginPageWidget> {
                                       ),
                                       borderRadius: 12,
                                     ),
-                                    loading: _loadingButton3,
+                                    loading: _loadingButton2,
                                   ),
                                 ),
                                 Align(
@@ -304,6 +291,17 @@ class _LoginPageWidgetState extends State<LoginPageWidget> {
                                   ),
                                 )
                               ],
+                            ),
+                          ),
+                        ),
+                        Padding(
+                          padding: EdgeInsetsDirectional.fromSTEB(0, 30, 0, 16),
+                          child: AutoSizeText(
+                            'ユーザー作成時、利用規約およびプライバシーポリシーに同意したとみなします。',
+                            textAlign: TextAlign.center,
+                            style: FlutterFlowTheme.bodyText2.override(
+                              fontFamily: 'Poppins',
+                              color: FlutterFlowTheme.textDark,
                             ),
                           ),
                         )
