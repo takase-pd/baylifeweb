@@ -9,6 +9,7 @@ import '../home_page/home_page_widget.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import '../backend/stripe/stripe_checkout.dart';
 
 class CreateAccountPageWidget extends StatefulWidget {
   CreateAccountPageWidget({
@@ -28,9 +29,8 @@ class _CreateAccountPageWidgetState extends State<CreateAccountPageWidget> {
   TextEditingController passwordController;
   bool passwordVisibility;
   bool _loadingButton1 = false;
-  dynamic subsEmail;
+  dynamic subs;
   bool _loadingButton2 = false;
-  dynamic subsGoogle;
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
@@ -172,19 +172,15 @@ class _CreateAccountPageWidgetState extends State<CreateAccountPageWidget> {
                                     .doc(user.uid)
                                     .update(usersCreateData);
 
-                                subsEmail = await subscribeCall(
+                                subs = await subscribeCall(
                                   priceId: widget.priceId,
-                                  url: 'https://baylifedev.web.app/',
+                                  url: 'https://localhost:5000/',
                                   uid: currentUserUid,
                                 );
-                                await Navigator.pushAndRemoveUntil(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) => HomePageWidget(),
-                                  ),
-                                  (r) => false,
-                                );
-
+                                final sessionId = getJsonField(
+                                        subs, r'''$.result.subscribe''')
+                                    .toString();
+                                redirectToCheckout(sessionId);
                                 setState(() {});
                               } finally {
                                 setState(() => _loadingButton1 = false);
@@ -237,19 +233,15 @@ class _CreateAccountPageWidgetState extends State<CreateAccountPageWidget> {
                                         if (user == null) {
                                           return;
                                         }
-                                        subsGoogle = await subscribeCall(
+                                        subs = await subscribeCall(
                                           priceId: widget.priceId,
-                                          url: 'https://baylifedev.web.app/',
+                                          url: 'https://localhost:5000/',
                                           uid: currentUserUid,
                                         );
-                                        await Navigator.pushAndRemoveUntil(
-                                          context,
-                                          MaterialPageRoute(
-                                            builder: (context) =>
-                                                HomePageWidget(),
-                                          ),
-                                          (r) => false,
-                                        );
+                                        final sessionId = getJsonField(
+                                                subs, r'''$.result.subscribe''')
+                                            .toString();
+                                        redirectToCheckout(sessionId);
 
                                         setState(() {});
                                       } finally {
