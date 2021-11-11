@@ -257,13 +257,14 @@ class _LoginPageWidgetState extends State<LoginPageWidget> {
                                             await getSubscriptionCall(
                                           uid: currentUserUid,
                                         );
-                                        await Navigator.pushAndRemoveUntil(
+                                        await Navigator.push(
                                           context,
                                           MaterialPageRoute(
                                             builder: (context) =>
-                                                HomePageWidget(),
+                                                HomePageWidget(
+                                              subscription: subscription,
+                                            ),
                                           ),
-                                          (r) => false,
                                         );
 
                                         setState(() {});
