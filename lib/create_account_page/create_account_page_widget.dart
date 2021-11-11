@@ -1,6 +1,5 @@
 import '../auth/auth_util.dart';
 import '../backend/api_requests/api_calls.dart';
-import '../backend/backend.dart';
 import '../components/top_page_header_widget.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
@@ -164,13 +163,6 @@ class _CreateAccountPageWidgetState extends State<CreateAccountPageWidget> {
                                 if (user == null) {
                                   return;
                                 }
-
-                                final usersCreateData = createUsersRecordData(
-                                  email: emailAddressController.text,
-                                );
-                                await UsersRecord.collection
-                                    .doc(user.uid)
-                                    .update(usersCreateData);
 
                                 subs = await subscribeCall(
                                   priceId: widget.priceId,
