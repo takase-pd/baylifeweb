@@ -40,7 +40,7 @@ class _PlanPageWidgetState extends State<PlanPageWidget> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(0, 40, 0, 0),
+                padding: EdgeInsetsDirectional.fromSTEB(0, 50, 0, 0),
                 child: Column(
                   mainAxisSize: MainAxisSize.max,
                   children: [
@@ -85,7 +85,22 @@ class _PlanPageWidgetState extends State<PlanPageWidget> {
                       ),
                     ),
                     Padding(
-                      padding: EdgeInsetsDirectional.fromSTEB(0, 30, 0, 0),
+                      padding: EdgeInsetsDirectional.fromSTEB(0, 50, 0, 0),
+                      child: Text(
+                        '企業様用プラン',
+                        textAlign: TextAlign.center,
+                        style: FlutterFlowTheme.title2,
+                      ),
+                    ),
+                    Padding(
+                      padding: EdgeInsetsDirectional.fromSTEB(0, 20, 0, 0),
+                      child: Text(
+                        '企業が投稿できる仕組みをご利用いただけます。\n企業規模が大きい場合、複数お申し込みをお願いする可能性があります。',
+                        style: FlutterFlowTheme.bodyText1,
+                      ),
+                    ),
+                    Padding(
+                      padding: EdgeInsetsDirectional.fromSTEB(0, 20, 0, 0),
                       child: Column(
                         mainAxisSize: MainAxisSize.max,
                         children: [
@@ -133,10 +148,12 @@ class _PlanPageWidgetState extends State<PlanPageWidget> {
                                             getJsonField(widget.plans,
                                                     r'''$.result.plans[1].name''')
                                                 .toString(),
-                                            style: FlutterFlowTheme.title2,
+                                            style: FlutterFlowTheme.title3,
                                           ),
                                           Text(
-                                            '企業が投稿できる仕組みをご利用いただけます。企業規模が大きい場合、複数お申し込みをお願いする可能性があります。',
+                                            getJsonField(widget.plans,
+                                                    r'''$.result.plans[1].prices[0].description''')
+                                                .toString(),
                                             style: FlutterFlowTheme.bodyText1,
                                           ),
                                           Row(
