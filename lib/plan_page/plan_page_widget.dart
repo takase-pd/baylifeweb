@@ -199,7 +199,9 @@ class _PlanPageWidgetState extends State<PlanPageWidget> {
                                                             .fromSTEB(
                                                                 5, 0, 0, 0),
                                                     child: Text(
-                                                      '円',
+                                                      getJsonField(widget.plans,
+                                                              r'''$.result.plans[1].prices[0].currency''')
+                                                          .toString(),
                                                       style: FlutterFlowTheme
                                                           .bodyText1,
                                                     ),
