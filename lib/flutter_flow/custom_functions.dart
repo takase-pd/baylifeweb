@@ -25,3 +25,10 @@ String getUnitCurrency(String currency) {
   else
     return currency;
 }
+
+String getUnitAmount(String unitAmount) {
+  Function mathFunc = (Match match) => '${match[1]},';
+  RegExp reg = RegExp(r'(\d{1,3})(?=(\d{3})+(?!\d))');
+  String result = unitAmount.replaceAllMapped(reg, mathFunc);
+  return '$result';
+}
