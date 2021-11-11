@@ -9,7 +9,12 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class HomePageWidget extends StatefulWidget {
-  HomePageWidget({Key key}) : super(key: key);
+  HomePageWidget({
+    Key key,
+    this.subscription,
+  }) : super(key: key);
+
+  final dynamic subscription;
 
   @override
   _HomePageWidgetState createState() => _HomePageWidgetState();
@@ -146,6 +151,16 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                 },
               ),
             ),
+          ),
+          Column(
+            mainAxisSize: MainAxisSize.max,
+            children: [
+              Text(
+                getJsonField(widget.subscription, r'''$.result.subscription''')
+                    .toString(),
+                style: FlutterFlowTheme.bodyText1,
+              )
+            ],
           )
         ],
       ),

@@ -1,4 +1,5 @@
 import '../auth/auth_util.dart';
+import '../backend/api_requests/api_calls.dart';
 import '../components/top_page_header_widget.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
@@ -22,6 +23,7 @@ class _LoginPageWidgetState extends State<LoginPageWidget> {
   bool _loadingButton1 = false;
   bool _loadingButton2 = false;
   bool _loadingButton3 = false;
+  dynamic subscription;
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
@@ -251,6 +253,10 @@ class _LoginPageWidgetState extends State<LoginPageWidget> {
                                         if (user == null) {
                                           return;
                                         }
+                                        subscription =
+                                            await getSubscriptionCall(
+                                          uid: currentUserUid,
+                                        );
                                         await Navigator.pushAndRemoveUntil(
                                           context,
                                           MaterialPageRoute(
@@ -259,6 +265,8 @@ class _LoginPageWidgetState extends State<LoginPageWidget> {
                                           ),
                                           (r) => false,
                                         );
+
+                                        setState(() {});
                                       } finally {
                                         setState(() => _loadingButton3 = false);
                                       }
