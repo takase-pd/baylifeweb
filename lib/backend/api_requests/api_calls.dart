@@ -128,3 +128,29 @@ Future<dynamic> subscribeCall({
     returnResponse: true,
   );
 }
+
+Future<dynamic> getSubscriptionCall({
+  String uid = '',
+}) {
+  final body = '''
+{
+  "data": {
+    "uid": "${uid}"
+  }
+}''';
+  return ApiManager.instance.makeApiCall(
+    callName: 'Get Subscription',
+    apiUrl:
+        'https://asia-northeast1-baylifedev.cloudfunctions.net/getSubscriptionsV0',
+    callType: ApiCallType.POST,
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    params: {
+      'uid': uid,
+    },
+    body: body,
+    bodyType: BodyType.JSON,
+    returnResponse: true,
+  );
+}
