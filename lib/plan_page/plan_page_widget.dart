@@ -2,6 +2,7 @@ import '../components/top_page_header_widget.dart';
 import '../create_account_page/create_account_page_widget.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
+import '../flutter_flow/custom_functions.dart' as functions;
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -164,9 +165,11 @@ class _PlanPageWidgetState extends State<PlanPageWidget> {
                                                             .fromSTEB(
                                                                 5, 0, 0, 0),
                                                     child: Text(
-                                                      getJsonField(widget.plans,
-                                                              r'''$.result.plans[1].prices[0].interval''')
-                                                          .toString(),
+                                                      functions.getInterval(
+                                                          getJsonField(
+                                                                  widget.plans,
+                                                                  r'''$.result.plans[1].prices[0].interval''')
+                                                              .toString()),
                                                       style: FlutterFlowTheme
                                                           .bodyText1,
                                                     ),

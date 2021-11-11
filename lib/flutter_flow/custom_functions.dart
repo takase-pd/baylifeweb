@@ -11,3 +11,17 @@ import '../../auth/auth_util.dart';
 String getMultilineText(String multilineText) {
   return multilineText.replaceAll(RegExp(r'\n'), r'\n');
 }
+
+String getInterval(String interval) {
+  if (interval == 'month')
+    return 'ヶ月';
+  else
+    return interval;
+}
+
+String getUnitCurrency(String currency) {
+  if (currency == 'jpy')
+    return '円';
+  else
+    return currency;
+}
