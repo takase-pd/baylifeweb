@@ -143,12 +143,30 @@ class _PlanPageWidgetState extends State<PlanPageWidget> {
                                                 style:
                                                     FlutterFlowTheme.bodyText1,
                                               ),
-                                              Text(
-                                                getJsonField(widget.plans,
-                                                        r'''$.result.plans[1].prices[0]. interval''')
-                                                    .toString(),
-                                                style:
-                                                    FlutterFlowTheme.bodyText1,
+                                              Row(
+                                                mainAxisSize: MainAxisSize.max,
+                                                children: [
+                                                  Text(
+                                                    getJsonField(widget.plans,
+                                                            r'''$.result.plans[1].prices[0]. interval_count''')
+                                                        .toString(),
+                                                    style: FlutterFlowTheme
+                                                        .bodyText1,
+                                                  ),
+                                                  Padding(
+                                                    padding:
+                                                        EdgeInsetsDirectional
+                                                            .fromSTEB(
+                                                                5, 0, 0, 0),
+                                                    child: Text(
+                                                      getJsonField(widget.plans,
+                                                              r'''$.result.plans[1].prices[0]. interval''')
+                                                          .toString(),
+                                                      style: FlutterFlowTheme
+                                                          .bodyText1,
+                                                    ),
+                                                  )
+                                                ],
                                               )
                                             ],
                                           ),
@@ -175,10 +193,16 @@ class _PlanPageWidgetState extends State<PlanPageWidget> {
                                                     style: FlutterFlowTheme
                                                         .bodyText1,
                                                   ),
-                                                  Text(
-                                                    '円',
-                                                    style: FlutterFlowTheme
-                                                        .bodyText1,
+                                                  Padding(
+                                                    padding:
+                                                        EdgeInsetsDirectional
+                                                            .fromSTEB(
+                                                                5, 0, 0, 0),
+                                                    child: Text(
+                                                      '円',
+                                                      style: FlutterFlowTheme
+                                                          .bodyText1,
+                                                    ),
                                                   )
                                                 ],
                                               )
