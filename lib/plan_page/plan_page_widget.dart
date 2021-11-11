@@ -153,7 +153,7 @@ class _PlanPageWidgetState extends State<PlanPageWidget> {
                                                 children: [
                                                   Text(
                                                     getJsonField(widget.plans,
-                                                            r'''$.result.plans[1].prices[0]. interval_count''')
+                                                            r'''$.result.plans[1].prices[0].intervalCount''')
                                                         .toString(),
                                                     style: FlutterFlowTheme
                                                         .bodyText1,
@@ -165,7 +165,7 @@ class _PlanPageWidgetState extends State<PlanPageWidget> {
                                                                 5, 0, 0, 0),
                                                     child: Text(
                                                       getJsonField(widget.plans,
-                                                              r'''$.result.plans[1].prices[0]. interval''')
+                                                              r'''$.result.plans[1].prices[0].interval''')
                                                           .toString(),
                                                       style: FlutterFlowTheme
                                                           .bodyText1,
