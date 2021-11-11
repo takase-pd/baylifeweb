@@ -135,28 +135,59 @@ class _PlanPageWidgetState extends State<PlanPageWidget> {
                                             style: FlutterFlowTheme.title2,
                                           ),
                                           Text(
-                                            getJsonField(widget.plans,
-                                                    r'''$.result.plans[1].prices[0].unitAmount''')
-                                                .toString(),
+                                            '企業が投稿できる仕組みをご利用いただけます。企業規模が大きい場合、複数お申し込みをお願いする可能性があります。',
                                             style: FlutterFlowTheme.bodyText1,
                                           ),
-                                          Text(
-                                            getJsonField(widget.plans,
-                                                    r'''$.result.plans[1].prices[0]. currency''')
-                                                .toString(),
-                                            style: FlutterFlowTheme.bodyText1,
+                                          Row(
+                                            mainAxisSize: MainAxisSize.max,
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceBetween,
+                                            children: [
+                                              Text(
+                                                '利用期間',
+                                                style:
+                                                    FlutterFlowTheme.bodyText1,
+                                              ),
+                                              Text(
+                                                getJsonField(widget.plans,
+                                                        r'''$.result.plans[1].prices[0]. interval''')
+                                                    .toString(),
+                                                style:
+                                                    FlutterFlowTheme.bodyText1,
+                                              )
+                                            ],
                                           ),
-                                          Text(
-                                            getJsonField(widget.plans,
-                                                    r'''$.result.plans[1].prices[0]. interval''')
-                                                .toString(),
-                                            style: FlutterFlowTheme.bodyText1,
-                                          ),
-                                          Text(
-                                            getJsonField(widget.plans,
-                                                    r'''$.result.plans[1].prices[0]. intervalCount''')
-                                                .toString(),
-                                            style: FlutterFlowTheme.bodyText1,
+                                          Row(
+                                            mainAxisSize: MainAxisSize.max,
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceBetween,
+                                            children: [
+                                              Text(
+                                                '月額',
+                                                style:
+                                                    FlutterFlowTheme.bodyText1,
+                                              ),
+                                              Row(
+                                                mainAxisSize: MainAxisSize.max,
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment
+                                                        .spaceBetween,
+                                                children: [
+                                                  Text(
+                                                    getJsonField(widget.plans,
+                                                            r'''$.result.plans[1].prices[0].unitAmount''')
+                                                        .toString(),
+                                                    style: FlutterFlowTheme
+                                                        .bodyText1,
+                                                  ),
+                                                  Text(
+                                                    '円',
+                                                    style: FlutterFlowTheme
+                                                        .bodyText1,
+                                                  )
+                                                ],
+                                              )
+                                            ],
                                           ),
                                           Text(
                                             '申し込みを希望の方は、こちらをクリックしてください。',
