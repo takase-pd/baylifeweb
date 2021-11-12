@@ -17,7 +17,8 @@ class MainMenuWidget extends StatefulWidget {
 }
 
 class _MainMenuWidgetState extends State<MainMenuWidget> {
-  dynamic subscription;
+  dynamic subscriptionConfig;
+  dynamic subscriptionPost;
 
   @override
   Widget build(BuildContext context) {
@@ -66,12 +67,21 @@ class _MainMenuWidgetState extends State<MainMenuWidget> {
                     decoration: BoxDecoration(),
                     child: InkWell(
                       onTap: () async {
+                        subscriptionPost = await getSubscriptionCall(
+                          uid: currentUserUid,
+                        );
                         await Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => PostPageWidget(),
+                            builder: (context) => PostPageWidget(
+                              subscription: getJsonField(subscriptionPost,
+                                      r'''$.result.subscription''')
+                                  .toString(),
+                            ),
                           ),
                         );
+
+                        setState(() {});
                       },
                       child: Text(
                         '投稿',
@@ -88,14 +98,14 @@ class _MainMenuWidgetState extends State<MainMenuWidget> {
                     decoration: BoxDecoration(),
                     child: InkWell(
                       onTap: () async {
-                        subscription = await getSubscriptionCall(
+                        subscriptionConfig = await getSubscriptionCall(
                           uid: currentUserUid,
                         );
                         await Navigator.push(
                           context,
                           MaterialPageRoute(
                             builder: (context) => ConfigPageWidget(
-                              subscription: subscription,
+                              subscription: subscriptionConfig,
                             ),
                           ),
                         );

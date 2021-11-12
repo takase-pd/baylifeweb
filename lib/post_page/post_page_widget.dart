@@ -14,7 +14,12 @@ import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class PostPageWidget extends StatefulWidget {
-  PostPageWidget({Key key}) : super(key: key);
+  PostPageWidget({
+    Key key,
+    this.subscription,
+  }) : super(key: key);
+
+  final String subscription;
 
   @override
   _PostPageWidgetState createState() => _PostPageWidgetState();
@@ -91,48 +96,51 @@ class _PostPageWidgetState extends State<PostPageWidget> {
                   padding: EdgeInsets.zero,
                   scrollDirection: Axis.vertical,
                   children: [
-                    Column(
-                      mainAxisSize: MainAxisSize.max,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          '投稿',
-                          style: FlutterFlowTheme.title1,
-                        ),
-                        StreamBuilder<List<InfoAdminRecord>>(
-                          stream: queryInfoAdminRecord(
-                            singleRecord: true,
+                    Visibility(
+                      visible: (widget.subscription) != ('empty'),
+                      child: Column(
+                        mainAxisSize: MainAxisSize.max,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            '投稿',
+                            style: FlutterFlowTheme.title1,
                           ),
-                          builder: (context, snapshot) {
-                            // Customize what your widget looks like when it's loading.
-                            if (!snapshot.hasData) {
-                              return Center(
-                                child: SizedBox(
-                                  width: 50,
-                                  height: 50,
-                                  child: CircularProgressIndicator(
-                                    color: FlutterFlowTheme.primaryColor,
+                          StreamBuilder<List<InfoAdminRecord>>(
+                            stream: queryInfoAdminRecord(
+                              singleRecord: true,
+                            ),
+                            builder: (context, snapshot) {
+                              // Customize what your widget looks like when it's loading.
+                              if (!snapshot.hasData) {
+                                return Center(
+                                  child: SizedBox(
+                                    width: 50,
+                                    height: 50,
+                                    child: CircularProgressIndicator(
+                                      color: FlutterFlowTheme.primaryColor,
+                                    ),
                                   ),
-                                ),
+                                );
+                              }
+                              List<InfoAdminRecord> textInfoAdminRecordList =
+                                  snapshot.data;
+                              // Return an empty Container when the document does not exist.
+                              if (snapshot.data.isEmpty) {
+                                return Container();
+                              }
+                              final textInfoAdminRecord =
+                                  textInfoAdminRecordList.isNotEmpty
+                                      ? textInfoAdminRecordList.first
+                                      : null;
+                              return Text(
+                                textInfoAdminRecord.postInfo,
+                                style: FlutterFlowTheme.bodyText1,
                               );
-                            }
-                            List<InfoAdminRecord> textInfoAdminRecordList =
-                                snapshot.data;
-                            // Return an empty Container when the document does not exist.
-                            if (snapshot.data.isEmpty) {
-                              return Container();
-                            }
-                            final textInfoAdminRecord =
-                                textInfoAdminRecordList.isNotEmpty
-                                    ? textInfoAdminRecordList.first
-                                    : null;
-                            return Text(
-                              textInfoAdminRecord.postInfo,
-                              style: FlutterFlowTheme.bodyText1,
-                            );
-                          },
-                        )
-                      ],
+                            },
+                          )
+                        ],
+                      ),
                     ),
                     Padding(
                       padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 16),
