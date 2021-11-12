@@ -188,7 +188,7 @@ class _CreateAccountPageWidgetState extends State<CreateAccountPageWidget> {
                               height: 60,
                               color: FlutterFlowTheme.secondaryColor,
                               textStyle: FlutterFlowTheme.subtitle2.override(
-                                fontFamily: 'Poppins',
+                                fontFamily: 'Open Sans',
                                 color: FlutterFlowTheme.textLight,
                               ),
                               borderSide: BorderSide(
@@ -206,7 +206,7 @@ class _CreateAccountPageWidgetState extends State<CreateAccountPageWidget> {
                             'Or use a social account to create user',
                             textAlign: TextAlign.center,
                             style: FlutterFlowTheme.bodyText2.override(
-                              fontFamily: 'Poppins',
+                              fontFamily: 'Open Sans',
                               color: FlutterFlowTheme.primaryColor,
                             ),
                           ),
@@ -298,7 +298,7 @@ class _CreateAccountPageWidgetState extends State<CreateAccountPageWidget> {
                             'ユーザー作成時、利用規約およびプライバシーポリシーに同意したとみなします。',
                             textAlign: TextAlign.center,
                             style: FlutterFlowTheme.bodyText2.override(
-                              fontFamily: 'Poppins',
+                              fontFamily: 'Open Sans',
                               color: FlutterFlowTheme.textDark,
                             ),
                           ),

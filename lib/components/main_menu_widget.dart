@@ -55,7 +55,7 @@ class _MainMenuWidgetState extends State<MainMenuWidget> {
                       child: Text(
                         'ホーム',
                         style: FlutterFlowTheme.subtitle1.override(
-                          fontFamily: 'Poppins',
+                          fontFamily: 'Open Sans',
                           color: FlutterFlowTheme.textPrimary,
                         ),
                       ),
@@ -86,7 +86,7 @@ class _MainMenuWidgetState extends State<MainMenuWidget> {
                       child: Text(
                         '投稿',
                         style: FlutterFlowTheme.subtitle1.override(
-                          fontFamily: 'Poppins',
+                          fontFamily: 'Open Sans',
                           color: FlutterFlowTheme.textPrimary,
                         ),
                       ),
@@ -115,7 +115,7 @@ class _MainMenuWidgetState extends State<MainMenuWidget> {
                       child: Text(
                         '設定',
                         style: FlutterFlowTheme.subtitle1.override(
-                          fontFamily: 'Poppins',
+                          fontFamily: 'Open Sans',
                           color: FlutterFlowTheme.textPrimary,
                         ),
                       ),
@@ -145,7 +145,7 @@ class _MainMenuWidgetState extends State<MainMenuWidget> {
                   Text(
                     'Logout',
                     style: FlutterFlowTheme.bodyText1.override(
-                      fontFamily: 'Poppins',
+                      fontFamily: 'Open Sans',
                       color: FlutterFlowTheme.textDark,
                     ),
                   ),

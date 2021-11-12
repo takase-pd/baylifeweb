@@ -177,7 +177,7 @@ class _ConfirmPageWidgetState extends State<ConfirmPageWidget> {
                                   child: Text(
                                     widget.catName,
                                     style: FlutterFlowTheme.bodyText1.override(
-                                      fontFamily: 'Poppins',
+                                      fontFamily: 'Open Sans',
                                       color: Color(0xFF8B97A2),
                                     ),
                                   ),
@@ -207,7 +207,7 @@ class _ConfirmPageWidgetState extends State<ConfirmPageWidget> {
                                   child: Text(
                                     widget.catNameAdd,
                                     style: FlutterFlowTheme.bodyText1.override(
-                                      fontFamily: 'Poppins',
+                                      fontFamily: 'Open Sans',
                                       color: Color(0xFF8B97A2),
                                     ),
                                   ),
@@ -237,7 +237,7 @@ class _ConfirmPageWidgetState extends State<ConfirmPageWidget> {
                                   child: Text(
                                     widget.title,
                                     style: FlutterFlowTheme.bodyText1.override(
-                                      fontFamily: 'Poppins',
+                                      fontFamily: 'Open Sans',
                                       color: Color(0xFF8B97A2),
                                     ),
                                   ),
@@ -267,7 +267,7 @@ class _ConfirmPageWidgetState extends State<ConfirmPageWidget> {
                                   child: Text(
                                     widget.overview,
                                     style: FlutterFlowTheme.bodyText1.override(
-                                      fontFamily: 'Poppins',
+                                      fontFamily: 'Open Sans',
                                       color: Color(0xFF8B97A2),
                                     ),
                                   ),
@@ -297,7 +297,7 @@ class _ConfirmPageWidgetState extends State<ConfirmPageWidget> {
                                   child: Text(
                                     widget.detail,
                                     style: FlutterFlowTheme.bodyText1.override(
-                                      fontFamily: 'Poppins',
+                                      fontFamily: 'Open Sans',
                                       color: Color(0xFF8B97A2),
                                     ),
                                   ),
@@ -333,7 +333,7 @@ class _ConfirmPageWidgetState extends State<ConfirmPageWidget> {
                                         '添付画像',
                                         style:
                                             FlutterFlowTheme.bodyText2.override(
-                                          fontFamily: 'Poppins',
+                                          fontFamily: 'Open Sans',
                                           color: Color(0xFF8BA79B),
                                           fontWeight: FontWeight.w500,
                                         ),
@@ -375,7 +375,7 @@ class _ConfirmPageWidgetState extends State<ConfirmPageWidget> {
                                   child: Text(
                                     widget.address,
                                     style: FlutterFlowTheme.bodyText1.override(
-                                      fontFamily: 'Poppins',
+                                      fontFamily: 'Open Sans',
                                       color: Color(0xFF8B97A2),
                                     ),
                                   ),
@@ -412,7 +412,7 @@ class _ConfirmPageWidgetState extends State<ConfirmPageWidget> {
                                           '開始日',
                                           style: FlutterFlowTheme.bodyText1
                                               .override(
-                                            fontFamily: 'Poppins',
+                                            fontFamily: 'Open Sans',
                                             color: Color(0xFF8B97A2),
                                           ),
                                         ),
@@ -422,7 +422,7 @@ class _ConfirmPageWidgetState extends State<ConfirmPageWidget> {
                                             'yMMMd', widget.startDay),
                                         style:
                                             FlutterFlowTheme.bodyText1.override(
-                                          fontFamily: 'Poppins',
+                                          fontFamily: 'Open Sans',
                                           color: Color(0xFF8B97A2),
                                         ),
                                       )
@@ -461,7 +461,7 @@ class _ConfirmPageWidgetState extends State<ConfirmPageWidget> {
                                           '終了日',
                                           style: FlutterFlowTheme.bodyText1
                                               .override(
-                                            fontFamily: 'Poppins',
+                                            fontFamily: 'Open Sans',
                                             color: Color(0xFF8B97A2),
                                           ),
                                         ),
@@ -471,7 +471,7 @@ class _ConfirmPageWidgetState extends State<ConfirmPageWidget> {
                                             'yMMMd', widget.finalDay),
                                         style:
                                             FlutterFlowTheme.bodyText1.override(
-                                          fontFamily: 'Poppins',
+                                          fontFamily: 'Open Sans',
                                           color: Color(0xFF8B97A2),
                                         ),
                                       )
@@ -503,7 +503,7 @@ class _ConfirmPageWidgetState extends State<ConfirmPageWidget> {
                                   child: Text(
                                     widget.organizer,
                                     style: FlutterFlowTheme.bodyText1.override(
-                                      fontFamily: 'Poppins',
+                                      fontFamily: 'Open Sans',
                                       color: Color(0xFF8B97A2),
                                     ),
                                   ),
@@ -533,7 +533,7 @@ class _ConfirmPageWidgetState extends State<ConfirmPageWidget> {
                                   child: Text(
                                     widget.contact,
                                     style: FlutterFlowTheme.bodyText1.override(
-                                      fontFamily: 'Poppins',
+                                      fontFamily: 'Open Sans',
                                       color: Color(0xFF8B97A2),
                                     ),
                                   ),
@@ -563,7 +563,7 @@ class _ConfirmPageWidgetState extends State<ConfirmPageWidget> {
                                   child: Text(
                                     widget.homepage,
                                     style: FlutterFlowTheme.bodyText1.override(
-                                      fontFamily: 'Poppins',
+                                      fontFamily: 'Open Sans',
                                       color: Color(0xFF8B97A2),
                                     ),
                                   ),
@@ -615,7 +615,7 @@ class _ConfirmPageWidgetState extends State<ConfirmPageWidget> {
                               child: Text(
                                 widget.postName,
                                 style: FlutterFlowTheme.bodyText1.override(
-                                  fontFamily: 'Poppins',
+                                  fontFamily: 'Open Sans',
                                   color: Color(0xFF8B97A2),
                                 ),
                               ),
@@ -645,7 +645,7 @@ class _ConfirmPageWidgetState extends State<ConfirmPageWidget> {
                               child: Text(
                                 widget.postEmail,
                                 style: FlutterFlowTheme.bodyText1.override(
-                                  fontFamily: 'Poppins',
+                                  fontFamily: 'Open Sans',
                                   color: Color(0xFF8B97A2),
                                 ),
                               ),
@@ -675,7 +675,7 @@ class _ConfirmPageWidgetState extends State<ConfirmPageWidget> {
                               child: Text(
                                 widget.postPhone,
                                 style: FlutterFlowTheme.bodyText1.override(
-                                  fontFamily: 'Poppins',
+                                  fontFamily: 'Open Sans',
                                   color: Color(0xFF8B97A2),
                                 ),
                               ),
@@ -705,7 +705,7 @@ class _ConfirmPageWidgetState extends State<ConfirmPageWidget> {
                               child: Text(
                                 widget.postOccupation,
                                 style: FlutterFlowTheme.bodyText1.override(
-                                  fontFamily: 'Poppins',
+                                  fontFamily: 'Open Sans',
                                   color: Color(0xFF8B97A2),
                                 ),
                               ),
@@ -787,7 +787,7 @@ class _ConfirmPageWidgetState extends State<ConfirmPageWidget> {
                                           color: Color(0xFFDCDCDC),
                                           textStyle: FlutterFlowTheme.subtitle2
                                               .override(
-                                            fontFamily: 'Poppins',
+                                            fontFamily: 'Open Sans',
                                             color: Colors.white,
                                           ),
                                           borderSide: BorderSide(
@@ -917,7 +917,7 @@ class _ConfirmPageWidgetState extends State<ConfirmPageWidget> {
                                             textStyle: FlutterFlowTheme
                                                 .subtitle2
                                                 .override(
-                                              fontFamily: 'Poppins',
+                                              fontFamily: 'Open Sans',
                                               color: Colors.white,
                                             ),
                                             borderSide: BorderSide(

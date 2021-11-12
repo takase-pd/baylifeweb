@@ -170,7 +170,7 @@ class _LoginPageWidgetState extends State<LoginPageWidget> {
                               height: 60,
                               color: FlutterFlowTheme.secondaryColor,
                               textStyle: FlutterFlowTheme.subtitle2.override(
-                                fontFamily: 'Poppins',
+                                fontFamily: 'Open Sans',
                                 color: FlutterFlowTheme.textLight,
                               ),
                               borderSide: BorderSide(
@@ -212,7 +212,7 @@ class _LoginPageWidgetState extends State<LoginPageWidget> {
                               height: 40,
                               color: FlutterFlowTheme.primaryColor,
                               textStyle: FlutterFlowTheme.subtitle2.override(
-                                fontFamily: 'Poppins',
+                                fontFamily: 'Open Sans',
                                 color: Colors.white,
                               ),
                               borderSide: BorderSide(
@@ -230,7 +230,7 @@ class _LoginPageWidgetState extends State<LoginPageWidget> {
                             'Or use a social account to login',
                             textAlign: TextAlign.center,
                             style: FlutterFlowTheme.bodyText2.override(
-                              fontFamily: 'Poppins',
+                              fontFamily: 'Open Sans',
                               color: FlutterFlowTheme.primaryColor,
                             ),
                           ),

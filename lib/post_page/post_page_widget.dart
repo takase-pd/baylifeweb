@@ -281,7 +281,7 @@ class _PostPageWidgetState extends State<PostPageWidget> {
                                                 textStyle: FlutterFlowTheme
                                                     .bodyText1
                                                     .override(
-                                                  fontFamily: 'Poppins',
+                                                  fontFamily: 'Open Sans',
                                                   color: Colors.black,
                                                 ),
                                                 fillColor: Colors.white,
@@ -667,7 +667,7 @@ class _PostPageWidgetState extends State<PostPageWidget> {
                                                     style: FlutterFlowTheme
                                                         .bodyText2
                                                         .override(
-                                                      fontFamily: 'Poppins',
+                                                      fontFamily: 'Open Sans',
                                                       fontWeight:
                                                           FontWeight.w500,
                                                     ),
@@ -682,7 +682,7 @@ class _PostPageWidgetState extends State<PostPageWidget> {
                                                       style: FlutterFlowTheme
                                                           .bodyText2
                                                           .override(
-                                                        fontFamily: 'Poppins',
+                                                        fontFamily: 'Open Sans',
                                                         fontSize: 10,
                                                       ),
                                                     ),
@@ -747,7 +747,7 @@ class _PostPageWidgetState extends State<PostPageWidget> {
                                                   textStyle: FlutterFlowTheme
                                                       .subtitle2
                                                       .override(
-                                                    fontFamily: 'Poppins',
+                                                    fontFamily: 'Open Sans',
                                                     color: Colors.white,
                                                   ),
                                                   borderSide: BorderSide(
@@ -889,7 +889,7 @@ class _PostPageWidgetState extends State<PostPageWidget> {
                                                       style: FlutterFlowTheme
                                                           .bodyText2
                                                           .override(
-                                                        fontFamily: 'Poppins',
+                                                        fontFamily: 'Open Sans',
                                                         color:
                                                             Color(0xFF8B97A2),
                                                         fontWeight:
@@ -908,7 +908,7 @@ class _PostPageWidgetState extends State<PostPageWidget> {
                                                       style: FlutterFlowTheme
                                                           .bodyText2
                                                           .override(
-                                                        fontFamily: 'Poppins',
+                                                        fontFamily: 'Open Sans',
                                                         color:
                                                             Color(0xFF8B97A2),
                                                         fontWeight:
@@ -949,7 +949,7 @@ class _PostPageWidgetState extends State<PostPageWidget> {
                                                   textStyle: FlutterFlowTheme
                                                       .subtitle2
                                                       .override(
-                                                    fontFamily: 'Poppins',
+                                                    fontFamily: 'Open Sans',
                                                     color: Colors.white,
                                                   ),
                                                   borderSide: BorderSide(
@@ -1009,7 +1009,7 @@ class _PostPageWidgetState extends State<PostPageWidget> {
                                                       style: FlutterFlowTheme
                                                           .bodyText2
                                                           .override(
-                                                        fontFamily: 'Poppins',
+                                                        fontFamily: 'Open Sans',
                                                         color:
                                                             Color(0xFF8B97A2),
                                                         fontWeight:
@@ -1028,7 +1028,7 @@ class _PostPageWidgetState extends State<PostPageWidget> {
                                                       style: FlutterFlowTheme
                                                           .bodyText2
                                                           .override(
-                                                        fontFamily: 'Poppins',
+                                                        fontFamily: 'Open Sans',
                                                         color:
                                                             Color(0xFF8B97A2),
                                                         fontWeight:
@@ -1069,7 +1069,7 @@ class _PostPageWidgetState extends State<PostPageWidget> {
                                                   textStyle: FlutterFlowTheme
                                                       .subtitle2
                                                       .override(
-                                                    fontFamily: 'Poppins',
+                                                    fontFamily: 'Open Sans',
                                                     color: Colors.white,
                                                   ),
                                                   borderSide: BorderSide(
@@ -1868,7 +1868,7 @@ class _PostPageWidgetState extends State<PostPageWidget> {
                                                 textStyle: FlutterFlowTheme
                                                     .subtitle2
                                                     .override(
-                                                  fontFamily: 'Poppins',
+                                                  fontFamily: 'Open Sans',
                                                   color: Colors.white,
                                                 ),
                                                 borderSide: BorderSide(

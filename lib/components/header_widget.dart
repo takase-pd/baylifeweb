@@ -28,7 +28,7 @@ class _HeaderWidgetState extends State<HeaderWidget> {
             Text(
               'MAKUHARI Bay Life',
               style: FlutterFlowTheme.title3.override(
-                fontFamily: 'Poppins',
+                fontFamily: 'Open Sans',
                 color: FlutterFlowTheme.textPrimary,
                 fontSize: 24,
               ),

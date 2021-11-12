@@ -62,7 +62,7 @@ class _TopPageWidgetState extends State<TopPageWidget> {
                         height: 60,
                         color: FlutterFlowTheme.secondaryColor,
                         textStyle: FlutterFlowTheme.subtitle1.override(
-                          fontFamily: 'Poppins',
+                          fontFamily: 'Open Sans',
                           color: FlutterFlowTheme.textLight,
                           fontSize: 24,
                         ),

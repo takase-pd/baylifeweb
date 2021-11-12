@@ -42,7 +42,7 @@ class _TopPageHeaderWidgetState extends State<TopPageHeaderWidget> {
               child: Text(
                 'MAKUHARI Bay Life',
                 style: FlutterFlowTheme.title3.override(
-                  fontFamily: 'Poppins',
+                  fontFamily: 'Open Sans',
                   color: FlutterFlowTheme.textPrimary,
                   fontSize: 24,
                 ),
@@ -68,7 +68,7 @@ class _TopPageHeaderWidgetState extends State<TopPageHeaderWidget> {
                 height: 50,
                 color: FlutterFlowTheme.secondaryDark,
                 textStyle: FlutterFlowTheme.subtitle2.override(
-                  fontFamily: 'Poppins',
+                  fontFamily: 'Open Sans',
                   color: FlutterFlowTheme.textSecondary,
                 ),
                 borderSide: BorderSide(

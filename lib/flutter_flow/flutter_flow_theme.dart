@@ -18,43 +18,43 @@ class FlutterFlowTheme {
   String primaryFontFamily = 'Poppins';
   String secondaryFontFamily = 'Roboto';
   static TextStyle get title1 => GoogleFonts.getFont(
-        'Poppins',
+        'Open Sans',
         color: textPrimary,
         fontWeight: FontWeight.w600,
         fontSize: 24,
       );
   static TextStyle get title2 => GoogleFonts.getFont(
-        'Poppins',
+        'Open Sans',
         color: textPrimary,
         fontWeight: FontWeight.w500,
         fontSize: 22,
       );
   static TextStyle get title3 => GoogleFonts.getFont(
-        'Poppins',
+        'Open Sans',
         color: textPrimary,
         fontWeight: FontWeight.w500,
         fontSize: 20,
       );
   static TextStyle get subtitle1 => GoogleFonts.getFont(
-        'Poppins',
+        'Open Sans',
         color: textDark,
         fontWeight: FontWeight.w500,
         fontSize: 18,
       );
   static TextStyle get subtitle2 => GoogleFonts.getFont(
-        'Poppins',
+        'Open Sans',
         color: textDark,
         fontWeight: FontWeight.normal,
         fontSize: 16,
       );
   static TextStyle get bodyText1 => GoogleFonts.getFont(
-        'Poppins',
+        'Open Sans',
         color: textDark,
         fontWeight: FontWeight.normal,
         fontSize: 14,
       );
   static TextStyle get bodyText2 => GoogleFonts.getFont(
-        'Poppins',
+        'Open Sans',
         color: textDark,
         fontWeight: FontWeight.normal,
         fontSize: 14,
