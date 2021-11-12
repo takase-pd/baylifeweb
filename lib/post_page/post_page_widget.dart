@@ -114,26 +114,23 @@ class _PostPageWidgetState extends State<PostPageWidget> {
                               '投稿契約がありません。',
                               style: FlutterFlowTheme.bodyText1,
                             ),
-                            Visibility(
-                              visible: (widget.subscription) == ('empty'),
-                              child: InkWell(
-                                onTap: () async {
-                                  plans = await getPlanCall();
-                                  await Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (context) => PlanPageWidget(
-                                        plans: plans,
-                                      ),
+                            InkWell(
+                              onTap: () async {
+                                plans = await getPlanCall();
+                                await Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => PlanPageWidget(
+                                      plans: plans,
                                     ),
-                                  );
+                                  ),
+                                );
 
-                                  setState(() {});
-                                },
-                                child: Text(
-                                  'こちらよりプランをお申込みください。',
-                                  style: FlutterFlowTheme.bodyText1,
-                                ),
+                                setState(() {});
+                              },
+                              child: Text(
+                                'こちらよりプランをお申込みください。',
+                                style: FlutterFlowTheme.bodyText1,
                               ),
                             )
                           ],
