@@ -63,15 +63,13 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                       ),
                     );
                   }
-                  List<ContentsRecord> listViewContentsRecordList =
-                      snapshot.data;
-                  return ListView.builder(
-                    padding: EdgeInsets.zero,
-                    scrollDirection: Axis.vertical,
-                    itemCount: listViewContentsRecordList.length,
-                    itemBuilder: (context, listViewIndex) {
-                      final listViewContentsRecord =
-                          listViewContentsRecordList[listViewIndex];
+                  List<ContentsRecord> columnContentsRecordList = snapshot.data;
+                  return Column(
+                    mainAxisSize: MainAxisSize.max,
+                    children: List.generate(columnContentsRecordList.length,
+                        (columnIndex) {
+                      final columnContentsRecord =
+                          columnContentsRecordList[columnIndex];
                       return Padding(
                         padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 10),
                         child: Container(
@@ -93,7 +91,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                       MainAxisAlignment.spaceBetween,
                                   children: [
                                     Text(
-                                      listViewContentsRecord.title,
+                                      columnContentsRecord.title,
                                       style: FlutterFlowTheme.subtitle1,
                                     ),
                                     Row(
@@ -103,21 +101,20 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                       children: [
                                         Text(
                                           dateTimeFormat('yMMMd',
-                                              listViewContentsRecord.posted),
+                                              columnContentsRecord.posted),
                                           style: FlutterFlowTheme.subtitle2,
                                         ),
                                         ToggleIcon(
                                           onPressed: () async {
                                             final contentsUpdateData =
                                                 createContentsRecordData(
-                                              display: !listViewContentsRecord
-                                                  .display,
+                                              display:
+                                                  !columnContentsRecord.display,
                                             );
-                                            await listViewContentsRecord
-                                                .reference
+                                            await columnContentsRecord.reference
                                                 .update(contentsUpdateData);
                                           },
-                                          value: listViewContentsRecord.display,
+                                          value: columnContentsRecord.display,
                                           onIcon: Icon(
                                             Icons.cloud_done,
                                             color: FlutterFlowTheme.textPrimary,
@@ -134,7 +131,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                   ],
                                 ),
                                 Text(
-                                  listViewContentsRecord.overview
+                                  columnContentsRecord.overview
                                       .maybeHandleOverflow(
                                     maxChars: 70,
                                     replacement: '…',
@@ -146,21 +143,11 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                           ),
                         ),
                       );
-                    },
+                    }),
                   );
                 },
               ),
             ),
-          ),
-          Column(
-            mainAxisSize: MainAxisSize.max,
-            children: [
-              Text(
-                getJsonField(widget.subscription, r'''$.result.subscription''')
-                    .toString(),
-                style: FlutterFlowTheme.bodyText1,
-              )
-            ],
           )
         ],
       ),
