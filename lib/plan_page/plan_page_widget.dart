@@ -135,7 +135,7 @@ class _PlanPageWidgetState extends State<PlanPageWidget> {
                                         borderRadius: BorderRadius.circular(10),
                                       ),
                                       child: Container(
-                                        width: 500,
+                                        width: 420,
                                         height: 300,
                                         decoration: BoxDecoration(
                                           borderRadius:
@@ -264,6 +264,169 @@ class _PlanPageWidgetState extends State<PlanPageWidget> {
                                                     FlutterFlowTheme.bodyText1,
                                               )
                                             ],
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                  Padding(
+                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                        10, 0, 0, 0),
+                                    child: InkWell(
+                                      onTap: () async {
+                                        await Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                            builder: (context) =>
+                                                CreateAccountPageWidget(
+                                              priceId: getJsonField(
+                                                      widget.plans,
+                                                      r'''$.result.plans[1].prices[1].priceId''')
+                                                  .toString(),
+                                            ),
+                                          ),
+                                        );
+                                      },
+                                      child: Card(
+                                        clipBehavior:
+                                            Clip.antiAliasWithSaveLayer,
+                                        color: FlutterFlowTheme.grayDark,
+                                        shape: RoundedRectangleBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(10),
+                                        ),
+                                        child: Container(
+                                          width: 420,
+                                          height: 300,
+                                          decoration: BoxDecoration(
+                                            borderRadius:
+                                                BorderRadius.circular(5),
+                                          ),
+                                          child: Padding(
+                                            padding:
+                                                EdgeInsetsDirectional.fromSTEB(
+                                                    30, 30, 30, 30),
+                                            child: Column(
+                                              mainAxisSize: MainAxisSize.max,
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.spaceAround,
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              children: [
+                                                Text(
+                                                  getJsonField(widget.plans,
+                                                          r'''$.result.plans[1].name''')
+                                                      .toString(),
+                                                  style:
+                                                      FlutterFlowTheme.title3,
+                                                ),
+                                                Text(
+                                                  getJsonField(widget.plans,
+                                                          r'''$.result.plans[1].prices[1].description''')
+                                                      .toString(),
+                                                  style: FlutterFlowTheme
+                                                      .bodyText1,
+                                                ),
+                                                Row(
+                                                  mainAxisSize:
+                                                      MainAxisSize.max,
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment
+                                                          .spaceBetween,
+                                                  children: [
+                                                    Text(
+                                                      '利用期間',
+                                                      style: FlutterFlowTheme
+                                                          .bodyText1,
+                                                    ),
+                                                    Row(
+                                                      mainAxisSize:
+                                                          MainAxisSize.max,
+                                                      children: [
+                                                        Text(
+                                                          getJsonField(
+                                                                  widget.plans,
+                                                                  r'''$.result.plans[1].prices[1].intervalCount''')
+                                                              .toString(),
+                                                          style:
+                                                              FlutterFlowTheme
+                                                                  .bodyText1,
+                                                        ),
+                                                        Padding(
+                                                          padding:
+                                                              EdgeInsetsDirectional
+                                                                  .fromSTEB(5,
+                                                                      0, 0, 0),
+                                                          child: Text(
+                                                            getJsonField(
+                                                                    widget
+                                                                        .plans,
+                                                                    r'''$.result.plans[1].prices[1].interval''')
+                                                                .toString(),
+                                                            style:
+                                                                FlutterFlowTheme
+                                                                    .bodyText1,
+                                                          ),
+                                                        )
+                                                      ],
+                                                    )
+                                                  ],
+                                                ),
+                                                Row(
+                                                  mainAxisSize:
+                                                      MainAxisSize.max,
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment
+                                                          .spaceBetween,
+                                                  children: [
+                                                    Text(
+                                                      '月額',
+                                                      style: FlutterFlowTheme
+                                                          .bodyText1,
+                                                    ),
+                                                    Row(
+                                                      mainAxisSize:
+                                                          MainAxisSize.max,
+                                                      mainAxisAlignment:
+                                                          MainAxisAlignment
+                                                              .spaceBetween,
+                                                      children: [
+                                                        Text(
+                                                          getJsonField(
+                                                                  widget.plans,
+                                                                  r'''$.result.plans[1].prices[1].unitAmount''')
+                                                              .toString(),
+                                                          style:
+                                                              FlutterFlowTheme
+                                                                  .bodyText1,
+                                                        ),
+                                                        Padding(
+                                                          padding:
+                                                              EdgeInsetsDirectional
+                                                                  .fromSTEB(5,
+                                                                      0, 0, 0),
+                                                          child: Text(
+                                                            getJsonField(
+                                                                    widget
+                                                                        .plans,
+                                                                    r'''$.result.plans[1].prices[1].currency''')
+                                                                .toString(),
+                                                            style:
+                                                                FlutterFlowTheme
+                                                                    .bodyText1,
+                                                          ),
+                                                        )
+                                                      ],
+                                                    )
+                                                  ],
+                                                ),
+                                                Text(
+                                                  '申し込みを希望の方は、こちらをクリックしてください。',
+                                                  style: FlutterFlowTheme
+                                                      .bodyText1,
+                                                )
+                                              ],
+                                            ),
                                           ),
                                         ),
                                       ),
