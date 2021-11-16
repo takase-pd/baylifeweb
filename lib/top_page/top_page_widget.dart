@@ -5,6 +5,7 @@ import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
 import '../plan_page/plan_page_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class TopPageWidget extends StatefulWidget {
@@ -23,7 +24,7 @@ class _TopPageWidgetState extends State<TopPageWidget> {
   Widget build(BuildContext context) {
     return Scaffold(
       key: scaffoldKey,
-      backgroundColor: FlutterFlowTheme.grayLight,
+      backgroundColor: FlutterFlowTheme.background,
       body: SafeArea(
         child: Column(
           mainAxisSize: MainAxisSize.max,
@@ -61,10 +62,9 @@ class _TopPageWidgetState extends State<TopPageWidget> {
                         width: 300,
                         height: 60,
                         color: FlutterFlowTheme.secondaryColor,
-                        textStyle: FlutterFlowTheme.subtitle1.override(
+                        textStyle: FlutterFlowTheme.title2.override(
                           fontFamily: 'Open Sans',
                           color: FlutterFlowTheme.textLight,
-                          fontSize: 24,
                         ),
                         borderSide: BorderSide(
                           color: Colors.transparent,

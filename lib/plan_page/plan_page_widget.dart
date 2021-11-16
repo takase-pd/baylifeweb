@@ -3,6 +3,7 @@ import '../create_account_page/create_account_page_widget.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class PlanPageWidget extends StatefulWidget {
@@ -24,7 +25,7 @@ class _PlanPageWidgetState extends State<PlanPageWidget> {
   Widget build(BuildContext context) {
     return Scaffold(
       key: scaffoldKey,
-      backgroundColor: FlutterFlowTheme.grayLight,
+      backgroundColor: FlutterFlowTheme.background,
       body: Column(
         mainAxisSize: MainAxisSize.max,
         children: [
@@ -124,7 +125,7 @@ class _PlanPageWidgetState extends State<PlanPageWidget> {
                                     },
                                     child: Card(
                                       clipBehavior: Clip.antiAliasWithSaveLayer,
-                                      color: FlutterFlowTheme.grayDark,
+                                      color: FlutterFlowTheme.tDark,
                                       shape: RoundedRectangleBorder(
                                         borderRadius: BorderRadius.circular(10),
                                       ),
@@ -278,7 +279,7 @@ class _PlanPageWidgetState extends State<PlanPageWidget> {
                                       child: Card(
                                         clipBehavior:
                                             Clip.antiAliasWithSaveLayer,
-                                        color: FlutterFlowTheme.grayDark,
+                                        color: FlutterFlowTheme.tDark,
                                         shape: RoundedRectangleBorder(
                                           borderRadius:
                                               BorderRadius.circular(10),

@@ -1,6 +1,7 @@
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class HeaderWidget extends StatefulWidget {
@@ -15,26 +16,9 @@ class _HeaderWidgetState extends State<HeaderWidget> {
   Widget build(BuildContext context) {
     return Container(
       width: double.infinity,
-      height: 80,
+      height: 8,
       decoration: BoxDecoration(
         color: FlutterFlowTheme.primaryColor,
-      ),
-      child: Padding(
-        padding: EdgeInsetsDirectional.fromSTEB(20, 10, 20, 10),
-        child: Row(
-          mainAxisSize: MainAxisSize.max,
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Text(
-              'MAKUHARI Bay Life',
-              style: FlutterFlowTheme.title3.override(
-                fontFamily: 'Open Sans',
-                color: FlutterFlowTheme.textPrimary,
-                fontSize: 24,
-              ),
-            )
-          ],
-        ),
       ),
     );
   }

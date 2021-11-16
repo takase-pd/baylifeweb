@@ -7,6 +7,7 @@ import '../flutter_flow/flutter_flow_widgets.dart';
 import '../home_page/home_page_widget.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class LoginPageWidget extends StatefulWidget {
@@ -38,7 +39,7 @@ class _LoginPageWidgetState extends State<LoginPageWidget> {
   Widget build(BuildContext context) {
     return Scaffold(
       key: scaffoldKey,
-      backgroundColor: FlutterFlowTheme.grayLight,
+      backgroundColor: FlutterFlowTheme.background,
       body: SafeArea(
         child: Column(
           mainAxisSize: MainAxisSize.max,
@@ -56,90 +57,148 @@ class _LoginPageWidgetState extends State<LoginPageWidget> {
                       mainAxisSize: MainAxisSize.max,
                       children: [
                         Padding(
-                          padding:
-                              EdgeInsetsDirectional.fromSTEB(20, 0, 20, 16),
-                          child: TextFormField(
-                            controller: emailAddressController,
-                            obscureText: false,
-                            decoration: InputDecoration(
-                              labelText: 'Email Address',
-                              labelStyle: FlutterFlowTheme.bodyText1,
-                              hintText: 'Enter your email...',
-                              hintStyle: FlutterFlowTheme.bodyText1,
-                              enabledBorder: UnderlineInputBorder(
-                                borderSide: BorderSide(
-                                  color: Color(0x00000000),
-                                  width: 1,
-                                ),
-                                borderRadius: const BorderRadius.only(
-                                  topLeft: Radius.circular(4.0),
-                                  topRight: Radius.circular(4.0),
-                                ),
-                              ),
-                              focusedBorder: UnderlineInputBorder(
-                                borderSide: BorderSide(
-                                  color: Color(0x00000000),
-                                  width: 1,
-                                ),
-                                borderRadius: const BorderRadius.only(
-                                  topLeft: Radius.circular(4.0),
-                                  topRight: Radius.circular(4.0),
-                                ),
+                          padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 16),
+                          child: Container(
+                            width: 360,
+                            height: 60,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(8),
+                              border: Border.all(
+                                color: FlutterFlowTheme.secondaryColor,
+                                width: 2,
                               ),
                             ),
-                            style: FlutterFlowTheme.bodyText1,
-                          ),
-                        ),
-                        Padding(
-                          padding:
-                              EdgeInsetsDirectional.fromSTEB(20, 0, 20, 16),
-                          child: TextFormField(
-                            controller: passwordController,
-                            obscureText: !passwordVisibility,
-                            decoration: InputDecoration(
-                              labelText: 'Password',
-                              labelStyle: FlutterFlowTheme.bodyText1,
-                              hintText: 'Enter your password...',
-                              hintStyle: FlutterFlowTheme.bodyText1,
-                              enabledBorder: UnderlineInputBorder(
-                                borderSide: BorderSide(
-                                  color: Color(0x00000000),
-                                  width: 1,
-                                ),
-                                borderRadius: const BorderRadius.only(
-                                  topLeft: Radius.circular(4.0),
-                                  topRight: Radius.circular(4.0),
-                                ),
-                              ),
-                              focusedBorder: UnderlineInputBorder(
-                                borderSide: BorderSide(
-                                  color: Color(0x00000000),
-                                  width: 1,
-                                ),
-                                borderRadius: const BorderRadius.only(
-                                  topLeft: Radius.circular(4.0),
-                                  topRight: Radius.circular(4.0),
-                                ),
-                              ),
-                              suffixIcon: InkWell(
-                                onTap: () => setState(
-                                  () =>
-                                      passwordVisibility = !passwordVisibility,
-                                ),
-                                child: Icon(
-                                  passwordVisibility
-                                      ? Icons.visibility_outlined
-                                      : Icons.visibility_off_outlined,
-                                  color: Color(0xFF757575),
-                                  size: 22,
-                                ),
-                              ),
+                            child: Row(
+                              mainAxisSize: MainAxisSize.max,
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                Expanded(
+                                  child: Padding(
+                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                        10, 0, 0, 0),
+                                    child: TextFormField(
+                                      controller: emailAddressController,
+                                      obscureText: false,
+                                      decoration: InputDecoration(
+                                        labelText: 'Email Address',
+                                        labelStyle:
+                                            FlutterFlowTheme.bodyText1.override(
+                                          fontFamily: 'Open Sans',
+                                          color: FlutterFlowTheme.textDark,
+                                        ),
+                                        hintText: 'Enter your email...',
+                                        hintStyle:
+                                            FlutterFlowTheme.bodyText1.override(
+                                          fontFamily: 'Open Sans',
+                                          color: FlutterFlowTheme.textDark,
+                                        ),
+                                        enabledBorder: UnderlineInputBorder(
+                                          borderSide: BorderSide(
+                                            color: Color(0x00000000),
+                                            width: 1,
+                                          ),
+                                          borderRadius: const BorderRadius.only(
+                                            topLeft: Radius.circular(4.0),
+                                            topRight: Radius.circular(4.0),
+                                          ),
+                                        ),
+                                        focusedBorder: UnderlineInputBorder(
+                                          borderSide: BorderSide(
+                                            color: Color(0x00000000),
+                                            width: 1,
+                                          ),
+                                          borderRadius: const BorderRadius.only(
+                                            topLeft: Radius.circular(4.0),
+                                            topRight: Radius.circular(4.0),
+                                          ),
+                                        ),
+                                      ),
+                                      style:
+                                          FlutterFlowTheme.bodyText1.override(
+                                        fontFamily: 'Open Sans',
+                                        color: FlutterFlowTheme.textDark,
+                                      ),
+                                    ),
+                                  ),
+                                )
+                              ],
                             ),
-                            style: FlutterFlowTheme.bodyText1,
                           ),
                         ),
                         Padding(
                           padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 16),
+                          child: Container(
+                            width: 360,
+                            height: 60,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(8),
+                              border: Border.all(
+                                color: FlutterFlowTheme.secondaryColor,
+                                width: 2,
+                              ),
+                            ),
+                            child: Row(
+                              mainAxisSize: MainAxisSize.max,
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                Expanded(
+                                  child: Padding(
+                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                        10, 0, 0, 0),
+                                    child: TextFormField(
+                                      controller: passwordController,
+                                      obscureText: !passwordVisibility,
+                                      decoration: InputDecoration(
+                                        labelText: 'Password',
+                                        labelStyle: FlutterFlowTheme.bodyText1,
+                                        hintText: 'Enter your password...',
+                                        hintStyle: FlutterFlowTheme.bodyText1,
+                                        enabledBorder: UnderlineInputBorder(
+                                          borderSide: BorderSide(
+                                            color: Color(0x00000000),
+                                            width: 1,
+                                          ),
+                                          borderRadius: const BorderRadius.only(
+                                            topLeft: Radius.circular(4.0),
+                                            topRight: Radius.circular(4.0),
+                                          ),
+                                        ),
+                                        focusedBorder: UnderlineInputBorder(
+                                          borderSide: BorderSide(
+                                            color: Color(0x00000000),
+                                            width: 1,
+                                          ),
+                                          borderRadius: const BorderRadius.only(
+                                            topLeft: Radius.circular(4.0),
+                                            topRight: Radius.circular(4.0),
+                                          ),
+                                        ),
+                                        suffixIcon: InkWell(
+                                          onTap: () => setState(
+                                            () => passwordVisibility =
+                                                !passwordVisibility,
+                                          ),
+                                          child: Icon(
+                                            passwordVisibility
+                                                ? Icons.visibility_outlined
+                                                : Icons.visibility_off_outlined,
+                                            color: Color(0xFF757575),
+                                            size: 22,
+                                          ),
+                                        ),
+                                      ),
+                                      style: FlutterFlowTheme.bodyText1,
+                                    ),
+                                  ),
+                                )
+                              ],
+                            ),
+                          ),
+                        ),
+                        Padding(
+                          padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 24),
                           child: FFButtonWidget(
                             onPressed: () async {
                               setState(() => _loadingButton1 = true);
@@ -169,7 +228,7 @@ class _LoginPageWidgetState extends State<LoginPageWidget> {
                               width: 230,
                               height: 60,
                               color: FlutterFlowTheme.secondaryColor,
-                              textStyle: FlutterFlowTheme.subtitle2.override(
+                              textStyle: FlutterFlowTheme.subtitle1.override(
                                 fontFamily: 'Open Sans',
                                 color: FlutterFlowTheme.textLight,
                               ),
@@ -183,7 +242,7 @@ class _LoginPageWidgetState extends State<LoginPageWidget> {
                           ),
                         ),
                         Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 20),
+                          padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 36),
                           child: FFButtonWidget(
                             onPressed: () async {
                               setState(() => _loadingButton2 = true);
@@ -210,7 +269,7 @@ class _LoginPageWidgetState extends State<LoginPageWidget> {
                             options: FFButtonOptions(
                               width: 170,
                               height: 40,
-                              color: FlutterFlowTheme.primaryColor,
+                              color: FlutterFlowTheme.sLight,
                               textStyle: FlutterFlowTheme.subtitle2.override(
                                 fontFamily: 'Open Sans',
                                 color: Colors.white,
@@ -225,13 +284,13 @@ class _LoginPageWidgetState extends State<LoginPageWidget> {
                           ),
                         ),
                         Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(0, 8, 0, 16),
+                          padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 16),
                           child: AutoSizeText(
                             'Or use a social account to login',
                             textAlign: TextAlign.center,
                             style: FlutterFlowTheme.bodyText2.override(
                               fontFamily: 'Open Sans',
-                              color: FlutterFlowTheme.primaryColor,
+                              color: FlutterFlowTheme.textDark,
                             ),
                           ),
                         ),
@@ -244,57 +303,62 @@ class _LoginPageWidgetState extends State<LoginPageWidget> {
                               children: [
                                 Align(
                                   alignment: AlignmentDirectional(0, 0),
-                                  child: FFButtonWidget(
-                                    onPressed: () async {
-                                      setState(() => _loadingButton3 = true);
-                                      try {
-                                        final user =
-                                            await signInWithGoogle(context);
-                                        if (user == null) {
-                                          return;
-                                        }
-                                        subscription =
-                                            await getSubscriptionCall(
-                                          uid: currentUserUid,
-                                        );
-                                        await Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                            builder: (context) =>
-                                                HomePageWidget(
-                                              subscription: subscription,
+                                  child: Padding(
+                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                        0, 1, 0, 0),
+                                    child: FFButtonWidget(
+                                      onPressed: () async {
+                                        setState(() => _loadingButton3 = true);
+                                        try {
+                                          final user =
+                                              await signInWithGoogle(context);
+                                          if (user == null) {
+                                            return;
+                                          }
+                                          subscription =
+                                              await getSubscriptionCall(
+                                            uid: currentUserUid,
+                                          );
+                                          await Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                              builder: (context) =>
+                                                  HomePageWidget(
+                                                subscription: subscription,
+                                              ),
                                             ),
-                                          ),
-                                        );
+                                          );
 
-                                        setState(() {});
-                                      } finally {
-                                        setState(() => _loadingButton3 = false);
-                                      }
-                                    },
-                                    text: 'Sign in with Google',
-                                    icon: Icon(
-                                      Icons.add,
-                                      color: Colors.transparent,
-                                      size: 20,
-                                    ),
-                                    options: FFButtonOptions(
-                                      width: 230,
-                                      height: 44,
-                                      color: Colors.white,
-                                      textStyle: GoogleFonts.getFont(
-                                        'Roboto',
-                                        color: Color(0xFF606060),
-                                        fontSize: 17,
-                                      ),
-                                      elevation: 4,
-                                      borderSide: BorderSide(
+                                          setState(() {});
+                                        } finally {
+                                          setState(
+                                              () => _loadingButton3 = false);
+                                        }
+                                      },
+                                      text: 'Sign in with Google',
+                                      icon: Icon(
+                                        Icons.add,
                                         color: Colors.transparent,
-                                        width: 0,
+                                        size: 20,
                                       ),
-                                      borderRadius: 12,
+                                      options: FFButtonOptions(
+                                        width: 230,
+                                        height: 44,
+                                        color: Colors.white,
+                                        textStyle: GoogleFonts.getFont(
+                                          'Roboto',
+                                          color: Color(0xFF606060),
+                                          fontSize: 17,
+                                        ),
+                                        elevation: 4,
+                                        borderSide: BorderSide(
+                                          color: Colors.transparent,
+                                          width: 0,
+                                        ),
+                                        borderRadius: 12,
+                                      ),
+                                      loading: _loadingButton3,
                                     ),
-                                    loading: _loadingButton3,
                                   ),
                                 ),
                                 Align(
