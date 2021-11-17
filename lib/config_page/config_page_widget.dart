@@ -3,6 +3,7 @@ import '../components/main_menu_widget.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class ConfigPageWidget extends StatefulWidget {
@@ -34,7 +35,7 @@ class _ConfigPageWidgetState extends State<ConfigPageWidget> {
           elevation: 4,
         ),
       ),
-      backgroundColor: FlutterFlowTheme.grayLight,
+      backgroundColor: FlutterFlowTheme.tertiaryColor,
       body: Row(
         mainAxisSize: MainAxisSize.max,
         children: [
@@ -50,21 +51,28 @@ class _ConfigPageWidgetState extends State<ConfigPageWidget> {
                     child: Column(
                       mainAxisSize: MainAxisSize.max,
                       children: [
-                        Column(
-                          mainAxisSize: MainAxisSize.max,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              'ご利用プラン',
-                              style: FlutterFlowTheme.title2,
-                            ),
-                            Text(
-                              getJsonField(widget.subscription,
-                                      r'''$.result.subscription''')
-                                  .toString(),
-                              style: FlutterFlowTheme.bodyText1,
-                            )
-                          ],
+                        Padding(
+                          padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 16),
+                          child: Column(
+                            mainAxisSize: MainAxisSize.max,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Padding(
+                                padding:
+                                    EdgeInsetsDirectional.fromSTEB(0, 0, 0, 8),
+                                child: Text(
+                                  'ご利用プラン',
+                                  style: FlutterFlowTheme.title2,
+                                ),
+                              ),
+                              Text(
+                                getJsonField(widget.subscription,
+                                        r'''$.result.subscription''')
+                                    .toString(),
+                                style: FlutterFlowTheme.bodyText1,
+                              )
+                            ],
+                          ),
                         )
                       ],
                     ),

@@ -7,6 +7,7 @@ import '../home_page/home_page_widget.dart';
 import '../post_page/post_page_widget.dart';
 import '../top_page/top_page_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class MainMenuWidget extends StatefulWidget {
@@ -23,15 +24,35 @@ class _MainMenuWidgetState extends State<MainMenuWidget> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: 240,
-      height: double.infinity,
+      width: 200,
       decoration: BoxDecoration(
-        color: FlutterFlowTheme.grayDark,
+        color: FlutterFlowTheme.secondaryColor,
       ),
       child: Column(
         mainAxisSize: MainAxisSize.max,
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
+          Container(
+            width: double.infinity,
+            height: 50,
+            decoration: BoxDecoration(
+              color: FlutterFlowTheme.secondaryColor,
+              border: Border.all(
+                color: Colors.transparent,
+              ),
+            ),
+            child: Padding(
+              padding: EdgeInsetsDirectional.fromSTEB(10, 10, 10, 0),
+              child: Text(
+                'Makuhari Bay Life',
+                style: FlutterFlowTheme.title3.override(
+                  fontFamily: 'Open Sans',
+                  color: FlutterFlowTheme.textLight,
+                ),
+              ),
+            ),
+          ),
           Expanded(
             child: Padding(
               padding: EdgeInsetsDirectional.fromSTEB(20, 40, 20, 20),
@@ -55,8 +76,8 @@ class _MainMenuWidgetState extends State<MainMenuWidget> {
                       child: Text(
                         'ホーム',
                         style: FlutterFlowTheme.subtitle1.override(
-                          fontFamily: 'Poppins',
-                          color: FlutterFlowTheme.textPrimary,
+                          fontFamily: 'Open Sans',
+                          color: FlutterFlowTheme.textLight,
                         ),
                       ),
                     ),
@@ -86,8 +107,8 @@ class _MainMenuWidgetState extends State<MainMenuWidget> {
                       child: Text(
                         '投稿',
                         style: FlutterFlowTheme.subtitle1.override(
-                          fontFamily: 'Poppins',
-                          color: FlutterFlowTheme.textPrimary,
+                          fontFamily: 'Open Sans',
+                          color: FlutterFlowTheme.textLight,
                         ),
                       ),
                     ),
@@ -114,9 +135,9 @@ class _MainMenuWidgetState extends State<MainMenuWidget> {
                       },
                       child: Text(
                         '設定',
-                        style: FlutterFlowTheme.subtitle1.override(
-                          fontFamily: 'Poppins',
-                          color: FlutterFlowTheme.textPrimary,
+                        style: FlutterFlowTheme.title3.override(
+                          fontFamily: 'Open Sans',
+                          color: FlutterFlowTheme.textLight,
                         ),
                       ),
                     ),
@@ -145,13 +166,13 @@ class _MainMenuWidgetState extends State<MainMenuWidget> {
                   Text(
                     'Logout',
                     style: FlutterFlowTheme.bodyText1.override(
-                      fontFamily: 'Poppins',
-                      color: FlutterFlowTheme.textDark,
+                      fontFamily: 'Open Sans',
+                      color: FlutterFlowTheme.textLight,
                     ),
                   ),
                   Icon(
                     Icons.logout,
-                    color: Colors.black,
+                    color: FlutterFlowTheme.textLight,
                     size: 24,
                   )
                 ],
