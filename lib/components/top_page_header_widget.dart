@@ -29,7 +29,7 @@ class _TopPageHeaderWidgetState extends State<TopPageHeaderWidget> {
         children: [
           HeaderWidget(),
           Padding(
-            padding: EdgeInsetsDirectional.fromSTEB(100, 10, 100, 10),
+            padding: EdgeInsetsDirectional.fromSTEB(10, 10, 10, 10),
             child: Row(
               mainAxisSize: MainAxisSize.max,
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -45,11 +45,7 @@ class _TopPageHeaderWidgetState extends State<TopPageHeaderWidget> {
                   },
                   child: Text(
                     'MAKUHARI Bay Life',
-                    style: FlutterFlowTheme.title3.override(
-                      fontFamily: 'Open Sans',
-                      color: FlutterFlowTheme.textDark,
-                      fontSize: 24,
-                    ),
+                    style: FlutterFlowTheme.title3,
                   ),
                 ),
                 FFButtonWidget(
@@ -69,7 +65,7 @@ class _TopPageHeaderWidgetState extends State<TopPageHeaderWidget> {
                   text: 'ログイン',
                   options: FFButtonOptions(
                     width: 100,
-                    height: 50,
+                    height: 36,
                     color: FlutterFlowTheme.secondaryColor,
                     textStyle: FlutterFlowTheme.subtitle2.override(
                       fontFamily: 'Open Sans',
@@ -79,7 +75,7 @@ class _TopPageHeaderWidgetState extends State<TopPageHeaderWidget> {
                       color: Colors.transparent,
                       width: 1,
                     ),
-                    borderRadius: 12,
+                    borderRadius: 5,
                   ),
                   loading: _loadingButton,
                 )
