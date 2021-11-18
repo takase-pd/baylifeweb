@@ -25,13 +25,22 @@ class _TopPageWidgetState extends State<TopPageWidget> {
   Widget build(BuildContext context) {
     return Scaffold(
       key: scaffoldKey,
+      appBar: PreferredSize(
+        preferredSize: Size.fromHeight(64),
+        child: AppBar(
+          backgroundColor: Color(0x00FFFFFF),
+          automaticallyImplyLeading: false,
+          flexibleSpace: TopPageHeaderWidget(),
+          actions: [],
+          elevation: 0,
+        ),
+      ),
       backgroundColor: FlutterFlowTheme.background,
       body: SingleChildScrollView(
         child: Column(
           mainAxisSize: MainAxisSize.max,
-          crossAxisAlignment: CrossAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            TopPageHeaderWidget(),
             Container(
               width: double.infinity,
               height: 720,
@@ -59,7 +68,7 @@ class _TopPageWidgetState extends State<TopPageWidget> {
                                 padding:
                                     EdgeInsetsDirectional.fromSTEB(0, 0, 0, 16),
                                 child: Text(
-                                  '住民とつながる',
+                                  '楽しみ溢れる街',
                                   style: FlutterFlowTheme.title1.override(
                                     fontFamily: 'Open Sans',
                                     fontSize: 64,
@@ -71,8 +80,34 @@ class _TopPageWidgetState extends State<TopPageWidget> {
                                 padding:
                                     EdgeInsetsDirectional.fromSTEB(0, 0, 0, 16),
                                 child: Text(
-                                  '幕張ベイタウン、ベイパーク',
-                                  style: FlutterFlowTheme.title2,
+                                  '幕張ベイタウン・ベイパーク',
+                                  style: FlutterFlowTheme.title1.override(
+                                    fontFamily: 'Open Sans',
+                                    fontSize: 48,
+                                    fontWeight: FontWeight.w500,
+                                  ),
+                                ),
+                              ),
+                              Padding(
+                                padding:
+                                    EdgeInsetsDirectional.fromSTEB(0, 0, 0, 16),
+                                child: Text(
+                                  'オンラインで住民とつながる仕組み「MAKUHARI Bay Life」',
+                                  style: FlutterFlowTheme.title2.override(
+                                    fontFamily: 'Open Sans',
+                                    fontSize: 20,
+                                  ),
+                                ),
+                              ),
+                              Padding(
+                                padding:
+                                    EdgeInsetsDirectional.fromSTEB(0, 0, 0, 16),
+                                child: Text(
+                                  '楽しみを投稿して住民に知らせよう！',
+                                  style: FlutterFlowTheme.title2.override(
+                                    fontFamily: 'Open Sans',
+                                    fontSize: 20,
+                                  ),
                                 ),
                               )
                             ],
@@ -144,28 +179,59 @@ class _TopPageWidgetState extends State<TopPageWidget> {
                 decoration: BoxDecoration(
                   color: FlutterFlowTheme.tertiaryColor,
                 ),
-                child: Column(
-                  mainAxisSize: MainAxisSize.max,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Padding(
-                      padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 16),
-                      child: Text(
-                        'About',
-                        style: FlutterFlowTheme.title1.override(
-                          fontFamily: 'Open Sans',
-                          color: FlutterFlowTheme.textDark,
+                child: Padding(
+                  padding: EdgeInsetsDirectional.fromSTEB(160, 0, 160, 0),
+                  child: Column(
+                    mainAxisSize: MainAxisSize.max,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Padding(
+                        padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 32),
+                        child: Text(
+                          'About',
+                          style: FlutterFlowTheme.title1.override(
+                            fontFamily: 'Open Sans',
+                            color: FlutterFlowTheme.textDark,
+                          ),
                         ),
                       ),
-                    ),
-                    Text(
-                      'Hello World',
-                      style: FlutterFlowTheme.subtitle1.override(
-                        fontFamily: 'Open Sans',
-                        color: FlutterFlowTheme.textDark,
-                      ),
-                    )
-                  ],
+                      Column(
+                        mainAxisSize: MainAxisSize.max,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Padding(
+                            padding:
+                                EdgeInsetsDirectional.fromSTEB(0, 0, 0, 24),
+                            child: Text(
+                              'MAKUHARI Bay Life は、幕張ベイタウン・ベイパーク地区に特化した情報を発信できる場所です。',
+                              style: FlutterFlowTheme.subtitle1.override(
+                                fontFamily: 'Open Sans',
+                                color: FlutterFlowTheme.textDark,
+                              ),
+                            ),
+                          ),
+                          Padding(
+                            padding:
+                                EdgeInsetsDirectional.fromSTEB(0, 0, 0, 24),
+                            child: Text(
+                              'この地域に住む人や事業を営む人たちがつながりやすくなり、それにより楽しみが溢れる街であり続けることに少しでも貢献できればと考えています。',
+                              style: FlutterFlowTheme.subtitle1.override(
+                                fontFamily: 'Open Sans',
+                                color: FlutterFlowTheme.textDark,
+                              ),
+                            ),
+                          ),
+                          Text(
+                            '情報を持つ人が発信しやすい環境を整えること、価値のある情報にアクセスしやすくすることを実現します。',
+                            style: FlutterFlowTheme.subtitle1.override(
+                              fontFamily: 'Open Sans',
+                              color: FlutterFlowTheme.textDark,
+                            ),
+                          )
+                        ],
+                      )
+                    ],
+                  ),
                 ),
               ),
             ),
@@ -212,7 +278,7 @@ class _TopPageWidgetState extends State<TopPageWidget> {
                                 padding:
                                     EdgeInsetsDirectional.fromSTEB(0, 0, 0, 16),
                                 child: Text(
-                                  'オンラインでつながる',
+                                  '投稿を見る',
                                   style: FlutterFlowTheme.title1,
                                 ),
                               ),
@@ -220,30 +286,22 @@ class _TopPageWidgetState extends State<TopPageWidget> {
                                 padding:
                                     EdgeInsetsDirectional.fromSTEB(0, 0, 0, 16),
                                 child: Text(
-                                  'アプリで投稿見る',
+                                  '住民に投稿を見てもらうアプリ',
                                   style: FlutterFlowTheme.subtitle1,
                                 ),
                               ),
-                              Padding(
-                                padding:
-                                    EdgeInsetsDirectional.fromSTEB(0, 0, 0, 16),
-                                child: Text(
-                                  'Makuhari Bay Life',
-                                  style: FlutterFlowTheme.title2,
+                              InkWell(
+                                onTap: () async {
+                                  await launchURL(
+                                      'https://apps.apple.com/jp/app/makuhari-baylife/id1582919405');
+                                },
+                                child: SvgPicture.asset(
+                                  'assets/images/Download_on_the_App_Store_Badge_US-UK_RGB_blk_092917.svg',
+                                  width: 180,
+                                  fit: BoxFit.cover,
                                 ),
                               )
                             ],
-                          ),
-                          InkWell(
-                            onTap: () async {
-                              await launchURL(
-                                  'https://apps.apple.com/jp/app/makuhari-baylife/id1582919405');
-                            },
-                            child: SvgPicture.asset(
-                              'assets/images/Download_on_the_App_Store_Badge_US-UK_RGB_blk_092917.svg',
-                              width: 180,
-                              fit: BoxFit.cover,
-                            ),
                           )
                         ],
                       ),

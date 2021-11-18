@@ -39,12 +39,21 @@ class _LoginPageWidgetState extends State<LoginPageWidget> {
   Widget build(BuildContext context) {
     return Scaffold(
       key: scaffoldKey,
+      appBar: PreferredSize(
+        preferredSize: Size.fromHeight(64),
+        child: AppBar(
+          backgroundColor: Colors.transparent,
+          automaticallyImplyLeading: false,
+          flexibleSpace: TopPageHeaderWidget(),
+          actions: [],
+          elevation: 0,
+        ),
+      ),
       backgroundColor: FlutterFlowTheme.background,
       body: Column(
         mainAxisSize: MainAxisSize.max,
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          TopPageHeaderWidget(),
           Expanded(
             child: Padding(
               padding: EdgeInsetsDirectional.fromSTEB(300, 50, 300, 50),

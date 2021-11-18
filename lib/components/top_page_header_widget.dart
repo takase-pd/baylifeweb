@@ -23,7 +23,9 @@ class _TopPageHeaderWidgetState extends State<TopPageHeaderWidget> {
     return Container(
       width: double.infinity,
       height: 80,
-      decoration: BoxDecoration(),
+      decoration: BoxDecoration(
+        color: Colors.transparent,
+      ),
       child: Column(
         mainAxisSize: MainAxisSize.max,
         children: [
