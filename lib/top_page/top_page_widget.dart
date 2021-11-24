@@ -159,11 +159,14 @@ class _TopPageWidgetState extends State<TopPageWidget> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Image.network(
-                          'https://picsum.photos/seed/81/600',
-                          width: double.infinity,
-                          height: 500,
-                          fit: BoxFit.cover,
+                        ClipRRect(
+                          borderRadius: BorderRadius.circular(3),
+                          child: Image.asset(
+                            'assets/images/R0002142.JPG',
+                            width: double.infinity,
+                            height: 500,
+                            fit: BoxFit.cover,
+                          ),
                         )
                       ],
                     ),
@@ -171,78 +174,172 @@ class _TopPageWidgetState extends State<TopPageWidget> {
                 ],
               ),
             ),
-            Padding(
-              padding: EdgeInsetsDirectional.fromSTEB(100, 0, 100, 0),
-              child: Container(
-                width: double.infinity,
-                height: 360,
-                decoration: BoxDecoration(
-                  color: FlutterFlowTheme.tertiaryColor,
-                ),
-                child: Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(160, 0, 160, 0),
-                  child: Column(
-                    mainAxisSize: MainAxisSize.max,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Padding(
-                        padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 32),
-                        child: Text(
-                          'About',
-                          style: FlutterFlowTheme.title1.override(
-                            fontFamily: 'Open Sans',
-                            color: FlutterFlowTheme.textDark,
-                          ),
+            Container(
+              width: double.infinity,
+              height: 360,
+              constraints: BoxConstraints(
+                maxWidth: 1200,
+              ),
+              decoration: BoxDecoration(
+                color: FlutterFlowTheme.tertiaryColor,
+                borderRadius: BorderRadius.circular(5),
+              ),
+              child: Padding(
+                padding: EdgeInsetsDirectional.fromSTEB(160, 0, 160, 0),
+                child: Column(
+                  mainAxisSize: MainAxisSize.max,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Padding(
+                      padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 32),
+                      child: Text(
+                        'About',
+                        style: FlutterFlowTheme.title1.override(
+                          fontFamily: 'Open Sans',
+                          color: FlutterFlowTheme.textDark,
                         ),
                       ),
-                      Column(
-                        mainAxisSize: MainAxisSize.max,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Padding(
-                            padding:
-                                EdgeInsetsDirectional.fromSTEB(0, 0, 0, 24),
-                            child: Text(
-                              'MAKUHARI Bay Life は、幕張ベイタウン・ベイパーク地区に特化した情報を発信できる場所です。',
-                              style: FlutterFlowTheme.subtitle1.override(
-                                fontFamily: 'Open Sans',
-                                color: FlutterFlowTheme.textDark,
-                              ),
-                            ),
-                          ),
-                          Padding(
-                            padding:
-                                EdgeInsetsDirectional.fromSTEB(0, 0, 0, 24),
-                            child: Text(
-                              'この地域に住む人や事業を営む人たちがつながりやすくなり、それにより楽しみが溢れる街であり続けることに少しでも貢献できればと考えています。',
-                              style: FlutterFlowTheme.subtitle1.override(
-                                fontFamily: 'Open Sans',
-                                color: FlutterFlowTheme.textDark,
-                              ),
-                            ),
-                          ),
-                          Text(
-                            '情報を持つ人が発信しやすい環境を整えること、価値のある情報にアクセスしやすくすることを実現します。',
+                    ),
+                    Column(
+                      mainAxisSize: MainAxisSize.max,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Padding(
+                          padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 24),
+                          child: Text(
+                            'MAKUHARI Bay Life は、幕張ベイタウン・ベイパーク地区に特化した情報を発信できる場所です。',
                             style: FlutterFlowTheme.subtitle1.override(
                               fontFamily: 'Open Sans',
                               color: FlutterFlowTheme.textDark,
                             ),
-                          )
-                        ],
-                      )
-                    ],
-                  ),
+                          ),
+                        ),
+                        Padding(
+                          padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 24),
+                          child: Text(
+                            'この地域に住む人や事業を営む人たちがつながりやすくなり、それにより楽しみが溢れる街であり続けることに少しでも貢献できればと考えています。',
+                            style: FlutterFlowTheme.subtitle1.override(
+                              fontFamily: 'Open Sans',
+                              color: FlutterFlowTheme.textDark,
+                            ),
+                          ),
+                        ),
+                        Text(
+                          '情報を持つ人が発信しやすい環境を整えること、価値のある情報にアクセスしやすくすることを実現します。',
+                          style: FlutterFlowTheme.subtitle1.override(
+                            fontFamily: 'Open Sans',
+                            color: FlutterFlowTheme.textDark,
+                          ),
+                        )
+                      ],
+                    )
+                  ],
                 ),
               ),
             ),
-            Padding(
-              padding: EdgeInsetsDirectional.fromSTEB(100, 0, 100, 0),
-              child: Container(
-                width: double.infinity,
-                height: 720,
-                decoration: BoxDecoration(
-                  color: FlutterFlowTheme.background,
-                ),
+            Container(
+              width: double.infinity,
+              height: 640,
+              constraints: BoxConstraints(
+                maxWidth: 1200,
+              ),
+              decoration: BoxDecoration(
+                color: FlutterFlowTheme.background,
+              ),
+              child: Column(
+                mainAxisSize: MainAxisSize.max,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Row(
+                    mainAxisSize: MainAxisSize.max,
+                    children: [
+                      Expanded(
+                        flex: 1,
+                        child: Column(
+                          mainAxisSize: MainAxisSize.max,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Column(
+                              mainAxisSize: MainAxisSize.max,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Padding(
+                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                      0, 0, 0, 32),
+                                  child: Text(
+                                    'ご利用方法',
+                                    style: FlutterFlowTheme.title1,
+                                  ),
+                                ),
+                                Padding(
+                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                      0, 0, 0, 16),
+                                  child: Text(
+                                    '1. ユーザー作成、プラン契約',
+                                    style: FlutterFlowTheme.subtitle1,
+                                  ),
+                                ),
+                                Padding(
+                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                      0, 0, 0, 16),
+                                  child: Text(
+                                    '2. 投稿を作成',
+                                    style: FlutterFlowTheme.subtitle1,
+                                  ),
+                                ),
+                                Padding(
+                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                      0, 0, 0, 16),
+                                  child: Text(
+                                    '3. アプリで確認',
+                                    style: FlutterFlowTheme.subtitle1,
+                                  ),
+                                ),
+                                Padding(
+                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                      0, 0, 0, 16),
+                                  child: Text(
+                                    '＊投稿は管理者の確認後にアプリに掲載されます。',
+                                    style: FlutterFlowTheme.bodyText1.override(
+                                      fontFamily: 'Open Sans',
+                                      color: FlutterFlowTheme.textDark,
+                                    ),
+                                  ),
+                                )
+                              ],
+                            )
+                          ],
+                        ),
+                      ),
+                      Expanded(
+                        flex: 1,
+                        child: Column(
+                          mainAxisSize: MainAxisSize.max,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Image.asset(
+                              'assets/images/MacBook_Pro.png',
+                              fit: BoxFit.fitWidth,
+                            )
+                          ],
+                        ),
+                      )
+                    ],
+                  )
+                ],
+              ),
+            ),
+            Container(
+              width: double.infinity,
+              height: 720,
+              constraints: BoxConstraints(
+                maxWidth: 1200,
+              ),
+              decoration: BoxDecoration(
+                color: FlutterFlowTheme.background,
+              ),
+              child: Padding(
+                padding: EdgeInsetsDirectional.fromSTEB(0, 40, 0, 40),
                 child: Row(
                   mainAxisSize: MainAxisSize.max,
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -253,13 +350,14 @@ class _TopPageWidgetState extends State<TopPageWidget> {
                       child: Column(
                         mainAxisSize: MainAxisSize.max,
                         mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
-                          Image.network(
-                            'https://picsum.photos/seed/81/600',
-                            width: double.infinity,
-                            height: 500,
-                            fit: BoxFit.cover,
+                          Expanded(
+                            child: Image.asset(
+                              'assets/images/iPhone_13_-_Midnight.png',
+                              width: 250,
+                              fit: BoxFit.contain,
+                            ),
                           )
                         ],
                       ),
@@ -269,6 +367,7 @@ class _TopPageWidgetState extends State<TopPageWidget> {
                       child: Column(
                         mainAxisSize: MainAxisSize.max,
                         mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
                           Column(
                             mainAxisSize: MainAxisSize.max,
@@ -290,15 +389,27 @@ class _TopPageWidgetState extends State<TopPageWidget> {
                                   style: FlutterFlowTheme.subtitle1,
                                 ),
                               ),
-                              InkWell(
-                                onTap: () async {
-                                  await launchURL(
-                                      'https://apps.apple.com/jp/app/makuhari-baylife/id1582919405');
-                                },
-                                child: SvgPicture.asset(
-                                  'assets/images/Download_on_the_App_Store_Badge_US-UK_RGB_blk_092917.svg',
-                                  width: 180,
-                                  fit: BoxFit.cover,
+                              Padding(
+                                padding:
+                                    EdgeInsetsDirectional.fromSTEB(0, 0, 0, 16),
+                                child: InkWell(
+                                  onTap: () async {
+                                    await launchURL(
+                                        'https://apps.apple.com/jp/app/makuhari-baylife/id1582919405');
+                                  },
+                                  child: SvgPicture.asset(
+                                    'assets/images/Download_on_the_App_Store_Badge_US-UK_RGB_blk_092917.svg',
+                                    width: 180,
+                                    fit: BoxFit.cover,
+                                  ),
+                                ),
+                              ),
+                              Padding(
+                                padding:
+                                    EdgeInsetsDirectional.fromSTEB(0, 0, 0, 16),
+                                child: Text(
+                                  '＊アプリの投稿機能は個人の利用に限ります。',
+                                  style: FlutterFlowTheme.bodyText1,
                                 ),
                               )
                             ],
