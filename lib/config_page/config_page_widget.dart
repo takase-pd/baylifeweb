@@ -26,13 +26,13 @@ class _ConfigPageWidgetState extends State<ConfigPageWidget> {
     return Scaffold(
       key: scaffoldKey,
       appBar: PreferredSize(
-        preferredSize: Size.fromHeight(80),
+        preferredSize: Size.fromHeight(8),
         child: AppBar(
-          backgroundColor: FlutterFlowTheme.primaryColor,
+          backgroundColor: Colors.transparent,
           automaticallyImplyLeading: false,
           flexibleSpace: HeaderWidget(),
           actions: [],
-          elevation: 4,
+          elevation: 0,
         ),
       ),
       backgroundColor: FlutterFlowTheme.tertiaryColor,

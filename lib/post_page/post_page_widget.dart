@@ -79,11 +79,20 @@ class _PostPageWidgetState extends State<PostPageWidget> {
       key: formKey,
       child: Scaffold(
         key: scaffoldKey,
+        appBar: PreferredSize(
+          preferredSize: Size.fromHeight(8),
+          child: AppBar(
+            backgroundColor: Colors.transparent,
+            automaticallyImplyLeading: false,
+            flexibleSpace: HeaderWidget(),
+            actions: [],
+            elevation: 0,
+          ),
+        ),
         backgroundColor: FlutterFlowTheme.tertiaryColor,
         body: Column(
           mainAxisSize: MainAxisSize.max,
           children: [
-            HeaderWidget(),
             Expanded(
               child: Row(
                 mainAxisSize: MainAxisSize.max,
