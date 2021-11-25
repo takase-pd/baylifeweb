@@ -357,7 +357,7 @@ class _PlanPageWidgetState extends State<PlanPageWidget> {
                                         .toString(),
                                     style: FlutterFlowTheme.subtitle1.override(
                                       fontFamily: 'Open Sans',
-                                      color: FlutterFlowTheme.pDark,
+                                      fontWeight: FontWeight.w600,
                                     ),
                                   ),
                                   Row(
@@ -477,7 +477,7 @@ class _PlanPageWidgetState extends State<PlanPageWidget> {
                                       style:
                                           FlutterFlowTheme.subtitle1.override(
                                         fontFamily: 'Open Sans',
-                                        color: FlutterFlowTheme.pDark,
+                                        fontWeight: FontWeight.w600,
                                       ),
                                     ),
                                     Row(
@@ -761,7 +761,7 @@ class _PlanPageWidgetState extends State<PlanPageWidget> {
                                         .toString(),
                                     style: FlutterFlowTheme.subtitle1.override(
                                       fontFamily: 'Open Sans',
-                                      color: FlutterFlowTheme.pDark,
+                                      fontWeight: FontWeight.w600,
                                     ),
                                   ),
                                   Row(
