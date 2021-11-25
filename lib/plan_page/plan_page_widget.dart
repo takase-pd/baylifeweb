@@ -272,7 +272,7 @@ class _PlanPageWidgetState extends State<PlanPageWidget> {
                                           Padding(
                                             padding:
                                                 EdgeInsetsDirectional.fromSTEB(
-                                                    8, 0, 0, 0),
+                                                    5, 0, 0, 0),
                                             child: Text(
                                               getJsonField(widget.plans,
                                                       r'''$.result.plans[0].prices[0].interval''')
@@ -307,7 +307,7 @@ class _PlanPageWidgetState extends State<PlanPageWidget> {
                                           Padding(
                                             padding:
                                                 EdgeInsetsDirectional.fromSTEB(
-                                                    8, 0, 0, 0),
+                                                    5, 0, 0, 0),
                                             child: Text(
                                               getJsonField(widget.plans,
                                                       r'''$.result.plans[0].prices[0].currency''')
@@ -318,10 +318,6 @@ class _PlanPageWidgetState extends State<PlanPageWidget> {
                                         ],
                                       )
                                     ],
-                                  ),
-                                  Text(
-                                    '申し込みを希望の方は、こちらをクリックしてください。',
-                                    style: FlutterFlowTheme.bodyText1,
                                   )
                                 ],
                               ),
@@ -391,7 +387,7 @@ class _PlanPageWidgetState extends State<PlanPageWidget> {
                                             ),
                                             Padding(
                                               padding: EdgeInsetsDirectional
-                                                  .fromSTEB(8, 0, 0, 0),
+                                                  .fromSTEB(5, 0, 0, 0),
                                               child: Text(
                                                 getJsonField(widget.plans,
                                                         r'''$.result.plans[0].prices[1].interval''')
@@ -426,7 +422,7 @@ class _PlanPageWidgetState extends State<PlanPageWidget> {
                                             ),
                                             Padding(
                                               padding: EdgeInsetsDirectional
-                                                  .fromSTEB(8, 0, 0, 0),
+                                                  .fromSTEB(5, 0, 0, 0),
                                               child: Text(
                                                 getJsonField(widget.plans,
                                                         r'''$.result.plans[0].prices[1].currency''')
@@ -438,10 +434,6 @@ class _PlanPageWidgetState extends State<PlanPageWidget> {
                                           ],
                                         )
                                       ],
-                                    ),
-                                    Text(
-                                      '申し込みを希望の方は、こちらをクリックしてください。',
-                                      style: FlutterFlowTheme.bodyText1,
                                     )
                                   ],
                                 ),
@@ -677,7 +669,7 @@ class _PlanPageWidgetState extends State<PlanPageWidget> {
                                           Padding(
                                             padding:
                                                 EdgeInsetsDirectional.fromSTEB(
-                                                    8, 0, 0, 0),
+                                                    5, 0, 0, 0),
                                             child: Text(
                                               getJsonField(widget.plans,
                                                       r'''$.result.plans[1].prices[0].interval''')
@@ -712,7 +704,7 @@ class _PlanPageWidgetState extends State<PlanPageWidget> {
                                           Padding(
                                             padding:
                                                 EdgeInsetsDirectional.fromSTEB(
-                                                    8, 0, 0, 0),
+                                                    5, 0, 0, 0),
                                             child: Text(
                                               getJsonField(widget.plans,
                                                       r'''$.result.plans[1].prices[0].currency''')
@@ -723,10 +715,6 @@ class _PlanPageWidgetState extends State<PlanPageWidget> {
                                         ],
                                       )
                                     ],
-                                  ),
-                                  Text(
-                                    '申し込みを希望の方は、こちらをクリックしてください。',
-                                    style: FlutterFlowTheme.bodyText1,
                                   )
                                 ],
                               ),
@@ -763,7 +751,7 @@ class _PlanPageWidgetState extends State<PlanPageWidget> {
                   Padding(
                     padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 16),
                     child: Text(
-                      '（限定3社）',
+                      '（限定5社）',
                       textAlign: TextAlign.center,
                       style: FlutterFlowTheme.title3.override(
                         fontFamily: 'Open Sans',
