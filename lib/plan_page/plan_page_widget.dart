@@ -218,7 +218,7 @@ class _PlanPageWidgetState extends State<PlanPageWidget> {
                             MaterialPageRoute(
                               builder: (context) => CreateAccountPageWidget(
                                 priceId: getJsonField(widget.plans,
-                                        r'''$.result.plans[1].prices[0].priceId''')
+                                        r'''$.result.plans[0].prices[0].priceId''')
                                     .toString(),
                               ),
                             ),
@@ -338,7 +338,7 @@ class _PlanPageWidgetState extends State<PlanPageWidget> {
                               MaterialPageRoute(
                                 builder: (context) => CreateAccountPageWidget(
                                   priceId: getJsonField(widget.plans,
-                                          r'''$.result.plans[1].prices[1].priceId''')
+                                          r'''$.result.plans[0].prices[1].priceId''')
                                       .toString(),
                                 ),
                               ),
@@ -367,7 +367,7 @@ class _PlanPageWidgetState extends State<PlanPageWidget> {
                                   children: [
                                     Text(
                                       getJsonField(widget.plans,
-                                              r'''$.result.plans[1].prices[1].description''')
+                                              r'''$.result.plans[0].prices[1].description''')
                                           .toString(),
                                       style: FlutterFlowTheme.subtitle1,
                                     ),
@@ -420,7 +420,7 @@ class _PlanPageWidgetState extends State<PlanPageWidget> {
                                           children: [
                                             Text(
                                               getJsonField(widget.plans,
-                                                      r'''$.result.plans[1].prices[1].unitAmount''')
+                                                      r'''$.result.plans[0].prices[1].unitAmount''')
                                                   .toString(),
                                               style: FlutterFlowTheme.bodyText1,
                                             ),
