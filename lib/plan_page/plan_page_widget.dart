@@ -355,10 +355,7 @@ class _PlanPageWidgetState extends State<PlanPageWidget> {
                                     getJsonField(widget.plans,
                                             r'''$.result.plans[0].prices[0].description''')
                                         .toString(),
-                                    style: FlutterFlowTheme.subtitle1.override(
-                                      fontFamily: 'Open Sans',
-                                      fontWeight: FontWeight.w600,
-                                    ),
+                                    style: FlutterFlowTheme.subtitle1,
                                   ),
                                   Row(
                                     mainAxisSize: MainAxisSize.max,
@@ -474,11 +471,7 @@ class _PlanPageWidgetState extends State<PlanPageWidget> {
                                       getJsonField(widget.plans,
                                               r'''$.result.plans[0].prices[1].description''')
                                           .toString(),
-                                      style:
-                                          FlutterFlowTheme.subtitle1.override(
-                                        fontFamily: 'Open Sans',
-                                        fontWeight: FontWeight.w600,
-                                      ),
+                                      style: FlutterFlowTheme.subtitle1,
                                     ),
                                     Row(
                                       mainAxisSize: MainAxisSize.max,
@@ -759,10 +752,7 @@ class _PlanPageWidgetState extends State<PlanPageWidget> {
                                     getJsonField(widget.plans,
                                             r'''$.result.plans[1].prices[0].description''')
                                         .toString(),
-                                    style: FlutterFlowTheme.subtitle1.override(
-                                      fontFamily: 'Open Sans',
-                                      fontWeight: FontWeight.w600,
-                                    ),
+                                    style: FlutterFlowTheme.subtitle1,
                                   ),
                                   Row(
                                     mainAxisSize: MainAxisSize.max,
