@@ -121,9 +121,15 @@ class _TopPageFooterWidgetState extends State<TopPageFooterWidget> {
                           Padding(
                             padding:
                                 EdgeInsetsDirectional.fromSTEB(0, 0, 0, 16),
-                            child: Text(
-                              '利用規約',
-                              style: FlutterFlowTheme.bodyText1,
+                            child: InkWell(
+                              onTap: () async {
+                                await launchURL(
+                                    'https://baylife-ff782.web.app/terms.html');
+                              },
+                              child: Text(
+                                '利用規約',
+                                style: FlutterFlowTheme.bodyText1,
+                              ),
                             ),
                           ),
                           Padding(

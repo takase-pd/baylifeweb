@@ -8,6 +8,7 @@ import '../home_page/home_page_widget.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class CreateAccountPageWidget extends StatefulWidget {
@@ -73,7 +74,7 @@ class _CreateAccountPageWidgetState extends State<CreateAccountPageWidget> {
                       Padding(
                         padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 16),
                         child: AutoSizeText(
-                          'ユーザー作成後、決済ページが開きます。',
+                          'ユーザー登録後、決済ページが開きます。',
                           textAlign: TextAlign.center,
                           style: FlutterFlowTheme.subtitle2,
                         ),
@@ -208,6 +209,78 @@ class _CreateAccountPageWidgetState extends State<CreateAccountPageWidget> {
                         ),
                       ),
                       Padding(
+                        padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 16),
+                        child: Row(
+                          mainAxisSize: MainAxisSize.max,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            InkWell(
+                              onTap: () async {
+                                await launchURL(
+                                    'https://baylife-ff782.web.app/terms.html');
+                              },
+                              child: Text(
+                                '利用規約',
+                                textAlign: TextAlign.start,
+                                style: FlutterFlowTheme.bodyText1,
+                              ),
+                            ),
+                            Padding(
+                              padding:
+                                  EdgeInsetsDirectional.fromSTEB(3, 0, 0, 0),
+                              child: InkWell(
+                                onTap: () async {
+                                  await launchURL(
+                                      'https://baylife-ff782.web.app/terms.html');
+                                },
+                                child: FaIcon(
+                                  FontAwesomeIcons.externalLinkAlt,
+                                  color: FlutterFlowTheme.textDark,
+                                  size: 16,
+                                ),
+                              ),
+                            ),
+                            Text(
+                              '、',
+                              textAlign: TextAlign.start,
+                              style: FlutterFlowTheme.bodyText1,
+                            ),
+                            InkWell(
+                              onTap: () async {
+                                await launchURL(
+                                    'https://www.particledrawing.com/privacy');
+                              },
+                              child: Text(
+                                'プライバシーポリシー',
+                                textAlign: TextAlign.start,
+                                style: FlutterFlowTheme.bodyText1,
+                              ),
+                            ),
+                            Padding(
+                              padding:
+                                  EdgeInsetsDirectional.fromSTEB(3, 0, 3, 0),
+                              child: InkWell(
+                                onTap: () async {
+                                  await launchURL(
+                                      'https://www.particledrawing.com/privacy');
+                                },
+                                child: FaIcon(
+                                  FontAwesomeIcons.externalLinkAlt,
+                                  color: FlutterFlowTheme.textDark,
+                                  size: 16,
+                                ),
+                              ),
+                            ),
+                            Text(
+                              'に同意の上、ご登録ください。',
+                              textAlign: TextAlign.start,
+                              style: FlutterFlowTheme.bodyText1,
+                            )
+                          ],
+                        ),
+                      ),
+                      Padding(
                         padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 24),
                         child: FFButtonWidget(
                           onPressed: () async {
@@ -240,12 +313,12 @@ class _CreateAccountPageWidgetState extends State<CreateAccountPageWidget> {
                               setState(() => _loadingButton1 = false);
                             }
                           },
-                          text: 'ユーザー作成',
+                          text: '上記に同意して登録',
                           options: FFButtonOptions(
-                            width: 230,
+                            width: 240,
                             height: 60,
                             color: FlutterFlowTheme.secondaryColor,
-                            textStyle: FlutterFlowTheme.title2.override(
+                            textStyle: FlutterFlowTheme.subtitle2.override(
                               fontFamily: 'Open Sans',
                               color: FlutterFlowTheme.textLight,
                             ),
@@ -352,14 +425,6 @@ class _CreateAccountPageWidgetState extends State<CreateAccountPageWidget> {
                             ),
                           ),
                         ),
-                      ),
-                      AutoSizeText(
-                        'ユーザー作成時、利用規約およびプライバシーポリシーに同意したとみなします。',
-                        textAlign: TextAlign.center,
-                        style: FlutterFlowTheme.bodyText2.override(
-                          fontFamily: 'Open Sans',
-                          color: FlutterFlowTheme.textDark,
-                        ),
                       )
                     ],
                   ),
@@ -367,15 +432,27 @@ class _CreateAccountPageWidgetState extends State<CreateAccountPageWidget> {
                     mainAxisSize: MainAxisSize.max,
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Text(
-                        '利用規約',
-                        style: FlutterFlowTheme.bodyText1,
+                      InkWell(
+                        onTap: () async {
+                          await launchURL(
+                              'https://baylife-ff782.web.app/terms.html');
+                        },
+                        child: Text(
+                          '利用規約',
+                          style: FlutterFlowTheme.bodyText1,
+                        ),
                       ),
                       Padding(
                         padding: EdgeInsetsDirectional.fromSTEB(30, 0, 0, 0),
-                        child: Text(
-                          'プライバシーポリシー',
-                          style: FlutterFlowTheme.bodyText1,
+                        child: InkWell(
+                          onTap: () async {
+                            await launchURL(
+                                'https://www.particledrawing.com/privacy');
+                          },
+                          child: Text(
+                            'プライバシーポリシー',
+                            style: FlutterFlowTheme.bodyText1,
+                          ),
                         ),
                       )
                     ],
