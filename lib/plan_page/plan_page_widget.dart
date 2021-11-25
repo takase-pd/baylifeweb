@@ -763,7 +763,7 @@ class _PlanPageWidgetState extends State<PlanPageWidget> {
                   Padding(
                     padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 16),
                     child: Text(
-                      '（限定10社）',
+                      '（限定3社）',
                       textAlign: TextAlign.center,
                       style: FlutterFlowTheme.title3.override(
                         fontFamily: 'Open Sans',
