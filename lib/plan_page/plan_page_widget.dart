@@ -238,10 +238,13 @@ class _PlanPageWidgetState extends State<PlanPageWidget> {
                                             MainAxisAlignment.spaceBetween,
                                         children: [
                                           Text(
-                                            functions.getUnitAmount(getJsonField(
-                                                    widget.plans,
-                                                    r'''$.result.plans[1].prices[0].unitAmount''')
-                                                .toString()),
+                                            functions.getUnitAmount(
+                                                getJsonField(widget.plans,
+                                                        r'''$.result.plans[1].prices[0].unitAmount''')
+                                                    .toString(),
+                                                getJsonField(widget.plans,
+                                                        r'''$.result.plans[1].prices[0].interval''')
+                                                    .toString()),
                                             style: FlutterFlowTheme.bodyText1,
                                           ),
                                           Padding(
@@ -367,10 +370,13 @@ class _PlanPageWidgetState extends State<PlanPageWidget> {
                                               MainAxisAlignment.spaceBetween,
                                           children: [
                                             Text(
-                                              functions.getUnitAmount(getJsonField(
-                                                      widget.plans,
-                                                      r'''$.result.plans[1].prices[1].unitAmount''')
-                                                  .toString()),
+                                              functions.getUnitAmount(
+                                                  getJsonField(widget.plans,
+                                                          r'''$.result.plans[1].prices[1].unitAmount''')
+                                                      .toString(),
+                                                  getJsonField(widget.plans,
+                                                          r'''$.result.plans[1].prices[1].interval''')
+                                                      .toString()),
                                               style: FlutterFlowTheme.bodyText1,
                                             ),
                                             Padding(
