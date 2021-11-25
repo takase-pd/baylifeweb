@@ -48,7 +48,7 @@ class _PlanPageWidgetState extends State<PlanPageWidget> {
           children: [
             Container(
               width: double.infinity,
-              height: 240,
+              height: 560,
               decoration: BoxDecoration(),
               child: Column(
                 mainAxisSize: MainAxisSize.max,
@@ -57,63 +57,126 @@ class _PlanPageWidgetState extends State<PlanPageWidget> {
                   Padding(
                     padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 32),
                     child: Text(
-                      'Makuhari Bay Life管理画面ご利用プラン',
+                      'Makuhari Bay Life投稿サービスご利用プラン',
                       textAlign: TextAlign.center,
                       style: FlutterFlowTheme.title1,
                     ),
                   ),
-                  Column(
-                    mainAxisSize: MainAxisSize.max,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Padding(
-                        padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 8),
-                        child: Text(
-                          'ボタンをクリックするとアカウント作成画面が開きます。',
-                          textAlign: TextAlign.start,
-                          style: FlutterFlowTheme.bodyText1,
-                        ),
-                      ),
-                      Padding(
-                        padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 8),
-                        child: Text(
-                          'アカウントを作成すると、決済画面が開きます。',
-                          textAlign: TextAlign.start,
-                          style: FlutterFlowTheme.bodyText1,
-                        ),
-                      ),
-                      Padding(
-                        padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 8),
-                        child: InkWell(
-                          onTap: () async {
-                            await launchURL('https://stripe.com/');
-                          },
+                  Padding(
+                    padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 32),
+                    child: Column(
+                      mainAxisSize: MainAxisSize.max,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Padding(
+                          padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 16),
                           child: Text(
-                            '決済はStripe, Inc.を利用しており、安全にお申し込みいただけます。',
+                            '企業、団体の形態ごとに異なるプランをご用意しています。',
                             textAlign: TextAlign.start,
                             style: FlutterFlowTheme.bodyText1,
                           ),
                         ),
-                      )
-                    ],
+                        Padding(
+                          padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 8),
+                          child: Text(
+                            '1. 一般事業会社様用プラン',
+                            textAlign: TextAlign.start,
+                            style: FlutterFlowTheme.subtitle1.override(
+                              fontFamily: 'Open Sans',
+                              fontSize: 24,
+                            ),
+                          ),
+                        ),
+                        Padding(
+                          padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 8),
+                          child: Text(
+                            '2. 教育機関、医療機関、行政機関、個人事業主様用プラン',
+                            textAlign: TextAlign.start,
+                            style: FlutterFlowTheme.subtitle1.override(
+                              fontFamily: 'Open Sans',
+                              fontSize: 24,
+                            ),
+                          ),
+                        ),
+                        Padding(
+                          padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 8),
+                          child: Text(
+                            '3. 代理店様用プラン',
+                            textAlign: TextAlign.start,
+                            style: FlutterFlowTheme.subtitle1.override(
+                              fontFamily: 'Open Sans',
+                              fontSize: 24,
+                            ),
+                          ),
+                        )
+                      ],
+                    ),
+                  ),
+                  Container(
+                    decoration: BoxDecoration(
+                      color: FlutterFlowTheme.tLight,
+                      borderRadius: BorderRadius.circular(5),
+                    ),
+                    child: Padding(
+                      padding: EdgeInsetsDirectional.fromSTEB(24, 24, 24, 24),
+                      child: Column(
+                        mainAxisSize: MainAxisSize.max,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Padding(
+                            padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 8),
+                            child: Text(
+                              'ボタンをクリックするとアカウント作成画面が開きます。',
+                              textAlign: TextAlign.start,
+                              style: FlutterFlowTheme.bodyText1,
+                            ),
+                          ),
+                          Padding(
+                            padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 8),
+                            child: Text(
+                              'アカウントを作成すると、決済画面が開きます。',
+                              textAlign: TextAlign.start,
+                              style: FlutterFlowTheme.bodyText1,
+                            ),
+                          ),
+                          Padding(
+                            padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 8),
+                            child: InkWell(
+                              onTap: () async {
+                                await launchURL('https://stripe.com/');
+                              },
+                              child: Text(
+                                '決済はstripeを利用しており、安全にお申し込みいただけます。',
+                                textAlign: TextAlign.start,
+                                style: FlutterFlowTheme.bodyText1,
+                              ),
+                            ),
+                          )
+                        ],
+                      ),
+                    ),
                   )
                 ],
               ),
             ),
             Container(
               width: double.infinity,
-              height: 560,
+              height: 480,
               decoration: BoxDecoration(),
               child: Column(
                 mainAxisSize: MainAxisSize.max,
-                mainAxisAlignment: MainAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Padding(
                     padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 16),
                     child: Text(
-                      '企業様用プラン',
+                      '一般事業会社様プラン',
                       textAlign: TextAlign.center,
-                      style: FlutterFlowTheme.title2,
+                      style: FlutterFlowTheme.title2.override(
+                        fontFamily: 'Open Sans',
+                        color: FlutterFlowTheme.pDark,
+                        fontSize: 40,
+                      ),
                     ),
                   ),
                   Padding(
@@ -125,7 +188,7 @@ class _PlanPageWidgetState extends State<PlanPageWidget> {
                         Padding(
                           padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 8),
                           child: Text(
-                            '企業が投稿できる仕組みをご利用いただけます。',
+                            '自社の情報を投稿できる仕組みをご利用いただけます。',
                             style: FlutterFlowTheme.bodyText1,
                           ),
                         ),
@@ -407,6 +470,108 @@ class _PlanPageWidgetState extends State<PlanPageWidget> {
                         ),
                       )
                     ],
+                  )
+                ],
+              ),
+            ),
+            Container(
+              width: double.infinity,
+              height: 480,
+              decoration: BoxDecoration(),
+              child: Column(
+                mainAxisSize: MainAxisSize.max,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Padding(
+                    padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 16),
+                    child: Text(
+                      '教育機関、医療機関、行政機関、個人事業主様プラン',
+                      textAlign: TextAlign.center,
+                      style: FlutterFlowTheme.title2.override(
+                        fontFamily: 'Open Sans',
+                        color: FlutterFlowTheme.pDark,
+                        fontSize: 40,
+                      ),
+                    ),
+                  ),
+                  Padding(
+                    padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 16),
+                    child: Column(
+                      mainAxisSize: MainAxisSize.max,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Padding(
+                          padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 8),
+                          child: Text(
+                            '自団体、個人事業の情報を投稿できる仕組みをご利用いただけます。',
+                            style: FlutterFlowTheme.bodyText1,
+                          ),
+                        ),
+                        Padding(
+                          padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 8),
+                          child: Text(
+                            '団体規模が大きい場合、複数お申し込みをお願いする可能性があります。',
+                            style: FlutterFlowTheme.bodyText1,
+                          ),
+                        )
+                      ],
+                    ),
+                  ),
+                  Row(
+                    mainAxisSize: MainAxisSize.max,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [],
+                  )
+                ],
+              ),
+            ),
+            Container(
+              width: double.infinity,
+              height: 480,
+              decoration: BoxDecoration(),
+              child: Column(
+                mainAxisSize: MainAxisSize.max,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Padding(
+                    padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 16),
+                    child: Text(
+                      '代理店様プラン',
+                      textAlign: TextAlign.center,
+                      style: FlutterFlowTheme.title2.override(
+                        fontFamily: 'Open Sans',
+                        color: FlutterFlowTheme.pDark,
+                        fontSize: 40,
+                      ),
+                    ),
+                  ),
+                  Padding(
+                    padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 16),
+                    child: Column(
+                      mainAxisSize: MainAxisSize.max,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Padding(
+                          padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 8),
+                          child: Text(
+                            '自社または顧客の情報を投稿できる仕組みをご利用いただけます。',
+                            style: FlutterFlowTheme.bodyText1,
+                          ),
+                        ),
+                        Padding(
+                          padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 8),
+                          child: Text(
+                            '企業規模が大きい場合、複数お申し込みをお願いする可能性があります。',
+                            style: FlutterFlowTheme.bodyText1,
+                          ),
+                        )
+                      ],
+                    ),
+                  ),
+                  Row(
+                    mainAxisSize: MainAxisSize.max,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [],
                   )
                 ],
               ),

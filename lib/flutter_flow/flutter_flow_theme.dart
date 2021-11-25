@@ -23,43 +23,43 @@ class FlutterFlowTheme {
         'Open Sans',
         color: textDark,
         fontWeight: FontWeight.w600,
-        fontSize: 24,
+        fontSize: 48,
       );
   static TextStyle get title2 => GoogleFonts.getFont(
         'Open Sans',
         color: textDark,
         fontWeight: FontWeight.w500,
-        fontSize: 22,
+        fontSize: 40,
       );
   static TextStyle get title3 => GoogleFonts.getFont(
         'Open Sans',
         color: textDark,
         fontWeight: FontWeight.w500,
-        fontSize: 20,
+        fontSize: 32,
       );
   static TextStyle get subtitle1 => GoogleFonts.getFont(
         'Open Sans',
         color: textDark,
         fontWeight: FontWeight.w500,
-        fontSize: 18,
+        fontSize: 24,
       );
   static TextStyle get subtitle2 => GoogleFonts.getFont(
         'Open Sans',
         color: textDark,
         fontWeight: FontWeight.normal,
-        fontSize: 16,
+        fontSize: 20,
       );
   static TextStyle get bodyText1 => GoogleFonts.getFont(
         'Open Sans',
         color: textDark,
         fontWeight: FontWeight.normal,
-        fontSize: 14,
+        fontSize: 16,
       );
   static TextStyle get bodyText2 => GoogleFonts.getFont(
         'Open Sans',
         color: textDark,
         fontWeight: FontWeight.normal,
-        fontSize: 14,
+        fontSize: 16,
       );
 }
 

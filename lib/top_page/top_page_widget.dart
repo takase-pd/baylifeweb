@@ -138,7 +138,7 @@ class _TopPageWidgetState extends State<TopPageWidget> {
                             width: 240,
                             height: 60,
                             color: FlutterFlowTheme.secondaryColor,
-                            textStyle: FlutterFlowTheme.title2.override(
+                            textStyle: FlutterFlowTheme.subtitle1.override(
                               fontFamily: 'Open Sans',
                               color: FlutterFlowTheme.textLight,
                             ),
@@ -195,9 +195,10 @@ class _TopPageWidgetState extends State<TopPageWidget> {
                       padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 32),
                       child: Text(
                         'About',
-                        style: FlutterFlowTheme.title1.override(
+                        style: FlutterFlowTheme.title2.override(
                           fontFamily: 'Open Sans',
-                          color: FlutterFlowTheme.textDark,
+                          fontSize: 32,
+                          fontWeight: FontWeight.w600,
                         ),
                       ),
                     ),
@@ -209,28 +210,19 @@ class _TopPageWidgetState extends State<TopPageWidget> {
                           padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 24),
                           child: Text(
                             'MAKUHARI Bay Life は、幕張ベイタウン・ベイパーク地区に特化した情報を発信できる場所です。',
-                            style: FlutterFlowTheme.subtitle1.override(
-                              fontFamily: 'Open Sans',
-                              color: FlutterFlowTheme.textDark,
-                            ),
+                            style: FlutterFlowTheme.bodyText1,
                           ),
                         ),
                         Padding(
                           padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 24),
                           child: Text(
                             'この地域に住む人や事業を営む人たちがつながりやすくなり、それにより楽しみが溢れる街であり続けることに少しでも貢献できればと考えています。',
-                            style: FlutterFlowTheme.subtitle1.override(
-                              fontFamily: 'Open Sans',
-                              color: FlutterFlowTheme.textDark,
-                            ),
+                            style: FlutterFlowTheme.bodyText1,
                           ),
                         ),
                         Text(
                           '情報を持つ人が発信しやすい環境を整えること、価値のある情報にアクセスしやすくすることを実現します。',
-                          style: FlutterFlowTheme.subtitle1.override(
-                            fontFamily: 'Open Sans',
-                            color: FlutterFlowTheme.textDark,
-                          ),
+                          style: FlutterFlowTheme.bodyText1,
                         )
                       ],
                     )
@@ -269,14 +261,18 @@ class _TopPageWidgetState extends State<TopPageWidget> {
                                       0, 0, 0, 32),
                                   child: Text(
                                     'ご利用方法',
-                                    style: FlutterFlowTheme.title1,
+                                    style: FlutterFlowTheme.title2.override(
+                                      fontFamily: 'Open Sans',
+                                      fontSize: 32,
+                                      fontWeight: FontWeight.w600,
+                                    ),
                                   ),
                                 ),
                                 Padding(
                                   padding: EdgeInsetsDirectional.fromSTEB(
                                       0, 0, 0, 16),
                                   child: Text(
-                                    '1. ユーザー作成、プラン契約',
+                                    '1. ユーザー登録、プラン契約',
                                     style: FlutterFlowTheme.subtitle1,
                                   ),
                                 ),
@@ -298,7 +294,18 @@ class _TopPageWidgetState extends State<TopPageWidget> {
                                 ),
                                 Padding(
                                   padding: EdgeInsetsDirectional.fromSTEB(
-                                      0, 0, 0, 16),
+                                      0, 0, 0, 8),
+                                  child: Text(
+                                    '＊パソコン（デスクトップ、ノートブック）から投稿いただけるサービスです。',
+                                    style: FlutterFlowTheme.bodyText1.override(
+                                      fontFamily: 'Open Sans',
+                                      color: FlutterFlowTheme.textDark,
+                                    ),
+                                  ),
+                                ),
+                                Padding(
+                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                      0, 0, 0, 8),
                                   child: Text(
                                     '＊投稿は管理者の確認後にアプリに掲載されます。',
                                     style: FlutterFlowTheme.bodyText1.override(
@@ -379,7 +386,11 @@ class _TopPageWidgetState extends State<TopPageWidget> {
                                     EdgeInsetsDirectional.fromSTEB(0, 0, 0, 16),
                                 child: Text(
                                   '投稿を見る',
-                                  style: FlutterFlowTheme.title1,
+                                  style: FlutterFlowTheme.title2.override(
+                                    fontFamily: 'Open Sans',
+                                    fontSize: 32,
+                                    fontWeight: FontWeight.w600,
+                                  ),
                                 ),
                               ),
                               Padding(
@@ -403,14 +414,6 @@ class _TopPageWidgetState extends State<TopPageWidget> {
                                     width: 180,
                                     fit: BoxFit.cover,
                                   ),
-                                ),
-                              ),
-                              Padding(
-                                padding:
-                                    EdgeInsetsDirectional.fromSTEB(0, 0, 0, 16),
-                                child: Text(
-                                  '＊アプリの投稿機能は個人の利用に限ります。',
-                                  style: FlutterFlowTheme.bodyText1,
                                 ),
                               )
                             ],
