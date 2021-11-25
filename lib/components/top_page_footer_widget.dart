@@ -49,6 +49,7 @@ class _TopPageFooterWidgetState extends State<TopPageFooterWidget> {
                               'ご検討中の方',
                               style: FlutterFlowTheme.subtitle2.override(
                                 fontFamily: 'Open Sans',
+                                fontSize: 16,
                                 fontWeight: FontWeight.w600,
                               ),
                             ),
@@ -73,6 +74,7 @@ class _TopPageFooterWidgetState extends State<TopPageFooterWidget> {
                               'ご利用中の方',
                               style: FlutterFlowTheme.subtitle2.override(
                                 fontFamily: 'Open Sans',
+                                fontSize: 16,
                                 fontWeight: FontWeight.w600,
                               ),
                             ),
@@ -97,6 +99,7 @@ class _TopPageFooterWidgetState extends State<TopPageFooterWidget> {
                               '運営会社',
                               style: FlutterFlowTheme.subtitle2.override(
                                 fontFamily: 'Open Sans',
+                                fontSize: 16,
                                 fontWeight: FontWeight.w600,
                               ),
                             ),
@@ -144,7 +147,10 @@ class _TopPageFooterWidgetState extends State<TopPageFooterWidget> {
                 ),
                 Text(
                   'Copyright © 2021 Particle Drawing, LLC.  All rights reserved.',
-                  style: FlutterFlowTheme.bodyText1,
+                  style: FlutterFlowTheme.bodyText1.override(
+                    fontFamily: 'Open Sans',
+                    fontSize: 14,
+                  ),
                 )
               ],
             ),
