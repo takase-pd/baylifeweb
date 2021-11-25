@@ -177,8 +177,7 @@ class _PlanPageWidgetState extends State<PlanPageWidget> {
                                       3, 0, 3, 0),
                                   child: InkWell(
                                     onTap: () async {
-                                      await launchURL(
-                                          'https://baylife-ff782.web.app/terms.html');
+                                      await launchURL('https://stripe.com/');
                                     },
                                     child: FaIcon(
                                       FontAwesomeIcons.externalLinkAlt,
@@ -338,8 +337,8 @@ class _PlanPageWidgetState extends State<PlanPageWidget> {
                             borderRadius: BorderRadius.circular(10),
                           ),
                           child: Container(
-                            width: 420,
-                            height: 300,
+                            width: 400,
+                            height: 240,
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(5),
                             ),
@@ -454,8 +453,8 @@ class _PlanPageWidgetState extends State<PlanPageWidget> {
                               borderRadius: BorderRadius.circular(10),
                             ),
                             child: Container(
-                              width: 420,
-                              height: 300,
+                              width: 400,
+                              height: 240,
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(5),
                               ),
@@ -735,8 +734,8 @@ class _PlanPageWidgetState extends State<PlanPageWidget> {
                             borderRadius: BorderRadius.circular(10),
                           ),
                           child: Container(
-                            width: 420,
-                            height: 300,
+                            width: 400,
+                            height: 240,
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(5),
                             ),
