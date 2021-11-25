@@ -7,6 +7,7 @@ import '../flutter_flow/custom_functions.dart' as functions;
 import '../flutter_flow/flutter_flow_widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 const apiKey =
@@ -121,6 +122,9 @@ class _PlanPageWidgetState extends State<PlanPageWidget> {
                     ],
                   ),
                   Container(
+                    constraints: BoxConstraints(
+                      maxWidth: 720,
+                    ),
                     decoration: BoxDecoration(
                       color: FlutterFlowTheme.tLight,
                       borderRadius: BorderRadius.circular(5),
@@ -134,7 +138,7 @@ class _PlanPageWidgetState extends State<PlanPageWidget> {
                           Padding(
                             padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 8),
                             child: Text(
-                              'ボタンをクリックするとアカウント作成画面が開きます。',
+                              'ボタンをクリックするとアカウント登録画面が開きます。',
                               textAlign: TextAlign.start,
                               style: FlutterFlowTheme.bodyText1,
                             ),
@@ -142,23 +146,126 @@ class _PlanPageWidgetState extends State<PlanPageWidget> {
                           Padding(
                             padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 8),
                             child: Text(
-                              'アカウントを作成すると、決済画面が開きます。',
+                              'アカウントを登録すると、決済画面が開きます。',
                               textAlign: TextAlign.start,
                               style: FlutterFlowTheme.bodyText1,
                             ),
                           ),
                           Padding(
                             padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 8),
-                            child: InkWell(
-                              onTap: () async {
-                                await launchURL('https://stripe.com/');
-                              },
-                              child: Text(
-                                '決済はstripeを利用しており、安全にお申し込みいただけます。',
+                            child: Row(
+                              mainAxisSize: MainAxisSize.max,
+                              children: [
+                                InkWell(
+                                  onTap: () async {
+                                    await launchURL('https://stripe.com/');
+                                  },
+                                  child: Text(
+                                    '決済は',
+                                    textAlign: TextAlign.start,
+                                    style: FlutterFlowTheme.bodyText1,
+                                  ),
+                                ),
+                                InkWell(
+                                  onTap: () async {
+                                    await launchURL('https://stripe.com/');
+                                  },
+                                  child: Text(
+                                    'stripe',
+                                    textAlign: TextAlign.start,
+                                    style: FlutterFlowTheme.bodyText1,
+                                  ),
+                                ),
+                                Padding(
+                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                      3, 0, 3, 0),
+                                  child: InkWell(
+                                    onTap: () async {
+                                      await launchURL(
+                                          'https://baylife-ff782.web.app/terms.html');
+                                    },
+                                    child: FaIcon(
+                                      FontAwesomeIcons.externalLinkAlt,
+                                      color: FlutterFlowTheme.textDark,
+                                      size: 16,
+                                    ),
+                                  ),
+                                ),
+                                Text(
+                                  'を利用しており、安全にお申し込みいただけます。',
+                                  textAlign: TextAlign.start,
+                                  style: FlutterFlowTheme.bodyText1,
+                                )
+                              ],
+                            ),
+                          ),
+                          Row(
+                            mainAxisSize: MainAxisSize.max,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              InkWell(
+                                onTap: () async {
+                                  await launchURL(
+                                      'https://baylife-ff782.web.app/terms.html');
+                                },
+                                child: Text(
+                                  '利用規約',
+                                  textAlign: TextAlign.start,
+                                  style: FlutterFlowTheme.bodyText1,
+                                ),
+                              ),
+                              Padding(
+                                padding:
+                                    EdgeInsetsDirectional.fromSTEB(3, 0, 0, 0),
+                                child: InkWell(
+                                  onTap: () async {
+                                    await launchURL(
+                                        'https://baylife-ff782.web.app/terms.html');
+                                  },
+                                  child: FaIcon(
+                                    FontAwesomeIcons.externalLinkAlt,
+                                    color: FlutterFlowTheme.textDark,
+                                    size: 16,
+                                  ),
+                                ),
+                              ),
+                              Text(
+                                '、',
                                 textAlign: TextAlign.start,
                                 style: FlutterFlowTheme.bodyText1,
                               ),
-                            ),
+                              InkWell(
+                                onTap: () async {
+                                  await launchURL(
+                                      'https://www.particledrawing.com/privacy');
+                                },
+                                child: Text(
+                                  'プライバシーポリシー',
+                                  textAlign: TextAlign.start,
+                                  style: FlutterFlowTheme.bodyText1,
+                                ),
+                              ),
+                              Padding(
+                                padding:
+                                    EdgeInsetsDirectional.fromSTEB(3, 0, 3, 0),
+                                child: InkWell(
+                                  onTap: () async {
+                                    await launchURL(
+                                        'https://www.particledrawing.com/privacy');
+                                  },
+                                  child: FaIcon(
+                                    FontAwesomeIcons.externalLinkAlt,
+                                    color: FlutterFlowTheme.textDark,
+                                    size: 16,
+                                  ),
+                                ),
+                              ),
+                              Text(
+                                'に同意の上、下記のプランをお申し込みください。',
+                                textAlign: TextAlign.start,
+                                style: FlutterFlowTheme.bodyText1,
+                              )
+                            ],
                           )
                         ],
                       ),
@@ -246,7 +353,7 @@ class _PlanPageWidgetState extends State<PlanPageWidget> {
                               child: Column(
                                 mainAxisSize: MainAxisSize.max,
                                 mainAxisAlignment:
-                                    MainAxisAlignment.spaceAround,
+                                    MainAxisAlignment.spaceEvenly,
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Text(
@@ -368,7 +475,7 @@ class _PlanPageWidgetState extends State<PlanPageWidget> {
                                 child: Column(
                                   mainAxisSize: MainAxisSize.max,
                                   mainAxisAlignment:
-                                      MainAxisAlignment.spaceAround,
+                                      MainAxisAlignment.spaceEvenly,
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Text(
@@ -655,7 +762,7 @@ class _PlanPageWidgetState extends State<PlanPageWidget> {
                               child: Column(
                                 mainAxisSize: MainAxisSize.max,
                                 mainAxisAlignment:
-                                    MainAxisAlignment.spaceAround,
+                                    MainAxisAlignment.spaceEvenly,
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Text(
