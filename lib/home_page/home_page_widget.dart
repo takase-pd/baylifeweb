@@ -102,11 +102,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                         children: [
                                           Text(
                                             columnContentsRecord.title,
-                                            style: FlutterFlowTheme.subtitle1
-                                                .override(
-                                              fontFamily: 'Open Sans',
-                                              color: FlutterFlowTheme.textDark,
-                                            ),
+                                            style: FlutterFlowTheme.subtitle2,
                                           ),
                                           Row(
                                             mainAxisSize: MainAxisSize.max,
@@ -118,13 +114,8 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                                     'yMMMd',
                                                     columnContentsRecord
                                                         .posted),
-                                                style: FlutterFlowTheme
-                                                    .subtitle2
-                                                    .override(
-                                                  fontFamily: 'Open Sans',
-                                                  color:
-                                                      FlutterFlowTheme.textDark,
-                                                ),
+                                                style:
+                                                    FlutterFlowTheme.bodyText1,
                                               ),
                                               ToggleIcon(
                                                 onPressed: () async {
