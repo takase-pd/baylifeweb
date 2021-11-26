@@ -279,7 +279,7 @@ class _LoginPageWidgetState extends State<LoginPageWidget> {
                             color: FlutterFlowTheme.sLight,
                             textStyle: FlutterFlowTheme.subtitle2.override(
                               fontFamily: 'Open Sans',
-                              color: Colors.white,
+                              color: FlutterFlowTheme.textLight,
                               fontSize: 16,
                             ),
                             borderSide: BorderSide(
