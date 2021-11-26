@@ -46,9 +46,10 @@ class _MainMenuWidgetState extends State<MainMenuWidget> {
               padding: EdgeInsetsDirectional.fromSTEB(10, 10, 10, 0),
               child: Text(
                 'Makuhari Bay Life',
-                style: FlutterFlowTheme.title3.override(
+                style: FlutterFlowTheme.subtitle1.override(
                   fontFamily: 'Open Sans',
                   color: FlutterFlowTheme.textLight,
+                  fontSize: 20,
                 ),
               ),
             ),
@@ -75,9 +76,10 @@ class _MainMenuWidgetState extends State<MainMenuWidget> {
                       },
                       child: Text(
                         'ホーム',
-                        style: FlutterFlowTheme.subtitle1.override(
+                        style: FlutterFlowTheme.subtitle2.override(
                           fontFamily: 'Open Sans',
                           color: FlutterFlowTheme.textLight,
+                          fontSize: 16,
                         ),
                       ),
                     ),
@@ -106,9 +108,10 @@ class _MainMenuWidgetState extends State<MainMenuWidget> {
                       },
                       child: Text(
                         '投稿',
-                        style: FlutterFlowTheme.subtitle1.override(
+                        style: FlutterFlowTheme.subtitle2.override(
                           fontFamily: 'Open Sans',
                           color: FlutterFlowTheme.textLight,
+                          fontSize: 16,
                         ),
                       ),
                     ),
@@ -135,9 +138,10 @@ class _MainMenuWidgetState extends State<MainMenuWidget> {
                       },
                       child: Text(
                         '設定',
-                        style: FlutterFlowTheme.title3.override(
+                        style: FlutterFlowTheme.subtitle2.override(
                           fontFamily: 'Open Sans',
                           color: FlutterFlowTheme.textLight,
+                          fontSize: 16,
                         ),
                       ),
                     ),

@@ -230,7 +230,7 @@ class _LoginPageWidgetState extends State<LoginPageWidget> {
                               setState(() => _loadingButton1 = false);
                             }
                           },
-                          text: 'Login',
+                          text: 'ログイン',
                           options: FFButtonOptions(
                             width: 230,
                             height: 60,
@@ -280,6 +280,7 @@ class _LoginPageWidgetState extends State<LoginPageWidget> {
                             textStyle: FlutterFlowTheme.subtitle2.override(
                               fontFamily: 'Open Sans',
                               color: Colors.white,
+                              fontSize: 16,
                             ),
                             borderSide: BorderSide(
                               color: Colors.transparent,
