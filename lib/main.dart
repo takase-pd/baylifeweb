@@ -6,9 +6,10 @@ import 'auth/firebase_user_provider.dart';
 import 'auth/auth_util.dart';
 
 import '../flutter_flow/flutter_flow_theme.dart';
-import 'package:bay_life_web/login_page/login_page_widget.dart';
+import 'package:bay_life_web/top_page/top_page_widget.dart';
 import 'package:bay_life_web/home_page/home_page_widget.dart';
 import 'flutter_flow/flutter_flow_theme.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -57,14 +58,15 @@ class _MyAppState extends State<MyApp> {
               child: SizedBox(
                 width: 50,
                 height: 50,
-                child: CircularProgressIndicator(
+                child: SpinKitPulse(
                   color: FlutterFlowTheme.primaryColor,
+                  size: 50,
                 ),
               ),
             )
           : currentUser.loggedIn
               ? HomePageWidget()
-              : LoginPageWidget(),
+              : TopPageWidget(),
     );
   }
 }
