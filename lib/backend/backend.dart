@@ -9,6 +9,7 @@ import 'schema/info_admin_record.dart';
 import 'schema/users_record.dart';
 import 'schema/cat_dd_record.dart';
 import 'schema/contents_record.dart';
+import 'schema/email_members_record.dart';
 import 'schema/serializers.dart';
 
 export 'package:cloud_firestore/cloud_firestore.dart';
@@ -20,6 +21,7 @@ export 'schema/info_admin_record.dart';
 export 'schema/users_record.dart';
 export 'schema/cat_dd_record.dart';
 export 'schema/contents_record.dart';
+export 'schema/email_members_record.dart';
 
 Stream<List<CategoriesRecord>> queryCategoriesRecord(
         {Query Function(Query) queryBuilder,
@@ -54,6 +56,14 @@ Stream<List<ContentsRecord>> queryContentsRecord(
         int limit = -1,
         bool singleRecord = false}) =>
     queryCollection(ContentsRecord.collection, ContentsRecord.serializer,
+        queryBuilder: queryBuilder, limit: limit, singleRecord: singleRecord);
+
+Stream<List<EmailMembersRecord>> queryEmailMembersRecord(
+        {Query Function(Query) queryBuilder,
+        int limit = -1,
+        bool singleRecord = false}) =>
+    queryCollection(
+        EmailMembersRecord.collection, EmailMembersRecord.serializer,
         queryBuilder: queryBuilder, limit: limit, singleRecord: singleRecord);
 
 Stream<List<T>> queryCollection<T>(

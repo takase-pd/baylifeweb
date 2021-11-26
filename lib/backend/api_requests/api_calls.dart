@@ -24,25 +24,25 @@ Future<dynamic> registContentsCall({
   final body = '''
 {
   "data": {
-    "catName": "$catName",
-    "catNameAdd": "$catNameAdd",
-    "title": "$title",
-    "overview": "$overview",
-    "detail": "$detail",
-    "organizer": "$organizer",
-    "contact": "$contact",
-    "homepage": "$homepage",
-    "postName": "$postName",
-    "postEmail": "$postEmail",
-    "postPhone": "$postPhone",
-    "postOccupation": "$postOccupation",
-    "permission": $permission,
-    "address": "$address",
-    "startDay": "$startDay",
-    "finalDay": "$finalDay",
-    "filePath": "$filePath",
-    "postRemarks": "$postRemarks",
-    "uid": "$uid"
+    "catName": "${catName}",
+    "catNameAdd": "${catNameAdd}",
+    "title": "${title}",
+    "overview": "${overview}",
+    "detail": "${detail}",
+    "organizer": "${organizer}",
+    "contact": "${contact}",
+    "homepage": "${homepage}",
+    "postName": "${postName}",
+    "postEmail": "${postEmail}",
+    "postPhone": "${postPhone}",
+    "postOccupation": "${postOccupation}",
+    "permission": ${permission},
+    "address": "${address}",
+    "startDay": "${startDay}",
+    "finalDay": "${finalDay}",
+    "filePath": "${filePath}",
+    "postRemarks": "${postRemarks}",
+    "uid": "${uid}"
   }
 }''';
   return ApiManager.instance.makeApiCall(
@@ -72,6 +72,82 @@ Future<dynamic> registContentsCall({
       'postRemarks': postRemarks,
       'uid': uid,
       'filePath': filePath,
+    },
+    body: body,
+    bodyType: BodyType.JSON,
+    returnResponse: true,
+  );
+}
+
+Future<dynamic> getPlanCall() {
+  final body = '''
+{
+  "data": {}
+}''';
+  return ApiManager.instance.makeApiCall(
+    callName: 'GetPlan',
+    apiUrl: 'https://asia-northeast1-baylifedev.cloudfunctions.net/getPlanV0',
+    callType: ApiCallType.POST,
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    params: {},
+    body: body,
+    bodyType: BodyType.JSON,
+    returnResponse: true,
+  );
+}
+
+Future<dynamic> subscribeCall({
+  String priceId = '',
+  String url = 'https://baylifedev.web.app/',
+  String uid = '',
+}) {
+  final body = '''
+{
+  "data": {
+    "priceId": "${priceId}",
+    "url": "${url}",
+    "uid": "${uid}"
+  }
+}''';
+  return ApiManager.instance.makeApiCall(
+    callName: 'Subscribe',
+    apiUrl: 'https://asia-northeast1-baylifedev.cloudfunctions.net/subscribeV0',
+    callType: ApiCallType.POST,
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    params: {
+      'priceId': priceId,
+      'url': url,
+      'uid': uid,
+    },
+    body: body,
+    bodyType: BodyType.JSON,
+    returnResponse: true,
+  );
+}
+
+Future<dynamic> getSubscriptionCall({
+  String uid = '',
+}) {
+  final body = '''
+{
+  "data": {
+    "uid": "${uid}"
+  }
+}''';
+  return ApiManager.instance.makeApiCall(
+    callName: 'Get Subscription',
+    apiUrl:
+        'https://asia-northeast1-baylifedev.cloudfunctions.net/getSubscriptionsV0',
+    callType: ApiCallType.POST,
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    params: {
+      'uid': uid,
     },
     body: body,
     bodyType: BodyType.JSON,
