@@ -47,7 +47,8 @@ Future<dynamic> registContentsCall({
 }''';
   return ApiManager.instance.makeApiCall(
     callName: 'Regist Contents',
-    apiUrl: 'https://asia-northeast1-baylife-ff782.cloudfunctions.net/sendMailV1',
+    apiUrl:
+        'https://asia-northeast1-baylife-ff782.cloudfunctions.net/sendMailV1',
     callType: ApiCallType.POST,
     headers: {
       'Content-Type': 'application/json',
@@ -86,7 +87,8 @@ Future<dynamic> getPlanCall() {
 }''';
   return ApiManager.instance.makeApiCall(
     callName: 'GetPlan',
-    apiUrl: 'https://asia-northeast1-baylifedev.cloudfunctions.net/getPlanV0',
+    apiUrl:
+        'https://asia-northeast1-baylife-ff782.cloudfunctions.net/getPlanV0',
     callType: ApiCallType.POST,
     headers: {
       'Content-Type': 'application/json',
@@ -100,7 +102,7 @@ Future<dynamic> getPlanCall() {
 
 Future<dynamic> subscribeCall({
   String priceId = '',
-  String url = 'https://baylifedev.web.app/',
+  String url = 'https://baylife-web-dev.web.app/',
   String uid = '',
 }) {
   final body = '''
@@ -113,7 +115,8 @@ Future<dynamic> subscribeCall({
 }''';
   return ApiManager.instance.makeApiCall(
     callName: 'Subscribe',
-    apiUrl: 'https://asia-northeast1-baylifedev.cloudfunctions.net/subscribeV0',
+    apiUrl:
+        'https://asia-northeast1-baylife-ff782.cloudfunctions.net/subscribeV0',
     callType: ApiCallType.POST,
     headers: {
       'Content-Type': 'application/json',
@@ -141,7 +144,7 @@ Future<dynamic> getSubscriptionCall({
   return ApiManager.instance.makeApiCall(
     callName: 'Get Subscription',
     apiUrl:
-        'https://asia-northeast1-baylifedev.cloudfunctions.net/getSubscriptionsV0',
+        'https://asia-northeast1-baylife-ff782.cloudfunctions.net/getSubscriptionsV0',
     callType: ApiCallType.POST,
     headers: {
       'Content-Type': 'application/json',

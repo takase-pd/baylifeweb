@@ -360,7 +360,8 @@ class _CreateAccountPageWidgetState extends State<CreateAccountPageWidget> {
                                         }
                                         subs = await subscribeCall(
                                           priceId: widget.priceId,
-                                          url: 'http://baylifedev.web.app/',
+                                          url:
+                                              'https://baylife-web-dev.web.app/',
                                           uid: currentUserUid,
                                         );
                                         final sessionId = getJsonField(
