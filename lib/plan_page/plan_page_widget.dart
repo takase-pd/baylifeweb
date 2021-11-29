@@ -89,7 +89,7 @@ class _PlanPageWidgetState extends State<PlanPageWidget> {
                       Padding(
                         padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 8),
                         child: Text(
-                          '2. ${getJsonField(widget.plans, r'''$.result.plans[2].name''').toString()}',
+                          '2. ${getJsonField(widget.plans, r'''$.result.plans[1].name''').toString()}',
                           textAlign: TextAlign.start,
                           style: FlutterFlowTheme.subtitle1.override(
                             fontFamily: 'Open Sans',
@@ -100,7 +100,7 @@ class _PlanPageWidgetState extends State<PlanPageWidget> {
                       Padding(
                         padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 8),
                         child: Text(
-                          '3. ${getJsonField(widget.plans, r'''$.result.plans[1].name''').toString()}',
+                          '3. ${getJsonField(widget.plans, r'''$.result.plans[3].name''').toString()}',
                           textAlign: TextAlign.start,
                           style: FlutterFlowTheme.subtitle1.override(
                             fontFamily: 'Open Sans',
@@ -111,7 +111,7 @@ class _PlanPageWidgetState extends State<PlanPageWidget> {
                       Padding(
                         padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 8),
                         child: Text(
-                          '4. ${getJsonField(widget.plans, r'''$.result.plans[3].name''').toString()}',
+                          '4. ${getJsonField(widget.plans, r'''$.result.plans[2].name''').toString()}',
                           textAlign: TextAlign.start,
                           style: FlutterFlowTheme.subtitle1.override(
                             fontFamily: 'Open Sans',
@@ -580,7 +580,7 @@ class _PlanPageWidgetState extends State<PlanPageWidget> {
                   Padding(
                     padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 16),
                     child: Text(
-                      getJsonField(widget.plans, r'''$.result.plans[2].name''')
+                      getJsonField(widget.plans, r'''$.result.plans[1].name''')
                           .toString(),
                       textAlign: TextAlign.center,
                       style: FlutterFlowTheme.title2.override(
@@ -693,7 +693,7 @@ class _PlanPageWidgetState extends State<PlanPageWidget> {
                   Padding(
                     padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 16),
                     child: Text(
-                      getJsonField(widget.plans, r'''$.result.plans[1].name''')
+                      getJsonField(widget.plans, r'''$.result.plans[3].name''')
                           .toString(),
                       textAlign: TextAlign.center,
                       style: FlutterFlowTheme.title2.override(
@@ -737,7 +737,7 @@ class _PlanPageWidgetState extends State<PlanPageWidget> {
                             MaterialPageRoute(
                               builder: (context) => CreateAccountPageWidget(
                                 priceId: getJsonField(widget.plans,
-                                        r'''$.result.plans[1].prices[0].priceId''')
+                                        r'''$.result.plans[3].prices[0].priceId''')
                                     .toString(),
                               ),
                             ),
@@ -766,7 +766,7 @@ class _PlanPageWidgetState extends State<PlanPageWidget> {
                                 children: [
                                   Text(
                                     getJsonField(widget.plans,
-                                            r'''$.result.plans[1].prices[0].description''')
+                                            r'''$.result.plans[3].prices[0].description''')
                                         .toString(),
                                     style: FlutterFlowTheme.subtitle1,
                                   ),
@@ -784,7 +784,7 @@ class _PlanPageWidgetState extends State<PlanPageWidget> {
                                         children: [
                                           Text(
                                             getJsonField(widget.plans,
-                                                    r'''$.result.plans[1].prices[0].intervalCount''')
+                                                    r'''$.result.plans[3].prices[0].intervalCount''')
                                                 .toString(),
                                             style: FlutterFlowTheme.bodyText1,
                                           ),
@@ -795,7 +795,7 @@ class _PlanPageWidgetState extends State<PlanPageWidget> {
                                             child: Text(
                                               functions.getInterval(getJsonField(
                                                       widget.plans,
-                                                      r'''$.result.plans[1].prices[0].interval''')
+                                                      r'''$.result.plans[3].prices[0].interval''')
                                                   .toString()),
                                               style: FlutterFlowTheme.bodyText1,
                                             ),
@@ -821,10 +821,10 @@ class _PlanPageWidgetState extends State<PlanPageWidget> {
                                           Text(
                                             functions.getUnitAmount(
                                                 getJsonField(widget.plans,
-                                                        r'''$.result.plans[1].prices[0].unitAmount''')
+                                                        r'''$.result.plans[3].prices[0].unitAmount''')
                                                     .toString(),
                                                 getJsonField(widget.plans,
-                                                        r'''$.result.plans[1].prices[0].interval''')
+                                                        r'''$.result.plans[3].prices[0].interval''')
                                                     .toString()),
                                             style: FlutterFlowTheme.bodyText1,
                                           ),
@@ -835,7 +835,7 @@ class _PlanPageWidgetState extends State<PlanPageWidget> {
                                             child: Text(
                                               functions.getUnitCurrency(
                                                   getJsonField(widget.plans,
-                                                          r'''$.result.plans[1].prices[0].currency''')
+                                                          r'''$.result.plans[3].prices[0].currency''')
                                                       .toString()),
                                               style: FlutterFlowTheme.bodyText1,
                                             ),
@@ -866,7 +866,7 @@ class _PlanPageWidgetState extends State<PlanPageWidget> {
                   Padding(
                     padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 16),
                     child: Text(
-                      getJsonField(widget.plans, r'''$.result.plans[3].name''')
+                      getJsonField(widget.plans, r'''$.result.plans[2].name''')
                           .toString(),
                       textAlign: TextAlign.center,
                       style: FlutterFlowTheme.title2.override(
