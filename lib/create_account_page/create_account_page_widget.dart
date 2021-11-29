@@ -218,7 +218,7 @@ class _CreateAccountPageWidgetState extends State<CreateAccountPageWidget> {
                             InkWell(
                               onTap: () async {
                                 await launchURL(
-                                    'https://baylife-ff782.web.app/terms.html');
+                                    'https://baylife.particledrawing.com/terms.html');
                               },
                               child: Text(
                                 '利用規約',
@@ -232,7 +232,7 @@ class _CreateAccountPageWidgetState extends State<CreateAccountPageWidget> {
                               child: InkWell(
                                 onTap: () async {
                                   await launchURL(
-                                      'https://baylife-ff782.web.app/terms.html');
+                                      'https://baylife.particledrawing.com/terms.html');
                                 },
                                 child: FaIcon(
                                   FontAwesomeIcons.externalLinkAlt,
@@ -297,7 +297,7 @@ class _CreateAccountPageWidgetState extends State<CreateAccountPageWidget> {
 
                               subs = await subscribeCall(
                                 priceId: widget.priceId,
-                                url: 'https://baylifedev.web.app/',
+                                url: 'https://baylife.particledrawing.com/',
                                 uid: currentUserUid,
                               );
                               final sessionId =
@@ -361,7 +361,7 @@ class _CreateAccountPageWidgetState extends State<CreateAccountPageWidget> {
                                         subs = await subscribeCall(
                                           priceId: widget.priceId,
                                           url:
-                                              'https://baylife-web-dev.web.app/',
+                                              'https://baylife.particledrawing.com/',
                                           uid: currentUserUid,
                                         );
                                         final sessionId = getJsonField(
@@ -428,7 +428,7 @@ class _CreateAccountPageWidgetState extends State<CreateAccountPageWidget> {
                       InkWell(
                         onTap: () async {
                           await launchURL(
-                              'https://baylife-ff782.web.app/terms.html');
+                              'https://baylife.particledrawing.com/terms.html');
                         },
                         child: Text(
                           '利用規約',

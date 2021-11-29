@@ -1959,7 +1959,7 @@ class _PostPageWidgetState extends State<PostPageWidget> {
                                       InkWell(
                                         onTap: () async {
                                           await launchURL(
-                                              'https://baylife-ff782.web.app/terms.html');
+                                              'https://baylife.particledrawing.com/terms.html');
                                         },
                                         child: Text(
                                           '＊利用規約に従い投稿します。',
