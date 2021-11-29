@@ -102,7 +102,7 @@ Future<dynamic> getPlanCall() {
 
 Future<dynamic> subscribeCall({
   String priceId = '',
-  String url = 'https://baylife-web-dev.web.app/',
+  String url = 'https://baylife.particledrawing.com/',
   String uid = '',
 }) {
   final body = '''

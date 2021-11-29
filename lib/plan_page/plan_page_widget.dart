@@ -205,7 +205,7 @@ class _PlanPageWidgetState extends State<PlanPageWidget> {
                               InkWell(
                                 onTap: () async {
                                   await launchURL(
-                                      'https://baylife-ff782.web.app/terms.html');
+                                      'https://baylife.particledrawing.com/terms.html');
                                 },
                                 child: Text(
                                   '利用規約',
@@ -219,7 +219,7 @@ class _PlanPageWidgetState extends State<PlanPageWidget> {
                                 child: InkWell(
                                   onTap: () async {
                                     await launchURL(
-                                        'https://baylife-ff782.web.app/terms.html');
+                                        'https://baylife.particledrawing.com/terms.html');
                                   },
                                   child: FaIcon(
                                     FontAwesomeIcons.externalLinkAlt,
