@@ -5,7 +5,7 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class TopPageFooterWidget extends StatefulWidget {
-  TopPageFooterWidget({Key key}) : super(key: key);
+  const TopPageFooterWidget({Key key}) : super(key: key);
 
   @override
   _TopPageFooterWidgetState createState() => _TopPageFooterWidgetState();
@@ -74,9 +74,15 @@ class _TopPageFooterWidgetState extends State<TopPageFooterWidget> {
                                 Padding(
                                   padding: EdgeInsetsDirectional.fromSTEB(
                                       0, 0, 0, 16),
-                                  child: Text(
-                                    '事例',
-                                    style: FlutterFlowTheme.bodyText1,
+                                  child: InkWell(
+                                    onTap: () async {
+                                      await launchURL(
+                                          'https://particledrawing.notion.site/Use-Case-a8f406da8ffc44ab991a371c1596297b');
+                                    },
+                                    child: Text(
+                                      '利用例',
+                                      style: FlutterFlowTheme.bodyText1,
+                                    ),
                                   ),
                                 )
                               ],
@@ -114,7 +120,7 @@ class _TopPageFooterWidgetState extends State<TopPageFooterWidget> {
                                   child: InkWell(
                                     onTap: () async {
                                       await launchURL(
-                                          'Cg1UZXh0X2lxdjhta2IwGAIiHRINCgnjg5fjg6njg7NABloJIQAAAAAAADBAiAMCYgA=');
+                                          'https://particledrawing.notion.site/What-s-New-ce7fec05daa640a49f38e9cb29583901');
                                     },
                                     child: Text(
                                       'What\'s New?',

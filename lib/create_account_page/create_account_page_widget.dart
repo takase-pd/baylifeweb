@@ -12,7 +12,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class CreateAccountPageWidget extends StatefulWidget {
-  CreateAccountPageWidget({
+  const CreateAccountPageWidget({
     Key key,
     this.priceId,
   }) : super(key: key);

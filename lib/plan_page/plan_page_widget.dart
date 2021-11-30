@@ -10,7 +10,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class PlanPageWidget extends StatefulWidget {
-  PlanPageWidget({
+  const PlanPageWidget({
     Key key,
     this.plans,
   }) : super(key: key);
