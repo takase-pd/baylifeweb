@@ -4,7 +4,6 @@ import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
 import '../home_page/home_page_widget.dart';
-import '../top_page/top_page_widget.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
@@ -66,12 +65,8 @@ class _CreateSpecialAccountPageWidgetState
                     children: [
                       InkWell(
                         onTap: () async {
-                          await Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => TopPageWidget(),
-                            ),
-                          );
+                          await launchURL(
+                              'https://baylife.particledrawing.com/');
                         },
                         child: Text(
                           'MAKUHARI Bay Life',
