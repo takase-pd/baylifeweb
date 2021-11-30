@@ -402,7 +402,7 @@ class _TopPageWidgetState extends State<TopPageWidget> {
                               ),
                               Padding(
                                 padding:
-                                    EdgeInsetsDirectional.fromSTEB(0, 0, 0, 16),
+                                    EdgeInsetsDirectional.fromSTEB(0, 0, 0, 32),
                                 child: Text(
                                   '住民に投稿を見てもらうアプリ',
                                   style: FlutterFlowTheme.subtitle1,
@@ -410,7 +410,7 @@ class _TopPageWidgetState extends State<TopPageWidget> {
                               ),
                               Padding(
                                 padding:
-                                    EdgeInsetsDirectional.fromSTEB(0, 0, 0, 16),
+                                    EdgeInsetsDirectional.fromSTEB(0, 0, 0, 32),
                                 child: ClipRRect(
                                   borderRadius: BorderRadius.circular(5),
                                   child: Image.asset(
