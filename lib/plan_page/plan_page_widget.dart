@@ -14,7 +14,7 @@ const apiKey =
     'pk_test_51ITgUwGe7bJktEzT6F1RcOf7aH2lrjK1jlIne0tpyoWXbdxAa0GpTBjyJp1CIn4EElYQFA7T39wLpRzdBlBCj1zg00TPUJYvsl';
 
 class PlanPageWidget extends StatefulWidget {
-  PlanPageWidget({
+  const PlanPageWidget({
     Key key,
     this.plans,
   }) : super(key: key);

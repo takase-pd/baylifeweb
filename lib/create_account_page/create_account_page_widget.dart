@@ -13,7 +13,7 @@ import 'package:google_fonts/google_fonts.dart';
 import '../backend/stripe/stripe_checkout.dart';
 
 class CreateAccountPageWidget extends StatefulWidget {
-  CreateAccountPageWidget({
+  const CreateAccountPageWidget({
     Key key,
     this.priceId,
   }) : super(key: key);

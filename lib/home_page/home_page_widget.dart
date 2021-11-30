@@ -10,7 +10,7 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class HomePageWidget extends StatefulWidget {
-  HomePageWidget({
+  const HomePageWidget({
     Key key,
     this.subscription,
   }) : super(key: key);
