@@ -209,7 +209,7 @@ class _TopPageWidgetState extends State<TopPageWidget> {
                         Padding(
                           padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 24),
                           child: Text(
-                            'MAKUHARI Bay Life は、幕張ベイタウン・ベイパーク地区に特化した情報を発信できる場所です。',
+                            'MAKUHARI Bay Life は、幕張ベイタウン・ベイパーク地区に特化した情報＊を発信できる場所です。',
                             style: FlutterFlowTheme.bodyText1,
                           ),
                         ),
@@ -220,8 +220,15 @@ class _TopPageWidgetState extends State<TopPageWidget> {
                             style: FlutterFlowTheme.bodyText1,
                           ),
                         ),
+                        Padding(
+                          padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 24),
+                          child: Text(
+                            '情報を持つ人が発信しやすい環境を整えること、価値のある情報にアクセスしやすくすることを実現します。',
+                            style: FlutterFlowTheme.bodyText1,
+                          ),
+                        ),
                         Text(
-                          '情報を持つ人が発信しやすい環境を整えること、価値のある情報にアクセスしやすくすることを実現します。',
+                          '＊この地区の住民に役立つ情報であれば、開催場所等は地区外でも投稿いただけます。',
                           style: FlutterFlowTheme.bodyText1,
                         )
                       ],
@@ -399,6 +406,19 @@ class _TopPageWidgetState extends State<TopPageWidget> {
                                 child: Text(
                                   '住民に投稿を見てもらうアプリ',
                                   style: FlutterFlowTheme.subtitle1,
+                                ),
+                              ),
+                              Padding(
+                                padding:
+                                    EdgeInsetsDirectional.fromSTEB(0, 0, 0, 16),
+                                child: ClipRRect(
+                                  borderRadius: BorderRadius.circular(5),
+                                  child: Image.asset(
+                                    'assets/images/BayLifeIcon_v1.png',
+                                    width: 128,
+                                    height: 128,
+                                    fit: BoxFit.cover,
+                                  ),
                                 ),
                               ),
                               Padding(
