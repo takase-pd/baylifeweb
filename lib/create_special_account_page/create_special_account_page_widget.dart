@@ -1,9 +1,10 @@
 import '../auth/auth_util.dart';
-import '../components/top_page_header_widget.dart';
+import '../components/header_widget.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
 import '../home_page/home_page_widget.dart';
+import '../top_page/top_page_widget.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
@@ -49,7 +50,40 @@ class _CreateSpecialAccountPageWidgetState
         child: AppBar(
           backgroundColor: Colors.transparent,
           automaticallyImplyLeading: false,
-          flexibleSpace: TopPageHeaderWidget(),
+          flexibleSpace: Container(
+            width: double.infinity,
+            height: 80,
+            decoration: BoxDecoration(),
+            child: Column(
+              mainAxisSize: MainAxisSize.max,
+              children: [
+                HeaderWidget(),
+                Padding(
+                  padding: EdgeInsetsDirectional.fromSTEB(10, 10, 10, 10),
+                  child: Row(
+                    mainAxisSize: MainAxisSize.max,
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      InkWell(
+                        onTap: () async {
+                          await Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => TopPageWidget(),
+                            ),
+                          );
+                        },
+                        child: Text(
+                          'MAKUHARI Bay Life',
+                          style: FlutterFlowTheme.subtitle1,
+                        ),
+                      )
+                    ],
+                  ),
+                )
+              ],
+            ),
+          ),
           actions: [],
           elevation: 0,
         ),
