@@ -25,7 +25,6 @@ class _CreateSpecialAccountPageWidgetState
   bool passwordVisibility;
   bool _loadingButton1 = false;
   bool _loadingButton2 = false;
-  bool _loadingButton3 = false;
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
@@ -433,35 +432,6 @@ class _CreateSpecialAccountPageWidgetState
                               ],
                             ),
                           ),
-                        ),
-                      ),
-                      Padding(
-                        padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 24),
-                        child: FFButtonWidget(
-                          onPressed: () async {
-                            setState(() => _loadingButton3 = true);
-                            try {
-                              await sendEmailVerification();
-                            } finally {
-                              setState(() => _loadingButton3 = false);
-                            }
-                          },
-                          text: 'emailVerify',
-                          options: FFButtonOptions(
-                            width: 240,
-                            height: 60,
-                            color: FlutterFlowTheme.secondaryColor,
-                            textStyle: FlutterFlowTheme.subtitle2.override(
-                              fontFamily: 'Open Sans',
-                              color: FlutterFlowTheme.textLight,
-                            ),
-                            borderSide: BorderSide(
-                              color: Colors.transparent,
-                              width: 1,
-                            ),
-                            borderRadius: 12,
-                          ),
-                          loading: _loadingButton3,
                         ),
                       )
                     ],
