@@ -387,7 +387,7 @@ class _PlanPageWidgetState extends State<PlanPageWidget> {
                                             style: FlutterFlowTheme.bodyText1
                                                 .override(
                                               fontFamily: 'Open Sans',
-                                              fontWeight: FontWeight.w500,
+                                              fontWeight: FontWeight.w600,
                                             ),
                                           ),
                                           Padding(
@@ -439,7 +439,7 @@ class _PlanPageWidgetState extends State<PlanPageWidget> {
                                             style: FlutterFlowTheme.bodyText1
                                                 .override(
                                               fontFamily: 'Open Sans',
-                                              fontWeight: FontWeight.w500,
+                                              fontWeight: FontWeight.w600,
                                             ),
                                           ),
                                           Padding(
@@ -537,7 +537,7 @@ class _PlanPageWidgetState extends State<PlanPageWidget> {
                                               style: FlutterFlowTheme.bodyText1
                                                   .override(
                                                 fontFamily: 'Open Sans',
-                                                fontWeight: FontWeight.w500,
+                                                fontWeight: FontWeight.w600,
                                               ),
                                             ),
                                             Padding(
@@ -589,7 +589,7 @@ class _PlanPageWidgetState extends State<PlanPageWidget> {
                                               style: FlutterFlowTheme.bodyText1
                                                   .override(
                                                 fontFamily: 'Open Sans',
-                                                fontWeight: FontWeight.w500,
+                                                fontWeight: FontWeight.w600,
                                               ),
                                             ),
                                             Padding(
@@ -851,7 +851,7 @@ class _PlanPageWidgetState extends State<PlanPageWidget> {
                                             style: FlutterFlowTheme.bodyText1
                                                 .override(
                                               fontFamily: 'Open Sans',
-                                              fontWeight: FontWeight.w500,
+                                              fontWeight: FontWeight.w600,
                                             ),
                                           ),
                                           Padding(
@@ -903,7 +903,7 @@ class _PlanPageWidgetState extends State<PlanPageWidget> {
                                             style: FlutterFlowTheme.bodyText1
                                                 .override(
                                               fontFamily: 'Open Sans',
-                                              fontWeight: FontWeight.w500,
+                                              fontWeight: FontWeight.w600,
                                             ),
                                           ),
                                           Padding(
