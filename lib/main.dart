@@ -8,10 +8,14 @@ import 'auth/auth_util.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import 'package:bay_life_web/top_page/top_page_widget.dart';
 import 'package:bay_life_web/home_page/home_page_widget.dart';
+import 'package:bay_life_web/create_special_account_page/create_special_account_page_widget.dart';
 import 'flutter_flow/flutter_flow_theme.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 
+import 'package:flutter_web_plugins/flutter_web_plugins.dart';
+
 void main() async {
+  setUrlStrategy(PathUrlStrategy());
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
   runApp(MyApp());
@@ -53,6 +57,9 @@ class _MyAppState extends State<MyApp> {
       ],
       supportedLocales: const [Locale('en', '')],
       theme: ThemeData(primarySwatch: Colors.blue),
+      routes: {
+        '/special': (context) => CreateSpecialAccountPageWidget(),
+      },
       home: initialUser == null
           ? const Center(
               child: SizedBox(

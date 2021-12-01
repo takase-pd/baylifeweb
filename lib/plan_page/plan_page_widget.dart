@@ -14,7 +14,7 @@ const apiKey =
     'pk_test_51ITgUwGe7bJktEzT6F1RcOf7aH2lrjK1jlIne0tpyoWXbdxAa0GpTBjyJp1CIn4EElYQFA7T39wLpRzdBlBCj1zg00TPUJYvsl';
 
 class PlanPageWidget extends StatefulWidget {
-  PlanPageWidget({
+  const PlanPageWidget({
     Key key,
     this.plans,
   }) : super(key: key);
@@ -173,7 +173,10 @@ class _PlanPageWidgetState extends State<PlanPageWidget> {
                                   child: Text(
                                     'stripe',
                                     textAlign: TextAlign.start,
-                                    style: FlutterFlowTheme.bodyText1,
+                                    style: FlutterFlowTheme.bodyText1.override(
+                                      fontFamily: 'Open Sans',
+                                      color: FlutterFlowTheme.pDark,
+                                    ),
                                   ),
                                 ),
                                 Padding(
@@ -185,7 +188,7 @@ class _PlanPageWidgetState extends State<PlanPageWidget> {
                                     },
                                     child: FaIcon(
                                       FontAwesomeIcons.externalLinkAlt,
-                                      color: FlutterFlowTheme.textDark,
+                                      color: FlutterFlowTheme.pDark,
                                       size: 16,
                                     ),
                                   ),
@@ -210,7 +213,10 @@ class _PlanPageWidgetState extends State<PlanPageWidget> {
                                 child: Text(
                                   '利用規約',
                                   textAlign: TextAlign.start,
-                                  style: FlutterFlowTheme.bodyText1,
+                                  style: FlutterFlowTheme.bodyText1.override(
+                                    fontFamily: 'Open Sans',
+                                    color: FlutterFlowTheme.pDark,
+                                  ),
                                 ),
                               ),
                               Padding(
@@ -223,7 +229,7 @@ class _PlanPageWidgetState extends State<PlanPageWidget> {
                                   },
                                   child: FaIcon(
                                     FontAwesomeIcons.externalLinkAlt,
-                                    color: FlutterFlowTheme.textDark,
+                                    color: FlutterFlowTheme.pDark,
                                     size: 16,
                                   ),
                                 ),
@@ -241,7 +247,10 @@ class _PlanPageWidgetState extends State<PlanPageWidget> {
                                 child: Text(
                                   'プライバシーポリシー',
                                   textAlign: TextAlign.start,
-                                  style: FlutterFlowTheme.bodyText1,
+                                  style: FlutterFlowTheme.bodyText1.override(
+                                    fontFamily: 'Open Sans',
+                                    color: FlutterFlowTheme.pDark,
+                                  ),
                                 ),
                               ),
                               Padding(
@@ -254,7 +263,7 @@ class _PlanPageWidgetState extends State<PlanPageWidget> {
                                   },
                                   child: FaIcon(
                                     FontAwesomeIcons.externalLinkAlt,
-                                    color: FlutterFlowTheme.textDark,
+                                    color: FlutterFlowTheme.pDark,
                                     size: 16,
                                   ),
                                 ),
@@ -348,7 +357,7 @@ class _PlanPageWidgetState extends State<PlanPageWidget> {
                             ),
                             child: Padding(
                               padding: EdgeInsetsDirectional.fromSTEB(
-                                  30, 30, 30, 30),
+                                  40, 30, 40, 30),
                               child: Column(
                                 mainAxisSize: MainAxisSize.max,
                                 mainAxisAlignment:
@@ -359,7 +368,10 @@ class _PlanPageWidgetState extends State<PlanPageWidget> {
                                     getJsonField(widget.plans,
                                             r'''$.result.plans[0].prices[0].description''')
                                         .toString(),
-                                    style: FlutterFlowTheme.subtitle1,
+                                    style: FlutterFlowTheme.subtitle1.override(
+                                      fontFamily: 'Open Sans',
+                                      fontWeight: FontWeight.w600,
+                                    ),
                                   ),
                                   Row(
                                     mainAxisSize: MainAxisSize.max,
@@ -368,7 +380,11 @@ class _PlanPageWidgetState extends State<PlanPageWidget> {
                                     children: [
                                       Text(
                                         '利用期間',
-                                        style: FlutterFlowTheme.bodyText1,
+                                        style:
+                                            FlutterFlowTheme.bodyText1.override(
+                                          fontFamily: 'Open Sans',
+                                          fontWeight: FontWeight.w600,
+                                        ),
                                       ),
                                       Row(
                                         mainAxisSize: MainAxisSize.max,
@@ -377,7 +393,11 @@ class _PlanPageWidgetState extends State<PlanPageWidget> {
                                             getJsonField(widget.plans,
                                                     r'''$.result.plans[0].prices[0].intervalCount''')
                                                 .toString(),
-                                            style: FlutterFlowTheme.bodyText1,
+                                            style: FlutterFlowTheme.bodyText1
+                                                .override(
+                                              fontFamily: 'Open Sans',
+                                              fontWeight: FontWeight.w600,
+                                            ),
                                           ),
                                           Padding(
                                             padding:
@@ -388,7 +408,11 @@ class _PlanPageWidgetState extends State<PlanPageWidget> {
                                                       widget.plans,
                                                       r'''$.result.plans[0].prices[0].interval''')
                                                   .toString()),
-                                              style: FlutterFlowTheme.bodyText1,
+                                              style: FlutterFlowTheme.bodyText1
+                                                  .override(
+                                                fontFamily: 'Open Sans',
+                                                fontWeight: FontWeight.w600,
+                                              ),
                                             ),
                                           )
                                         ],
@@ -402,7 +426,11 @@ class _PlanPageWidgetState extends State<PlanPageWidget> {
                                     children: [
                                       Text(
                                         '月額',
-                                        style: FlutterFlowTheme.bodyText1,
+                                        style:
+                                            FlutterFlowTheme.bodyText1.override(
+                                          fontFamily: 'Open Sans',
+                                          fontWeight: FontWeight.w600,
+                                        ),
                                       ),
                                       Row(
                                         mainAxisSize: MainAxisSize.max,
@@ -417,7 +445,11 @@ class _PlanPageWidgetState extends State<PlanPageWidget> {
                                                 getJsonField(widget.plans,
                                                         r'''$.result.plans[0].prices[0].interval''')
                                                     .toString()),
-                                            style: FlutterFlowTheme.bodyText1,
+                                            style: FlutterFlowTheme.bodyText1
+                                                .override(
+                                              fontFamily: 'Open Sans',
+                                              fontWeight: FontWeight.w600,
+                                            ),
                                           ),
                                           Padding(
                                             padding:
@@ -428,7 +460,11 @@ class _PlanPageWidgetState extends State<PlanPageWidget> {
                                                   getJsonField(widget.plans,
                                                           r'''$.result.plans[0].prices[0].currency''')
                                                       .toString()),
-                                              style: FlutterFlowTheme.bodyText1,
+                                              style: FlutterFlowTheme.bodyText1
+                                                  .override(
+                                                fontFamily: 'Open Sans',
+                                                fontWeight: FontWeight.w600,
+                                              ),
                                             ),
                                           )
                                         ],
@@ -470,7 +506,7 @@ class _PlanPageWidgetState extends State<PlanPageWidget> {
                               ),
                               child: Padding(
                                 padding: EdgeInsetsDirectional.fromSTEB(
-                                    30, 30, 30, 30),
+                                    40, 30, 40, 30),
                                 child: Column(
                                   mainAxisSize: MainAxisSize.max,
                                   mainAxisAlignment:
@@ -481,7 +517,11 @@ class _PlanPageWidgetState extends State<PlanPageWidget> {
                                       getJsonField(widget.plans,
                                               r'''$.result.plans[0].prices[1].description''')
                                           .toString(),
-                                      style: FlutterFlowTheme.subtitle1,
+                                      style:
+                                          FlutterFlowTheme.subtitle1.override(
+                                        fontFamily: 'Open Sans',
+                                        fontWeight: FontWeight.w600,
+                                      ),
                                     ),
                                     Row(
                                       mainAxisSize: MainAxisSize.max,
@@ -490,7 +530,11 @@ class _PlanPageWidgetState extends State<PlanPageWidget> {
                                       children: [
                                         Text(
                                           '利用期間',
-                                          style: FlutterFlowTheme.bodyText1,
+                                          style: FlutterFlowTheme.bodyText1
+                                              .override(
+                                            fontFamily: 'Open Sans',
+                                            fontWeight: FontWeight.w600,
+                                          ),
                                         ),
                                         Row(
                                           mainAxisSize: MainAxisSize.max,
@@ -499,7 +543,11 @@ class _PlanPageWidgetState extends State<PlanPageWidget> {
                                               getJsonField(widget.plans,
                                                       r'''$.result.plans[0].prices[1].intervalCount''')
                                                   .toString(),
-                                              style: FlutterFlowTheme.bodyText1,
+                                              style: FlutterFlowTheme.bodyText1
+                                                  .override(
+                                                fontFamily: 'Open Sans',
+                                                fontWeight: FontWeight.w600,
+                                              ),
                                             ),
                                             Padding(
                                               padding: EdgeInsetsDirectional
@@ -509,8 +557,12 @@ class _PlanPageWidgetState extends State<PlanPageWidget> {
                                                         widget.plans,
                                                         r'''$.result.plans[0].prices[1].interval''')
                                                     .toString()),
-                                                style:
-                                                    FlutterFlowTheme.bodyText1,
+                                                style: FlutterFlowTheme
+                                                    .bodyText1
+                                                    .override(
+                                                  fontFamily: 'Open Sans',
+                                                  fontWeight: FontWeight.w600,
+                                                ),
                                               ),
                                             )
                                           ],
@@ -524,7 +576,11 @@ class _PlanPageWidgetState extends State<PlanPageWidget> {
                                       children: [
                                         Text(
                                           '月額',
-                                          style: FlutterFlowTheme.bodyText1,
+                                          style: FlutterFlowTheme.bodyText1
+                                              .override(
+                                            fontFamily: 'Open Sans',
+                                            fontWeight: FontWeight.w600,
+                                          ),
                                         ),
                                         Row(
                                           mainAxisSize: MainAxisSize.max,
@@ -539,7 +595,11 @@ class _PlanPageWidgetState extends State<PlanPageWidget> {
                                                   getJsonField(widget.plans,
                                                           r'''$.result.plans[0].prices[1].interval''')
                                                       .toString()),
-                                              style: FlutterFlowTheme.bodyText1,
+                                              style: FlutterFlowTheme.bodyText1
+                                                  .override(
+                                                fontFamily: 'Open Sans',
+                                                fontWeight: FontWeight.w600,
+                                              ),
                                             ),
                                             Padding(
                                               padding: EdgeInsetsDirectional
@@ -549,8 +609,12 @@ class _PlanPageWidgetState extends State<PlanPageWidget> {
                                                     getJsonField(widget.plans,
                                                             r'''$.result.plans[0].prices[1].currency''')
                                                         .toString()),
-                                                style:
-                                                    FlutterFlowTheme.bodyText1,
+                                                style: FlutterFlowTheme
+                                                    .bodyText1
+                                                    .override(
+                                                  fontFamily: 'Open Sans',
+                                                  fontWeight: FontWeight.w600,
+                                                ),
                                               ),
                                             )
                                           ],
@@ -757,7 +821,7 @@ class _PlanPageWidgetState extends State<PlanPageWidget> {
                             ),
                             child: Padding(
                               padding: EdgeInsetsDirectional.fromSTEB(
-                                  30, 30, 30, 30),
+                                  40, 30, 40, 30),
                               child: Column(
                                 mainAxisSize: MainAxisSize.max,
                                 mainAxisAlignment:
@@ -768,7 +832,10 @@ class _PlanPageWidgetState extends State<PlanPageWidget> {
                                     getJsonField(widget.plans,
                                             r'''$.result.plans[3].prices[0].description''')
                                         .toString(),
-                                    style: FlutterFlowTheme.subtitle1,
+                                    style: FlutterFlowTheme.subtitle1.override(
+                                      fontFamily: 'Open Sans',
+                                      fontWeight: FontWeight.w600,
+                                    ),
                                   ),
                                   Row(
                                     mainAxisSize: MainAxisSize.max,
@@ -777,7 +844,11 @@ class _PlanPageWidgetState extends State<PlanPageWidget> {
                                     children: [
                                       Text(
                                         '利用期間',
-                                        style: FlutterFlowTheme.bodyText1,
+                                        style:
+                                            FlutterFlowTheme.bodyText1.override(
+                                          fontFamily: 'Open Sans',
+                                          fontWeight: FontWeight.w600,
+                                        ),
                                       ),
                                       Row(
                                         mainAxisSize: MainAxisSize.max,
@@ -786,7 +857,11 @@ class _PlanPageWidgetState extends State<PlanPageWidget> {
                                             getJsonField(widget.plans,
                                                     r'''$.result.plans[3].prices[0].intervalCount''')
                                                 .toString(),
-                                            style: FlutterFlowTheme.bodyText1,
+                                            style: FlutterFlowTheme.bodyText1
+                                                .override(
+                                              fontFamily: 'Open Sans',
+                                              fontWeight: FontWeight.w600,
+                                            ),
                                           ),
                                           Padding(
                                             padding:
@@ -797,7 +872,11 @@ class _PlanPageWidgetState extends State<PlanPageWidget> {
                                                       widget.plans,
                                                       r'''$.result.plans[3].prices[0].interval''')
                                                   .toString()),
-                                              style: FlutterFlowTheme.bodyText1,
+                                              style: FlutterFlowTheme.bodyText1
+                                                  .override(
+                                                fontFamily: 'Open Sans',
+                                                fontWeight: FontWeight.w600,
+                                              ),
                                             ),
                                           )
                                         ],
@@ -811,7 +890,11 @@ class _PlanPageWidgetState extends State<PlanPageWidget> {
                                     children: [
                                       Text(
                                         '月額',
-                                        style: FlutterFlowTheme.bodyText1,
+                                        style:
+                                            FlutterFlowTheme.bodyText1.override(
+                                          fontFamily: 'Open Sans',
+                                          fontWeight: FontWeight.w600,
+                                        ),
                                       ),
                                       Row(
                                         mainAxisSize: MainAxisSize.max,
@@ -826,7 +909,11 @@ class _PlanPageWidgetState extends State<PlanPageWidget> {
                                                 getJsonField(widget.plans,
                                                         r'''$.result.plans[3].prices[0].interval''')
                                                     .toString()),
-                                            style: FlutterFlowTheme.bodyText1,
+                                            style: FlutterFlowTheme.bodyText1
+                                                .override(
+                                              fontFamily: 'Open Sans',
+                                              fontWeight: FontWeight.w600,
+                                            ),
                                           ),
                                           Padding(
                                             padding:
@@ -837,7 +924,11 @@ class _PlanPageWidgetState extends State<PlanPageWidget> {
                                                   getJsonField(widget.plans,
                                                           r'''$.result.plans[3].prices[0].currency''')
                                                       .toString()),
-                                              style: FlutterFlowTheme.bodyText1,
+                                              style: FlutterFlowTheme.bodyText1
+                                                  .override(
+                                                fontFamily: 'Open Sans',
+                                                fontWeight: FontWeight.w600,
+                                              ),
                                             ),
                                           )
                                         ],
