@@ -229,7 +229,10 @@ class _TopPageWidgetState extends State<TopPageWidget> {
                         ),
                         Text(
                           '＊この地区の住民に役立つ情報であれば、開催場所等は地区外でも投稿いただけます。',
-                          style: FlutterFlowTheme.bodyText1,
+                          style: FlutterFlowTheme.bodyText1.override(
+                            fontFamily: 'Open Sans',
+                            color: FlutterFlowTheme.pDark,
+                          ),
                         )
                       ],
                     )
@@ -306,7 +309,7 @@ class _TopPageWidgetState extends State<TopPageWidget> {
                                     '＊パソコン（デスクトップ、ノートブック）から投稿いただけるサービスです。',
                                     style: FlutterFlowTheme.bodyText1.override(
                                       fontFamily: 'Open Sans',
-                                      color: FlutterFlowTheme.textDark,
+                                      color: FlutterFlowTheme.pDark,
                                     ),
                                   ),
                                 ),
@@ -317,7 +320,7 @@ class _TopPageWidgetState extends State<TopPageWidget> {
                                     '＊投稿は管理者の確認後にアプリに掲載されます。',
                                     style: FlutterFlowTheme.bodyText1.override(
                                       fontFamily: 'Open Sans',
-                                      color: FlutterFlowTheme.textDark,
+                                      color: FlutterFlowTheme.pDark,
                                     ),
                                   ),
                                 )
