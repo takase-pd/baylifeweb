@@ -1,5 +1,8 @@
+import '../backend/api_requests/api_calls.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
+import '../login_page/login_page_widget.dart';
+import '../plan_page/plan_page_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -12,6 +15,8 @@ class TopPageFooterWidget extends StatefulWidget {
 }
 
 class _TopPageFooterWidgetState extends State<TopPageFooterWidget> {
+  dynamic plans;
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -66,9 +71,24 @@ class _TopPageFooterWidgetState extends State<TopPageFooterWidget> {
                                 Padding(
                                   padding: EdgeInsetsDirectional.fromSTEB(
                                       0, 0, 0, 16),
-                                  child: Text(
-                                    'プラン',
-                                    style: FlutterFlowTheme.bodyText1,
+                                  child: InkWell(
+                                    onTap: () async {
+                                      plans = await getPlanCall();
+                                      await Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (context) => PlanPageWidget(
+                                            plans: plans,
+                                          ),
+                                        ),
+                                      );
+
+                                      setState(() {});
+                                    },
+                                    child: Text(
+                                      'プラン',
+                                      style: FlutterFlowTheme.bodyText1,
+                                    ),
                                   ),
                                 ),
                                 Padding(
@@ -109,9 +129,20 @@ class _TopPageFooterWidgetState extends State<TopPageFooterWidget> {
                                 Padding(
                                   padding: EdgeInsetsDirectional.fromSTEB(
                                       0, 0, 0, 16),
-                                  child: Text(
-                                    'ログイン',
-                                    style: FlutterFlowTheme.bodyText1,
+                                  child: InkWell(
+                                    onTap: () async {
+                                      await Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (context) =>
+                                              LoginPageWidget(),
+                                        ),
+                                      );
+                                    },
+                                    child: Text(
+                                      'ログイン',
+                                      style: FlutterFlowTheme.bodyText1,
+                                    ),
                                   ),
                                 ),
                                 Padding(
