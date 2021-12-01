@@ -17,7 +17,7 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class PostPageWidget extends StatefulWidget {
-  PostPageWidget({
+  const PostPageWidget({
     Key key,
     this.subscription,
   }) : super(key: key);
@@ -96,6 +96,7 @@ class _PostPageWidgetState extends State<PostPageWidget> {
             Expanded(
               child: Row(
                 mainAxisSize: MainAxisSize.max,
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   MainMenuWidget(),
                   Expanded(

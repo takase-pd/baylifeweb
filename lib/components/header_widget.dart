@@ -5,7 +5,7 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class HeaderWidget extends StatefulWidget {
-  HeaderWidget({Key key}) : super(key: key);
+  const HeaderWidget({Key key}) : super(key: key);
 
   @override
   _HeaderWidgetState createState() => _HeaderWidgetState();

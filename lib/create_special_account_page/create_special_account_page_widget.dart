@@ -1,6 +1,5 @@
 import '../auth/auth_util.dart';
-import '../backend/api_requests/api_calls.dart';
-import '../components/top_page_header_widget.dart';
+import '../components/header_widget.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
@@ -10,27 +9,21 @@ import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
-import '../backend/stripe/stripe_checkout.dart';
 
-class CreateAccountPageWidget extends StatefulWidget {
-  const CreateAccountPageWidget({
-    Key key,
-    this.priceId,
-  }) : super(key: key);
-
-  final String priceId;
+class CreateSpecialAccountPageWidget extends StatefulWidget {
+  const CreateSpecialAccountPageWidget({Key key}) : super(key: key);
 
   @override
-  _CreateAccountPageWidgetState createState() =>
-      _CreateAccountPageWidgetState();
+  _CreateSpecialAccountPageWidgetState createState() =>
+      _CreateSpecialAccountPageWidgetState();
 }
 
-class _CreateAccountPageWidgetState extends State<CreateAccountPageWidget> {
+class _CreateSpecialAccountPageWidgetState
+    extends State<CreateSpecialAccountPageWidget> {
   TextEditingController emailAddressController;
   TextEditingController passwordController;
   bool passwordVisibility;
   bool _loadingButton1 = false;
-  dynamic subs;
   bool _loadingButton2 = false;
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
@@ -51,7 +44,36 @@ class _CreateAccountPageWidgetState extends State<CreateAccountPageWidget> {
         child: AppBar(
           backgroundColor: Colors.transparent,
           automaticallyImplyLeading: false,
-          flexibleSpace: TopPageHeaderWidget(),
+          flexibleSpace: Container(
+            width: double.infinity,
+            height: 80,
+            decoration: BoxDecoration(),
+            child: Column(
+              mainAxisSize: MainAxisSize.max,
+              children: [
+                HeaderWidget(),
+                Padding(
+                  padding: EdgeInsetsDirectional.fromSTEB(10, 10, 10, 10),
+                  child: Row(
+                    mainAxisSize: MainAxisSize.max,
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      InkWell(
+                        onTap: () async {
+                          await launchURL(
+                              'https://baylife.particledrawing.com/');
+                        },
+                        child: Text(
+                          'MAKUHARI Bay Life',
+                          style: FlutterFlowTheme.subtitle1,
+                        ),
+                      )
+                    ],
+                  ),
+                )
+              ],
+            ),
+          ),
           actions: [],
           elevation: 0,
         ),
@@ -74,7 +96,7 @@ class _CreateAccountPageWidgetState extends State<CreateAccountPageWidget> {
                       Padding(
                         padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 16),
                         child: AutoSizeText(
-                          'ユーザー登録後、決済ページが開きます。',
+                          'トライアルユーザー登録画面',
                           textAlign: TextAlign.center,
                           style: FlutterFlowTheme.subtitle2,
                         ),
@@ -218,7 +240,7 @@ class _CreateAccountPageWidgetState extends State<CreateAccountPageWidget> {
                             InkWell(
                               onTap: () async {
                                 await launchURL(
-                                    'https://baylife.particledrawing.com/terms.html');
+                                    'https://baylife-ff782.web.app/terms.html');
                               },
                               child: Text(
                                 '利用規約',
@@ -235,7 +257,7 @@ class _CreateAccountPageWidgetState extends State<CreateAccountPageWidget> {
                               child: InkWell(
                                 onTap: () async {
                                   await launchURL(
-                                      'https://baylife.particledrawing.com/terms.html');
+                                      'https://baylife-ff782.web.app/terms.html');
                                 },
                                 child: FaIcon(
                                   FontAwesomeIcons.externalLinkAlt,
@@ -301,16 +323,13 @@ class _CreateAccountPageWidgetState extends State<CreateAccountPageWidget> {
                                 return;
                               }
 
-                              subs = await subscribeCall(
-                                priceId: widget.priceId,
-                                url: 'https://baylife.particledrawing.com/',
-                                uid: currentUserUid,
+                              await Navigator.pushAndRemoveUntil(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => HomePageWidget(),
+                                ),
+                                (r) => false,
                               );
-                              final sessionId =
-                                  getJsonField(subs, r'''$.result.subscribe''')
-                                      .toString();
-                              redirectToCheckout(sessionId);
-                              setState(() {});
                             } finally {
                               setState(() => _loadingButton1 = false);
                             }
@@ -364,18 +383,14 @@ class _CreateAccountPageWidgetState extends State<CreateAccountPageWidget> {
                                         if (user == null) {
                                           return;
                                         }
-                                        subs = await subscribeCall(
-                                          priceId: widget.priceId,
-                                          url:
-                                              'https://baylife.particledrawing.com/',
-                                          uid: currentUserUid,
+                                        await Navigator.pushAndRemoveUntil(
+                                          context,
+                                          MaterialPageRoute(
+                                            builder: (context) =>
+                                                HomePageWidget(),
+                                          ),
+                                          (r) => false,
                                         );
-                                        final sessionId = getJsonField(
-                                                subs, r'''$.result.subscribe''')
-                                            .toString();
-                                        redirectToCheckout(sessionId);
-
-                                        setState(() {});
                                       } finally {
                                         setState(() => _loadingButton2 = false);
                                       }
@@ -434,7 +449,7 @@ class _CreateAccountPageWidgetState extends State<CreateAccountPageWidget> {
                       InkWell(
                         onTap: () async {
                           await launchURL(
-                              'https://baylife.particledrawing.com/terms.html');
+                              'https://baylife-ff782.web.app/terms.html');
                         },
                         child: Text(
                           '利用規約',
