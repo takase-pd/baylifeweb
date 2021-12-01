@@ -96,6 +96,7 @@ class _PostPageWidgetState extends State<PostPageWidget> {
             Expanded(
               child: Row(
                 mainAxisSize: MainAxisSize.max,
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   MainMenuWidget(),
                   Expanded(

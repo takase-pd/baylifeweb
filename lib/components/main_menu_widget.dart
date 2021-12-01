@@ -20,8 +20,6 @@ class MainMenuWidget extends StatefulWidget {
 
 class _MainMenuWidgetState extends State<MainMenuWidget> {
   bool _loadingButton1 = false;
-  dynamic subscriptionConfig2;
-  dynamic subscriptionPost2;
   bool _loadingButton2 = false;
   dynamic subscriptionPost;
   bool _loadingButton3 = false;
@@ -65,101 +63,16 @@ class _MainMenuWidgetState extends State<MainMenuWidget> {
                   ),
                 ),
               ),
-              Container(
-                width: double.infinity,
-                height: 800,
-                decoration: BoxDecoration(),
-                child: Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(16, 0, 0, 0),
+              Padding(
+                padding: EdgeInsetsDirectional.fromSTEB(16, 24, 0, 0),
+                child: Container(
+                  width: double.infinity,
+                  height: 800,
+                  decoration: BoxDecoration(),
                   child: ListView(
                     padding: EdgeInsets.zero,
                     scrollDirection: Axis.vertical,
                     children: [
-                      Container(
-                        width: 200,
-                        height: 50,
-                        decoration: BoxDecoration(),
-                        child: InkWell(
-                          onTap: () async {
-                            await Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => HomePageWidget(),
-                              ),
-                            );
-                          },
-                          child: Text(
-                            'ホーム',
-                            style: FlutterFlowTheme.subtitle2.override(
-                              fontFamily: 'Open Sans',
-                              color: FlutterFlowTheme.textLight,
-                              fontSize: 16,
-                            ),
-                          ),
-                        ),
-                      ),
-                      Container(
-                        width: 200,
-                        height: 50,
-                        decoration: BoxDecoration(),
-                        child: InkWell(
-                          onTap: () async {
-                            subscriptionPost2 = await getSubscriptionCall(
-                              uid: currentUserUid,
-                            );
-                            await Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => PostPageWidget(
-                                  subscription: getJsonField(subscriptionPost,
-                                          r'''$.result.subscription''')
-                                      .toString(),
-                                ),
-                              ),
-                            );
-
-                            setState(() {});
-                          },
-                          child: Text(
-                            '投稿',
-                            style: FlutterFlowTheme.subtitle2.override(
-                              fontFamily: 'Open Sans',
-                              color: FlutterFlowTheme.textLight,
-                              fontSize: 16,
-                            ),
-                          ),
-                        ),
-                      ),
-                      Container(
-                        width: 200,
-                        height: 50,
-                        decoration: BoxDecoration(),
-                        child: InkWell(
-                          onTap: () async {
-                            subscriptionConfig2 = await getSubscriptionCall(
-                              uid: currentUserUid,
-                            );
-                            await Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => ConfigPageWidget(
-                                  subscription: subscriptionConfig2,
-                                ),
-                              ),
-                            );
-
-                            setState(() {});
-                          },
-                          child: Text(
-                            '設定',
-                            style: FlutterFlowTheme.subtitle2.override(
-                              fontFamily: 'Open Sans',
-                              color: FlutterFlowTheme.textLight,
-                              fontSize: 16,
-                            ),
-                          ),
-                        ),
-                      ),
                       Row(
                         mainAxisSize: MainAxisSize.max,
                         children: [
