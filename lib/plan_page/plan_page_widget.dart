@@ -169,7 +169,10 @@ class _PlanPageWidgetState extends State<PlanPageWidget> {
                                   child: Text(
                                     'stripe',
                                     textAlign: TextAlign.start,
-                                    style: FlutterFlowTheme.bodyText1,
+                                    style: FlutterFlowTheme.bodyText1.override(
+                                      fontFamily: 'Open Sans',
+                                      color: FlutterFlowTheme.pDark,
+                                    ),
                                   ),
                                 ),
                                 Padding(
@@ -181,7 +184,7 @@ class _PlanPageWidgetState extends State<PlanPageWidget> {
                                     },
                                     child: FaIcon(
                                       FontAwesomeIcons.externalLinkAlt,
-                                      color: FlutterFlowTheme.textDark,
+                                      color: FlutterFlowTheme.pDark,
                                       size: 16,
                                     ),
                                   ),
@@ -206,7 +209,10 @@ class _PlanPageWidgetState extends State<PlanPageWidget> {
                                 child: Text(
                                   '利用規約',
                                   textAlign: TextAlign.start,
-                                  style: FlutterFlowTheme.bodyText1,
+                                  style: FlutterFlowTheme.bodyText1.override(
+                                    fontFamily: 'Open Sans',
+                                    color: FlutterFlowTheme.pDark,
+                                  ),
                                 ),
                               ),
                               Padding(
@@ -219,7 +225,7 @@ class _PlanPageWidgetState extends State<PlanPageWidget> {
                                   },
                                   child: FaIcon(
                                     FontAwesomeIcons.externalLinkAlt,
-                                    color: FlutterFlowTheme.textDark,
+                                    color: FlutterFlowTheme.pDark,
                                     size: 16,
                                   ),
                                 ),
@@ -237,7 +243,10 @@ class _PlanPageWidgetState extends State<PlanPageWidget> {
                                 child: Text(
                                   'プライバシーポリシー',
                                   textAlign: TextAlign.start,
-                                  style: FlutterFlowTheme.bodyText1,
+                                  style: FlutterFlowTheme.bodyText1.override(
+                                    fontFamily: 'Open Sans',
+                                    color: FlutterFlowTheme.pDark,
+                                  ),
                                 ),
                               ),
                               Padding(
@@ -250,7 +259,7 @@ class _PlanPageWidgetState extends State<PlanPageWidget> {
                                   },
                                   child: FaIcon(
                                     FontAwesomeIcons.externalLinkAlt,
-                                    color: FlutterFlowTheme.textDark,
+                                    color: FlutterFlowTheme.pDark,
                                     size: 16,
                                   ),
                                 ),
