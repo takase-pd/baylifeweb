@@ -64,219 +64,234 @@ class _MainMenuWidgetState extends State<MainMenuWidget> {
                 ),
               ),
               Container(
-                width: 160,
+                width: double.infinity,
                 height: 800,
                 decoration: BoxDecoration(),
-                child: ListView(
-                  padding: EdgeInsets.zero,
-                  scrollDirection: Axis.vertical,
-                  children: [
-                    Container(
-                      width: 200,
-                      height: 50,
-                      decoration: BoxDecoration(),
-                      child: InkWell(
-                        onTap: () async {
-                          await Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => HomePageWidget(),
-                            ),
-                          );
-                        },
-                        child: Text(
-                          'ホーム',
-                          style: FlutterFlowTheme.subtitle2.override(
-                            fontFamily: 'Open Sans',
-                            color: FlutterFlowTheme.textLight,
-                            fontSize: 16,
-                          ),
-                        ),
-                      ),
-                    ),
-                    Container(
-                      width: 200,
-                      height: 50,
-                      decoration: BoxDecoration(),
-                      child: InkWell(
-                        onTap: () async {
-                          subscriptionPost = await getSubscriptionCall(
-                            uid: currentUserUid,
-                          );
-                          await Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => PostPageWidget(
-                                subscription: getJsonField(subscriptionPost,
-                                        r'''$.result.subscription''')
-                                    .toString(),
-                              ),
-                            ),
-                          );
-
-                          setState(() {});
-                        },
-                        child: Text(
-                          '投稿',
-                          style: FlutterFlowTheme.subtitle2.override(
-                            fontFamily: 'Open Sans',
-                            color: FlutterFlowTheme.textLight,
-                            fontSize: 16,
-                          ),
-                        ),
-                      ),
-                    ),
-                    Container(
-                      width: 200,
-                      height: 50,
-                      decoration: BoxDecoration(),
-                      child: InkWell(
-                        onTap: () async {
-                          subscriptionConfig = await getSubscriptionCall(
-                            uid: currentUserUid,
-                          );
-                          await Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => ConfigPageWidget(
-                                subscription: subscriptionConfig,
-                              ),
-                            ),
-                          );
-
-                          setState(() {});
-                        },
-                        child: Text(
-                          '設定',
-                          style: FlutterFlowTheme.subtitle2.override(
-                            fontFamily: 'Open Sans',
-                            color: FlutterFlowTheme.textLight,
-                            fontSize: 16,
-                          ),
-                        ),
-                      ),
-                    ),
-                    Padding(
-                      padding: EdgeInsetsDirectional.fromSTEB(0, 0, 16, 0),
-                      child: FFButtonWidget(
-                        onPressed: () async {
-                          setState(() => _loadingButton1 = true);
-                          try {
+                child: Padding(
+                  padding: EdgeInsetsDirectional.fromSTEB(16, 0, 0, 0),
+                  child: ListView(
+                    padding: EdgeInsets.zero,
+                    scrollDirection: Axis.vertical,
+                    children: [
+                      Container(
+                        width: 200,
+                        height: 50,
+                        decoration: BoxDecoration(),
+                        child: InkWell(
+                          onTap: () async {
                             await Navigator.push(
                               context,
                               MaterialPageRoute(
                                 builder: (context) => HomePageWidget(),
                               ),
                             );
-                          } finally {
-                            setState(() => _loadingButton1 = false);
-                          }
-                        },
-                        text: 'ホーム',
-                        icon: Icon(
-                          Icons.home_sharp,
-                          size: 16,
-                        ),
-                        options: FFButtonOptions(
-                          height: 48,
-                          color: FlutterFlowTheme.secondaryColor,
-                          textStyle: FlutterFlowTheme.subtitle2.override(
-                            fontFamily: 'Open Sans',
-                            color: FlutterFlowTheme.textLight,
-                            fontSize: 16,
+                          },
+                          child: Text(
+                            'ホーム',
+                            style: FlutterFlowTheme.subtitle2.override(
+                              fontFamily: 'Open Sans',
+                              color: FlutterFlowTheme.textLight,
+                              fontSize: 16,
+                            ),
                           ),
-                          elevation: 0,
-                          borderSide: BorderSide(
-                            color: Colors.transparent,
-                          ),
-                          borderRadius: 0,
                         ),
-                        loading: _loadingButton1,
                       ),
-                    ),
-                    Padding(
-                      padding: EdgeInsetsDirectional.fromSTEB(0, 0, 16, 0),
-                      child: FFButtonWidget(
-                        onPressed: () async {
-                          setState(() => _loadingButton2 = true);
-                          try {
-                            await getSubscriptionCall(
+                      Container(
+                        width: 200,
+                        height: 50,
+                        decoration: BoxDecoration(),
+                        child: InkWell(
+                          onTap: () async {
+                            subscriptionPost = await getSubscriptionCall(
                               uid: currentUserUid,
                             );
                             await Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (context) => ConfigPageWidget(),
+                                builder: (context) => PostPageWidget(
+                                  subscription: getJsonField(subscriptionPost,
+                                          r'''$.result.subscription''')
+                                      .toString(),
+                                ),
                               ),
                             );
-                          } finally {
-                            setState(() => _loadingButton2 = false);
-                          }
-                        },
-                        text: '投稿　',
-                        icon: Icon(
-                          Icons.post_add_sharp,
-                          size: 16,
-                        ),
-                        options: FFButtonOptions(
-                          height: 48,
-                          color: FlutterFlowTheme.secondaryColor,
-                          textStyle: FlutterFlowTheme.subtitle2.override(
-                            fontFamily: 'Open Sans',
-                            color: FlutterFlowTheme.textLight,
-                            fontSize: 16,
+
+                            setState(() {});
+                          },
+                          child: Text(
+                            '投稿',
+                            style: FlutterFlowTheme.subtitle2.override(
+                              fontFamily: 'Open Sans',
+                              color: FlutterFlowTheme.textLight,
+                              fontSize: 16,
+                            ),
                           ),
-                          elevation: 0,
-                          borderSide: BorderSide(
-                            color: Colors.transparent,
-                          ),
-                          borderRadius: 0,
                         ),
-                        loading: _loadingButton2,
                       ),
-                    ),
-                    Padding(
-                      padding: EdgeInsetsDirectional.fromSTEB(0, 0, 16, 0),
-                      child: FFButtonWidget(
-                        onPressed: () async {
-                          setState(() => _loadingButton3 = true);
-                          try {
-                            await getSubscriptionCall(
+                      Container(
+                        width: 200,
+                        height: 50,
+                        decoration: BoxDecoration(),
+                        child: InkWell(
+                          onTap: () async {
+                            subscriptionConfig = await getSubscriptionCall(
                               uid: currentUserUid,
                             );
                             await Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (context) => ConfigPageWidget(),
+                                builder: (context) => ConfigPageWidget(
+                                  subscription: subscriptionConfig,
+                                ),
                               ),
                             );
-                          } finally {
-                            setState(() => _loadingButton3 = false);
-                          }
-                        },
-                        text: '設定　',
-                        icon: Icon(
-                          Icons.settings_sharp,
-                          size: 16,
-                        ),
-                        options: FFButtonOptions(
-                          height: 48,
-                          color: FlutterFlowTheme.secondaryColor,
-                          textStyle: FlutterFlowTheme.subtitle2.override(
-                            fontFamily: 'Open Sans',
-                            color: FlutterFlowTheme.textLight,
-                            fontSize: 16,
+
+                            setState(() {});
+                          },
+                          child: Text(
+                            '設定',
+                            style: FlutterFlowTheme.subtitle2.override(
+                              fontFamily: 'Open Sans',
+                              color: FlutterFlowTheme.textLight,
+                              fontSize: 16,
+                            ),
                           ),
-                          elevation: 0,
-                          borderSide: BorderSide(
-                            color: Colors.transparent,
-                          ),
-                          borderRadius: 0,
                         ),
-                        loading: _loadingButton3,
                       ),
-                    )
-                  ],
+                      Row(
+                        mainAxisSize: MainAxisSize.max,
+                        children: [
+                          Icon(
+                            Icons.home_sharp,
+                            color: FlutterFlowTheme.textLight,
+                            size: 24,
+                          ),
+                          FFButtonWidget(
+                            onPressed: () async {
+                              setState(() => _loadingButton1 = true);
+                              try {
+                                await Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => HomePageWidget(),
+                                  ),
+                                );
+                              } finally {
+                                setState(() => _loadingButton1 = false);
+                              }
+                            },
+                            text: 'ホーム',
+                            options: FFButtonOptions(
+                              width: 100,
+                              height: 48,
+                              color: FlutterFlowTheme.secondaryColor,
+                              textStyle: FlutterFlowTheme.subtitle2.override(
+                                fontFamily: 'Open Sans',
+                                color: FlutterFlowTheme.textLight,
+                                fontSize: 16,
+                              ),
+                              elevation: 0,
+                              borderSide: BorderSide(
+                                color: Colors.transparent,
+                              ),
+                              borderRadius: 0,
+                            ),
+                            loading: _loadingButton1,
+                          )
+                        ],
+                      ),
+                      Row(
+                        mainAxisSize: MainAxisSize.max,
+                        children: [
+                          Icon(
+                            Icons.post_add_sharp,
+                            color: FlutterFlowTheme.textLight,
+                            size: 24,
+                          ),
+                          FFButtonWidget(
+                            onPressed: () async {
+                              setState(() => _loadingButton2 = true);
+                              try {
+                                await getSubscriptionCall(
+                                  uid: currentUserUid,
+                                );
+                                await Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => ConfigPageWidget(),
+                                  ),
+                                );
+                              } finally {
+                                setState(() => _loadingButton2 = false);
+                              }
+                            },
+                            text: '投稿　',
+                            options: FFButtonOptions(
+                              width: 100,
+                              height: 48,
+                              color: FlutterFlowTheme.secondaryColor,
+                              textStyle: FlutterFlowTheme.subtitle2.override(
+                                fontFamily: 'Open Sans',
+                                color: FlutterFlowTheme.textLight,
+                                fontSize: 16,
+                              ),
+                              elevation: 0,
+                              borderSide: BorderSide(
+                                color: Colors.transparent,
+                              ),
+                              borderRadius: 0,
+                            ),
+                            loading: _loadingButton2,
+                          )
+                        ],
+                      ),
+                      Row(
+                        mainAxisSize: MainAxisSize.max,
+                        children: [
+                          Icon(
+                            Icons.settings_sharp,
+                            color: FlutterFlowTheme.textLight,
+                            size: 24,
+                          ),
+                          FFButtonWidget(
+                            onPressed: () async {
+                              setState(() => _loadingButton3 = true);
+                              try {
+                                await getSubscriptionCall(
+                                  uid: currentUserUid,
+                                );
+                                await Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => ConfigPageWidget(),
+                                  ),
+                                );
+                              } finally {
+                                setState(() => _loadingButton3 = false);
+                              }
+                            },
+                            text: '設定　',
+                            options: FFButtonOptions(
+                              width: 100,
+                              height: 48,
+                              color: FlutterFlowTheme.secondaryColor,
+                              textStyle: FlutterFlowTheme.subtitle2.override(
+                                fontFamily: 'Open Sans',
+                                color: FlutterFlowTheme.textLight,
+                                fontSize: 16,
+                              ),
+                              elevation: 0,
+                              borderSide: BorderSide(
+                                color: Colors.transparent,
+                              ),
+                              borderRadius: 0,
+                            ),
+                            loading: _loadingButton3,
+                          )
+                        ],
+                      )
+                    ],
+                  ),
                 ),
               )
             ],
