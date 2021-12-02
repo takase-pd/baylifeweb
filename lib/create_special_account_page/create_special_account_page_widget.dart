@@ -295,7 +295,7 @@ class _CreateSpecialAccountPageWidgetState
                                 },
                                 child: FaIcon(
                                   FontAwesomeIcons.externalLinkAlt,
-                                  color: FlutterFlowTheme.pDark,
+                                  color: FlutterFlowTheme.textDark,
                                   size: 16,
                                 ),
                               ),
