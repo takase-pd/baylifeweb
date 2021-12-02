@@ -8,6 +8,7 @@ import '../plan_page/plan_page_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class TopPageWidget extends StatefulWidget {
@@ -114,41 +115,75 @@ class _TopPageWidgetState extends State<TopPageWidget> {
                             ],
                           ),
                         ),
-                        FFButtonWidget(
-                          onPressed: () async {
-                            setState(() => _loadingButton = true);
-                            try {
-                              plans = await getPlanCall();
-                              await Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => PlanPageWidget(
-                                    plans: plans,
+                        Padding(
+                          padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 16),
+                          child: FFButtonWidget(
+                            onPressed: () async {
+                              setState(() => _loadingButton = true);
+                              try {
+                                plans = await getPlanCall();
+                                await Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => PlanPageWidget(
+                                      plans: plans,
+                                    ),
                                   ),
-                                ),
-                              );
+                                );
 
-                              setState(() {});
-                            } finally {
-                              setState(() => _loadingButton = false);
-                            }
-                          },
-                          text: 'プラン確認',
-                          options: FFButtonOptions(
-                            width: 240,
-                            height: 60,
-                            color: FlutterFlowTheme.secondaryColor,
-                            textStyle: FlutterFlowTheme.subtitle1.override(
-                              fontFamily: 'Open Sans',
-                              color: FlutterFlowTheme.textLight,
+                                setState(() {});
+                              } finally {
+                                setState(() => _loadingButton = false);
+                              }
+                            },
+                            text: 'プラン確認',
+                            options: FFButtonOptions(
+                              width: 240,
+                              height: 60,
+                              color: FlutterFlowTheme.secondaryColor,
+                              textStyle: FlutterFlowTheme.subtitle1.override(
+                                fontFamily: 'Open Sans',
+                                color: FlutterFlowTheme.textLight,
+                              ),
+                              borderSide: BorderSide(
+                                color: Colors.transparent,
+                                width: 1,
+                              ),
+                              borderRadius: 12,
                             ),
-                            borderSide: BorderSide(
-                              color: Colors.transparent,
-                              width: 1,
-                            ),
-                            borderRadius: 12,
+                            loading: _loadingButton,
                           ),
-                          loading: _loadingButton,
+                        ),
+                        Row(
+                          mainAxisSize: MainAxisSize.max,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            InkWell(
+                              onTap: () async {
+                                await launchURL(
+                                    'https://particledrawing.notion.site/Use-Case-a8f406da8ffc44ab991a371c1596297b');
+                              },
+                              child: Text(
+                                '利用例を見る',
+                                style: FlutterFlowTheme.bodyText1,
+                              ),
+                            ),
+                            Padding(
+                              padding:
+                                  EdgeInsetsDirectional.fromSTEB(2, 0, 0, 0),
+                              child: InkWell(
+                                onTap: () async {
+                                  await launchURL(
+                                      'https://particledrawing.notion.site/Use-Case-a8f406da8ffc44ab991a371c1596297b');
+                                },
+                                child: FaIcon(
+                                  FontAwesomeIcons.externalLinkAlt,
+                                  color: FlutterFlowTheme.textDark,
+                                  size: 14,
+                                ),
+                              ),
+                            )
+                          ],
                         )
                       ],
                     ),
