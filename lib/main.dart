@@ -26,6 +26,7 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   Stream<BayLifeWebFirebaseUser> userStream;
   BayLifeWebFirebaseUser initialUser;
+  bool displaySplashImage = true;
   final authUserSub = authenticatedUserStream.listen((_) {});
 
   @override
@@ -33,6 +34,8 @@ class _MyAppState extends State<MyApp> {
     super.initState();
     userStream = bayLifeWebFirebaseUserStream()
       ..listen((user) => initialUser ?? setState(() => initialUser = user));
+    Future.delayed(
+        Duration(seconds: 1), () => setState(() => displaySplashImage = false));
   }
 
   @override
@@ -53,7 +56,7 @@ class _MyAppState extends State<MyApp> {
       ],
       supportedLocales: const [Locale('en', '')],
       theme: ThemeData(primarySwatch: Colors.blue),
-      home: initialUser == null
+      home: initialUser == null || displaySplashImage
           ? const Center(
               child: SizedBox(
                 width: 50,

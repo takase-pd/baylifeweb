@@ -25,13 +25,11 @@ class CreateAccountPageWidget extends StatefulWidget {
 }
 
 class _CreateAccountPageWidgetState extends State<CreateAccountPageWidget> {
+  ApiCallResponse subsEmail;
   TextEditingController emailAddressController;
   TextEditingController passwordController;
   bool passwordVisibility;
-  bool _loadingButton1 = false;
-  dynamic subsEmail;
-  bool _loadingButton2 = false;
-  dynamic subsGoogle;
+  ApiCallResponse subsGoogle;
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
@@ -290,34 +288,29 @@ class _CreateAccountPageWidgetState extends State<CreateAccountPageWidget> {
                         padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 24),
                         child: FFButtonWidget(
                           onPressed: () async {
-                            setState(() => _loadingButton1 = true);
-                            try {
-                              final user = await createAccountWithEmail(
-                                context,
-                                emailAddressController.text,
-                                passwordController.text,
-                              );
-                              if (user == null) {
-                                return;
-                              }
-
-                              subsEmail = await subscribeCall(
-                                priceId: widget.priceId,
-                                url: 'https://baylifedev.web.app/',
-                                uid: currentUserUid,
-                              );
-                              await Navigator.pushAndRemoveUntil(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => HomePageWidget(),
-                                ),
-                                (r) => false,
-                              );
-
-                              setState(() {});
-                            } finally {
-                              setState(() => _loadingButton1 = false);
+                            final user = await createAccountWithEmail(
+                              context,
+                              emailAddressController.text,
+                              passwordController.text,
+                            );
+                            if (user == null) {
+                              return;
                             }
+
+                            subsEmail = await subscribeCall(
+                              priceId: widget.priceId,
+                              url: 'https://baylifedev.web.app/',
+                              uid: currentUserUid,
+                            );
+                            await Navigator.pushAndRemoveUntil(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => HomePageWidget(),
+                              ),
+                              (r) => false,
+                            );
+
+                            setState(() {});
                           },
                           text: '上記に同意して登録',
                           options: FFButtonOptions(
@@ -334,7 +327,6 @@ class _CreateAccountPageWidgetState extends State<CreateAccountPageWidget> {
                             ),
                             borderRadius: 12,
                           ),
-                          loading: _loadingButton1,
                         ),
                       ),
                       Padding(
@@ -361,31 +353,26 @@ class _CreateAccountPageWidgetState extends State<CreateAccountPageWidget> {
                                   alignment: AlignmentDirectional(0, 0),
                                   child: FFButtonWidget(
                                     onPressed: () async {
-                                      setState(() => _loadingButton2 = true);
-                                      try {
-                                        final user =
-                                            await signInWithGoogle(context);
-                                        if (user == null) {
-                                          return;
-                                        }
-                                        subsGoogle = await subscribeCall(
-                                          priceId: widget.priceId,
-                                          url: 'https://baylifedev.web.app/',
-                                          uid: currentUserUid,
-                                        );
-                                        await Navigator.pushAndRemoveUntil(
-                                          context,
-                                          MaterialPageRoute(
-                                            builder: (context) =>
-                                                HomePageWidget(),
-                                          ),
-                                          (r) => false,
-                                        );
-
-                                        setState(() {});
-                                      } finally {
-                                        setState(() => _loadingButton2 = false);
+                                      final user =
+                                          await signInWithGoogle(context);
+                                      if (user == null) {
+                                        return;
                                       }
+                                      subsGoogle = await subscribeCall(
+                                        priceId: widget.priceId,
+                                        url: 'https://baylifedev.web.app/',
+                                        uid: currentUserUid,
+                                      );
+                                      await Navigator.pushAndRemoveUntil(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (context) =>
+                                              HomePageWidget(),
+                                        ),
+                                        (r) => false,
+                                      );
+
+                                      setState(() {});
                                     },
                                     text: 'Sign up with Google',
                                     icon: Icon(
@@ -409,7 +396,6 @@ class _CreateAccountPageWidgetState extends State<CreateAccountPageWidget> {
                                       ),
                                       borderRadius: 12,
                                     ),
-                                    loading: _loadingButton2,
                                   ),
                                 ),
                                 Align(

@@ -19,11 +19,8 @@ class MainMenuWidget extends StatefulWidget {
 }
 
 class _MainMenuWidgetState extends State<MainMenuWidget> {
-  bool _loadingButton1 = false;
-  bool _loadingButton2 = false;
-  dynamic subscriptionPost;
-  bool _loadingButton3 = false;
-  dynamic subscriptionConfig;
+  ApiCallResponse subscriptionConfig;
+  ApiCallResponse subscriptionPost;
 
   @override
   Widget build(BuildContext context) {
@@ -79,17 +76,12 @@ class _MainMenuWidgetState extends State<MainMenuWidget> {
                           children: [
                             FFButtonWidget(
                               onPressed: () async {
-                                setState(() => _loadingButton1 = true);
-                                try {
-                                  await Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (context) => HomePageWidget(),
-                                    ),
-                                  );
-                                } finally {
-                                  setState(() => _loadingButton1 = false);
-                                }
+                                await Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => HomePageWidget(),
+                                  ),
+                                );
                               },
                               text: 'ホーム',
                               options: FFButtonOptions(
@@ -107,7 +99,6 @@ class _MainMenuWidgetState extends State<MainMenuWidget> {
                                 ),
                                 borderRadius: 0,
                               ),
-                              loading: _loadingButton1,
                             ),
                             Align(
                               alignment: AlignmentDirectional(-0.83, 0),
@@ -126,27 +117,22 @@ class _MainMenuWidgetState extends State<MainMenuWidget> {
                           children: [
                             FFButtonWidget(
                               onPressed: () async {
-                                setState(() => _loadingButton2 = true);
-                                try {
-                                  subscriptionPost = await getSubscriptionCall(
-                                    uid: currentUserUid,
-                                  );
-                                  await Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (context) => PostPageWidget(
-                                        subscription: getJsonField(
-                                                subscriptionPost,
-                                                r'''$.result.subscription''')
-                                            .toString(),
-                                      ),
+                                subscriptionPost = await getSubscriptionCall(
+                                  uid: currentUserUid,
+                                );
+                                await Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => PostPageWidget(
+                                      subscription: getJsonField(
+                                              subscriptionPost.jsonBody,
+                                              r'''$.result.subscription''')
+                                          .toString(),
                                     ),
-                                  );
+                                  ),
+                                );
 
-                                  setState(() {});
-                                } finally {
-                                  setState(() => _loadingButton2 = false);
-                                }
+                                setState(() {});
                               },
                               text: '投稿　',
                               options: FFButtonOptions(
@@ -164,7 +150,6 @@ class _MainMenuWidgetState extends State<MainMenuWidget> {
                                 ),
                                 borderRadius: 0,
                               ),
-                              loading: _loadingButton2,
                             ),
                             Align(
                               alignment: AlignmentDirectional(-0.83, 0),
@@ -183,25 +168,19 @@ class _MainMenuWidgetState extends State<MainMenuWidget> {
                           children: [
                             FFButtonWidget(
                               onPressed: () async {
-                                setState(() => _loadingButton3 = true);
-                                try {
-                                  subscriptionConfig =
-                                      await getSubscriptionCall(
-                                    uid: currentUserUid,
-                                  );
-                                  await Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (context) => ConfigPageWidget(
-                                        subscription: subscriptionConfig,
-                                      ),
+                                subscriptionConfig = await getSubscriptionCall(
+                                  uid: currentUserUid,
+                                );
+                                await Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => ConfigPageWidget(
+                                      subscription: subscriptionConfig.jsonBody,
                                     ),
-                                  );
+                                  ),
+                                );
 
-                                  setState(() {});
-                                } finally {
-                                  setState(() => _loadingButton3 = false);
-                                }
+                                setState(() {});
                               },
                               text: '設定　',
                               options: FFButtonOptions(
@@ -219,7 +198,6 @@ class _MainMenuWidgetState extends State<MainMenuWidget> {
                                 ),
                                 borderRadius: 0,
                               ),
-                              loading: _loadingButton3,
                             ),
                             Align(
                               alignment: AlignmentDirectional(-0.83, 0),
