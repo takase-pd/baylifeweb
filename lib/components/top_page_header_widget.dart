@@ -16,8 +16,6 @@ class TopPageHeaderWidget extends StatefulWidget {
 }
 
 class _TopPageHeaderWidgetState extends State<TopPageHeaderWidget> {
-  bool _loadingButton = false;
-
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -52,17 +50,12 @@ class _TopPageHeaderWidgetState extends State<TopPageHeaderWidget> {
                 ),
                 FFButtonWidget(
                   onPressed: () async {
-                    setState(() => _loadingButton = true);
-                    try {
-                      await Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => LoginPageWidget(),
-                        ),
-                      );
-                    } finally {
-                      setState(() => _loadingButton = false);
-                    }
+                    await Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => LoginPageWidget(),
+                      ),
+                    );
                   },
                   text: 'ログイン',
                   options: FFButtonOptions(
@@ -79,7 +72,6 @@ class _TopPageHeaderWidgetState extends State<TopPageHeaderWidget> {
                     ),
                     borderRadius: 5,
                   ),
-                  loading: _loadingButton,
                 )
               ],
             ),

@@ -26,12 +26,13 @@ class CreateAccountPageWidget extends StatefulWidget {
 }
 
 class _CreateAccountPageWidgetState extends State<CreateAccountPageWidget> {
+  ApiCallResponse subsEmail;
   TextEditingController emailAddressController;
   TextEditingController passwordController;
   bool passwordVisibility;
   bool _loadingButton1 = false;
-  dynamic subs;
   bool _loadingButton2 = false;
+  ApiCallResponse subsGoogle;
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
@@ -290,30 +291,26 @@ class _CreateAccountPageWidgetState extends State<CreateAccountPageWidget> {
                         padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 24),
                         child: FFButtonWidget(
                           onPressed: () async {
-                            setState(() => _loadingButton1 = true);
-                            try {
-                              final user = await createAccountWithEmail(
-                                context,
-                                emailAddressController.text,
-                                passwordController.text,
-                              );
-                              if (user == null) {
-                                return;
-                              }
-
-                              subs = await subscribeCall(
-                                priceId: widget.priceId,
-                                url: 'https://baylife.particledrawing.com/',
-                                uid: currentUserUid,
-                              );
-                              final sessionId =
-                                  getJsonField(subs, r'''$.result.subscribe''')
-                                      .toString();
-                              redirectToCheckout(sessionId);
-                              setState(() {});
-                            } finally {
-                              setState(() => _loadingButton1 = false);
+                            final user = await createAccountWithEmail(
+                              context,
+                              emailAddressController.text,
+                              passwordController.text,
+                            );
+                            if (user == null) {
+                              return;
                             }
+
+                            subsEmail = await subscribeCall(
+                              priceId: widget.priceId,
+                              url: 'https://baylife.particledrawing.com/',
+                              uid: currentUserUid,
+                            );
+                            final sessionId = getJsonField(subsEmail.jsonBody,
+                                    r'''$.result.subscribe''')
+                                .toString();
+                            redirectToCheckout(sessionId);
+
+                            setState(() {});
                           },
                           text: '上記に同意して登録',
                           options: FFButtonOptions(
@@ -330,7 +327,6 @@ class _CreateAccountPageWidgetState extends State<CreateAccountPageWidget> {
                             ),
                             borderRadius: 12,
                           ),
-                          loading: _loadingButton1,
                         ),
                       ),
                       Padding(
@@ -357,28 +353,24 @@ class _CreateAccountPageWidgetState extends State<CreateAccountPageWidget> {
                                   alignment: AlignmentDirectional(0, 0),
                                   child: FFButtonWidget(
                                     onPressed: () async {
-                                      setState(() => _loadingButton2 = true);
-                                      try {
-                                        final user =
-                                            await signInWithGoogle(context);
-                                        if (user == null) {
-                                          return;
-                                        }
-                                        subs = await subscribeCall(
-                                          priceId: widget.priceId,
-                                          url:
-                                              'https://baylife.particledrawing.com/',
-                                          uid: currentUserUid,
-                                        );
-                                        final sessionId = getJsonField(
-                                                subs, r'''$.result.subscribe''')
-                                            .toString();
-                                        redirectToCheckout(sessionId);
-
-                                        setState(() {});
-                                      } finally {
-                                        setState(() => _loadingButton2 = false);
+                                      final user =
+                                          await signInWithGoogle(context);
+                                      if (user == null) {
+                                        return;
                                       }
+                                      subsGoogle = await subscribeCall(
+                                        priceId: widget.priceId,
+                                        url:
+                                            'https://baylife.particledrawing.com/',
+                                        uid: currentUserUid,
+                                      );
+                                      final sessionId = getJsonField(
+                                              subsGoogle.jsonBody,
+                                              r'''$.result.subscribe''')
+                                          .toString();
+                                      redirectToCheckout(sessionId);
+
+                                      setState(() {});
                                     },
                                     text: 'Sign up with Google',
                                     icon: Icon(
@@ -402,7 +394,6 @@ class _CreateAccountPageWidgetState extends State<CreateAccountPageWidget> {
                                       ),
                                       borderRadius: 12,
                                     ),
-                                    loading: _loadingButton2,
                                   ),
                                 ),
                                 Align(
