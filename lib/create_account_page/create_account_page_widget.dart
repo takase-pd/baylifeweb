@@ -305,17 +305,10 @@ class _CreateAccountPageWidgetState extends State<CreateAccountPageWidget> {
                               url: 'https://baylifedev.web.app/',
                               uid: currentUserUid,
                             );
-                            final sessionId = getJsonField(
-                                    subsEmail, r'''$.result.subscribe''')
+                            final sessionId = getJsonField(subsEmail.jsonBody,
+                                    r'''$.result.subscribe''')
                                 .toString();
                             redirectToCheckout(sessionId);
-                            await Navigator.pushAndRemoveUntil(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => HomePageWidget(),
-                              ),
-                              (r) => false,
-                            );
 
                             setState(() {});
                           },
@@ -370,18 +363,11 @@ class _CreateAccountPageWidgetState extends State<CreateAccountPageWidget> {
                                         url: 'https://baylifedev.web.app/',
                                         uid: currentUserUid,
                                       );
-                                      final sessionId = getJsonField(subsGoogle,
+                                      final sessionId = getJsonField(
+                                              subsGoogle.jsonBody,
                                               r'''$.result.subscribe''')
                                           .toString();
                                       redirectToCheckout(sessionId);
-                                      await Navigator.pushAndRemoveUntil(
-                                        context,
-                                        MaterialPageRoute(
-                                          builder: (context) =>
-                                              HomePageWidget(),
-                                        ),
-                                        (r) => false,
-                                      );
 
                                       setState(() {});
                                     },
