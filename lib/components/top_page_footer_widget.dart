@@ -15,7 +15,7 @@ class TopPageFooterWidget extends StatefulWidget {
 }
 
 class _TopPageFooterWidgetState extends State<TopPageFooterWidget> {
-  dynamic plans;
+  ApiCallResponse plans;
 
   @override
   Widget build(BuildContext context) {
@@ -78,7 +78,7 @@ class _TopPageFooterWidgetState extends State<TopPageFooterWidget> {
                                         context,
                                         MaterialPageRoute(
                                           builder: (context) => PlanPageWidget(
-                                            plans: plans,
+                                            plans: plans.jsonBody,
                                           ),
                                         ),
                                       );
@@ -200,7 +200,7 @@ class _TopPageFooterWidgetState extends State<TopPageFooterWidget> {
                                   child: InkWell(
                                     onTap: () async {
                                       await launchURL(
-                                          'https://baylife-ff782.web.app/terms.html');
+                                          'https://baylife.particledrawing.com/terms.html');
                                     },
                                     child: Text(
                                       '利用規約',

@@ -26,8 +26,6 @@ class PlanPageWidget extends StatefulWidget {
 }
 
 class _PlanPageWidgetState extends State<PlanPageWidget> {
-  bool _loadingButton1 = false;
-  bool _loadingButton2 = false;
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
@@ -693,36 +691,31 @@ class _PlanPageWidgetState extends State<PlanPageWidget> {
                     children: [
                       FFButtonWidget(
                         onPressed: () async {
-                          setState(() => _loadingButton1 = true);
-                          try {
-                            await showDialog(
-                              context: context,
-                              builder: (alertDialogContext) {
-                                return AlertDialog(
-                                  title: Text('問い合わせページに遷移'),
-                                  content: Text('問い合わせページからご連絡ください。'),
-                                  actions: [
-                                    TextButton(
-                                      onPressed: () =>
-                                          Navigator.pop(alertDialogContext),
-                                      child: Text('Cancel'),
-                                    ),
-                                    TextButton(
-                                      onPressed: () async {
-                                        Navigator.pop(alertDialogContext);
-                                        await launchURL(
-                                            'https://www.particledrawing.com/contact');
-                                        ;
-                                      },
-                                      child: Text('OK'),
-                                    ),
-                                  ],
-                                );
-                              },
-                            );
-                          } finally {
-                            setState(() => _loadingButton1 = false);
-                          }
+                          await showDialog(
+                            context: context,
+                            builder: (alertDialogContext) {
+                              return AlertDialog(
+                                title: Text('問い合わせページに遷移'),
+                                content: Text('問い合わせページからご連絡ください。'),
+                                actions: [
+                                  TextButton(
+                                    onPressed: () =>
+                                        Navigator.pop(alertDialogContext),
+                                    child: Text('Cancel'),
+                                  ),
+                                  TextButton(
+                                    onPressed: () async {
+                                      Navigator.pop(alertDialogContext);
+                                      await launchURL(
+                                          'https://www.particledrawing.com/contact');
+                                      ;
+                                    },
+                                    child: Text('OK'),
+                                  ),
+                                ],
+                              );
+                            },
+                          );
                         },
                         text: '問い合わせ',
                         options: FFButtonOptions(
@@ -739,7 +732,6 @@ class _PlanPageWidgetState extends State<PlanPageWidget> {
                           ),
                           borderRadius: 12,
                         ),
-                        loading: _loadingButton1,
                       )
                     ],
                   )
@@ -1007,36 +999,31 @@ class _PlanPageWidgetState extends State<PlanPageWidget> {
                     children: [
                       FFButtonWidget(
                         onPressed: () async {
-                          setState(() => _loadingButton2 = true);
-                          try {
-                            await showDialog(
-                              context: context,
-                              builder: (alertDialogContext) {
-                                return AlertDialog(
-                                  title: Text('問い合わせページに遷移'),
-                                  content: Text('問い合わせページからご連絡ください。'),
-                                  actions: [
-                                    TextButton(
-                                      onPressed: () =>
-                                          Navigator.pop(alertDialogContext),
-                                      child: Text('Cancel'),
-                                    ),
-                                    TextButton(
-                                      onPressed: () async {
-                                        Navigator.pop(alertDialogContext);
-                                        await launchURL(
-                                            'https://www.particledrawing.com/contact');
-                                        ;
-                                      },
-                                      child: Text('OK'),
-                                    ),
-                                  ],
-                                );
-                              },
-                            );
-                          } finally {
-                            setState(() => _loadingButton2 = false);
-                          }
+                          await showDialog(
+                            context: context,
+                            builder: (alertDialogContext) {
+                              return AlertDialog(
+                                title: Text('問い合わせページに遷移'),
+                                content: Text('問い合わせページからご連絡ください。'),
+                                actions: [
+                                  TextButton(
+                                    onPressed: () =>
+                                        Navigator.pop(alertDialogContext),
+                                    child: Text('Cancel'),
+                                  ),
+                                  TextButton(
+                                    onPressed: () async {
+                                      Navigator.pop(alertDialogContext);
+                                      await launchURL(
+                                          'https://www.particledrawing.com/contact');
+                                      ;
+                                    },
+                                    child: Text('OK'),
+                                  ),
+                                ],
+                              );
+                            },
+                          );
                         },
                         text: '問い合わせ',
                         options: FFButtonOptions(
@@ -1053,7 +1040,6 @@ class _PlanPageWidgetState extends State<PlanPageWidget> {
                           ),
                           borderRadius: 12,
                         ),
-                        loading: _loadingButton2,
                       )
                     ],
                   )

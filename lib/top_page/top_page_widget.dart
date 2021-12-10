@@ -19,8 +19,7 @@ class TopPageWidget extends StatefulWidget {
 }
 
 class _TopPageWidgetState extends State<TopPageWidget> {
-  bool _loadingButton = false;
-  dynamic plans;
+  ApiCallResponse plans;
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
@@ -119,22 +118,17 @@ class _TopPageWidgetState extends State<TopPageWidget> {
                           padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 16),
                           child: FFButtonWidget(
                             onPressed: () async {
-                              setState(() => _loadingButton = true);
-                              try {
-                                plans = await getPlanCall();
-                                await Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) => PlanPageWidget(
-                                      plans: plans,
-                                    ),
+                              plans = await getPlanCall();
+                              await Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => PlanPageWidget(
+                                    plans: plans.jsonBody,
                                   ),
-                                );
+                                ),
+                              );
 
-                                setState(() {});
-                              } finally {
-                                setState(() => _loadingButton = false);
-                              }
+                              setState(() {});
                             },
                             text: 'プラン確認',
                             options: FFButtonOptions(
@@ -151,7 +145,6 @@ class _TopPageWidgetState extends State<TopPageWidget> {
                               ),
                               borderRadius: 12,
                             ),
-                            loading: _loadingButton,
                           ),
                         ),
                         Row(
@@ -462,16 +455,32 @@ class _TopPageWidgetState extends State<TopPageWidget> {
                               Padding(
                                 padding:
                                     EdgeInsetsDirectional.fromSTEB(0, 0, 0, 16),
-                                child: InkWell(
-                                  onTap: () async {
-                                    await launchURL(
-                                        'https://apps.apple.com/jp/app/makuhari-baylife/id1582919405');
-                                  },
-                                  child: SvgPicture.asset(
-                                    'assets/images/Download_on_the_App_Store_Badge_US-UK_RGB_blk_092917.svg',
-                                    width: 180,
-                                    fit: BoxFit.cover,
-                                  ),
+                                child: Row(
+                                  mainAxisSize: MainAxisSize.max,
+                                  children: [
+                                    InkWell(
+                                      onTap: () async {
+                                        await launchURL(
+                                            'https://apps.apple.com/jp/app/makuhari-baylife/id1582919405');
+                                      },
+                                      child: SvgPicture.asset(
+                                        'assets/images/Download_on_the_App_Store_Badge_US-UK_RGB_blk_092917.svg',
+                                        width: 180,
+                                        fit: BoxFit.cover,
+                                      ),
+                                    ),
+                                    InkWell(
+                                      onTap: () async {
+                                        await launchURL(
+                                            'https://play.google.com/store/apps/details?id=com.particledrawing.baylife&utm_source=service-web&pcampaignid=pcampaignidMKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1');
+                                      },
+                                      child: Image.network(
+                                        'https://play.google.com/intl/ja/badges/static/images/badges/ja_badge_web_generic.png',
+                                        width: 230,
+                                        fit: BoxFit.cover,
+                                      ),
+                                    )
+                                  ],
                                 ),
                               )
                             ],

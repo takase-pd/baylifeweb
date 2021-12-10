@@ -1,6 +1,8 @@
 import 'api_manager.dart';
 
-Future<dynamic> registContentsCall({
+export 'api_manager.dart' show ApiCallResponse;
+
+Future<ApiCallResponse> registContentsCall({
   String catName = 'デフォルト',
   String catNameAdd = '',
   String title = 'デフォルト',
@@ -76,11 +78,11 @@ Future<dynamic> registContentsCall({
     },
     body: body,
     bodyType: BodyType.JSON,
-    returnResponse: true,
+    returnBody: true,
   );
 }
 
-Future<dynamic> getPlanCall() {
+Future<ApiCallResponse> getPlanCall() {
   final body = '''
 {
   "data": {}
@@ -96,11 +98,11 @@ Future<dynamic> getPlanCall() {
     params: {},
     body: body,
     bodyType: BodyType.JSON,
-    returnResponse: true,
+    returnBody: true,
   );
 }
 
-Future<dynamic> subscribeCall({
+Future<ApiCallResponse> subscribeCall({
   String priceId = '',
   String url = 'https://baylife.particledrawing.com/',
   String uid = '',
@@ -128,11 +130,11 @@ Future<dynamic> subscribeCall({
     },
     body: body,
     bodyType: BodyType.JSON,
-    returnResponse: true,
+    returnBody: true,
   );
 }
 
-Future<dynamic> getSubscriptionCall({
+Future<ApiCallResponse> getSubscriptionCall({
   String uid = '',
 }) {
   final body = '''
@@ -154,6 +156,6 @@ Future<dynamic> getSubscriptionCall({
     },
     body: body,
     bodyType: BodyType.JSON,
-    returnResponse: true,
+    returnBody: true,
   );
 }

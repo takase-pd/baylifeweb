@@ -18,13 +18,10 @@ class LoginPageWidget extends StatefulWidget {
 }
 
 class _LoginPageWidgetState extends State<LoginPageWidget> {
+  ApiCallResponse subscription;
   TextEditingController emailAddressController;
   TextEditingController passwordController;
   bool passwordVisibility;
-  bool _loadingButton1 = false;
-  bool _loadingButton2 = false;
-  bool _loadingButton3 = false;
-  dynamic subscription;
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
@@ -208,27 +205,22 @@ class _LoginPageWidgetState extends State<LoginPageWidget> {
                         padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 24),
                         child: FFButtonWidget(
                           onPressed: () async {
-                            setState(() => _loadingButton1 = true);
-                            try {
-                              final user = await signInWithEmail(
-                                context,
-                                emailAddressController.text,
-                                passwordController.text,
-                              );
-                              if (user == null) {
-                                return;
-                              }
-
-                              await Navigator.pushAndRemoveUntil(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => HomePageWidget(),
-                                ),
-                                (r) => false,
-                              );
-                            } finally {
-                              setState(() => _loadingButton1 = false);
+                            final user = await signInWithEmail(
+                              context,
+                              emailAddressController.text,
+                              passwordController.text,
+                            );
+                            if (user == null) {
+                              return;
                             }
+
+                            await Navigator.pushAndRemoveUntil(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => HomePageWidget(),
+                              ),
+                              (r) => false,
+                            );
                           },
                           text: 'ログイン',
                           options: FFButtonOptions(
@@ -245,32 +237,26 @@ class _LoginPageWidgetState extends State<LoginPageWidget> {
                             ),
                             borderRadius: 12,
                           ),
-                          loading: _loadingButton1,
                         ),
                       ),
                       Padding(
                         padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 36),
                         child: FFButtonWidget(
                           onPressed: () async {
-                            setState(() => _loadingButton2 = true);
-                            try {
-                              if (emailAddressController.text.isEmpty) {
-                                ScaffoldMessenger.of(context).showSnackBar(
-                                  SnackBar(
-                                    content: Text(
-                                      'Email required!',
-                                    ),
+                            if (emailAddressController.text.isEmpty) {
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                SnackBar(
+                                  content: Text(
+                                    'Email required!',
                                   ),
-                                );
-                                return;
-                              }
-                              await resetPassword(
-                                email: emailAddressController.text,
-                                context: context,
+                                ),
                               );
-                            } finally {
-                              setState(() => _loadingButton2 = false);
+                              return;
                             }
+                            await resetPassword(
+                              email: emailAddressController.text,
+                              context: context,
+                            );
                           },
                           text: 'Forget Password?',
                           options: FFButtonOptions(
@@ -288,7 +274,6 @@ class _LoginPageWidgetState extends State<LoginPageWidget> {
                             ),
                             borderRadius: 12,
                           ),
-                          loading: _loadingButton2,
                         ),
                       ),
                       Padding(
@@ -316,31 +301,24 @@ class _LoginPageWidgetState extends State<LoginPageWidget> {
                                       0, 1, 0, 0),
                                   child: FFButtonWidget(
                                     onPressed: () async {
-                                      setState(() => _loadingButton3 = true);
-                                      try {
-                                        final user =
-                                            await signInWithGoogle(context);
-                                        if (user == null) {
-                                          return;
-                                        }
-                                        subscription =
-                                            await getSubscriptionCall(
-                                          uid: currentUserUid,
-                                        );
-                                        await Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                            builder: (context) =>
-                                                HomePageWidget(
-                                              subscription: subscription,
-                                            ),
-                                          ),
-                                        );
-
-                                        setState(() {});
-                                      } finally {
-                                        setState(() => _loadingButton3 = false);
+                                      final user =
+                                          await signInWithGoogle(context);
+                                      if (user == null) {
+                                        return;
                                       }
+                                      subscription = await getSubscriptionCall(
+                                        uid: currentUserUid,
+                                      );
+                                      await Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (context) => HomePageWidget(
+                                            subscription: subscription.jsonBody,
+                                          ),
+                                        ),
+                                      );
+
+                                      setState(() {});
                                     },
                                     text: 'Sign in with Google',
                                     icon: Icon(
@@ -364,7 +342,6 @@ class _LoginPageWidgetState extends State<LoginPageWidget> {
                                       ),
                                       borderRadius: 12,
                                     ),
-                                    loading: _loadingButton3,
                                   ),
                                 ),
                               ),

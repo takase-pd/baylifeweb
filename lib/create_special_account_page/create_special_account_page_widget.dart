@@ -23,8 +23,6 @@ class _CreateSpecialAccountPageWidgetState
   TextEditingController emailAddressController;
   TextEditingController passwordController;
   bool passwordVisibility;
-  bool _loadingButton1 = false;
-  bool _loadingButton2 = false;
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
@@ -240,7 +238,7 @@ class _CreateSpecialAccountPageWidgetState
                             InkWell(
                               onTap: () async {
                                 await launchURL(
-                                    'https://baylife-ff782.web.app/terms.html');
+                                    'https://baylife.particledrawing.com/terms.html');
                               },
                               child: Text(
                                 '利用規約',
@@ -257,7 +255,7 @@ class _CreateSpecialAccountPageWidgetState
                               child: InkWell(
                                 onTap: () async {
                                   await launchURL(
-                                      'https://baylife-ff782.web.app/terms.html');
+                                      'https://baylife.particledrawing.com/terms.html');
                                 },
                                 child: FaIcon(
                                   FontAwesomeIcons.externalLinkAlt,
@@ -295,7 +293,7 @@ class _CreateSpecialAccountPageWidgetState
                                 },
                                 child: FaIcon(
                                   FontAwesomeIcons.externalLinkAlt,
-                                  color: FlutterFlowTheme.textDark,
+                                  color: FlutterFlowTheme.pDark,
                                   size: 16,
                                 ),
                               ),
@@ -312,27 +310,22 @@ class _CreateSpecialAccountPageWidgetState
                         padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 24),
                         child: FFButtonWidget(
                           onPressed: () async {
-                            setState(() => _loadingButton1 = true);
-                            try {
-                              final user = await createAccountWithEmail(
-                                context,
-                                emailAddressController.text,
-                                passwordController.text,
-                              );
-                              if (user == null) {
-                                return;
-                              }
-
-                              await Navigator.pushAndRemoveUntil(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => HomePageWidget(),
-                                ),
-                                (r) => false,
-                              );
-                            } finally {
-                              setState(() => _loadingButton1 = false);
+                            final user = await createAccountWithEmail(
+                              context,
+                              emailAddressController.text,
+                              passwordController.text,
+                            );
+                            if (user == null) {
+                              return;
                             }
+
+                            await Navigator.pushAndRemoveUntil(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => HomePageWidget(),
+                              ),
+                              (r) => false,
+                            );
                           },
                           text: '上記に同意して登録',
                           options: FFButtonOptions(
@@ -349,7 +342,6 @@ class _CreateSpecialAccountPageWidgetState
                             ),
                             borderRadius: 12,
                           ),
-                          loading: _loadingButton1,
                         ),
                       ),
                       Padding(
@@ -376,24 +368,19 @@ class _CreateSpecialAccountPageWidgetState
                                   alignment: AlignmentDirectional(0, 0),
                                   child: FFButtonWidget(
                                     onPressed: () async {
-                                      setState(() => _loadingButton2 = true);
-                                      try {
-                                        final user =
-                                            await signInWithGoogle(context);
-                                        if (user == null) {
-                                          return;
-                                        }
-                                        await Navigator.pushAndRemoveUntil(
-                                          context,
-                                          MaterialPageRoute(
-                                            builder: (context) =>
-                                                HomePageWidget(),
-                                          ),
-                                          (r) => false,
-                                        );
-                                      } finally {
-                                        setState(() => _loadingButton2 = false);
+                                      final user =
+                                          await signInWithGoogle(context);
+                                      if (user == null) {
+                                        return;
                                       }
+                                      await Navigator.pushAndRemoveUntil(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (context) =>
+                                              HomePageWidget(),
+                                        ),
+                                        (r) => false,
+                                      );
                                     },
                                     text: 'Sign up with Google',
                                     icon: Icon(
@@ -417,7 +404,6 @@ class _CreateSpecialAccountPageWidgetState
                                       ),
                                       borderRadius: 12,
                                     ),
-                                    loading: _loadingButton2,
                                   ),
                                 ),
                                 Align(
@@ -449,7 +435,7 @@ class _CreateSpecialAccountPageWidgetState
                       InkWell(
                         onTap: () async {
                           await launchURL(
-                              'https://baylife-ff782.web.app/terms.html');
+                              'https://baylife.particledrawing.com/terms.html');
                         },
                         child: Text(
                           '利用規約',
