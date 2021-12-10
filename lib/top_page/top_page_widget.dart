@@ -472,7 +472,7 @@ class _TopPageWidgetState extends State<TopPageWidget> {
                                     InkWell(
                                       onTap: () async {
                                         await launchURL(
-                                            'https://play.google.com/store/apps/details?id=com.particledrawing.baylife&utm_source=service-web&pcampaignid=pcampaignidMKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1');
+                                            'https://apps.apple.com/jp/app/makuhari-baylife/id1582919405');
                                       },
                                       child: Image.network(
                                         'https://play.google.com/intl/ja/badges/static/images/badges/ja_badge_web_generic.png',

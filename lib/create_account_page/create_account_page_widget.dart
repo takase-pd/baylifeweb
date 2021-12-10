@@ -216,7 +216,7 @@ class _CreateAccountPageWidgetState extends State<CreateAccountPageWidget> {
                             InkWell(
                               onTap: () async {
                                 await launchURL(
-                                    'https://baylife-ff782.web.app/terms.html');
+                                    'https://baylife.particledrawing.com/terms.html');
                               },
                               child: Text(
                                 '利用規約',
@@ -233,7 +233,7 @@ class _CreateAccountPageWidgetState extends State<CreateAccountPageWidget> {
                               child: InkWell(
                                 onTap: () async {
                                   await launchURL(
-                                      'https://baylife-ff782.web.app/terms.html');
+                                      'https://baylife.particledrawing.com/terms.html');
                                 },
                                 child: FaIcon(
                                   FontAwesomeIcons.externalLinkAlt,
@@ -427,7 +427,7 @@ class _CreateAccountPageWidgetState extends State<CreateAccountPageWidget> {
                       InkWell(
                         onTap: () async {
                           await launchURL(
-                              'https://baylife-ff782.web.app/terms.html');
+                              'https://baylife.particledrawing.com/terms.html');
                         },
                         child: Text(
                           '利用規約',
