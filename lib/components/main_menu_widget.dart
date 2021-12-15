@@ -107,7 +107,7 @@ class _MainMenuWidgetState extends State<MainMenuWidget> {
                                 color: FlutterFlowTheme.textLight,
                                 size: 24,
                               ),
-                            )
+                            ),
                           ],
                         ),
                       ),
@@ -158,7 +158,7 @@ class _MainMenuWidgetState extends State<MainMenuWidget> {
                                 color: FlutterFlowTheme.textLight,
                                 size: 24,
                               ),
-                            )
+                            ),
                           ],
                         ),
                       ),
@@ -206,14 +206,14 @@ class _MainMenuWidgetState extends State<MainMenuWidget> {
                                 color: FlutterFlowTheme.textLight,
                                 size: 24,
                               ),
-                            )
+                            ),
                           ],
                         ),
-                      )
+                      ),
                     ],
                   ),
                 ),
-              )
+              ),
             ],
           ),
           Padding(
@@ -244,11 +244,11 @@ class _MainMenuWidgetState extends State<MainMenuWidget> {
                     Icons.logout,
                     color: FlutterFlowTheme.textLight,
                     size: 24,
-                  )
+                  ),
                 ],
               ),
             ),
-          )
+          ),
         ],
       ),
     );

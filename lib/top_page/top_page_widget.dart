@@ -110,7 +110,7 @@ class _TopPageWidgetState extends State<TopPageWidget> {
                                     fontSize: 20,
                                   ),
                                 ),
-                              )
+                              ),
                             ],
                           ),
                         ),
@@ -175,9 +175,9 @@ class _TopPageWidgetState extends State<TopPageWidget> {
                                   size: 14,
                                 ),
                               ),
-                            )
+                            ),
                           ],
-                        )
+                        ),
                       ],
                     ),
                   ),
@@ -196,10 +196,10 @@ class _TopPageWidgetState extends State<TopPageWidget> {
                             height: 500,
                             fit: BoxFit.cover,
                           ),
-                        )
+                        ),
                       ],
                     ),
-                  )
+                  ),
                 ],
               ),
             ),
@@ -261,9 +261,9 @@ class _TopPageWidgetState extends State<TopPageWidget> {
                             fontFamily: 'Open Sans',
                             color: FlutterFlowTheme.pDark,
                           ),
-                        )
+                        ),
                       ],
-                    )
+                    ),
                   ],
                 ),
               ),
@@ -351,9 +351,9 @@ class _TopPageWidgetState extends State<TopPageWidget> {
                                       color: FlutterFlowTheme.pDark,
                                     ),
                                   ),
-                                )
+                                ),
                               ],
-                            )
+                            ),
                           ],
                         ),
                       ),
@@ -366,12 +366,12 @@ class _TopPageWidgetState extends State<TopPageWidget> {
                             Image.asset(
                               'assets/images/MacBook_Pro.png',
                               fit: BoxFit.fitWidth,
-                            )
+                            ),
                           ],
                         ),
-                      )
+                      ),
                     ],
-                  )
+                  ),
                 ],
               ),
             ),
@@ -404,7 +404,7 @@ class _TopPageWidgetState extends State<TopPageWidget> {
                               width: 250,
                               fit: BoxFit.contain,
                             ),
-                          )
+                          ),
                         ],
                       ),
                     ),
@@ -479,20 +479,20 @@ class _TopPageWidgetState extends State<TopPageWidget> {
                                         width: 230,
                                         fit: BoxFit.cover,
                                       ),
-                                    )
+                                    ),
                                   ],
                                 ),
-                              )
+                              ),
                             ],
-                          )
+                          ),
                         ],
                       ),
-                    )
+                    ),
                   ],
                 ),
               ),
             ),
-            TopPageFooterWidget()
+            TopPageFooterWidget(),
           ],
         ),
       ),

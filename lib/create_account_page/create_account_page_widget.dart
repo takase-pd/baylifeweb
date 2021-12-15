@@ -130,7 +130,7 @@ class _CreateAccountPageWidgetState extends State<CreateAccountPageWidget> {
                                     style: FlutterFlowTheme.bodyText1,
                                   ),
                                 ),
-                              )
+                              ),
                             ],
                           ),
                         ),
@@ -201,7 +201,7 @@ class _CreateAccountPageWidgetState extends State<CreateAccountPageWidget> {
                                     style: FlutterFlowTheme.bodyText1,
                                   ),
                                 ),
-                              )
+                              ),
                             ],
                           ),
                         ),
@@ -280,7 +280,7 @@ class _CreateAccountPageWidgetState extends State<CreateAccountPageWidget> {
                               'に同意の上、ご登録ください。',
                               textAlign: TextAlign.start,
                               style: FlutterFlowTheme.bodyText1,
-                            )
+                            ),
                           ],
                         ),
                       ),
@@ -412,12 +412,12 @@ class _CreateAccountPageWidgetState extends State<CreateAccountPageWidget> {
                                       fit: BoxFit.contain,
                                     ),
                                   ),
-                                )
+                                ),
                               ],
                             ),
                           ),
                         ),
-                      )
+                      ),
                     ],
                   ),
                   Row(
@@ -446,13 +446,13 @@ class _CreateAccountPageWidgetState extends State<CreateAccountPageWidget> {
                             style: FlutterFlowTheme.bodyText1,
                           ),
                         ),
-                      )
+                      ),
                     ],
-                  )
+                  ),
                 ],
               ),
             ),
-          )
+          ),
         ],
       ),
     );

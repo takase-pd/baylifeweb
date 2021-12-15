@@ -112,7 +112,7 @@ class _PlanPageWidgetState extends State<PlanPageWidget> {
                             fontSize: 24,
                           ),
                         ),
-                      )
+                      ),
                     ],
                   ),
                   Container(
@@ -191,7 +191,7 @@ class _PlanPageWidgetState extends State<PlanPageWidget> {
                                   'を利用しており、安全にお申し込みいただけます。',
                                   textAlign: TextAlign.start,
                                   style: FlutterFlowTheme.bodyText1,
-                                )
+                                ),
                               ],
                             ),
                           ),
@@ -266,13 +266,13 @@ class _PlanPageWidgetState extends State<PlanPageWidget> {
                                 'に同意の上、下記のプランをお申し込みください。',
                                 textAlign: TextAlign.start,
                                 style: FlutterFlowTheme.bodyText1,
-                              )
+                              ),
                             ],
-                          )
+                          ),
                         ],
                       ),
                     ),
-                  )
+                  ),
                 ],
               ),
             ),
@@ -316,7 +316,7 @@ class _PlanPageWidgetState extends State<PlanPageWidget> {
                             '企業規模が大きい場合、複数お申し込みをお願いする可能性があります。',
                             style: FlutterFlowTheme.bodyText1,
                           ),
-                        )
+                        ),
                       ],
                     ),
                   ),
@@ -407,9 +407,9 @@ class _PlanPageWidgetState extends State<PlanPageWidget> {
                                                 fontWeight: FontWeight.w600,
                                               ),
                                             ),
-                                          )
+                                          ),
                                         ],
-                                      )
+                                      ),
                                     ],
                                   ),
                                   Row(
@@ -454,11 +454,11 @@ class _PlanPageWidgetState extends State<PlanPageWidget> {
                                                 fontWeight: FontWeight.w600,
                                               ),
                                             ),
-                                          )
+                                          ),
                                         ],
-                                      )
+                                      ),
                                     ],
-                                  )
+                                  ),
                                 ],
                               ),
                             ),
@@ -551,9 +551,9 @@ class _PlanPageWidgetState extends State<PlanPageWidget> {
                                                   fontWeight: FontWeight.w600,
                                                 ),
                                               ),
-                                            )
+                                            ),
                                           ],
-                                        )
+                                        ),
                                       ],
                                     ),
                                     Row(
@@ -598,20 +598,20 @@ class _PlanPageWidgetState extends State<PlanPageWidget> {
                                                   fontWeight: FontWeight.w600,
                                                 ),
                                               ),
-                                            )
+                                            ),
                                           ],
-                                        )
+                                        ),
                                       ],
-                                    )
+                                    ),
                                   ],
                                 ),
                               ),
                             ),
                           ),
                         ),
-                      )
+                      ),
                     ],
-                  )
+                  ),
                 ],
               ),
             ),
@@ -665,7 +665,7 @@ class _PlanPageWidgetState extends State<PlanPageWidget> {
                             '団体規模が大きい場合、複数お申し込みをお願いする可能性があります。',
                             style: FlutterFlowTheme.bodyText1,
                           ),
-                        )
+                        ),
                       ],
                     ),
                   ),
@@ -716,9 +716,9 @@ class _PlanPageWidgetState extends State<PlanPageWidget> {
                           ),
                           borderRadius: 12,
                         ),
-                      )
+                      ),
                     ],
-                  )
+                  ),
                 ],
               ),
             ),
@@ -762,7 +762,7 @@ class _PlanPageWidgetState extends State<PlanPageWidget> {
                             '事業規模が大きい場合、複数お申し込みをお願いする可能性があります。',
                             style: FlutterFlowTheme.bodyText1,
                           ),
-                        )
+                        ),
                       ],
                     ),
                   ),
@@ -853,9 +853,9 @@ class _PlanPageWidgetState extends State<PlanPageWidget> {
                                                 fontWeight: FontWeight.w600,
                                               ),
                                             ),
-                                          )
+                                          ),
                                         ],
-                                      )
+                                      ),
                                     ],
                                   ),
                                   Row(
@@ -900,19 +900,19 @@ class _PlanPageWidgetState extends State<PlanPageWidget> {
                                                 fontWeight: FontWeight.w600,
                                               ),
                                             ),
-                                          )
+                                          ),
                                         ],
-                                      )
+                                      ),
                                     ],
-                                  )
+                                  ),
                                 ],
                               ),
                             ),
                           ),
                         ),
-                      )
+                      ),
                     ],
-                  )
+                  ),
                 ],
               ),
             ),
@@ -967,7 +967,7 @@ class _PlanPageWidgetState extends State<PlanPageWidget> {
                             '企業規模が大きい場合、複数お申し込みをお願いする可能性があります。',
                             style: FlutterFlowTheme.bodyText1,
                           ),
-                        )
+                        ),
                       ],
                     ),
                   ),
@@ -1018,13 +1018,13 @@ class _PlanPageWidgetState extends State<PlanPageWidget> {
                           ),
                           borderRadius: 12,
                         ),
-                      )
+                      ),
                     ],
-                  )
+                  ),
                 ],
               ),
             ),
-            TopPageFooterWidget()
+            TopPageFooterWidget(),
           ],
         ),
       ),

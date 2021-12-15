@@ -142,9 +142,9 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                                   color: FlutterFlowTheme.pDark,
                                                   size: 25,
                                                 ),
-                                              )
+                                              ),
                                             ],
-                                          )
+                                          ),
                                         ],
                                       ),
                                       Text(
@@ -158,7 +158,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                           fontFamily: 'Open Sans',
                                           color: FlutterFlowTheme.textDark,
                                         ),
-                                      )
+                                      ),
                                     ],
                                   ),
                                 ),
@@ -169,10 +169,10 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                       },
                     ),
                   ),
-                )
+                ),
               ],
             ),
-          )
+          ),
         ],
       ),
     );
