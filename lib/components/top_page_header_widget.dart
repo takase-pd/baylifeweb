@@ -72,10 +72,10 @@ class _TopPageHeaderWidgetState extends State<TopPageHeaderWidget> {
                     ),
                     borderRadius: 5,
                   ),
-                )
+                ),
               ],
             ),
-          )
+          ),
         ],
       ),
     );

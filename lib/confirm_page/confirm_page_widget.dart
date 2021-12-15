@@ -143,7 +143,7 @@ class _ConfirmPageWidgetState extends State<ConfirmPageWidget> {
                                       style: FlutterFlowTheme.bodyText1,
                                     );
                                   },
-                                )
+                                ),
                               ],
                             ),
                           ),
@@ -165,7 +165,7 @@ class _ConfirmPageWidgetState extends State<ConfirmPageWidget> {
                                 Text(
                                   '投稿に表示されます。機密情報などは記載しないでください。',
                                   style: FlutterFlowTheme.bodyText1,
-                                )
+                                ),
                               ],
                             ),
                           ),
@@ -198,7 +198,7 @@ class _ConfirmPageWidgetState extends State<ConfirmPageWidget> {
                                           ),
                                         ),
                                       ),
-                                    )
+                                    ),
                                   ],
                                 ),
                               ),
@@ -228,7 +228,7 @@ class _ConfirmPageWidgetState extends State<ConfirmPageWidget> {
                                           ),
                                         ),
                                       ),
-                                    )
+                                    ),
                                   ],
                                 ),
                               ),
@@ -258,7 +258,7 @@ class _ConfirmPageWidgetState extends State<ConfirmPageWidget> {
                                           ),
                                         ),
                                       ),
-                                    )
+                                    ),
                                   ],
                                 ),
                               ),
@@ -288,7 +288,7 @@ class _ConfirmPageWidgetState extends State<ConfirmPageWidget> {
                                           ),
                                         ),
                                       ),
-                                    )
+                                    ),
                                   ],
                                 ),
                               ),
@@ -318,7 +318,7 @@ class _ConfirmPageWidgetState extends State<ConfirmPageWidget> {
                                           ),
                                         ),
                                       ),
-                                    )
+                                    ),
                                   ],
                                 ),
                               ),
@@ -362,11 +362,11 @@ class _ConfirmPageWidgetState extends State<ConfirmPageWidget> {
                                               width: 100,
                                               height: 60,
                                               fit: BoxFit.cover,
-                                            )
+                                            ),
                                           ],
                                         ),
                                       ),
-                                    )
+                                    ),
                                   ],
                                 ),
                               ),
@@ -396,7 +396,7 @@ class _ConfirmPageWidgetState extends State<ConfirmPageWidget> {
                                           ),
                                         ),
                                       ),
-                                    )
+                                    ),
                                   ],
                                 ),
                               ),
@@ -443,11 +443,11 @@ class _ConfirmPageWidgetState extends State<ConfirmPageWidget> {
                                                 color:
                                                     FlutterFlowTheme.textDark,
                                               ),
-                                            )
+                                            ),
                                           ],
                                         ),
                                       ),
-                                    )
+                                    ),
                                   ],
                                 ),
                               ),
@@ -494,11 +494,11 @@ class _ConfirmPageWidgetState extends State<ConfirmPageWidget> {
                                                 color:
                                                     FlutterFlowTheme.textDark,
                                               ),
-                                            )
+                                            ),
                                           ],
                                         ),
                                       ),
-                                    )
+                                    ),
                                   ],
                                 ),
                               ),
@@ -528,7 +528,7 @@ class _ConfirmPageWidgetState extends State<ConfirmPageWidget> {
                                           ),
                                         ),
                                       ),
-                                    )
+                                    ),
                                   ],
                                 ),
                               ),
@@ -558,7 +558,7 @@ class _ConfirmPageWidgetState extends State<ConfirmPageWidget> {
                                           ),
                                         ),
                                       ),
-                                    )
+                                    ),
                                   ],
                                 ),
                               ),
@@ -588,10 +588,10 @@ class _ConfirmPageWidgetState extends State<ConfirmPageWidget> {
                                           ),
                                         ),
                                       ),
-                                    )
+                                    ),
                                   ],
                                 ),
-                              )
+                              ),
                             ],
                           ),
                           Padding(
@@ -612,7 +612,7 @@ class _ConfirmPageWidgetState extends State<ConfirmPageWidget> {
                                 Text(
                                   '投稿には表示されません。管理者が投稿の確認、連絡などに使用します。',
                                   style: FlutterFlowTheme.bodyText1,
-                                )
+                                ),
                               ],
                             ),
                           ),
@@ -642,7 +642,7 @@ class _ConfirmPageWidgetState extends State<ConfirmPageWidget> {
                                       ),
                                     ),
                                   ),
-                                )
+                                ),
                               ],
                             ),
                           ),
@@ -672,7 +672,7 @@ class _ConfirmPageWidgetState extends State<ConfirmPageWidget> {
                                       ),
                                     ),
                                   ),
-                                )
+                                ),
                               ],
                             ),
                           ),
@@ -702,7 +702,7 @@ class _ConfirmPageWidgetState extends State<ConfirmPageWidget> {
                                       ),
                                     ),
                                   ),
-                                )
+                                ),
                               ],
                             ),
                           ),
@@ -732,7 +732,7 @@ class _ConfirmPageWidgetState extends State<ConfirmPageWidget> {
                                       ),
                                     ),
                                   ),
-                                )
+                                ),
                               ],
                             ),
                           ),
@@ -773,7 +773,7 @@ class _ConfirmPageWidgetState extends State<ConfirmPageWidget> {
                                               ListTileControlAffinity.trailing,
                                         ),
                                       ),
-                                    )
+                                    ),
                                   ],
                                 ),
                                 Row(
@@ -959,23 +959,23 @@ class _ConfirmPageWidgetState extends State<ConfirmPageWidget> {
                                                 ),
                                               );
                                             },
-                                          )
+                                          ),
                                         ],
                                       ),
-                                    )
+                                    ),
                                   ],
-                                )
+                                ),
                               ],
                             ),
-                          )
+                          ),
                         ],
                       ),
                     ),
                   ),
-                )
+                ),
               ],
             ),
-          )
+          ),
         ],
       ),
     );

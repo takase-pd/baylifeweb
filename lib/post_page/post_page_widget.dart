@@ -103,9 +103,8 @@ class _PostPageWidgetState extends State<PostPageWidget> {
                           mainAxisSize: MainAxisSize.max,
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Visibility(
-                              visible: (widget.subscription) == ('empty'),
-                              child: Column(
+                            if ((widget.subscription) == ('empty'))
+                              Column(
                                 mainAxisSize: MainAxisSize.max,
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
@@ -135,13 +134,11 @@ class _PostPageWidgetState extends State<PostPageWidget> {
                                       'こちらよりプランをお申込みください。',
                                       style: FlutterFlowTheme.bodyText1,
                                     ),
-                                  )
+                                  ),
                                 ],
                               ),
-                            ),
-                            Visibility(
-                              visible: (widget.subscription) != ('empty'),
-                              child: Column(
+                            if ((widget.subscription) != ('empty'))
+                              Column(
                                 mainAxisSize: MainAxisSize.max,
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
@@ -199,7 +196,7 @@ class _PostPageWidgetState extends State<PostPageWidget> {
                                               style: FlutterFlowTheme.bodyText1,
                                             );
                                           },
-                                        )
+                                        ),
                                       ],
                                     ),
                                   ),
@@ -223,7 +220,7 @@ class _PostPageWidgetState extends State<PostPageWidget> {
                                         Text(
                                           '投稿に表示されます。機密情報などは記載しないでください。',
                                           style: FlutterFlowTheme.bodyText1,
-                                        )
+                                        ),
                                       ],
                                     ),
                                   ),
@@ -288,6 +285,9 @@ class _PostPageWidgetState extends State<PostPageWidget> {
                                                                 .first
                                                             : null;
                                                     return FlutterFlowDropDown(
+                                                      initialOption:
+                                                          dropDownValue ??=
+                                                              '総合',
                                                       options:
                                                           dropDownCatDdRecord
                                                               .cats
@@ -321,7 +321,7 @@ class _PostPageWidgetState extends State<PostPageWidget> {
                                                   },
                                                 ),
                                               ),
-                                            )
+                                            ),
                                           ],
                                         ),
                                       ),
@@ -407,7 +407,7 @@ class _PostPageWidgetState extends State<PostPageWidget> {
                                                   ),
                                                 ),
                                               ),
-                                            )
+                                            ),
                                           ],
                                         ),
                                       ),
@@ -500,7 +500,7 @@ class _PostPageWidgetState extends State<PostPageWidget> {
                                                   },
                                                 ),
                                               ),
-                                            )
+                                            ),
                                           ],
                                         ),
                                       ),
@@ -597,7 +597,7 @@ class _PostPageWidgetState extends State<PostPageWidget> {
                                                   },
                                                 ),
                                               ),
-                                            )
+                                            ),
                                           ],
                                         ),
                                       ),
@@ -693,7 +693,7 @@ class _PostPageWidgetState extends State<PostPageWidget> {
                                                   },
                                                 ),
                                               ),
-                                            )
+                                            ),
                                           ],
                                         ),
                                       ),
@@ -763,7 +763,7 @@ class _PostPageWidgetState extends State<PostPageWidget> {
                                                               fontSize: 10,
                                                             ),
                                                           ),
-                                                        )
+                                                        ),
                                                       ],
                                                     ),
                                                     FFButtonWidget(
@@ -835,11 +835,11 @@ class _PostPageWidgetState extends State<PostPageWidget> {
                                                         ),
                                                         borderRadius: 12,
                                                       ),
-                                                    )
+                                                    ),
                                                   ],
                                                 ),
                                               ),
-                                            )
+                                            ),
                                           ],
                                         ),
                                       ),
@@ -932,7 +932,7 @@ class _PostPageWidgetState extends State<PostPageWidget> {
                                                   },
                                                 ),
                                               ),
-                                            )
+                                            ),
                                           ],
                                         ),
                                       ),
@@ -1013,7 +1013,7 @@ class _PostPageWidgetState extends State<PostPageWidget> {
                                                                       .w500,
                                                             ),
                                                           ),
-                                                        )
+                                                        ),
                                                       ],
                                                     ),
                                                     FFButtonWidget(
@@ -1055,11 +1055,11 @@ class _PostPageWidgetState extends State<PostPageWidget> {
                                                         ),
                                                         borderRadius: 12,
                                                       ),
-                                                    )
+                                                    ),
                                                   ],
                                                 ),
                                               ),
-                                            )
+                                            ),
                                           ],
                                         ),
                                       ),
@@ -1140,7 +1140,7 @@ class _PostPageWidgetState extends State<PostPageWidget> {
                                                                       .w500,
                                                             ),
                                                           ),
-                                                        )
+                                                        ),
                                                       ],
                                                     ),
                                                     FFButtonWidget(
@@ -1182,11 +1182,11 @@ class _PostPageWidgetState extends State<PostPageWidget> {
                                                         ),
                                                         borderRadius: 12,
                                                       ),
-                                                    )
+                                                    ),
                                                   ],
                                                 ),
                                               ),
-                                            )
+                                            ),
                                           ],
                                         ),
                                       ),
@@ -1279,7 +1279,7 @@ class _PostPageWidgetState extends State<PostPageWidget> {
                                                   },
                                                 ),
                                               ),
-                                            )
+                                            ),
                                           ],
                                         ),
                                       ),
@@ -1373,7 +1373,7 @@ class _PostPageWidgetState extends State<PostPageWidget> {
                                                   },
                                                 ),
                                               ),
-                                            )
+                                            ),
                                           ],
                                         ),
                                       ),
@@ -1461,10 +1461,10 @@ class _PostPageWidgetState extends State<PostPageWidget> {
                                                       TextInputType.url,
                                                 ),
                                               ),
-                                            )
+                                            ),
                                           ],
                                         ),
-                                      )
+                                      ),
                                     ],
                                   ),
                                   Padding(
@@ -1487,7 +1487,7 @@ class _PostPageWidgetState extends State<PostPageWidget> {
                                         Text(
                                           '投稿には表示されません。管理者が投稿の確認、連絡などに使用します。',
                                           style: FlutterFlowTheme.bodyText1,
-                                        )
+                                        ),
                                       ],
                                     ),
                                   ),
@@ -1569,7 +1569,7 @@ class _PostPageWidgetState extends State<PostPageWidget> {
                                                   ),
                                                 ),
                                               ),
-                                            )
+                                            ),
                                           ],
                                         ),
                                       ),
@@ -1649,7 +1649,7 @@ class _PostPageWidgetState extends State<PostPageWidget> {
                                                   ),
                                                 ),
                                               ),
-                                            )
+                                            ),
                                           ],
                                         ),
                                       ),
@@ -1737,7 +1737,7 @@ class _PostPageWidgetState extends State<PostPageWidget> {
                                                       TextInputType.phone,
                                                 ),
                                               ),
-                                            )
+                                            ),
                                           ],
                                         ),
                                       ),
@@ -1823,7 +1823,7 @@ class _PostPageWidgetState extends State<PostPageWidget> {
                                                   ),
                                                 ),
                                               ),
-                                            )
+                                            ),
                                           ],
                                         ),
                                       ),
@@ -1912,10 +1912,10 @@ class _PostPageWidgetState extends State<PostPageWidget> {
                                                       TextInputType.multiline,
                                                 ),
                                               ),
-                                            )
+                                            ),
                                           ],
                                         ),
-                                      )
+                                      ),
                                     ],
                                   ),
                                   Column(
@@ -1964,7 +1964,7 @@ class _PostPageWidgetState extends State<PostPageWidget> {
                                                         .trailing,
                                               ),
                                             ),
-                                          )
+                                          ),
                                         ],
                                       ),
                                       Row(
@@ -2075,26 +2075,25 @@ class _PostPageWidgetState extends State<PostPageWidget> {
                                                       ),
                                                       borderRadius: 12,
                                                     ),
-                                                  )
+                                                  ),
                                                 ],
                                               ),
                                             ),
-                                          )
+                                          ),
                                         ],
-                                      )
+                                      ),
                                     ],
-                                  )
+                                  ),
                                 ],
                               ),
-                            )
                           ],
                         ),
                       ),
                     ),
-                  )
+                  ),
                 ],
               ),
-            )
+            ),
           ],
         ),
       ),

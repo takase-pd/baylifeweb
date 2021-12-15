@@ -125,7 +125,7 @@ class _LoginPageWidgetState extends State<LoginPageWidget> {
                                     ),
                                   ),
                                 ),
-                              )
+                              ),
                             ],
                           ),
                         ),
@@ -196,7 +196,7 @@ class _LoginPageWidgetState extends State<LoginPageWidget> {
                                     style: FlutterFlowTheme.bodyText1,
                                   ),
                                 ),
-                              )
+                              ),
                             ],
                           ),
                         ),
@@ -359,11 +359,11 @@ class _LoginPageWidgetState extends State<LoginPageWidget> {
                                     fit: BoxFit.contain,
                                   ),
                                 ),
-                              )
+                              ),
                             ],
                           ),
                         ),
-                      )
+                      ),
                     ],
                   ),
                   Row(
@@ -380,13 +380,13 @@ class _LoginPageWidgetState extends State<LoginPageWidget> {
                           'プライバシーポリシー',
                           style: FlutterFlowTheme.bodyText1,
                         ),
-                      )
+                      ),
                     ],
-                  )
+                  ),
                 ],
               ),
             ),
-          )
+          ),
         ],
       ),
     );

@@ -65,10 +65,10 @@ class _CreateSpecialAccountPageWidgetState
                           'MAKUHARI Bay Life',
                           style: FlutterFlowTheme.subtitle1,
                         ),
-                      )
+                      ),
                     ],
                   ),
-                )
+                ),
               ],
             ),
           ),
@@ -152,7 +152,7 @@ class _CreateSpecialAccountPageWidgetState
                                     style: FlutterFlowTheme.bodyText1,
                                   ),
                                 ),
-                              )
+                              ),
                             ],
                           ),
                         ),
@@ -223,7 +223,7 @@ class _CreateSpecialAccountPageWidgetState
                                     style: FlutterFlowTheme.bodyText1,
                                   ),
                                 ),
-                              )
+                              ),
                             ],
                           ),
                         ),
@@ -302,7 +302,7 @@ class _CreateSpecialAccountPageWidgetState
                               'に同意の上、ご登録ください。',
                               textAlign: TextAlign.start,
                               style: FlutterFlowTheme.bodyText1,
-                            )
+                            ),
                           ],
                         ),
                       ),
@@ -420,12 +420,12 @@ class _CreateSpecialAccountPageWidgetState
                                       fit: BoxFit.contain,
                                     ),
                                   ),
-                                )
+                                ),
                               ],
                             ),
                           ),
                         ),
-                      )
+                      ),
                     ],
                   ),
                   Row(
@@ -454,13 +454,13 @@ class _CreateSpecialAccountPageWidgetState
                             style: FlutterFlowTheme.bodyText1,
                           ),
                         ),
-                      )
+                      ),
                     ],
-                  )
+                  ),
                 ],
               ),
             ),
-          )
+          ),
         ],
       ),
     );

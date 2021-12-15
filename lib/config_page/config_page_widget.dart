@@ -70,17 +70,17 @@ class _ConfigPageWidgetState extends State<ConfigPageWidget> {
                                         r'''$.result.subscription''')
                                     .toString(),
                                 style: FlutterFlowTheme.bodyText1,
-                              )
+                              ),
                             ],
                           ),
-                        )
+                        ),
                       ],
                     ),
                   ),
-                )
+                ),
               ],
             ),
-          )
+          ),
         ],
       ),
     );
