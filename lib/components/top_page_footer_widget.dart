@@ -104,7 +104,7 @@ class _TopPageFooterWidgetState extends State<TopPageFooterWidget> {
                                       style: FlutterFlowTheme.bodyText1,
                                     ),
                                   ),
-                                )
+                                ),
                               ],
                             ),
                           ),
@@ -158,7 +158,7 @@ class _TopPageFooterWidgetState extends State<TopPageFooterWidget> {
                                       style: FlutterFlowTheme.bodyText1,
                                     ),
                                   ),
-                                )
+                                ),
                               ],
                             ),
                           ),
@@ -221,15 +221,15 @@ class _TopPageFooterWidgetState extends State<TopPageFooterWidget> {
                                       style: FlutterFlowTheme.bodyText1,
                                     ),
                                   ),
-                                )
+                                ),
                               ],
                             ),
-                          )
+                          ),
                         ],
-                      )
+                      ),
                     ],
                   ),
-                )
+                ),
               ],
             ),
           ),
@@ -239,7 +239,7 @@ class _TopPageFooterWidgetState extends State<TopPageFooterWidget> {
               fontFamily: 'Open Sans',
               fontSize: 14,
             ),
-          )
+          ),
         ],
       ),
     );
