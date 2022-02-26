@@ -71,22 +71,23 @@ class _PostPageWidgetState extends State<PostPageWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return Form(
-      key: formKey,
-      child: Scaffold(
-        key: scaffoldKey,
-        appBar: PreferredSize(
-          preferredSize: Size.fromHeight(8),
-          child: AppBar(
-            backgroundColor: Colors.transparent,
-            automaticallyImplyLeading: false,
-            flexibleSpace: HeaderWidget(),
-            actions: [],
-            elevation: 0,
-          ),
+    return Scaffold(
+      key: scaffoldKey,
+      appBar: PreferredSize(
+        preferredSize: Size.fromHeight(8),
+        child: AppBar(
+          backgroundColor: Colors.transparent,
+          automaticallyImplyLeading: false,
+          flexibleSpace: HeaderWidget(),
+          actions: [],
+          elevation: 0,
         ),
-        backgroundColor: FlutterFlowTheme.tertiaryColor,
-        body: Column(
+      ),
+      backgroundColor: FlutterFlowTheme.of(context).tertiaryColor,
+      body: Form(
+        key: formKey,
+        autovalidateMode: AutovalidateMode.disabled,
+        child: Column(
           mainAxisSize: MainAxisSize.max,
           children: [
             Expanded(
@@ -103,27 +104,28 @@ class _PostPageWidgetState extends State<PostPageWidget> {
                           mainAxisSize: MainAxisSize.max,
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            if ((widget.subscription) == ('empty'))
+                            if ((widget.subscription) == 'empty')
                               Column(
                                 mainAxisSize: MainAxisSize.max,
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Text(
                                     '投稿',
-                                    style: FlutterFlowTheme.title1,
+                                    style: FlutterFlowTheme.of(context).title1,
                                   ),
                                   Text(
                                     '投稿契約がありません。',
-                                    style: FlutterFlowTheme.bodyText1,
+                                    style:
+                                        FlutterFlowTheme.of(context).bodyText1,
                                   ),
                                   InkWell(
                                     onTap: () async {
-                                      plans = await getPlanCall();
+                                      plans = await GetPlanCall.call();
                                       await Navigator.push(
                                         context,
                                         MaterialPageRoute(
                                           builder: (context) => PlanPageWidget(
-                                            plans: plans.jsonBody,
+                                            plans: (plans?.jsonBody ?? ''),
                                           ),
                                         ),
                                       );
@@ -132,12 +134,13 @@ class _PostPageWidgetState extends State<PostPageWidget> {
                                     },
                                     child: Text(
                                       'こちらよりプランをお申込みください。',
-                                      style: FlutterFlowTheme.bodyText1,
+                                      style: FlutterFlowTheme.of(context)
+                                          .bodyText1,
                                     ),
                                   ),
                                 ],
                               ),
-                            if ((widget.subscription) != ('empty'))
+                            if ((widget.subscription) != 'empty')
                               Column(
                                 mainAxisSize: MainAxisSize.max,
                                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -156,7 +159,8 @@ class _PostPageWidgetState extends State<PostPageWidget> {
                                                   0, 0, 0, 8),
                                           child: Text(
                                             '投稿',
-                                            style: FlutterFlowTheme.title1,
+                                            style: FlutterFlowTheme.of(context)
+                                                .title1,
                                           ),
                                         ),
                                         StreamBuilder<List<InfoAdminRecord>>(
@@ -171,7 +175,8 @@ class _PostPageWidgetState extends State<PostPageWidget> {
                                                   width: 50,
                                                   height: 50,
                                                   child: SpinKitPulse(
-                                                    color: FlutterFlowTheme
+                                                    color: FlutterFlowTheme.of(
+                                                            context)
                                                         .primaryColor,
                                                     size: 50,
                                                   ),
@@ -193,7 +198,9 @@ class _PostPageWidgetState extends State<PostPageWidget> {
                                                     : null;
                                             return Text(
                                               textInfoAdminRecord.postInfo,
-                                              style: FlutterFlowTheme.bodyText1,
+                                              style:
+                                                  FlutterFlowTheme.of(context)
+                                                      .bodyText1,
                                             );
                                           },
                                         ),
@@ -214,12 +221,14 @@ class _PostPageWidgetState extends State<PostPageWidget> {
                                                   0, 0, 0, 8),
                                           child: Text(
                                             '投稿内容',
-                                            style: FlutterFlowTheme.title2,
+                                            style: FlutterFlowTheme.of(context)
+                                                .title2,
                                           ),
                                         ),
                                         Text(
                                           '投稿に表示されます。機密情報などは記載しないでください。',
-                                          style: FlutterFlowTheme.bodyText1,
+                                          style: FlutterFlowTheme.of(context)
+                                              .bodyText1,
                                         ),
                                       ],
                                     ),
@@ -243,7 +252,8 @@ class _PostPageWidgetState extends State<PostPageWidget> {
                                               height: 60,
                                               decoration: BoxDecoration(
                                                 color:
-                                                    FlutterFlowTheme.background,
+                                                    FlutterFlowTheme.of(context)
+                                                        .background,
                                                 borderRadius:
                                                     BorderRadius.circular(8),
                                               ),
@@ -263,9 +273,9 @@ class _PostPageWidgetState extends State<PostPageWidget> {
                                                           width: 50,
                                                           height: 50,
                                                           child: SpinKitPulse(
-                                                            color:
-                                                                FlutterFlowTheme
-                                                                    .primaryColor,
+                                                            color: FlutterFlowTheme
+                                                                    .of(context)
+                                                                .primaryColor,
                                                             size: 50,
                                                           ),
                                                         ),
@@ -288,10 +298,7 @@ class _PostPageWidgetState extends State<PostPageWidget> {
                                                       initialOption:
                                                           dropDownValue ??=
                                                               '総合',
-                                                      options:
-                                                          dropDownCatDdRecord
-                                                              .cats
-                                                              .toList(),
+                                                      options: [].toList(),
                                                       onChanged: (val) =>
                                                           setState(() =>
                                                               dropDownValue =
@@ -299,13 +306,16 @@ class _PostPageWidgetState extends State<PostPageWidget> {
                                                       width: 130,
                                                       height: 40,
                                                       textStyle:
-                                                          FlutterFlowTheme
+                                                          FlutterFlowTheme.of(
+                                                                  context)
                                                               .bodyText1
                                                               .override(
-                                                        fontFamily: 'Open Sans',
-                                                        color: FlutterFlowTheme
-                                                            .textDark,
-                                                      ),
+                                                                fontFamily:
+                                                                    'Open Sans',
+                                                                color: FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .textDark,
+                                                              ),
                                                       fillColor:
                                                           Color(0x00FFFFFF),
                                                       elevation: 2,
@@ -339,7 +349,8 @@ class _PostPageWidgetState extends State<PostPageWidget> {
                                               height: 60,
                                               decoration: BoxDecoration(
                                                 color:
-                                                    FlutterFlowTheme.background,
+                                                    FlutterFlowTheme.of(context)
+                                                        .background,
                                                 borderRadius:
                                                     BorderRadius.circular(8),
                                               ),
@@ -351,15 +362,6 @@ class _PostPageWidgetState extends State<PostPageWidget> {
                                                   obscureText: false,
                                                   decoration: InputDecoration(
                                                     labelText: 'その他の希望カテゴリー',
-                                                    labelStyle: FlutterFlowTheme
-                                                        .bodyText2
-                                                        .override(
-                                                      fontFamily: 'Montserrat',
-                                                      color: FlutterFlowTheme
-                                                          .textDark,
-                                                      fontWeight:
-                                                          FontWeight.w500,
-                                                    ),
                                                     enabledBorder:
                                                         UnderlineInputBorder(
                                                       borderSide: BorderSide(
@@ -397,14 +399,19 @@ class _PostPageWidgetState extends State<PostPageWidget> {
                                                       ),
                                                     ),
                                                   ),
-                                                  style: FlutterFlowTheme
+                                                  style: FlutterFlowTheme.of(
+                                                          context)
                                                       .bodyText2
                                                       .override(
-                                                    fontFamily: 'Montserrat',
-                                                    color: FlutterFlowTheme
-                                                        .textDark,
-                                                    fontWeight: FontWeight.w500,
-                                                  ),
+                                                        fontFamily:
+                                                            'Montserrat',
+                                                        color:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .textDark,
+                                                        fontWeight:
+                                                            FontWeight.w500,
+                                                      ),
                                                 ),
                                               ),
                                             ),
@@ -425,7 +432,8 @@ class _PostPageWidgetState extends State<PostPageWidget> {
                                               height: 60,
                                               decoration: BoxDecoration(
                                                 color:
-                                                    FlutterFlowTheme.background,
+                                                    FlutterFlowTheme.of(context)
+                                                        .background,
                                                 borderRadius:
                                                     BorderRadius.circular(8),
                                               ),
@@ -437,15 +445,6 @@ class _PostPageWidgetState extends State<PostPageWidget> {
                                                   obscureText: false,
                                                   decoration: InputDecoration(
                                                     labelText: 'タイトル',
-                                                    labelStyle: FlutterFlowTheme
-                                                        .bodyText2
-                                                        .override(
-                                                      fontFamily: 'Montserrat',
-                                                      color: FlutterFlowTheme
-                                                          .textDark,
-                                                      fontWeight:
-                                                          FontWeight.w500,
-                                                    ),
                                                     enabledBorder:
                                                         UnderlineInputBorder(
                                                       borderSide: BorderSide(
@@ -483,14 +482,19 @@ class _PostPageWidgetState extends State<PostPageWidget> {
                                                       ),
                                                     ),
                                                   ),
-                                                  style: FlutterFlowTheme
+                                                  style: FlutterFlowTheme.of(
+                                                          context)
                                                       .bodyText2
                                                       .override(
-                                                    fontFamily: 'Montserrat',
-                                                    color: FlutterFlowTheme
-                                                        .textDark,
-                                                    fontWeight: FontWeight.w500,
-                                                  ),
+                                                        fontFamily:
+                                                            'Montserrat',
+                                                        color:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .textDark,
+                                                        fontWeight:
+                                                            FontWeight.w500,
+                                                      ),
                                                   validator: (val) {
                                                     if (val.isEmpty) {
                                                       return 'タイトルを入力してください。';
@@ -518,7 +522,8 @@ class _PostPageWidgetState extends State<PostPageWidget> {
                                               height: 120,
                                               decoration: BoxDecoration(
                                                 color:
-                                                    FlutterFlowTheme.background,
+                                                    FlutterFlowTheme.of(context)
+                                                        .background,
                                                 borderRadius:
                                                     BorderRadius.circular(8),
                                               ),
@@ -531,15 +536,6 @@ class _PostPageWidgetState extends State<PostPageWidget> {
                                                   decoration: InputDecoration(
                                                     labelText:
                                                         '概要＊投稿一覧ページに表示されます。',
-                                                    labelStyle: FlutterFlowTheme
-                                                        .bodyText2
-                                                        .override(
-                                                      fontFamily: 'Montserrat',
-                                                      color: FlutterFlowTheme
-                                                          .textDark,
-                                                      fontWeight:
-                                                          FontWeight.w500,
-                                                    ),
                                                     enabledBorder:
                                                         UnderlineInputBorder(
                                                       borderSide: BorderSide(
@@ -577,14 +573,19 @@ class _PostPageWidgetState extends State<PostPageWidget> {
                                                       ),
                                                     ),
                                                   ),
-                                                  style: FlutterFlowTheme
+                                                  style: FlutterFlowTheme.of(
+                                                          context)
                                                       .bodyText2
                                                       .override(
-                                                    fontFamily: 'Montserrat',
-                                                    color: FlutterFlowTheme
-                                                        .textDark,
-                                                    fontWeight: FontWeight.w500,
-                                                  ),
+                                                        fontFamily:
+                                                            'Montserrat',
+                                                        color:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .textDark,
+                                                        fontWeight:
+                                                            FontWeight.w500,
+                                                      ),
                                                   maxLines: 10,
                                                   keyboardType:
                                                       TextInputType.multiline,
@@ -615,7 +616,8 @@ class _PostPageWidgetState extends State<PostPageWidget> {
                                               height: 330,
                                               decoration: BoxDecoration(
                                                 color:
-                                                    FlutterFlowTheme.background,
+                                                    FlutterFlowTheme.of(context)
+                                                        .background,
                                                 borderRadius:
                                                     BorderRadius.circular(8),
                                               ),
@@ -627,15 +629,6 @@ class _PostPageWidgetState extends State<PostPageWidget> {
                                                   obscureText: false,
                                                   decoration: InputDecoration(
                                                     labelText: '投稿詳細',
-                                                    labelStyle: FlutterFlowTheme
-                                                        .bodyText2
-                                                        .override(
-                                                      fontFamily: 'Montserrat',
-                                                      color: FlutterFlowTheme
-                                                          .textDark,
-                                                      fontWeight:
-                                                          FontWeight.w500,
-                                                    ),
                                                     enabledBorder:
                                                         UnderlineInputBorder(
                                                       borderSide: BorderSide(
@@ -673,14 +666,19 @@ class _PostPageWidgetState extends State<PostPageWidget> {
                                                       ),
                                                     ),
                                                   ),
-                                                  style: FlutterFlowTheme
+                                                  style: FlutterFlowTheme.of(
+                                                          context)
                                                       .bodyText2
                                                       .override(
-                                                    fontFamily: 'Montserrat',
-                                                    color: FlutterFlowTheme
-                                                        .textDark,
-                                                    fontWeight: FontWeight.w500,
-                                                  ),
+                                                        fontFamily:
+                                                            'Montserrat',
+                                                        color:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .textDark,
+                                                        fontWeight:
+                                                            FontWeight.w500,
+                                                      ),
                                                   maxLines: 30,
                                                   keyboardType:
                                                       TextInputType.multiline,
@@ -711,7 +709,8 @@ class _PostPageWidgetState extends State<PostPageWidget> {
                                               height: 60,
                                               decoration: BoxDecoration(
                                                 color:
-                                                    FlutterFlowTheme.background,
+                                                    FlutterFlowTheme.of(context)
+                                                        .background,
                                                 borderRadius:
                                                     BorderRadius.circular(8),
                                               ),
@@ -736,16 +735,17 @@ class _PostPageWidgetState extends State<PostPageWidget> {
                                                               .start,
                                                       children: [
                                                         Text(
-                                                          '添付画像 300X300px以内',
-                                                          style:
-                                                              FlutterFlowTheme
-                                                                  .bodyText2
-                                                                  .override(
-                                                            fontFamily:
-                                                                'Open Sans',
-                                                            fontWeight:
-                                                                FontWeight.w500,
-                                                          ),
+                                                          '添付画像 300X300px内に収まるよう表示されます。',
+                                                          style: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .bodyText2
+                                                              .override(
+                                                                fontFamily:
+                                                                    'Open Sans',
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .w500,
+                                                              ),
                                                         ),
                                                         Padding(
                                                           padding:
@@ -754,14 +754,14 @@ class _PostPageWidgetState extends State<PostPageWidget> {
                                                                       3, 0, 0),
                                                           child: Text(
                                                             '画像は次のページで確認できます。',
-                                                            style:
-                                                                FlutterFlowTheme
-                                                                    .bodyText2
-                                                                    .override(
-                                                              fontFamily:
-                                                                  'Open Sans',
-                                                              fontSize: 10,
-                                                            ),
+                                                            style: FlutterFlowTheme
+                                                                    .of(context)
+                                                                .bodyText2
+                                                                .override(
+                                                                  fontFamily:
+                                                                      'Open Sans',
+                                                                  fontSize: 10,
+                                                                ),
                                                           ),
                                                         ),
                                                       ],
@@ -783,10 +783,10 @@ class _PostPageWidgetState extends State<PostPageWidget> {
                                                                     .storagePath,
                                                                 context)) {
                                                           showUploadMessage(
-                                                              context,
-                                                              'Uploading file...',
-                                                              showLoading:
-                                                                  true);
+                                                            context,
+                                                            'Uploading file...',
+                                                            showLoading: true,
+                                                          );
                                                           final downloadUrl =
                                                               await uploadData(
                                                                   selectedMedia
@@ -802,12 +802,14 @@ class _PostPageWidgetState extends State<PostPageWidget> {
                                                                 uploadedFileUrl =
                                                                     downloadUrl);
                                                             showUploadMessage(
-                                                                context,
-                                                                'Success!');
+                                                              context,
+                                                              'Success!',
+                                                            );
                                                           } else {
                                                             showUploadMessage(
-                                                                context,
-                                                                'Failed to upload media');
+                                                              context,
+                                                              'Failed to upload media',
+                                                            );
                                                             return;
                                                           }
                                                         }
@@ -816,18 +818,21 @@ class _PostPageWidgetState extends State<PostPageWidget> {
                                                       options: FFButtonOptions(
                                                         width: 130,
                                                         height: 40,
-                                                        color: FlutterFlowTheme
-                                                            .secondaryColor,
+                                                        color:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .secondaryColor,
                                                         textStyle:
-                                                            FlutterFlowTheme
+                                                            FlutterFlowTheme.of(
+                                                                    context)
                                                                 .subtitle2
                                                                 .override(
-                                                          fontFamily:
-                                                              'Open Sans',
-                                                          color:
-                                                              FlutterFlowTheme
-                                                                  .textLight,
-                                                        ),
+                                                                  fontFamily:
+                                                                      'Open Sans',
+                                                                  color: FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .textLight,
+                                                                ),
                                                         borderSide: BorderSide(
                                                           color: Colors
                                                               .transparent,
@@ -857,7 +862,8 @@ class _PostPageWidgetState extends State<PostPageWidget> {
                                               height: 60,
                                               decoration: BoxDecoration(
                                                 color:
-                                                    FlutterFlowTheme.background,
+                                                    FlutterFlowTheme.of(context)
+                                                        .background,
                                                 borderRadius:
                                                     BorderRadius.circular(8),
                                               ),
@@ -869,15 +875,6 @@ class _PostPageWidgetState extends State<PostPageWidget> {
                                                   obscureText: false,
                                                   decoration: InputDecoration(
                                                     labelText: '開催場所',
-                                                    labelStyle: FlutterFlowTheme
-                                                        .bodyText2
-                                                        .override(
-                                                      fontFamily: 'Montserrat',
-                                                      color: FlutterFlowTheme
-                                                          .textDark,
-                                                      fontWeight:
-                                                          FontWeight.w500,
-                                                    ),
                                                     enabledBorder:
                                                         UnderlineInputBorder(
                                                       borderSide: BorderSide(
@@ -915,14 +912,19 @@ class _PostPageWidgetState extends State<PostPageWidget> {
                                                       ),
                                                     ),
                                                   ),
-                                                  style: FlutterFlowTheme
+                                                  style: FlutterFlowTheme.of(
+                                                          context)
                                                       .bodyText2
                                                       .override(
-                                                    fontFamily: 'Montserrat',
-                                                    color: FlutterFlowTheme
-                                                        .textDark,
-                                                    fontWeight: FontWeight.w500,
-                                                  ),
+                                                        fontFamily:
+                                                            'Montserrat',
+                                                        color:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .textDark,
+                                                        fontWeight:
+                                                            FontWeight.w500,
+                                                      ),
                                                   validator: (val) {
                                                     if (val.isEmpty) {
                                                       return '住所を入力してください。';
@@ -950,7 +952,8 @@ class _PostPageWidgetState extends State<PostPageWidget> {
                                               height: 60,
                                               decoration: BoxDecoration(
                                                 color:
-                                                    FlutterFlowTheme.background,
+                                                    FlutterFlowTheme.of(context)
+                                                        .background,
                                                 borderRadius:
                                                     BorderRadius.circular(8),
                                               ),
@@ -975,19 +978,19 @@ class _PostPageWidgetState extends State<PostPageWidget> {
                                                                       0, 16, 0),
                                                           child: Text(
                                                             '開始日',
-                                                            style:
-                                                                FlutterFlowTheme
-                                                                    .bodyText2
-                                                                    .override(
-                                                              fontFamily:
-                                                                  'Open Sans',
-                                                              color:
-                                                                  FlutterFlowTheme
+                                                            style: FlutterFlowTheme
+                                                                    .of(context)
+                                                                .bodyText2
+                                                                .override(
+                                                                  fontFamily:
+                                                                      'Open Sans',
+                                                                  color: FlutterFlowTheme.of(
+                                                                          context)
                                                                       .textDark,
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .w500,
-                                                            ),
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .w500,
+                                                                ),
                                                           ),
                                                         ),
                                                         Padding(
@@ -999,19 +1002,19 @@ class _PostPageWidgetState extends State<PostPageWidget> {
                                                             dateTimeFormat(
                                                                 'yMMMd',
                                                                 datePicked1),
-                                                            style:
-                                                                FlutterFlowTheme
-                                                                    .bodyText2
-                                                                    .override(
-                                                              fontFamily:
-                                                                  'Open Sans',
-                                                              color:
-                                                                  FlutterFlowTheme
+                                                            style: FlutterFlowTheme
+                                                                    .of(context)
+                                                                .bodyText2
+                                                                .override(
+                                                                  fontFamily:
+                                                                      'Open Sans',
+                                                                  color: FlutterFlowTheme.of(
+                                                                          context)
                                                                       .textDark,
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .w500,
-                                                            ),
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .w500,
+                                                                ),
                                                           ),
                                                         ),
                                                       ],
@@ -1030,24 +1033,29 @@ class _PostPageWidgetState extends State<PostPageWidget> {
                                                           },
                                                           currentTime:
                                                               getCurrentTimestamp,
+                                                          minTime:
+                                                              DateTime(0, 0, 0),
                                                         );
                                                       },
                                                       text: '日付',
                                                       options: FFButtonOptions(
                                                         width: 130,
                                                         height: 40,
-                                                        color: FlutterFlowTheme
-                                                            .secondaryColor,
+                                                        color:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .secondaryColor,
                                                         textStyle:
-                                                            FlutterFlowTheme
+                                                            FlutterFlowTheme.of(
+                                                                    context)
                                                                 .subtitle2
                                                                 .override(
-                                                          fontFamily:
-                                                              'Open Sans',
-                                                          color:
-                                                              FlutterFlowTheme
-                                                                  .textLight,
-                                                        ),
+                                                                  fontFamily:
+                                                                      'Open Sans',
+                                                                  color: FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .textLight,
+                                                                ),
                                                         borderSide: BorderSide(
                                                           color: Colors
                                                               .transparent,
@@ -1077,7 +1085,8 @@ class _PostPageWidgetState extends State<PostPageWidget> {
                                               height: 60,
                                               decoration: BoxDecoration(
                                                 color:
-                                                    FlutterFlowTheme.background,
+                                                    FlutterFlowTheme.of(context)
+                                                        .background,
                                                 borderRadius:
                                                     BorderRadius.circular(8),
                                               ),
@@ -1102,19 +1111,19 @@ class _PostPageWidgetState extends State<PostPageWidget> {
                                                                       0, 16, 0),
                                                           child: Text(
                                                             '終了日',
-                                                            style:
-                                                                FlutterFlowTheme
-                                                                    .bodyText2
-                                                                    .override(
-                                                              fontFamily:
-                                                                  'Open Sans',
-                                                              color:
-                                                                  FlutterFlowTheme
+                                                            style: FlutterFlowTheme
+                                                                    .of(context)
+                                                                .bodyText2
+                                                                .override(
+                                                                  fontFamily:
+                                                                      'Open Sans',
+                                                                  color: FlutterFlowTheme.of(
+                                                                          context)
                                                                       .textDark,
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .w500,
-                                                            ),
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .w500,
+                                                                ),
                                                           ),
                                                         ),
                                                         Padding(
@@ -1126,19 +1135,19 @@ class _PostPageWidgetState extends State<PostPageWidget> {
                                                             dateTimeFormat(
                                                                 'yMMMd',
                                                                 datePicked2),
-                                                            style:
-                                                                FlutterFlowTheme
-                                                                    .bodyText2
-                                                                    .override(
-                                                              fontFamily:
-                                                                  'Open Sans',
-                                                              color:
-                                                                  FlutterFlowTheme
+                                                            style: FlutterFlowTheme
+                                                                    .of(context)
+                                                                .bodyText2
+                                                                .override(
+                                                                  fontFamily:
+                                                                      'Open Sans',
+                                                                  color: FlutterFlowTheme.of(
+                                                                          context)
                                                                       .textDark,
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .w500,
-                                                            ),
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .w500,
+                                                                ),
                                                           ),
                                                         ),
                                                       ],
@@ -1157,24 +1166,29 @@ class _PostPageWidgetState extends State<PostPageWidget> {
                                                           },
                                                           currentTime:
                                                               getCurrentTimestamp,
+                                                          minTime:
+                                                              DateTime(0, 0, 0),
                                                         );
                                                       },
                                                       text: '日付',
                                                       options: FFButtonOptions(
                                                         width: 130,
                                                         height: 40,
-                                                        color: FlutterFlowTheme
-                                                            .secondaryColor,
+                                                        color:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .secondaryColor,
                                                         textStyle:
-                                                            FlutterFlowTheme
+                                                            FlutterFlowTheme.of(
+                                                                    context)
                                                                 .subtitle2
                                                                 .override(
-                                                          fontFamily:
-                                                              'Open Sans',
-                                                          color:
-                                                              FlutterFlowTheme
-                                                                  .textLight,
-                                                        ),
+                                                                  fontFamily:
+                                                                      'Open Sans',
+                                                                  color: FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .textLight,
+                                                                ),
                                                         borderSide: BorderSide(
                                                           color: Colors
                                                               .transparent,
@@ -1204,7 +1218,8 @@ class _PostPageWidgetState extends State<PostPageWidget> {
                                               height: 60,
                                               decoration: BoxDecoration(
                                                 color:
-                                                    FlutterFlowTheme.background,
+                                                    FlutterFlowTheme.of(context)
+                                                        .background,
                                                 borderRadius:
                                                     BorderRadius.circular(8),
                                               ),
@@ -1216,15 +1231,6 @@ class _PostPageWidgetState extends State<PostPageWidget> {
                                                   obscureText: false,
                                                   decoration: InputDecoration(
                                                     labelText: '主催',
-                                                    labelStyle: FlutterFlowTheme
-                                                        .bodyText2
-                                                        .override(
-                                                      fontFamily: 'Montserrat',
-                                                      color: FlutterFlowTheme
-                                                          .textDark,
-                                                      fontWeight:
-                                                          FontWeight.w500,
-                                                    ),
                                                     enabledBorder:
                                                         UnderlineInputBorder(
                                                       borderSide: BorderSide(
@@ -1262,14 +1268,19 @@ class _PostPageWidgetState extends State<PostPageWidget> {
                                                       ),
                                                     ),
                                                   ),
-                                                  style: FlutterFlowTheme
+                                                  style: FlutterFlowTheme.of(
+                                                          context)
                                                       .bodyText2
                                                       .override(
-                                                    fontFamily: 'Montserrat',
-                                                    color: FlutterFlowTheme
-                                                        .textDark,
-                                                    fontWeight: FontWeight.w500,
-                                                  ),
+                                                        fontFamily:
+                                                            'Montserrat',
+                                                        color:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .textDark,
+                                                        fontWeight:
+                                                            FontWeight.w500,
+                                                      ),
                                                   validator: (val) {
                                                     if (val.isEmpty) {
                                                       return '主催者名を入力してください。';
@@ -1297,7 +1308,8 @@ class _PostPageWidgetState extends State<PostPageWidget> {
                                               height: 60,
                                               decoration: BoxDecoration(
                                                 color:
-                                                    FlutterFlowTheme.background,
+                                                    FlutterFlowTheme.of(context)
+                                                        .background,
                                                 borderRadius:
                                                     BorderRadius.circular(8),
                                               ),
@@ -1310,15 +1322,6 @@ class _PostPageWidgetState extends State<PostPageWidget> {
                                                   decoration: InputDecoration(
                                                     labelText:
                                                         '問い合わせ先（担当者名・部署など）',
-                                                    labelStyle: FlutterFlowTheme
-                                                        .bodyText2
-                                                        .override(
-                                                      fontFamily: 'Montserrat',
-                                                      color: FlutterFlowTheme
-                                                          .textDark,
-                                                      fontWeight:
-                                                          FontWeight.w500,
-                                                    ),
                                                     enabledBorder:
                                                         UnderlineInputBorder(
                                                       borderSide: BorderSide(
@@ -1356,14 +1359,19 @@ class _PostPageWidgetState extends State<PostPageWidget> {
                                                       ),
                                                     ),
                                                   ),
-                                                  style: FlutterFlowTheme
+                                                  style: FlutterFlowTheme.of(
+                                                          context)
                                                       .bodyText2
                                                       .override(
-                                                    fontFamily: 'Montserrat',
-                                                    color: FlutterFlowTheme
-                                                        .textDark,
-                                                    fontWeight: FontWeight.w500,
-                                                  ),
+                                                        fontFamily:
+                                                            'Montserrat',
+                                                        color:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .textDark,
+                                                        fontWeight:
+                                                            FontWeight.w500,
+                                                      ),
                                                   validator: (val) {
                                                     if (val.isEmpty) {
                                                       return '問い合わせ先を入力してください。';
@@ -1391,7 +1399,8 @@ class _PostPageWidgetState extends State<PostPageWidget> {
                                               height: 60,
                                               decoration: BoxDecoration(
                                                 color:
-                                                    FlutterFlowTheme.background,
+                                                    FlutterFlowTheme.of(context)
+                                                        .background,
                                                 borderRadius:
                                                     BorderRadius.circular(8),
                                               ),
@@ -1403,15 +1412,6 @@ class _PostPageWidgetState extends State<PostPageWidget> {
                                                   obscureText: false,
                                                   decoration: InputDecoration(
                                                     labelText: 'ホームページ',
-                                                    labelStyle: FlutterFlowTheme
-                                                        .bodyText2
-                                                        .override(
-                                                      fontFamily: 'Montserrat',
-                                                      color: FlutterFlowTheme
-                                                          .textDark,
-                                                      fontWeight:
-                                                          FontWeight.w500,
-                                                    ),
                                                     enabledBorder:
                                                         UnderlineInputBorder(
                                                       borderSide: BorderSide(
@@ -1449,14 +1449,19 @@ class _PostPageWidgetState extends State<PostPageWidget> {
                                                       ),
                                                     ),
                                                   ),
-                                                  style: FlutterFlowTheme
+                                                  style: FlutterFlowTheme.of(
+                                                          context)
                                                       .bodyText2
                                                       .override(
-                                                    fontFamily: 'Montserrat',
-                                                    color: FlutterFlowTheme
-                                                        .textDark,
-                                                    fontWeight: FontWeight.w500,
-                                                  ),
+                                                        fontFamily:
+                                                            'Montserrat',
+                                                        color:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .textDark,
+                                                        fontWeight:
+                                                            FontWeight.w500,
+                                                      ),
                                                   keyboardType:
                                                       TextInputType.url,
                                                 ),
@@ -1481,12 +1486,14 @@ class _PostPageWidgetState extends State<PostPageWidget> {
                                                   0, 0, 0, 8),
                                           child: Text(
                                             '投稿者情報',
-                                            style: FlutterFlowTheme.title2,
+                                            style: FlutterFlowTheme.of(context)
+                                                .title2,
                                           ),
                                         ),
                                         Text(
                                           '投稿には表示されません。管理者が投稿の確認、連絡などに使用します。',
-                                          style: FlutterFlowTheme.bodyText1,
+                                          style: FlutterFlowTheme.of(context)
+                                              .bodyText1,
                                         ),
                                       ],
                                     ),
@@ -1508,7 +1515,8 @@ class _PostPageWidgetState extends State<PostPageWidget> {
                                               height: 60,
                                               decoration: BoxDecoration(
                                                 color:
-                                                    FlutterFlowTheme.background,
+                                                    FlutterFlowTheme.of(context)
+                                                        .background,
                                                 borderRadius:
                                                     BorderRadius.circular(8),
                                               ),
@@ -1557,15 +1565,18 @@ class _PostPageWidgetState extends State<PostPageWidget> {
                                                         ),
                                                       ),
                                                     ),
-                                                    style: FlutterFlowTheme
+                                                    style: FlutterFlowTheme.of(
+                                                            context)
                                                         .bodyText2
                                                         .override(
-                                                      fontFamily: 'Montserrat',
-                                                      color: FlutterFlowTheme
-                                                          .textDark,
-                                                      fontWeight:
-                                                          FontWeight.w500,
-                                                    ),
+                                                          fontFamily:
+                                                              'Montserrat',
+                                                          color: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .textDark,
+                                                          fontWeight:
+                                                              FontWeight.w500,
+                                                        ),
                                                   ),
                                                 ),
                                               ),
@@ -1587,87 +1598,8 @@ class _PostPageWidgetState extends State<PostPageWidget> {
                                               height: 60,
                                               decoration: BoxDecoration(
                                                 color:
-                                                    FlutterFlowTheme.background,
-                                                borderRadius:
-                                                    BorderRadius.circular(8),
-                                              ),
-                                              child: Padding(
-                                                padding: EdgeInsetsDirectional
-                                                    .fromSTEB(16, 0, 0, 0),
-                                                child: AuthUserStreamWidget(
-                                                  child: TextFormField(
-                                                    controller:
-                                                        textController10,
-                                                    obscureText: false,
-                                                    decoration: InputDecoration(
-                                                      enabledBorder:
-                                                          UnderlineInputBorder(
-                                                        borderSide: BorderSide(
-                                                          color:
-                                                              Color(0x00000000),
-                                                          width: 1,
-                                                        ),
-                                                        borderRadius:
-                                                            const BorderRadius
-                                                                .only(
-                                                          topLeft:
-                                                              Radius.circular(
-                                                                  4.0),
-                                                          topRight:
-                                                              Radius.circular(
-                                                                  4.0),
-                                                        ),
-                                                      ),
-                                                      focusedBorder:
-                                                          UnderlineInputBorder(
-                                                        borderSide: BorderSide(
-                                                          color:
-                                                              Color(0x00000000),
-                                                          width: 1,
-                                                        ),
-                                                        borderRadius:
-                                                            const BorderRadius
-                                                                .only(
-                                                          topLeft:
-                                                              Radius.circular(
-                                                                  4.0),
-                                                          topRight:
-                                                              Radius.circular(
-                                                                  4.0),
-                                                        ),
-                                                      ),
-                                                    ),
-                                                    style: FlutterFlowTheme
-                                                        .bodyText2
-                                                        .override(
-                                                      fontFamily: 'Montserrat',
-                                                      color: FlutterFlowTheme
-                                                          .textDark,
-                                                      fontWeight:
-                                                          FontWeight.w500,
-                                                    ),
-                                                  ),
-                                                ),
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                      Padding(
-                                        padding: EdgeInsetsDirectional.fromSTEB(
-                                            0, 0, 0, 12),
-                                        child: Row(
-                                          mainAxisSize: MainAxisSize.max,
-                                          children: [
-                                            Container(
-                                              width: MediaQuery.of(context)
-                                                      .size
-                                                      .width *
-                                                  0.7,
-                                              height: 60,
-                                              decoration: BoxDecoration(
-                                                color:
-                                                    FlutterFlowTheme.background,
+                                                    FlutterFlowTheme.of(context)
+                                                        .background,
                                                 borderRadius:
                                                     BorderRadius.circular(8),
                                               ),
@@ -1675,19 +1607,9 @@ class _PostPageWidgetState extends State<PostPageWidget> {
                                                 padding: EdgeInsetsDirectional
                                                     .fromSTEB(16, 0, 0, 0),
                                                 child: TextFormField(
-                                                  controller: textController11,
+                                                  controller: textController10,
                                                   obscureText: false,
                                                   decoration: InputDecoration(
-                                                    labelText: '電話番号',
-                                                    labelStyle: FlutterFlowTheme
-                                                        .bodyText2
-                                                        .override(
-                                                      fontFamily: 'Montserrat',
-                                                      color: FlutterFlowTheme
-                                                          .textDark,
-                                                      fontWeight:
-                                                          FontWeight.w500,
-                                                    ),
                                                     enabledBorder:
                                                         UnderlineInputBorder(
                                                       borderSide: BorderSide(
@@ -1725,14 +1647,102 @@ class _PostPageWidgetState extends State<PostPageWidget> {
                                                       ),
                                                     ),
                                                   ),
-                                                  style: FlutterFlowTheme
+                                                  style: FlutterFlowTheme.of(
+                                                          context)
                                                       .bodyText2
                                                       .override(
-                                                    fontFamily: 'Montserrat',
-                                                    color: FlutterFlowTheme
-                                                        .textDark,
-                                                    fontWeight: FontWeight.w500,
+                                                        fontFamily:
+                                                            'Montserrat',
+                                                        color:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .textDark,
+                                                        fontWeight:
+                                                            FontWeight.w500,
+                                                      ),
+                                                ),
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                      Padding(
+                                        padding: EdgeInsetsDirectional.fromSTEB(
+                                            0, 0, 0, 12),
+                                        child: Row(
+                                          mainAxisSize: MainAxisSize.max,
+                                          children: [
+                                            Container(
+                                              width: MediaQuery.of(context)
+                                                      .size
+                                                      .width *
+                                                  0.7,
+                                              height: 60,
+                                              decoration: BoxDecoration(
+                                                color:
+                                                    FlutterFlowTheme.of(context)
+                                                        .background,
+                                                borderRadius:
+                                                    BorderRadius.circular(8),
+                                              ),
+                                              child: Padding(
+                                                padding: EdgeInsetsDirectional
+                                                    .fromSTEB(16, 0, 0, 0),
+                                                child: TextFormField(
+                                                  controller: textController11,
+                                                  obscureText: false,
+                                                  decoration: InputDecoration(
+                                                    labelText: '電話番号',
+                                                    enabledBorder:
+                                                        UnderlineInputBorder(
+                                                      borderSide: BorderSide(
+                                                        color:
+                                                            Color(0x00000000),
+                                                        width: 1,
+                                                      ),
+                                                      borderRadius:
+                                                          const BorderRadius
+                                                              .only(
+                                                        topLeft:
+                                                            Radius.circular(
+                                                                4.0),
+                                                        topRight:
+                                                            Radius.circular(
+                                                                4.0),
+                                                      ),
+                                                    ),
+                                                    focusedBorder:
+                                                        UnderlineInputBorder(
+                                                      borderSide: BorderSide(
+                                                        color:
+                                                            Color(0x00000000),
+                                                        width: 1,
+                                                      ),
+                                                      borderRadius:
+                                                          const BorderRadius
+                                                              .only(
+                                                        topLeft:
+                                                            Radius.circular(
+                                                                4.0),
+                                                        topRight:
+                                                            Radius.circular(
+                                                                4.0),
+                                                      ),
+                                                    ),
                                                   ),
+                                                  style: FlutterFlowTheme.of(
+                                                          context)
+                                                      .bodyText2
+                                                      .override(
+                                                        fontFamily:
+                                                            'Montserrat',
+                                                        color:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .textDark,
+                                                        fontWeight:
+                                                            FontWeight.w500,
+                                                      ),
                                                   keyboardType:
                                                       TextInputType.phone,
                                                 ),
@@ -1755,7 +1765,8 @@ class _PostPageWidgetState extends State<PostPageWidget> {
                                               height: 60,
                                               decoration: BoxDecoration(
                                                 color:
-                                                    FlutterFlowTheme.background,
+                                                    FlutterFlowTheme.of(context)
+                                                        .background,
                                                 borderRadius:
                                                     BorderRadius.circular(8),
                                               ),
@@ -1767,15 +1778,6 @@ class _PostPageWidgetState extends State<PostPageWidget> {
                                                   obscureText: false,
                                                   decoration: InputDecoration(
                                                     labelText: '所属',
-                                                    labelStyle: FlutterFlowTheme
-                                                        .bodyText2
-                                                        .override(
-                                                      fontFamily: 'Montserrat',
-                                                      color: FlutterFlowTheme
-                                                          .textDark,
-                                                      fontWeight:
-                                                          FontWeight.w500,
-                                                    ),
                                                     enabledBorder:
                                                         UnderlineInputBorder(
                                                       borderSide: BorderSide(
@@ -1813,14 +1815,19 @@ class _PostPageWidgetState extends State<PostPageWidget> {
                                                       ),
                                                     ),
                                                   ),
-                                                  style: FlutterFlowTheme
+                                                  style: FlutterFlowTheme.of(
+                                                          context)
                                                       .bodyText2
                                                       .override(
-                                                    fontFamily: 'Montserrat',
-                                                    color: FlutterFlowTheme
-                                                        .textDark,
-                                                    fontWeight: FontWeight.w500,
-                                                  ),
+                                                        fontFamily:
+                                                            'Montserrat',
+                                                        color:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .textDark,
+                                                        fontWeight:
+                                                            FontWeight.w500,
+                                                      ),
                                                 ),
                                               ),
                                             ),
@@ -1841,7 +1848,8 @@ class _PostPageWidgetState extends State<PostPageWidget> {
                                               height: 120,
                                               decoration: BoxDecoration(
                                                 color:
-                                                    FlutterFlowTheme.background,
+                                                    FlutterFlowTheme.of(context)
+                                                        .background,
                                                 borderRadius:
                                                     BorderRadius.circular(8),
                                               ),
@@ -1853,15 +1861,6 @@ class _PostPageWidgetState extends State<PostPageWidget> {
                                                   obscureText: false,
                                                   decoration: InputDecoration(
                                                     labelText: '備考',
-                                                    labelStyle: FlutterFlowTheme
-                                                        .bodyText2
-                                                        .override(
-                                                      fontFamily: 'Montserrat',
-                                                      color: FlutterFlowTheme
-                                                          .textDark,
-                                                      fontWeight:
-                                                          FontWeight.w500,
-                                                    ),
                                                     enabledBorder:
                                                         UnderlineInputBorder(
                                                       borderSide: BorderSide(
@@ -1899,14 +1898,19 @@ class _PostPageWidgetState extends State<PostPageWidget> {
                                                       ),
                                                     ),
                                                   ),
-                                                  style: FlutterFlowTheme
+                                                  style: FlutterFlowTheme.of(
+                                                          context)
                                                       .bodyText2
                                                       .override(
-                                                    fontFamily: 'Montserrat',
-                                                    color: FlutterFlowTheme
-                                                        .textDark,
-                                                    fontWeight: FontWeight.w500,
-                                                  ),
+                                                        fontFamily:
+                                                            'Montserrat',
+                                                        color:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .textDark,
+                                                        fontWeight:
+                                                            FontWeight.w500,
+                                                      ),
                                                   maxLines: 10,
                                                   keyboardType:
                                                       TextInputType.multiline,
@@ -1930,7 +1934,8 @@ class _PostPageWidgetState extends State<PostPageWidget> {
                                         },
                                         child: Text(
                                           '＊利用規約に従い投稿します。',
-                                          style: FlutterFlowTheme.bodyText1,
+                                          style: FlutterFlowTheme.of(context)
+                                              .bodyText1,
                                         ),
                                       ),
                                       Row(
@@ -1946,22 +1951,30 @@ class _PostPageWidgetState extends State<PostPageWidget> {
                                                       .width *
                                                   0.7,
                                               decoration: BoxDecoration(),
-                                              child: CheckboxListTile(
-                                                value: checkboxListTileValue ??=
-                                                    false,
-                                                onChanged: (newValue) =>
-                                                    setState(() =>
-                                                        checkboxListTileValue =
-                                                            newValue),
-                                                title: Text(
-                                                  '上記内容に同意',
-                                                  style: FlutterFlowTheme
-                                                      .bodyText2,
+                                              child: Theme(
+                                                data: ThemeData(
+                                                  unselectedWidgetColor:
+                                                      Color(0xFF707070),
                                                 ),
-                                                dense: false,
-                                                controlAffinity:
-                                                    ListTileControlAffinity
-                                                        .trailing,
+                                                child: CheckboxListTile(
+                                                  value:
+                                                      checkboxListTileValue ??=
+                                                          false,
+                                                  onChanged: (newValue) =>
+                                                      setState(() =>
+                                                          checkboxListTileValue =
+                                                              newValue),
+                                                  title: Text(
+                                                    '上記内容に同意',
+                                                    style: FlutterFlowTheme.of(
+                                                            context)
+                                                        .bodyText2,
+                                                  ),
+                                                  dense: false,
+                                                  controlAffinity:
+                                                      ListTileControlAffinity
+                                                          .trailing,
+                                                ),
                                               ),
                                             ),
                                           ),
@@ -1988,10 +2001,6 @@ class _PostPageWidgetState extends State<PostPageWidget> {
                                                 children: [
                                                   FFButtonWidget(
                                                     onPressed: () async {
-                                                      if (!formKey.currentState
-                                                          .validate()) {
-                                                        return;
-                                                      }
                                                       await Navigator.push(
                                                         context,
                                                         MaterialPageRoute(
@@ -2058,16 +2067,21 @@ class _PostPageWidgetState extends State<PostPageWidget> {
                                                     options: FFButtonOptions(
                                                       width: 130,
                                                       height: 60,
-                                                      color: FlutterFlowTheme
-                                                          .secondaryColor,
+                                                      color:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .secondaryColor,
                                                       textStyle:
-                                                          FlutterFlowTheme
+                                                          FlutterFlowTheme.of(
+                                                                  context)
                                                               .subtitle2
                                                               .override(
-                                                        fontFamily: 'Open Sans',
-                                                        color: FlutterFlowTheme
-                                                            .textLight,
-                                                      ),
+                                                                fontFamily:
+                                                                    'Open Sans',
+                                                                color: FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .textLight,
+                                                              ),
                                                       borderSide: BorderSide(
                                                         color:
                                                             Colors.transparent,

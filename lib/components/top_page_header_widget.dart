@@ -45,7 +45,7 @@ class _TopPageHeaderWidgetState extends State<TopPageHeaderWidget> {
                   },
                   child: Text(
                     'MAKUHARI Bay Life',
-                    style: FlutterFlowTheme.subtitle1,
+                    style: FlutterFlowTheme.of(context).subtitle1,
                   ),
                 ),
                 FFButtonWidget(
@@ -61,11 +61,11 @@ class _TopPageHeaderWidgetState extends State<TopPageHeaderWidget> {
                   options: FFButtonOptions(
                     width: 100,
                     height: 36,
-                    color: FlutterFlowTheme.secondaryColor,
-                    textStyle: FlutterFlowTheme.bodyText1.override(
-                      fontFamily: 'Open Sans',
-                      color: FlutterFlowTheme.textLight,
-                    ),
+                    color: FlutterFlowTheme.of(context).secondaryColor,
+                    textStyle: FlutterFlowTheme.of(context).bodyText1.override(
+                          fontFamily: 'Open Sans',
+                          color: FlutterFlowTheme.of(context).textLight,
+                        ),
                     borderSide: BorderSide(
                       color: Colors.transparent,
                       width: 1,

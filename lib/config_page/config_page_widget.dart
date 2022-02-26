@@ -35,7 +35,7 @@ class _ConfigPageWidgetState extends State<ConfigPageWidget> {
           elevation: 0,
         ),
       ),
-      backgroundColor: FlutterFlowTheme.tertiaryColor,
+      backgroundColor: FlutterFlowTheme.of(context).tertiaryColor,
       body: Row(
         mainAxisSize: MainAxisSize.max,
         children: [
@@ -62,14 +62,15 @@ class _ConfigPageWidgetState extends State<ConfigPageWidget> {
                                     EdgeInsetsDirectional.fromSTEB(0, 0, 0, 8),
                                 child: Text(
                                   'ご利用プラン',
-                                  style: FlutterFlowTheme.title2,
+                                  style: FlutterFlowTheme.of(context).title2,
                                 ),
                               ),
                               Text(
-                                getJsonField(widget.subscription,
-                                        r'''$.result.subscription''')
-                                    .toString(),
-                                style: FlutterFlowTheme.bodyText1,
+                                getJsonField(
+                                  widget.subscription,
+                                  r'''$.result.subscription''',
+                                ).toString(),
+                                style: FlutterFlowTheme.of(context).bodyText1,
                               ),
                             ],
                           ),

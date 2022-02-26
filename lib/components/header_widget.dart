@@ -18,7 +18,7 @@ class _HeaderWidgetState extends State<HeaderWidget> {
       width: double.infinity,
       height: 8,
       decoration: BoxDecoration(
-        color: FlutterFlowTheme.primaryColor,
+        color: FlutterFlowTheme.of(context).primaryColor,
       ),
     );
   }
