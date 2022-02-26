@@ -38,7 +38,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
           elevation: 0,
         ),
       ),
-      backgroundColor: FlutterFlowTheme.background,
+      backgroundColor: FlutterFlowTheme.of(context).background,
       body: Column(
         mainAxisSize: MainAxisSize.max,
         children: [
@@ -63,7 +63,8 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                               width: 50,
                               height: 50,
                               child: SpinKitPulse(
-                                color: FlutterFlowTheme.primaryColor,
+                                color:
+                                    FlutterFlowTheme.of(context).primaryColor,
                                 size: 50,
                               ),
                             ),
@@ -83,7 +84,8 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                               child: Container(
                                 height: 80,
                                 decoration: BoxDecoration(
-                                  color: FlutterFlowTheme.tertiaryColor,
+                                  color: FlutterFlowTheme.of(context)
+                                      .tertiaryColor,
                                 ),
                                 child: Padding(
                                   padding: EdgeInsetsDirectional.fromSTEB(
@@ -102,7 +104,8 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                         children: [
                                           Text(
                                             columnContentsRecord.title,
-                                            style: FlutterFlowTheme.subtitle2,
+                                            style: FlutterFlowTheme.of(context)
+                                                .subtitle2,
                                           ),
                                           Row(
                                             mainAxisSize: MainAxisSize.max,
@@ -115,7 +118,8 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                                     columnContentsRecord
                                                         .posted),
                                                 style:
-                                                    FlutterFlowTheme.bodyText1,
+                                                    FlutterFlowTheme.of(context)
+                                                        .bodyText1,
                                               ),
                                               ToggleIcon(
                                                 onPressed: () async {
@@ -134,12 +138,16 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                                     .display,
                                                 onIcon: Icon(
                                                   Icons.cloud_done,
-                                                  color: FlutterFlowTheme.pDark,
+                                                  color: FlutterFlowTheme.of(
+                                                          context)
+                                                      .pDark,
                                                   size: 25,
                                                 ),
                                                 offIcon: Icon(
                                                   Icons.cloud_off_outlined,
-                                                  color: FlutterFlowTheme.pDark,
+                                                  color: FlutterFlowTheme.of(
+                                                          context)
+                                                      .pDark,
                                                   size: 25,
                                                 ),
                                               ),
@@ -153,11 +161,14 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                           maxChars: 70,
                                           replacement: '…',
                                         ),
-                                        style:
-                                            FlutterFlowTheme.bodyText1.override(
-                                          fontFamily: 'Open Sans',
-                                          color: FlutterFlowTheme.textDark,
-                                        ),
+                                        style: FlutterFlowTheme.of(context)
+                                            .bodyText1
+                                            .override(
+                                              fontFamily: 'Open Sans',
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .textDark,
+                                            ),
                                       ),
                                     ],
                                   ),

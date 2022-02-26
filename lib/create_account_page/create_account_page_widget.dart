@@ -54,7 +54,7 @@ class _CreateAccountPageWidgetState extends State<CreateAccountPageWidget> {
           elevation: 0,
         ),
       ),
-      backgroundColor: FlutterFlowTheme.background,
+      backgroundColor: FlutterFlowTheme.of(context).background,
       body: Column(
         mainAxisSize: MainAxisSize.max,
         crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -74,7 +74,7 @@ class _CreateAccountPageWidgetState extends State<CreateAccountPageWidget> {
                         child: AutoSizeText(
                           'ユーザー登録後、決済ページが開きます。',
                           textAlign: TextAlign.center,
-                          style: FlutterFlowTheme.subtitle2,
+                          style: FlutterFlowTheme.of(context).subtitle2,
                         ),
                       ),
                       Padding(
@@ -85,7 +85,8 @@ class _CreateAccountPageWidgetState extends State<CreateAccountPageWidget> {
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(8),
                             border: Border.all(
-                              color: FlutterFlowTheme.secondaryColor,
+                              color:
+                                  FlutterFlowTheme.of(context).secondaryColor,
                               width: 2,
                             ),
                           ),
@@ -103,9 +104,7 @@ class _CreateAccountPageWidgetState extends State<CreateAccountPageWidget> {
                                     obscureText: false,
                                     decoration: InputDecoration(
                                       labelText: 'Email Address',
-                                      labelStyle: FlutterFlowTheme.bodyText1,
                                       hintText: 'Enter your email...',
-                                      hintStyle: FlutterFlowTheme.bodyText1,
                                       enabledBorder: UnderlineInputBorder(
                                         borderSide: BorderSide(
                                           color: Color(0x00000000),
@@ -127,7 +126,8 @@ class _CreateAccountPageWidgetState extends State<CreateAccountPageWidget> {
                                         ),
                                       ),
                                     ),
-                                    style: FlutterFlowTheme.bodyText1,
+                                    style:
+                                        FlutterFlowTheme.of(context).bodyText1,
                                   ),
                                 ),
                               ),
@@ -143,7 +143,8 @@ class _CreateAccountPageWidgetState extends State<CreateAccountPageWidget> {
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(8),
                             border: Border.all(
-                              color: FlutterFlowTheme.secondaryColor,
+                              color:
+                                  FlutterFlowTheme.of(context).secondaryColor,
                               width: 2,
                             ),
                           ),
@@ -161,9 +162,7 @@ class _CreateAccountPageWidgetState extends State<CreateAccountPageWidget> {
                                     obscureText: !passwordVisibility,
                                     decoration: InputDecoration(
                                       labelText: 'Password',
-                                      labelStyle: FlutterFlowTheme.bodyText1,
                                       hintText: 'Enter your password...',
-                                      hintStyle: FlutterFlowTheme.bodyText1,
                                       enabledBorder: UnderlineInputBorder(
                                         borderSide: BorderSide(
                                           color: Color(0x00000000),
@@ -198,7 +197,8 @@ class _CreateAccountPageWidgetState extends State<CreateAccountPageWidget> {
                                         ),
                                       ),
                                     ),
-                                    style: FlutterFlowTheme.bodyText1,
+                                    style:
+                                        FlutterFlowTheme.of(context).bodyText1,
                                   ),
                                 ),
                               ),
@@ -221,10 +221,12 @@ class _CreateAccountPageWidgetState extends State<CreateAccountPageWidget> {
                               child: Text(
                                 '利用規約',
                                 textAlign: TextAlign.start,
-                                style: FlutterFlowTheme.bodyText1.override(
-                                  fontFamily: 'Open Sans',
-                                  color: FlutterFlowTheme.pDark,
-                                ),
+                                style: FlutterFlowTheme.of(context)
+                                    .bodyText1
+                                    .override(
+                                      fontFamily: 'Open Sans',
+                                      color: FlutterFlowTheme.of(context).pDark,
+                                    ),
                               ),
                             ),
                             Padding(
@@ -237,7 +239,7 @@ class _CreateAccountPageWidgetState extends State<CreateAccountPageWidget> {
                                 },
                                 child: FaIcon(
                                   FontAwesomeIcons.externalLinkAlt,
-                                  color: FlutterFlowTheme.pDark,
+                                  color: FlutterFlowTheme.of(context).pDark,
                                   size: 16,
                                 ),
                               ),
@@ -245,7 +247,7 @@ class _CreateAccountPageWidgetState extends State<CreateAccountPageWidget> {
                             Text(
                               '、',
                               textAlign: TextAlign.start,
-                              style: FlutterFlowTheme.bodyText1,
+                              style: FlutterFlowTheme.of(context).bodyText1,
                             ),
                             InkWell(
                               onTap: () async {
@@ -255,10 +257,12 @@ class _CreateAccountPageWidgetState extends State<CreateAccountPageWidget> {
                               child: Text(
                                 'プライバシーポリシー',
                                 textAlign: TextAlign.start,
-                                style: FlutterFlowTheme.bodyText1.override(
-                                  fontFamily: 'Open Sans',
-                                  color: FlutterFlowTheme.pDark,
-                                ),
+                                style: FlutterFlowTheme.of(context)
+                                    .bodyText1
+                                    .override(
+                                      fontFamily: 'Open Sans',
+                                      color: FlutterFlowTheme.of(context).pDark,
+                                    ),
                               ),
                             ),
                             Padding(
@@ -271,7 +275,7 @@ class _CreateAccountPageWidgetState extends State<CreateAccountPageWidget> {
                                 },
                                 child: FaIcon(
                                   FontAwesomeIcons.externalLinkAlt,
-                                  color: FlutterFlowTheme.pDark,
+                                  color: FlutterFlowTheme.of(context).pDark,
                                   size: 16,
                                 ),
                               ),
@@ -279,7 +283,7 @@ class _CreateAccountPageWidgetState extends State<CreateAccountPageWidget> {
                             Text(
                               'に同意の上、ご登録ください。',
                               textAlign: TextAlign.start,
-                              style: FlutterFlowTheme.bodyText1,
+                              style: FlutterFlowTheme.of(context).bodyText1,
                             ),
                           ],
                         ),
@@ -297,7 +301,7 @@ class _CreateAccountPageWidgetState extends State<CreateAccountPageWidget> {
                               return;
                             }
 
-                            subsEmail = await subscribeCall(
+                            subsEmail = await SubscribeCall.call(
                               priceId: widget.priceId,
                               url: 'https://baylifedev.web.app/',
                               uid: currentUserUid,
@@ -316,11 +320,13 @@ class _CreateAccountPageWidgetState extends State<CreateAccountPageWidget> {
                           options: FFButtonOptions(
                             width: 240,
                             height: 60,
-                            color: FlutterFlowTheme.secondaryColor,
-                            textStyle: FlutterFlowTheme.subtitle2.override(
-                              fontFamily: 'Open Sans',
-                              color: FlutterFlowTheme.textLight,
-                            ),
+                            color: FlutterFlowTheme.of(context).secondaryColor,
+                            textStyle: FlutterFlowTheme.of(context)
+                                .subtitle2
+                                .override(
+                                  fontFamily: 'Open Sans',
+                                  color: FlutterFlowTheme.of(context).textLight,
+                                ),
                             borderSide: BorderSide(
                               color: Colors.transparent,
                               width: 1,
@@ -334,10 +340,12 @@ class _CreateAccountPageWidgetState extends State<CreateAccountPageWidget> {
                         child: AutoSizeText(
                           'Or use a social account to create user',
                           textAlign: TextAlign.center,
-                          style: FlutterFlowTheme.bodyText2.override(
-                            fontFamily: 'Open Sans',
-                            color: FlutterFlowTheme.textDark,
-                          ),
+                          style: FlutterFlowTheme.of(context)
+                              .bodyText2
+                              .override(
+                                fontFamily: 'Open Sans',
+                                color: FlutterFlowTheme.of(context).textDark,
+                              ),
                         ),
                       ),
                       Align(
@@ -358,7 +366,7 @@ class _CreateAccountPageWidgetState extends State<CreateAccountPageWidget> {
                                       if (user == null) {
                                         return;
                                       }
-                                      subsGoogle = await subscribeCall(
+                                      subsGoogle = await SubscribeCall.call(
                                         priceId: widget.priceId,
                                         url: 'https://baylifedev.web.app/',
                                         uid: currentUserUid,
@@ -431,7 +439,7 @@ class _CreateAccountPageWidgetState extends State<CreateAccountPageWidget> {
                         },
                         child: Text(
                           '利用規約',
-                          style: FlutterFlowTheme.bodyText1,
+                          style: FlutterFlowTheme.of(context).bodyText1,
                         ),
                       ),
                       Padding(
@@ -443,7 +451,7 @@ class _CreateAccountPageWidgetState extends State<CreateAccountPageWidget> {
                           },
                           child: Text(
                             'プライバシーポリシー',
-                            style: FlutterFlowTheme.bodyText1,
+                            style: FlutterFlowTheme.of(context).bodyText1,
                           ),
                         ),
                       ),

@@ -28,6 +28,10 @@ abstract class EmailMembersRecord
       .snapshots()
       .map((s) => serializers.deserializeWith(serializer, serializedData(s)));
 
+  static Future<EmailMembersRecord> getDocumentOnce(DocumentReference ref) =>
+      ref.get().then(
+          (s) => serializers.deserializeWith(serializer, serializedData(s)));
+
   EmailMembersRecord._();
   factory EmailMembersRecord(
           [void Function(EmailMembersRecordBuilder) updates]) =
