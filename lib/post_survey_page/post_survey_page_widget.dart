@@ -11,6 +11,8 @@ import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import '../custom_code/widgets/index.dart';
+
 class PostSurveyPageWidget extends StatefulWidget {
   const PostSurveyPageWidget({Key key}) : super(key: key);
 
@@ -26,6 +28,76 @@ class _PostSurveyPageWidgetState extends State<PostSurveyPageWidget> {
   DateTime datePicked2;
   final formKey = GlobalKey<FormState>();
   final scaffoldKey = GlobalKey<ScaffoldState>();
+
+  List<ChoiceItem> choices = [];
+  int choiceCount = 0;
+
+  @override
+  void dispose() {
+    choices.forEach((element) {
+      element.dispose();
+    });
+
+    super.dispose();
+  }
+
+  void choiceAdd() {
+    if (choiceCount > 3) return;
+    setState(() {
+      choices.add(ChoiceItem.create(""));
+      choiceCount++;
+    });
+    print(choiceCount);
+  }
+
+  void choiceRemove(int id) {
+    final removedItem = choices.firstWhere((element) => element.id == id);
+    setState(() {
+      choices.removeWhere((element) => element.id == id);
+      choiceCount--;
+    });
+
+    Future.delayed(Duration(seconds: 1)).then((value) {
+      removedItem.dispose();
+    });
+  }
+
+  List<String> choiceList() {
+    List<String> _choices = [];
+    choices.forEach((choice) {
+      String _text = choice.toString();
+      if (_text != null || _text != "") _choices.add(choice.toString());
+    });
+    _choices.add('その他');
+    return _choices;
+  }
+
+  Widget textFieldItem(
+    ChoiceItem choice,
+  ) {
+    return Row(
+      children: [
+        Expanded(
+          child: TextField(
+            controller: choice.controller,
+            onChanged: (text) {
+              setState(() {
+                choices = choices
+                    .map((e) => e.id == choice.id ? choice.change(text) : e)
+                    .toList();
+              });
+            },
+          ),
+        ),
+        IconButton(
+          icon: Icon(Icons.close),
+          onPressed: () {
+            choiceRemove(choice.id);
+          },
+        )
+      ],
+    );
+  }
 
   @override
   void initState() {
@@ -339,67 +411,14 @@ class _PostSurveyPageWidgetState extends State<PostSurveyPageWidget> {
                                                   scrollDirection:
                                                       Axis.vertical,
                                                   children: [
-                                                    Padding(
-                                                      padding:
-                                                          EdgeInsetsDirectional
-                                                              .fromSTEB(
-                                                                  0, 0, 0, 8),
-                                                      child: TextFormField(
-                                                        controller:
-                                                            textController3,
-                                                        obscureText: false,
-                                                        decoration:
-                                                            InputDecoration(
-                                                          hintText: '選択肢',
-                                                          enabledBorder:
-                                                              UnderlineInputBorder(
-                                                            borderSide:
-                                                                BorderSide(
-                                                              color: Color(
-                                                                  0x00000000),
-                                                              width: 1,
-                                                            ),
-                                                            borderRadius:
-                                                                const BorderRadius
-                                                                    .only(
-                                                              topLeft: Radius
-                                                                  .circular(
-                                                                      4.0),
-                                                              topRight: Radius
-                                                                  .circular(
-                                                                      4.0),
-                                                            ),
-                                                          ),
-                                                          focusedBorder:
-                                                              UnderlineInputBorder(
-                                                            borderSide:
-                                                                BorderSide(
-                                                              color: Color(
-                                                                  0x00000000),
-                                                              width: 1,
-                                                            ),
-                                                            borderRadius:
-                                                                const BorderRadius
-                                                                    .only(
-                                                              topLeft: Radius
-                                                                  .circular(
-                                                                      4.0),
-                                                              topRight: Radius
-                                                                  .circular(
-                                                                      4.0),
-                                                            ),
-                                                          ),
-                                                        ),
-                                                        style:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .bodyText1,
-                                                      ),
-                                                    ),
+                                                    Text(
+                                                        choiceCount.toString()),
+                                                    Text(choices.toString()),
+                                                    ...choices.map((item) =>
+                                                        textFieldItem(item)),
                                                     FFButtonWidget(
                                                       onPressed: () {
-                                                        print(
-                                                            'Button pressed ...');
+                                                        choiceAdd();
                                                       },
                                                       text: '追加',
                                                       options: FFButtonOptions(
@@ -769,10 +788,8 @@ class _PostSurveyPageWidgetState extends State<PostSurveyPageWidget> {
                                                                 endDate:
                                                                     datePicked2,
                                                               ),
-                                                              'choices': [
-                                                                textController3
-                                                                    .text
-                                                              ],
+                                                              'choices':
+                                                                  choiceList(),
                                                             };
                                                             await SurveyRecord
                                                                 .collection
