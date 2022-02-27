@@ -47,7 +47,6 @@ class _PostSurveyPageWidgetState extends State<PostSurveyPageWidget> {
       choices.add(ChoiceItem.create(""));
       choiceCount++;
     });
-    print(choiceCount);
   }
 
   void choiceRemove(int id) {
@@ -404,8 +403,7 @@ class _PostSurveyPageWidgetState extends State<PostSurveyPageWidget> {
                                                         ),
                                                         FFButtonWidget(
                                                           onPressed: () {
-                                                            print(
-                                                                'Button pressed ...');
+                                                            choiceAdd();
                                                           },
                                                           text: '追加',
                                                           options:
@@ -443,7 +441,7 @@ class _PostSurveyPageWidgetState extends State<PostSurveyPageWidget> {
                                                 width: MediaQuery.of(context)
                                                         .size
                                                         .width *
-                                                    0.64,
+                                                    0.62,
                                                 decoration: BoxDecoration(),
                                                 child: ListView(
                                                   padding: EdgeInsets.zero,
@@ -451,42 +449,10 @@ class _PostSurveyPageWidgetState extends State<PostSurveyPageWidget> {
                                                   scrollDirection:
                                                       Axis.vertical,
                                                   children: [
-                                                    Text(
-                                                        choiceCount.toString()),
-                                                    Text(choices.toString()),
                                                     ...choices.map((item) =>
                                                         textFieldItem(item)),
-                                                    FFButtonWidget(
-                                                      onPressed: () {
-                                                        choiceAdd();
-                                                      },
-                                                      text: '追加',
-                                                      options: FFButtonOptions(
-                                                        height: 40,
-                                                        color:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .pDark,
-                                                        textStyle:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .subtitle2
-                                                                .override(
-                                                                  fontFamily:
-                                                                      'Open Sans',
-                                                                  color: Colors
-                                                                      .white,
-                                                                ),
-                                                        borderSide: BorderSide(
-                                                          color: Colors
-                                                              .transparent,
-                                                          width: 1,
-                                                        ),
-                                                        borderRadius: 12,
-                                                      ),
-                                                    ),
                                                     Text(
-                                                      '設定可能な選択肢は最大4個まで。選択肢の最後に「その他」が自動で追加されます。',
+                                                      '設定可能な選択肢は最大4個。選択肢の最後に「その他」が自動で追加されます。',
                                                       style:
                                                           FlutterFlowTheme.of(
                                                                   context)
