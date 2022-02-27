@@ -383,18 +383,58 @@ class _PostSurveyPageWidgetState extends State<PostSurveyPageWidget> {
                                                   crossAxisAlignment:
                                                       CrossAxisAlignment.start,
                                                   children: [
-                                                    Padding(
-                                                      padding:
-                                                          EdgeInsetsDirectional
-                                                              .fromSTEB(
-                                                                  0, 0, 0, 8),
-                                                      child: Text(
-                                                        '選択肢',
-                                                        style:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
+                                                    Column(
+                                                      mainAxisSize:
+                                                          MainAxisSize.max,
+                                                      crossAxisAlignment:
+                                                          CrossAxisAlignment
+                                                              .start,
+                                                      children: [
+                                                        Padding(
+                                                          padding:
+                                                              EdgeInsetsDirectional
+                                                                  .fromSTEB(0,
+                                                                      0, 0, 8),
+                                                          child: Text(
+                                                            '選択肢',
+                                                            style: FlutterFlowTheme
+                                                                    .of(context)
                                                                 .subtitle1,
-                                                      ),
+                                                          ),
+                                                        ),
+                                                        FFButtonWidget(
+                                                          onPressed: () {
+                                                            print(
+                                                                'Button pressed ...');
+                                                          },
+                                                          text: '追加',
+                                                          options:
+                                                              FFButtonOptions(
+                                                            width: 120,
+                                                            height: 40,
+                                                            color: FlutterFlowTheme
+                                                                    .of(context)
+                                                                .pDark,
+                                                            textStyle:
+                                                                FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .subtitle2
+                                                                    .override(
+                                                                      fontFamily:
+                                                                          'Open Sans',
+                                                                      color: Colors
+                                                                          .white,
+                                                                    ),
+                                                            borderSide:
+                                                                BorderSide(
+                                                              color: Colors
+                                                                  .transparent,
+                                                              width: 1,
+                                                            ),
+                                                            borderRadius: 12,
+                                                          ),
+                                                        ),
+                                                      ],
                                                     ),
                                                   ],
                                                 ),
@@ -444,6 +484,21 @@ class _PostSurveyPageWidgetState extends State<PostSurveyPageWidget> {
                                                         ),
                                                         borderRadius: 12,
                                                       ),
+                                                    ),
+                                                    Text(
+                                                      '設定可能な選択肢は最大4個まで。選択肢の最後に「その他」が自動で追加されます。',
+                                                      style:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .bodyText2
+                                                              .override(
+                                                                fontFamily:
+                                                                    'Open Sans',
+                                                                color: FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .sLight,
+                                                                fontSize: 14,
+                                                              ),
                                                     ),
                                                   ],
                                                 ),
@@ -738,18 +793,6 @@ class _PostSurveyPageWidgetState extends State<PostSurveyPageWidget> {
                                           crossAxisAlignment:
                                               CrossAxisAlignment.start,
                                           children: [
-                                            InkWell(
-                                              onTap: () async {
-                                                await launchURL(
-                                                    'https://baylife-ff782.web.app/terms.html');
-                                              },
-                                              child: Text(
-                                                '＊利用規約に従い投稿します。',
-                                                style:
-                                                    FlutterFlowTheme.of(context)
-                                                        .bodyText1,
-                                              ),
-                                            ),
                                             Row(
                                               mainAxisSize: MainAxisSize.max,
                                               children: [
@@ -796,8 +839,39 @@ class _PostSurveyPageWidgetState extends State<PostSurveyPageWidget> {
                                                                 .doc()
                                                                 .set(
                                                                     surveyCreateData);
+                                                            await showDialog(
+                                                              context: context,
+                                                              builder:
+                                                                  (alertDialogContext) {
+                                                                return AlertDialog(
+                                                                  title: Text(
+                                                                      '送信完了'),
+                                                                  content: Text(
+                                                                      '投稿ありがとうございます。アンケート内容を審査しますので、お待ち下さい。'),
+                                                                  actions: [
+                                                                    TextButton(
+                                                                      onPressed:
+                                                                          () =>
+                                                                              Navigator.pop(alertDialogContext),
+                                                                      child: Text(
+                                                                          'OK'),
+                                                                    ),
+                                                                  ],
+                                                                );
+                                                              },
+                                                            );
+                                                            await Navigator
+                                                                .pushAndRemoveUntil(
+                                                              context,
+                                                              MaterialPageRoute(
+                                                                builder:
+                                                                    (context) =>
+                                                                        PostSurveyPageWidget(),
+                                                              ),
+                                                              (r) => false,
+                                                            );
                                                           },
-                                                          text: '保存',
+                                                          text: '送信',
                                                           options:
                                                               FFButtonOptions(
                                                             width: 130,
