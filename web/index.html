@@ -22,22 +22,17 @@
       name="google-signin-client_id"
       content="317803933569-vmk8ms4eaaejdtmfkiq10efmgadcl43c.apps.googleusercontent.com"
     />
-
     <!-- iOS meta tags & icons -->
-    <meta name="apple-mobile-web-app-capable" content="yes" />
-    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
-    <meta name="apple-mobile-web-app-title" content="bay_life_web" />
-    <link rel="apple-touch-icon" href="icons/Icon-192.png" />
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="BayLifeWeb">
+    <link rel="apple-touch-icon" href="icons/Icon-192.png">
 
-    <!-- Favicon -->
-    <link rel="icon" type="image/png" href="favicon.png" />
-
-    <title>bay_life_web</title>
-    <link rel="manifest" href="manifest.json" />
-  </head>
-
-  <body>
-    <!-- This script installs service_worker.js to provide PWA functionality to
+  <title>BayLifeWeb</title>
+  <link rel="manifest" href="manifest.json">
+</head>
+<body>
+  <!-- This script installs service_worker.js to provide PWA functionality to
        application. For more information, see:
        https://developers.google.com/web/fundamentals/primers/service-workers -->
   <script>
@@ -47,11 +42,11 @@
       });
     }
   </script>
-  <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-app.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-auth.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-firestore.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-storage.js"></script>
-  
+  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-storage.js"></script>
+
   <!-- Add Stripe.js -->
   <script src="https://js.stripe.com/v3/"></script>
 
@@ -68,7 +63,8 @@
 
     firebase.initializeApp(firebaseConfig);
   </script>
-  
+
+
   <script src="main.dart.js" type="application/javascript"></script>
 </body>
 </html>

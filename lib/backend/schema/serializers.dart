@@ -6,6 +6,7 @@ import 'users_record.dart';
 import 'cat_dd_record.dart';
 import 'contents_record.dart';
 import 'email_members_record.dart';
+import 'survey_record.dart';
 
 import 'index.dart';
 
@@ -22,6 +23,7 @@ const kDocumentReferenceField = 'Document__Reference__Field';
   CatDdRecord,
   ContentsRecord,
   EmailMembersRecord,
+  SurveyRecord,
 ])
 final Serializers serializers = (_$serializers.toBuilder()
       ..add(DocumentReferenceSerializer())

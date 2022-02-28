@@ -46,7 +46,7 @@ class _LoginPageWidgetState extends State<LoginPageWidget> {
           elevation: 0,
         ),
       ),
-      backgroundColor: FlutterFlowTheme.background,
+      backgroundColor: FlutterFlowTheme.of(context).background,
       body: Column(
         mainAxisSize: MainAxisSize.max,
         crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -69,7 +69,8 @@ class _LoginPageWidgetState extends State<LoginPageWidget> {
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(8),
                             border: Border.all(
-                              color: FlutterFlowTheme.secondaryColor,
+                              color:
+                                  FlutterFlowTheme.of(context).secondaryColor,
                               width: 2,
                             ),
                           ),
@@ -87,17 +88,7 @@ class _LoginPageWidgetState extends State<LoginPageWidget> {
                                     obscureText: false,
                                     decoration: InputDecoration(
                                       labelText: 'Email Address',
-                                      labelStyle:
-                                          FlutterFlowTheme.bodyText1.override(
-                                        fontFamily: 'Open Sans',
-                                        color: FlutterFlowTheme.textDark,
-                                      ),
                                       hintText: 'Enter your email...',
-                                      hintStyle:
-                                          FlutterFlowTheme.bodyText1.override(
-                                        fontFamily: 'Open Sans',
-                                        color: FlutterFlowTheme.textDark,
-                                      ),
                                       enabledBorder: UnderlineInputBorder(
                                         borderSide: BorderSide(
                                           color: Color(0x00000000),
@@ -119,10 +110,13 @@ class _LoginPageWidgetState extends State<LoginPageWidget> {
                                         ),
                                       ),
                                     ),
-                                    style: FlutterFlowTheme.bodyText1.override(
-                                      fontFamily: 'Open Sans',
-                                      color: FlutterFlowTheme.textDark,
-                                    ),
+                                    style: FlutterFlowTheme.of(context)
+                                        .bodyText1
+                                        .override(
+                                          fontFamily: 'Open Sans',
+                                          color: FlutterFlowTheme.of(context)
+                                              .textDark,
+                                        ),
                                   ),
                                 ),
                               ),
@@ -138,7 +132,8 @@ class _LoginPageWidgetState extends State<LoginPageWidget> {
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(8),
                             border: Border.all(
-                              color: FlutterFlowTheme.secondaryColor,
+                              color:
+                                  FlutterFlowTheme.of(context).secondaryColor,
                               width: 2,
                             ),
                           ),
@@ -156,9 +151,7 @@ class _LoginPageWidgetState extends State<LoginPageWidget> {
                                     obscureText: !passwordVisibility,
                                     decoration: InputDecoration(
                                       labelText: 'Password',
-                                      labelStyle: FlutterFlowTheme.bodyText1,
                                       hintText: 'Enter your password...',
-                                      hintStyle: FlutterFlowTheme.bodyText1,
                                       enabledBorder: UnderlineInputBorder(
                                         borderSide: BorderSide(
                                           color: Color(0x00000000),
@@ -193,7 +186,8 @@ class _LoginPageWidgetState extends State<LoginPageWidget> {
                                         ),
                                       ),
                                     ),
-                                    style: FlutterFlowTheme.bodyText1,
+                                    style:
+                                        FlutterFlowTheme.of(context).bodyText1,
                                   ),
                                 ),
                               ),
@@ -226,11 +220,13 @@ class _LoginPageWidgetState extends State<LoginPageWidget> {
                           options: FFButtonOptions(
                             width: 230,
                             height: 60,
-                            color: FlutterFlowTheme.secondaryColor,
-                            textStyle: FlutterFlowTheme.subtitle1.override(
-                              fontFamily: 'Open Sans',
-                              color: FlutterFlowTheme.textLight,
-                            ),
+                            color: FlutterFlowTheme.of(context).secondaryColor,
+                            textStyle: FlutterFlowTheme.of(context)
+                                .subtitle1
+                                .override(
+                                  fontFamily: 'Open Sans',
+                                  color: FlutterFlowTheme.of(context).textLight,
+                                ),
                             borderSide: BorderSide(
                               color: Colors.transparent,
                               width: 1,
@@ -262,12 +258,14 @@ class _LoginPageWidgetState extends State<LoginPageWidget> {
                           options: FFButtonOptions(
                             width: 170,
                             height: 40,
-                            color: FlutterFlowTheme.sLight,
-                            textStyle: FlutterFlowTheme.subtitle2.override(
-                              fontFamily: 'Open Sans',
-                              color: FlutterFlowTheme.textLight,
-                              fontSize: 16,
-                            ),
+                            color: FlutterFlowTheme.of(context).sLight,
+                            textStyle: FlutterFlowTheme.of(context)
+                                .subtitle2
+                                .override(
+                                  fontFamily: 'Open Sans',
+                                  color: FlutterFlowTheme.of(context).textLight,
+                                  fontSize: 16,
+                                ),
                             borderSide: BorderSide(
                               color: Colors.transparent,
                               width: 1,
@@ -281,10 +279,12 @@ class _LoginPageWidgetState extends State<LoginPageWidget> {
                         child: AutoSizeText(
                           'Or use a social account to login',
                           textAlign: TextAlign.center,
-                          style: FlutterFlowTheme.bodyText2.override(
-                            fontFamily: 'Open Sans',
-                            color: FlutterFlowTheme.textDark,
-                          ),
+                          style: FlutterFlowTheme.of(context)
+                              .bodyText2
+                              .override(
+                                fontFamily: 'Open Sans',
+                                color: FlutterFlowTheme.of(context).textDark,
+                              ),
                         ),
                       ),
                       Align(
@@ -306,14 +306,16 @@ class _LoginPageWidgetState extends State<LoginPageWidget> {
                                       if (user == null) {
                                         return;
                                       }
-                                      subscription = await getSubscriptionCall(
+                                      subscription =
+                                          await GetSubscriptionCall.call(
                                         uid: currentUserUid,
                                       );
                                       await Navigator.push(
                                         context,
                                         MaterialPageRoute(
                                           builder: (context) => HomePageWidget(
-                                            subscription: subscription.jsonBody,
+                                            subscription:
+                                                (subscription?.jsonBody ?? ''),
                                           ),
                                         ),
                                       );
@@ -372,13 +374,13 @@ class _LoginPageWidgetState extends State<LoginPageWidget> {
                     children: [
                       Text(
                         '利用規約',
-                        style: FlutterFlowTheme.bodyText1,
+                        style: FlutterFlowTheme.of(context).bodyText1,
                       ),
                       Padding(
                         padding: EdgeInsetsDirectional.fromSTEB(30, 0, 0, 0),
                         child: Text(
                           'プライバシーポリシー',
-                          style: FlutterFlowTheme.bodyText1,
+                          style: FlutterFlowTheme.of(context).bodyText1,
                         ),
                       ),
                     ],
