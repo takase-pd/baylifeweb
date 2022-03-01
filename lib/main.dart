@@ -14,12 +14,15 @@ import 'flutter_flow/flutter_flow_theme.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 
 import 'package:flutter_web_plugins/flutter_web_plugins.dart';
+import 'package:firebase_app_check/firebase_app_check.dart';
 
 void main() async {
   setUrlStrategy(PathUrlStrategy());
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
-
+  await FirebaseAppCheck.instance.activate(
+    webRecaptchaSiteKey: '6Lc9kageAAAAABqHutthzF8JeGNk_lyFp-kp-gDe',
+  );
   runApp(MyApp());
 }
 
