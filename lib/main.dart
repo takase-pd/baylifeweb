@@ -21,7 +21,7 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
   await FirebaseAppCheck.instance.activate(
-    webRecaptchaSiteKey: '6Lc9kageAAAAABqHutthzF8JeGNk_lyFp-kp-gDe',
+    webRecaptchaSiteKey: '6LeoJqgeAAAAALN1AqR5kS1JGm7j_b763i1EVuis',
   );
   runApp(MyApp());
 }
