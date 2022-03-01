@@ -23,7 +23,7 @@ class _TopPageFooterWidgetState extends State<TopPageFooterWidget> {
       width: double.infinity,
       height: 480,
       decoration: BoxDecoration(
-        color: FlutterFlowTheme.background,
+        color: FlutterFlowTheme.of(context).background,
       ),
       child: Column(
         mainAxisSize: MainAxisSize.max,
@@ -39,7 +39,7 @@ class _TopPageFooterWidgetState extends State<TopPageFooterWidget> {
                 Divider(
                   height: 72,
                   thickness: 1,
-                  color: FlutterFlowTheme.tDark,
+                  color: FlutterFlowTheme.of(context).tDark,
                 ),
                 Expanded(
                   child: Column(
@@ -61,11 +61,13 @@ class _TopPageFooterWidgetState extends State<TopPageFooterWidget> {
                                       0, 0, 0, 24),
                                   child: Text(
                                     'ご検討中の方',
-                                    style: FlutterFlowTheme.subtitle2.override(
-                                      fontFamily: 'Open Sans',
-                                      fontSize: 16,
-                                      fontWeight: FontWeight.w600,
-                                    ),
+                                    style: FlutterFlowTheme.of(context)
+                                        .subtitle2
+                                        .override(
+                                          fontFamily: 'Open Sans',
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.w600,
+                                        ),
                                   ),
                                 ),
                                 Padding(
@@ -73,12 +75,12 @@ class _TopPageFooterWidgetState extends State<TopPageFooterWidget> {
                                       0, 0, 0, 16),
                                   child: InkWell(
                                     onTap: () async {
-                                      plans = await getPlanCall();
+                                      plans = await GetPlanCall.call();
                                       await Navigator.push(
                                         context,
                                         MaterialPageRoute(
                                           builder: (context) => PlanPageWidget(
-                                            plans: plans.jsonBody,
+                                            plans: (plans?.jsonBody ?? ''),
                                           ),
                                         ),
                                       );
@@ -87,7 +89,8 @@ class _TopPageFooterWidgetState extends State<TopPageFooterWidget> {
                                     },
                                     child: Text(
                                       'プラン',
-                                      style: FlutterFlowTheme.bodyText1,
+                                      style: FlutterFlowTheme.of(context)
+                                          .bodyText1,
                                     ),
                                   ),
                                 ),
@@ -101,7 +104,8 @@ class _TopPageFooterWidgetState extends State<TopPageFooterWidget> {
                                     },
                                     child: Text(
                                       '利用例',
-                                      style: FlutterFlowTheme.bodyText1,
+                                      style: FlutterFlowTheme.of(context)
+                                          .bodyText1,
                                     ),
                                   ),
                                 ),
@@ -119,11 +123,13 @@ class _TopPageFooterWidgetState extends State<TopPageFooterWidget> {
                                       0, 0, 0, 24),
                                   child: Text(
                                     'ご利用中の方',
-                                    style: FlutterFlowTheme.subtitle2.override(
-                                      fontFamily: 'Open Sans',
-                                      fontSize: 16,
-                                      fontWeight: FontWeight.w600,
-                                    ),
+                                    style: FlutterFlowTheme.of(context)
+                                        .subtitle2
+                                        .override(
+                                          fontFamily: 'Open Sans',
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.w600,
+                                        ),
                                   ),
                                 ),
                                 Padding(
@@ -141,7 +147,8 @@ class _TopPageFooterWidgetState extends State<TopPageFooterWidget> {
                                     },
                                     child: Text(
                                       'ログイン',
-                                      style: FlutterFlowTheme.bodyText1,
+                                      style: FlutterFlowTheme.of(context)
+                                          .bodyText1,
                                     ),
                                   ),
                                 ),
@@ -155,7 +162,8 @@ class _TopPageFooterWidgetState extends State<TopPageFooterWidget> {
                                     },
                                     child: Text(
                                       'What\'s New?',
-                                      style: FlutterFlowTheme.bodyText1,
+                                      style: FlutterFlowTheme.of(context)
+                                          .bodyText1,
                                     ),
                                   ),
                                 ),
@@ -173,11 +181,13 @@ class _TopPageFooterWidgetState extends State<TopPageFooterWidget> {
                                       0, 0, 0, 24),
                                   child: Text(
                                     '運営会社',
-                                    style: FlutterFlowTheme.subtitle2.override(
-                                      fontFamily: 'Open Sans',
-                                      fontSize: 16,
-                                      fontWeight: FontWeight.w600,
-                                    ),
+                                    style: FlutterFlowTheme.of(context)
+                                        .subtitle2
+                                        .override(
+                                          fontFamily: 'Open Sans',
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.w600,
+                                        ),
                                   ),
                                 ),
                                 Padding(
@@ -190,7 +200,8 @@ class _TopPageFooterWidgetState extends State<TopPageFooterWidget> {
                                     },
                                     child: Text(
                                       '会社情報',
-                                      style: FlutterFlowTheme.bodyText1,
+                                      style: FlutterFlowTheme.of(context)
+                                          .bodyText1,
                                     ),
                                   ),
                                 ),
@@ -204,7 +215,8 @@ class _TopPageFooterWidgetState extends State<TopPageFooterWidget> {
                                     },
                                     child: Text(
                                       '利用規約',
-                                      style: FlutterFlowTheme.bodyText1,
+                                      style: FlutterFlowTheme.of(context)
+                                          .bodyText1,
                                     ),
                                   ),
                                 ),
@@ -218,7 +230,8 @@ class _TopPageFooterWidgetState extends State<TopPageFooterWidget> {
                                     },
                                     child: Text(
                                       'プライバシーポリシー',
-                                      style: FlutterFlowTheme.bodyText1,
+                                      style: FlutterFlowTheme.of(context)
+                                          .bodyText1,
                                     ),
                                   ),
                                 ),
@@ -235,10 +248,10 @@ class _TopPageFooterWidgetState extends State<TopPageFooterWidget> {
           ),
           Text(
             'Copyright © 2021 Particle Drawing, LLC.  All rights reserved.',
-            style: FlutterFlowTheme.bodyText1.override(
-              fontFamily: 'Open Sans',
-              fontSize: 14,
-            ),
+            style: FlutterFlowTheme.of(context).bodyText1.override(
+                  fontFamily: 'Open Sans',
+                  fontSize: 14,
+                ),
           ),
         ],
       ),

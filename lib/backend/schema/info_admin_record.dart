@@ -29,6 +29,10 @@ abstract class InfoAdminRecord
       .snapshots()
       .map((s) => serializers.deserializeWith(serializer, serializedData(s)));
 
+  static Future<InfoAdminRecord> getDocumentOnce(DocumentReference ref) => ref
+      .get()
+      .then((s) => serializers.deserializeWith(serializer, serializedData(s)));
+
   InfoAdminRecord._();
   factory InfoAdminRecord([void Function(InfoAdminRecordBuilder) updates]) =
       _$InfoAdminRecord;

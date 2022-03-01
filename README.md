@@ -1,4 +1,4 @@
-# bay_life_web
+# BayLifeWeb
 
 A new Flutter project.
 

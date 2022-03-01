@@ -1,6 +1,6 @@
 {
-    "name": "bay_life_web",
-    "short_name": "bay_life_web",
+    "name": "BayLifeWeb",
+    "short_name": "BayLifeWeb",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",

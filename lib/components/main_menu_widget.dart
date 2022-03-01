@@ -6,6 +6,7 @@ import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
 import '../home_page/home_page_widget.dart';
 import '../post_page/post_page_widget.dart';
+import '../post_survey_page/post_survey_page_widget.dart';
 import '../top_page/top_page_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
@@ -27,7 +28,7 @@ class _MainMenuWidgetState extends State<MainMenuWidget> {
     return Container(
       width: 200,
       decoration: BoxDecoration(
-        color: FlutterFlowTheme.secondaryColor,
+        color: FlutterFlowTheme.of(context).secondaryColor,
       ),
       child: Column(
         mainAxisSize: MainAxisSize.max,
@@ -43,7 +44,7 @@ class _MainMenuWidgetState extends State<MainMenuWidget> {
                 width: double.infinity,
                 height: 50,
                 decoration: BoxDecoration(
-                  color: FlutterFlowTheme.secondaryColor,
+                  color: FlutterFlowTheme.of(context).secondaryColor,
                   border: Border.all(
                     color: Colors.transparent,
                   ),
@@ -52,11 +53,11 @@ class _MainMenuWidgetState extends State<MainMenuWidget> {
                   padding: EdgeInsetsDirectional.fromSTEB(10, 10, 10, 0),
                   child: Text(
                     'Makuhari Bay Life',
-                    style: FlutterFlowTheme.subtitle1.override(
-                      fontFamily: 'Open Sans',
-                      color: FlutterFlowTheme.textLight,
-                      fontSize: 20,
-                    ),
+                    style: FlutterFlowTheme.of(context).subtitle1.override(
+                          fontFamily: 'Open Sans',
+                          color: FlutterFlowTheme.of(context).textLight,
+                          fontSize: 20,
+                        ),
                   ),
                 ),
               ),
@@ -87,12 +88,16 @@ class _MainMenuWidgetState extends State<MainMenuWidget> {
                               options: FFButtonOptions(
                                 width: 160,
                                 height: 48,
-                                color: FlutterFlowTheme.secondaryColor,
-                                textStyle: FlutterFlowTheme.subtitle2.override(
-                                  fontFamily: 'Open Sans',
-                                  color: FlutterFlowTheme.textLight,
-                                  fontSize: 16,
-                                ),
+                                color:
+                                    FlutterFlowTheme.of(context).secondaryColor,
+                                textStyle: FlutterFlowTheme.of(context)
+                                    .subtitle2
+                                    .override(
+                                      fontFamily: 'Open Sans',
+                                      color: FlutterFlowTheme.of(context)
+                                          .textLight,
+                                      fontSize: 16,
+                                    ),
                                 elevation: 0,
                                 borderSide: BorderSide(
                                   color: Colors.transparent,
@@ -104,7 +109,7 @@ class _MainMenuWidgetState extends State<MainMenuWidget> {
                               alignment: AlignmentDirectional(-0.83, 0),
                               child: Icon(
                                 Icons.home_sharp,
-                                color: FlutterFlowTheme.textLight,
+                                color: FlutterFlowTheme.of(context).textLight,
                                 size: 24,
                               ),
                             ),
@@ -117,7 +122,8 @@ class _MainMenuWidgetState extends State<MainMenuWidget> {
                           children: [
                             FFButtonWidget(
                               onPressed: () async {
-                                subscriptionPost = await getSubscriptionCall(
+                                subscriptionPost =
+                                    await GetSubscriptionCall.call(
                                   uid: currentUserUid,
                                 );
                                 await Navigator.push(
@@ -125,9 +131,9 @@ class _MainMenuWidgetState extends State<MainMenuWidget> {
                                   MaterialPageRoute(
                                     builder: (context) => PostPageWidget(
                                       subscription: getJsonField(
-                                              subscriptionPost.jsonBody,
-                                              r'''$.result.subscription''')
-                                          .toString(),
+                                        (subscriptionPost?.jsonBody ?? ''),
+                                        r'''$.result.subscription''',
+                                      ).toString(),
                                     ),
                                   ),
                                 );
@@ -138,12 +144,16 @@ class _MainMenuWidgetState extends State<MainMenuWidget> {
                               options: FFButtonOptions(
                                 width: 160,
                                 height: 48,
-                                color: FlutterFlowTheme.secondaryColor,
-                                textStyle: FlutterFlowTheme.subtitle2.override(
-                                  fontFamily: 'Open Sans',
-                                  color: FlutterFlowTheme.textLight,
-                                  fontSize: 16,
-                                ),
+                                color:
+                                    FlutterFlowTheme.of(context).secondaryColor,
+                                textStyle: FlutterFlowTheme.of(context)
+                                    .subtitle2
+                                    .override(
+                                      fontFamily: 'Open Sans',
+                                      color: FlutterFlowTheme.of(context)
+                                          .textLight,
+                                      fontSize: 16,
+                                    ),
                                 elevation: 0,
                                 borderSide: BorderSide(
                                   color: Colors.transparent,
@@ -155,7 +165,57 @@ class _MainMenuWidgetState extends State<MainMenuWidget> {
                               alignment: AlignmentDirectional(-0.83, 0),
                               child: Icon(
                                 Icons.post_add_sharp,
-                                color: FlutterFlowTheme.textLight,
+                                color: FlutterFlowTheme.of(context).textLight,
+                                size: 24,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      Container(
+                        height: 48,
+                        child: Stack(
+                          children: [
+                            Padding(
+                              padding:
+                                  EdgeInsetsDirectional.fromSTEB(16, 0, 0, 0),
+                              child: FFButtonWidget(
+                                onPressed: () async {
+                                  await Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) =>
+                                          PostSurveyPageWidget(),
+                                    ),
+                                  );
+                                },
+                                text: 'アンケート',
+                                options: FFButtonOptions(
+                                  width: 160,
+                                  height: 48,
+                                  color: FlutterFlowTheme.of(context)
+                                      .secondaryColor,
+                                  textStyle: FlutterFlowTheme.of(context)
+                                      .subtitle2
+                                      .override(
+                                        fontFamily: 'Open Sans',
+                                        color: FlutterFlowTheme.of(context)
+                                            .textLight,
+                                        fontSize: 16,
+                                      ),
+                                  elevation: 0,
+                                  borderSide: BorderSide(
+                                    color: Colors.transparent,
+                                  ),
+                                  borderRadius: 0,
+                                ),
+                              ),
+                            ),
+                            Align(
+                              alignment: AlignmentDirectional(-0.83, 0),
+                              child: Icon(
+                                Icons.question_answer_rounded,
+                                color: FlutterFlowTheme.of(context).textLight,
                                 size: 24,
                               ),
                             ),
@@ -168,14 +228,16 @@ class _MainMenuWidgetState extends State<MainMenuWidget> {
                           children: [
                             FFButtonWidget(
                               onPressed: () async {
-                                subscriptionConfig = await getSubscriptionCall(
+                                subscriptionConfig =
+                                    await GetSubscriptionCall.call(
                                   uid: currentUserUid,
                                 );
                                 await Navigator.push(
                                   context,
                                   MaterialPageRoute(
                                     builder: (context) => ConfigPageWidget(
-                                      subscription: subscriptionConfig.jsonBody,
+                                      subscription:
+                                          (subscriptionConfig?.jsonBody ?? ''),
                                     ),
                                   ),
                                 );
@@ -186,12 +248,16 @@ class _MainMenuWidgetState extends State<MainMenuWidget> {
                               options: FFButtonOptions(
                                 width: 160,
                                 height: 48,
-                                color: FlutterFlowTheme.secondaryColor,
-                                textStyle: FlutterFlowTheme.subtitle2.override(
-                                  fontFamily: 'Open Sans',
-                                  color: FlutterFlowTheme.textLight,
-                                  fontSize: 16,
-                                ),
+                                color:
+                                    FlutterFlowTheme.of(context).secondaryColor,
+                                textStyle: FlutterFlowTheme.of(context)
+                                    .subtitle2
+                                    .override(
+                                      fontFamily: 'Open Sans',
+                                      color: FlutterFlowTheme.of(context)
+                                          .textLight,
+                                      fontSize: 16,
+                                    ),
                                 elevation: 0,
                                 borderSide: BorderSide(
                                   color: Colors.transparent,
@@ -203,7 +269,7 @@ class _MainMenuWidgetState extends State<MainMenuWidget> {
                               alignment: AlignmentDirectional(-0.83, 0),
                               child: Icon(
                                 Icons.settings_sharp,
-                                color: FlutterFlowTheme.textLight,
+                                color: FlutterFlowTheme.of(context).textLight,
                                 size: 24,
                               ),
                             ),
@@ -235,14 +301,14 @@ class _MainMenuWidgetState extends State<MainMenuWidget> {
                 children: [
                   Text(
                     'Logout',
-                    style: FlutterFlowTheme.bodyText1.override(
-                      fontFamily: 'Open Sans',
-                      color: FlutterFlowTheme.textLight,
-                    ),
+                    style: FlutterFlowTheme.of(context).bodyText1.override(
+                          fontFamily: 'Open Sans',
+                          color: FlutterFlowTheme.of(context).textLight,
+                        ),
                   ),
                   Icon(
                     Icons.logout,
-                    color: FlutterFlowTheme.textLight,
+                    color: FlutterFlowTheme.of(context).textLight,
                     size: 24,
                   ),
                 ],
