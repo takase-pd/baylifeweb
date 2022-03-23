@@ -77,6 +77,8 @@ class _MainMenuWidgetState extends State<MainMenuWidget> {
                           children: [
                             FFButtonWidget(
                               onPressed: () async {
+                                logFirebaseEvent('Button-ON_TAP');
+                                logFirebaseEvent('Button-Navigate-To');
                                 await Navigator.push(
                                   context,
                                   MaterialPageRoute(
@@ -122,10 +124,13 @@ class _MainMenuWidgetState extends State<MainMenuWidget> {
                           children: [
                             FFButtonWidget(
                               onPressed: () async {
+                                logFirebaseEvent('Button-ON_TAP');
+                                logFirebaseEvent('Button-Backend-Call');
                                 subscriptionPost =
                                     await GetSubscriptionCall.call(
                                   uid: currentUserUid,
                                 );
+                                logFirebaseEvent('Button-Navigate-To');
                                 await Navigator.push(
                                   context,
                                   MaterialPageRoute(
@@ -181,6 +186,8 @@ class _MainMenuWidgetState extends State<MainMenuWidget> {
                                   EdgeInsetsDirectional.fromSTEB(16, 0, 0, 0),
                               child: FFButtonWidget(
                                 onPressed: () async {
+                                  logFirebaseEvent('Button-ON_TAP');
+                                  logFirebaseEvent('Button-Navigate-To');
                                   await Navigator.push(
                                     context,
                                     MaterialPageRoute(
@@ -228,10 +235,13 @@ class _MainMenuWidgetState extends State<MainMenuWidget> {
                           children: [
                             FFButtonWidget(
                               onPressed: () async {
+                                logFirebaseEvent('Button-ON_TAP');
+                                logFirebaseEvent('Button-Backend-Call');
                                 subscriptionConfig =
                                     await GetSubscriptionCall.call(
                                   uid: currentUserUid,
                                 );
+                                logFirebaseEvent('Button-Navigate-To');
                                 await Navigator.push(
                                   context,
                                   MaterialPageRoute(
@@ -286,6 +296,8 @@ class _MainMenuWidgetState extends State<MainMenuWidget> {
             padding: EdgeInsetsDirectional.fromSTEB(10, 10, 10, 20),
             child: InkWell(
               onTap: () async {
+                logFirebaseEvent('Row-ON_TAP');
+                logFirebaseEvent('Row-Auth');
                 await signOut();
                 await Navigator.pushAndRemoveUntil(
                   context,

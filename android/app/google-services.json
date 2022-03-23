@@ -14,7 +14,15 @@
       },
       "oauth_client": [
         {
-          "client_id": "201447539334-0sniu4rh51l5ulc8ad5itgu8eti399cg.apps.googleusercontent.com",
+          "client_id": "201447539334-3bav26142euh2jqa7v4iffbqm867b0g8.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.particledrawing.baylife",
+            "certificate_hash": "9bbb3186b2189ef16d8f272bdab59362c395cbb4"
+          }
+        },
+        {
+          "client_id": "201447539334-u8l1pne72ufo1370die387tleh81v917.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.particledrawing.baylife",
@@ -51,12 +59,20 @@
     },
     {
       "client_info": {
-        "mobilesdk_app_id": "1:201447539334:android:32c4f61b1fb417bc958707",
+        "mobilesdk_app_id": "1:201447539334:android:dd9e61f7c1dd8cfe958707",
         "android_client_info": {
-          "package_name": "com.particledrawing.baylifeweb"
+          "package_name": "com.particledrawing.baylifepad"
         }
       },
       "oauth_client": [
+        {
+          "client_id": "201447539334-a1dpfdnvvv020dt83srl3nktdjsqh1sn.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.particledrawing.baylifepad",
+            "certificate_hash": "9bbb3186b2189ef16d8f272bdab59362c395cbb4"
+          }
+        },
         {
           "client_id": "201447539334-u7bg08jh5jd3q4chbibpisckkmsuadlj.apps.googleusercontent.com",
           "client_type": 3
