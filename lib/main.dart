@@ -13,11 +13,11 @@ import 'package:bay_life_web/create_special_account_page/create_special_account_
 import 'flutter_flow/flutter_flow_theme.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 
-import 'package:flutter_web_plugins/flutter_web_plugins.dart';
+// import 'package:flutter_web_plugins/flutter_web_plugins.dart';
 import 'package:firebase_app_check/firebase_app_check.dart';
 
 void main() async {
-  setUrlStrategy(PathUrlStrategy());
+  // setUrlStrategy(PathUrlStrategy());
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
   await FirebaseAppCheck.instance.activate(
@@ -76,9 +76,9 @@ class _MyAppState extends State<MyApp> {
       ],
       locale: _locale,
       supportedLocales: const [Locale('en', '')],
-      routes: {
-        '/special': (context) => CreateSpecialAccountPageWidget(),
-      },
+      // routes: {
+      //   '/special': (context) => CreateSpecialAccountPageWidget(),
+      // },
       theme: ThemeData(brightness: Brightness.light),
       themeMode: _themeMode,
       home: initialUser == null || displaySplashImage
