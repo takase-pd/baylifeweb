@@ -1,6 +1,5 @@
 import '../components/top_page_footer_widget.dart';
 import '../components/top_page_header_widget.dart';
-import '../create_account_page/create_account_page_widget.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/custom_functions.dart' as functions;
@@ -348,19 +347,7 @@ class _PlanPageWidgetState extends State<PlanPageWidget> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       InkWell(
-                        onTap: () async {
-                          await Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => CreateAccountPageWidget(
-                                priceId: getJsonField(
-                                  widget.plans,
-                                  r'''$.result.plans[0].prices[0].priceId''',
-                                ).toString(),
-                              ),
-                            ),
-                          );
-                        },
+                        onTap: () async {},
                         child: Card(
                           clipBehavior: Clip.antiAliasWithSaveLayer,
                           color: FlutterFlowTheme.of(context).tDark,
@@ -512,19 +499,7 @@ class _PlanPageWidgetState extends State<PlanPageWidget> {
                       Padding(
                         padding: EdgeInsetsDirectional.fromSTEB(10, 0, 0, 0),
                         child: InkWell(
-                          onTap: () async {
-                            await Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => CreateAccountPageWidget(
-                                  priceId: getJsonField(
-                                    widget.plans,
-                                    r'''$.result.plans[0].prices[1].priceId''',
-                                  ).toString(),
-                                ),
-                              ),
-                            );
-                          },
+                          onTap: () async {},
                           child: Card(
                             clipBehavior: Clip.antiAliasWithSaveLayer,
                             color: FlutterFlowTheme.of(context).tDark,
@@ -842,18 +817,7 @@ class _PlanPageWidgetState extends State<PlanPageWidget> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       InkWell(
-                        onTap: () async {
-                          await Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => CreateAccountPageWidget(
-                                priceId: getJsonField(widget.plans,
-                                        r'''$.result.plans[3].prices[0].priceId''')
-                                    .toString(),
-                              ),
-                            ),
-                          );
-                        },
+                        onTap: () async {},
                         child: Card(
                           clipBehavior: Clip.antiAliasWithSaveLayer,
                           color: FlutterFlowTheme.of(context).tDark,
