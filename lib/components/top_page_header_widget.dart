@@ -36,6 +36,8 @@ class _TopPageHeaderWidgetState extends State<TopPageHeaderWidget> {
               children: [
                 InkWell(
                   onTap: () async {
+                    logFirebaseEvent('Text-ON_TAP');
+                    logFirebaseEvent('Text-Navigate-To');
                     await Navigator.push(
                       context,
                       MaterialPageRoute(
@@ -50,6 +52,8 @@ class _TopPageHeaderWidgetState extends State<TopPageHeaderWidget> {
                 ),
                 FFButtonWidget(
                   onPressed: () async {
+                    logFirebaseEvent('Button-ON_TAP');
+                    logFirebaseEvent('Button-Navigate-To');
                     await Navigator.push(
                       context,
                       MaterialPageRoute(

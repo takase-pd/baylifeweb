@@ -54,6 +54,7 @@ class _PostPageWidgetState extends State<PostPageWidget> {
   @override
   void initState() {
     super.initState();
+    logFirebaseEvent('screen_view', parameters: {'screen_name': 'PostPage'});
     textController1 = TextEditingController();
     textController2 = TextEditingController();
     textController3 = TextEditingController();
@@ -73,16 +74,6 @@ class _PostPageWidgetState extends State<PostPageWidget> {
   Widget build(BuildContext context) {
     return Scaffold(
       key: scaffoldKey,
-      appBar: PreferredSize(
-        preferredSize: Size.fromHeight(8),
-        child: AppBar(
-          backgroundColor: Colors.transparent,
-          automaticallyImplyLeading: false,
-          flexibleSpace: HeaderWidget(),
-          actions: [],
-          elevation: 0,
-        ),
-      ),
       backgroundColor: FlutterFlowTheme.of(context).tertiaryColor,
       body: Form(
         key: formKey,
@@ -90,6 +81,7 @@ class _PostPageWidgetState extends State<PostPageWidget> {
         child: Column(
           mainAxisSize: MainAxisSize.max,
           children: [
+            HeaderWidget(),
             Expanded(
               child: Row(
                 mainAxisSize: MainAxisSize.max,
@@ -120,7 +112,10 @@ class _PostPageWidgetState extends State<PostPageWidget> {
                                   ),
                                   InkWell(
                                     onTap: () async {
+                                      logFirebaseEvent('Text-ON_TAP');
+                                      logFirebaseEvent('Text-Backend-Call');
                                       plans = await GetPlanCall.call();
+                                      logFirebaseEvent('Text-Navigate-To');
                                       await Navigator.push(
                                         context,
                                         MaterialPageRoute(
@@ -768,6 +763,10 @@ class _PostPageWidgetState extends State<PostPageWidget> {
                                                     ),
                                                     FFButtonWidget(
                                                       onPressed: () async {
+                                                        logFirebaseEvent(
+                                                            'Button-ON_TAP');
+                                                        logFirebaseEvent(
+                                                            'Button-Upload-Photo-Video');
                                                         final selectedMedia =
                                                             await selectMedia(
                                                           maxWidth: 300.00,
@@ -1021,6 +1020,10 @@ class _PostPageWidgetState extends State<PostPageWidget> {
                                                     ),
                                                     FFButtonWidget(
                                                       onPressed: () async {
+                                                        logFirebaseEvent(
+                                                            'Button-ON_TAP');
+                                                        logFirebaseEvent(
+                                                            'Button-Date-Time-Picker');
                                                         await DatePicker
                                                             .showDatePicker(
                                                           context,
@@ -1154,6 +1157,10 @@ class _PostPageWidgetState extends State<PostPageWidget> {
                                                     ),
                                                     FFButtonWidget(
                                                       onPressed: () async {
+                                                        logFirebaseEvent(
+                                                            'Button-ON_TAP');
+                                                        logFirebaseEvent(
+                                                            'Button-Date-Time-Picker');
                                                         await DatePicker
                                                             .showDatePicker(
                                                           context,
@@ -1929,6 +1936,8 @@ class _PostPageWidgetState extends State<PostPageWidget> {
                                     children: [
                                       InkWell(
                                         onTap: () async {
+                                          logFirebaseEvent('Text-ON_TAP');
+                                          logFirebaseEvent('Text-Launch-U-R-L');
                                           await launchURL(
                                               'https://baylife-ff782.web.app/terms.html');
                                         },
@@ -2001,6 +2010,10 @@ class _PostPageWidgetState extends State<PostPageWidget> {
                                                 children: [
                                                   FFButtonWidget(
                                                     onPressed: () async {
+                                                      logFirebaseEvent(
+                                                          'Button-ON_TAP');
+                                                      logFirebaseEvent(
+                                                          'Button-Navigate-To');
                                                       await Navigator.push(
                                                         context,
                                                         MaterialPageRoute(

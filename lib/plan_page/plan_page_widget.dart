@@ -28,6 +28,12 @@ class _PlanPageWidgetState extends State<PlanPageWidget> {
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
+  void initState() {
+    super.initState();
+    logFirebaseEvent('screen_view', parameters: {'screen_name': 'PlanPage'});
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       key: scaffoldKey,
@@ -171,6 +177,8 @@ class _PlanPageWidgetState extends State<PlanPageWidget> {
                               children: [
                                 InkWell(
                                   onTap: () async {
+                                    logFirebaseEvent('Text-ON_TAP');
+                                    logFirebaseEvent('Text-Launch-U-R-L');
                                     await launchURL('https://stripe.com/');
                                   },
                                   child: Text(
@@ -182,6 +190,8 @@ class _PlanPageWidgetState extends State<PlanPageWidget> {
                                 ),
                                 InkWell(
                                   onTap: () async {
+                                    logFirebaseEvent('Text-ON_TAP');
+                                    logFirebaseEvent('Text-Launch-U-R-L');
                                     await launchURL('https://stripe.com/');
                                   },
                                   child: Text(
@@ -201,6 +211,8 @@ class _PlanPageWidgetState extends State<PlanPageWidget> {
                                       3, 0, 3, 0),
                                   child: InkWell(
                                     onTap: () async {
+                                      logFirebaseEvent('Icon-ON_TAP');
+                                      logFirebaseEvent('Icon-Launch-U-R-L');
                                       await launchURL('https://stripe.com/');
                                     },
                                     child: FaIcon(
@@ -224,6 +236,8 @@ class _PlanPageWidgetState extends State<PlanPageWidget> {
                             children: [
                               InkWell(
                                 onTap: () async {
+                                  logFirebaseEvent('Text-ON_TAP');
+                                  logFirebaseEvent('Text-Launch-U-R-L');
                                   await launchURL(
                                       'https://baylife-ff782.web.app/terms.html');
                                 },
@@ -244,6 +258,8 @@ class _PlanPageWidgetState extends State<PlanPageWidget> {
                                     EdgeInsetsDirectional.fromSTEB(3, 0, 0, 0),
                                 child: InkWell(
                                   onTap: () async {
+                                    logFirebaseEvent('Icon-ON_TAP');
+                                    logFirebaseEvent('Icon-Launch-U-R-L');
                                     await launchURL(
                                         'https://baylife-ff782.web.app/terms.html');
                                   },
@@ -261,6 +277,8 @@ class _PlanPageWidgetState extends State<PlanPageWidget> {
                               ),
                               InkWell(
                                 onTap: () async {
+                                  logFirebaseEvent('Text-ON_TAP');
+                                  logFirebaseEvent('Text-Launch-U-R-L');
                                   await launchURL(
                                       'https://www.particledrawing.com/privacy');
                                 },
@@ -281,6 +299,8 @@ class _PlanPageWidgetState extends State<PlanPageWidget> {
                                     EdgeInsetsDirectional.fromSTEB(3, 0, 3, 0),
                                 child: InkWell(
                                   onTap: () async {
+                                    logFirebaseEvent('Icon-ON_TAP');
+                                    logFirebaseEvent('Icon-Launch-U-R-L');
                                     await launchURL(
                                         'https://www.particledrawing.com/privacy');
                                   },
@@ -730,31 +750,35 @@ class _PlanPageWidgetState extends State<PlanPageWidget> {
                     children: [
                       FFButtonWidget(
                         onPressed: () async {
-                          await showDialog(
-                            context: context,
-                            builder: (alertDialogContext) {
-                              return AlertDialog(
-                                title: Text('問い合わせページに遷移'),
-                                content: Text('問い合わせページからご連絡ください。'),
-                                actions: [
-                                  TextButton(
-                                    onPressed: () =>
-                                        Navigator.pop(alertDialogContext),
-                                    child: Text('Cancel'),
-                                  ),
-                                  TextButton(
-                                    onPressed: () async {
-                                      Navigator.pop(alertDialogContext);
-                                      await launchURL(
-                                          'https://www.particledrawing.com/contact');
-                                      ;
-                                    },
-                                    child: Text('OK'),
-                                  ),
-                                ],
-                              );
-                            },
-                          );
+                          logFirebaseEvent('Button-ON_TAP');
+                          logFirebaseEvent('Button-Alert-Dialog');
+                          var confirmDialogResponse = await showDialog<bool>(
+                                context: context,
+                                builder: (alertDialogContext) {
+                                  return AlertDialog(
+                                    title: Text('問い合わせページに遷移'),
+                                    content: Text('問い合わせページからご連絡ください。'),
+                                    actions: [
+                                      TextButton(
+                                        onPressed: () => Navigator.pop(
+                                            alertDialogContext, false),
+                                        child: Text('Cancel'),
+                                      ),
+                                      TextButton(
+                                        onPressed: () => Navigator.pop(
+                                            alertDialogContext, true),
+                                        child: Text('OK'),
+                                      ),
+                                    ],
+                                  );
+                                },
+                              ) ??
+                              false;
+                          if (confirmDialogResponse) {
+                            logFirebaseEvent('Button-Launch-U-R-L');
+                            await launchURL(
+                                'https://www.particledrawing.com/contact');
+                          }
                         },
                         text: '問い合わせ',
                         options: FFButtonOptions(
@@ -1047,31 +1071,35 @@ class _PlanPageWidgetState extends State<PlanPageWidget> {
                     children: [
                       FFButtonWidget(
                         onPressed: () async {
-                          await showDialog(
-                            context: context,
-                            builder: (alertDialogContext) {
-                              return AlertDialog(
-                                title: Text('問い合わせページに遷移'),
-                                content: Text('問い合わせページからご連絡ください。'),
-                                actions: [
-                                  TextButton(
-                                    onPressed: () =>
-                                        Navigator.pop(alertDialogContext),
-                                    child: Text('Cancel'),
-                                  ),
-                                  TextButton(
-                                    onPressed: () async {
-                                      Navigator.pop(alertDialogContext);
-                                      await launchURL(
-                                          'https://www.particledrawing.com/contact');
-                                      ;
-                                    },
-                                    child: Text('OK'),
-                                  ),
-                                ],
-                              );
-                            },
-                          );
+                          logFirebaseEvent('Button-ON_TAP');
+                          logFirebaseEvent('Button-Alert-Dialog');
+                          var confirmDialogResponse = await showDialog<bool>(
+                                context: context,
+                                builder: (alertDialogContext) {
+                                  return AlertDialog(
+                                    title: Text('問い合わせページに遷移'),
+                                    content: Text('問い合わせページからご連絡ください。'),
+                                    actions: [
+                                      TextButton(
+                                        onPressed: () => Navigator.pop(
+                                            alertDialogContext, false),
+                                        child: Text('Cancel'),
+                                      ),
+                                      TextButton(
+                                        onPressed: () => Navigator.pop(
+                                            alertDialogContext, true),
+                                        child: Text('OK'),
+                                      ),
+                                    ],
+                                  );
+                                },
+                              ) ??
+                              false;
+                          if (confirmDialogResponse) {
+                            logFirebaseEvent('Button-Launch-U-R-L');
+                            await launchURL(
+                                'https://www.particledrawing.com/contact');
+                          }
                         },
                         text: '問い合わせ',
                         options: FFButtonOptions(

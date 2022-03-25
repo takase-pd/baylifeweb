@@ -30,6 +30,7 @@ class _LoginPageWidgetState extends State<LoginPageWidget> {
     emailAddressController = TextEditingController();
     passwordController = TextEditingController();
     passwordVisibility = false;
+    logFirebaseEvent('screen_view', parameters: {'screen_name': 'LoginPage'});
   }
 
   @override
@@ -199,6 +200,9 @@ class _LoginPageWidgetState extends State<LoginPageWidget> {
                         padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 24),
                         child: FFButtonWidget(
                           onPressed: () async {
+                            logFirebaseEvent('Button-ON_TAP');
+                            logFirebaseEvent('Button-Auth');
+
                             final user = await signInWithEmail(
                               context,
                               emailAddressController.text,
@@ -239,6 +243,8 @@ class _LoginPageWidgetState extends State<LoginPageWidget> {
                         padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 36),
                         child: FFButtonWidget(
                           onPressed: () async {
+                            logFirebaseEvent('Button-ON_TAP');
+                            logFirebaseEvent('Button-Auth');
                             if (emailAddressController.text.isEmpty) {
                               ScaffoldMessenger.of(context).showSnackBar(
                                 SnackBar(
@@ -301,15 +307,19 @@ class _LoginPageWidgetState extends State<LoginPageWidget> {
                                       0, 1, 0, 0),
                                   child: FFButtonWidget(
                                     onPressed: () async {
+                                      logFirebaseEvent('Button-ON_TAP');
+                                      logFirebaseEvent('Button-Auth');
                                       final user =
                                           await signInWithGoogle(context);
                                       if (user == null) {
                                         return;
                                       }
+                                      logFirebaseEvent('Button-Backend-Call');
                                       subscription =
                                           await GetSubscriptionCall.call(
                                         uid: currentUserUid,
                                       );
+                                      logFirebaseEvent('Button-Navigate-To');
                                       await Navigator.push(
                                         context,
                                         MaterialPageRoute(

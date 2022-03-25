@@ -22,58 +22,46 @@ class _ConfigPageWidgetState extends State<ConfigPageWidget> {
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
+  void initState() {
+    super.initState();
+    logFirebaseEvent('screen_view', parameters: {'screen_name': 'ConfigPage'});
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       key: scaffoldKey,
-      appBar: PreferredSize(
-        preferredSize: Size.fromHeight(8),
-        child: AppBar(
-          backgroundColor: Colors.transparent,
-          automaticallyImplyLeading: false,
-          flexibleSpace: HeaderWidget(),
-          actions: [],
-          elevation: 0,
-        ),
-      ),
       backgroundColor: FlutterFlowTheme.of(context).tertiaryColor,
-      body: Row(
+      body: Column(
         mainAxisSize: MainAxisSize.max,
+        crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          MainMenuWidget(),
+          HeaderWidget(),
           Expanded(
-            child: Column(
-              mainAxisSize: MainAxisSize.max,
-              crossAxisAlignment: CrossAxisAlignment.start,
+            child: Row(
+              mainAxisSize: MainAxisSize.min,
               children: [
+                MainMenuWidget(),
                 Expanded(
                   child: Padding(
-                    padding: EdgeInsetsDirectional.fromSTEB(30, 30, 0, 0),
+                    padding: EdgeInsetsDirectional.fromSTEB(36, 18, 8, 0),
                     child: Column(
                       mainAxisSize: MainAxisSize.max,
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 16),
-                          child: Column(
-                            mainAxisSize: MainAxisSize.max,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Padding(
-                                padding:
-                                    EdgeInsetsDirectional.fromSTEB(0, 0, 0, 8),
-                                child: Text(
-                                  'ご利用プラン',
-                                  style: FlutterFlowTheme.of(context).title2,
-                                ),
-                              ),
-                              Text(
-                                getJsonField(
-                                  widget.subscription,
-                                  r'''$.result.subscription''',
-                                ).toString(),
-                                style: FlutterFlowTheme.of(context).bodyText1,
-                              ),
-                            ],
+                          padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 8),
+                          child: Text(
+                            'ご利用プラン',
+                            style: FlutterFlowTheme.of(context).title2,
                           ),
+                        ),
+                        Text(
+                          getJsonField(
+                            widget.subscription,
+                            r'''$.result.subscription''',
+                          ).toString(),
+                          style: FlutterFlowTheme.of(context).bodyText1,
                         ),
                       ],
                     ),

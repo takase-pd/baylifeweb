@@ -35,40 +35,39 @@ class _MainMenuWidgetState extends State<MainMenuWidget> {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Column(
-            mainAxisSize: MainAxisSize.max,
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Container(
-                width: double.infinity,
-                height: 50,
-                decoration: BoxDecoration(
-                  color: FlutterFlowTheme.of(context).secondaryColor,
-                  border: Border.all(
-                    color: Colors.transparent,
-                  ),
-                ),
-                child: Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(10, 10, 10, 0),
-                  child: Text(
-                    'Makuhari Bay Life',
-                    style: FlutterFlowTheme.of(context).subtitle1.override(
-                          fontFamily: 'Open Sans',
-                          color: FlutterFlowTheme.of(context).textLight,
-                          fontSize: 20,
-                        ),
-                  ),
-                ),
-              ),
-              Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(0, 24, 0, 0),
-                child: Container(
+          Expanded(
+            child: Column(
+              mainAxisSize: MainAxisSize.max,
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Container(
                   width: double.infinity,
-                  height: 800,
+                  height: 50,
+                  decoration: BoxDecoration(
+                    color: FlutterFlowTheme.of(context).secondaryColor,
+                    border: Border.all(
+                      color: Colors.transparent,
+                    ),
+                  ),
+                  child: Padding(
+                    padding: EdgeInsetsDirectional.fromSTEB(10, 10, 10, 0),
+                    child: Text(
+                      'Makuhari Bay Life',
+                      style: FlutterFlowTheme.of(context).subtitle1.override(
+                            fontFamily: 'Open Sans',
+                            color: FlutterFlowTheme.of(context).textLight,
+                            fontSize: 20,
+                          ),
+                    ),
+                  ),
+                ),
+                Container(
+                  width: double.infinity,
                   decoration: BoxDecoration(),
                   child: ListView(
                     padding: EdgeInsets.zero,
+                    shrinkWrap: true,
                     scrollDirection: Axis.vertical,
                     children: [
                       Container(
@@ -77,6 +76,8 @@ class _MainMenuWidgetState extends State<MainMenuWidget> {
                           children: [
                             FFButtonWidget(
                               onPressed: () async {
+                                logFirebaseEvent('Button-ON_TAP');
+                                logFirebaseEvent('Button-Navigate-To');
                                 await Navigator.push(
                                   context,
                                   MaterialPageRoute(
@@ -122,10 +123,13 @@ class _MainMenuWidgetState extends State<MainMenuWidget> {
                           children: [
                             FFButtonWidget(
                               onPressed: () async {
+                                logFirebaseEvent('Button-ON_TAP');
+                                logFirebaseEvent('Button-Backend-Call');
                                 subscriptionPost =
                                     await GetSubscriptionCall.call(
                                   uid: currentUserUid,
                                 );
+                                logFirebaseEvent('Button-Navigate-To');
                                 await Navigator.push(
                                   context,
                                   MaterialPageRoute(
@@ -181,6 +185,8 @@ class _MainMenuWidgetState extends State<MainMenuWidget> {
                                   EdgeInsetsDirectional.fromSTEB(16, 0, 0, 0),
                               child: FFButtonWidget(
                                 onPressed: () async {
+                                  logFirebaseEvent('Button-ON_TAP');
+                                  logFirebaseEvent('Button-Navigate-To');
                                   await Navigator.push(
                                     context,
                                     MaterialPageRoute(
@@ -228,10 +234,13 @@ class _MainMenuWidgetState extends State<MainMenuWidget> {
                           children: [
                             FFButtonWidget(
                               onPressed: () async {
+                                logFirebaseEvent('Button-ON_TAP');
+                                logFirebaseEvent('Button-Backend-Call');
                                 subscriptionConfig =
                                     await GetSubscriptionCall.call(
                                   uid: currentUserUid,
                                 );
+                                logFirebaseEvent('Button-Navigate-To');
                                 await Navigator.push(
                                   context,
                                   MaterialPageRoute(
@@ -279,13 +288,15 @@ class _MainMenuWidgetState extends State<MainMenuWidget> {
                     ],
                   ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
           Padding(
             padding: EdgeInsetsDirectional.fromSTEB(10, 10, 10, 20),
             child: InkWell(
               onTap: () async {
+                logFirebaseEvent('Row-ON_TAP');
+                logFirebaseEvent('Row-Auth');
                 await signOut();
                 await Navigator.pushAndRemoveUntil(
                   context,

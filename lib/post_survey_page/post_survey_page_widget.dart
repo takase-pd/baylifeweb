@@ -101,6 +101,8 @@ class _PostSurveyPageWidgetState extends State<PostSurveyPageWidget> {
   @override
   void initState() {
     super.initState();
+    logFirebaseEvent('screen_view',
+        parameters: {'screen_name': 'PostSurveyPage'});
     textController1 = TextEditingController();
     textController2 = TextEditingController();
     textController3 = TextEditingController();
@@ -110,16 +112,6 @@ class _PostSurveyPageWidgetState extends State<PostSurveyPageWidget> {
   Widget build(BuildContext context) {
     return Scaffold(
       key: scaffoldKey,
-      appBar: PreferredSize(
-        preferredSize: Size.fromHeight(8),
-        child: AppBar(
-          backgroundColor: Colors.transparent,
-          automaticallyImplyLeading: false,
-          flexibleSpace: HeaderWidget(),
-          actions: [],
-          elevation: 0,
-        ),
-      ),
       backgroundColor: FlutterFlowTheme.of(context).tertiaryColor,
       body: Form(
         key: formKey,
@@ -127,6 +119,7 @@ class _PostSurveyPageWidgetState extends State<PostSurveyPageWidget> {
         child: Column(
           mainAxisSize: MainAxisSize.max,
           children: [
+            HeaderWidget(),
             Expanded(
               child: Row(
                 mainAxisSize: MainAxisSize.max,
@@ -562,6 +555,10 @@ class _PostSurveyPageWidgetState extends State<PostSurveyPageWidget> {
                                                       ),
                                                       FFButtonWidget(
                                                         onPressed: () async {
+                                                          logFirebaseEvent(
+                                                              'Button-ON_TAP');
+                                                          logFirebaseEvent(
+                                                              'Button-Date-Time-Picker');
                                                           await DatePicker
                                                               .showDatePicker(
                                                             context,
@@ -703,6 +700,10 @@ class _PostSurveyPageWidgetState extends State<PostSurveyPageWidget> {
                                                       ),
                                                       FFButtonWidget(
                                                         onPressed: () async {
+                                                          logFirebaseEvent(
+                                                              'Button-ON_TAP');
+                                                          logFirebaseEvent(
+                                                              'Button-Date-Time-Picker');
                                                           await DatePicker
                                                               .showDatePicker(
                                                             context,
@@ -781,6 +782,11 @@ class _PostSurveyPageWidgetState extends State<PostSurveyPageWidget> {
                                                       children: [
                                                         FFButtonWidget(
                                                           onPressed: () async {
+                                                            logFirebaseEvent(
+                                                                'Button-ON_TAP');
+                                                            logFirebaseEvent(
+                                                                'Button-Backend-Call');
+
                                                             final surveyCreateData =
                                                                 {
                                                               ...createSurveyRecordData(
@@ -805,6 +811,8 @@ class _PostSurveyPageWidgetState extends State<PostSurveyPageWidget> {
                                                                 .doc()
                                                                 .set(
                                                                     surveyCreateData);
+                                                            logFirebaseEvent(
+                                                                'Button-Alert-Dialog');
                                                             await showDialog(
                                                               context: context,
                                                               builder:
@@ -826,6 +834,8 @@ class _PostSurveyPageWidgetState extends State<PostSurveyPageWidget> {
                                                                 );
                                                               },
                                                             );
+                                                            logFirebaseEvent(
+                                                                'Button-Navigate-To');
                                                             await Navigator
                                                                 .pushAndRemoveUntil(
                                                               context,
