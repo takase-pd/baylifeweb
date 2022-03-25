@@ -10,7 +10,7 @@
 		<string>ad-hoc</string>
 		<key>provisioningProfiles</key>
 		<dict>
-			<key>com.particledrawing.baylife</key>
+			<key>com.particledrawing.baylifeweb</key>
 			<string>com.particledrawing.baylifeweb</string>
 		</dict>
 		<key>signingCertificate</key>
