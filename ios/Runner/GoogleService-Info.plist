@@ -3,23 +3,23 @@
 <plist version="1.0">
 <dict>
 	<key>CLIENT_ID</key>
-	<string>201447539334-0vcreemd19ckb7196cet2tbbncta53st.apps.googleusercontent.com</string>
+	<string>317803933569-0h30455u8tb4mbo3sbr4tbrbemksbm78.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.201447539334-0vcreemd19ckb7196cet2tbbncta53st</string>
+	<string>com.googleusercontent.apps.317803933569-0h30455u8tb4mbo3sbr4tbrbemksbm78</string>
 	<key>ANDROID_CLIENT_ID</key>
-	<string>201447539334-0sniu4rh51l5ulc8ad5itgu8eti399cg.apps.googleusercontent.com</string>
+	<string>317803933569-70qc4d667shd6h60csmeola3d1b9nc7r.apps.googleusercontent.com</string>
 	<key>API_KEY</key>
-	<string>AIzaSyCYFGFcFWvDEBB3VS1WZoJWFqEt8D32o58</string>
+	<string>AIzaSyDKyaR1B-IB8lG2qmwBSfbRJv2SGXfgw3Y</string>
 	<key>GCM_SENDER_ID</key>
-	<string>201447539334</string>
+	<string>317803933569</string>
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
 	<string>com.particledrawing.baylifeweb</string>
 	<key>PROJECT_ID</key>
-	<string>baylifedev</string>
+	<string>baylife-ff782</string>
 	<key>STORAGE_BUCKET</key>
-	<string>baylifedev.appspot.com</string>
+	<string>baylife-ff782.appspot.com</string>
 	<key>IS_ADS_ENABLED</key>
 	<false></false>
 	<key>IS_ANALYTICS_ENABLED</key>
@@ -31,6 +31,6 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:201447539334:ios:21d7dcb720e4abe0958707</string>
+	<string>1:317803933569:ios:afb65e4ca9791c0d6e8280</string>
 </dict>
 </plist>
