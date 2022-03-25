@@ -35,40 +35,39 @@ class _MainMenuWidgetState extends State<MainMenuWidget> {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Column(
-            mainAxisSize: MainAxisSize.max,
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Container(
-                width: double.infinity,
-                height: 50,
-                decoration: BoxDecoration(
-                  color: FlutterFlowTheme.of(context).secondaryColor,
-                  border: Border.all(
-                    color: Colors.transparent,
-                  ),
-                ),
-                child: Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(10, 10, 10, 0),
-                  child: Text(
-                    'Makuhari Bay Life',
-                    style: FlutterFlowTheme.of(context).subtitle1.override(
-                          fontFamily: 'Open Sans',
-                          color: FlutterFlowTheme.of(context).textLight,
-                          fontSize: 20,
-                        ),
-                  ),
-                ),
-              ),
-              Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(0, 24, 0, 0),
-                child: Container(
+          Expanded(
+            child: Column(
+              mainAxisSize: MainAxisSize.max,
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Container(
                   width: double.infinity,
-                  height: 800,
+                  height: 50,
+                  decoration: BoxDecoration(
+                    color: FlutterFlowTheme.of(context).secondaryColor,
+                    border: Border.all(
+                      color: Colors.transparent,
+                    ),
+                  ),
+                  child: Padding(
+                    padding: EdgeInsetsDirectional.fromSTEB(10, 10, 10, 0),
+                    child: Text(
+                      'Makuhari Bay Life',
+                      style: FlutterFlowTheme.of(context).subtitle1.override(
+                            fontFamily: 'Open Sans',
+                            color: FlutterFlowTheme.of(context).textLight,
+                            fontSize: 20,
+                          ),
+                    ),
+                  ),
+                ),
+                Container(
+                  width: double.infinity,
                   decoration: BoxDecoration(),
                   child: ListView(
                     padding: EdgeInsets.zero,
+                    shrinkWrap: true,
                     scrollDirection: Axis.vertical,
                     children: [
                       Container(
@@ -289,8 +288,8 @@ class _MainMenuWidgetState extends State<MainMenuWidget> {
                     ],
                   ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
           Padding(
             padding: EdgeInsetsDirectional.fromSTEB(10, 10, 10, 20),
