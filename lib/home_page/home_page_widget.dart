@@ -25,23 +25,20 @@ class _HomePageWidgetState extends State<HomePageWidget> {
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
+  void initState() {
+    super.initState();
+    logFirebaseEvent('screen_view', parameters: {'screen_name': 'HomePage'});
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       key: scaffoldKey,
-      appBar: PreferredSize(
-        preferredSize: Size.fromHeight(8),
-        child: AppBar(
-          backgroundColor: Colors.transparent,
-          automaticallyImplyLeading: false,
-          flexibleSpace: HeaderWidget(),
-          actions: [],
-          elevation: 0,
-        ),
-      ),
       backgroundColor: FlutterFlowTheme.of(context).background,
       body: Column(
         mainAxisSize: MainAxisSize.max,
         children: [
+          HeaderWidget(),
           Expanded(
             child: Row(
               mainAxisSize: MainAxisSize.max,
@@ -82,7 +79,6 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                               padding:
                                   EdgeInsetsDirectional.fromSTEB(0, 0, 0, 10),
                               child: Container(
-                                height: 80,
                                 decoration: BoxDecoration(
                                   color: FlutterFlowTheme.of(context)
                                       .tertiaryColor,
@@ -158,7 +154,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                       Text(
                                         columnContentsRecord.overview
                                             .maybeHandleOverflow(
-                                          maxChars: 70,
+                                          maxChars: 56,
                                           replacement: '…',
                                         ),
                                         style: FlutterFlowTheme.of(context)

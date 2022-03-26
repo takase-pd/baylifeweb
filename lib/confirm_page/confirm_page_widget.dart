@@ -64,26 +64,24 @@ class _ConfirmPageWidgetState extends State<ConfirmPageWidget> {
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
+  void initState() {
+    super.initState();
+    logFirebaseEvent('screen_view', parameters: {'screen_name': 'ConfirmPage'});
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       key: scaffoldKey,
-      appBar: PreferredSize(
-        preferredSize: Size.fromHeight(8),
-        child: AppBar(
-          backgroundColor: Colors.transparent,
-          automaticallyImplyLeading: false,
-          flexibleSpace: HeaderWidget(),
-          actions: [],
-          elevation: 0,
-        ),
-      ),
       backgroundColor: FlutterFlowTheme.of(context).tertiaryColor,
       body: Column(
         mainAxisSize: MainAxisSize.max,
         children: [
+          HeaderWidget(),
           Expanded(
             child: Row(
               mainAxisSize: MainAxisSize.max,
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 MainMenuWidget(),
                 Expanded(
@@ -877,6 +875,10 @@ class _ConfirmPageWidgetState extends State<ConfirmPageWidget> {
                                               decoration: BoxDecoration(),
                                               child: FFButtonWidget(
                                                 onPressed: () async {
+                                                  logFirebaseEvent(
+                                                      'Button-ON_TAP');
+                                                  logFirebaseEvent(
+                                                      'Button-Navigate-Back');
                                                   Navigator.pop(context);
                                                 },
                                                 text: '戻る',
@@ -951,6 +953,10 @@ class _ConfirmPageWidgetState extends State<ConfirmPageWidget> {
                                                 ),
                                                 child: FFButtonWidget(
                                                   onPressed: () async {
+                                                    logFirebaseEvent(
+                                                        'Button-ON_TAP');
+                                                    logFirebaseEvent(
+                                                        'Button-Backend-Call');
                                                     aaa =
                                                         await RegistContentsCall
                                                             .call(
@@ -989,6 +995,8 @@ class _ConfirmPageWidgetState extends State<ConfirmPageWidget> {
                                                       uid: currentUserUid,
                                                       filePath: widget.filePath,
                                                     );
+                                                    logFirebaseEvent(
+                                                        'Button-Alert-Dialog');
                                                     await showDialog(
                                                       context: context,
                                                       builder:
@@ -1008,6 +1016,8 @@ class _ConfirmPageWidgetState extends State<ConfirmPageWidget> {
                                                         );
                                                       },
                                                     );
+                                                    logFirebaseEvent(
+                                                        'Button-Navigate-To');
                                                     await Navigator
                                                         .pushAndRemoveUntil(
                                                       context,
