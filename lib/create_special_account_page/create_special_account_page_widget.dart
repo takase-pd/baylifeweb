@@ -1,5 +1,5 @@
 import '../auth/auth_util.dart';
-import '../components/header_widget.dart';
+import '../components/top_header_widget.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
@@ -51,7 +51,7 @@ class _CreateSpecialAccountPageWidgetState
             child: Column(
               mainAxisSize: MainAxisSize.max,
               children: [
-                HeaderWidget(),
+                TopHeaderWidget(),
                 Padding(
                   padding: EdgeInsetsDirectional.fromSTEB(10, 10, 10, 10),
                   child: Row(

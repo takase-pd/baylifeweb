@@ -79,7 +79,6 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                               padding:
                                   EdgeInsetsDirectional.fromSTEB(0, 0, 0, 10),
                               child: Container(
-                                height: 80,
                                 decoration: BoxDecoration(
                                   color: FlutterFlowTheme.of(context)
                                       .tertiaryColor,
@@ -155,7 +154,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                       Text(
                                         columnContentsRecord.overview
                                             .maybeHandleOverflow(
-                                          maxChars: 70,
+                                          maxChars: 56,
                                           replacement: '…',
                                         ),
                                         style: FlutterFlowTheme.of(context)

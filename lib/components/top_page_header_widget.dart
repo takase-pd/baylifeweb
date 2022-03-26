@@ -1,4 +1,4 @@
-import '../components/header_widget.dart';
+import '../components/top_header_widget.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
@@ -27,7 +27,7 @@ class _TopPageHeaderWidgetState extends State<TopPageHeaderWidget> {
       child: Column(
         mainAxisSize: MainAxisSize.max,
         children: [
-          HeaderWidget(),
+          TopHeaderWidget(),
           Padding(
             padding: EdgeInsetsDirectional.fromSTEB(10, 10, 10, 10),
             child: Row(
