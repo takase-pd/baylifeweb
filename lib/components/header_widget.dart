@@ -16,24 +16,9 @@ class _HeaderWidgetState extends State<HeaderWidget> {
   Widget build(BuildContext context) {
     return Container(
       width: double.infinity,
+      height: 24,
       decoration: BoxDecoration(
         color: FlutterFlowTheme.of(context).primaryColor,
-      ),
-      child: Row(
-        mainAxisSize: MainAxisSize.max,
-        children: [
-          Padding(
-            padding: EdgeInsetsDirectional.fromSTEB(24, 8, 8, 8),
-            child: Text(
-              'Makuhari Bay Life',
-              style: FlutterFlowTheme.of(context).subtitle1.override(
-                    fontFamily: 'Open Sans',
-                    color: FlutterFlowTheme.of(context).textLight,
-                    fontSize: 20,
-                  ),
-            ),
-          ),
-        ],
       ),
     );
   }
