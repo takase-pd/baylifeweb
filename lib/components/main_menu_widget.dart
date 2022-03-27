@@ -26,7 +26,7 @@ class _MainMenuWidgetState extends State<MainMenuWidget> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: 200,
+      width: 216,
       decoration: BoxDecoration(
         color: FlutterFlowTheme.of(context).secondaryColor,
       ),
@@ -43,6 +43,24 @@ class _MainMenuWidgetState extends State<MainMenuWidget> {
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
+                  Padding(
+                    padding: EdgeInsetsDirectional.fromSTEB(8, 8, 0, 8),
+                    child: Row(
+                      mainAxisSize: MainAxisSize.max,
+                      children: [
+                        Text(
+                          'Makuhari Bay Life',
+                          style: FlutterFlowTheme.of(context)
+                              .subtitle1
+                              .override(
+                                fontFamily: 'Open Sans',
+                                color: FlutterFlowTheme.of(context).textLight,
+                                fontSize: 20,
+                              ),
+                        ),
+                      ],
+                    ),
+                  ),
                   Container(
                     width: double.infinity,
                     decoration: BoxDecoration(),
