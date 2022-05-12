@@ -2,7 +2,7 @@ import '../backend/api_requests/api_calls.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../login_page/login_page_widget.dart';
-import '../plan_page/plan_page_widget.dart';
+import '../service_plan_page/service_plan_page_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -82,7 +82,8 @@ class _TopPageFooterWidgetState extends State<TopPageFooterWidget> {
                                       await Navigator.push(
                                         context,
                                         MaterialPageRoute(
-                                          builder: (context) => PlanPageWidget(
+                                          builder: (context) =>
+                                              ServicePlanPageWidget(
                                             plans: (plans?.jsonBody ?? ''),
                                           ),
                                         ),

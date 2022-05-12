@@ -20,10 +20,10 @@ class CreateSpecialAccountPageWidget extends StatefulWidget {
 
 class _CreateSpecialAccountPageWidgetState
     extends State<CreateSpecialAccountPageWidget> {
+  final scaffoldKey = GlobalKey<ScaffoldState>();
   TextEditingController emailAddressController;
   TextEditingController passwordController;
   bool passwordVisibility;
-  final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   void initState() {

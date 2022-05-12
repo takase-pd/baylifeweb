@@ -59,8 +59,8 @@ class ConfirmPageWidget extends StatefulWidget {
 }
 
 class _ConfirmPageWidgetState extends State<ConfirmPageWidget> {
-  ApiCallResponse aaa;
   bool checkboxListTileValue;
+  ApiCallResponse aaa;
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override

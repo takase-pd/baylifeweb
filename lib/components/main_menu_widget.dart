@@ -1,6 +1,8 @@
 import '../auth/auth_util.dart';
 import '../backend/api_requests/api_calls.dart';
 import '../config_page/config_page_widget.dart';
+import '../create_com_page/create_com_page_widget.dart';
+import '../create_shop_page/create_shop_page_widget.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
@@ -220,6 +222,162 @@ class _MainMenuWidgetState extends State<MainMenuWidget> {
                                 alignment: AlignmentDirectional(-0.83, 0),
                                 child: Icon(
                                   Icons.question_answer_rounded,
+                                  color: FlutterFlowTheme.of(context).textLight,
+                                  size: 24,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                        Container(
+                          height: 48,
+                          child: Stack(
+                            children: [
+                              Padding(
+                                padding:
+                                    EdgeInsetsDirectional.fromSTEB(16, 0, 0, 0),
+                                child: FFButtonWidget(
+                                  onPressed: () async {
+                                    logFirebaseEvent('Button-ON_TAP');
+                                    logFirebaseEvent('Button-Navigate-To');
+                                    await Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) =>
+                                            CreateComPageWidget(),
+                                      ),
+                                    );
+                                  },
+                                  text: '企業　　　',
+                                  options: FFButtonOptions(
+                                    width: 160,
+                                    height: 48,
+                                    color: FlutterFlowTheme.of(context)
+                                        .secondaryColor,
+                                    textStyle: FlutterFlowTheme.of(context)
+                                        .subtitle2
+                                        .override(
+                                          fontFamily: 'Open Sans',
+                                          color: FlutterFlowTheme.of(context)
+                                              .textLight,
+                                          fontSize: 16,
+                                        ),
+                                    elevation: 0,
+                                    borderSide: BorderSide(
+                                      color: Colors.transparent,
+                                    ),
+                                    borderRadius: 0,
+                                  ),
+                                ),
+                              ),
+                              Align(
+                                alignment: AlignmentDirectional(-0.83, 0),
+                                child: Icon(
+                                  Icons.corporate_fare_rounded,
+                                  color: FlutterFlowTheme.of(context).textLight,
+                                  size: 24,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                        Container(
+                          height: 48,
+                          child: Stack(
+                            children: [
+                              Padding(
+                                padding:
+                                    EdgeInsetsDirectional.fromSTEB(16, 0, 0, 0),
+                                child: FFButtonWidget(
+                                  onPressed: () async {
+                                    logFirebaseEvent('Button-ON_TAP');
+                                    logFirebaseEvent('Button-Navigate-To');
+                                    await Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) =>
+                                            CreateShopPageWidget(),
+                                      ),
+                                    );
+                                  },
+                                  text: 'ショップ　',
+                                  options: FFButtonOptions(
+                                    width: 160,
+                                    height: 48,
+                                    color: FlutterFlowTheme.of(context)
+                                        .secondaryColor,
+                                    textStyle: FlutterFlowTheme.of(context)
+                                        .subtitle2
+                                        .override(
+                                          fontFamily: 'Open Sans',
+                                          color: FlutterFlowTheme.of(context)
+                                              .textLight,
+                                          fontSize: 16,
+                                        ),
+                                    elevation: 0,
+                                    borderSide: BorderSide(
+                                      color: Colors.transparent,
+                                    ),
+                                    borderRadius: 0,
+                                  ),
+                                ),
+                              ),
+                              Align(
+                                alignment: AlignmentDirectional(-0.83, 0),
+                                child: Icon(
+                                  Icons.store_rounded,
+                                  color: FlutterFlowTheme.of(context).textLight,
+                                  size: 24,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                        Container(
+                          height: 48,
+                          child: Stack(
+                            children: [
+                              Padding(
+                                padding:
+                                    EdgeInsetsDirectional.fromSTEB(16, 0, 0, 0),
+                                child: FFButtonWidget(
+                                  onPressed: () async {
+                                    logFirebaseEvent('Button-ON_TAP');
+                                    logFirebaseEvent('Button-Navigate-To');
+                                    await Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) =>
+                                            PostSurveyPageWidget(),
+                                      ),
+                                    );
+                                  },
+                                  text: '商品　　　',
+                                  options: FFButtonOptions(
+                                    width: 160,
+                                    height: 48,
+                                    color: FlutterFlowTheme.of(context)
+                                        .secondaryColor,
+                                    textStyle: FlutterFlowTheme.of(context)
+                                        .subtitle2
+                                        .override(
+                                          fontFamily: 'Open Sans',
+                                          color: FlutterFlowTheme.of(context)
+                                              .textLight,
+                                          fontSize: 16,
+                                        ),
+                                    elevation: 0,
+                                    borderSide: BorderSide(
+                                      color: Colors.transparent,
+                                    ),
+                                    borderRadius: 0,
+                                  ),
+                                ),
+                              ),
+                              Align(
+                                alignment: AlignmentDirectional(-0.83, 0),
+                                child: Icon(
+                                  Icons.add_to_photos_rounded,
                                   color: FlutterFlowTheme.of(context).textLight,
                                   size: 24,
                                 ),

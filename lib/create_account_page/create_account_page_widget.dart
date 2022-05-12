@@ -25,12 +25,12 @@ class CreateAccountPageWidget extends StatefulWidget {
 }
 
 class _CreateAccountPageWidgetState extends State<CreateAccountPageWidget> {
+  final scaffoldKey = GlobalKey<ScaffoldState>();
   ApiCallResponse subsEmail;
   TextEditingController emailAddressController;
   TextEditingController passwordController;
   bool passwordVisibility;
   ApiCallResponse subsGoogle;
-  final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   void initState() {

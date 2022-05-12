@@ -9,8 +9,8 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class PlanPageWidget extends StatefulWidget {
-  const PlanPageWidget({
+class ServicePlanPageWidget extends StatefulWidget {
+  const ServicePlanPageWidget({
     Key key,
     this.plans,
   }) : super(key: key);
@@ -18,16 +18,17 @@ class PlanPageWidget extends StatefulWidget {
   final dynamic plans;
 
   @override
-  _PlanPageWidgetState createState() => _PlanPageWidgetState();
+  _ServicePlanPageWidgetState createState() => _ServicePlanPageWidgetState();
 }
 
-class _PlanPageWidgetState extends State<PlanPageWidget> {
+class _ServicePlanPageWidgetState extends State<ServicePlanPageWidget> {
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   void initState() {
     super.initState();
-    logFirebaseEvent('screen_view', parameters: {'screen_name': 'PlanPage'});
+    logFirebaseEvent('screen_view',
+        parameters: {'screen_name': 'ServicePlanPage'});
   }
 
   @override
