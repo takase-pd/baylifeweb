@@ -5,14 +5,11 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'auth/firebase_user_provider.dart';
 import 'auth/auth_util.dart';
 
+import 'flutter_flow/flutter_flow_theme.dart';
 import 'flutter_flow/flutter_flow_util.dart';
-import 'flutter_flow/flutter_flow_theme.dart';
 import 'flutter_flow/internationalization.dart';
-import 'package:bay_life_web/top_page/top_page_widget.dart';
-import 'package:bay_life_web/home_page/home_page_widget.dart';
-import 'package:bay_life_web/create_special_account_page/create_special_account_page_widget.dart';
-import 'flutter_flow/flutter_flow_theme.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'index.dart';
 
 // import 'package:flutter_web_plugins/flutter_web_plugins.dart';
 import 'package:firebase_app_check/firebase_app_check.dart';
@@ -30,7 +27,7 @@ void main() async {
 class MyApp extends StatefulWidget {
   // This widget is the root of your application.
   @override
-  _MyAppState createState() => _MyAppState();
+  State<MyApp> createState() => _MyAppState();
 
   static _MyAppState of(BuildContext context) =>
       context.findAncestorStateOfType<_MyAppState>();
@@ -39,15 +36,12 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   Locale _locale;
   ThemeMode _themeMode = ThemeMode.system;
+
   Stream<BayLifeWebFirebaseUser> userStream;
   BayLifeWebFirebaseUser initialUser;
   bool displaySplashImage = true;
-  final authUserSub = authenticatedUserStream.listen((_) {});
 
-  void setLocale(Locale value) => setState(() => _locale = value);
-  void setThemeMode(ThemeMode mode) => setState(() {
-        _themeMode = mode;
-      });
+  final authUserSub = authenticatedUserStream.listen((_) {});
 
   @override
   void initState() {
@@ -55,7 +49,9 @@ class _MyAppState extends State<MyApp> {
     userStream = bayLifeWebFirebaseUserStream()
       ..listen((user) => initialUser ?? setState(() => initialUser = user));
     Future.delayed(
-        Duration(seconds: 1), () => setState(() => displaySplashImage = false));
+      Duration(seconds: 1),
+      () => setState(() => displaySplashImage = false),
+    );
   }
 
   @override
@@ -64,6 +60,11 @@ class _MyAppState extends State<MyApp> {
 
     super.dispose();
   }
+
+  void setLocale(Locale value) => setState(() => _locale = value);
+  void setThemeMode(ThemeMode mode) => setState(() {
+        _themeMode = mode;
+      });
 
   @override
   Widget build(BuildContext context) {

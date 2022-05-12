@@ -18,11 +18,11 @@ class LoginPageWidget extends StatefulWidget {
 }
 
 class _LoginPageWidgetState extends State<LoginPageWidget> {
+  final scaffoldKey = GlobalKey<ScaffoldState>();
   ApiCallResponse subscription;
   TextEditingController emailAddressController;
   TextEditingController passwordController;
   bool passwordVisibility;
-  final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   void initState() {

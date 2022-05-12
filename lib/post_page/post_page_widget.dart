@@ -10,7 +10,7 @@ import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
 import '../flutter_flow/upload_media.dart';
-import '../plan_page/plan_page_widget.dart';
+import '../service_plan_page/service_plan_page_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
@@ -29,14 +29,13 @@ class PostPageWidget extends StatefulWidget {
 }
 
 class _PostPageWidgetState extends State<PostPageWidget> {
-  ApiCallResponse plans;
   DateTime datePicked1;
+  String uploadedFileUrl = '';
   String dropDownValue;
   TextEditingController textController1;
   TextEditingController textController2;
   TextEditingController textController3;
   TextEditingController textController4;
-  String uploadedFileUrl = '';
   TextEditingController textController5;
   DateTime datePicked2;
   TextEditingController textController6;
@@ -48,6 +47,7 @@ class _PostPageWidgetState extends State<PostPageWidget> {
   TextEditingController textController12;
   TextEditingController textController13;
   bool checkboxListTileValue;
+  ApiCallResponse plans;
   final formKey = GlobalKey<FormState>();
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
@@ -119,7 +119,8 @@ class _PostPageWidgetState extends State<PostPageWidget> {
                                       await Navigator.push(
                                         context,
                                         MaterialPageRoute(
-                                          builder: (context) => PlanPageWidget(
+                                          builder: (context) =>
+                                              ServicePlanPageWidget(
                                             plans: (plans?.jsonBody ?? ''),
                                           ),
                                         ),
@@ -293,7 +294,7 @@ class _PostPageWidgetState extends State<PostPageWidget> {
                                                       initialOption:
                                                           dropDownValue ??=
                                                               '総合',
-                                                      options: [].toList(),
+                                                      options: ['総合'].toList(),
                                                       onChanged: (val) =>
                                                           setState(() =>
                                                               dropDownValue =
@@ -491,7 +492,8 @@ class _PostPageWidgetState extends State<PostPageWidget> {
                                                             FontWeight.w500,
                                                       ),
                                                   validator: (val) {
-                                                    if (val.isEmpty) {
+                                                    if (val == null ||
+                                                        val.isEmpty) {
                                                       return 'タイトルを入力してください。';
                                                     }
 
@@ -585,7 +587,8 @@ class _PostPageWidgetState extends State<PostPageWidget> {
                                                   keyboardType:
                                                       TextInputType.multiline,
                                                   validator: (val) {
-                                                    if (val.isEmpty) {
+                                                    if (val == null ||
+                                                        val.isEmpty) {
                                                       return '概要を入力してください。';
                                                     }
 
@@ -678,7 +681,8 @@ class _PostPageWidgetState extends State<PostPageWidget> {
                                                   keyboardType:
                                                       TextInputType.multiline,
                                                   validator: (val) {
-                                                    if (val.isEmpty) {
+                                                    if (val == null ||
+                                                        val.isEmpty) {
                                                       return '投稿詳細を入力してください。';
                                                     }
 
@@ -774,32 +778,43 @@ class _PostPageWidgetState extends State<PostPageWidget> {
                                                           mediaSource:
                                                               MediaSource
                                                                   .photoGallery,
+                                                          multiImage: false,
                                                         );
                                                         if (selectedMedia !=
                                                                 null &&
-                                                            validateFileFormat(
-                                                                selectedMedia
-                                                                    .storagePath,
-                                                                context)) {
+                                                            selectedMedia.every((m) =>
+                                                                validateFileFormat(
+                                                                    m.storagePath,
+                                                                    context))) {
                                                           showUploadMessage(
                                                             context,
                                                             'Uploading file...',
                                                             showLoading: true,
                                                           );
-                                                          final downloadUrl =
-                                                              await uploadData(
-                                                                  selectedMedia
-                                                                      .storagePath,
-                                                                  selectedMedia
-                                                                      .bytes);
+                                                          final downloadUrls =
+                                                              (await Future.wait(selectedMedia.map(
+                                                                      (m) async =>
+                                                                          await uploadData(
+                                                                              m
+                                                                                  .storagePath,
+                                                                              m
+                                                                                  .bytes))))
+                                                                  .where((u) =>
+                                                                      u != null)
+                                                                  .toList();
                                                           ScaffoldMessenger.of(
                                                                   context)
                                                               .hideCurrentSnackBar();
-                                                          if (downloadUrl !=
-                                                              null) {
+                                                          if (downloadUrls !=
+                                                                  null &&
+                                                              downloadUrls
+                                                                      .length ==
+                                                                  selectedMedia
+                                                                      .length) {
                                                             setState(() =>
                                                                 uploadedFileUrl =
-                                                                    downloadUrl);
+                                                                    downloadUrls
+                                                                        .first);
                                                             showUploadMessage(
                                                               context,
                                                               'Success!',
@@ -925,7 +940,8 @@ class _PostPageWidgetState extends State<PostPageWidget> {
                                                             FontWeight.w500,
                                                       ),
                                                   validator: (val) {
-                                                    if (val.isEmpty) {
+                                                    if (val == null ||
+                                                        val.isEmpty) {
                                                       return '住所を入力してください。';
                                                     }
 
@@ -1289,7 +1305,8 @@ class _PostPageWidgetState extends State<PostPageWidget> {
                                                             FontWeight.w500,
                                                       ),
                                                   validator: (val) {
-                                                    if (val.isEmpty) {
+                                                    if (val == null ||
+                                                        val.isEmpty) {
                                                       return '主催者名を入力してください。';
                                                     }
 
@@ -1380,7 +1397,8 @@ class _PostPageWidgetState extends State<PostPageWidget> {
                                                             FontWeight.w500,
                                                       ),
                                                   validator: (val) {
-                                                    if (val.isEmpty) {
+                                                    if (val == null ||
+                                                        val.isEmpty) {
                                                       return '問い合わせ先を入力してください。';
                                                     }
 

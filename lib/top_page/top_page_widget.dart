@@ -4,7 +4,7 @@ import '../components/top_page_header_widget.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
-import '../plan_page/plan_page_widget.dart';
+import '../service_plan_page/service_plan_page_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -19,8 +19,8 @@ class TopPageWidget extends StatefulWidget {
 }
 
 class _TopPageWidgetState extends State<TopPageWidget> {
-  ApiCallResponse plans;
   final scaffoldKey = GlobalKey<ScaffoldState>();
+  ApiCallResponse plans;
 
   @override
   void initState() {
@@ -139,7 +139,7 @@ class _TopPageWidgetState extends State<TopPageWidget> {
                               await Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                  builder: (context) => PlanPageWidget(
+                                  builder: (context) => ServicePlanPageWidget(
                                     plans: (plans?.jsonBody ?? ''),
                                   ),
                                 ),
