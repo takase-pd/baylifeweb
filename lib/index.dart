@@ -17,3 +17,5 @@ export 'login_page/login_page_widget.dart' show LoginPageWidget;
 export 'create_shop_page/create_shop_page_widget.dart'
     show CreateShopPageWidget;
 export 'add_plan_page/add_plan_page_widget.dart' show AddPlanPageWidget;
+export 'add_plan_page_copy/add_plan_page_copy_widget.dart'
+    show AddPlanPageCopyWidget;
