@@ -7,8 +7,6 @@ export 'top_page/top_page_widget.dart' show TopPageWidget;
 export 'service_plan_page/service_plan_page_widget.dart'
     show ServicePlanPageWidget;
 export 'home_page/home_page_widget.dart' show HomePageWidget;
-export 'create_account_page/create_account_page_widget.dart'
-    show CreateAccountPageWidget;
 export 'config_page/config_page_widget.dart' show ConfigPageWidget;
 export 'create_special_account_page/create_special_account_page_widget.dart'
     show CreateSpecialAccountPageWidget;
