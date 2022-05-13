@@ -1469,7 +1469,7 @@ class _CreateShopPageWidgetState extends State<CreateShopPageWidget> {
                                           ),
                                         ),
                                         Text(
-                                          '企業、ショップカテゴリは手動で設定する必要があります。',
+                                          'XXXXXXは手動で設定する必要があります。',
                                           style: FlutterFlowTheme.of(context)
                                               .bodyText1,
                                         ),
