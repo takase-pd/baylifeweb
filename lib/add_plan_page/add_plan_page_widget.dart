@@ -3,6 +3,7 @@ import '../backend/backend.dart';
 import '../backend/firebase_storage/storage.dart';
 import '../components/header_widget.dart';
 import '../components/main_menu_widget.dart';
+import '../flutter_flow/flutter_flow_drop_down.dart';
 import '../flutter_flow/flutter_flow_radio_button.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
@@ -25,6 +26,7 @@ class _AddPlanPageWidgetState extends State<AddPlanPageWidget> {
   DateTime datePicked;
   String uploadedFileUrl = '';
   TextEditingController textController6;
+  String dropDownValue;
   TextEditingController textController1;
   TextEditingController textController2;
   TextEditingController textController3;
@@ -40,6 +42,7 @@ class _AddPlanPageWidgetState extends State<AddPlanPageWidget> {
   void initState() {
     super.initState();
     logFirebaseEvent('screen_view', parameters: {'screen_name': 'AddPlanPage'});
+    textController1 = TextEditingController(text: dropDownValue);
     textController2 = TextEditingController();
     textController3 = TextEditingController();
     textController4 = TextEditingController();
@@ -126,50 +129,10 @@ class _AddPlanPageWidgetState extends State<AddPlanPageWidget> {
                                                       .title2,
                                             ),
                                           ),
-                                          StreamBuilder<List<ShopsRecord>>(
-                                            stream: queryShopsRecord(
-                                              queryBuilder: (shopsRecord) =>
-                                                  shopsRecord.where('director',
-                                                      isEqualTo:
-                                                          currentUserReference),
-                                              singleRecord: true,
-                                            ),
-                                            builder: (context, snapshot) {
-                                              // Customize what your widget looks like when it's loading.
-                                              if (!snapshot.hasData) {
-                                                return Center(
-                                                  child: SizedBox(
-                                                    width: 50,
-                                                    height: 50,
-                                                    child: SpinKitPulse(
-                                                      color:
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .primaryColor,
-                                                      size: 50,
-                                                    ),
-                                                  ),
-                                                );
-                                              }
-                                              List<ShopsRecord>
-                                                  textShopsRecordList =
-                                                  snapshot.data;
-                                              // Return an empty Container when the document does not exist.
-                                              if (snapshot.data.isEmpty) {
-                                                return Container();
-                                              }
-                                              final textShopsRecord =
-                                                  textShopsRecordList.isNotEmpty
-                                                      ? textShopsRecordList
-                                                          .first
-                                                      : null;
-                                              return Text(
-                                                '',
-                                                style:
-                                                    FlutterFlowTheme.of(context)
-                                                        .bodyText1,
-                                              );
-                                            },
+                                          Text(
+                                            '',
+                                            style: FlutterFlowTheme.of(context)
+                                                .bodyText1,
                                           ),
                                         ],
                                       ),
@@ -254,73 +217,116 @@ class _AddPlanPageWidgetState extends State<AddPlanPageWidget> {
                                                       padding:
                                                           EdgeInsetsDirectional
                                                               .fromSTEB(
-                                                                  16, 0, 0, 0),
-                                                      child: TextFormField(
-                                                        controller:
-                                                            textController1 ??=
-                                                                TextEditingController(
-                                                          text:
-                                                              containerShopsRecord
-                                                                  .shopName,
-                                                        ),
-                                                        readOnly: true,
-                                                        obscureText: false,
-                                                        decoration:
-                                                            InputDecoration(
-                                                          labelText: 'ショップ',
-                                                          enabledBorder:
-                                                              UnderlineInputBorder(
-                                                            borderSide:
-                                                                BorderSide(
-                                                              color: Color(
-                                                                  0x00000000),
-                                                              width: 1,
-                                                            ),
-                                                            borderRadius:
-                                                                const BorderRadius
-                                                                    .only(
-                                                              topLeft: Radius
-                                                                  .circular(
-                                                                      4.0),
-                                                              topRight: Radius
-                                                                  .circular(
-                                                                      4.0),
-                                                            ),
-                                                          ),
-                                                          focusedBorder:
-                                                              UnderlineInputBorder(
-                                                            borderSide:
-                                                                BorderSide(
-                                                              color: Color(
-                                                                  0x00000000),
-                                                              width: 1,
-                                                            ),
-                                                            borderRadius:
-                                                                const BorderRadius
-                                                                    .only(
-                                                              topLeft: Radius
-                                                                  .circular(
-                                                                      4.0),
-                                                              topRight: Radius
-                                                                  .circular(
-                                                                      4.0),
-                                                            ),
-                                                          ),
-                                                        ),
-                                                        style:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .bodyText2
-                                                                .override(
-                                                                  fontFamily:
-                                                                      'Montserrat',
-                                                                  color: FlutterFlowTheme.of(
-                                                                          context)
-                                                                      .textDark,
-                                                                  fontWeight:
-                                                                      FontWeight
-                                                                          .w500,
+                                                                  16, 0, 16, 0),
+                                                      child: Row(
+                                                        mainAxisSize:
+                                                            MainAxisSize.max,
+                                                        children: [
+                                                          Expanded(
+                                                            child:
+                                                                TextFormField(
+                                                              controller:
+                                                                  textController1,
+                                                              readOnly: true,
+                                                              obscureText:
+                                                                  false,
+                                                              decoration:
+                                                                  InputDecoration(
+                                                                labelText:
+                                                                    'ショップ',
+                                                                enabledBorder:
+                                                                    UnderlineInputBorder(
+                                                                  borderSide:
+                                                                      BorderSide(
+                                                                    color: Color(
+                                                                        0x00000000),
+                                                                    width: 1,
+                                                                  ),
+                                                                  borderRadius:
+                                                                      const BorderRadius
+                                                                          .only(
+                                                                    topLeft: Radius
+                                                                        .circular(
+                                                                            4.0),
+                                                                    topRight: Radius
+                                                                        .circular(
+                                                                            4.0),
+                                                                  ),
                                                                 ),
+                                                                focusedBorder:
+                                                                    UnderlineInputBorder(
+                                                                  borderSide:
+                                                                      BorderSide(
+                                                                    color: Color(
+                                                                        0x00000000),
+                                                                    width: 1,
+                                                                  ),
+                                                                  borderRadius:
+                                                                      const BorderRadius
+                                                                          .only(
+                                                                    topLeft: Radius
+                                                                        .circular(
+                                                                            4.0),
+                                                                    topRight: Radius
+                                                                        .circular(
+                                                                            4.0),
+                                                                  ),
+                                                                ),
+                                                              ),
+                                                              style: FlutterFlowTheme
+                                                                      .of(context)
+                                                                  .bodyText2
+                                                                  .override(
+                                                                    fontFamily:
+                                                                        'Montserrat',
+                                                                    color: FlutterFlowTheme.of(
+                                                                            context)
+                                                                        .textDark,
+                                                                    fontWeight:
+                                                                        FontWeight
+                                                                            .w500,
+                                                                  ),
+                                                            ),
+                                                          ),
+                                                          FlutterFlowDropDown(
+                                                            options: [
+                                                              'Option 1'
+                                                            ].toList(),
+                                                            onChanged: (val) =>
+                                                                setState(() =>
+                                                                    dropDownValue =
+                                                                        val),
+                                                            width: 240,
+                                                            height: 50,
+                                                            textStyle:
+                                                                FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .bodyText1
+                                                                    .override(
+                                                                      fontFamily:
+                                                                          'Open Sans',
+                                                                      color: Colors
+                                                                          .black,
+                                                                    ),
+                                                            hintText: 'ショップ名',
+                                                            fillColor:
+                                                                Colors.white,
+                                                            elevation: 2,
+                                                            borderColor: Colors
+                                                                .transparent,
+                                                            borderWidth: 0,
+                                                            borderRadius: 0,
+                                                            margin:
+                                                                EdgeInsetsDirectional
+                                                                    .fromSTEB(
+                                                                        12,
+                                                                        4,
+                                                                        12,
+                                                                        4),
+                                                            hidesUnderline:
+                                                                true,
+                                                          ),
+                                                        ],
                                                       ),
                                                     ),
                                                   );
