@@ -376,6 +376,17 @@ class _CreateComPageWidgetState extends State<CreateComPageWidget> {
                                                                           0x00000000),
                                                                 ),
                                                               );
+                                                              logFirebaseEvent(
+                                                                  'Button-Navigate-To');
+                                                              await Navigator
+                                                                  .push(
+                                                                context,
+                                                                MaterialPageRoute(
+                                                                  builder:
+                                                                      (context) =>
+                                                                          CreateComPageWidget(),
+                                                                ),
+                                                              );
                                                               return;
                                                             } else {
                                                               return;
