@@ -39,6 +39,9 @@ class _CreateShopPageWidgetState extends State<CreateShopPageWidget> {
   final formKey = GlobalKey<FormState>();
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
+  Map<String, DocumentReference<Object>> catShop;
+  Map<String, DocumentReference<Object>> company;
+
   @override
   void initState() {
     super.initState();
@@ -270,6 +273,13 @@ class _CreateShopPageWidgetState extends State<CreateShopPageWidget> {
                                                   List<CatShopRecord>
                                                       containerCatShopRecordList =
                                                       snapshot.data;
+                                                  catShop = Map.fromIterables(
+                                                      containerCatShopRecordList
+                                                          .map(
+                                                              (e) => e.catName),
+                                                      containerCatShopRecordList
+                                                          .map((e) =>
+                                                              e.reference));
                                                   return Container(
                                                     width:
                                                         MediaQuery.of(context)
@@ -363,13 +373,17 @@ class _CreateShopPageWidgetState extends State<CreateShopPageWidget> {
                                                             ),
                                                           ),
                                                           FlutterFlowDropDown(
-                                                            options: [
-                                                              'Option 1'
-                                                            ].toList(),
+                                                            options: catShop
+                                                                .keys
+                                                                .toList(),
                                                             onChanged: (val) =>
-                                                                setState(() =>
-                                                                    dropDownValue1 =
-                                                                        val),
+                                                                setState(() => {
+                                                                      dropDownValue1 =
+                                                                          val,
+                                                                      textController2 =
+                                                                          TextEditingController(
+                                                                              text: val),
+                                                                    }),
                                                             width: 240,
                                                             height: 50,
                                                             textStyle:
@@ -439,6 +453,12 @@ class _CreateShopPageWidgetState extends State<CreateShopPageWidget> {
                                                   List<CompaniesRecord>
                                                       containerCompaniesRecordList =
                                                       snapshot.data;
+                                                  company = Map.fromIterables(
+                                                      containerCompaniesRecordList
+                                                          .map((e) => e.name),
+                                                      containerCompaniesRecordList
+                                                          .map((e) =>
+                                                              e.reference));
                                                   return Container(
                                                     width:
                                                         MediaQuery.of(context)
@@ -531,13 +551,17 @@ class _CreateShopPageWidgetState extends State<CreateShopPageWidget> {
                                                             ),
                                                           ),
                                                           FlutterFlowDropDown(
-                                                            options: [
-                                                              'Option 1'
-                                                            ].toList(),
+                                                            options: company
+                                                                .keys
+                                                                .toList(),
                                                             onChanged: (val) =>
-                                                                setState(() =>
-                                                                    dropDownValue2 =
-                                                                        val),
+                                                                setState(() => {
+                                                                      dropDownValue2 =
+                                                                          val,
+                                                                      textController3 =
+                                                                          TextEditingController(
+                                                                              text: val),
+                                                                    }),
                                                             width: 240,
                                                             height: 50,
                                                             textStyle:
@@ -1469,7 +1493,7 @@ class _CreateShopPageWidgetState extends State<CreateShopPageWidget> {
                                           ),
                                         ),
                                         Text(
-                                          '企業、ショップカテゴリは手動で設定する必要があります。',
+                                          'XXXXXXは手動で設定する必要があります。',
                                           style: FlutterFlowTheme.of(context)
                                               .bodyText1,
                                         ),
@@ -1574,6 +1598,12 @@ class _CreateShopPageWidgetState extends State<CreateShopPageWidget> {
                                                                     int.parse(
                                                                         textController7
                                                                             .text),
+                                                                catMain: catShop[
+                                                                    textController2
+                                                                        .text],
+                                                                company: company[
+                                                                    textController3
+                                                                        .text],
                                                               );
                                                               await ShopsRecord
                                                                   .collection
