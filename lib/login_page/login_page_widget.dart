@@ -38,7 +38,7 @@ class _LoginPageWidgetState extends State<LoginPageWidget> {
     return Scaffold(
       key: scaffoldKey,
       appBar: PreferredSize(
-        preferredSize: Size.fromHeight(64),
+        preferredSize: Size.fromHeight(80),
         child: AppBar(
           backgroundColor: Colors.transparent,
           automaticallyImplyLeading: false,

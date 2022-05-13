@@ -33,7 +33,7 @@ class _TopPageWidgetState extends State<TopPageWidget> {
     return Scaffold(
       key: scaffoldKey,
       appBar: PreferredSize(
-        preferredSize: Size.fromHeight(64),
+        preferredSize: Size.fromHeight(80),
         child: AppBar(
           backgroundColor: Color(0x00FFFFFF),
           automaticallyImplyLeading: false,
