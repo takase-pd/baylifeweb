@@ -33,6 +33,7 @@ class _CreateShopPageWidgetState extends State<CreateShopPageWidget> {
   TextEditingController textController7;
   TextEditingController textController8;
   TextEditingController textController9;
+  String dropDownValue3;
   TextEditingController textController10;
   TextEditingController textController11;
   TextEditingController textController12;
@@ -1276,72 +1277,118 @@ class _CreateShopPageWidgetState extends State<CreateShopPageWidget> {
                                                           BorderRadius.circular(
                                                               8),
                                                     ),
-                                                    child: Padding(
-                                                      padding:
-                                                          EdgeInsetsDirectional
-                                                              .fromSTEB(
-                                                                  16, 0, 0, 0),
-                                                      child: TextFormField(
-                                                        controller:
-                                                            textController10,
-                                                        obscureText: false,
-                                                        decoration:
-                                                            InputDecoration(
-                                                          labelText: '管理者',
-                                                          enabledBorder:
-                                                              UnderlineInputBorder(
-                                                            borderSide:
-                                                                BorderSide(
-                                                              color: Color(
-                                                                  0x00000000),
-                                                              width: 1,
-                                                            ),
-                                                            borderRadius:
-                                                                const BorderRadius
-                                                                    .only(
-                                                              topLeft: Radius
-                                                                  .circular(
-                                                                      4.0),
-                                                              topRight: Radius
-                                                                  .circular(
-                                                                      4.0),
-                                                            ),
-                                                          ),
-                                                          focusedBorder:
-                                                              UnderlineInputBorder(
-                                                            borderSide:
-                                                                BorderSide(
-                                                              color: Color(
-                                                                  0x00000000),
-                                                              width: 1,
-                                                            ),
-                                                            borderRadius:
-                                                                const BorderRadius
-                                                                    .only(
-                                                              topLeft: Radius
-                                                                  .circular(
-                                                                      4.0),
-                                                              topRight: Radius
-                                                                  .circular(
-                                                                      4.0),
+                                                    child: Row(
+                                                      mainAxisSize:
+                                                          MainAxisSize.max,
+                                                      children: [
+                                                        Expanded(
+                                                          child: Padding(
+                                                            padding:
+                                                                EdgeInsetsDirectional
+                                                                    .fromSTEB(
+                                                                        16,
+                                                                        0,
+                                                                        0,
+                                                                        0),
+                                                            child:
+                                                                TextFormField(
+                                                              controller:
+                                                                  textController10,
+                                                              obscureText:
+                                                                  false,
+                                                              decoration:
+                                                                  InputDecoration(
+                                                                labelText:
+                                                                    '管理者',
+                                                                enabledBorder:
+                                                                    UnderlineInputBorder(
+                                                                  borderSide:
+                                                                      BorderSide(
+                                                                    color: Color(
+                                                                        0x00000000),
+                                                                    width: 1,
+                                                                  ),
+                                                                  borderRadius:
+                                                                      const BorderRadius
+                                                                          .only(
+                                                                    topLeft: Radius
+                                                                        .circular(
+                                                                            4.0),
+                                                                    topRight: Radius
+                                                                        .circular(
+                                                                            4.0),
+                                                                  ),
+                                                                ),
+                                                                focusedBorder:
+                                                                    UnderlineInputBorder(
+                                                                  borderSide:
+                                                                      BorderSide(
+                                                                    color: Color(
+                                                                        0x00000000),
+                                                                    width: 1,
+                                                                  ),
+                                                                  borderRadius:
+                                                                      const BorderRadius
+                                                                          .only(
+                                                                    topLeft: Radius
+                                                                        .circular(
+                                                                            4.0),
+                                                                    topRight: Radius
+                                                                        .circular(
+                                                                            4.0),
+                                                                  ),
+                                                                ),
+                                                              ),
+                                                              style: FlutterFlowTheme
+                                                                      .of(context)
+                                                                  .bodyText2
+                                                                  .override(
+                                                                    fontFamily:
+                                                                        'Montserrat',
+                                                                    color: FlutterFlowTheme.of(
+                                                                            context)
+                                                                        .textDark,
+                                                                    fontWeight:
+                                                                        FontWeight
+                                                                            .w500,
+                                                                  ),
                                                             ),
                                                           ),
                                                         ),
-                                                        style:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .bodyText2
-                                                                .override(
-                                                                  fontFamily:
-                                                                      'Montserrat',
-                                                                  color: FlutterFlowTheme.of(
-                                                                          context)
-                                                                      .textDark,
-                                                                  fontWeight:
-                                                                      FontWeight
-                                                                          .w500,
-                                                                ),
-                                                      ),
+                                                        FlutterFlowDropDown(
+                                                          options: ['Option 1']
+                                                              .toList(),
+                                                          onChanged: (val) =>
+                                                              setState(() =>
+                                                                  dropDownValue3 =
+                                                                      val),
+                                                          width: 240,
+                                                          height: 50,
+                                                          textStyle:
+                                                              FlutterFlowTheme.of(
+                                                                      context)
+                                                                  .bodyText1
+                                                                  .override(
+                                                                    fontFamily:
+                                                                        'Open Sans',
+                                                                    color: Colors
+                                                                        .black,
+                                                                  ),
+                                                          hintText: 'ユーザーID',
+                                                          fillColor:
+                                                              Colors.white,
+                                                          elevation: 2,
+                                                          borderColor: Colors
+                                                              .transparent,
+                                                          borderWidth: 0,
+                                                          borderRadius: 0,
+                                                          margin:
+                                                              EdgeInsetsDirectional
+                                                                  .fromSTEB(12,
+                                                                      4, 12, 4),
+                                                          hidesUnderline: true,
+                                                        ),
+                                                      ],
                                                     ),
                                                   );
                                                 },
