@@ -36,6 +36,7 @@ class _CreateShopPageWidgetState extends State<CreateShopPageWidget> {
   TextEditingController textController10;
   TextEditingController textController11;
   TextEditingController textController12;
+  TextEditingController textController13;
   final formKey = GlobalKey<FormState>();
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
@@ -59,6 +60,7 @@ class _CreateShopPageWidgetState extends State<CreateShopPageWidget> {
     textController10 = TextEditingController();
     textController11 = TextEditingController();
     textController12 = TextEditingController();
+    textController13 = TextEditingController();
   }
 
   @override
@@ -1233,6 +1235,123 @@ class _CreateShopPageWidgetState extends State<CreateShopPageWidget> {
                                         Padding(
                                           padding:
                                               EdgeInsetsDirectional.fromSTEB(
+                                                  0, 0, 0, 16),
+                                          child: Row(
+                                            mainAxisSize: MainAxisSize.max,
+                                            children: [
+                                              StreamBuilder<List<UsersRecord>>(
+                                                stream: queryUsersRecord(),
+                                                builder: (context, snapshot) {
+                                                  // Customize what your widget looks like when it's loading.
+                                                  if (!snapshot.hasData) {
+                                                    return Center(
+                                                      child: SizedBox(
+                                                        width: 50,
+                                                        height: 50,
+                                                        child: SpinKitPulse(
+                                                          color: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .primaryColor,
+                                                          size: 50,
+                                                        ),
+                                                      ),
+                                                    );
+                                                  }
+                                                  List<UsersRecord>
+                                                      containerUsersRecordList =
+                                                      snapshot.data;
+                                                  return Container(
+                                                    width:
+                                                        MediaQuery.of(context)
+                                                                .size
+                                                                .width *
+                                                            0.7,
+                                                    height: 60,
+                                                    decoration: BoxDecoration(
+                                                      color:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .background,
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              8),
+                                                    ),
+                                                    child: Padding(
+                                                      padding:
+                                                          EdgeInsetsDirectional
+                                                              .fromSTEB(
+                                                                  16, 0, 0, 0),
+                                                      child: TextFormField(
+                                                        controller:
+                                                            textController10,
+                                                        obscureText: false,
+                                                        decoration:
+                                                            InputDecoration(
+                                                          labelText: '管理者',
+                                                          enabledBorder:
+                                                              UnderlineInputBorder(
+                                                            borderSide:
+                                                                BorderSide(
+                                                              color: Color(
+                                                                  0x00000000),
+                                                              width: 1,
+                                                            ),
+                                                            borderRadius:
+                                                                const BorderRadius
+                                                                    .only(
+                                                              topLeft: Radius
+                                                                  .circular(
+                                                                      4.0),
+                                                              topRight: Radius
+                                                                  .circular(
+                                                                      4.0),
+                                                            ),
+                                                          ),
+                                                          focusedBorder:
+                                                              UnderlineInputBorder(
+                                                            borderSide:
+                                                                BorderSide(
+                                                              color: Color(
+                                                                  0x00000000),
+                                                              width: 1,
+                                                            ),
+                                                            borderRadius:
+                                                                const BorderRadius
+                                                                    .only(
+                                                              topLeft: Radius
+                                                                  .circular(
+                                                                      4.0),
+                                                              topRight: Radius
+                                                                  .circular(
+                                                                      4.0),
+                                                            ),
+                                                          ),
+                                                        ),
+                                                        style:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .bodyText2
+                                                                .override(
+                                                                  fontFamily:
+                                                                      'Montserrat',
+                                                                  color: FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .textDark,
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .w500,
+                                                                ),
+                                                      ),
+                                                    ),
+                                                  );
+                                                },
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                        Padding(
+                                          padding:
+                                              EdgeInsetsDirectional.fromSTEB(
                                                   0, 8, 0, 8),
                                           child: Text(
                                             'メディア',
@@ -1265,7 +1384,7 @@ class _CreateShopPageWidgetState extends State<CreateShopPageWidget> {
                                                       .fromSTEB(16, 0, 0, 0),
                                                   child: TextFormField(
                                                     controller:
-                                                        textController10,
+                                                        textController11,
                                                     obscureText: false,
                                                     decoration: InputDecoration(
                                                       labelText: 'Instagram',
@@ -1349,7 +1468,7 @@ class _CreateShopPageWidgetState extends State<CreateShopPageWidget> {
                                                       .fromSTEB(16, 0, 0, 0),
                                                   child: TextFormField(
                                                     controller:
-                                                        textController11,
+                                                        textController12,
                                                     obscureText: false,
                                                     decoration: InputDecoration(
                                                       labelText: 'Twitter',
@@ -1433,7 +1552,7 @@ class _CreateShopPageWidgetState extends State<CreateShopPageWidget> {
                                                       .fromSTEB(16, 0, 0, 0),
                                                   child: TextFormField(
                                                     controller:
-                                                        textController12,
+                                                        textController13,
                                                     obscureText: false,
                                                     decoration: InputDecoration(
                                                       labelText: 'Web',
@@ -1575,7 +1694,7 @@ class _CreateShopPageWidgetState extends State<CreateShopPageWidget> {
                                                                     textController8
                                                                         .text,
                                                                 instagram:
-                                                                    textController10
+                                                                    textController11
                                                                         .text,
                                                                 phone:
                                                                     textController9
@@ -1584,10 +1703,10 @@ class _CreateShopPageWidgetState extends State<CreateShopPageWidget> {
                                                                     textController1
                                                                         .text,
                                                                 twitter:
-                                                                    textController11
+                                                                    textController12
                                                                         .text,
                                                                 web:
-                                                                    textController12
+                                                                    textController13
                                                                         .text,
                                                                 director:
                                                                     currentUserReference,
