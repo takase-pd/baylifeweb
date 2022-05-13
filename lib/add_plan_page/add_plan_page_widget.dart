@@ -40,7 +40,6 @@ class _AddPlanPageWidgetState extends State<AddPlanPageWidget> {
   void initState() {
     super.initState();
     logFirebaseEvent('screen_view', parameters: {'screen_name': 'AddPlanPage'});
-    textController1 = TextEditingController();
     textController2 = TextEditingController();
     textController3 = TextEditingController();
     textController4 = TextEditingController();
@@ -197,66 +196,73 @@ class _AddPlanPageWidgetState extends State<AddPlanPageWidget> {
                                           child: Row(
                                             mainAxisSize: MainAxisSize.max,
                                             children: [
-                                              Container(
-                                                width: MediaQuery.of(context)
-                                                        .size
-                                                        .width *
-                                                    0.7,
-                                                height: 60,
-                                                decoration: BoxDecoration(
-                                                  color: FlutterFlowTheme.of(
-                                                          context)
-                                                      .background,
-                                                  borderRadius:
-                                                      BorderRadius.circular(8),
+                                              StreamBuilder<List<ShopsRecord>>(
+                                                stream: queryShopsRecord(
+                                                  queryBuilder: (shopsRecord) =>
+                                                      shopsRecord.where(
+                                                          'director',
+                                                          isEqualTo:
+                                                              currentUserReference),
+                                                  singleRecord: true,
                                                 ),
-                                                child: Padding(
-                                                  padding: EdgeInsetsDirectional
-                                                      .fromSTEB(16, 0, 0, 0),
-                                                  child: StreamBuilder<
-                                                      List<ShopsRecord>>(
-                                                    stream: queryShopsRecord(
-                                                      queryBuilder: (shopsRecord) =>
-                                                          shopsRecord.where(
-                                                              'director',
-                                                              isEqualTo:
-                                                                  currentUserReference),
-                                                      singleRecord: true,
+                                                builder: (context, snapshot) {
+                                                  // Customize what your widget looks like when it's loading.
+                                                  if (!snapshot.hasData) {
+                                                    return Center(
+                                                      child: SizedBox(
+                                                        width: 50,
+                                                        height: 50,
+                                                        child: SpinKitPulse(
+                                                          color: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .primaryColor,
+                                                          size: 50,
+                                                        ),
+                                                      ),
+                                                    );
+                                                  }
+                                                  List<ShopsRecord>
+                                                      containerShopsRecordList =
+                                                      snapshot.data;
+                                                  // Return an empty Container when the document does not exist.
+                                                  if (snapshot.data.isEmpty) {
+                                                    return Container();
+                                                  }
+                                                  final containerShopsRecord =
+                                                      containerShopsRecordList
+                                                              .isNotEmpty
+                                                          ? containerShopsRecordList
+                                                              .first
+                                                          : null;
+                                                  return Container(
+                                                    width:
+                                                        MediaQuery.of(context)
+                                                                .size
+                                                                .width *
+                                                            0.7,
+                                                    height: 60,
+                                                    decoration: BoxDecoration(
+                                                      color:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .background,
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              8),
                                                     ),
-                                                    builder:
-                                                        (context, snapshot) {
-                                                      // Customize what your widget looks like when it's loading.
-                                                      if (!snapshot.hasData) {
-                                                        return Center(
-                                                          child: SizedBox(
-                                                            width: 50,
-                                                            height: 50,
-                                                            child: SpinKitPulse(
-                                                              color: FlutterFlowTheme
-                                                                      .of(context)
-                                                                  .primaryColor,
-                                                              size: 50,
-                                                            ),
-                                                          ),
-                                                        );
-                                                      }
-                                                      List<ShopsRecord>
-                                                          textFieldShopsRecordList =
-                                                          snapshot.data;
-                                                      // Return an empty Container when the document does not exist.
-                                                      if (snapshot
-                                                          .data.isEmpty) {
-                                                        return Container();
-                                                      }
-                                                      final textFieldShopsRecord =
-                                                          textFieldShopsRecordList
-                                                                  .isNotEmpty
-                                                              ? textFieldShopsRecordList
-                                                                  .first
-                                                              : null;
-                                                      return TextFormField(
+                                                    child: Padding(
+                                                      padding:
+                                                          EdgeInsetsDirectional
+                                                              .fromSTEB(
+                                                                  16, 0, 0, 0),
+                                                      child: TextFormField(
                                                         controller:
-                                                            textController1,
+                                                            textController1 ??=
+                                                                TextEditingController(
+                                                          text:
+                                                              containerShopsRecord
+                                                                  .shopName,
+                                                        ),
                                                         readOnly: true,
                                                         obscureText: false,
                                                         decoration:
@@ -315,10 +321,10 @@ class _AddPlanPageWidgetState extends State<AddPlanPageWidget> {
                                                                       FontWeight
                                                                           .w500,
                                                                 ),
-                                                      );
-                                                    },
-                                                  ),
-                                                ),
+                                                      ),
+                                                    ),
+                                                  );
+                                                },
                                               ),
                                             ],
                                           ),
