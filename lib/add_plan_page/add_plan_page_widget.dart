@@ -1363,6 +1363,17 @@ class _AddPlanPageWidgetState extends State<AddPlanPageWidget> {
                                                                           0x00000000),
                                                                 ),
                                                               );
+                                                              logFirebaseEvent(
+                                                                  'Button-Navigate-To');
+                                                              await Navigator
+                                                                  .push(
+                                                                context,
+                                                                MaterialPageRoute(
+                                                                  builder:
+                                                                      (context) =>
+                                                                          AddPlanPageWidget(),
+                                                                ),
+                                                              );
                                                               return;
                                                             } else {
                                                               return;

@@ -1,3 +1,4 @@
+import '../add_plan_page/add_plan_page_widget.dart';
 import '../auth/auth_util.dart';
 import '../backend/api_requests/api_calls.dart';
 import '../config_page/config_page_widget.dart';
@@ -348,7 +349,7 @@ class _MainMenuWidgetState extends State<MainMenuWidget> {
                                       context,
                                       MaterialPageRoute(
                                         builder: (context) =>
-                                            PostSurveyPageWidget(),
+                                            AddPlanPageWidget(),
                                       ),
                                     );
                                   },
