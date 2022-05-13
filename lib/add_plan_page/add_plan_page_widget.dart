@@ -166,7 +166,6 @@ class _AddPlanPageWidgetState extends State<AddPlanPageWidget> {
                                                           'director',
                                                           isEqualTo:
                                                               currentUserReference),
-                                                  singleRecord: true,
                                                 ),
                                                 builder: (context, snapshot) {
                                                   // Customize what your widget looks like when it's loading.
@@ -187,16 +186,6 @@ class _AddPlanPageWidgetState extends State<AddPlanPageWidget> {
                                                   List<ShopsRecord>
                                                       containerShopsRecordList =
                                                       snapshot.data;
-                                                  // Return an empty Container when the document does not exist.
-                                                  if (snapshot.data.isEmpty) {
-                                                    return Container();
-                                                  }
-                                                  final containerShopsRecord =
-                                                      containerShopsRecordList
-                                                              .isNotEmpty
-                                                          ? containerShopsRecordList
-                                                              .first
-                                                          : null;
                                                   return Container(
                                                     width:
                                                         MediaQuery.of(context)
