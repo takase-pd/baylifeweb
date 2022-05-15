@@ -1,8 +1,8 @@
 import '../add_plan_page/add_plan_page_widget.dart';
 import '../auth/auth_util.dart';
 import '../backend/api_requests/api_calls.dart';
+import '../com_list_page/com_list_page_widget.dart';
 import '../config_page/config_page_widget.dart';
-import '../create_com_page/create_com_page_widget.dart';
 import '../create_shop_page/create_shop_page_widget.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
@@ -245,7 +245,7 @@ class _MainMenuWidgetState extends State<MainMenuWidget> {
                                       context,
                                       MaterialPageRoute(
                                         builder: (context) =>
-                                            CreateComPageWidget(),
+                                            ComListPageWidget(),
                                       ),
                                     );
                                   },
