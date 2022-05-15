@@ -42,7 +42,8 @@ class _CreateShopPageWidgetState extends State<CreateShopPageWidget> {
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   Map<String, DocumentReference<Object>> catShop;
-  Map<String, DocumentReference<Object>> company;
+  Map<String, DocumentReference<Object>> companies;
+  Map<String, DocumentReference<Object>> users;
 
   @override
   void initState() {
@@ -456,7 +457,7 @@ class _CreateShopPageWidgetState extends State<CreateShopPageWidget> {
                                                   List<CompaniesRecord>
                                                       containerCompaniesRecordList =
                                                       snapshot.data;
-                                                  company = Map.fromIterables(
+                                                  companies = Map.fromIterables(
                                                       containerCompaniesRecordList
                                                           .map((e) => e.name),
                                                       containerCompaniesRecordList
@@ -554,7 +555,7 @@ class _CreateShopPageWidgetState extends State<CreateShopPageWidget> {
                                                             ),
                                                           ),
                                                           FlutterFlowDropDown(
-                                                            options: company
+                                                            options: companies
                                                                 .keys
                                                                 .toList(),
                                                             onChanged: (val) =>
@@ -1261,6 +1262,12 @@ class _CreateShopPageWidgetState extends State<CreateShopPageWidget> {
                                                   List<UsersRecord>
                                                       containerUsersRecordList =
                                                       snapshot.data;
+                                                  users = Map.fromIterables(
+                                                      containerUsersRecordList
+                                                          .map((e) => e.email),
+                                                      containerUsersRecordList
+                                                          .map((e) =>
+                                                              e.reference));
                                                   return Container(
                                                     width:
                                                         MediaQuery.of(context)
@@ -1356,12 +1363,17 @@ class _CreateShopPageWidgetState extends State<CreateShopPageWidget> {
                                                           ),
                                                         ),
                                                         FlutterFlowDropDown(
-                                                          options: ['Option 1']
+                                                          options: users.keys
                                                               .toList(),
                                                           onChanged: (val) =>
-                                                              setState(() =>
-                                                                  dropDownValue3 =
-                                                                      val),
+                                                              setState(() => {
+                                                                    dropDownValue3 =
+                                                                        val,
+                                                                    textController10 =
+                                                                        TextEditingController(
+                                                                            text:
+                                                                                val),
+                                                                  }),
                                                           width: 240,
                                                           height: 50,
                                                           textStyle:
@@ -1755,8 +1767,9 @@ class _CreateShopPageWidgetState extends State<CreateShopPageWidget> {
                                                                 web:
                                                                     textController13
                                                                         .text,
-                                                                director:
-                                                                    currentUserReference,
+                                                                director: users[
+                                                                    textController10
+                                                                        .text],
                                                                 shippingFee: int.parse(
                                                                     textController6
                                                                         .text),
@@ -1767,7 +1780,7 @@ class _CreateShopPageWidgetState extends State<CreateShopPageWidget> {
                                                                 catMain: catShop[
                                                                     textController2
                                                                         .text],
-                                                                company: company[
+                                                                company: companies[
                                                                     textController3
                                                                         .text],
                                                               );

@@ -38,6 +38,10 @@ class _AddPlanPageWidgetState extends State<AddPlanPageWidget> {
   final formKey = GlobalKey<FormState>();
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
+  Map<String, DocumentReference<Object>> shops;
+  Map<String, bool> shippingEachFee;
+  bool shippingEachFeeValue;
+
   @override
   void initState() {
     super.initState();
@@ -50,6 +54,10 @@ class _AddPlanPageWidgetState extends State<AddPlanPageWidget> {
     textController6 = TextEditingController(text: uploadedFileUrl);
     textController7 = TextEditingController();
     textController8 = TextEditingController();
+    shippingEachFee = {
+      '1個当たりの送料': true,
+      '個数問わず一律の送料': false,
+    };
   }
 
   @override
@@ -186,6 +194,13 @@ class _AddPlanPageWidgetState extends State<AddPlanPageWidget> {
                                                   List<ShopsRecord>
                                                       containerShopsRecordList =
                                                       snapshot.data;
+                                                  shops = Map.fromIterables(
+                                                      containerShopsRecordList
+                                                          .map((e) =>
+                                                              e.shopName),
+                                                      containerShopsRecordList
+                                                          .map((e) =>
+                                                              e.reference));
                                                   return Container(
                                                     width:
                                                         MediaQuery.of(context)
@@ -278,13 +293,16 @@ class _AddPlanPageWidgetState extends State<AddPlanPageWidget> {
                                                             ),
                                                           ),
                                                           FlutterFlowDropDown(
-                                                            options: [
-                                                              'Option 1'
-                                                            ].toList(),
+                                                            options: shops.keys
+                                                                .toList(),
                                                             onChanged: (val) =>
-                                                                setState(() =>
-                                                                    dropDownValue =
-                                                                        val),
+                                                                setState(() => {
+                                                                      dropDownValue =
+                                                                          val,
+                                                                      textController1 =
+                                                                          TextEditingController(
+                                                                              text: val),
+                                                                    }),
                                                             width: 240,
                                                             height: 50,
                                                             textStyle:
@@ -1035,7 +1053,7 @@ class _AddPlanPageWidgetState extends State<AddPlanPageWidget> {
                                                     decoration: InputDecoration(
                                                       labelText: '配送説明',
                                                       hintText:
-                                                          '「◯日以内に発送」などと記載してください。',
+                                                          '「2日以内に発送」などと記載してください。',
                                                       enabledBorder:
                                                           UnderlineInputBorder(
                                                         borderSide: BorderSide(
@@ -1192,14 +1210,16 @@ class _AddPlanPageWidgetState extends State<AddPlanPageWidget> {
                                                       BorderRadius.circular(8),
                                                 ),
                                                 child: FlutterFlowRadioButton(
-                                                  options: [
-                                                    '1個当たりの送料',
-                                                    '個数問わず一律の送料'
-                                                  ].toList(),
+                                                  options: shippingEachFee.keys
+                                                      .toList(),
                                                   onChanged: (value) {
-                                                    setState(() =>
-                                                        radioButtonValue =
-                                                            value);
+                                                    setState(() => {
+                                                          radioButtonValue =
+                                                              value,
+                                                          shippingEachFeeValue =
+                                                              shippingEachFee[
+                                                                  value],
+                                                        });
                                                   },
                                                   optionHeight: 25,
                                                   textStyle: FlutterFlowTheme
@@ -1286,9 +1306,9 @@ class _AddPlanPageWidgetState extends State<AddPlanPageWidget> {
                                                                           (alertDialogContext) {
                                                                         return AlertDialog(
                                                                           title:
-                                                                              Text('ショップ追加'),
+                                                                              Text('商品追加'),
                                                                           content:
-                                                                              Text('ショップを追加します。'),
+                                                                              Text('商品を追加します。'),
                                                                           actions: [
                                                                             TextButton(
                                                                               onPressed: () => Navigator.pop(alertDialogContext, false),
@@ -1339,6 +1359,9 @@ class _AddPlanPageWidgetState extends State<AddPlanPageWidget> {
                                                                 shippingNormal:
                                                                     textController7
                                                                         .text,
+                                                                shop: shops[
+                                                                    textController1
+                                                                        .text],
                                                               );
                                                               await PlansRecord
                                                                   .collection
@@ -1352,7 +1375,7 @@ class _AddPlanPageWidgetState extends State<AddPlanPageWidget> {
                                                                   .showSnackBar(
                                                                 SnackBar(
                                                                   content: Text(
-                                                                    'ショップを追加しました。',
+                                                                    '商品を追加しました。',
                                                                     style:
                                                                         TextStyle(),
                                                                   ),
