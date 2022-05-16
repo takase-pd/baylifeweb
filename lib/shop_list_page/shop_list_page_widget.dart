@@ -94,10 +94,24 @@ class _ShopListPageWidgetState extends State<ShopListPageWidget> {
                                       Padding(
                                         padding: EdgeInsetsDirectional.fromSTEB(
                                             0, 0, 16, 0),
-                                        child: Text(
-                                          '一覧',
-                                          style: FlutterFlowTheme.of(context)
-                                              .subtitle1,
+                                        child: InkWell(
+                                          onTap: () async {
+                                            logFirebaseEvent('Text-ON_TAP');
+                                            logFirebaseEvent(
+                                                'Text-Navigate-To');
+                                            await Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                builder: (context) =>
+                                                    ShopListPageWidget(),
+                                              ),
+                                            );
+                                          },
+                                          child: Text(
+                                            '一覧',
+                                            style: FlutterFlowTheme.of(context)
+                                                .subtitle1,
+                                          ),
                                         ),
                                       ),
                                       InkWell(

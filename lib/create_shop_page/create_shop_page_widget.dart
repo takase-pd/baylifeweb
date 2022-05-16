@@ -8,6 +8,7 @@ import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
 import '../flutter_flow/upload_media.dart';
+import '../shop_list_page/shop_list_page_widget.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
@@ -118,10 +119,24 @@ class _CreateShopPageWidgetState extends State<CreateShopPageWidget> {
                                       Padding(
                                         padding: EdgeInsetsDirectional.fromSTEB(
                                             0, 0, 16, 0),
-                                        child: Text(
-                                          '一覧',
-                                          style: FlutterFlowTheme.of(context)
-                                              .subtitle1,
+                                        child: InkWell(
+                                          onTap: () async {
+                                            logFirebaseEvent('Text-ON_TAP');
+                                            logFirebaseEvent(
+                                                'Text-Navigate-To');
+                                            await Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                builder: (context) =>
+                                                    ShopListPageWidget(),
+                                              ),
+                                            );
+                                          },
+                                          child: Text(
+                                            '一覧',
+                                            style: FlutterFlowTheme.of(context)
+                                                .subtitle1,
+                                          ),
                                         ),
                                       ),
                                       InkWell(
