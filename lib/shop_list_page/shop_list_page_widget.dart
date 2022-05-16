@@ -1,8 +1,7 @@
-import '../auth/auth_util.dart';
 import '../backend/backend.dart';
 import '../components/header_widget.dart';
 import '../components/main_menu_widget.dart';
-import '../create_com_page/create_com_page_widget.dart';
+import '../create_shop_page/create_shop_page_widget.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import 'package:flutter/material.dart';
@@ -10,15 +9,15 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 
-class ComListPageWidget extends StatefulWidget {
-  const ComListPageWidget({Key key}) : super(key: key);
+class ShopListPageWidget extends StatefulWidget {
+  const ShopListPageWidget({Key key}) : super(key: key);
 
   @override
-  _ComListPageWidgetState createState() => _ComListPageWidgetState();
+  _ShopListPageWidgetState createState() => _ShopListPageWidgetState();
 }
 
-class _ComListPageWidgetState extends State<ComListPageWidget> {
-  PagingController<DocumentSnapshot, CompaniesRecord> _pagingController;
+class _ShopListPageWidgetState extends State<ShopListPageWidget> {
+  PagingController<DocumentSnapshot, ShopsRecord> _pagingController;
   Query _pagingQuery;
   List<StreamSubscription> _streamSubscriptions = [];
 
@@ -28,7 +27,8 @@ class _ComListPageWidgetState extends State<ComListPageWidget> {
   @override
   void initState() {
     super.initState();
-    logFirebaseEvent('screen_view', parameters: {'screen_name': 'ComListPage'});
+    logFirebaseEvent('screen_view',
+        parameters: {'screen_name': 'ShopListPage'});
   }
 
   @override
@@ -63,30 +63,25 @@ class _ComListPageWidgetState extends State<ComListPageWidget> {
                           mainAxisSize: MainAxisSize.max,
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            if ((currentUserDocument?.auth) != 'admin')
-                              Padding(
-                                padding: EdgeInsetsDirectional.fromSTEB(
-                                    0, 16, 0, 16),
-                                child: AuthUserStreamWidget(
-                                  child: Column(
-                                    mainAxisSize: MainAxisSize.max,
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      Text(
-                                        '企業',
-                                        style:
-                                            FlutterFlowTheme.of(context).title1,
-                                      ),
-                                      Text(
-                                        'Adminのみ',
-                                        style: FlutterFlowTheme.of(context)
-                                            .bodyText1,
-                                      ),
-                                    ],
+                            Padding(
+                              padding:
+                                  EdgeInsetsDirectional.fromSTEB(0, 16, 0, 16),
+                              child: Column(
+                                mainAxisSize: MainAxisSize.max,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    'ショップ',
+                                    style: FlutterFlowTheme.of(context).title1,
                                   ),
-                                ),
+                                  Text(
+                                    'Adminのみ',
+                                    style:
+                                        FlutterFlowTheme.of(context).bodyText1,
+                                  ),
+                                ],
                               ),
+                            ),
                             Padding(
                               padding:
                                   EdgeInsetsDirectional.fromSTEB(0, 0, 0, 24),
@@ -99,24 +94,10 @@ class _ComListPageWidgetState extends State<ComListPageWidget> {
                                       Padding(
                                         padding: EdgeInsetsDirectional.fromSTEB(
                                             0, 0, 16, 0),
-                                        child: InkWell(
-                                          onTap: () async {
-                                            logFirebaseEvent('Text-ON_TAP');
-                                            logFirebaseEvent(
-                                                'Text-Navigate-To');
-                                            await Navigator.push(
-                                              context,
-                                              MaterialPageRoute(
-                                                builder: (context) =>
-                                                    ComListPageWidget(),
-                                              ),
-                                            );
-                                          },
-                                          child: Text(
-                                            '一覧',
-                                            style: FlutterFlowTheme.of(context)
-                                                .subtitle1,
-                                          ),
+                                        child: Text(
+                                          '一覧',
+                                          style: FlutterFlowTheme.of(context)
+                                              .subtitle1,
                                         ),
                                       ),
                                       InkWell(
@@ -127,7 +108,7 @@ class _ComListPageWidgetState extends State<ComListPageWidget> {
                                             context,
                                             MaterialPageRoute(
                                               builder: (context) =>
-                                                  CreateComPageWidget(),
+                                                  CreateShopPageWidget(),
                                             ),
                                           );
                                         },
@@ -158,14 +139,14 @@ class _ComListPageWidgetState extends State<ComListPageWidget> {
                                     borderRadius: BorderRadius.circular(8),
                                   ),
                                   child: PagedListView<DocumentSnapshot<Object>,
-                                      CompaniesRecord>(
+                                      ShopsRecord>(
                                     pagingController: () {
                                       final Query<Object> Function(
                                               Query<Object>) queryBuilder =
-                                          (companiesRecord) => companiesRecord;
+                                          (shopsRecord) => shopsRecord;
                                       if (_pagingController != null) {
                                         final query = queryBuilder(
-                                            CompaniesRecord.collection);
+                                            ShopsRecord.collection);
                                         if (query != _pagingQuery) {
                                           // The query has changed
                                           _pagingQuery = query;
@@ -179,13 +160,13 @@ class _ComListPageWidgetState extends State<ComListPageWidget> {
 
                                       _pagingController =
                                           PagingController(firstPageKey: null);
-                                      _pagingQuery = queryBuilder(
-                                          CompaniesRecord.collection);
+                                      _pagingQuery =
+                                          queryBuilder(ShopsRecord.collection);
                                       _pagingController.addPageRequestListener(
                                           (nextPageMarker) {
-                                        queryCompaniesRecordPage(
-                                          queryBuilder: (companiesRecord) =>
-                                              companiesRecord,
+                                        queryShopsRecordPage(
+                                          queryBuilder: (shopsRecord) =>
+                                              shopsRecord,
                                           nextPageMarker: nextPageMarker,
                                           pageSize: 25,
                                           isStream: true,
@@ -221,8 +202,8 @@ class _ComListPageWidgetState extends State<ComListPageWidget> {
                                     padding: EdgeInsets.zero,
                                     shrinkWrap: true,
                                     scrollDirection: Axis.vertical,
-                                    builderDelegate: PagedChildBuilderDelegate<
-                                        CompaniesRecord>(
+                                    builderDelegate:
+                                        PagedChildBuilderDelegate<ShopsRecord>(
                                       // Customize what your widget looks like when it's loading the first page.
                                       firstPageProgressIndicatorBuilder: (_) =>
                                           Center(
@@ -238,11 +219,11 @@ class _ComListPageWidgetState extends State<ComListPageWidget> {
                                       ),
 
                                       itemBuilder: (context, _, listViewIndex) {
-                                        final listViewCompaniesRecord =
+                                        final listViewShopsRecord =
                                             _pagingController
                                                 .itemList[listViewIndex];
                                         return Container(
-                                          height: 60,
+                                          height: 88,
                                           decoration: BoxDecoration(
                                             color: FlutterFlowTheme.of(context)
                                                 .background,
@@ -268,10 +249,57 @@ class _ComListPageWidgetState extends State<ComListPageWidget> {
                                                   ),
                                                 ),
                                                 Expanded(
-                                                  flex: 4,
+                                                  flex: 3,
                                                   child: Text(
-                                                    listViewCompaniesRecord
-                                                        .name,
+                                                    listViewShopsRecord
+                                                        .shopName,
+                                                    style: FlutterFlowTheme.of(
+                                                            context)
+                                                        .bodyText1,
+                                                  ),
+                                                ),
+                                                Expanded(
+                                                  flex: 2,
+                                                  child: StreamBuilder<
+                                                      CatShopRecord>(
+                                                    stream: CatShopRecord
+                                                        .getDocument(
+                                                            listViewShopsRecord
+                                                                .catMain),
+                                                    builder:
+                                                        (context, snapshot) {
+                                                      // Customize what your widget looks like when it's loading.
+                                                      if (!snapshot.hasData) {
+                                                        return Center(
+                                                          child: SizedBox(
+                                                            width: 50,
+                                                            height: 50,
+                                                            child: SpinKitPulse(
+                                                              color: FlutterFlowTheme
+                                                                      .of(context)
+                                                                  .primaryColor,
+                                                              size: 50,
+                                                            ),
+                                                          ),
+                                                        );
+                                                      }
+                                                      final textCatShopRecord =
+                                                          snapshot.data;
+                                                      return Text(
+                                                        textCatShopRecord
+                                                            .catName,
+                                                        style:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .bodyText1,
+                                                      );
+                                                    },
+                                                  ),
+                                                ),
+                                                Expanded(
+                                                  flex: 3,
+                                                  child: Text(
+                                                    'Company Name',
                                                     style: FlutterFlowTheme.of(
                                                             context)
                                                         .bodyText1,
@@ -279,11 +307,11 @@ class _ComListPageWidgetState extends State<ComListPageWidget> {
                                                 ),
                                                 Expanded(
                                                   flex: 3,
-                                                  child: FutureBuilder<
+                                                  child: StreamBuilder<
                                                       UsersRecord>(
-                                                    future: UsersRecord
-                                                        .getDocumentOnce(
-                                                            listViewCompaniesRecord
+                                                    stream:
+                                                        UsersRecord.getDocument(
+                                                            listViewShopsRecord
                                                                 .director),
                                                     builder:
                                                         (context, snapshot) {
@@ -316,62 +344,69 @@ class _ComListPageWidgetState extends State<ComListPageWidget> {
                                                   ),
                                                 ),
                                                 Expanded(
-                                                  flex: 6,
-                                                  child: FutureBuilder<
-                                                      UsersRecord>(
-                                                    future: UsersRecord
-                                                        .getDocumentOnce(
-                                                            listViewCompaniesRecord
-                                                                .director),
-                                                    builder:
-                                                        (context, snapshot) {
-                                                      // Customize what your widget looks like when it's loading.
-                                                      if (!snapshot.hasData) {
-                                                        return Center(
-                                                          child: SizedBox(
-                                                            width: 50,
-                                                            height: 50,
-                                                            child: SpinKitPulse(
-                                                              color: FlutterFlowTheme
-                                                                      .of(context)
-                                                                  .primaryColor,
-                                                              size: 50,
-                                                            ),
-                                                          ),
-                                                        );
-                                                      }
-                                                      final textUsersRecord =
-                                                          snapshot.data;
-                                                      return Text(
-                                                        textUsersRecord.uid,
-                                                        style:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .bodyText1,
-                                                      );
-                                                    },
-                                                  ),
-                                                ),
-                                                Expanded(
-                                                  flex: 6,
-                                                  child: InkWell(
-                                                    onTap: () async {
-                                                      logFirebaseEvent(
-                                                          'Text-ON_TAP');
-                                                      logFirebaseEvent(
-                                                          'Text-Launch-U-R-L');
-                                                      await launchURL(
-                                                          listViewCompaniesRecord
-                                                              .web);
-                                                    },
-                                                    child: Text(
-                                                      listViewCompaniesRecord
-                                                          .web,
-                                                      style:
-                                                          FlutterFlowTheme.of(
-                                                                  context)
+                                                  flex: 2,
+                                                  child: Column(
+                                                    mainAxisSize:
+                                                        MainAxisSize.max,
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment
+                                                            .spaceEvenly,
+                                                    crossAxisAlignment:
+                                                        CrossAxisAlignment
+                                                            .start,
+                                                    children: [
+                                                      InkWell(
+                                                        onTap: () async {
+                                                          logFirebaseEvent(
+                                                              'Text-ON_TAP');
+                                                          logFirebaseEvent(
+                                                              'Text-Launch-U-R-L');
+                                                          await launchURL(
+                                                              listViewShopsRecord
+                                                                  .instagram);
+                                                        },
+                                                        child: Text(
+                                                          'Instagram',
+                                                          style: FlutterFlowTheme
+                                                                  .of(context)
                                                               .bodyText1,
-                                                    ),
+                                                        ),
+                                                      ),
+                                                      InkWell(
+                                                        onTap: () async {
+                                                          logFirebaseEvent(
+                                                              'Text-ON_TAP');
+                                                          logFirebaseEvent(
+                                                              'Text-Launch-U-R-L');
+                                                          await launchURL(
+                                                              listViewShopsRecord
+                                                                  .twitter);
+                                                        },
+                                                        child: Text(
+                                                          'Twitter',
+                                                          style: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .bodyText1,
+                                                        ),
+                                                      ),
+                                                      InkWell(
+                                                        onTap: () async {
+                                                          logFirebaseEvent(
+                                                              'Text-ON_TAP');
+                                                          logFirebaseEvent(
+                                                              'Text-Launch-U-R-L');
+                                                          await launchURL(
+                                                              listViewShopsRecord
+                                                                  .web);
+                                                        },
+                                                        child: Text(
+                                                          'Web',
+                                                          style: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .bodyText1,
+                                                        ),
+                                                      ),
+                                                    ],
                                                   ),
                                                 ),
                                               ],
