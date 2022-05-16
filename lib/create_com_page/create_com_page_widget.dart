@@ -27,6 +27,8 @@ class _CreateComPageWidgetState extends State<CreateComPageWidget> {
   final formKey = GlobalKey<FormState>();
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
+  Map<String, DocumentReference<Object>> users;
+
   @override
   void initState() {
     super.initState();
@@ -63,30 +65,28 @@ class _CreateComPageWidgetState extends State<CreateComPageWidget> {
                           mainAxisSize: MainAxisSize.max,
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            if ((currentUserDocument?.auth) != 'admin')
-                              Padding(
-                                padding: EdgeInsetsDirectional.fromSTEB(
-                                    0, 16, 0, 16),
-                                child: AuthUserStreamWidget(
-                                  child: Column(
-                                    mainAxisSize: MainAxisSize.max,
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      Text(
-                                        '企業',
-                                        style:
-                                            FlutterFlowTheme.of(context).title1,
-                                      ),
-                                      Text(
-                                        'Adminのみ',
-                                        style: FlutterFlowTheme.of(context)
-                                            .bodyText1,
-                                      ),
-                                    ],
-                                  ),
+                            Padding(
+                              padding:
+                                  EdgeInsetsDirectional.fromSTEB(0, 16, 0, 16),
+                              child: AuthUserStreamWidget(
+                                child: Column(
+                                  mainAxisSize: MainAxisSize.max,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      '企業',
+                                      style:
+                                          FlutterFlowTheme.of(context).title1,
+                                    ),
+                                    Text(
+                                      'Adminのみ',
+                                      style: FlutterFlowTheme.of(context)
+                                          .bodyText1,
+                                    ),
+                                  ],
                                 ),
                               ),
+                            ),
                             Padding(
                               padding:
                                   EdgeInsetsDirectional.fromSTEB(0, 0, 0, 24),
@@ -329,6 +329,13 @@ class _CreateComPageWidgetState extends State<CreateComPageWidget> {
                                               List<UsersRecord>
                                                   containerUsersRecordList =
                                                   snapshot.data;
+                                              users = Map.fromIterables(
+                                                  containerUsersRecordList.map(
+                                                      (e) =>
+                                                          e.displayName ??
+                                                          e.uid),
+                                                  containerUsersRecordList
+                                                      .map((e) => e.reference));
                                               return Container(
                                                 width: MediaQuery.of(context)
                                                         .size
@@ -415,65 +422,42 @@ class _CreateComPageWidgetState extends State<CreateComPageWidget> {
                                                         ),
                                                       ),
                                                     ),
-                                                    StreamBuilder<
-                                                        List<UsersRecord>>(
-                                                      stream:
-                                                          queryUsersRecord(),
-                                                      builder:
-                                                          (context, snapshot) {
-                                                        // Customize what your widget looks like when it's loading.
-                                                        if (!snapshot.hasData) {
-                                                          return Center(
-                                                            child: SizedBox(
-                                                              width: 50,
-                                                              height: 50,
-                                                              child:
-                                                                  SpinKitPulse(
-                                                                color: FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .primaryColor,
-                                                                size: 50,
+                                                    FlutterFlowDropDown(
+                                                      options:
+                                                          users.keys.toList(),
+                                                      onChanged: (val) =>
+                                                          setState(() => {
+                                                                dropDownValue =
+                                                                    val,
+                                                                textController3 =
+                                                                    TextEditingController(
+                                                                        text:
+                                                                            val),
+                                                              }),
+                                                      width: 240,
+                                                      height: 50,
+                                                      textStyle:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .bodyText1
+                                                              .override(
+                                                                fontFamily:
+                                                                    'Open Sans',
+                                                                color: Colors
+                                                                    .black,
                                                               ),
-                                                            ),
-                                                          );
-                                                        }
-                                                        List<UsersRecord>
-                                                            dropDownUsersRecordList =
-                                                            snapshot.data;
-                                                        return FlutterFlowDropDown(
-                                                          options: ['Option 1']
-                                                              .toList(),
-                                                          onChanged: (val) =>
-                                                              setState(() =>
-                                                                  dropDownValue =
-                                                                      val),
-                                                          width: 240,
-                                                          height: 50,
-                                                          textStyle:
-                                                              FlutterFlowTheme.of(
-                                                                      context)
-                                                                  .bodyText1
-                                                                  .override(
-                                                                    fontFamily:
-                                                                        'Open Sans',
-                                                                    color: Colors
-                                                                        .black,
-                                                                  ),
-                                                          hintText: 'ユーザーID',
-                                                          fillColor:
-                                                              Colors.white,
-                                                          elevation: 2,
-                                                          borderColor: Colors
-                                                              .transparent,
-                                                          borderWidth: 0,
-                                                          borderRadius: 0,
-                                                          margin:
-                                                              EdgeInsetsDirectional
-                                                                  .fromSTEB(12,
-                                                                      4, 12, 4),
-                                                          hidesUnderline: true,
-                                                        );
-                                                      },
+                                                      hintText: 'ユーザーID',
+                                                      fillColor: Colors.white,
+                                                      elevation: 2,
+                                                      borderColor:
+                                                          Colors.transparent,
+                                                      borderWidth: 0,
+                                                      borderRadius: 0,
+                                                      margin:
+                                                          EdgeInsetsDirectional
+                                                              .fromSTEB(
+                                                                  12, 4, 12, 4),
+                                                      hidesUnderline: true,
                                                     ),
                                                   ],
                                                 ),
