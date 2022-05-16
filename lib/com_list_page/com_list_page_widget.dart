@@ -63,30 +63,28 @@ class _ComListPageWidgetState extends State<ComListPageWidget> {
                           mainAxisSize: MainAxisSize.max,
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            if ((currentUserDocument?.auth) != 'admin')
-                              Padding(
-                                padding: EdgeInsetsDirectional.fromSTEB(
-                                    0, 16, 0, 16),
-                                child: AuthUserStreamWidget(
-                                  child: Column(
-                                    mainAxisSize: MainAxisSize.max,
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      Text(
-                                        '企業',
-                                        style:
-                                            FlutterFlowTheme.of(context).title1,
-                                      ),
-                                      Text(
-                                        'Adminのみ',
-                                        style: FlutterFlowTheme.of(context)
-                                            .bodyText1,
-                                      ),
-                                    ],
-                                  ),
+                            Padding(
+                              padding:
+                                  EdgeInsetsDirectional.fromSTEB(0, 16, 0, 16),
+                              child: AuthUserStreamWidget(
+                                child: Column(
+                                  mainAxisSize: MainAxisSize.max,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      '企業',
+                                      style:
+                                          FlutterFlowTheme.of(context).title1,
+                                    ),
+                                    Text(
+                                      'Adminのみ',
+                                      style: FlutterFlowTheme.of(context)
+                                          .bodyText1,
+                                    ),
+                                  ],
                                 ),
                               ),
+                            ),
                             Padding(
                               padding:
                                   EdgeInsetsDirectional.fromSTEB(0, 0, 0, 24),
@@ -151,7 +149,7 @@ class _ComListPageWidgetState extends State<ComListPageWidget> {
                               children: [
                                 Container(
                                   width:
-                                      MediaQuery.of(context).size.width * 0.7,
+                                      MediaQuery.of(context).size.width * 0.72,
                                   decoration: BoxDecoration(
                                     color:
                                         FlutterFlowTheme.of(context).background,
@@ -267,7 +265,7 @@ class _ComListPageWidgetState extends State<ComListPageWidget> {
                                                   ),
                                                 ),
                                                 Expanded(
-                                                  flex: 3,
+                                                  flex: 4,
                                                   child: Text(
                                                     listViewCompaniesRecord
                                                         .name,
@@ -315,7 +313,7 @@ class _ComListPageWidgetState extends State<ComListPageWidget> {
                                                   ),
                                                 ),
                                                 Expanded(
-                                                  flex: 3,
+                                                  flex: 6,
                                                   child: FutureBuilder<
                                                       UsersRecord>(
                                                     future: UsersRecord
@@ -352,7 +350,7 @@ class _ComListPageWidgetState extends State<ComListPageWidget> {
                                                   ),
                                                 ),
                                                 Expanded(
-                                                  flex: 3,
+                                                  flex: 6,
                                                   child: InkWell(
                                                     onTap: () async {
                                                       logFirebaseEvent(
