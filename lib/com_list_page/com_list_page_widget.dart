@@ -151,7 +151,7 @@ class _ComListPageWidgetState extends State<ComListPageWidget> {
                               children: [
                                 Container(
                                   width:
-                                      MediaQuery.of(context).size.width * 0.7,
+                                      MediaQuery.of(context).size.width * 0.72,
                                   decoration: BoxDecoration(
                                     color:
                                         FlutterFlowTheme.of(context).background,
@@ -267,7 +267,7 @@ class _ComListPageWidgetState extends State<ComListPageWidget> {
                                                   ),
                                                 ),
                                                 Expanded(
-                                                  flex: 3,
+                                                  flex: 4,
                                                   child: Text(
                                                     listViewCompaniesRecord
                                                         .name,
@@ -315,7 +315,7 @@ class _ComListPageWidgetState extends State<ComListPageWidget> {
                                                   ),
                                                 ),
                                                 Expanded(
-                                                  flex: 3,
+                                                  flex: 6,
                                                   child: FutureBuilder<
                                                       UsersRecord>(
                                                     future: UsersRecord
@@ -352,7 +352,7 @@ class _ComListPageWidgetState extends State<ComListPageWidget> {
                                                   ),
                                                 ),
                                                 Expanded(
-                                                  flex: 3,
+                                                  flex: 6,
                                                   child: InkWell(
                                                     onTap: () async {
                                                       logFirebaseEvent(
