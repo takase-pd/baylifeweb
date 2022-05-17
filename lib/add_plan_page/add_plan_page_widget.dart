@@ -1171,7 +1171,7 @@ class _AddPlanPageWidgetState extends State<AddPlanPageWidget> {
                                                       shippingEachFee: false,
                                                       shippingQuick: '',
                                                       unitAmount: int.parse(
-                                                          textController8.text),
+                                                          textController3.text),
                                                       shippingFeeNormal:
                                                           int.parse(
                                                               textController8
