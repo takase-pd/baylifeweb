@@ -9,6 +9,7 @@ import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
 import '../flutter_flow/upload_media.dart';
+import '../plan_list_page/plan_list_page_widget.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
@@ -78,38 +79,92 @@ class _AddPlanPageWidgetState extends State<AddPlanPageWidget> {
                           mainAxisSize: MainAxisSize.max,
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            if ((currentUserDocument?.auth) != 'admin')
-                              Padding(
-                                padding: EdgeInsetsDirectional.fromSTEB(
-                                    0, 16, 0, 16),
-                                child: AuthUserStreamWidget(
-                                  child: Column(
+                            Padding(
+                              padding:
+                                  EdgeInsetsDirectional.fromSTEB(0, 16, 0, 16),
+                              child: Column(
+                                mainAxisSize: MainAxisSize.max,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Padding(
+                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                        0, 0, 0, 8),
+                                    child: Text(
+                                      '商品',
+                                      style:
+                                          FlutterFlowTheme.of(context).title1,
+                                    ),
+                                  ),
+                                  Padding(
+                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                        0, 0, 0, 8),
+                                    child: Text(
+                                      'Adminのみ',
+                                      style: FlutterFlowTheme.of(context)
+                                          .bodyText1,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            Padding(
+                              padding:
+                                  EdgeInsetsDirectional.fromSTEB(0, 0, 0, 24),
+                              child: Column(
+                                mainAxisSize: MainAxisSize.max,
+                                children: [
+                                  Row(
                                     mainAxisSize: MainAxisSize.max,
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
                                     children: [
                                       Padding(
                                         padding: EdgeInsetsDirectional.fromSTEB(
-                                            0, 0, 0, 8),
-                                        child: Text(
-                                          '商品',
-                                          style: FlutterFlowTheme.of(context)
-                                              .title1,
+                                            0, 0, 16, 0),
+                                        child: InkWell(
+                                          onTap: () async {
+                                            logFirebaseEvent('Text-ON_TAP');
+                                            logFirebaseEvent(
+                                                'Text-Navigate-To');
+                                            await Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                builder: (context) =>
+                                                    PlanListPageWidget(),
+                                              ),
+                                            );
+                                          },
+                                          child: Text(
+                                            '一覧',
+                                            style: FlutterFlowTheme.of(context)
+                                                .subtitle1,
+                                          ),
                                         ),
                                       ),
-                                      Padding(
-                                        padding: EdgeInsetsDirectional.fromSTEB(
-                                            0, 0, 0, 8),
+                                      InkWell(
+                                        onTap: () async {
+                                          logFirebaseEvent('Text-ON_TAP');
+                                          logFirebaseEvent('Text-Navigate-To');
+                                          await Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                              builder: (context) =>
+                                                  AddPlanPageWidget(),
+                                            ),
+                                          );
+                                        },
                                         child: Text(
-                                          'Adminのみ',
+                                          '追加',
                                           style: FlutterFlowTheme.of(context)
-                                              .bodyText1,
+                                              .subtitle1,
                                         ),
                                       ),
                                     ],
                                   ),
-                                ),
+                                  Divider(
+                                    color: FlutterFlowTheme.of(context).sLight,
+                                  ),
+                                ],
                               ),
+                            ),
                             Row(
                               mainAxisSize: MainAxisSize.max,
                               mainAxisAlignment: MainAxisAlignment.center,

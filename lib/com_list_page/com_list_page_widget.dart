@@ -1,4 +1,3 @@
-import '../auth/auth_util.dart';
 import '../backend/backend.dart';
 import '../components/header_widget.dart';
 import '../components/main_menu_widget.dart';
@@ -63,30 +62,25 @@ class _ComListPageWidgetState extends State<ComListPageWidget> {
                           mainAxisSize: MainAxisSize.max,
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            if ((currentUserDocument?.auth) != 'admin')
-                              Padding(
-                                padding: EdgeInsetsDirectional.fromSTEB(
-                                    0, 16, 0, 16),
-                                child: AuthUserStreamWidget(
-                                  child: Column(
-                                    mainAxisSize: MainAxisSize.max,
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      Text(
-                                        '企業',
-                                        style:
-                                            FlutterFlowTheme.of(context).title1,
-                                      ),
-                                      Text(
-                                        'Adminのみ',
-                                        style: FlutterFlowTheme.of(context)
-                                            .bodyText1,
-                                      ),
-                                    ],
+                            Padding(
+                              padding:
+                                  EdgeInsetsDirectional.fromSTEB(0, 16, 0, 16),
+                              child: Column(
+                                mainAxisSize: MainAxisSize.max,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    '企業',
+                                    style: FlutterFlowTheme.of(context).title1,
                                   ),
-                                ),
+                                  Text(
+                                    'Adminのみ',
+                                    style:
+                                        FlutterFlowTheme.of(context).bodyText1,
+                                  ),
+                                ],
                               ),
+                            ),
                             Padding(
                               padding:
                                   EdgeInsetsDirectional.fromSTEB(0, 0, 0, 24),
