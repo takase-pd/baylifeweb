@@ -1,4 +1,3 @@
-import '../add_plan_page/add_plan_page_widget.dart';
 import '../auth/auth_util.dart';
 import '../backend/api_requests/api_calls.dart';
 import '../com_list_page/com_list_page_widget.dart';
@@ -7,6 +6,7 @@ import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
 import '../home_page/home_page_widget.dart';
+import '../plan_list_page/plan_list_page_widget.dart';
 import '../post_page/post_page_widget.dart';
 import '../post_survey_page/post_survey_page_widget.dart';
 import '../shop_list_page/shop_list_page_widget.dart';
@@ -349,7 +349,7 @@ class _MainMenuWidgetState extends State<MainMenuWidget> {
                                       context,
                                       MaterialPageRoute(
                                         builder: (context) =>
-                                            AddPlanPageWidget(),
+                                            PlanListPageWidget(),
                                       ),
                                     );
                                   },

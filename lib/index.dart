@@ -10,6 +10,7 @@ export 'home_page/home_page_widget.dart' show HomePageWidget;
 export 'config_page/config_page_widget.dart' show ConfigPageWidget;
 export 'create_special_account_page/create_special_account_page_widget.dart'
     show CreateSpecialAccountPageWidget;
+export 'plan_list_page/plan_list_page_widget.dart' show PlanListPageWidget;
 export 'create_com_page/create_com_page_widget.dart' show CreateComPageWidget;
 export 'com_list_page/com_list_page_widget.dart' show ComListPageWidget;
 export 'login_page/login_page_widget.dart' show LoginPageWidget;
