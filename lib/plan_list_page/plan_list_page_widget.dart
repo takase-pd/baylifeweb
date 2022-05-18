@@ -308,9 +308,7 @@ class _PlanListPageWidgetState extends State<PlanListPageWidget> {
                                                                 context)
                                                             .tertiaryColor,
                                                     barrierColor:
-                                                        FlutterFlowTheme.of(
-                                                                context)
-                                                            .sLight,
+                                                        Color(0x3D484848),
                                                     context: context,
                                                     builder: (context) {
                                                       return Padding(
@@ -322,7 +320,7 @@ class _PlanListPageWidgetState extends State<PlanListPageWidget> {
                                                                       context)
                                                                   .size
                                                                   .height *
-                                                              0.8,
+                                                              0.96,
                                                           child:
                                                               ModifyPlanPageWidget(
                                                             plan:
