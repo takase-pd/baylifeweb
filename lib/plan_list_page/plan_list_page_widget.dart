@@ -351,7 +351,11 @@ class _PlanListPageWidgetState extends State<PlanListPageWidget> {
                                                                   .height *
                                                               0.96,
                                                           child:
-                                                              UpdatePlanPageWidget(),
+                                                              UpdatePlanPageWidget(
+                                                            plan:
+                                                                listViewPlansRecord
+                                                                    .reference,
+                                                          ),
                                                         ),
                                                       );
                                                     },
