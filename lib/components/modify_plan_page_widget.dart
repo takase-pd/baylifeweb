@@ -57,6 +57,7 @@ class _ModifyPlanPageWidgetState extends State<ModifyPlanPageWidget> {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
+        color: FlutterFlowTheme.of(context).tertiaryColor,
         borderRadius: BorderRadius.circular(8),
       ),
       child: Row(
