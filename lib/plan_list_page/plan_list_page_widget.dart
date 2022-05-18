@@ -2,7 +2,7 @@ import '../auth/auth_util.dart';
 import '../backend/backend.dart';
 import '../components/header_widget.dart';
 import '../components/main_menu_widget.dart';
-import '../components/modify_plan_page_widget.dart';
+import '../components/update_plan_page_widget.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
@@ -146,7 +146,7 @@ class _PlanListPageWidgetState extends State<PlanListPageWidget> {
                                                           .size
                                                           .height *
                                                       0.96,
-                                                  child: ModifyPlanPageWidget(),
+                                                  child: UpdatePlanPageWidget(),
                                                 ),
                                               );
                                             },
@@ -351,11 +351,7 @@ class _PlanListPageWidgetState extends State<PlanListPageWidget> {
                                                                   .height *
                                                               0.96,
                                                           child:
-                                                              ModifyPlanPageWidget(
-                                                            plan:
-                                                                listViewPlansRecord
-                                                                    .reference,
-                                                          ),
+                                                              UpdatePlanPageWidget(),
                                                         ),
                                                       );
                                                     },
