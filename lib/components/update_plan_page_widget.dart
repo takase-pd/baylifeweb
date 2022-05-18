@@ -54,8 +54,8 @@ class _UpdatePlanPageWidgetState extends State<UpdatePlanPageWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return StreamBuilder<PlansRecord>(
-      stream: PlansRecord.getDocument(widget.plan),
+    return FutureBuilder<PlansRecord>(
+      future: PlansRecord.getDocumentOnce(widget.plan),
       builder: (context, snapshot) {
         // Customize what your widget looks like when it's loading.
         if (!snapshot.hasData) {
@@ -81,7 +81,7 @@ class _UpdatePlanPageWidgetState extends State<UpdatePlanPageWidget> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Container(
-                width: MediaQuery.of(context).size.width * 0.72,
+                width: MediaQuery.of(context).size.width * 0.48,
                 decoration: BoxDecoration(),
                 child: SingleChildScrollView(
                   child: Column(
