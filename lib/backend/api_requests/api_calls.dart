@@ -168,3 +168,31 @@ class GetSubscriptionCall {
     );
   }
 }
+
+class GetOrdersCall {
+  static Future<ApiCallResponse> call({
+    String shop = '',
+  }) {
+    final body = '''
+{
+  "data": {
+    "shop": "${shop}"
+  }
+}''';
+    return ApiManager.instance.makeApiCall(
+      callName: 'Get Orders',
+      apiUrl:
+          'https://asia-northeast1-baylifedev.cloudfunctions.net/ec-getOrdersV0',
+      callType: ApiCallType.POST,
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      params: {
+        'shop': shop,
+      },
+      body: body,
+      bodyType: BodyType.JSON,
+      returnBody: true,
+    );
+  }
+}
