@@ -6,20 +6,20 @@ import '../components/update_plan_page_widget.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
-import '../ord_list_page/ord_list_page_widget.dart';
+import '../plan_list_page/plan_list_page_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 
-class PlanListPageWidget extends StatefulWidget {
-  const PlanListPageWidget({Key key}) : super(key: key);
+class OrdListPageWidget extends StatefulWidget {
+  const OrdListPageWidget({Key key}) : super(key: key);
 
   @override
-  _PlanListPageWidgetState createState() => _PlanListPageWidgetState();
+  _OrdListPageWidgetState createState() => _OrdListPageWidgetState();
 }
 
-class _PlanListPageWidgetState extends State<PlanListPageWidget> {
+class _OrdListPageWidgetState extends State<OrdListPageWidget> {
   PagingController<DocumentSnapshot, PlansRecord> _pagingController;
   Query _pagingQuery;
   List<StreamSubscription> _streamSubscriptions = [];
@@ -30,8 +30,7 @@ class _PlanListPageWidgetState extends State<PlanListPageWidget> {
   @override
   void initState() {
     super.initState();
-    logFirebaseEvent('screen_view',
-        parameters: {'screen_name': 'PlanListPage'});
+    logFirebaseEvent('screen_view', parameters: {'screen_name': 'OrdListPage'});
   }
 
   @override
@@ -427,10 +426,9 @@ class _PlanListPageWidgetState extends State<PlanListPageWidget> {
                                                           ),
                                                         ),
                                                         Expanded(
-                                                          flex: 2,
+                                                          flex: 1,
                                                           child: Text(
-                                                            listViewPlansRecord
-                                                                .name,
+                                                            '注文日',
                                                             style: FlutterFlowTheme
                                                                     .of(context)
                                                                 .bodyText1,
@@ -439,16 +437,7 @@ class _PlanListPageWidgetState extends State<PlanListPageWidget> {
                                                         Expanded(
                                                           flex: 1,
                                                           child: Text(
-                                                            formatNumber(
-                                                              listViewPlansRecord
-                                                                  .unitAmount,
-                                                              formatType:
-                                                                  FormatType
-                                                                      .custom,
-                                                              currency: '￥',
-                                                              format: '#,##0',
-                                                              locale: 'ja_JP',
-                                                            ),
+                                                            '総数',
                                                             style: FlutterFlowTheme
                                                                     .of(context)
                                                                 .bodyText1,
@@ -457,16 +446,16 @@ class _PlanListPageWidgetState extends State<PlanListPageWidget> {
                                                         Expanded(
                                                           flex: 1,
                                                           child: Text(
-                                                            formatNumber(
-                                                              listViewPlansRecord
-                                                                  .shippingFeeNormal,
-                                                              formatType:
-                                                                  FormatType
-                                                                      .custom,
-                                                              currency: '￥',
-                                                              format: '#,##0',
-                                                              locale: 'ja_JP',
-                                                            ),
+                                                            '注文額',
+                                                            style: FlutterFlowTheme
+                                                                    .of(context)
+                                                                .bodyText1,
+                                                          ),
+                                                        ),
+                                                        Expanded(
+                                                          flex: 1,
+                                                          child: Text(
+                                                            '送料',
                                                             style: FlutterFlowTheme
                                                                     .of(context)
                                                                 .bodyText1,
@@ -475,8 +464,7 @@ class _PlanListPageWidgetState extends State<PlanListPageWidget> {
                                                         Expanded(
                                                           flex: 2,
                                                           child: Text(
-                                                            listViewPlansRecord
-                                                                .shippingNormal,
+                                                            '購入者名',
                                                             style: FlutterFlowTheme
                                                                     .of(context)
                                                                 .bodyText1,
@@ -485,21 +473,7 @@ class _PlanListPageWidgetState extends State<PlanListPageWidget> {
                                                         Expanded(
                                                           flex: 1,
                                                           child: Text(
-                                                            listViewPlansRecord
-                                                                .quantityMax
-                                                                .toString(),
-                                                            style: FlutterFlowTheme
-                                                                    .of(context)
-                                                                .bodyText1,
-                                                          ),
-                                                        ),
-                                                        Expanded(
-                                                          flex: 1,
-                                                          child: Text(
-                                                            dateTimeFormat(
-                                                                'yMMMd',
-                                                                listViewPlansRecord
-                                                                    .published),
+                                                            'ステータス',
                                                             style: FlutterFlowTheme
                                                                     .of(context)
                                                                 .bodyText1,

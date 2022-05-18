@@ -345,13 +345,8 @@ class _UpdatePlanPageWidgetState extends State<UpdatePlanPageWidget> {
                                   child: TextFormField(
                                     controller: textController4 ??=
                                         TextEditingController(
-                                      text: formatNumber(
-                                        containerPlansRecord.quantityMax,
-                                        formatType: FormatType.custom,
-                                        currency: '￥',
-                                        format: '#,##0',
-                                        locale: 'ja_JP',
-                                      ),
+                                      text: containerPlansRecord.quantityMax
+                                          .toString(),
                                     ),
                                     obscureText: false,
                                     decoration: InputDecoration(
