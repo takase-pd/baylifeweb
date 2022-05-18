@@ -40,6 +40,15 @@ class _UpdatePlanPageWidgetState extends State<UpdatePlanPageWidget> {
   TextEditingController textController8;
   String radioButtonValue;
 
+  Future<PlansRecord> plan;
+
+  Future<PlansRecord> _getPlan() async {
+    PlansRecord _plan;
+    if (widget.plan != null)
+      _plan = await PlansRecord.getDocumentOnce(widget.plan);
+    return _plan;
+  }
+
   @override
   void initState() {
     super.initState();
@@ -50,15 +59,16 @@ class _UpdatePlanPageWidgetState extends State<UpdatePlanPageWidget> {
     textController6 = TextEditingController(text: uploadedFileUrl);
     textController7 = TextEditingController();
     textController8 = TextEditingController();
+    plan = _getPlan();
   }
 
   @override
   Widget build(BuildContext context) {
     return FutureBuilder<PlansRecord>(
-      future: PlansRecord.getDocumentOnce(widget.plan),
+      future: plan,
       builder: (context, snapshot) {
         // Customize what your widget looks like when it's loading.
-        if (!snapshot.hasData) {
+        if (snapshot.connectionState != ConnectionState.done) {
           return Center(
             child: SizedBox(
               width: 50,
@@ -225,7 +235,7 @@ class _UpdatePlanPageWidgetState extends State<UpdatePlanPageWidget> {
                                   child: TextFormField(
                                     controller: textController2 ??=
                                         TextEditingController(
-                                      text: containerPlansRecord.name,
+                                      text: containerPlansRecord?.name,
                                     ),
                                     obscureText: false,
                                     decoration: InputDecoration(
