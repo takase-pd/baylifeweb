@@ -53,13 +53,7 @@ class _UpdatePlanPageWidgetState extends State<UpdatePlanPageWidget> {
   void initState() {
     super.initState();
     textController1 = TextEditingController(text: dropDownValue);
-    textController3 = TextEditingController();
-    textController4 = TextEditingController();
-    textController5 = TextEditingController();
     textController6 = TextEditingController(text: uploadedFileUrl);
-    textController7 = TextEditingController();
-    textController8 = TextEditingController();
-    plan = _getPlan();
   }
 
   @override
@@ -292,7 +286,16 @@ class _UpdatePlanPageWidgetState extends State<UpdatePlanPageWidget> {
                                   padding: EdgeInsetsDirectional.fromSTEB(
                                       16, 0, 0, 0),
                                   child: TextFormField(
-                                    controller: textController3,
+                                    controller: textController3 ??=
+                                        TextEditingController(
+                                      text: formatNumber(
+                                        containerPlansRecord.unitAmount,
+                                        formatType: FormatType.custom,
+                                        currency: '￥',
+                                        format: '#,##0',
+                                        locale: 'ja_JP',
+                                      ),
+                                    ),
                                     obscureText: false,
                                     decoration: InputDecoration(
                                       labelText: '料金',
@@ -349,7 +352,16 @@ class _UpdatePlanPageWidgetState extends State<UpdatePlanPageWidget> {
                                   padding: EdgeInsetsDirectional.fromSTEB(
                                       16, 0, 0, 0),
                                   child: TextFormField(
-                                    controller: textController4,
+                                    controller: textController4 ??=
+                                        TextEditingController(
+                                      text: formatNumber(
+                                        containerPlansRecord.quantityMax,
+                                        formatType: FormatType.custom,
+                                        currency: '￥',
+                                        format: '#,##0',
+                                        locale: 'ja_JP',
+                                      ),
+                                    ),
                                     obscureText: false,
                                     decoration: InputDecoration(
                                       labelText: '注文最大数',
@@ -407,7 +419,10 @@ class _UpdatePlanPageWidgetState extends State<UpdatePlanPageWidget> {
                                   padding: EdgeInsetsDirectional.fromSTEB(
                                       16, 0, 0, 0),
                                   child: TextFormField(
-                                    controller: textController5,
+                                    controller: textController5 ??=
+                                        TextEditingController(
+                                      text: containerPlansRecord.description,
+                                    ),
                                     obscureText: false,
                                     decoration: InputDecoration(
                                       labelText: '説明・備考',
@@ -678,7 +693,10 @@ class _UpdatePlanPageWidgetState extends State<UpdatePlanPageWidget> {
                                   padding: EdgeInsetsDirectional.fromSTEB(
                                       16, 0, 0, 0),
                                   child: TextFormField(
-                                    controller: textController7,
+                                    controller: textController7 ??=
+                                        TextEditingController(
+                                      text: containerPlansRecord.description,
+                                    ),
                                     obscureText: false,
                                     decoration: InputDecoration(
                                       labelText: '配送説明',
@@ -735,7 +753,16 @@ class _UpdatePlanPageWidgetState extends State<UpdatePlanPageWidget> {
                                   padding: EdgeInsetsDirectional.fromSTEB(
                                       16, 0, 0, 0),
                                   child: TextFormField(
-                                    controller: textController8,
+                                    controller: textController8 ??=
+                                        TextEditingController(
+                                      text: formatNumber(
+                                        containerPlansRecord.shippingFeeNormal,
+                                        formatType: FormatType.custom,
+                                        currency: '￥',
+                                        format: '#,##0',
+                                        locale: 'ja_JP',
+                                      ),
+                                    ),
                                     obscureText: false,
                                     decoration: InputDecoration(
                                       labelText: '送料',
@@ -870,18 +897,19 @@ class _UpdatePlanPageWidgetState extends State<UpdatePlanPageWidget> {
                                       active: false,
                                       activeQuick: false,
                                       banner: uploadedFileUrl,
-                                      description: textController5.text,
+                                      description: textController5?.text ?? '',
                                       name: textController2?.text ?? '',
                                       published: datePicked,
-                                      quantityMax:
-                                          int.parse(textController4.text),
+                                      quantityMax: int.parse(
+                                          textController4?.text ?? ''),
                                       shippingEachFee: false,
                                       shippingQuick: '',
-                                      unitAmount:
-                                          int.parse(textController3.text),
-                                      shippingFeeNormal:
-                                          int.parse(textController8.text),
-                                      shippingNormal: textController7.text,
+                                      unitAmount: int.parse(
+                                          textController3?.text ?? ''),
+                                      shippingFeeNormal: int.parse(
+                                          textController8?.text ?? ''),
+                                      shippingNormal:
+                                          textController7?.text ?? '',
                                     );
                                     await PlansRecord.collection
                                         .doc()
