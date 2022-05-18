@@ -3,6 +3,7 @@ import '../auth/auth_util.dart';
 import '../backend/backend.dart';
 import '../components/header_widget.dart';
 import '../components/main_menu_widget.dart';
+import '../components/modify_plan_page_widget.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import 'package:flutter/material.dart';
@@ -291,119 +292,162 @@ class _PlanListPageWidgetState extends State<PlanListPageWidget> {
                                             final listViewPlansRecord =
                                                 _pagingController
                                                     .itemList[listViewIndex];
-                                            return Container(
-                                              height: 88,
-                                              decoration: BoxDecoration(
-                                                color:
-                                                    FlutterFlowTheme.of(context)
+                                            return Padding(
+                                              padding: EdgeInsetsDirectional
+                                                  .fromSTEB(0, 0, 0, 4),
+                                              child: InkWell(
+                                                onTap: () async {
+                                                  logFirebaseEvent(
+                                                      'Container-ON_TAP');
+                                                  logFirebaseEvent(
+                                                      'Container-Bottom-Sheet');
+                                                  await showModalBottomSheet(
+                                                    isScrollControlled: true,
+                                                    backgroundColor:
+                                                        FlutterFlowTheme.of(
+                                                                context)
+                                                            .tertiaryColor,
+                                                    barrierColor:
+                                                        FlutterFlowTheme.of(
+                                                                context)
+                                                            .sLight,
+                                                    context: context,
+                                                    builder: (context) {
+                                                      return Padding(
+                                                        padding: MediaQuery.of(
+                                                                context)
+                                                            .viewInsets,
+                                                        child: Container(
+                                                          height: MediaQuery.of(
+                                                                      context)
+                                                                  .size
+                                                                  .height *
+                                                              0.8,
+                                                          child:
+                                                              ModifyPlanPageWidget(
+                                                            plan:
+                                                                listViewPlansRecord
+                                                                    .reference,
+                                                          ),
+                                                        ),
+                                                      );
+                                                    },
+                                                  );
+                                                },
+                                                child: Container(
+                                                  height: 88,
+                                                  decoration: BoxDecoration(
+                                                    color: FlutterFlowTheme.of(
+                                                            context)
                                                         .background,
-                                                borderRadius:
-                                                    BorderRadius.circular(8),
-                                              ),
-                                              child: Padding(
-                                                padding: EdgeInsetsDirectional
-                                                    .fromSTEB(16, 0, 0, 0),
-                                                child: Row(
-                                                  mainAxisSize:
-                                                      MainAxisSize.min,
-                                                  mainAxisAlignment:
-                                                      MainAxisAlignment.start,
-                                                  children: [
-                                                    Expanded(
-                                                      flex: 1,
-                                                      child: Text(
-                                                        listViewIndex
-                                                            .toString(),
-                                                        style:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            8),
+                                                  ),
+                                                  child: Padding(
+                                                    padding:
+                                                        EdgeInsetsDirectional
+                                                            .fromSTEB(
+                                                                16, 0, 0, 0),
+                                                    child: Row(
+                                                      mainAxisSize:
+                                                          MainAxisSize.min,
+                                                      mainAxisAlignment:
+                                                          MainAxisAlignment
+                                                              .start,
+                                                      children: [
+                                                        Expanded(
+                                                          flex: 1,
+                                                          child: Text(
+                                                            listViewIndex
+                                                                .toString(),
+                                                            style: FlutterFlowTheme
+                                                                    .of(context)
                                                                 .bodyText1,
-                                                      ),
-                                                    ),
-                                                    Expanded(
-                                                      flex: 2,
-                                                      child: Text(
-                                                        listViewPlansRecord
-                                                            .name,
-                                                        style:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .bodyText1,
-                                                      ),
-                                                    ),
-                                                    Expanded(
-                                                      flex: 1,
-                                                      child: Text(
-                                                        formatNumber(
-                                                          listViewPlansRecord
-                                                              .unitAmount,
-                                                          formatType:
-                                                              FormatType.custom,
-                                                          currency: '￥',
-                                                          format: '#,##0',
-                                                          locale: 'ja_JP',
+                                                          ),
                                                         ),
-                                                        style:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .bodyText1,
-                                                      ),
-                                                    ),
-                                                    Expanded(
-                                                      flex: 1,
-                                                      child: Text(
-                                                        formatNumber(
-                                                          listViewPlansRecord
-                                                              .shippingFeeNormal,
-                                                          formatType:
-                                                              FormatType.custom,
-                                                          currency: '￥',
-                                                          format: '#,##0',
-                                                          locale: 'ja_JP',
-                                                        ),
-                                                        style:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .bodyText1,
-                                                      ),
-                                                    ),
-                                                    Expanded(
-                                                      flex: 2,
-                                                      child: Text(
-                                                        listViewPlansRecord
-                                                            .shippingNormal,
-                                                        style:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .bodyText1,
-                                                      ),
-                                                    ),
-                                                    Expanded(
-                                                      flex: 1,
-                                                      child: Text(
-                                                        listViewPlansRecord
-                                                            .quantityMax
-                                                            .toString(),
-                                                        style:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .bodyText1,
-                                                      ),
-                                                    ),
-                                                    Expanded(
-                                                      flex: 1,
-                                                      child: Text(
-                                                        dateTimeFormat(
-                                                            'yMMMd',
+                                                        Expanded(
+                                                          flex: 2,
+                                                          child: Text(
                                                             listViewPlansRecord
-                                                                .published),
-                                                        style:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
+                                                                .name,
+                                                            style: FlutterFlowTheme
+                                                                    .of(context)
                                                                 .bodyText1,
-                                                      ),
+                                                          ),
+                                                        ),
+                                                        Expanded(
+                                                          flex: 1,
+                                                          child: Text(
+                                                            formatNumber(
+                                                              listViewPlansRecord
+                                                                  .unitAmount,
+                                                              formatType:
+                                                                  FormatType
+                                                                      .custom,
+                                                              currency: '￥',
+                                                              format: '#,##0',
+                                                              locale: 'ja_JP',
+                                                            ),
+                                                            style: FlutterFlowTheme
+                                                                    .of(context)
+                                                                .bodyText1,
+                                                          ),
+                                                        ),
+                                                        Expanded(
+                                                          flex: 1,
+                                                          child: Text(
+                                                            formatNumber(
+                                                              listViewPlansRecord
+                                                                  .shippingFeeNormal,
+                                                              formatType:
+                                                                  FormatType
+                                                                      .custom,
+                                                              currency: '￥',
+                                                              format: '#,##0',
+                                                              locale: 'ja_JP',
+                                                            ),
+                                                            style: FlutterFlowTheme
+                                                                    .of(context)
+                                                                .bodyText1,
+                                                          ),
+                                                        ),
+                                                        Expanded(
+                                                          flex: 2,
+                                                          child: Text(
+                                                            listViewPlansRecord
+                                                                .shippingNormal,
+                                                            style: FlutterFlowTheme
+                                                                    .of(context)
+                                                                .bodyText1,
+                                                          ),
+                                                        ),
+                                                        Expanded(
+                                                          flex: 1,
+                                                          child: Text(
+                                                            listViewPlansRecord
+                                                                .quantityMax
+                                                                .toString(),
+                                                            style: FlutterFlowTheme
+                                                                    .of(context)
+                                                                .bodyText1,
+                                                          ),
+                                                        ),
+                                                        Expanded(
+                                                          flex: 1,
+                                                          child: Text(
+                                                            dateTimeFormat(
+                                                                'yMMMd',
+                                                                listViewPlansRecord
+                                                                    .published),
+                                                            style: FlutterFlowTheme
+                                                                    .of(context)
+                                                                .bodyText1,
+                                                          ),
+                                                        ),
+                                                      ],
                                                     ),
-                                                  ],
+                                                  ),
                                                 ),
                                               ),
                                             );
