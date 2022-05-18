@@ -19,4 +19,4 @@ export 'login_page/login_page_widget.dart' show LoginPageWidget;
 export 'create_shop_page/create_shop_page_widget.dart'
     show CreateShopPageWidget;
 export 'shop_list_page/shop_list_page_widget.dart' show ShopListPageWidget;
-export 'ord_list_page/ord_list_page_widget.dart' show OrdListPageWidget;
+export 'order_list_page/order_list_page_widget.dart' show OrderListPageWidget;

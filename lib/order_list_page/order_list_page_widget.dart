@@ -12,14 +12,14 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 
-class OrdListPageWidget extends StatefulWidget {
-  const OrdListPageWidget({Key key}) : super(key: key);
+class OrderListPageWidget extends StatefulWidget {
+  const OrderListPageWidget({Key key}) : super(key: key);
 
   @override
-  _OrdListPageWidgetState createState() => _OrdListPageWidgetState();
+  _OrderListPageWidgetState createState() => _OrderListPageWidgetState();
 }
 
-class _OrdListPageWidgetState extends State<OrdListPageWidget> {
+class _OrderListPageWidgetState extends State<OrderListPageWidget> {
   PagingController<DocumentSnapshot, PlansRecord> _pagingController;
   Query _pagingQuery;
   List<StreamSubscription> _streamSubscriptions = [];
@@ -30,7 +30,8 @@ class _OrdListPageWidgetState extends State<OrdListPageWidget> {
   @override
   void initState() {
     super.initState();
-    logFirebaseEvent('screen_view', parameters: {'screen_name': 'OrdListPage'});
+    logFirebaseEvent('screen_view',
+        parameters: {'screen_name': 'OrderListPage'});
   }
 
   @override
@@ -145,7 +146,7 @@ class _OrdListPageWidgetState extends State<OrdListPageWidget> {
                                                   context,
                                                   MaterialPageRoute(
                                                     builder: (context) =>
-                                                        OrdListPageWidget(),
+                                                        OrderListPageWidget(),
                                                   ),
                                                 );
                                               },
