@@ -54,6 +54,7 @@ class _UpdatePlanPageWidgetState extends State<UpdatePlanPageWidget> {
     super.initState();
     textController1 = TextEditingController(text: dropDownValue);
     textController6 = TextEditingController(text: uploadedFileUrl);
+    plan = _getPlan();
   }
 
   @override
@@ -288,13 +289,15 @@ class _UpdatePlanPageWidgetState extends State<UpdatePlanPageWidget> {
                                   child: TextFormField(
                                     controller: textController3 ??=
                                         TextEditingController(
-                                      text: formatNumber(
-                                        containerPlansRecord.unitAmount,
-                                        formatType: FormatType.custom,
-                                        currency: '￥',
-                                        format: '#,##0',
-                                        locale: 'ja_JP',
-                                      ),
+                                      text: containerPlansRecord == null
+                                          ? ''
+                                          : formatNumber(
+                                              containerPlansRecord.unitAmount,
+                                              formatType: FormatType.custom,
+                                              currency: '￥',
+                                              format: '#,##0',
+                                              locale: 'ja_JP',
+                                            ),
                                     ),
                                     obscureText: false,
                                     decoration: InputDecoration(
@@ -354,13 +357,10 @@ class _UpdatePlanPageWidgetState extends State<UpdatePlanPageWidget> {
                                   child: TextFormField(
                                     controller: textController4 ??=
                                         TextEditingController(
-                                      text: formatNumber(
-                                        containerPlansRecord.quantityMax,
-                                        formatType: FormatType.custom,
-                                        currency: '￥',
-                                        format: '#,##0',
-                                        locale: 'ja_JP',
-                                      ),
+                                      text: containerPlansRecord == null
+                                          ? ''
+                                          : containerPlansRecord.quantityMax
+                                              .toString(),
                                     ),
                                     obscureText: false,
                                     decoration: InputDecoration(
@@ -421,7 +421,7 @@ class _UpdatePlanPageWidgetState extends State<UpdatePlanPageWidget> {
                                   child: TextFormField(
                                     controller: textController5 ??=
                                         TextEditingController(
-                                      text: containerPlansRecord.description,
+                                      text: containerPlansRecord?.description,
                                     ),
                                     obscureText: false,
                                     decoration: InputDecoration(
@@ -695,7 +695,7 @@ class _UpdatePlanPageWidgetState extends State<UpdatePlanPageWidget> {
                                   child: TextFormField(
                                     controller: textController7 ??=
                                         TextEditingController(
-                                      text: containerPlansRecord.description,
+                                      text: containerPlansRecord?.description,
                                     ),
                                     obscureText: false,
                                     decoration: InputDecoration(
@@ -755,13 +755,16 @@ class _UpdatePlanPageWidgetState extends State<UpdatePlanPageWidget> {
                                   child: TextFormField(
                                     controller: textController8 ??=
                                         TextEditingController(
-                                      text: formatNumber(
-                                        containerPlansRecord.shippingFeeNormal,
-                                        formatType: FormatType.custom,
-                                        currency: '￥',
-                                        format: '#,##0',
-                                        locale: 'ja_JP',
-                                      ),
+                                      text: containerPlansRecord == null
+                                          ? ''
+                                          : formatNumber(
+                                              containerPlansRecord
+                                                  .shippingFeeNormal,
+                                              formatType: FormatType.custom,
+                                              currency: '￥',
+                                              format: '#,##0',
+                                              locale: 'ja_JP',
+                                            ),
                                     ),
                                     obscureText: false,
                                     decoration: InputDecoration(
