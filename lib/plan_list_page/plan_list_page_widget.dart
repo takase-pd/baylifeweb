@@ -1,4 +1,3 @@
-import '../add_plan_page/add_plan_page_widget.dart';
 import '../auth/auth_util.dart';
 import '../backend/backend.dart';
 import '../components/header_widget.dart';
@@ -6,6 +5,7 @@ import '../components/main_menu_widget.dart';
 import '../components/modify_plan_page_widget.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
+import '../flutter_flow/flutter_flow_widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -101,6 +101,8 @@ class _PlanListPageWidgetState extends State<PlanListPageWidget> {
                                 children: [
                                   Row(
                                     mainAxisSize: MainAxisSize.max,
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
                                     children: [
                                       Padding(
                                         padding: EdgeInsetsDirectional.fromSTEB(
@@ -125,22 +127,51 @@ class _PlanListPageWidgetState extends State<PlanListPageWidget> {
                                           ),
                                         ),
                                       ),
-                                      InkWell(
-                                        onTap: () async {
-                                          logFirebaseEvent('Text-ON_TAP');
-                                          logFirebaseEvent('Text-Navigate-To');
-                                          await Navigator.push(
-                                            context,
-                                            MaterialPageRoute(
-                                              builder: (context) =>
-                                                  AddPlanPageWidget(),
-                                            ),
+                                      FFButtonWidget(
+                                        onPressed: () async {
+                                          logFirebaseEvent('Button-ON_TAP');
+                                          logFirebaseEvent(
+                                              'Button-Bottom-Sheet');
+                                          await showModalBottomSheet(
+                                            isScrollControlled: true,
+                                            backgroundColor: Colors.transparent,
+                                            barrierColor: Color(0x8E484848),
+                                            context: context,
+                                            builder: (context) {
+                                              return Padding(
+                                                padding: MediaQuery.of(context)
+                                                    .viewInsets,
+                                                child: Container(
+                                                  height: MediaQuery.of(context)
+                                                          .size
+                                                          .height *
+                                                      0.96,
+                                                  child: ModifyPlanPageWidget(),
+                                                ),
+                                              );
+                                            },
                                           );
                                         },
-                                        child: Text(
-                                          '追加',
-                                          style: FlutterFlowTheme.of(context)
-                                              .subtitle1,
+                                        text: '追加',
+                                        options: FFButtonOptions(
+                                          width: 80,
+                                          height: 32,
+                                          color: FlutterFlowTheme.of(context)
+                                              .primaryColor,
+                                          textStyle: FlutterFlowTheme.of(
+                                                  context)
+                                              .bodyText2
+                                              .override(
+                                                fontFamily: 'Open Sans',
+                                                color:
+                                                    FlutterFlowTheme.of(context)
+                                                        .textLight,
+                                              ),
+                                          borderSide: BorderSide(
+                                            color: Colors.transparent,
+                                            width: 1,
+                                          ),
+                                          borderRadius: 4,
                                         ),
                                       ),
                                     ],
@@ -306,7 +337,7 @@ class _PlanListPageWidgetState extends State<PlanListPageWidget> {
                                                     backgroundColor:
                                                         Colors.transparent,
                                                     barrierColor:
-                                                        Color(0x8e484848),
+                                                        Color(0x8E484848),
                                                     context: context,
                                                     constraints: BoxConstraints(
                                                       maxWidth:
