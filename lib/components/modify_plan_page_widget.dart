@@ -57,6 +57,7 @@ class _ModifyPlanPageWidgetState extends State<ModifyPlanPageWidget> {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
+        color: FlutterFlowTheme.of(context).tertiaryColor,
         borderRadius: BorderRadius.circular(8),
       ),
       child: Row(
@@ -64,7 +65,7 @@ class _ModifyPlanPageWidgetState extends State<ModifyPlanPageWidget> {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Container(
-            width: MediaQuery.of(context).size.width * 0.72,
+            width: MediaQuery.of(context).size.width * 0.48,
             decoration: BoxDecoration(),
             child: SingleChildScrollView(
               child: Column(

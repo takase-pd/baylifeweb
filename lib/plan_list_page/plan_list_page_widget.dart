@@ -304,12 +304,17 @@ class _PlanListPageWidgetState extends State<PlanListPageWidget> {
                                                   await showModalBottomSheet(
                                                     isScrollControlled: true,
                                                     backgroundColor:
-                                                        FlutterFlowTheme.of(
-                                                                context)
-                                                            .tertiaryColor,
+                                                        Colors.transparent,
                                                     barrierColor:
-                                                        Color(0x3D484848),
+                                                        Color(0x8e484848),
                                                     context: context,
+                                                    constraints: BoxConstraints(
+                                                      maxWidth:
+                                                          MediaQuery.of(context)
+                                                                  .size
+                                                                  .width *
+                                                              0.64,
+                                                    ),
                                                     builder: (context) {
                                                       return Padding(
                                                         padding: MediaQuery.of(
