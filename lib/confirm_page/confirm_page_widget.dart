@@ -59,8 +59,8 @@ class ConfirmPageWidget extends StatefulWidget {
 }
 
 class _ConfirmPageWidgetState extends State<ConfirmPageWidget> {
-  bool checkboxListTileValue;
   ApiCallResponse aaa;
+  bool checkboxListTileValue;
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
@@ -876,9 +876,9 @@ class _ConfirmPageWidgetState extends State<ConfirmPageWidget> {
                                               child: FFButtonWidget(
                                                 onPressed: () async {
                                                   logFirebaseEvent(
-                                                      'Button-ON_TAP');
+                                                      'Button_ON_TAP');
                                                   logFirebaseEvent(
-                                                      'Button-Navigate-Back');
+                                                      'Button_Navigate-Back');
                                                   Navigator.pop(context);
                                                 },
                                                 text: '戻る',
@@ -954,9 +954,9 @@ class _ConfirmPageWidgetState extends State<ConfirmPageWidget> {
                                                 child: FFButtonWidget(
                                                   onPressed: () async {
                                                     logFirebaseEvent(
-                                                        'Button-ON_TAP');
+                                                        'Button_ON_TAP');
                                                     logFirebaseEvent(
-                                                        'Button-Backend-Call');
+                                                        'Button_Backend-Call');
                                                     aaa =
                                                         await RegistContentsCall
                                                             .call(
@@ -996,7 +996,7 @@ class _ConfirmPageWidgetState extends State<ConfirmPageWidget> {
                                                       filePath: widget.filePath,
                                                     );
                                                     logFirebaseEvent(
-                                                        'Button-Alert-Dialog');
+                                                        'Button_Alert-Dialog');
                                                     await showDialog(
                                                       context: context,
                                                       builder:
@@ -1017,7 +1017,7 @@ class _ConfirmPageWidgetState extends State<ConfirmPageWidget> {
                                                       },
                                                     );
                                                     logFirebaseEvent(
-                                                        'Button-Navigate-To');
+                                                        'Button_Navigate-To');
                                                     await Navigator
                                                         .pushAndRemoveUntil(
                                                       context,

@@ -19,8 +19,8 @@ class TopPageWidget extends StatefulWidget {
 }
 
 class _TopPageWidgetState extends State<TopPageWidget> {
-  final scaffoldKey = GlobalKey<ScaffoldState>();
   ApiCallResponse plans;
+  final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   void initState() {
@@ -132,10 +132,10 @@ class _TopPageWidgetState extends State<TopPageWidget> {
                           padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 16),
                           child: FFButtonWidget(
                             onPressed: () async {
-                              logFirebaseEvent('Button-ON_TAP');
-                              logFirebaseEvent('Button-Backend-Call');
+                              logFirebaseEvent('Button_ON_TAP');
+                              logFirebaseEvent('Button_Backend-Call');
                               plans = await GetPlanCall.call();
-                              logFirebaseEvent('Button-Navigate-To');
+                              logFirebaseEvent('Button_Navigate-To');
                               await Navigator.push(
                                 context,
                                 MaterialPageRoute(
@@ -174,8 +174,8 @@ class _TopPageWidgetState extends State<TopPageWidget> {
                           children: [
                             InkWell(
                               onTap: () async {
-                                logFirebaseEvent('Text-ON_TAP');
-                                logFirebaseEvent('Text-Launch-U-R-L');
+                                logFirebaseEvent('Text_ON_TAP');
+                                logFirebaseEvent('Text_Launch-U-R-L');
                                 await launchURL(
                                     'https://particledrawing.notion.site/Use-Case-a8f406da8ffc44ab991a371c1596297b');
                               },
@@ -189,8 +189,8 @@ class _TopPageWidgetState extends State<TopPageWidget> {
                                   EdgeInsetsDirectional.fromSTEB(2, 0, 0, 0),
                               child: InkWell(
                                 onTap: () async {
-                                  logFirebaseEvent('Icon-ON_TAP');
-                                  logFirebaseEvent('Icon-Launch-U-R-L');
+                                  logFirebaseEvent('Icon_ON_TAP');
+                                  logFirebaseEvent('Icon_Launch-U-R-L');
                                   await launchURL(
                                       'https://particledrawing.notion.site/Use-Case-a8f406da8ffc44ab991a371c1596297b');
                                 },
@@ -499,8 +499,8 @@ class _TopPageWidgetState extends State<TopPageWidget> {
                                   children: [
                                     InkWell(
                                       onTap: () async {
-                                        logFirebaseEvent('Image-ON_TAP');
-                                        logFirebaseEvent('Image-Launch-U-R-L');
+                                        logFirebaseEvent('Image_ON_TAP');
+                                        logFirebaseEvent('Image_Launch-U-R-L');
                                         await launchURL(
                                             'https://apps.apple.com/jp/app/makuhari-baylife/id1582919405');
                                       },
@@ -512,8 +512,8 @@ class _TopPageWidgetState extends State<TopPageWidget> {
                                     ),
                                     InkWell(
                                       onTap: () async {
-                                        logFirebaseEvent('Image-ON_TAP');
-                                        logFirebaseEvent('Image-Launch-U-R-L');
+                                        logFirebaseEvent('Image_ON_TAP');
+                                        logFirebaseEvent('Image_Launch-U-R-L');
                                         await launchURL(
                                             'https://play.google.com/store/apps/details?id=com.particledrawing.baylife&utm_source=service-web&pcampaignid=pcampaignidMKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1');
                                       },

@@ -95,9 +95,9 @@ class _ComListPageWidgetState extends State<ComListPageWidget> {
                                             0, 0, 16, 0),
                                         child: InkWell(
                                           onTap: () async {
-                                            logFirebaseEvent('Text-ON_TAP');
+                                            logFirebaseEvent('Text_ON_TAP');
                                             logFirebaseEvent(
-                                                'Text-Navigate-To');
+                                                'Text_Navigate-To');
                                             await Navigator.push(
                                               context,
                                               MaterialPageRoute(
@@ -115,8 +115,8 @@ class _ComListPageWidgetState extends State<ComListPageWidget> {
                                       ),
                                       InkWell(
                                         onTap: () async {
-                                          logFirebaseEvent('Text-ON_TAP');
-                                          logFirebaseEvent('Text-Navigate-To');
+                                          logFirebaseEvent('Text_ON_TAP');
+                                          logFirebaseEvent('Text_Navigate-To');
                                           await Navigator.push(
                                             context,
                                             MaterialPageRoute(
@@ -351,9 +351,9 @@ class _ComListPageWidgetState extends State<ComListPageWidget> {
                                                   child: InkWell(
                                                     onTap: () async {
                                                       logFirebaseEvent(
-                                                          'Text-ON_TAP');
+                                                          'Text_ON_TAP');
                                                       logFirebaseEvent(
-                                                          'Text-Launch-U-R-L');
+                                                          'Text_Launch-U-R-L');
                                                       await launchURL(
                                                           listViewCompaniesRecord
                                                               .web);

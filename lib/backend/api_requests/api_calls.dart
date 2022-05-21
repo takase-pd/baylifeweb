@@ -172,11 +172,13 @@ class GetSubscriptionCall {
 class GetOrdersCall {
   static Future<ApiCallResponse> call({
     String shop = '',
+    String uid = '',
   }) {
     final body = '''
 {
   "data": {
-    "shop": "${shop}"
+    "shop": "${shop}",
+    "uid": "${uid}"
   }
 }''';
     return ApiManager.instance.makeApiCall(
@@ -189,6 +191,7 @@ class GetOrdersCall {
       },
       params: {
         'shop': shop,
+        'uid': uid,
       },
       body: body,
       bodyType: BodyType.JSON,

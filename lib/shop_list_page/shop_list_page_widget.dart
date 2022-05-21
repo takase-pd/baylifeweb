@@ -96,9 +96,9 @@ class _ShopListPageWidgetState extends State<ShopListPageWidget> {
                                             0, 0, 16, 0),
                                         child: InkWell(
                                           onTap: () async {
-                                            logFirebaseEvent('Text-ON_TAP');
+                                            logFirebaseEvent('Text_ON_TAP');
                                             logFirebaseEvent(
-                                                'Text-Navigate-To');
+                                                'Text_Navigate-To');
                                             await Navigator.push(
                                               context,
                                               MaterialPageRoute(
@@ -116,8 +116,8 @@ class _ShopListPageWidgetState extends State<ShopListPageWidget> {
                                       ),
                                       InkWell(
                                         onTap: () async {
-                                          logFirebaseEvent('Text-ON_TAP');
-                                          logFirebaseEvent('Text-Navigate-To');
+                                          logFirebaseEvent('Text_ON_TAP');
+                                          logFirebaseEvent('Text_Navigate-To');
                                           await Navigator.push(
                                             context,
                                             MaterialPageRoute(
@@ -372,9 +372,9 @@ class _ShopListPageWidgetState extends State<ShopListPageWidget> {
                                                       InkWell(
                                                         onTap: () async {
                                                           logFirebaseEvent(
-                                                              'Text-ON_TAP');
+                                                              'Text_ON_TAP');
                                                           logFirebaseEvent(
-                                                              'Text-Launch-U-R-L');
+                                                              'Text_Launch-U-R-L');
                                                           await launchURL(
                                                               listViewShopsRecord
                                                                   .instagram);
@@ -389,9 +389,9 @@ class _ShopListPageWidgetState extends State<ShopListPageWidget> {
                                                       InkWell(
                                                         onTap: () async {
                                                           logFirebaseEvent(
-                                                              'Text-ON_TAP');
+                                                              'Text_ON_TAP');
                                                           logFirebaseEvent(
-                                                              'Text-Launch-U-R-L');
+                                                              'Text_Launch-U-R-L');
                                                           await launchURL(
                                                               listViewShopsRecord
                                                                   .twitter);
@@ -406,9 +406,9 @@ class _ShopListPageWidgetState extends State<ShopListPageWidget> {
                                                       InkWell(
                                                         onTap: () async {
                                                           logFirebaseEvent(
-                                                              'Text-ON_TAP');
+                                                              'Text_ON_TAP');
                                                           logFirebaseEvent(
-                                                              'Text-Launch-U-R-L');
+                                                              'Text_Launch-U-R-L');
                                                           await launchURL(
                                                               listViewShopsRecord
                                                                   .web);

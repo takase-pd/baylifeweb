@@ -25,12 +25,12 @@ class CreateAccountPageWidget extends StatefulWidget {
 }
 
 class _CreateAccountPageWidgetState extends State<CreateAccountPageWidget> {
-  final scaffoldKey = GlobalKey<ScaffoldState>();
   ApiCallResponse subsEmail;
   TextEditingController emailAddressController;
   TextEditingController passwordController;
   bool passwordVisibility;
   ApiCallResponse subsGoogle;
+  final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   void initState() {
@@ -217,8 +217,8 @@ class _CreateAccountPageWidgetState extends State<CreateAccountPageWidget> {
                           children: [
                             InkWell(
                               onTap: () async {
-                                logFirebaseEvent('Text-ON_TAP');
-                                logFirebaseEvent('Text-Launch-U-R-L');
+                                logFirebaseEvent('Text_ON_TAP');
+                                logFirebaseEvent('Text_Launch-U-R-L');
                                 await launchURL(
                                     'https://baylife.particledrawing.com/terms.html');
                               },
@@ -238,8 +238,8 @@ class _CreateAccountPageWidgetState extends State<CreateAccountPageWidget> {
                                   EdgeInsetsDirectional.fromSTEB(3, 0, 0, 0),
                               child: InkWell(
                                 onTap: () async {
-                                  logFirebaseEvent('Icon-ON_TAP');
-                                  logFirebaseEvent('Icon-Launch-U-R-L');
+                                  logFirebaseEvent('Icon_ON_TAP');
+                                  logFirebaseEvent('Icon_Launch-U-R-L');
                                   await launchURL(
                                       'https://baylife.particledrawing.com/terms.html');
                                 },
@@ -257,8 +257,8 @@ class _CreateAccountPageWidgetState extends State<CreateAccountPageWidget> {
                             ),
                             InkWell(
                               onTap: () async {
-                                logFirebaseEvent('Text-ON_TAP');
-                                logFirebaseEvent('Text-Launch-U-R-L');
+                                logFirebaseEvent('Text_ON_TAP');
+                                logFirebaseEvent('Text_Launch-U-R-L');
                                 await launchURL(
                                     'https://www.particledrawing.com/privacy');
                               },
@@ -278,8 +278,8 @@ class _CreateAccountPageWidgetState extends State<CreateAccountPageWidget> {
                                   EdgeInsetsDirectional.fromSTEB(3, 0, 3, 0),
                               child: InkWell(
                                 onTap: () async {
-                                  logFirebaseEvent('Icon-ON_TAP');
-                                  logFirebaseEvent('Icon-Launch-U-R-L');
+                                  logFirebaseEvent('Icon_ON_TAP');
+                                  logFirebaseEvent('Icon_Launch-U-R-L');
                                   await launchURL(
                                       'https://www.particledrawing.com/privacy');
                                 },
@@ -302,8 +302,8 @@ class _CreateAccountPageWidgetState extends State<CreateAccountPageWidget> {
                         padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 24),
                         child: FFButtonWidget(
                           onPressed: () async {
-                            logFirebaseEvent('Button-ON_TAP');
-                            logFirebaseEvent('Button-Auth');
+                            logFirebaseEvent('Button_ON_TAP');
+                            logFirebaseEvent('Button_Auth');
 
                             final user = await createAccountWithEmail(
                               context,
@@ -314,7 +314,7 @@ class _CreateAccountPageWidgetState extends State<CreateAccountPageWidget> {
                               return;
                             }
 
-                            logFirebaseEvent('Button-Backend-Call');
+                            logFirebaseEvent('Button_Backend-Call');
                             subsEmail = await SubscribeCall.call(
                               priceId: widget.priceId,
                               url: 'https://baylifedev.web.app/',
@@ -375,14 +375,14 @@ class _CreateAccountPageWidgetState extends State<CreateAccountPageWidget> {
                                   alignment: AlignmentDirectional(0, 0),
                                   child: FFButtonWidget(
                                     onPressed: () async {
-                                      logFirebaseEvent('Button-ON_TAP');
-                                      logFirebaseEvent('Button-Auth');
+                                      logFirebaseEvent('Button_ON_TAP');
+                                      logFirebaseEvent('Button_Auth');
                                       final user =
                                           await signInWithGoogle(context);
                                       if (user == null) {
                                         return;
                                       }
-                                      logFirebaseEvent('Button-Backend-Call');
+                                      logFirebaseEvent('Button_Backend-Call');
                                       subsGoogle = await SubscribeCall.call(
                                         priceId: widget.priceId,
                                         url: 'https://baylifedev.web.app/',
@@ -451,8 +451,8 @@ class _CreateAccountPageWidgetState extends State<CreateAccountPageWidget> {
                     children: [
                       InkWell(
                         onTap: () async {
-                          logFirebaseEvent('Text-ON_TAP');
-                          logFirebaseEvent('Text-Launch-U-R-L');
+                          logFirebaseEvent('Text_ON_TAP');
+                          logFirebaseEvent('Text_Launch-U-R-L');
                           await launchURL(
                               'https://baylife.particledrawing.com/terms.html');
                         },
@@ -465,8 +465,8 @@ class _CreateAccountPageWidgetState extends State<CreateAccountPageWidget> {
                         padding: EdgeInsetsDirectional.fromSTEB(30, 0, 0, 0),
                         child: InkWell(
                           onTap: () async {
-                            logFirebaseEvent('Text-ON_TAP');
-                            logFirebaseEvent('Text-Launch-U-R-L');
+                            logFirebaseEvent('Text_ON_TAP');
+                            logFirebaseEvent('Text_Launch-U-R-L');
                             await launchURL(
                                 'https://www.particledrawing.com/privacy');
                           },

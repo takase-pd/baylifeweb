@@ -10,6 +10,7 @@ import '../plan_list_page/plan_list_page_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 
 class OrderListPageWidget extends StatefulWidget {
   const OrderListPageWidget({Key key}) : super(key: key);
@@ -19,6 +20,10 @@ class OrderListPageWidget extends StatefulWidget {
 }
 
 class _OrderListPageWidgetState extends State<OrderListPageWidget> {
+  PagingController<DocumentSnapshot, SoldRecord> _pagingController;
+  Query _pagingQuery;
+  List<StreamSubscription> _streamSubscriptions = [];
+
   final formKey = GlobalKey<FormState>();
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
@@ -27,6 +32,12 @@ class _OrderListPageWidgetState extends State<OrderListPageWidget> {
     super.initState();
     logFirebaseEvent('screen_view',
         parameters: {'screen_name': 'OrderListPage'});
+  }
+
+  @override
+  void dispose() {
+    _streamSubscriptions.forEach((s) => s?.cancel());
+    super.dispose();
   }
 
   @override
@@ -103,9 +114,9 @@ class _OrderListPageWidgetState extends State<OrderListPageWidget> {
                                                     0, 0, 16, 0),
                                             child: InkWell(
                                               onTap: () async {
-                                                logFirebaseEvent('Text-ON_TAP');
+                                                logFirebaseEvent('Text_ON_TAP');
                                                 logFirebaseEvent(
-                                                    'Text-Navigate-To');
+                                                    'Text_Navigate-To');
                                                 await Navigator.push(
                                                   context,
                                                   MaterialPageRoute(
@@ -128,9 +139,9 @@ class _OrderListPageWidgetState extends State<OrderListPageWidget> {
                                                     0, 0, 16, 0),
                                             child: InkWell(
                                               onTap: () async {
-                                                logFirebaseEvent('Text-ON_TAP');
+                                                logFirebaseEvent('Text_ON_TAP');
                                                 logFirebaseEvent(
-                                                    'Text-Navigate-To');
+                                                    'Text_Navigate-To');
                                                 await Navigator.push(
                                                   context,
                                                   MaterialPageRoute(
@@ -151,9 +162,9 @@ class _OrderListPageWidgetState extends State<OrderListPageWidget> {
                                       ),
                                       FFButtonWidget(
                                         onPressed: () async {
-                                          logFirebaseEvent('Button-ON_TAP');
+                                          logFirebaseEvent('Button_ON_TAP');
                                           logFirebaseEvent(
-                                              'Button-Bottom-Sheet');
+                                              'Button_Bottom-Sheet');
                                           await showModalBottomSheet(
                                             isScrollControlled: true,
                                             backgroundColor: Colors.transparent,
@@ -248,179 +259,189 @@ class _OrderListPageWidgetState extends State<OrderListPageWidget> {
                                             .background,
                                         borderRadius: BorderRadius.circular(8),
                                       ),
-                                      child: FutureBuilder<List<PlansRecord>>(
-                                        future: queryPlansRecordOnce(
-                                          queryBuilder: (plansRecord) =>
-                                              plansRecord.where('shop',
-                                                  isEqualTo:
-                                                      containerShopsRecord
-                                                          .reference),
-                                        ),
-                                        builder: (context, snapshot) {
-                                          // Customize what your widget looks like when it's loading.
-                                          if (!snapshot.hasData) {
-                                            return Center(
-                                              child: SizedBox(
-                                                width: 50,
-                                                height: 50,
-                                                child: SpinKitPulse(
+                                      child: PagedListView<
+                                          DocumentSnapshot<Object>, SoldRecord>(
+                                        pagingController: () {
+                                          final Query<Object> Function(
+                                                  Query<Object>) queryBuilder =
+                                              (soldRecord) => soldRecord;
+                                          if (_pagingController != null) {
+                                            final query = queryBuilder(
+                                                SoldRecord.collection);
+                                            if (query != _pagingQuery) {
+                                              // The query has changed
+                                              _pagingQuery = query;
+                                              _streamSubscriptions
+                                                  .forEach((s) => s?.cancel());
+                                              _streamSubscriptions.clear();
+                                              _pagingController.refresh();
+                                            }
+                                            return _pagingController;
+                                          }
+
+                                          _pagingController = PagingController(
+                                              firstPageKey: null);
+                                          _pagingQuery = queryBuilder(
+                                              SoldRecord.collection);
+                                          _pagingController
+                                              .addPageRequestListener(
+                                                  (nextPageMarker) {
+                                            querySoldRecordPage(
+                                              parent: containerShopsRecord
+                                                  .reference,
+                                              queryBuilder: (soldRecord) =>
+                                                  soldRecord,
+                                              nextPageMarker: nextPageMarker,
+                                              pageSize: 25,
+                                              isStream: true,
+                                            ).then((page) {
+                                              _pagingController.appendPage(
+                                                page.data,
+                                                page.nextPageMarker,
+                                              );
+                                              final streamSubscription = page
+                                                  .dataStream
+                                                  ?.listen((data) {
+                                                final itemIndexes =
+                                                    _pagingController.itemList
+                                                        .asMap()
+                                                        .map((k, v) => MapEntry(
+                                                            v.reference.id, k));
+                                                data.forEach((item) {
+                                                  final index = itemIndexes[
+                                                      item.reference.id];
+                                                  if (index != null) {
+                                                    _pagingController.itemList
+                                                        .replaceRange(index,
+                                                            index + 1, [item]);
+                                                  }
+                                                });
+                                                setState(() {});
+                                              });
+                                              _streamSubscriptions
+                                                  .add(streamSubscription);
+                                            });
+                                          });
+                                          return _pagingController;
+                                        }(),
+                                        padding: EdgeInsets.zero,
+                                        shrinkWrap: true,
+                                        scrollDirection: Axis.vertical,
+                                        builderDelegate:
+                                            PagedChildBuilderDelegate<
+                                                SoldRecord>(
+                                          // Customize what your widget looks like when it's loading the first page.
+                                          firstPageProgressIndicatorBuilder:
+                                              (_) => Center(
+                                            child: SizedBox(
+                                              width: 50,
+                                              height: 50,
+                                              child: SpinKitPulse(
+                                                color:
+                                                    FlutterFlowTheme.of(context)
+                                                        .primaryColor,
+                                                size: 50,
+                                              ),
+                                            ),
+                                          ),
+
+                                          itemBuilder:
+                                              (context, _, listViewIndex) {
+                                            final listViewSoldRecord =
+                                                _pagingController
+                                                    .itemList[listViewIndex];
+                                            return Padding(
+                                              padding: EdgeInsetsDirectional
+                                                  .fromSTEB(0, 0, 0, 4),
+                                              child: Container(
+                                                height: 88,
+                                                decoration: BoxDecoration(
                                                   color: FlutterFlowTheme.of(
                                                           context)
-                                                      .primaryColor,
-                                                  size: 50,
+                                                      .background,
+                                                  borderRadius:
+                                                      BorderRadius.circular(8),
+                                                ),
+                                                child: Padding(
+                                                  padding: EdgeInsetsDirectional
+                                                      .fromSTEB(16, 0, 0, 0),
+                                                  child: Row(
+                                                    mainAxisSize:
+                                                        MainAxisSize.min,
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment.start,
+                                                    children: [
+                                                      Expanded(
+                                                        flex: 1,
+                                                        child: Text(
+                                                          listViewIndex
+                                                              .toString(),
+                                                          style: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .bodyText1,
+                                                        ),
+                                                      ),
+                                                      Expanded(
+                                                        flex: 1,
+                                                        child: Text(
+                                                          dateTimeFormat(
+                                                              'yMMMd',
+                                                              listViewSoldRecord
+                                                                  .purchased),
+                                                          style: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .bodyText1,
+                                                        ),
+                                                      ),
+                                                      Expanded(
+                                                        flex: 1,
+                                                        child: Text(
+                                                          listViewSoldRecord
+                                                              .totalAmount
+                                                              .toString(),
+                                                          style: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .bodyText1,
+                                                        ),
+                                                      ),
+                                                      Expanded(
+                                                        flex: 1,
+                                                        child: Text(
+                                                          listViewSoldRecord
+                                                              .totalQuantity
+                                                              .toString(),
+                                                          style: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .bodyText1,
+                                                        ),
+                                                      ),
+                                                      Expanded(
+                                                        flex: 1,
+                                                        child: Text(
+                                                          listViewSoldRecord
+                                                              .totalShippingFee
+                                                              .toString(),
+                                                          style: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .bodyText1,
+                                                        ),
+                                                      ),
+                                                      Expanded(
+                                                        flex: 1,
+                                                        child: Text(
+                                                          'ステータス',
+                                                          style: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .bodyText1,
+                                                        ),
+                                                      ),
+                                                    ],
+                                                  ),
                                                 ),
                                               ),
                                             );
-                                          }
-                                          List<PlansRecord>
-                                              listViewPlansRecordList =
-                                              snapshot.data;
-                                          return ListView.builder(
-                                            padding: EdgeInsets.zero,
-                                            shrinkWrap: true,
-                                            scrollDirection: Axis.vertical,
-                                            itemCount:
-                                                listViewPlansRecordList.length,
-                                            itemBuilder:
-                                                (context, listViewIndex) {
-                                              final listViewPlansRecord =
-                                                  listViewPlansRecordList[
-                                                      listViewIndex];
-                                              return Padding(
-                                                padding: EdgeInsetsDirectional
-                                                    .fromSTEB(0, 0, 0, 4),
-                                                child: InkWell(
-                                                  onTap: () async {
-                                                    logFirebaseEvent(
-                                                        'Container-ON_TAP');
-                                                    logFirebaseEvent(
-                                                        'Container-Bottom-Sheet');
-                                                    await showModalBottomSheet(
-                                                      isScrollControlled: true,
-                                                      backgroundColor:
-                                                          Colors.transparent,
-                                                      barrierColor:
-                                                          Color(0x8E484848),
-                                                      context: context,
-                                                      builder: (context) {
-                                                        return Padding(
-                                                          padding:
-                                                              MediaQuery.of(
-                                                                      context)
-                                                                  .viewInsets,
-                                                          child: Container(
-                                                            height: MediaQuery.of(
-                                                                        context)
-                                                                    .size
-                                                                    .height *
-                                                                0.96,
-                                                            child:
-                                                                UpdatePlanPageWidget(
-                                                              plan:
-                                                                  listViewPlansRecord
-                                                                      .reference,
-                                                            ),
-                                                          ),
-                                                        );
-                                                      },
-                                                    );
-                                                  },
-                                                  child: Container(
-                                                    height: 88,
-                                                    decoration: BoxDecoration(
-                                                      color:
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .background,
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              8),
-                                                    ),
-                                                    child: Padding(
-                                                      padding:
-                                                          EdgeInsetsDirectional
-                                                              .fromSTEB(
-                                                                  16, 0, 0, 0),
-                                                      child: Row(
-                                                        mainAxisSize:
-                                                            MainAxisSize.min,
-                                                        mainAxisAlignment:
-                                                            MainAxisAlignment
-                                                                .start,
-                                                        children: [
-                                                          Expanded(
-                                                            flex: 1,
-                                                            child: Text(
-                                                              listViewIndex
-                                                                  .toString(),
-                                                              style: FlutterFlowTheme
-                                                                      .of(context)
-                                                                  .bodyText1,
-                                                            ),
-                                                          ),
-                                                          Expanded(
-                                                            flex: 1,
-                                                            child: Text(
-                                                              '注文日',
-                                                              style: FlutterFlowTheme
-                                                                      .of(context)
-                                                                  .bodyText1,
-                                                            ),
-                                                          ),
-                                                          Expanded(
-                                                            flex: 1,
-                                                            child: Text(
-                                                              '総数',
-                                                              style: FlutterFlowTheme
-                                                                      .of(context)
-                                                                  .bodyText1,
-                                                            ),
-                                                          ),
-                                                          Expanded(
-                                                            flex: 1,
-                                                            child: Text(
-                                                              '注文額',
-                                                              style: FlutterFlowTheme
-                                                                      .of(context)
-                                                                  .bodyText1,
-                                                            ),
-                                                          ),
-                                                          Expanded(
-                                                            flex: 1,
-                                                            child: Text(
-                                                              '送料',
-                                                              style: FlutterFlowTheme
-                                                                      .of(context)
-                                                                  .bodyText1,
-                                                            ),
-                                                          ),
-                                                          Expanded(
-                                                            flex: 2,
-                                                            child: Text(
-                                                              '購入者名',
-                                                              style: FlutterFlowTheme
-                                                                      .of(context)
-                                                                  .bodyText1,
-                                                            ),
-                                                          ),
-                                                          Expanded(
-                                                            flex: 1,
-                                                            child: Text(
-                                                              'ステータス',
-                                                              style: FlutterFlowTheme
-                                                                      .of(context)
-                                                                  .bodyText1,
-                                                            ),
-                                                          ),
-                                                        ],
-                                                      ),
-                                                    ),
-                                                  ),
-                                                ),
-                                              );
-                                            },
-                                          );
-                                        },
+                                          },
+                                        ),
                                       ),
                                     );
                                   },
