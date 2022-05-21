@@ -98,9 +98,9 @@ class _CreateComPageWidgetState extends State<CreateComPageWidget> {
                                             0, 0, 16, 0),
                                         child: InkWell(
                                           onTap: () async {
-                                            logFirebaseEvent('Text-ON_TAP');
+                                            logFirebaseEvent('Text_ON_TAP');
                                             logFirebaseEvent(
-                                                'Text-Navigate-To');
+                                                'Text_Navigate-To');
                                             await Navigator.push(
                                               context,
                                               MaterialPageRoute(
@@ -118,8 +118,8 @@ class _CreateComPageWidgetState extends State<CreateComPageWidget> {
                                       ),
                                       InkWell(
                                         onTap: () async {
-                                          logFirebaseEvent('Text-ON_TAP');
-                                          logFirebaseEvent('Text-Navigate-To');
+                                          logFirebaseEvent('Text_ON_TAP');
+                                          logFirebaseEvent('Text_Navigate-To');
                                           await Navigator.push(
                                             context,
                                             MaterialPageRoute(
@@ -530,9 +530,9 @@ class _CreateComPageWidgetState extends State<CreateComPageWidget> {
                                               FFButtonWidget(
                                                 onPressed: () async {
                                                   logFirebaseEvent(
-                                                      'Button-ON_TAP');
+                                                      'Button_ON_TAP');
                                                   logFirebaseEvent(
-                                                      'Button-Alert-Dialog');
+                                                      'Button_Alert-Dialog');
                                                   var confirmDialogResponse =
                                                       await showDialog<bool>(
                                                             context: context,
@@ -567,7 +567,7 @@ class _CreateComPageWidgetState extends State<CreateComPageWidget> {
                                                           false;
                                                   if (confirmDialogResponse) {
                                                     logFirebaseEvent(
-                                                        'Button-Backend-Call');
+                                                        'Button_Backend-Call');
 
                                                     final companiesCreateData =
                                                         createCompaniesRecordData(
@@ -581,7 +581,7 @@ class _CreateComPageWidgetState extends State<CreateComPageWidget> {
                                                         .set(
                                                             companiesCreateData);
                                                     logFirebaseEvent(
-                                                        'Button-Show-Snack-Bar');
+                                                        'Button_Show-Snack-Bar');
                                                     ScaffoldMessenger.of(
                                                             context)
                                                         .showSnackBar(
@@ -597,7 +597,7 @@ class _CreateComPageWidgetState extends State<CreateComPageWidget> {
                                                       ),
                                                     );
                                                     logFirebaseEvent(
-                                                        'Button-Navigate-To');
+                                                        'Button_Navigate-To');
                                                     await Navigator.push(
                                                       context,
                                                       MaterialPageRoute(

@@ -125,9 +125,9 @@ class _CreateShopPageWidgetState extends State<CreateShopPageWidget> {
                                             0, 0, 16, 0),
                                         child: InkWell(
                                           onTap: () async {
-                                            logFirebaseEvent('Text-ON_TAP');
+                                            logFirebaseEvent('Text_ON_TAP');
                                             logFirebaseEvent(
-                                                'Text-Navigate-To');
+                                                'Text_Navigate-To');
                                             await Navigator.push(
                                               context,
                                               MaterialPageRoute(
@@ -145,8 +145,8 @@ class _CreateShopPageWidgetState extends State<CreateShopPageWidget> {
                                       ),
                                       InkWell(
                                         onTap: () async {
-                                          logFirebaseEvent('Text-ON_TAP');
-                                          logFirebaseEvent('Text-Navigate-To');
+                                          logFirebaseEvent('Text_ON_TAP');
+                                          logFirebaseEvent('Text_Navigate-To');
                                           await Navigator.push(
                                             context,
                                             MaterialPageRoute(
@@ -736,9 +736,9 @@ class _CreateShopPageWidgetState extends State<CreateShopPageWidget> {
                                                 FFButtonWidget(
                                                   onPressed: () async {
                                                     logFirebaseEvent(
-                                                        'Button-ON_TAP');
+                                                        'Button_ON_TAP');
                                                     logFirebaseEvent(
-                                                        'Button-Upload-Photo-Video');
+                                                        'Button_Upload-Photo-Video');
                                                     final selectedMedia =
                                                         await selectMediaWithSourceBottomSheet(
                                                       context: context,
@@ -1571,9 +1571,9 @@ class _CreateShopPageWidgetState extends State<CreateShopPageWidget> {
                                               FFButtonWidget(
                                                 onPressed: () async {
                                                   logFirebaseEvent(
-                                                      'Button-ON_TAP');
+                                                      'Button_ON_TAP');
                                                   logFirebaseEvent(
-                                                      'Button-Alert-Dialog');
+                                                      'Button_Alert-Dialog');
                                                   var confirmDialogResponse =
                                                       await showDialog<bool>(
                                                             context: context,
@@ -1608,7 +1608,7 @@ class _CreateShopPageWidgetState extends State<CreateShopPageWidget> {
                                                           false;
                                                   if (confirmDialogResponse) {
                                                     logFirebaseEvent(
-                                                        'Button-Backend-Call');
+                                                        'Button_Backend-Call');
 
                                                     final shopsCreateData =
                                                         createShopsRecordData(
@@ -1649,7 +1649,7 @@ class _CreateShopPageWidgetState extends State<CreateShopPageWidget> {
                                                         .doc()
                                                         .set(shopsCreateData);
                                                     logFirebaseEvent(
-                                                        'Button-Show-Snack-Bar');
+                                                        'Button_Show-Snack-Bar');
                                                     ScaffoldMessenger.of(
                                                             context)
                                                         .showSnackBar(

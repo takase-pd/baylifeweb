@@ -114,9 +114,9 @@ class _PlanListPageWidgetState extends State<PlanListPageWidget> {
                                                     0, 0, 16, 0),
                                             child: InkWell(
                                               onTap: () async {
-                                                logFirebaseEvent('Text-ON_TAP');
+                                                logFirebaseEvent('Text_ON_TAP');
                                                 logFirebaseEvent(
-                                                    'Text-Navigate-To');
+                                                    'Text_Navigate-To');
                                                 await Navigator.push(
                                                   context,
                                                   MaterialPageRoute(
@@ -139,9 +139,9 @@ class _PlanListPageWidgetState extends State<PlanListPageWidget> {
                                                     0, 0, 16, 0),
                                             child: InkWell(
                                               onTap: () async {
-                                                logFirebaseEvent('Text-ON_TAP');
+                                                logFirebaseEvent('Text_ON_TAP');
                                                 logFirebaseEvent(
-                                                    'Text-Navigate-To');
+                                                    'Text_Navigate-To');
                                                 await Navigator.push(
                                                   context,
                                                   MaterialPageRoute(
@@ -162,9 +162,9 @@ class _PlanListPageWidgetState extends State<PlanListPageWidget> {
                                       ),
                                       FFButtonWidget(
                                         onPressed: () async {
-                                          logFirebaseEvent('Button-ON_TAP');
+                                          logFirebaseEvent('Button_ON_TAP');
                                           logFirebaseEvent(
-                                              'Button-Bottom-Sheet');
+                                              'Button_Bottom-Sheet');
                                           await showModalBottomSheet(
                                             isScrollControlled: true,
                                             backgroundColor: Colors.transparent,
@@ -369,9 +369,9 @@ class _PlanListPageWidgetState extends State<PlanListPageWidget> {
                                               child: InkWell(
                                                 onTap: () async {
                                                   logFirebaseEvent(
-                                                      'Container-ON_TAP');
+                                                      'Container_ON_TAP');
                                                   logFirebaseEvent(
-                                                      'Container-Bottom-Sheet');
+                                                      'Container_Bottom-Sheet');
                                                   await showModalBottomSheet(
                                                     isScrollControlled: true,
                                                     backgroundColor:

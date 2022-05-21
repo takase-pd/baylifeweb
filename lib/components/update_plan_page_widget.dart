@@ -519,9 +519,9 @@ class _UpdatePlanPageWidgetState extends State<UpdatePlanPageWidget> {
                                 ),
                                 FFButtonWidget(
                                   onPressed: () async {
-                                    logFirebaseEvent('Button-ON_TAP');
+                                    logFirebaseEvent('Button_ON_TAP');
                                     logFirebaseEvent(
-                                        'Button-Upload-Photo-Video');
+                                        'Button_Upload-Photo-Video');
                                     final selectedMedia =
                                         await selectMediaWithSourceBottomSheet(
                                       context: context,
@@ -640,8 +640,8 @@ class _UpdatePlanPageWidgetState extends State<UpdatePlanPageWidget> {
                                 ),
                                 FFButtonWidget(
                                   onPressed: () async {
-                                    logFirebaseEvent('Button-ON_TAP');
-                                    logFirebaseEvent('Button-Date-Time-Picker');
+                                    logFirebaseEvent('Button_ON_TAP');
+                                    logFirebaseEvent('Button_Date-Time-Picker');
                                     await DatePicker.showDatePicker(
                                       context,
                                       showTitleActions: true,
@@ -863,8 +863,8 @@ class _UpdatePlanPageWidgetState extends State<UpdatePlanPageWidget> {
                             children: [
                               FFButtonWidget(
                                 onPressed: () async {
-                                  logFirebaseEvent('Button-ON_TAP');
-                                  logFirebaseEvent('Button-Alert-Dialog');
+                                  logFirebaseEvent('Button_ON_TAP');
+                                  logFirebaseEvent('Button_Alert-Dialog');
                                   var confirmDialogResponse =
                                       await showDialog<bool>(
                                             context: context,
@@ -893,7 +893,7 @@ class _UpdatePlanPageWidgetState extends State<UpdatePlanPageWidget> {
                                           ) ??
                                           false;
                                   if (confirmDialogResponse) {
-                                    logFirebaseEvent('Button-Backend-Call');
+                                    logFirebaseEvent('Button_Backend-Call');
 
                                     final plansCreateData =
                                         createPlansRecordData(
@@ -917,7 +917,7 @@ class _UpdatePlanPageWidgetState extends State<UpdatePlanPageWidget> {
                                     await PlansRecord.collection
                                         .doc()
                                         .set(plansCreateData);
-                                    logFirebaseEvent('Button-Show-Snack-Bar');
+                                    logFirebaseEvent('Button_Show-Snack-Bar');
                                     ScaffoldMessenger.of(context).showSnackBar(
                                       SnackBar(
                                         content: Text(
@@ -928,7 +928,7 @@ class _UpdatePlanPageWidgetState extends State<UpdatePlanPageWidget> {
                                         backgroundColor: Color(0x00000000),
                                       ),
                                     );
-                                    logFirebaseEvent('Button-Navigate-To');
+                                    logFirebaseEvent('Button_Navigate-To');
                                     await Navigator.push(
                                       context,
                                       MaterialPageRoute(

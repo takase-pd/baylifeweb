@@ -13,6 +13,7 @@ import '../auth/firebase_user_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 
 class OrderListPageWidget extends StatefulWidget {
   const OrderListPageWidget({Key key}) : super(key: key);
@@ -22,6 +23,10 @@ class OrderListPageWidget extends StatefulWidget {
 }
 
 class _OrderListPageWidgetState extends State<OrderListPageWidget> {
+  PagingController<DocumentSnapshot, SoldRecord> _pagingController;
+  Query _pagingQuery;
+  List<StreamSubscription> _streamSubscriptions = [];
+
   final formKey = GlobalKey<FormState>();
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
@@ -102,6 +107,12 @@ class _OrderListPageWidgetState extends State<OrderListPageWidget> {
   }
 
   @override
+  void dispose() {
+    _streamSubscriptions.forEach((s) => s?.cancel());
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       key: scaffoldKey,
@@ -175,9 +186,9 @@ class _OrderListPageWidgetState extends State<OrderListPageWidget> {
                                                     0, 0, 16, 0),
                                             child: InkWell(
                                               onTap: () async {
-                                                logFirebaseEvent('Text-ON_TAP');
+                                                logFirebaseEvent('Text_ON_TAP');
                                                 logFirebaseEvent(
-                                                    'Text-Navigate-To');
+                                                    'Text_Navigate-To');
                                                 await Navigator.push(
                                                   context,
                                                   MaterialPageRoute(
@@ -200,9 +211,9 @@ class _OrderListPageWidgetState extends State<OrderListPageWidget> {
                                                     0, 0, 16, 0),
                                             child: InkWell(
                                               onTap: () async {
-                                                logFirebaseEvent('Text-ON_TAP');
+                                                logFirebaseEvent('Text_ON_TAP');
                                                 logFirebaseEvent(
-                                                    'Text-Navigate-To');
+                                                    'Text_Navigate-To');
                                                 await Navigator.push(
                                                   context,
                                                   MaterialPageRoute(
@@ -223,9 +234,9 @@ class _OrderListPageWidgetState extends State<OrderListPageWidget> {
                                       ),
                                       FFButtonWidget(
                                         onPressed: () async {
-                                          logFirebaseEvent('Button-ON_TAP');
+                                          logFirebaseEvent('Button_ON_TAP');
                                           logFirebaseEvent(
-                                              'Button-Bottom-Sheet');
+                                              'Button_Bottom-Sheet');
                                           await showModalBottomSheet(
                                             isScrollControlled: true,
                                             backgroundColor: Colors.transparent,
@@ -288,72 +299,133 @@ class _OrderListPageWidgetState extends State<OrderListPageWidget> {
                                         FlutterFlowTheme.of(context).background,
                                     borderRadius: BorderRadius.circular(8),
                                   ),
-                                  child: FutureBuilder<List<Order>>(
-                                    future: _getOrders(),
-                                    builder: (context, snapshot) {
-                                      // Customize what your widget looks like when it's loading.
-                                      if (!snapshot.hasData) {
-                                        return Center(
-                                          child: SizedBox(
-                                            width: 50,
-                                            height: 50,
-                                            child: SpinKitPulse(
-                                              color:
-                                                  FlutterFlowTheme.of(context)
-                                                      .primaryColor,
-                                              size: 50,
-                                            ),
+                                  builder: (context, snapshot) {
+                                    // Customize what your widget looks like when it's loading.
+                                    if (!snapshot.hasData) {
+                                      return Center(
+                                        child: SizedBox(
+                                          width: 50,
+                                          height: 50,
+                                          child: SpinKitPulse(
+                                            color: FlutterFlowTheme.of(context)
+                                                .primaryColor,
+                                            size: 50,
                                           ),
-                                        );
-                                      }
-                                      List<Order> listViewOrderList =
-                                          snapshot.data;
-                                      return ListView.builder(
+                                        ),
+                                      );
+                                    }
+                                    List<ShopsRecord> containerShopsRecordList =
+                                        snapshot.data;
+                                    // Return an empty Container when the document does not exist.
+                                    if (snapshot.data.isEmpty) {
+                                      return Container();
+                                    }
+                                    final containerShopsRecord =
+                                        containerShopsRecordList.isNotEmpty
+                                            ? containerShopsRecordList.first
+                                            : null;
+                                    return Container(
+                                      width: MediaQuery.of(context).size.width *
+                                          0.72,
+                                      decoration: BoxDecoration(
+                                        color: FlutterFlowTheme.of(context)
+                                            .background,
+                                        borderRadius: BorderRadius.circular(8),
+                                      ),
+                                      child: PagedListView<
+                                          DocumentSnapshot<Object>, SoldRecord>(
+                                        pagingController: () {
+                                          final Query<Object> Function(
+                                                  Query<Object>) queryBuilder =
+                                              (soldRecord) => soldRecord;
+                                          if (_pagingController != null) {
+                                            final query = queryBuilder(
+                                                SoldRecord.collection);
+                                            if (query != _pagingQuery) {
+                                              // The query has changed
+                                              _pagingQuery = query;
+                                              _streamSubscriptions
+                                                  .forEach((s) => s?.cancel());
+                                              _streamSubscriptions.clear();
+                                              _pagingController.refresh();
+                                            }
+                                            return _pagingController;
+                                          }
+
+                                          _pagingController = PagingController(
+                                              firstPageKey: null);
+                                          _pagingQuery = queryBuilder(
+                                              SoldRecord.collection);
+                                          _pagingController
+                                              .addPageRequestListener(
+                                                  (nextPageMarker) {
+                                            querySoldRecordPage(
+                                              parent: containerShopsRecord
+                                                  .reference,
+                                              queryBuilder: (soldRecord) =>
+                                                  soldRecord,
+                                              nextPageMarker: nextPageMarker,
+                                              pageSize: 25,
+                                              isStream: true,
+                                            ).then((page) {
+                                              _pagingController.appendPage(
+                                                page.data,
+                                                page.nextPageMarker,
+                                              );
+                                              final streamSubscription = page
+                                                  .dataStream
+                                                  ?.listen((data) {
+                                                final itemIndexes =
+                                                    _pagingController.itemList
+                                                        .asMap()
+                                                        .map((k, v) => MapEntry(
+                                                            v.reference.id, k));
+                                                data.forEach((item) {
+                                                  final index = itemIndexes[
+                                                      item.reference.id];
+                                                  if (index != null) {
+                                                    _pagingController.itemList
+                                                        .replaceRange(index,
+                                                            index + 1, [item]);
+                                                  }
+                                                });
+                                                setState(() {});
+                                              });
+                                              _streamSubscriptions
+                                                  .add(streamSubscription);
+                                            });
+                                          });
+                                          return _pagingController;
+                                        }(),
                                         padding: EdgeInsets.zero,
                                         shrinkWrap: true,
                                         scrollDirection: Axis.vertical,
-                                        itemCount: listViewOrderList.length,
-                                        itemBuilder: (context, listViewIndex) {
-                                          final listViewPlansRecord =
-                                              listViewOrderList[listViewIndex];
-                                          return Padding(
-                                            padding:
-                                                EdgeInsetsDirectional.fromSTEB(
-                                                    0, 0, 0, 4),
-                                            child: InkWell(
-                                              onTap: () async {
-                                                logFirebaseEvent(
-                                                    'Container-ON_TAP');
-                                                logFirebaseEvent(
-                                                    'Container-Bottom-Sheet');
-                                                await showModalBottomSheet(
-                                                  isScrollControlled: true,
-                                                  backgroundColor:
-                                                      Colors.transparent,
-                                                  barrierColor:
-                                                      Color(0x8E484848),
-                                                  context: context,
-                                                  builder: (context) {
-                                                    return Padding(
-                                                      padding:
-                                                          MediaQuery.of(context)
-                                                              .viewInsets,
-                                                      child: Container(
-                                                        height: MediaQuery.of(
-                                                                    context)
-                                                                .size
-                                                                .height *
-                                                            0.96,
-                                                        child: UpdatePlanPageWidget(
-                                                            // plan:
-                                                            //     listViewOrderList
-                                                            //         .reference,
-                                                            ),
-                                                      ),
-                                                    );
-                                                  },
-                                                );
-                                              },
+                                        builderDelegate:
+                                            PagedChildBuilderDelegate<
+                                                SoldRecord>(
+                                          // Customize what your widget looks like when it's loading the first page.
+                                          firstPageProgressIndicatorBuilder:
+                                              (_) => Center(
+                                            child: SizedBox(
+                                              width: 50,
+                                              height: 50,
+                                              child: SpinKitPulse(
+                                                color:
+                                                    FlutterFlowTheme.of(context)
+                                                        .primaryColor,
+                                                size: 50,
+                                              ),
+                                            ),
+                                          ),
+
+                                          itemBuilder:
+                                              (context, _, listViewIndex) {
+                                            final listViewSoldRecord =
+                                                _pagingController
+                                                    .itemList[listViewIndex];
+                                            return Padding(
+                                              padding: EdgeInsetsDirectional
+                                                  .fromSTEB(0, 0, 0, 4),
                                               child: Container(
                                                 height: 88,
                                                 decoration: BoxDecoration(
@@ -385,7 +457,10 @@ class _OrderListPageWidgetState extends State<OrderListPageWidget> {
                                                       Expanded(
                                                         flex: 1,
                                                         child: Text(
-                                                          '注文日',
+                                                          dateTimeFormat(
+                                                              'yMMMd',
+                                                              listViewSoldRecord
+                                                                  .purchased),
                                                           style: FlutterFlowTheme
                                                                   .of(context)
                                                               .bodyText1,
@@ -394,7 +469,9 @@ class _OrderListPageWidgetState extends State<OrderListPageWidget> {
                                                       Expanded(
                                                         flex: 1,
                                                         child: Text(
-                                                          '総数',
+                                                          listViewSoldRecord
+                                                              .totalAmount
+                                                              .toString(),
                                                           style: FlutterFlowTheme
                                                                   .of(context)
                                                               .bodyText1,
@@ -403,7 +480,9 @@ class _OrderListPageWidgetState extends State<OrderListPageWidget> {
                                                       Expanded(
                                                         flex: 1,
                                                         child: Text(
-                                                          '注文額',
+                                                          listViewSoldRecord
+                                                              .totalQuantity
+                                                              .toString(),
                                                           style: FlutterFlowTheme
                                                                   .of(context)
                                                               .bodyText1,
@@ -412,16 +491,9 @@ class _OrderListPageWidgetState extends State<OrderListPageWidget> {
                                                       Expanded(
                                                         flex: 1,
                                                         child: Text(
-                                                          '送料',
-                                                          style: FlutterFlowTheme
-                                                                  .of(context)
-                                                              .bodyText1,
-                                                        ),
-                                                      ),
-                                                      Expanded(
-                                                        flex: 2,
-                                                        child: Text(
-                                                          '購入者名',
+                                                          listViewSoldRecord
+                                                              .totalShippingFee
+                                                              .toString(),
                                                           style: FlutterFlowTheme
                                                                   .of(context)
                                                               .bodyText1,
@@ -440,12 +512,12 @@ class _OrderListPageWidgetState extends State<OrderListPageWidget> {
                                                   ),
                                                 ),
                                               ),
-                                            ),
-                                          );
-                                        },
-                                      );
-                                    },
-                                  ),
+                                            );
+                                          },
+                                        ),
+                                      ),
+                                    );
+                                  },
                                 ),
                               ],
                             ),
