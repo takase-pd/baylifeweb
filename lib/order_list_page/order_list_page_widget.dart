@@ -250,6 +250,8 @@ class _OrderListPageWidgetState extends State<OrderListPageWidget> {
                                   return Container(
                                     width: MediaQuery.of(context).size.width *
                                         0.72,
+                                    height: MediaQuery.of(context).size.height *
+                                        0.64,
                                     decoration: BoxDecoration(
                                       color: FlutterFlowTheme.of(context)
                                           .background,
