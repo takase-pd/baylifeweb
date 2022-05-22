@@ -287,8 +287,6 @@ class _OrderListPageWidgetState extends State<OrderListPageWidget> {
                                               .addPageRequestListener(
                                                   (nextPageMarker) {
                                             querySoldRecordPage(
-                                              parent: containerShopsRecord
-                                                  .reference,
                                               queryBuilder: (soldRecord) =>
                                                   soldRecord,
                                               nextPageMarker: nextPageMarker,
