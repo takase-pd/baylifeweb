@@ -291,13 +291,12 @@ class _OrderListPageWidgetState extends State<OrderListPageWidget> {
                               mainAxisSize: MainAxisSize.max,
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
-                                Container(
-                                  width:
-                                      MediaQuery.of(context).size.width * 0.72,
-                                  decoration: BoxDecoration(
-                                    color:
-                                        FlutterFlowTheme.of(context).background,
-                                    borderRadius: BorderRadius.circular(8),
+                                FutureBuilder<List<ShopsRecord>>(
+                                  future: queryShopsRecordOnce(
+                                    queryBuilder: (shopsRecord) =>
+                                        shopsRecord.where('director',
+                                            isEqualTo: currentUserReference),
+                                    singleRecord: true,
                                   ),
                                   builder: (context, snapshot) {
                                     // Customize what your widget looks like when it's loading.
@@ -340,7 +339,9 @@ class _OrderListPageWidgetState extends State<OrderListPageWidget> {
                                               (soldRecord) => soldRecord;
                                           if (_pagingController != null) {
                                             final query = queryBuilder(
-                                                SoldRecord.collection);
+                                                SoldRecord.collection(
+                                                    containerShopsRecord
+                                                        .reference));
                                             if (query != _pagingQuery) {
                                               // The query has changed
                                               _pagingQuery = query;
@@ -355,7 +356,9 @@ class _OrderListPageWidgetState extends State<OrderListPageWidget> {
                                           _pagingController = PagingController(
                                               firstPageKey: null);
                                           _pagingQuery = queryBuilder(
-                                              SoldRecord.collection);
+                                              SoldRecord.collection(
+                                                  containerShopsRecord
+                                                      .reference));
                                           _pagingController
                                               .addPageRequestListener(
                                                   (nextPageMarker) {
