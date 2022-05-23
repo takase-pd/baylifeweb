@@ -383,7 +383,7 @@ class _OrderListPageWidgetState extends State<OrderListPageWidget> {
                                                       ),
                                                     ),
                                                     Expanded(
-                                                      flex: 2,
+                                                      flex: 3,
                                                       child: Text(
                                                         dateTimeFormat(
                                                             'yMMMd',
