@@ -509,7 +509,7 @@ class _PlanListPageWidgetState extends State<PlanListPageWidget> {
                                                         flex: 1,
                                                         child: Text(
                                                           dateTimeFormat(
-                                                              'yMMMd',
+                                                              'MMMd, y h:mm a',
                                                               listViewPlansRecord
                                                                   .published),
                                                           style: FlutterFlowTheme
