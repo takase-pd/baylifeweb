@@ -3,23 +3,13 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:flutter_stripe/flutter_stripe.dart' as stripe;
 
-class Order {
-  final PlanData plan;
-  final int totalAmount;
-  final int totalQuantity;
-  final int totalShippingfee;
+class OrderDetails {
   final String paymentId;
-  final DateTime purchased;
   final stripe.ShippingDetails shipping;
   final stripe.BillingDetails billing;
 
-  Order({
-    this.plan,
-    this.totalAmount,
-    this.totalQuantity,
-    this.totalShippingfee,
+  OrderDetails({
     this.paymentId,
-    this.purchased,
     this.shipping,
     this.billing,
   });
