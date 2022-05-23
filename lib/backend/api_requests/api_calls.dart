@@ -169,10 +169,11 @@ class GetSubscriptionCall {
   }
 }
 
-class GetOrdersCall {
+class GetOrderDetailsCall {
   static Future<ApiCallResponse> call({
     String shop = '',
     String uid = '',
+    String paymentId = '',
     String accessToken = '',
     String appCheckToken = '',
   }) {
@@ -180,13 +181,14 @@ class GetOrdersCall {
 {
   "data": {
     "shop": "${shop}",
-    "uid": "${uid}"
+    "uid": "${uid}",
+    "paymentId": "${paymentId}"
   }
 }''';
     return ApiManager.instance.makeApiCall(
-      callName: 'Get Orders',
+      callName: 'Get Order Details',
       apiUrl:
-          'https://asia-northeast1-baylifedev.cloudfunctions.net/ec-getOrdersV0',
+          'https://asia-northeast1-baylifedev.cloudfunctions.net/ec-getOrderDetailsV0',
       callType: ApiCallType.POST,
       headers: {
         'Content-Type': 'application/json',
@@ -194,6 +196,7 @@ class GetOrdersCall {
       params: {
         'shop': shop,
         'uid': uid,
+        'paymentId': paymentId,
       },
       body: body,
       bodyType: BodyType.JSON,
