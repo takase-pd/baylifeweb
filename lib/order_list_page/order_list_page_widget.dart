@@ -26,24 +26,26 @@ class _OrderListPageWidgetState extends State<OrderListPageWidget> {
   PagingController<DocumentSnapshot, SoldRecord> _pagingController;
   Query _pagingQuery;
   List<StreamSubscription> _streamSubscriptions = [];
+  int count = 0;
 
   final formKey = GlobalKey<FormState>();
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
-  Future<List<Order>> _getOrders() async {
-    List<Order> orders = [];
+  Future<OrderDetails> _getOrdersDetails(String paymentId) async {
+    OrderDetails details;
 
     final _shop = await _getShop();
-    if (_shop == null) return orders;
+    if (_shop == null) return details;
 
-    if (!currentUser.loggedIn) return orders;
+    if (!currentUser.loggedIn) return details;
 
     final _appCheckToken = await AppCheckAgent.getToken(context);
-    if (_appCheckToken == null) return orders;
+    if (_appCheckToken == null) return details;
 
-    final apiCallOutput = await GetOrdersCall.call(
+    final apiCallOutput = await GetOrderDetailsCall.call(
       shop: _shop.reference.path,
       uid: currentUserUid,
+      paymentId: paymentId,
       accessToken: currentJwtToken,
       appCheckToken: _appCheckToken,
     );
@@ -55,33 +57,11 @@ class _OrderListPageWidgetState extends State<OrderListPageWidget> {
         context,
         'Error: $errorMessage',
       );
-      return orders;
+      return details;
     }
-    _apiJson['orders'].forEach((_order) {
-      print(_order);
-      orders.add(Order(
-        // plan: PlanData(
-        //   path: _order['path'],
-        //   unitAmount: _order['unit_amount'],
-        //   quantity: _order['quantity'],
-        //   name: _order['name'],
-        //   status: getShippingStatus(_order['status']),
-        // ),
-        totalAmount: _order['total_amount'],
-        totalQuantity: _order['total_quantity'],
-        totalShippingfee: _order['total_shippingfee'],
-        paymentId: _order['paymentId'],
-        purchased: Timestamp(_order['purchased']['_seconds'],
-                _order['purchased']['_nanoseconds'])
-            .toDate(),
-        shipping: _order['shipping'],
-        billing: _order['billing'],
-      ));
-    });
+    print(_apiJson['details']);
 
-    orders.sort(((a, b) => b.purchased.compareTo(a.purchased)));
-
-    return orders;
+    return details;
   }
 
   Future<ShopsRecord> _getShop() async {

@@ -1,5 +1,5 @@
 export 'choice_item.dart' show ChoiceItem;
-export 'ecommerce.dart' show Order;
+export 'ecommerce.dart' show OrderDetails;
 export 'custom_dialog.dart' show CustomDialog;
 export 'appcheck_agent.dart' show AppCheckAgent;
 export 'ecommerce.dart' show PlanData;
