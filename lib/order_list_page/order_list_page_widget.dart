@@ -379,7 +379,11 @@ class _OrderListPageWidgetState extends State<OrderListPageWidget> {
                                                                 .height *
                                                             0.96,
                                                         child:
-                                                            UpdateOrderPageWidget(),
+                                                            UpdateOrderPageWidget(
+                                                          order:
+                                                              listViewSoldRecord
+                                                                  .reference,
+                                                        ),
                                                       ),
                                                     );
                                                   },
