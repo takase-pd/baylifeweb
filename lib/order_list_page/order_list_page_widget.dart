@@ -334,7 +334,9 @@ class _OrderListPageWidgetState extends State<OrderListPageWidget> {
                                       pagingController: () {
                                         final Query<Object> Function(
                                                 Query<Object>) queryBuilder =
-                                            (soldRecord) => soldRecord;
+                                            (soldRecord) => soldRecord.orderBy(
+                                                'purchased',
+                                                descending: true);
                                         if (_pagingController != null) {
                                           final query = queryBuilder(
                                               SoldRecord.collection(
@@ -364,7 +366,8 @@ class _OrderListPageWidgetState extends State<OrderListPageWidget> {
                                             parent:
                                                 containerShopsRecord.reference,
                                             queryBuilder: (soldRecord) =>
-                                                soldRecord,
+                                                soldRecord.orderBy('purchased',
+                                                    descending: true),
                                             nextPageMarker: nextPageMarker,
                                             pageSize: 25,
                                             isStream: true,
