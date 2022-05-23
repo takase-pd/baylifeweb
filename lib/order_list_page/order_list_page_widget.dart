@@ -251,7 +251,7 @@ class _OrderListPageWidgetState extends State<OrderListPageWidget> {
                                     width: MediaQuery.of(context).size.width *
                                         0.72,
                                     height: MediaQuery.of(context).size.height *
-                                        0.64,
+                                        0.72,
                                     decoration: BoxDecoration(
                                       color: FlutterFlowTheme.of(context)
                                           .background,
@@ -361,7 +361,7 @@ class _OrderListPageWidgetState extends State<OrderListPageWidget> {
                                               ),
                                               child: Padding(
                                                 padding: EdgeInsetsDirectional
-                                                    .fromSTEB(16, 0, 0, 0),
+                                                    .fromSTEB(16, 0, 8, 0),
                                                 child: Row(
                                                   mainAxisSize:
                                                       MainAxisSize.min,
@@ -380,7 +380,7 @@ class _OrderListPageWidgetState extends State<OrderListPageWidget> {
                                                       ),
                                                     ),
                                                     Expanded(
-                                                      flex: 1,
+                                                      flex: 2,
                                                       child: Text(
                                                         dateTimeFormat(
                                                             'yMMMd',
@@ -394,6 +394,26 @@ class _OrderListPageWidgetState extends State<OrderListPageWidget> {
                                                     ),
                                                     Expanded(
                                                       flex: 1,
+                                                      child: Text(
+                                                        'status',
+                                                        style:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .bodyText1,
+                                                      ),
+                                                    ),
+                                                    Expanded(
+                                                      flex: 3,
+                                                      child: Text(
+                                                        'customer name',
+                                                        style:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .bodyText1,
+                                                      ),
+                                                    ),
+                                                    Expanded(
+                                                      flex: 2,
                                                       child: Text(
                                                         listViewSoldRecord
                                                             .totalAmount
@@ -417,21 +437,11 @@ class _OrderListPageWidgetState extends State<OrderListPageWidget> {
                                                       ),
                                                     ),
                                                     Expanded(
-                                                      flex: 1,
+                                                      flex: 2,
                                                       child: Text(
                                                         listViewSoldRecord
                                                             .totalShippingFee
                                                             .toString(),
-                                                        style:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .bodyText1,
-                                                      ),
-                                                    ),
-                                                    Expanded(
-                                                      flex: 1,
-                                                      child: Text(
-                                                        'ステータス',
                                                         style:
                                                             FlutterFlowTheme.of(
                                                                     context)
