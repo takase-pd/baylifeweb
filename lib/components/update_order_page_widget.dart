@@ -36,6 +36,7 @@ class _UpdateOrderPageWidgetState extends State<UpdateOrderPageWidget> {
   TextEditingController textController8;
   TextEditingController textController9;
   TextEditingController textController10;
+  TextEditingController textController11;
   Future<OrderDetails> details;
 
   Future<OrderDetails> _getOrdersDetails(String paymentId) async {
@@ -234,6 +235,55 @@ class _UpdateOrderPageWidgetState extends State<UpdateOrderPageWidget> {
                                         ),
                                       ),
                                     ),
+                                    Expanded(
+                                      child: Padding(
+                                        padding: EdgeInsetsDirectional.fromSTEB(
+                                            16, 0, 0, 0),
+                                        child: TextFormField(
+                                          controller: textController2 ??=
+                                              TextEditingController(
+                                            text: dateTimeFormat('yMMMd',
+                                                containerSoldRecord.updated),
+                                          ),
+                                          readOnly: true,
+                                          obscureText: false,
+                                          decoration: InputDecoration(
+                                            labelText: '最終更新',
+                                            enabledBorder: UnderlineInputBorder(
+                                              borderSide: BorderSide(
+                                                color: Color(0x00000000),
+                                                width: 1,
+                                              ),
+                                              borderRadius:
+                                                  const BorderRadius.only(
+                                                topLeft: Radius.circular(4.0),
+                                                topRight: Radius.circular(4.0),
+                                              ),
+                                            ),
+                                            focusedBorder: UnderlineInputBorder(
+                                              borderSide: BorderSide(
+                                                color: Color(0x00000000),
+                                                width: 1,
+                                              ),
+                                              borderRadius:
+                                                  const BorderRadius.only(
+                                                topLeft: Radius.circular(4.0),
+                                                topRight: Radius.circular(4.0),
+                                              ),
+                                            ),
+                                          ),
+                                          style: FlutterFlowTheme.of(context)
+                                              .bodyText2
+                                              .override(
+                                                fontFamily: 'Montserrat',
+                                                color:
+                                                    FlutterFlowTheme.of(context)
+                                                        .textDark,
+                                                fontWeight: FontWeight.w500,
+                                              ),
+                                        ),
+                                      ),
+                                    ),
                                   ],
                                 ),
                                 Row(
@@ -245,7 +295,7 @@ class _UpdateOrderPageWidgetState extends State<UpdateOrderPageWidget> {
                                         padding: EdgeInsetsDirectional.fromSTEB(
                                             16, 0, 0, 0),
                                         child: TextFormField(
-                                          controller: textController2 ??=
+                                          controller: textController3 ??=
                                               TextEditingController(
                                             text: formatNumber(
                                               containerSoldRecord.totalAmount,
@@ -302,7 +352,7 @@ class _UpdateOrderPageWidgetState extends State<UpdateOrderPageWidget> {
                                         padding: EdgeInsetsDirectional.fromSTEB(
                                             8, 0, 0, 0),
                                         child: TextFormField(
-                                          controller: textController3 ??=
+                                          controller: textController4 ??=
                                               TextEditingController(
                                             text: containerSoldRecord
                                                 .totalQuantity
@@ -355,7 +405,7 @@ class _UpdateOrderPageWidgetState extends State<UpdateOrderPageWidget> {
                                         padding: EdgeInsetsDirectional.fromSTEB(
                                             8, 0, 8, 0),
                                         child: TextFormField(
-                                          controller: textController4 ??=
+                                          controller: textController5 ??=
                                               TextEditingController(
                                             text: formatNumber(
                                               containerSoldRecord
@@ -449,7 +499,7 @@ class _UpdateOrderPageWidgetState extends State<UpdateOrderPageWidget> {
                                         }
                                         final _details = snapshot.data;
                                         return TextFormField(
-                                          controller: textController5 ??=
+                                          controller: textController6 ??=
                                               TextEditingController(
                                             text: _details.billing.name,
                                           ),
@@ -538,7 +588,7 @@ class _UpdateOrderPageWidgetState extends State<UpdateOrderPageWidget> {
                                             }
                                             final _details = snapshot.data;
                                             return TextFormField(
-                                              controller: textController6 ??=
+                                              controller: textController7 ??=
                                                   TextEditingController(
                                                 text: _details.shipping.name,
                                               ),
@@ -601,7 +651,7 @@ class _UpdateOrderPageWidgetState extends State<UpdateOrderPageWidget> {
                                         padding: EdgeInsetsDirectional.fromSTEB(
                                             16, 0, 0, 0),
                                         child: TextFormField(
-                                          controller: textController7 ??=
+                                          controller: textController8 ??=
                                               TextEditingController(
                                             text: containerSoldRecord.carrier,
                                           ),
@@ -649,7 +699,7 @@ class _UpdateOrderPageWidgetState extends State<UpdateOrderPageWidget> {
                                         padding: EdgeInsetsDirectional.fromSTEB(
                                             16, 0, 0, 0),
                                         child: TextFormField(
-                                          controller: textController8 ??=
+                                          controller: textController9 ??=
                                               TextEditingController(
                                             text: containerSoldRecord
                                                 .trackingNumber,
@@ -715,7 +765,7 @@ class _UpdateOrderPageWidgetState extends State<UpdateOrderPageWidget> {
                                     padding: EdgeInsetsDirectional.fromSTEB(
                                         16, 0, 0, 0),
                                     child: TextFormField(
-                                      controller: textController9 ??=
+                                      controller: textController10 ??=
                                           TextEditingController(
                                         text: containerSoldRecord.status,
                                       ),
@@ -798,7 +848,7 @@ class _UpdateOrderPageWidgetState extends State<UpdateOrderPageWidget> {
                                       padding: EdgeInsetsDirectional.fromSTEB(
                                           16, 0, 0, 0),
                                       child: TextFormField(
-                                        controller: textController10 ??=
+                                        controller: textController11 ??=
                                             TextEditingController(
                                           text: containerSoldRecord.note,
                                         ),
@@ -892,11 +942,11 @@ class _UpdateOrderPageWidgetState extends State<UpdateOrderPageWidget> {
                                       final soldUpdateData =
                                           createSoldRecordData(
                                         status: dropDownValue,
-                                        note: textController10?.text ?? '',
+                                        note: textController11?.text ?? '',
                                         updated: getCurrentTimestamp,
-                                        carrier: textController7?.text ?? '',
+                                        carrier: textController8?.text ?? '',
                                         trackingNumber:
-                                            textController8?.text ?? '',
+                                            textController9?.text ?? '',
                                       );
                                       await widget.order.update(soldUpdateData);
                                       logFirebaseEvent('Button_Show-Snack-Bar');
