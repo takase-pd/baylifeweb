@@ -28,6 +28,9 @@ abstract class SoldRecord implements Built<SoldRecord, SoldRecordBuilder> {
   int get totalShippingFee;
 
   @nullable
+  String get status;
+
+  @nullable
   @BuiltValueField(wireName: kDocumentReferenceField)
   DocumentReference get reference;
 
@@ -36,7 +39,8 @@ abstract class SoldRecord implements Built<SoldRecord, SoldRecordBuilder> {
   static void _initializeBuilder(SoldRecordBuilder builder) => builder
     ..totalAmount = 0
     ..totalQuantity = 0
-    ..totalShippingFee = 0;
+    ..totalShippingFee = 0
+    ..status = '';
 
   static Query<Map<String, dynamic>> collection([DocumentReference parent]) =>
       parent != null
@@ -69,6 +73,7 @@ Map<String, dynamic> createSoldRecordData({
   int totalAmount,
   int totalQuantity,
   int totalShippingFee,
+  String status,
 }) =>
     serializers.toFirestore(
         SoldRecord.serializer,
@@ -77,4 +82,5 @@ Map<String, dynamic> createSoldRecordData({
           ..purchased = purchased
           ..totalAmount = totalAmount
           ..totalQuantity = totalQuantity
-          ..totalShippingFee = totalShippingFee));
+          ..totalShippingFee = totalShippingFee
+          ..status = status));
