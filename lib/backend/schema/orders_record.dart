@@ -32,6 +32,19 @@ abstract class OrdersRecord
   String get status;
 
   @nullable
+  String get note;
+
+  @nullable
+  DateTime get updated;
+
+  @nullable
+  String get carrier;
+
+  @nullable
+  @BuiltValueField(wireName: 'tracking_number')
+  String get trackingNumber;
+
+  @nullable
   @BuiltValueField(wireName: kDocumentReferenceField)
   DocumentReference get reference;
 
@@ -41,7 +54,10 @@ abstract class OrdersRecord
     ..totalAmount = 0
     ..totalQuantity = 0
     ..totalShippingFee = 0
-    ..status = '';
+    ..status = ''
+    ..note = ''
+    ..carrier = ''
+    ..trackingNumber = '';
 
   static Query<Map<String, dynamic>> collection([DocumentReference parent]) =>
       parent != null
@@ -76,6 +92,10 @@ Map<String, dynamic> createOrdersRecordData({
   int totalQuantity,
   int totalShippingFee,
   String status,
+  String note,
+  DateTime updated,
+  String carrier,
+  String trackingNumber,
 }) =>
     serializers.toFirestore(
         OrdersRecord.serializer,
@@ -85,4 +105,8 @@ Map<String, dynamic> createOrdersRecordData({
           ..totalAmount = totalAmount
           ..totalQuantity = totalQuantity
           ..totalShippingFee = totalShippingFee
-          ..status = status));
+          ..status = status
+          ..note = note
+          ..updated = updated
+          ..carrier = carrier
+          ..trackingNumber = trackingNumber));
