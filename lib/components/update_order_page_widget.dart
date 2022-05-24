@@ -1,3 +1,4 @@
+import '../auth/auth_util.dart';
 import '../backend/api_requests/api_calls.dart';
 import '../backend/backend.dart';
 import '../flutter_flow/flutter_flow_drop_down.dart';
@@ -5,10 +6,13 @@ import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
 import '../plan_list_page/plan_list_page_widget.dart';
+import '../custom_code/widgets/index.dart';
+import '../auth/firebase_user_provider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:flutter_stripe/flutter_stripe.dart' as stripe;
 
 class UpdateOrderPageWidget extends StatefulWidget {
   const UpdateOrderPageWidget({
@@ -33,12 +37,89 @@ class _UpdateOrderPageWidgetState extends State<UpdateOrderPageWidget> {
   TextEditingController textController7;
   TextEditingController textController8;
   TextEditingController textController9;
+  Future<OrderDetails> details;
+
+  Future<OrderDetails> _getOrdersDetails(String paymentId) async {
+    OrderDetails _details;
+
+    final _shop = await _getShop();
+    if (_shop == null) return _details;
+
+    if (!currentUser.loggedIn) return _details;
+
+    final _appCheckToken = await AppCheckAgent.getToken(context);
+    if (_appCheckToken == null) return _details;
+
+    final apiCallOutput = await GetOrderDetailsCall.call(
+      shop: _shop.reference.path,
+      uid: currentUserUid,
+      paymentId: paymentId,
+      accessToken: currentJwtToken,
+      appCheckToken: _appCheckToken,
+    );
+    final _apiJson = getJsonField(apiCallOutput.jsonBody, r'''$.result''');
+    final success = _apiJson['success'] ?? false;
+    if (!success) {
+      String errorMessage = _apiJson['error'] ?? '原因不明のエラーが発生';
+      showSnackbar(
+        context,
+        'Error: $errorMessage',
+      );
+      return _details;
+    }
+    _details = OrderDetails(
+      paymentId: _apiJson['details']['paymentId'],
+      billing: stripe.BillingDetails(
+        address: stripe.Address(
+          country: _apiJson['details']['billing']['address']['country'],
+          state: _apiJson['details']['billing']['address']['state'],
+          city: _apiJson['details']['billing']['address']['city'],
+          line1: _apiJson['details']['billing']['address']['line1'],
+          line2: _apiJson['details']['billing']['address']['line2'],
+          postalCode: _apiJson['details']['billing']['address']['postal_code'],
+        ),
+        name: _apiJson['details']['billing']['name'],
+        phone: _apiJson['details']['billing']['phone'],
+        email: _apiJson['details']['billing']['email'],
+      ),
+      shipping: stripe.ShippingDetails(
+        address: stripe.Address(
+          country: _apiJson['details']['shipping']['address']['country'],
+          state: _apiJson['details']['shipping']['address']['state'],
+          city: _apiJson['details']['shipping']['address']['city'],
+          line1: _apiJson['details']['shipping']['address']['line1'],
+          line2: _apiJson['details']['shipping']['address']['line2'],
+          postalCode: _apiJson['details']['shipping']['address']['postal_code'],
+        ),
+        name: _apiJson['details']['shipping']['name'],
+        phone: _apiJson['details']['shipping']['phone'],
+      ),
+    );
+
+    return _details;
+  }
+
+  Future<ShopsRecord> _getShop() async {
+    ShopsRecord _shop;
+    final containerShopsRecordList = await queryShopsRecordOnce(
+      queryBuilder: (shopsRecord) =>
+          shopsRecord.where('director', isEqualTo: currentUserReference),
+      singleRecord: true,
+    );
+    // Return an empty Container when the document does not exist.
+    if (containerShopsRecordList.isNotEmpty)
+      _shop = containerShopsRecordList.isNotEmpty
+          ? containerShopsRecordList.first
+          : null;
+    return _shop;
+  }
 
   @override
   void initState() {
     super.initState();
     textController8 = TextEditingController();
     textController9 = TextEditingController();
+    details = _getOrdersDetails(widget.order.id);
   }
 
   @override
@@ -193,7 +274,8 @@ class _UpdateOrderPageWidgetState extends State<UpdateOrderPageWidget> {
                                         child: TextFormField(
                                           controller: textController2 ??=
                                               TextEditingController(
-                                            text: dateTimeFormat('yMMMd',
+                                            text: dateTimeFormat(
+                                                'MMMd, y h:mm a',
                                                 containerSoldRecord.purchased),
                                           ),
                                           readOnly: true,
@@ -429,11 +511,12 @@ class _UpdateOrderPageWidgetState extends State<UpdateOrderPageWidget> {
                                   child: Padding(
                                     padding: EdgeInsetsDirectional.fromSTEB(
                                         16, 0, 0, 0),
-                                    child: FutureBuilder<ApiCallResponse>(
-                                      future: GetOrderDetailsCall.call(),
+                                    child: FutureBuilder<OrderDetails>(
+                                      future: details,
                                       builder: (context, snapshot) {
                                         // Customize what your widget looks like when it's loading.
-                                        if (!snapshot.hasData) {
+                                        if (snapshot.connectionState !=
+                                            ConnectionState.done) {
                                           return Center(
                                             child: SizedBox(
                                               width: 50,
@@ -447,17 +530,11 @@ class _UpdateOrderPageWidgetState extends State<UpdateOrderPageWidget> {
                                             ),
                                           );
                                         }
-                                        final textFieldGetOrderDetailsResponse =
-                                            snapshot.data;
+                                        final _details = snapshot.data;
                                         return TextFormField(
                                           controller: textController6 ??=
                                               TextEditingController(
-                                            text: getJsonField(
-                                              (textFieldGetOrderDetailsResponse
-                                                      ?.jsonBody ??
-                                                  ''),
-                                              r'''$''',
-                                            ).toString(),
+                                            text: _details.billing.name,
                                           ),
                                           readOnly: true,
                                           obscureText: false,
@@ -523,11 +600,12 @@ class _UpdateOrderPageWidgetState extends State<UpdateOrderPageWidget> {
                                       child: Padding(
                                         padding: EdgeInsetsDirectional.fromSTEB(
                                             16, 0, 0, 0),
-                                        child: FutureBuilder<ApiCallResponse>(
-                                          future: GetOrderDetailsCall.call(),
+                                        child: FutureBuilder<OrderDetails>(
+                                          future: details,
                                           builder: (context, snapshot) {
                                             // Customize what your widget looks like when it's loading.
-                                            if (!snapshot.hasData) {
+                                            if (snapshot.connectionState !=
+                                                ConnectionState.done) {
                                               return Center(
                                                 child: SizedBox(
                                                   width: 50,
@@ -541,17 +619,11 @@ class _UpdateOrderPageWidgetState extends State<UpdateOrderPageWidget> {
                                                 ),
                                               );
                                             }
-                                            final textFieldGetOrderDetailsResponse =
-                                                snapshot.data;
+                                            final _details = snapshot.data;
                                             return TextFormField(
                                               controller: textController7 ??=
                                                   TextEditingController(
-                                                text: getJsonField(
-                                                  (textFieldGetOrderDetailsResponse
-                                                          ?.jsonBody ??
-                                                      ''),
-                                                  r'''$''',
-                                                ).toString(),
+                                                text: _details.shipping.name,
                                               ),
                                               readOnly: true,
                                               obscureText: false,

@@ -32,54 +32,6 @@ class _OrderListPageWidgetState extends State<OrderListPageWidget> {
   final formKey = GlobalKey<FormState>();
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
-  Future<OrderDetails> _getOrdersDetails(String paymentId) async {
-    OrderDetails details;
-
-    final _shop = await _getShop();
-    if (_shop == null) return details;
-
-    if (!currentUser.loggedIn) return details;
-
-    final _appCheckToken = await AppCheckAgent.getToken(context);
-    if (_appCheckToken == null) return details;
-
-    final apiCallOutput = await GetOrderDetailsCall.call(
-      shop: _shop.reference.path,
-      uid: currentUserUid,
-      paymentId: paymentId,
-      accessToken: currentJwtToken,
-      appCheckToken: _appCheckToken,
-    );
-    final _apiJson = getJsonField(apiCallOutput.jsonBody, r'''$.result''');
-    final success = _apiJson['success'] ?? false;
-    if (!success) {
-      String errorMessage = _apiJson['error'] ?? '原因不明のエラーが発生';
-      showSnackbar(
-        context,
-        'Error: $errorMessage',
-      );
-      return details;
-    }
-    print(_apiJson['details']);
-
-    return details;
-  }
-
-  Future<ShopsRecord> _getShop() async {
-    ShopsRecord _shop;
-    final containerShopsRecordList = await queryShopsRecordOnce(
-      queryBuilder: (shopsRecord) =>
-          shopsRecord.where('director', isEqualTo: currentUserReference),
-      singleRecord: true,
-    );
-    // Return an empty Container when the document does not exist.
-    if (containerShopsRecordList.isNotEmpty)
-      _shop = containerShopsRecordList.isNotEmpty
-          ? containerShopsRecordList.first
-          : null;
-    return _shop;
-  }
-
   @override
   void initState() {
     super.initState();
