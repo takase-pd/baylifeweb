@@ -29,6 +29,9 @@ abstract class OrdersRecord
   int get totalShippingFee;
 
   @nullable
+  String get status;
+
+  @nullable
   @BuiltValueField(wireName: kDocumentReferenceField)
   DocumentReference get reference;
 
@@ -37,7 +40,8 @@ abstract class OrdersRecord
   static void _initializeBuilder(OrdersRecordBuilder builder) => builder
     ..totalAmount = 0
     ..totalQuantity = 0
-    ..totalShippingFee = 0;
+    ..totalShippingFee = 0
+    ..status = '';
 
   static Query<Map<String, dynamic>> collection([DocumentReference parent]) =>
       parent != null
@@ -71,6 +75,7 @@ Map<String, dynamic> createOrdersRecordData({
   int totalAmount,
   int totalQuantity,
   int totalShippingFee,
+  String status,
 }) =>
     serializers.toFirestore(
         OrdersRecord.serializer,
@@ -79,4 +84,5 @@ Map<String, dynamic> createOrdersRecordData({
           ..purchased = purchased
           ..totalAmount = totalAmount
           ..totalQuantity = totalQuantity
-          ..totalShippingFee = totalShippingFee));
+          ..totalShippingFee = totalShippingFee
+          ..status = status));
