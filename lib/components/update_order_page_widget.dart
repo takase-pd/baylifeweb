@@ -36,14 +36,6 @@ class _UpdateOrderPageWidgetState extends State<UpdateOrderPageWidget> {
   TextEditingController textController10;
 
   @override
-  void initState() {
-    super.initState();
-    textController10 = TextEditingController();
-    textController7 = TextEditingController();
-    textController8 = TextEditingController();
-  }
-
-  @override
   Widget build(BuildContext context) {
     return FutureBuilder<SoldRecord>(
       future: SoldRecord.getDocumentOnce(widget.order),
@@ -534,7 +526,10 @@ class _UpdateOrderPageWidgetState extends State<UpdateOrderPageWidget> {
                                         padding: EdgeInsetsDirectional.fromSTEB(
                                             16, 0, 0, 0),
                                         child: TextFormField(
-                                          controller: textController7,
+                                          controller: textController7 ??=
+                                              TextEditingController(
+                                            text: containerSoldRecord.carrier,
+                                          ),
                                           obscureText: false,
                                           decoration: InputDecoration(
                                             labelText: '配送業者',
@@ -579,7 +574,11 @@ class _UpdateOrderPageWidgetState extends State<UpdateOrderPageWidget> {
                                         padding: EdgeInsetsDirectional.fromSTEB(
                                             16, 0, 0, 0),
                                         child: TextFormField(
-                                          controller: textController8,
+                                          controller: textController8 ??=
+                                              TextEditingController(
+                                            text: containerSoldRecord
+                                                .trackingNumber,
+                                          ),
                                           obscureText: false,
                                           decoration: InputDecoration(
                                             labelText: 'トラッキングコード',
@@ -724,7 +723,10 @@ class _UpdateOrderPageWidgetState extends State<UpdateOrderPageWidget> {
                                       padding: EdgeInsetsDirectional.fromSTEB(
                                           16, 0, 0, 0),
                                       child: TextFormField(
-                                        controller: textController10,
+                                        controller: textController10 ??=
+                                            TextEditingController(
+                                          text: containerSoldRecord.note,
+                                        ),
                                         obscureText: false,
                                         decoration: InputDecoration(
                                           labelText: 'メモ',
@@ -815,10 +817,11 @@ class _UpdateOrderPageWidgetState extends State<UpdateOrderPageWidget> {
                                       final soldUpdateData =
                                           createSoldRecordData(
                                         status: dropDownValue,
-                                        note: textController10.text,
+                                        note: textController10?.text ?? '',
                                         updated: getCurrentTimestamp,
-                                        carrier: textController7.text,
-                                        trackingNumber: textController8.text,
+                                        carrier: textController7?.text ?? '',
+                                        trackingNumber:
+                                            textController8?.text ?? '',
                                       );
                                       await widget.order.update(soldUpdateData);
                                       logFirebaseEvent('Button_Show-Snack-Bar');
