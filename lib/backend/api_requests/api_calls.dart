@@ -202,3 +202,37 @@ class GetOrderDetailsCall {
     );
   }
 }
+
+class GetOrderedPlansCall {
+  static Future<ApiCallResponse> call({
+    String shop = '',
+    String uid = '',
+    String paymentId = '',
+  }) {
+    final body = '''
+{
+  "data": {
+    "shop": "${shop}",
+    "uid": "${uid}",
+    "paymentId": "${paymentId}"
+  }
+}''';
+    return ApiManager.instance.makeApiCall(
+      callName: 'Get Ordered Plans',
+      apiUrl:
+          'https://asia-northeast1-baylifedev.cloudfunctions.net/ec-getOrderedPlansV0',
+      callType: ApiCallType.POST,
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      params: {
+        'shop': shop,
+        'uid': uid,
+        'paymentId': paymentId,
+      },
+      body: body,
+      bodyType: BodyType.JSON,
+      returnBody: true,
+    );
+  }
+}
