@@ -23,10 +23,7 @@ class UpdateOrderPageWidget extends StatefulWidget {
 }
 
 class _UpdateOrderPageWidgetState extends State<UpdateOrderPageWidget> {
-  String dropDownValue;
-  TextEditingController textController10;
-  TextEditingController textController9;
-  TextEditingController textController11;
+  String dropDownValue1;
   TextEditingController textController1;
   TextEditingController textController2;
   TextEditingController textController3;
@@ -35,6 +32,10 @@ class _UpdateOrderPageWidgetState extends State<UpdateOrderPageWidget> {
   TextEditingController textController6;
   TextEditingController textController7;
   TextEditingController textController8;
+  String dropDownValue2;
+  TextEditingController textController10;
+  TextEditingController textController9;
+  TextEditingController textController11;
 
   @override
   Widget build(BuildContext context) {
@@ -680,103 +681,71 @@ class _UpdateOrderPageWidgetState extends State<UpdateOrderPageWidget> {
                                     Padding(
                                       padding: EdgeInsetsDirectional.fromSTEB(
                                           0, 0, 0, 16),
-                                      child: FutureBuilder<List<ShopsRecord>>(
-                                        future: queryShopsRecordOnce(
-                                          queryBuilder: (shopsRecord) =>
-                                              shopsRecord.where('director',
-                                                  isEqualTo:
-                                                      currentUserReference),
-                                          singleRecord: true,
-                                        ),
-                                        builder: (context, snapshot) {
-                                          // Customize what your widget looks like when it's loading.
-                                          if (!snapshot.hasData) {
-                                            return Center(
-                                              child: SizedBox(
-                                                width: 50,
-                                                height: 50,
-                                                child: SpinKitPulse(
-                                                  color: FlutterFlowTheme.of(
-                                                          context)
-                                                      .primaryColor,
-                                                  size: 50,
-                                                ),
-                                              ),
-                                            );
-                                          }
-                                          List<ShopsRecord>
-                                              containerShopsRecordList =
-                                              snapshot.data;
-                                          // Return an empty Container when the document does not exist.
-                                          if (snapshot.data.isEmpty) {
-                                            return Container();
-                                          }
-                                          final containerShopsRecord =
-                                              containerShopsRecordList
-                                                      .isNotEmpty
-                                                  ? containerShopsRecordList
-                                                      .first
-                                                  : null;
-                                          return Container(
-                                            decoration: BoxDecoration(),
-                                            child: Padding(
-                                              padding: EdgeInsetsDirectional
-                                                  .fromSTEB(16, 0, 16, 0),
-                                              child: FutureBuilder<
-                                                  ApiCallResponse>(
-                                                future:
-                                                    GetOrderedPlansCall.call(),
-                                                builder: (context, snapshot) {
-                                                  // Customize what your widget looks like when it's loading.
-                                                  if (!snapshot.hasData) {
-                                                    return Center(
-                                                      child: SizedBox(
-                                                        width: 50,
-                                                        height: 50,
-                                                        child: SpinKitPulse(
-                                                          color: FlutterFlowTheme
-                                                                  .of(context)
+                                      child: Container(
+                                        decoration: BoxDecoration(),
+                                        child: Padding(
+                                          padding:
+                                              EdgeInsetsDirectional.fromSTEB(
+                                                  16, 0, 16, 0),
+                                          child: FutureBuilder<ApiCallResponse>(
+                                            future: GetOrderedPlansCall.call(),
+                                            builder: (context, snapshot) {
+                                              // Customize what your widget looks like when it's loading.
+                                              if (!snapshot.hasData) {
+                                                return Center(
+                                                  child: SizedBox(
+                                                    width: 50,
+                                                    height: 50,
+                                                    child: SpinKitPulse(
+                                                      color:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
                                                               .primaryColor,
-                                                          size: 50,
-                                                        ),
+                                                      size: 50,
+                                                    ),
+                                                  ),
+                                                );
+                                              }
+                                              final listViewGetOrderedPlansResponse =
+                                                  snapshot.data;
+                                              return ListView(
+                                                padding: EdgeInsets.zero,
+                                                primary: false,
+                                                shrinkWrap: true,
+                                                scrollDirection: Axis.vertical,
+                                                children: [
+                                                  Padding(
+                                                    padding:
+                                                        EdgeInsetsDirectional
+                                                            .fromSTEB(
+                                                                0, 0, 0, 4),
+                                                    child: Container(
+                                                      height: 88,
+                                                      decoration: BoxDecoration(
+                                                        color:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .background,
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(8),
                                                       ),
-                                                    );
-                                                  }
-                                                  final listViewGetOrderedPlansResponse =
-                                                      snapshot.data;
-                                                  return ListView(
-                                                    padding: EdgeInsets.zero,
-                                                    primary: false,
-                                                    shrinkWrap: true,
-                                                    scrollDirection:
-                                                        Axis.vertical,
-                                                    children: [
-                                                      Padding(
+                                                      child: Padding(
                                                         padding:
                                                             EdgeInsetsDirectional
-                                                                .fromSTEB(
-                                                                    0, 0, 0, 4),
-                                                        child: Container(
-                                                          height: 88,
-                                                          decoration:
-                                                              BoxDecoration(
-                                                            color: FlutterFlowTheme
-                                                                    .of(context)
-                                                                .background,
-                                                            borderRadius:
-                                                                BorderRadius
-                                                                    .circular(
-                                                                        8),
-                                                          ),
-                                                          child: Padding(
-                                                            padding:
-                                                                EdgeInsetsDirectional
-                                                                    .fromSTEB(
-                                                                        16,
-                                                                        0,
-                                                                        0,
-                                                                        0),
-                                                            child: Row(
+                                                                .fromSTEB(16, 8,
+                                                                    8, 8),
+                                                        child: Column(
+                                                          mainAxisSize:
+                                                              MainAxisSize.max,
+                                                          mainAxisAlignment:
+                                                              MainAxisAlignment
+                                                                  .spaceEvenly,
+                                                          crossAxisAlignment:
+                                                              CrossAxisAlignment
+                                                                  .start,
+                                                          children: [
+                                                            Row(
                                                               mainAxisSize:
                                                                   MainAxisSize
                                                                       .min,
@@ -821,15 +790,6 @@ class _UpdateOrderPageWidgetState extends State<UpdateOrderPageWidget> {
                                                                   ),
                                                                 ),
                                                                 Expanded(
-                                                                  flex: 3,
-                                                                  child: Text(
-                                                                    'updated',
-                                                                    style: FlutterFlowTheme.of(
-                                                                            context)
-                                                                        .bodyText1,
-                                                                  ),
-                                                                ),
-                                                                Expanded(
                                                                   flex: 2,
                                                                   child: Text(
                                                                     'status',
@@ -840,16 +800,88 @@ class _UpdateOrderPageWidgetState extends State<UpdateOrderPageWidget> {
                                                                 ),
                                                               ],
                                                             ),
-                                                          ),
+                                                            Row(
+                                                              mainAxisSize:
+                                                                  MainAxisSize
+                                                                      .max,
+                                                              mainAxisAlignment:
+                                                                  MainAxisAlignment
+                                                                      .spaceBetween,
+                                                              children: [
+                                                                Padding(
+                                                                  padding: EdgeInsetsDirectional
+                                                                      .fromSTEB(
+                                                                          16,
+                                                                          0,
+                                                                          0,
+                                                                          0),
+                                                                  child: Text(
+                                                                    'updated',
+                                                                    style: FlutterFlowTheme.of(
+                                                                            context)
+                                                                        .bodyText1,
+                                                                  ),
+                                                                ),
+                                                                Padding(
+                                                                  padding: EdgeInsetsDirectional
+                                                                      .fromSTEB(
+                                                                          0,
+                                                                          0,
+                                                                          8,
+                                                                          0),
+                                                                  child:
+                                                                      FlutterFlowDropDown(
+                                                                    options: [
+                                                                      '注文',
+                                                                      '確認中',
+                                                                      '発送済',
+                                                                      '到着'
+                                                                    ].toList(),
+                                                                    onChanged: (val) =>
+                                                                        setState(() =>
+                                                                            dropDownValue1 =
+                                                                                val),
+                                                                    width: 128,
+                                                                    height: 32,
+                                                                    textStyle: FlutterFlowTheme.of(
+                                                                            context)
+                                                                        .bodyText2,
+                                                                    hintText:
+                                                                        'ステータス',
+                                                                    fillColor:
+                                                                        Colors
+                                                                            .white,
+                                                                    elevation:
+                                                                        4,
+                                                                    borderColor:
+                                                                        Colors
+                                                                            .transparent,
+                                                                    borderWidth:
+                                                                        0,
+                                                                    borderRadius:
+                                                                        0,
+                                                                    margin: EdgeInsetsDirectional
+                                                                        .fromSTEB(
+                                                                            16,
+                                                                            4,
+                                                                            8,
+                                                                            4),
+                                                                    hidesUnderline:
+                                                                        true,
+                                                                  ),
+                                                                ),
+                                                              ],
+                                                            ),
+                                                          ],
                                                         ),
                                                       ),
-                                                    ],
-                                                  );
-                                                },
-                                              ),
-                                            ),
-                                          );
-                                        },
+                                                    ),
+                                                  ),
+                                                ],
+                                              );
+                                            },
+                                          ),
+                                        ),
                                       ),
                                     ),
                                   ],
@@ -1013,6 +1045,7 @@ class _UpdateOrderPageWidgetState extends State<UpdateOrderPageWidget> {
                                       0, 0, 0, 16),
                                   child: Row(
                                     mainAxisSize: MainAxisSize.max,
+                                    mainAxisAlignment: MainAxisAlignment.end,
                                     children: [
                                       Padding(
                                         padding: EdgeInsetsDirectional.fromSTEB(
@@ -1021,7 +1054,7 @@ class _UpdateOrderPageWidgetState extends State<UpdateOrderPageWidget> {
                                           options: ['注文', '確認中', '発送済', '到着']
                                               .toList(),
                                           onChanged: (val) => setState(
-                                              () => dropDownValue = val),
+                                              () => dropDownValue2 = val),
                                           width: 180,
                                           height: 50,
                                           textStyle:
@@ -1090,7 +1123,7 @@ class _UpdateOrderPageWidgetState extends State<UpdateOrderPageWidget> {
 
                                       final soldUpdateData =
                                           createSoldRecordData(
-                                        status: dropDownValue,
+                                        status: dropDownValue2,
                                         note: textController11?.text ?? '',
                                         updated: getCurrentTimestamp,
                                         carrier: textController9?.text ?? '',
