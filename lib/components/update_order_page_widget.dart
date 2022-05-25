@@ -150,7 +150,7 @@ class _UpdateOrderPageWidgetState extends State<UpdateOrderPageWidget> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Container(
-                width: MediaQuery.of(context).size.width * 0.56,
+                width: MediaQuery.of(context).size.width * 0.48,
                 decoration: BoxDecoration(),
                 child: Padding(
                   padding: EdgeInsetsDirectional.fromSTEB(0, 16, 0, 0),
@@ -197,7 +197,7 @@ class _UpdateOrderPageWidgetState extends State<UpdateOrderPageWidget> {
                                             controller: textController1 ??=
                                                 TextEditingController(
                                               text: dateTimeFormat(
-                                                  'yMMMd',
+                                                  'MMMd, y h:mm a',
                                                   containerSoldRecord
                                                       .purchased),
                                             ),
@@ -505,11 +505,12 @@ class _UpdateOrderPageWidgetState extends State<UpdateOrderPageWidget> {
                                           padding:
                                               EdgeInsetsDirectional.fromSTEB(
                                                   16, 0, 0, 0),
-                                          child: FutureBuilder<ApiCallResponse>(
-                                            future: GetOrderDetailsCall.call(),
+                                          child: FutureBuilder<OrderDetails>(
+                                            future: details,
                                             builder: (context, snapshot) {
                                               // Customize what your widget looks like when it's loading.
-                                              if (!snapshot.hasData) {
+                                              if (snapshot.connectionState !=
+                                                  ConnectionState.done) {
                                                 return Center(
                                                   child: SizedBox(
                                                     width: 50,
@@ -524,17 +525,11 @@ class _UpdateOrderPageWidgetState extends State<UpdateOrderPageWidget> {
                                                   ),
                                                 );
                                               }
-                                              final textFieldGetOrderDetailsResponse =
-                                                  snapshot.data;
+                                              final _details = snapshot.data;
                                               return TextFormField(
                                                 controller: textController6 ??=
                                                     TextEditingController(
-                                                  text: getJsonField(
-                                                    (textFieldGetOrderDetailsResponse
-                                                            ?.jsonBody ??
-                                                        ''),
-                                                    r'''$''',
-                                                  ).toString(),
+                                                  text: _details.billing.name,
                                                 ),
                                                 readOnly: true,
                                                 obscureText: false,
@@ -601,11 +596,12 @@ class _UpdateOrderPageWidgetState extends State<UpdateOrderPageWidget> {
                                           padding:
                                               EdgeInsetsDirectional.fromSTEB(
                                                   16, 0, 0, 0),
-                                          child: FutureBuilder<ApiCallResponse>(
-                                            future: GetOrderDetailsCall.call(),
+                                          child: FutureBuilder<OrderDetails>(
+                                            future: details,
                                             builder: (context, snapshot) {
                                               // Customize what your widget looks like when it's loading.
-                                              if (!snapshot.hasData) {
+                                              if (snapshot.connectionState !=
+                                                  ConnectionState.done) {
                                                 return Center(
                                                   child: SizedBox(
                                                     width: 50,
@@ -620,17 +616,11 @@ class _UpdateOrderPageWidgetState extends State<UpdateOrderPageWidget> {
                                                   ),
                                                 );
                                               }
-                                              final textFieldGetOrderDetailsResponse =
-                                                  snapshot.data;
+                                              final _details = snapshot.data;
                                               return TextFormField(
                                                 controller: textController7 ??=
                                                     TextEditingController(
-                                                  text: getJsonField(
-                                                    (textFieldGetOrderDetailsResponse
-                                                            ?.jsonBody ??
-                                                        ''),
-                                                    r'''$''',
-                                                  ).toString(),
+                                                  text: _details.shipping.name,
                                                 ),
                                                 readOnly: true,
                                                 obscureText: false,
@@ -929,7 +919,7 @@ class _UpdateOrderPageWidgetState extends State<UpdateOrderPageWidget> {
                                           borderRadius: 0,
                                           margin:
                                               EdgeInsetsDirectional.fromSTEB(
-                                                  12, 4, 12, 4),
+                                                  16, 4, 12, 4),
                                           hidesUnderline: true,
                                         ),
                                       ),

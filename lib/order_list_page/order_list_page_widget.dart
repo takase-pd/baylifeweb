@@ -381,7 +381,7 @@ class _OrderListPageWidgetState extends State<OrderListPageWidget> {
                                                         MediaQuery.of(context)
                                                                 .size
                                                                 .width *
-                                                            0.64,
+                                                            0.56,
                                                   ),
                                                   builder: (context) {
                                                     return Padding(
