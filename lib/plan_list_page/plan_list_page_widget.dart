@@ -45,6 +45,7 @@ class _PlanListPageWidgetState extends State<PlanListPageWidget> {
     return Scaffold(
       key: scaffoldKey,
       backgroundColor: FlutterFlowTheme.of(context).tertiaryColor,
+      resizeToAvoidBottomInset: false,
       body: Form(
         key: formKey,
         autovalidateMode: AutovalidateMode.disabled,

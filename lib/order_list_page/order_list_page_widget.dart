@@ -50,6 +50,7 @@ class _OrderListPageWidgetState extends State<OrderListPageWidget> {
     return Scaffold(
       key: scaffoldKey,
       backgroundColor: FlutterFlowTheme.of(context).tertiaryColor,
+      resizeToAvoidBottomInset: false,
       body: Form(
         key: formKey,
         autovalidateMode: AutovalidateMode.disabled,
