@@ -738,6 +738,103 @@ class _UpdateOrderPageWidgetState extends State<UpdateOrderPageWidget> {
                                     ],
                                   ),
                                 ),
+                                Column(
+                                  mainAxisSize: MainAxisSize.max,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Padding(
+                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                          16, 0, 0, 0),
+                                      child: Text(
+                                        '注文商品',
+                                        style: FlutterFlowTheme.of(context)
+                                            .bodyText1,
+                                      ),
+                                    ),
+                                    Padding(
+                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                          0, 0, 0, 16),
+                                      child: FutureBuilder<List<ShopsRecord>>(
+                                        future: queryShopsRecordOnce(
+                                          queryBuilder: (shopsRecord) =>
+                                              shopsRecord.where('director',
+                                                  isEqualTo:
+                                                      currentUserReference),
+                                          singleRecord: true,
+                                        ),
+                                        builder: (context, snapshot) {
+                                          // Customize what your widget looks like when it's loading.
+                                          if (!snapshot.hasData) {
+                                            return Center(
+                                              child: SizedBox(
+                                                width: 50,
+                                                height: 50,
+                                                child: SpinKitPulse(
+                                                  color: FlutterFlowTheme.of(
+                                                          context)
+                                                      .primaryColor,
+                                                  size: 50,
+                                                ),
+                                              ),
+                                            );
+                                          }
+                                          List<ShopsRecord>
+                                              containerShopsRecordList =
+                                              snapshot.data;
+                                          // Return an empty Container when the document does not exist.
+                                          if (snapshot.data.isEmpty) {
+                                            return Container();
+                                          }
+                                          final containerShopsRecord =
+                                              containerShopsRecordList
+                                                      .isNotEmpty
+                                                  ? containerShopsRecordList
+                                                      .first
+                                                  : null;
+                                          return Container(
+                                            decoration: BoxDecoration(),
+                                            child: Padding(
+                                              padding: EdgeInsetsDirectional
+                                                  .fromSTEB(16, 0, 16, 0),
+                                              child: FutureBuilder<
+                                                  ApiCallResponse>(
+                                                future:
+                                                    GetOrderedPlansCall.call(),
+                                                builder: (context, snapshot) {
+                                                  // Customize what your widget looks like when it's loading.
+                                                  if (!snapshot.hasData) {
+                                                    return Center(
+                                                      child: SizedBox(
+                                                        width: 50,
+                                                        height: 50,
+                                                        child: SpinKitPulse(
+                                                          color: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .primaryColor,
+                                                          size: 50,
+                                                        ),
+                                                      ),
+                                                    );
+                                                  }
+                                                  final listViewGetOrderedPlansResponse =
+                                                      snapshot.data;
+                                                  return ListView(
+                                                    padding: EdgeInsets.zero,
+                                                    primary: false,
+                                                    shrinkWrap: true,
+                                                    scrollDirection:
+                                                        Axis.vertical,
+                                                    children: [],
+                                                  );
+                                                },
+                                              ),
+                                            ),
+                                          );
+                                        },
+                                      ),
+                                    ),
+                                  ],
+                                ),
                               ],
                             ),
                           ),
