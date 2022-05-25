@@ -249,6 +249,7 @@ class _UpdateOrderPageWidgetState extends State<UpdateOrderPageWidget> {
                                           obscureText: false,
                                           decoration: InputDecoration(
                                             labelText: '最終更新',
+                                            hintText: '配送情報、ステータス、メモ更新日時',
                                             enabledBorder: UnderlineInputBorder(
                                               borderSide: BorderSide(
                                                 color: Color(0x00000000),
