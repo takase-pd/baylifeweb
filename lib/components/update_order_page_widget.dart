@@ -66,7 +66,7 @@ class _UpdateOrderPageWidgetState extends State<UpdateOrderPageWidget> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Container(
-                width: MediaQuery.of(context).size.width * 0.56,
+                width: MediaQuery.of(context).size.width * 0.48,
                 decoration: BoxDecoration(),
                 child: Padding(
                   padding: EdgeInsetsDirectional.fromSTEB(0, 16, 0, 0),
@@ -845,7 +845,7 @@ class _UpdateOrderPageWidgetState extends State<UpdateOrderPageWidget> {
                                           borderRadius: 0,
                                           margin:
                                               EdgeInsetsDirectional.fromSTEB(
-                                                  12, 4, 12, 4),
+                                                  16, 4, 12, 4),
                                           hidesUnderline: true,
                                         ),
                                       ),
