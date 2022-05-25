@@ -92,7 +92,7 @@ class _UpdateOrderPageWidgetState extends State<UpdateOrderPageWidget> {
                           padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 16),
                           child: Container(
                             decoration: BoxDecoration(
-                              color: FlutterFlowTheme.of(context).tDark,
+                              color: FlutterFlowTheme.of(context).tLight,
                               borderRadius: BorderRadius.circular(8),
                             ),
                             child: Column(
@@ -665,226 +665,227 @@ class _UpdateOrderPageWidgetState extends State<UpdateOrderPageWidget> {
                                     ],
                                   ),
                                 ),
-                                Column(
-                                  mainAxisSize: MainAxisSize.max,
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Padding(
+                              ],
+                            ),
+                          ),
+                        ),
+                        Padding(
+                          padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 16),
+                          child: Container(
+                            decoration: BoxDecoration(
+                              color: FlutterFlowTheme.of(context).tLight,
+                              borderRadius: BorderRadius.circular(8),
+                            ),
+                            child: Column(
+                              mainAxisSize: MainAxisSize.max,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Padding(
+                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                      16, 0, 0, 8),
+                                  child: Text(
+                                    '注文商品',
+                                    style:
+                                        FlutterFlowTheme.of(context).bodyText1,
+                                  ),
+                                ),
+                                Padding(
+                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                      0, 0, 0, 16),
+                                  child: Container(
+                                    decoration: BoxDecoration(),
+                                    child: Padding(
                                       padding: EdgeInsetsDirectional.fromSTEB(
-                                          16, 0, 0, 8),
-                                      child: Text(
-                                        '注文商品',
-                                        style: FlutterFlowTheme.of(context)
-                                            .bodyText1,
-                                      ),
-                                    ),
-                                    Padding(
-                                      padding: EdgeInsetsDirectional.fromSTEB(
-                                          0, 0, 0, 16),
-                                      child: Container(
-                                        decoration: BoxDecoration(),
-                                        child: Padding(
-                                          padding:
-                                              EdgeInsetsDirectional.fromSTEB(
-                                                  16, 0, 16, 0),
-                                          child: FutureBuilder<ApiCallResponse>(
-                                            future: GetOrderedPlansCall.call(),
-                                            builder: (context, snapshot) {
-                                              // Customize what your widget looks like when it's loading.
-                                              if (!snapshot.hasData) {
-                                                return Center(
-                                                  child: SizedBox(
-                                                    width: 50,
-                                                    height: 50,
-                                                    child: SpinKitPulse(
-                                                      color:
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .primaryColor,
-                                                      size: 50,
-                                                    ),
+                                          16, 0, 16, 0),
+                                      child: FutureBuilder<ApiCallResponse>(
+                                        future: GetOrderedPlansCall.call(),
+                                        builder: (context, snapshot) {
+                                          // Customize what your widget looks like when it's loading.
+                                          if (!snapshot.hasData) {
+                                            return Center(
+                                              child: SizedBox(
+                                                width: 50,
+                                                height: 50,
+                                                child: SpinKitPulse(
+                                                  color: FlutterFlowTheme.of(
+                                                          context)
+                                                      .primaryColor,
+                                                  size: 50,
+                                                ),
+                                              ),
+                                            );
+                                          }
+                                          final listViewGetOrderedPlansResponse =
+                                              snapshot.data;
+                                          return ListView(
+                                            padding: EdgeInsets.zero,
+                                            primary: false,
+                                            shrinkWrap: true,
+                                            scrollDirection: Axis.vertical,
+                                            children: [
+                                              Padding(
+                                                padding: EdgeInsetsDirectional
+                                                    .fromSTEB(0, 0, 0, 4),
+                                                child: Container(
+                                                  height: 88,
+                                                  decoration: BoxDecoration(
+                                                    color: FlutterFlowTheme.of(
+                                                            context)
+                                                        .background,
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            8),
                                                   ),
-                                                );
-                                              }
-                                              final listViewGetOrderedPlansResponse =
-                                                  snapshot.data;
-                                              return ListView(
-                                                padding: EdgeInsets.zero,
-                                                primary: false,
-                                                shrinkWrap: true,
-                                                scrollDirection: Axis.vertical,
-                                                children: [
-                                                  Padding(
+                                                  child: Padding(
                                                     padding:
                                                         EdgeInsetsDirectional
                                                             .fromSTEB(
-                                                                0, 0, 0, 4),
-                                                    child: Container(
-                                                      height: 88,
-                                                      decoration: BoxDecoration(
-                                                        color:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .background,
-                                                        borderRadius:
-                                                            BorderRadius
-                                                                .circular(8),
-                                                      ),
-                                                      child: Padding(
-                                                        padding:
-                                                            EdgeInsetsDirectional
-                                                                .fromSTEB(16, 8,
-                                                                    8, 8),
-                                                        child: Column(
+                                                                16, 8, 8, 8),
+                                                    child: Column(
+                                                      mainAxisSize:
+                                                          MainAxisSize.max,
+                                                      mainAxisAlignment:
+                                                          MainAxisAlignment
+                                                              .spaceEvenly,
+                                                      crossAxisAlignment:
+                                                          CrossAxisAlignment
+                                                              .start,
+                                                      children: [
+                                                        Row(
+                                                          mainAxisSize:
+                                                              MainAxisSize.min,
+                                                          mainAxisAlignment:
+                                                              MainAxisAlignment
+                                                                  .start,
+                                                          children: [
+                                                            Expanded(
+                                                              flex: 1,
+                                                              child: Text(
+                                                                'No',
+                                                                style: FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .bodyText1,
+                                                              ),
+                                                            ),
+                                                            Expanded(
+                                                              flex: 3,
+                                                              child: Text(
+                                                                'Name',
+                                                                style: FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .bodyText1,
+                                                              ),
+                                                            ),
+                                                            Expanded(
+                                                              flex: 2,
+                                                              child: Text(
+                                                                'total_amount',
+                                                                style: FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .bodyText1,
+                                                              ),
+                                                            ),
+                                                            Expanded(
+                                                              flex: 1,
+                                                              child: Text(
+                                                                'quantity',
+                                                                style: FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .bodyText1,
+                                                              ),
+                                                            ),
+                                                            Expanded(
+                                                              flex: 2,
+                                                              child: Text(
+                                                                'status',
+                                                                style: FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .bodyText1,
+                                                              ),
+                                                            ),
+                                                          ],
+                                                        ),
+                                                        Row(
                                                           mainAxisSize:
                                                               MainAxisSize.max,
                                                           mainAxisAlignment:
                                                               MainAxisAlignment
-                                                                  .spaceEvenly,
-                                                          crossAxisAlignment:
-                                                              CrossAxisAlignment
-                                                                  .start,
+                                                                  .spaceBetween,
                                                           children: [
-                                                            Row(
-                                                              mainAxisSize:
-                                                                  MainAxisSize
-                                                                      .min,
-                                                              mainAxisAlignment:
-                                                                  MainAxisAlignment
-                                                                      .start,
-                                                              children: [
-                                                                Expanded(
-                                                                  flex: 1,
-                                                                  child: Text(
-                                                                    'No',
-                                                                    style: FlutterFlowTheme.of(
-                                                                            context)
-                                                                        .bodyText1,
-                                                                  ),
-                                                                ),
-                                                                Expanded(
-                                                                  flex: 3,
-                                                                  child: Text(
-                                                                    'Name',
-                                                                    style: FlutterFlowTheme.of(
-                                                                            context)
-                                                                        .bodyText1,
-                                                                  ),
-                                                                ),
-                                                                Expanded(
-                                                                  flex: 2,
-                                                                  child: Text(
-                                                                    'total_amount',
-                                                                    style: FlutterFlowTheme.of(
-                                                                            context)
-                                                                        .bodyText1,
-                                                                  ),
-                                                                ),
-                                                                Expanded(
-                                                                  flex: 1,
-                                                                  child: Text(
-                                                                    'quantity',
-                                                                    style: FlutterFlowTheme.of(
-                                                                            context)
-                                                                        .bodyText1,
-                                                                  ),
-                                                                ),
-                                                                Expanded(
-                                                                  flex: 2,
-                                                                  child: Text(
-                                                                    'status',
-                                                                    style: FlutterFlowTheme.of(
-                                                                            context)
-                                                                        .bodyText1,
-                                                                  ),
-                                                                ),
-                                                              ],
-                                                            ),
-                                                            Row(
-                                                              mainAxisSize:
-                                                                  MainAxisSize
-                                                                      .max,
-                                                              mainAxisAlignment:
-                                                                  MainAxisAlignment
-                                                                      .spaceBetween,
-                                                              children: [
-                                                                Padding(
-                                                                  padding: EdgeInsetsDirectional
+                                                            Padding(
+                                                              padding:
+                                                                  EdgeInsetsDirectional
                                                                       .fromSTEB(
                                                                           16,
                                                                           0,
                                                                           0,
                                                                           0),
-                                                                  child: Text(
-                                                                    'updated',
-                                                                    style: FlutterFlowTheme.of(
-                                                                            context)
-                                                                        .bodyText1,
-                                                                  ),
-                                                                ),
-                                                                Padding(
-                                                                  padding: EdgeInsetsDirectional
+                                                              child: Text(
+                                                                'updated',
+                                                                style: FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .bodyText1,
+                                                              ),
+                                                            ),
+                                                            Padding(
+                                                              padding:
+                                                                  EdgeInsetsDirectional
                                                                       .fromSTEB(
                                                                           0,
                                                                           0,
                                                                           8,
                                                                           0),
-                                                                  child:
-                                                                      FlutterFlowDropDown(
-                                                                    options: [
-                                                                      '注文',
-                                                                      '確認中',
-                                                                      '発送済',
-                                                                      '到着'
-                                                                    ].toList(),
-                                                                    onChanged: (val) =>
-                                                                        setState(() =>
-                                                                            dropDownValue1 =
-                                                                                val),
-                                                                    width: 128,
-                                                                    height: 32,
-                                                                    textStyle: FlutterFlowTheme.of(
-                                                                            context)
-                                                                        .bodyText2,
-                                                                    hintText:
-                                                                        'ステータス',
-                                                                    fillColor:
-                                                                        Colors
-                                                                            .white,
-                                                                    elevation:
-                                                                        4,
-                                                                    borderColor:
-                                                                        Colors
-                                                                            .transparent,
-                                                                    borderWidth:
-                                                                        0,
-                                                                    borderRadius:
-                                                                        0,
-                                                                    margin: EdgeInsetsDirectional
+                                                              child:
+                                                                  FlutterFlowDropDown(
+                                                                options: [
+                                                                  '注文',
+                                                                  '確認中',
+                                                                  '発送済',
+                                                                  '到着'
+                                                                ].toList(),
+                                                                onChanged: (val) =>
+                                                                    setState(() =>
+                                                                        dropDownValue1 =
+                                                                            val),
+                                                                width: 128,
+                                                                height: 32,
+                                                                textStyle: FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .bodyText2,
+                                                                hintText:
+                                                                    'ステータス',
+                                                                fillColor:
+                                                                    Colors
+                                                                        .white,
+                                                                elevation: 4,
+                                                                borderColor: Colors
+                                                                    .transparent,
+                                                                borderWidth: 0,
+                                                                borderRadius: 0,
+                                                                margin:
+                                                                    EdgeInsetsDirectional
                                                                         .fromSTEB(
                                                                             16,
                                                                             4,
                                                                             8,
                                                                             4),
-                                                                    hidesUnderline:
-                                                                        true,
-                                                                  ),
-                                                                ),
-                                                              ],
+                                                                hidesUnderline:
+                                                                    true,
+                                                              ),
                                                             ),
                                                           ],
                                                         ),
-                                                      ),
+                                                      ],
                                                     ),
                                                   ),
-                                                ],
-                                              );
-                                            },
-                                          ),
-                                        ),
+                                                ),
+                                              ),
+                                            ],
+                                          );
+                                        },
                                       ),
                                     ),
-                                  ],
+                                  ),
                                 ),
                               ],
                             ),
