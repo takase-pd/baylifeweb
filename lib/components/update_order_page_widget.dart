@@ -83,7 +83,7 @@ class _UpdateOrderPageWidgetState extends State<UpdateOrderPageWidget> {
                             children: [
                               Text(
                                 '注文詳細',
-                                style: FlutterFlowTheme.of(context).subtitle2,
+                                style: FlutterFlowTheme.of(context).subtitle1,
                               ),
                             ],
                           ),
@@ -150,14 +150,7 @@ class _UpdateOrderPageWidgetState extends State<UpdateOrderPageWidget> {
                                               ),
                                             ),
                                             style: FlutterFlowTheme.of(context)
-                                                .bodyText2
-                                                .override(
-                                                  fontFamily: 'Montserrat',
-                                                  color: FlutterFlowTheme.of(
-                                                          context)
-                                                      .textDark,
-                                                  fontWeight: FontWeight.w500,
-                                                ),
+                                                .bodyText1,
                                           ),
                                         ),
                                       ),
@@ -205,14 +198,7 @@ class _UpdateOrderPageWidgetState extends State<UpdateOrderPageWidget> {
                                               ),
                                             ),
                                             style: FlutterFlowTheme.of(context)
-                                                .bodyText2
-                                                .override(
-                                                  fontFamily: 'Montserrat',
-                                                  color: FlutterFlowTheme.of(
-                                                          context)
-                                                      .textDark,
-                                                  fontWeight: FontWeight.w500,
-                                                ),
+                                                .bodyText1,
                                           ),
                                         ),
                                       ),
@@ -226,7 +212,7 @@ class _UpdateOrderPageWidgetState extends State<UpdateOrderPageWidget> {
                                     mainAxisSize: MainAxisSize.max,
                                     children: [
                                       Expanded(
-                                        flex: 2,
+                                        flex: 1,
                                         child: Padding(
                                           padding:
                                               EdgeInsetsDirectional.fromSTEB(
@@ -274,14 +260,7 @@ class _UpdateOrderPageWidgetState extends State<UpdateOrderPageWidget> {
                                               ),
                                             ),
                                             style: FlutterFlowTheme.of(context)
-                                                .bodyText2
-                                                .override(
-                                                  fontFamily: 'Montserrat',
-                                                  color: FlutterFlowTheme.of(
-                                                          context)
-                                                      .textDark,
-                                                  fontWeight: FontWeight.w500,
-                                                ),
+                                                .bodyText1,
                                             textAlign: TextAlign.end,
                                             keyboardType: TextInputType.number,
                                           ),
@@ -292,7 +271,7 @@ class _UpdateOrderPageWidgetState extends State<UpdateOrderPageWidget> {
                                         child: Padding(
                                           padding:
                                               EdgeInsetsDirectional.fromSTEB(
-                                                  8, 0, 0, 0),
+                                                  16, 0, 0, 0),
                                           child: TextFormField(
                                             controller: textController4 ??=
                                                 TextEditingController(
@@ -332,25 +311,18 @@ class _UpdateOrderPageWidgetState extends State<UpdateOrderPageWidget> {
                                               ),
                                             ),
                                             style: FlutterFlowTheme.of(context)
-                                                .bodyText2
-                                                .override(
-                                                  fontFamily: 'Montserrat',
-                                                  color: FlutterFlowTheme.of(
-                                                          context)
-                                                      .textDark,
-                                                  fontWeight: FontWeight.w500,
-                                                ),
+                                                .bodyText1,
                                             textAlign: TextAlign.end,
                                             keyboardType: TextInputType.number,
                                           ),
                                         ),
                                       ),
                                       Expanded(
-                                        flex: 2,
+                                        flex: 1,
                                         child: Padding(
                                           padding:
                                               EdgeInsetsDirectional.fromSTEB(
-                                                  8, 0, 8, 0),
+                                                  16, 0, 16, 0),
                                           child: TextFormField(
                                             controller: textController5 ??=
                                                 TextEditingController(
@@ -395,14 +367,7 @@ class _UpdateOrderPageWidgetState extends State<UpdateOrderPageWidget> {
                                               ),
                                             ),
                                             style: FlutterFlowTheme.of(context)
-                                                .bodyText2
-                                                .override(
-                                                  fontFamily: 'Montserrat',
-                                                  color: FlutterFlowTheme.of(
-                                                          context)
-                                                      .textDark,
-                                                  fontWeight: FontWeight.w500,
-                                                ),
+                                                .bodyText1,
                                             textAlign: TextAlign.end,
                                           ),
                                         ),
@@ -486,18 +451,9 @@ class _UpdateOrderPageWidgetState extends State<UpdateOrderPageWidget> {
                                                     ),
                                                   ),
                                                 ),
-                                                style: FlutterFlowTheme.of(
-                                                        context)
-                                                    .bodyText2
-                                                    .override(
-                                                      fontFamily: 'Montserrat',
-                                                      color:
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .textDark,
-                                                      fontWeight:
-                                                          FontWeight.w500,
-                                                    ),
+                                                style:
+                                                    FlutterFlowTheme.of(context)
+                                                        .bodyText1,
                                               );
                                             },
                                           ),
@@ -582,18 +538,9 @@ class _UpdateOrderPageWidgetState extends State<UpdateOrderPageWidget> {
                                                     ),
                                                   ),
                                                 ),
-                                                style: FlutterFlowTheme.of(
-                                                        context)
-                                                    .bodyText2
-                                                    .override(
-                                                      fontFamily: 'Montserrat',
-                                                      color:
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .textDark,
-                                                      fontWeight:
-                                                          FontWeight.w500,
-                                                    ),
+                                                style:
+                                                    FlutterFlowTheme.of(context)
+                                                        .bodyText1,
                                               );
                                             },
                                           ),
@@ -651,14 +598,7 @@ class _UpdateOrderPageWidgetState extends State<UpdateOrderPageWidget> {
                                               ),
                                             ),
                                             style: FlutterFlowTheme.of(context)
-                                                .bodyText2
-                                                .override(
-                                                  fontFamily: 'Montserrat',
-                                                  color: FlutterFlowTheme.of(
-                                                          context)
-                                                      .textDark,
-                                                  fontWeight: FontWeight.w500,
-                                                ),
+                                                .bodyText1,
                                           ),
                                         ),
                                       ),
@@ -686,7 +626,7 @@ class _UpdateOrderPageWidgetState extends State<UpdateOrderPageWidget> {
                                   child: Text(
                                     '注文商品',
                                     style:
-                                        FlutterFlowTheme.of(context).bodyText1,
+                                        FlutterFlowTheme.of(context).subtitle2,
                                   ),
                                 ),
                                 Padding(
@@ -925,14 +865,7 @@ class _UpdateOrderPageWidgetState extends State<UpdateOrderPageWidget> {
                                               focusedBorder: InputBorder.none,
                                             ),
                                             style: FlutterFlowTheme.of(context)
-                                                .bodyText2
-                                                .override(
-                                                  fontFamily: 'Montserrat',
-                                                  color: FlutterFlowTheme.of(
-                                                          context)
-                                                      .textDark,
-                                                  fontWeight: FontWeight.w500,
-                                                ),
+                                                .bodyText1,
                                           ),
                                         ),
                                       ),
@@ -955,14 +888,7 @@ class _UpdateOrderPageWidgetState extends State<UpdateOrderPageWidget> {
                                               focusedBorder: InputBorder.none,
                                             ),
                                             style: FlutterFlowTheme.of(context)
-                                                .bodyText2
-                                                .override(
-                                                  fontFamily: 'Montserrat',
-                                                  color: FlutterFlowTheme.of(
-                                                          context)
-                                                      .textDark,
-                                                  fontWeight: FontWeight.w500,
-                                                ),
+                                                .bodyText1,
                                           ),
                                         ),
                                       ),
@@ -1021,17 +947,13 @@ class _UpdateOrderPageWidgetState extends State<UpdateOrderPageWidget> {
                                                   ),
                                                 ),
                                               ),
-                                              style: FlutterFlowTheme.of(
-                                                      context)
-                                                  .bodyText2
-                                                  .override(
-                                                    fontFamily: 'Montserrat',
-                                                    color: FlutterFlowTheme.of(
-                                                            context)
-                                                        .textDark,
-                                                    fontWeight: FontWeight.w500,
-                                                    lineHeight: 1.48,
-                                                  ),
+                                              style:
+                                                  FlutterFlowTheme.of(context)
+                                                      .bodyText1
+                                                      .override(
+                                                        fontFamily: 'Open Sans',
+                                                        lineHeight: 1.48,
+                                                      ),
                                               keyboardType:
                                                   TextInputType.multiline,
                                             ),
@@ -1060,7 +982,7 @@ class _UpdateOrderPageWidgetState extends State<UpdateOrderPageWidget> {
                                           height: 50,
                                           textStyle:
                                               FlutterFlowTheme.of(context)
-                                                  .bodyText2,
+                                                  .bodyText1,
                                           hintText: 'ステータス',
                                           fillColor: Colors.white,
                                           elevation: 4,
@@ -1157,7 +1079,7 @@ class _UpdateOrderPageWidgetState extends State<UpdateOrderPageWidget> {
                                     color: FlutterFlowTheme.of(context)
                                         .secondaryColor,
                                     textStyle: FlutterFlowTheme.of(context)
-                                        .subtitle2
+                                        .bodyText1
                                         .override(
                                           fontFamily: 'Open Sans',
                                           color: FlutterFlowTheme.of(context)
