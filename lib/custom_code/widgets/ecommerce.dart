@@ -15,25 +15,21 @@ class OrderDetails {
   });
 }
 
-class PlanData {
+class OrderedPlan {
   final String path;
   final int unitAmount;
   final int quantity;
   final String name;
-  // final int subtotal;
-  final int shippingFeeNormal;
-  final bool shippingEachFee;
   final ShippingStatus status;
+  final DateTime updated;
 
-  PlanData({
+  OrderedPlan({
     this.path,
     this.unitAmount,
     this.quantity,
     this.name,
-    // this.subtotal,
-    this.shippingFeeNormal,
-    this.shippingEachFee,
     this.status,
+    this.updated,
   });
 
   int get subtotal => unitAmount * quantity;

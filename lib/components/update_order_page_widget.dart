@@ -39,8 +39,9 @@ class _UpdateOrderPageWidgetState extends State<UpdateOrderPageWidget> {
   TextEditingController textController10;
   TextEditingController textController11;
   Future<OrderDetails> details;
+  Future<List<OrderedPlan>> plans;
 
-  Future<OrderDetails> _getOrdersDetails(String paymentId) async {
+  Future<OrderDetails> _getOrderDetails(String paymentId) async {
     OrderDetails _details;
 
     final _shop = await _getShop();
@@ -100,6 +101,51 @@ class _UpdateOrderPageWidgetState extends State<UpdateOrderPageWidget> {
     return _details;
   }
 
+  Future<List<OrderedPlan>> _getOrderedPlans(String paymentId) async {
+    List<OrderedPlan> _plans = [];
+
+    final _shop = await _getShop();
+    if (_shop == null) return _plans;
+
+    if (!currentUser.loggedIn) return _plans;
+
+    final _appCheckToken = await AppCheckAgent.getToken(context);
+    if (_appCheckToken == null) return _plans;
+
+    final apiCallOutput = await GetOrderedPlansCall.call(
+      shop: _shop.reference.path,
+      uid: currentUserUid,
+      paymentId: paymentId,
+      accessToken: currentJwtToken,
+      appCheckToken: _appCheckToken,
+    );
+    final _apiJson = getJsonField(apiCallOutput.jsonBody, r'''$.result''');
+    final success = _apiJson['success'] ?? false;
+    if (!success) {
+      String errorMessage = _apiJson['error'] ?? '原因不明のエラーが発生';
+      showSnackbar(
+        context,
+        'Error: $errorMessage',
+      );
+      return _plans;
+    }
+    _apiJson['plans'].forEach((plan) {
+      _plans.add(OrderedPlan(
+        path: plan['path'],
+        unitAmount: plan['unit_amount'],
+        quantity: plan['quantity'],
+        name: plan['name'],
+        status: getShippingStatus(plan['status']),
+        updated: Timestamp(
+          plan['updated']['_seconds'],
+          plan['updated']['_nanoseconds'],
+        ).toDate(),
+      ));
+    });
+
+    return _plans;
+  }
+
   Future<ShopsRecord> _getShop() async {
     ShopsRecord _shop;
     final containerShopsRecordList = await queryShopsRecordOnce(
@@ -118,7 +164,8 @@ class _UpdateOrderPageWidgetState extends State<UpdateOrderPageWidget> {
   @override
   void initState() {
     super.initState();
-    details = _getOrdersDetails(widget.order.id);
+    details = _getOrderDetails(widget.order.id);
+    plans = _getOrderedPlans(widget.order.id);
   }
 
   @override
@@ -198,7 +245,7 @@ class _UpdateOrderPageWidgetState extends State<UpdateOrderPageWidget> {
                                             controller: textController1 ??=
                                                 TextEditingController(
                                               text: dateTimeFormat(
-                                                  'MMMd, y h:mm a',
+                                                  'MMM d, y h:mm a',
                                                   containerSoldRecord
                                                       .purchased),
                                             ),
@@ -253,7 +300,8 @@ class _UpdateOrderPageWidgetState extends State<UpdateOrderPageWidget> {
                                           child: TextFormField(
                                             controller: textController2 ??=
                                                 TextEditingController(
-                                              text: dateTimeFormat('yMMMd',
+                                              text: dateTimeFormat(
+                                                  'MMM d, y h:mm a',
                                                   containerSoldRecord.updated),
                                             ),
                                             readOnly: true,
@@ -771,11 +819,12 @@ class _UpdateOrderPageWidgetState extends State<UpdateOrderPageWidget> {
                                     child: Padding(
                                       padding: EdgeInsetsDirectional.fromSTEB(
                                           16, 0, 16, 0),
-                                      child: FutureBuilder<ApiCallResponse>(
-                                        future: GetOrderedPlansCall.call(),
+                                      child: FutureBuilder<List<OrderedPlan>>(
+                                        future: plans,
                                         builder: (context, snapshot) {
                                           // Customize what your widget looks like when it's loading.
-                                          if (!snapshot.hasData) {
+                                          if (snapshot.connectionState !=
+                                              ConnectionState.done) {
                                             return Center(
                                               child: SizedBox(
                                                 width: 50,
@@ -789,15 +838,20 @@ class _UpdateOrderPageWidgetState extends State<UpdateOrderPageWidget> {
                                               ),
                                             );
                                           }
-                                          final listViewGetOrderedPlansResponse =
-                                              snapshot.data;
-                                          return ListView(
+                                          final _plans = snapshot.data;
+                                          return ListView.builder(
                                             padding: EdgeInsets.zero,
                                             primary: false,
                                             shrinkWrap: true,
                                             scrollDirection: Axis.vertical,
-                                            children: [
-                                              Padding(
+                                            physics:
+                                                const NeverScrollableScrollPhysics(),
+                                            itemCount: _plans.length,
+                                            itemBuilder:
+                                                (context, listViewIndex) {
+                                              final _plan =
+                                                  _plans[listViewIndex];
+                                              return Padding(
                                                 padding: EdgeInsetsDirectional
                                                     .fromSTEB(0, 0, 0, 4),
                                                 child: Container(
@@ -835,7 +889,9 @@ class _UpdateOrderPageWidgetState extends State<UpdateOrderPageWidget> {
                                                             Expanded(
                                                               flex: 1,
                                                               child: Text(
-                                                                'No',
+                                                                (listViewIndex +
+                                                                        1)
+                                                                    .toString(),
                                                                 style: FlutterFlowTheme.of(
                                                                         context)
                                                                     .bodyText1,
@@ -844,7 +900,7 @@ class _UpdateOrderPageWidgetState extends State<UpdateOrderPageWidget> {
                                                             Expanded(
                                                               flex: 3,
                                                               child: Text(
-                                                                'Name',
+                                                                _plan.name,
                                                                 style: FlutterFlowTheme.of(
                                                                         context)
                                                                     .bodyText1,
@@ -853,7 +909,18 @@ class _UpdateOrderPageWidgetState extends State<UpdateOrderPageWidget> {
                                                             Expanded(
                                                               flex: 2,
                                                               child: Text(
-                                                                'total_amount',
+                                                                formatNumber(
+                                                                  _plan
+                                                                      .subtotal,
+                                                                  formatType:
+                                                                      FormatType
+                                                                          .custom,
+                                                                  currency: '￥',
+                                                                  format:
+                                                                      '#,##0',
+                                                                  locale:
+                                                                      'ja_JP',
+                                                                ),
                                                                 style: FlutterFlowTheme.of(
                                                                         context)
                                                                     .bodyText1,
@@ -862,20 +929,18 @@ class _UpdateOrderPageWidgetState extends State<UpdateOrderPageWidget> {
                                                             Expanded(
                                                               flex: 1,
                                                               child: Text(
-                                                                'quantity',
+                                                                _plan.quantity
+                                                                    .toString(),
                                                                 style: FlutterFlowTheme.of(
                                                                         context)
                                                                     .bodyText1,
                                                               ),
                                                             ),
                                                             Expanded(
-                                                              flex: 2,
-                                                              child: Text(
-                                                                'status',
-                                                                style: FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .bodyText1,
-                                                              ),
+                                                              flex: 1,
+                                                              child: shippingStatusIcon(
+                                                                  context,
+                                                                  _plan.status),
                                                             ),
                                                           ],
                                                         ),
@@ -895,7 +960,10 @@ class _UpdateOrderPageWidgetState extends State<UpdateOrderPageWidget> {
                                                                           0,
                                                                           0),
                                                               child: Text(
-                                                                'updated',
+                                                                dateTimeFormat(
+                                                                    'MMM d, y h:mm a',
+                                                                    _plan
+                                                                        .updated),
                                                                 style: FlutterFlowTheme.of(
                                                                         context)
                                                                     .bodyText1,
@@ -953,8 +1021,8 @@ class _UpdateOrderPageWidgetState extends State<UpdateOrderPageWidget> {
                                                     ),
                                                   ),
                                                 ),
-                                              ),
-                                            ],
+                                              );
+                                            },
                                           );
                                         },
                                       ),
