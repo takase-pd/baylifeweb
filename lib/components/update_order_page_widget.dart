@@ -24,7 +24,10 @@ class UpdateOrderPageWidget extends StatefulWidget {
 
 class _UpdateOrderPageWidgetState extends State<UpdateOrderPageWidget> {
   String dropDownValue1;
+  TextEditingController textController10;
   TextEditingController textController9;
+  TextEditingController textController11;
+  String dropDownValue2;
   TextEditingController textController1;
   TextEditingController textController2;
   TextEditingController textController3;
@@ -33,14 +36,11 @@ class _UpdateOrderPageWidgetState extends State<UpdateOrderPageWidget> {
   TextEditingController textController6;
   TextEditingController textController7;
   TextEditingController textController8;
-  String dropDownValue2;
-  TextEditingController textController10;
-  TextEditingController textController11;
 
   @override
   void initState() {
     super.initState();
-    textController9 = TextEditingController();
+    textController10 = TextEditingController();
   }
 
   @override
@@ -672,7 +672,7 @@ class _UpdateOrderPageWidgetState extends State<UpdateOrderPageWidget> {
                                                 padding: EdgeInsetsDirectional
                                                     .fromSTEB(0, 0, 0, 4),
                                                 child: Container(
-                                                  height: 144,
+                                                  height: 88,
                                                   decoration: BoxDecoration(
                                                     color: FlutterFlowTheme.of(
                                                             context)
@@ -784,111 +784,6 @@ class _UpdateOrderPageWidgetState extends State<UpdateOrderPageWidget> {
                                                             ),
                                                           ],
                                                         ),
-                                                        Row(
-                                                          mainAxisSize:
-                                                              MainAxisSize.max,
-                                                          mainAxisAlignment:
-                                                              MainAxisAlignment
-                                                                  .spaceBetween,
-                                                          children: [
-                                                            Expanded(
-                                                              flex: 4,
-                                                              child: Padding(
-                                                                padding:
-                                                                    EdgeInsetsDirectional
-                                                                        .fromSTEB(
-                                                                            16,
-                                                                            0,
-                                                                            8,
-                                                                            0),
-                                                                child:
-                                                                    TextFormField(
-                                                                  controller:
-                                                                      textController9,
-                                                                  obscureText:
-                                                                      false,
-                                                                  decoration:
-                                                                      InputDecoration(
-                                                                    labelText:
-                                                                        'トラッキングコード',
-                                                                    enabledBorder:
-                                                                        InputBorder
-                                                                            .none,
-                                                                    focusedBorder:
-                                                                        InputBorder
-                                                                            .none,
-                                                                  ),
-                                                                  style: FlutterFlowTheme.of(
-                                                                          context)
-                                                                      .bodyText1
-                                                                      .override(
-                                                                        fontFamily:
-                                                                            'Open Sans',
-                                                                        color: FlutterFlowTheme.of(context)
-                                                                            .pDark,
-                                                                      ),
-                                                                ),
-                                                              ),
-                                                            ),
-                                                            Expanded(
-                                                              flex: 3,
-                                                              child: Padding(
-                                                                padding:
-                                                                    EdgeInsetsDirectional
-                                                                        .fromSTEB(
-                                                                            0,
-                                                                            0,
-                                                                            8,
-                                                                            0),
-                                                                child:
-                                                                    FlutterFlowDropDown(
-                                                                  options: [
-                                                                    '注文',
-                                                                    '確認中',
-                                                                    '発送済',
-                                                                    '到着'
-                                                                  ].toList(),
-                                                                  onChanged: (val) =>
-                                                                      setState(() =>
-                                                                          dropDownValue1 =
-                                                                              val),
-                                                                  width: 128,
-                                                                  height: 32,
-                                                                  textStyle: FlutterFlowTheme.of(
-                                                                          context)
-                                                                      .bodyText1
-                                                                      .override(
-                                                                        fontFamily:
-                                                                            'Open Sans',
-                                                                        color: FlutterFlowTheme.of(context)
-                                                                            .pDark,
-                                                                      ),
-                                                                  hintText:
-                                                                      'ステータス',
-                                                                  fillColor:
-                                                                      Colors
-                                                                          .white,
-                                                                  elevation: 4,
-                                                                  borderColor:
-                                                                      Colors
-                                                                          .transparent,
-                                                                  borderWidth:
-                                                                      0,
-                                                                  borderRadius:
-                                                                      0,
-                                                                  margin: EdgeInsetsDirectional
-                                                                      .fromSTEB(
-                                                                          16,
-                                                                          4,
-                                                                          8,
-                                                                          4),
-                                                                  hidesUnderline:
-                                                                      true,
-                                                                ),
-                                                              ),
-                                                            ),
-                                                          ],
-                                                        ),
                                                       ],
                                                     ),
                                                   ),
@@ -927,7 +822,7 @@ class _UpdateOrderPageWidgetState extends State<UpdateOrderPageWidget> {
                                               EdgeInsetsDirectional.fromSTEB(
                                                   16, 0, 0, 0),
                                           child: TextFormField(
-                                            controller: textController10 ??=
+                                            controller: textController9 ??=
                                                 TextEditingController(
                                               text: containerSoldRecord.carrier,
                                             ),
@@ -944,6 +839,71 @@ class _UpdateOrderPageWidgetState extends State<UpdateOrderPageWidget> {
                                       ),
                                     ],
                                   ),
+                                ),
+                                Row(
+                                  mainAxisSize: MainAxisSize.max,
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Expanded(
+                                      flex: 1,
+                                      child: Padding(
+                                        padding: EdgeInsetsDirectional.fromSTEB(
+                                            16, 0, 0, 0),
+                                        child: Text(
+                                          'No',
+                                          style: FlutterFlowTheme.of(context)
+                                              .bodyText1,
+                                        ),
+                                      ),
+                                    ),
+                                    Expanded(
+                                      flex: 4,
+                                      child: Padding(
+                                        padding: EdgeInsetsDirectional.fromSTEB(
+                                            16, 0, 0, 0),
+                                        child: TextFormField(
+                                          controller: textController10,
+                                          obscureText: false,
+                                          decoration: InputDecoration(
+                                            labelText: 'トラッキングコード',
+                                            enabledBorder: InputBorder.none,
+                                            focusedBorder: InputBorder.none,
+                                          ),
+                                          style: FlutterFlowTheme.of(context)
+                                              .bodyText1,
+                                        ),
+                                      ),
+                                    ),
+                                    Expanded(
+                                      flex: 3,
+                                      child: Padding(
+                                        padding: EdgeInsetsDirectional.fromSTEB(
+                                            16, 0, 8, 0),
+                                        child: FlutterFlowDropDown(
+                                          options: ['注文', '確認中', '発送済', '到着']
+                                              .toList(),
+                                          onChanged: (val) => setState(
+                                              () => dropDownValue1 = val),
+                                          width: 128,
+                                          height: 32,
+                                          textStyle:
+                                              FlutterFlowTheme.of(context)
+                                                  .bodyText1,
+                                          hintText: 'ステータス',
+                                          fillColor: Colors.white,
+                                          elevation: 4,
+                                          borderColor: Colors.transparent,
+                                          borderWidth: 0,
+                                          borderRadius: 0,
+                                          margin:
+                                              EdgeInsetsDirectional.fromSTEB(
+                                                  16, 4, 8, 4),
+                                          hidesUnderline: true,
+                                        ),
+                                      ),
+                                    ),
+                                  ],
                                 ),
                                 Row(
                                   mainAxisSize: MainAxisSize.max,
@@ -1099,7 +1059,7 @@ class _UpdateOrderPageWidgetState extends State<UpdateOrderPageWidget> {
                                         status: dropDownValue2,
                                         note: textController11?.text ?? '',
                                         updated: getCurrentTimestamp,
-                                        carrier: textController10?.text ?? '',
+                                        carrier: textController9?.text ?? '',
                                       );
                                       await widget.order.update(soldUpdateData);
                                       logFirebaseEvent('Button_Show-Snack-Bar');
