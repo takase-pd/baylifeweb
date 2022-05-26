@@ -755,7 +755,7 @@ class _UpdateOrderPageWidgetState extends State<UpdateOrderPageWidget> {
                                                               MainAxisSize.max,
                                                           mainAxisAlignment:
                                                               MainAxisAlignment
-                                                                  .spaceBetween,
+                                                                  .end,
                                                           children: [
                                                             Padding(
                                                               padding:
@@ -769,7 +769,17 @@ class _UpdateOrderPageWidgetState extends State<UpdateOrderPageWidget> {
                                                                 'updated',
                                                                 style: FlutterFlowTheme.of(
                                                                         context)
-                                                                    .bodyText1,
+                                                                    .bodyText1
+                                                                    .override(
+                                                                      fontFamily:
+                                                                          'Open Sans',
+                                                                      color: FlutterFlowTheme.of(
+                                                                              context)
+                                                                          .sLight,
+                                                                      fontStyle:
+                                                                          FontStyle
+                                                                              .italic,
+                                                                    ),
                                                               ),
                                                             ),
                                                           ],
@@ -810,7 +820,13 @@ class _UpdateOrderPageWidgetState extends State<UpdateOrderPageWidget> {
                                                                   ),
                                                                   style: FlutterFlowTheme.of(
                                                                           context)
-                                                                      .bodyText1,
+                                                                      .bodyText1
+                                                                      .override(
+                                                                        fontFamily:
+                                                                            'Open Sans',
+                                                                        color: FlutterFlowTheme.of(context)
+                                                                            .pDark,
+                                                                      ),
                                                                 ),
                                                               ),
                                                             ),
@@ -840,7 +856,13 @@ class _UpdateOrderPageWidgetState extends State<UpdateOrderPageWidget> {
                                                                   height: 32,
                                                                   textStyle: FlutterFlowTheme.of(
                                                                           context)
-                                                                      .bodyText1,
+                                                                      .bodyText1
+                                                                      .override(
+                                                                        fontFamily:
+                                                                            'Open Sans',
+                                                                        color: FlutterFlowTheme.of(context)
+                                                                            .pDark,
+                                                                      ),
                                                                   hintText:
                                                                       'ステータス',
                                                                   fillColor:
