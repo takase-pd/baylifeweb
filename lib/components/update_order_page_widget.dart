@@ -73,7 +73,7 @@ class _UpdateOrderPageWidgetState extends State<UpdateOrderPageWidget> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Container(
-                width: MediaQuery.of(context).size.width * 0.56,
+                width: MediaQuery.of(context).size.width * 0.48,
                 decoration: BoxDecoration(),
                 child: Padding(
                   padding: EdgeInsetsDirectional.fromSTEB(0, 16, 0, 0),
