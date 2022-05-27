@@ -204,6 +204,11 @@ String storagePath(String uid, String filePath, bool isVideo) {
   return 'users/$uid/uploads/$timestamp.$ext';
 }
 
+String signatureStoragePath(String uid) {
+  final timestamp = DateTime.now().microsecondsSinceEpoch;
+  return 'users/$uid/uploads/signature_$timestamp.png';
+}
+
 void showUploadMessage(BuildContext context, String message,
     {bool showLoading = false}) {
   ScaffoldMessenger.of(context)
