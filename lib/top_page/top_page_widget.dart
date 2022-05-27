@@ -132,7 +132,8 @@ class _TopPageWidgetState extends State<TopPageWidget> {
                           padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 16),
                           child: FFButtonWidget(
                             onPressed: () async {
-                              logFirebaseEvent('Button_ON_TAP');
+                              logFirebaseEvent(
+                                  'TOP_PAGE_PAGE_プラン確認_BUTTON_ON_TAP');
                               logFirebaseEvent('Button_Backend-Call');
                               plans = await GetPlanCall.call();
                               logFirebaseEvent('Button_Navigate-To');
@@ -174,7 +175,8 @@ class _TopPageWidgetState extends State<TopPageWidget> {
                           children: [
                             InkWell(
                               onTap: () async {
-                                logFirebaseEvent('Text_ON_TAP');
+                                logFirebaseEvent(
+                                    'TOP_PAGE_PAGE_Text_stjbw1rw_ON_TAP');
                                 logFirebaseEvent('Text_Launch-U-R-L');
                                 await launchURL(
                                     'https://particledrawing.notion.site/Use-Case-a8f406da8ffc44ab991a371c1596297b');
@@ -189,7 +191,8 @@ class _TopPageWidgetState extends State<TopPageWidget> {
                                   EdgeInsetsDirectional.fromSTEB(2, 0, 0, 0),
                               child: InkWell(
                                 onTap: () async {
-                                  logFirebaseEvent('Icon_ON_TAP');
+                                  logFirebaseEvent(
+                                      'TOP_PAGE_PAGE_Icon_f9ihj0nk_ON_TAP');
                                   logFirebaseEvent('Icon_Launch-U-R-L');
                                   await launchURL(
                                       'https://particledrawing.notion.site/Use-Case-a8f406da8ffc44ab991a371c1596297b');
@@ -499,7 +502,8 @@ class _TopPageWidgetState extends State<TopPageWidget> {
                                   children: [
                                     InkWell(
                                       onTap: () async {
-                                        logFirebaseEvent('Image_ON_TAP');
+                                        logFirebaseEvent(
+                                            'TOP_PAGE_PAGE_Image_wxik8m5l_ON_TAP');
                                         logFirebaseEvent('Image_Launch-U-R-L');
                                         await launchURL(
                                             'https://apps.apple.com/jp/app/makuhari-baylife/id1582919405');
@@ -512,7 +516,8 @@ class _TopPageWidgetState extends State<TopPageWidget> {
                                     ),
                                     InkWell(
                                       onTap: () async {
-                                        logFirebaseEvent('Image_ON_TAP');
+                                        logFirebaseEvent(
+                                            'TOP_PAGE_PAGE_Image_7zyk8ua1_ON_TAP');
                                         logFirebaseEvent('Image_Launch-U-R-L');
                                         await launchURL(
                                             'https://play.google.com/store/apps/details?id=com.particledrawing.baylife&utm_source=service-web&pcampaignid=pcampaignidMKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1');

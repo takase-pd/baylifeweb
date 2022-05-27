@@ -509,7 +509,8 @@ class _UpdatePlanPageWidgetState extends State<UpdatePlanPageWidget> {
                                   ),
                                   FFButtonWidget(
                                     onPressed: () async {
-                                      logFirebaseEvent('Button_ON_TAP');
+                                      logFirebaseEvent(
+                                          'UPDATE_PLAN_PAGE_COMP_選択_BUTTON_ON_TAP');
                                       logFirebaseEvent(
                                           'Button_Upload-Photo-Video');
                                       final selectedMedia =
@@ -632,7 +633,8 @@ class _UpdatePlanPageWidgetState extends State<UpdatePlanPageWidget> {
                                   ),
                                   FFButtonWidget(
                                     onPressed: () async {
-                                      logFirebaseEvent('Button_ON_TAP');
+                                      logFirebaseEvent(
+                                          'UPDATE_PLAN_PAGE_COMP_日付_BUTTON_ON_TAP');
                                       logFirebaseEvent(
                                           'Button_Date-Time-Picker');
                                       await DatePicker.showDatePicker(
@@ -855,7 +857,8 @@ class _UpdatePlanPageWidgetState extends State<UpdatePlanPageWidget> {
                               children: [
                                 FFButtonWidget(
                                   onPressed: () async {
-                                    logFirebaseEvent('Button_ON_TAP');
+                                    logFirebaseEvent(
+                                        'UPDATE_PLAN_PAGE_COMP_更新_BUTTON_ON_TAP');
                                     logFirebaseEvent('Button_Alert-Dialog');
                                     var confirmDialogResponse =
                                         await showDialog<bool>(

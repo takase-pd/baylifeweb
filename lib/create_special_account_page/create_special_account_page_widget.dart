@@ -60,7 +60,8 @@ class _CreateSpecialAccountPageWidgetState
                     children: [
                       InkWell(
                         onTap: () async {
-                          logFirebaseEvent('Text_ON_TAP');
+                          logFirebaseEvent(
+                              'CREATE_SPECIAL_ACCOUNT_PAGE_PAGE_Text_7r2o1bjp_ON_TAP');
                           logFirebaseEvent('Text_Launch-U-R-L');
                           await launchURL(
                               'https://baylife.particledrawing.com/');
@@ -214,6 +215,8 @@ class _CreateSpecialAccountPageWidgetState
                                           () => passwordVisibility =
                                               !passwordVisibility,
                                         ),
+                                        focusNode:
+                                            FocusNode(skipTraversal: true),
                                         child: Icon(
                                           passwordVisibility
                                               ? Icons.visibility_outlined
@@ -241,7 +244,8 @@ class _CreateSpecialAccountPageWidgetState
                           children: [
                             InkWell(
                               onTap: () async {
-                                logFirebaseEvent('Text_ON_TAP');
+                                logFirebaseEvent(
+                                    'CREATE_SPECIAL_ACCOUNT_PAGE_PAGE_Text_lmzk5wk7_ON_TAP');
                                 logFirebaseEvent('Text_Launch-U-R-L');
                                 await launchURL(
                                     'https://baylife.particledrawing.com/terms.html');
@@ -262,7 +266,8 @@ class _CreateSpecialAccountPageWidgetState
                                   EdgeInsetsDirectional.fromSTEB(3, 0, 0, 0),
                               child: InkWell(
                                 onTap: () async {
-                                  logFirebaseEvent('Icon_ON_TAP');
+                                  logFirebaseEvent(
+                                      'CREATE_SPECIAL_ACCOUNT_PAGE_PAGE_Icon_8pq7qix9_ON_TAP');
                                   logFirebaseEvent('Icon_Launch-U-R-L');
                                   await launchURL(
                                       'https://baylife.particledrawing.com/terms.html');
@@ -281,7 +286,8 @@ class _CreateSpecialAccountPageWidgetState
                             ),
                             InkWell(
                               onTap: () async {
-                                logFirebaseEvent('Text_ON_TAP');
+                                logFirebaseEvent(
+                                    'CREATE_SPECIAL_ACCOUNT_PAGE_PAGE_Text_48qbzzma_ON_TAP');
                                 logFirebaseEvent('Text_Launch-U-R-L');
                                 await launchURL(
                                     'https://www.particledrawing.com/privacy');
@@ -302,7 +308,8 @@ class _CreateSpecialAccountPageWidgetState
                                   EdgeInsetsDirectional.fromSTEB(3, 0, 3, 0),
                               child: InkWell(
                                 onTap: () async {
-                                  logFirebaseEvent('Icon_ON_TAP');
+                                  logFirebaseEvent(
+                                      'CREATE_SPECIAL_ACCOUNT_PAGE_PAGE_Icon_n59j7o6z_ON_TAP');
                                   logFirebaseEvent('Icon_Launch-U-R-L');
                                   await launchURL(
                                       'https://www.particledrawing.com/privacy');
@@ -326,7 +333,8 @@ class _CreateSpecialAccountPageWidgetState
                         padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 24),
                         child: FFButtonWidget(
                           onPressed: () async {
-                            logFirebaseEvent('Button_ON_TAP');
+                            logFirebaseEvent(
+                                'CREATE_SPECIAL_ACCOUNT_PAGE_PAGE_上記に同意して登録_BUTTON_ON_TAP');
                             logFirebaseEvent('Button_Auth');
 
                             final user = await createAccountWithEmail(
@@ -391,7 +399,8 @@ class _CreateSpecialAccountPageWidgetState
                                   alignment: AlignmentDirectional(0, 0),
                                   child: FFButtonWidget(
                                     onPressed: () async {
-                                      logFirebaseEvent('Button_ON_TAP');
+                                      logFirebaseEvent(
+                                          'CREATE_SPECIAL_ACCOUNT_PAGE_PAGE_SIGN_UP_WITH_GOOGLE_BUTTON_ON_TAP');
                                       logFirebaseEvent('Button_Auth');
                                       final user =
                                           await signInWithGoogle(context);
@@ -459,7 +468,8 @@ class _CreateSpecialAccountPageWidgetState
                     children: [
                       InkWell(
                         onTap: () async {
-                          logFirebaseEvent('Text_ON_TAP');
+                          logFirebaseEvent(
+                              'CREATE_SPECIAL_ACCOUNT_PAGE_PAGE_Text_92u4b7kg_ON_TAP');
                           logFirebaseEvent('Text_Launch-U-R-L');
                           await launchURL(
                               'https://baylife.particledrawing.com/terms.html');
@@ -473,7 +483,8 @@ class _CreateSpecialAccountPageWidgetState
                         padding: EdgeInsetsDirectional.fromSTEB(30, 0, 0, 0),
                         child: InkWell(
                           onTap: () async {
-                            logFirebaseEvent('Text_ON_TAP');
+                            logFirebaseEvent(
+                                'CREATE_SPECIAL_ACCOUNT_PAGE_PAGE_Text_b1otio4q_ON_TAP');
                             logFirebaseEvent('Text_Launch-U-R-L');
                             await launchURL(
                                 'https://www.particledrawing.com/privacy');

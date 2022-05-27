@@ -178,6 +178,8 @@ class _LoginPageWidgetState extends State<LoginPageWidget> {
                                           () => passwordVisibility =
                                               !passwordVisibility,
                                         ),
+                                        focusNode:
+                                            FocusNode(skipTraversal: true),
                                         child: Icon(
                                           passwordVisibility
                                               ? Icons.visibility_outlined
@@ -200,7 +202,8 @@ class _LoginPageWidgetState extends State<LoginPageWidget> {
                         padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 24),
                         child: FFButtonWidget(
                           onPressed: () async {
-                            logFirebaseEvent('Button_ON_TAP');
+                            logFirebaseEvent(
+                                'LOGIN_PAGE_PAGE_ログイン_BUTTON_ON_TAP');
                             logFirebaseEvent('Button_Auth');
 
                             final user = await signInWithEmail(
@@ -243,7 +246,8 @@ class _LoginPageWidgetState extends State<LoginPageWidget> {
                         padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 36),
                         child: FFButtonWidget(
                           onPressed: () async {
-                            logFirebaseEvent('Button_ON_TAP');
+                            logFirebaseEvent(
+                                'LOGIN_PAGE_PAGE_FORGET_PASSWORD?_BUTTON_ON_TAP');
                             logFirebaseEvent('Button_Auth');
                             if (emailAddressController.text.isEmpty) {
                               ScaffoldMessenger.of(context).showSnackBar(
@@ -307,7 +311,8 @@ class _LoginPageWidgetState extends State<LoginPageWidget> {
                                       0, 1, 0, 0),
                                   child: FFButtonWidget(
                                     onPressed: () async {
-                                      logFirebaseEvent('Button_ON_TAP');
+                                      logFirebaseEvent(
+                                          'LOGIN_PAGE_PAGE_SIGN_IN_WITH_GOOGLE_BUTTON_ON_TAP');
                                       logFirebaseEvent('Button_Auth');
                                       final user =
                                           await signInWithGoogle(context);

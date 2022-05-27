@@ -113,7 +113,8 @@ class _OrderListPageWidgetState extends State<OrderListPageWidget> {
                                                   0, 0, 16, 0),
                                           child: InkWell(
                                             onTap: () async {
-                                              logFirebaseEvent('Text_ON_TAP');
+                                              logFirebaseEvent(
+                                                  'ORDER_LIST_PAGE_PAGE_Text_844r48sl_ON_TAP');
                                               logFirebaseEvent(
                                                   'Text_Navigate-To');
                                               await Navigator.push(
@@ -138,7 +139,8 @@ class _OrderListPageWidgetState extends State<OrderListPageWidget> {
                                                   0, 0, 16, 0),
                                           child: InkWell(
                                             onTap: () async {
-                                              logFirebaseEvent('Text_ON_TAP');
+                                              logFirebaseEvent(
+                                                  'ORDER_LIST_PAGE_PAGE_Text_3sgzeybv_ON_TAP');
                                               logFirebaseEvent(
                                                   'Text_Navigate-To');
                                               await Navigator.push(
@@ -161,7 +163,8 @@ class _OrderListPageWidgetState extends State<OrderListPageWidget> {
                                     ),
                                     FFButtonWidget(
                                       onPressed: () async {
-                                        logFirebaseEvent('Button_ON_TAP');
+                                        logFirebaseEvent(
+                                            'ORDER_LIST_PAGE_PAGE_追加_BUTTON_ON_TAP');
                                         logFirebaseEvent('Button_Bottom-Sheet');
                                         await showModalBottomSheet(
                                           isScrollControlled: true,
@@ -268,7 +271,7 @@ class _OrderListPageWidgetState extends State<OrderListPageWidget> {
                                                 descending: true);
                                         if (_pagingController != null) {
                                           final query = queryBuilder(
-                                              SoldRecord.collection);
+                                              SoldRecord.collection());
                                           if (query != _pagingQuery) {
                                             // The query has changed
                                             _pagingQuery = query;
@@ -282,8 +285,8 @@ class _OrderListPageWidgetState extends State<OrderListPageWidget> {
 
                                         _pagingController = PagingController(
                                             firstPageKey: null);
-                                        _pagingQuery =
-                                            queryBuilder(SoldRecord.collection);
+                                        _pagingQuery = queryBuilder(
+                                            SoldRecord.collection());
                                         _pagingController
                                             .addPageRequestListener(
                                                 (nextPageMarker) {
@@ -357,7 +360,7 @@ class _OrderListPageWidgetState extends State<OrderListPageWidget> {
                                             child: InkWell(
                                               onTap: () async {
                                                 logFirebaseEvent(
-                                                    'Container_ON_TAP');
+                                                    'ORDER_LIST_PAGE_PAGE_Container_pbgvwp6p_ON_TAP');
                                                 logFirebaseEvent(
                                                     'Container_Bottom-Sheet');
                                                 await showModalBottomSheet(

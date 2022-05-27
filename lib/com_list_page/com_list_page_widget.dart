@@ -95,7 +95,8 @@ class _ComListPageWidgetState extends State<ComListPageWidget> {
                                             0, 0, 16, 0),
                                         child: InkWell(
                                           onTap: () async {
-                                            logFirebaseEvent('Text_ON_TAP');
+                                            logFirebaseEvent(
+                                                'COM_LIST_PAGE_PAGE_Text_vz1fttz3_ON_TAP');
                                             logFirebaseEvent(
                                                 'Text_Navigate-To');
                                             await Navigator.push(
@@ -115,7 +116,8 @@ class _ComListPageWidgetState extends State<ComListPageWidget> {
                                       ),
                                       InkWell(
                                         onTap: () async {
-                                          logFirebaseEvent('Text_ON_TAP');
+                                          logFirebaseEvent(
+                                              'COM_LIST_PAGE_PAGE_Text_7h3e9gq9_ON_TAP');
                                           logFirebaseEvent('Text_Navigate-To');
                                           await Navigator.push(
                                             context,
@@ -351,7 +353,7 @@ class _ComListPageWidgetState extends State<ComListPageWidget> {
                                                   child: InkWell(
                                                     onTap: () async {
                                                       logFirebaseEvent(
-                                                          'Text_ON_TAP');
+                                                          'COM_LIST_PAGE_PAGE_Text_zeqvhghu_ON_TAP');
                                                       logFirebaseEvent(
                                                           'Text_Launch-U-R-L');
                                                       await launchURL(

@@ -96,7 +96,8 @@ class _ShopListPageWidgetState extends State<ShopListPageWidget> {
                                             0, 0, 16, 0),
                                         child: InkWell(
                                           onTap: () async {
-                                            logFirebaseEvent('Text_ON_TAP');
+                                            logFirebaseEvent(
+                                                'SHOP_LIST_PAGE_PAGE_Text_zgn9nzfg_ON_TAP');
                                             logFirebaseEvent(
                                                 'Text_Navigate-To');
                                             await Navigator.push(
@@ -116,7 +117,8 @@ class _ShopListPageWidgetState extends State<ShopListPageWidget> {
                                       ),
                                       InkWell(
                                         onTap: () async {
-                                          logFirebaseEvent('Text_ON_TAP');
+                                          logFirebaseEvent(
+                                              'SHOP_LIST_PAGE_PAGE_Text_dhtrtnu9_ON_TAP');
                                           logFirebaseEvent('Text_Navigate-To');
                                           await Navigator.push(
                                             context,
@@ -372,7 +374,7 @@ class _ShopListPageWidgetState extends State<ShopListPageWidget> {
                                                       InkWell(
                                                         onTap: () async {
                                                           logFirebaseEvent(
-                                                              'Text_ON_TAP');
+                                                              'SHOP_LIST_PAGE_PAGE_Text_c4z9598m_ON_TAP');
                                                           logFirebaseEvent(
                                                               'Text_Launch-U-R-L');
                                                           await launchURL(
@@ -389,7 +391,7 @@ class _ShopListPageWidgetState extends State<ShopListPageWidget> {
                                                       InkWell(
                                                         onTap: () async {
                                                           logFirebaseEvent(
-                                                              'Text_ON_TAP');
+                                                              'SHOP_LIST_PAGE_PAGE_Text_9cb9dx5g_ON_TAP');
                                                           logFirebaseEvent(
                                                               'Text_Launch-U-R-L');
                                                           await launchURL(
@@ -406,7 +408,7 @@ class _ShopListPageWidgetState extends State<ShopListPageWidget> {
                                                       InkWell(
                                                         onTap: () async {
                                                           logFirebaseEvent(
-                                                              'Text_ON_TAP');
+                                                              'SHOP_LIST_PAGE_PAGE_Text_th7grjt6_ON_TAP');
                                                           logFirebaseEvent(
                                                               'Text_Launch-U-R-L');
                                                           await launchURL(

@@ -112,7 +112,8 @@ class _PostPageWidgetState extends State<PostPageWidget> {
                                   ),
                                   InkWell(
                                     onTap: () async {
-                                      logFirebaseEvent('Text_ON_TAP');
+                                      logFirebaseEvent(
+                                          'POST_PAGE_PAGE_Text_ggrhv841_ON_TAP');
                                       logFirebaseEvent('Text_Backend-Call');
                                       plans = await GetPlanCall.call();
                                       logFirebaseEvent('Text_Navigate-To');
@@ -768,7 +769,7 @@ class _PostPageWidgetState extends State<PostPageWidget> {
                                                     FFButtonWidget(
                                                       onPressed: () async {
                                                         logFirebaseEvent(
-                                                            'Button_ON_TAP');
+                                                            'POST_PAGE_PAGE_選択_BUTTON_ON_TAP');
                                                         logFirebaseEvent(
                                                             'Button_Upload-Photo-Video');
                                                         final selectedMedia =
@@ -1037,7 +1038,7 @@ class _PostPageWidgetState extends State<PostPageWidget> {
                                                     FFButtonWidget(
                                                       onPressed: () async {
                                                         logFirebaseEvent(
-                                                            'Button_ON_TAP');
+                                                            'POST_PAGE_PAGE_日付_BUTTON_ON_TAP');
                                                         logFirebaseEvent(
                                                             'Button_Date-Time-Picker');
                                                         await DatePicker
@@ -1174,7 +1175,7 @@ class _PostPageWidgetState extends State<PostPageWidget> {
                                                     FFButtonWidget(
                                                       onPressed: () async {
                                                         logFirebaseEvent(
-                                                            'Button_ON_TAP');
+                                                            'POST_PAGE_PAGE_日付_BUTTON_ON_TAP');
                                                         logFirebaseEvent(
                                                             'Button_Date-Time-Picker');
                                                         await DatePicker
@@ -1954,7 +1955,8 @@ class _PostPageWidgetState extends State<PostPageWidget> {
                                     children: [
                                       InkWell(
                                         onTap: () async {
-                                          logFirebaseEvent('Text_ON_TAP');
+                                          logFirebaseEvent(
+                                              'POST_PAGE_PAGE_Text_fxa0cre6_ON_TAP');
                                           logFirebaseEvent('Text_Launch-U-R-L');
                                           await launchURL(
                                               'https://baylife-ff782.web.app/terms.html');
@@ -2029,7 +2031,7 @@ class _PostPageWidgetState extends State<PostPageWidget> {
                                                   FFButtonWidget(
                                                     onPressed: () async {
                                                       logFirebaseEvent(
-                                                          'Button_ON_TAP');
+                                                          'POST_PAGE_PAGE_確認_BUTTON_ON_TAP');
                                                       logFirebaseEvent(
                                                           'Button_Navigate-To');
                                                       await Navigator.push(
