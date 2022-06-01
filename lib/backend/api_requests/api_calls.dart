@@ -212,6 +212,8 @@ class GetOrderedPlansCall {
     String shop = '',
     String uid = '',
     String paymentId = '',
+    String accessToken = '',
+    String appCheckToken = '',
   }) {
     final body = '''
 {
@@ -237,6 +239,8 @@ class GetOrderedPlansCall {
       body: body,
       bodyType: BodyType.JSON,
       returnBody: true,
+      accessToken: accessToken,
+      appCheckToken: appCheckToken,
     );
   }
 }
