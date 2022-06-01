@@ -40,7 +40,7 @@ abstract class SoldRecord implements Built<SoldRecord, SoldRecordBuilder> {
   String get carrier;
 
   @nullable
-  @BuiltValueField(wireName: 'tracking_idndex')
+  @BuiltValueField(wireName: 'tracking_index')
   int get trackingIndex;
 
   @nullable

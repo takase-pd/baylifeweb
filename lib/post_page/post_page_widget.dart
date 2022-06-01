@@ -294,7 +294,7 @@ class _PostPageWidgetState extends State<PostPageWidget> {
                                                       initialOption:
                                                           dropDownValue ??=
                                                               '総合',
-                                                      options: ['総合'].toList(),
+                                                      options: ['総合'],
                                                       onChanged: (val) =>
                                                           setState(() =>
                                                               dropDownValue =

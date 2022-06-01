@@ -187,7 +187,7 @@ class _UpdatePlanPageWidgetState extends State<UpdatePlanPageWidget> {
                                         ),
                                       ),
                                       FlutterFlowDropDown(
-                                        options: ['Option 1'].toList(),
+                                        options: ['Option 1'],
                                         onChanged: (val) =>
                                             setState(() => dropDownValue = val),
                                         width: 240,
