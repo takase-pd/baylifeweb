@@ -12,6 +12,8 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_stripe/flutter_stripe.dart' as stripe;
 
+import 'package:bay_life_web/custom_code/widgets/ecommerce.dart';
+
 class UpdateOrderPageWidget extends StatefulWidget {
   const UpdateOrderPageWidget({
     Key key,
@@ -40,10 +42,13 @@ class _UpdateOrderPageWidgetState extends State<UpdateOrderPageWidget> {
   TextEditingController textController9;
   TextEditingController textController10;
   TextEditingController textController11;
+  Future<SoldRecord> order;
   Future<OrderDetails> details;
   Future<List<OrderedPlan>> plans;
+  List<ShippinStatusForm> status;
+  List<String> trackingNumbers;
 
-  Future<OrderDetails> _getOrderDetails(String paymentId) async {
+  Future<OrderDetails> _getOrderDetails() async {
     OrderDetails _details;
 
     final _shop = await _getShop();
@@ -57,7 +62,7 @@ class _UpdateOrderPageWidgetState extends State<UpdateOrderPageWidget> {
     final apiCallOutput = await GetOrderDetailsCall.call(
       shop: _shop.reference.path,
       uid: currentUserUid,
-      paymentId: paymentId,
+      paymentId: widget.order.id,
       accessToken: currentJwtToken,
       appCheckToken: _appCheckToken,
     );
@@ -97,13 +102,17 @@ class _UpdateOrderPageWidgetState extends State<UpdateOrderPageWidget> {
         ),
         name: _apiJson['details']['shipping']['name'],
         phone: _apiJson['details']['shipping']['phone'],
+        trackingNumber: _apiJson['details']['shipping']['tracking_number'],
       ),
     );
+
+    trackingNumbers = _details.shipping.trackingNumber.split(',');
+    print(trackingNumbers);
 
     return _details;
   }
 
-  Future<List<OrderedPlan>> _getOrderedPlans(String paymentId) async {
+  Future<List<OrderedPlan>> _getOrderedPlans() async {
     List<OrderedPlan> _plans = [];
 
     final _shop = await _getShop();
@@ -117,7 +126,7 @@ class _UpdateOrderPageWidgetState extends State<UpdateOrderPageWidget> {
     final apiCallOutput = await GetOrderedPlansCall.call(
       shop: _shop.reference.path,
       uid: currentUserUid,
-      paymentId: paymentId,
+      paymentId: widget.order.id,
       accessToken: currentJwtToken,
       appCheckToken: _appCheckToken,
     );
@@ -138,12 +147,15 @@ class _UpdateOrderPageWidgetState extends State<UpdateOrderPageWidget> {
         quantity: plan['quantity'],
         name: plan['name'],
         status: getShippingStatus(plan['status']),
+        trackingIndex: int.parse(plan['tracking_index']),
         updated: Timestamp(
           plan['updated']['_seconds'],
           plan['updated']['_nanoseconds'],
         ).toDate(),
       ));
     });
+
+    _setShippingStatusForm(_plans);
 
     return _plans;
   }
@@ -163,18 +175,62 @@ class _UpdateOrderPageWidgetState extends State<UpdateOrderPageWidget> {
     return _shop;
   }
 
+  Future<SoldRecord> _getOrder() async {
+    return SoldRecord.getDocumentOnce(widget.order);
+  }
+
+  _setShippingStatusForm(List<OrderedPlan> _plans) async {
+    final _order = await order;
+    status = [];
+    switchListTileValue
+        ? _plans.forEach(
+            (_plan) => status.add(
+              ShippinStatusForm.create(
+                _plan.id,
+                _plan.name,
+                _getTrackingNumber(_plan.trackingIndex),
+                _plan.status,
+              ),
+            ),
+          )
+        : status.add(
+            ShippinStatusForm.create(
+              '',
+              '',
+              _getTrackingNumber(_order.trackingIndex),
+              getShippingStatus(_order.status),
+            ),
+          );
+  }
+
+  String _getTrackingNumber(int index) {
+    if (trackingNumbers.length == 0) return '';
+    return trackingNumbers[index];
+  }
+
   @override
   void initState() {
     super.initState();
+    switchListTileValue = false;
     textController9 = TextEditingController();
-    details = _getOrderDetails(widget.order.id);
-    plans = _getOrderedPlans(widget.order.id);
+    order = _getOrder();
+    details = _getOrderDetails();
+    plans = _getOrderedPlans();
+  }
+
+  @override
+  void dispose() {
+    status.forEach((element) {
+      element.dispose();
+    });
+
+    super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
     return FutureBuilder<SoldRecord>(
-      future: SoldRecord.getDocumentOnce(widget.order),
+      future: order,
       builder: (context, snapshot) {
         // Customize what your widget looks like when it's loading.
         if (!snapshot.hasData) {
@@ -189,7 +245,7 @@ class _UpdateOrderPageWidgetState extends State<UpdateOrderPageWidget> {
             ),
           );
         }
-        final containerSoldRecord = snapshot.data;
+        final _order = snapshot.data;
         return Container(
           decoration: BoxDecoration(
             color: FlutterFlowTheme.of(context).tertiaryColor,
@@ -250,8 +306,7 @@ class _UpdateOrderPageWidgetState extends State<UpdateOrderPageWidget> {
                                                 TextEditingController(
                                               text: dateTimeFormat(
                                                   'MMM d, y h:mm a',
-                                                  containerSoldRecord
-                                                      .purchased),
+                                                  _order.purchased),
                                             ),
                                             readOnly: true,
                                             obscureText: false,
@@ -300,7 +355,7 @@ class _UpdateOrderPageWidgetState extends State<UpdateOrderPageWidget> {
                                                 TextEditingController(
                                               text: dateTimeFormat(
                                                   'MMM d, y h:mm a',
-                                                  containerSoldRecord.updated),
+                                                  _order.updated),
                                             ),
                                             readOnly: true,
                                             obscureText: false,
@@ -358,7 +413,7 @@ class _UpdateOrderPageWidgetState extends State<UpdateOrderPageWidget> {
                                             controller: textController3 ??=
                                                 TextEditingController(
                                               text: formatNumber(
-                                                containerSoldRecord.totalAmount,
+                                                _order.totalAmount,
                                                 formatType: FormatType.custom,
                                                 currency: '￥',
                                                 format: '#,##0',
@@ -412,8 +467,7 @@ class _UpdateOrderPageWidgetState extends State<UpdateOrderPageWidget> {
                                           child: TextFormField(
                                             controller: textController4 ??=
                                                 TextEditingController(
-                                              text: containerSoldRecord
-                                                  .totalQuantity
+                                              text: _order.totalQuantity
                                                   .toString(),
                                             ),
                                             readOnly: true,
@@ -464,8 +518,7 @@ class _UpdateOrderPageWidgetState extends State<UpdateOrderPageWidget> {
                                             controller: textController5 ??=
                                                 TextEditingController(
                                               text: formatNumber(
-                                                containerSoldRecord
-                                                    .totalShippingFee,
+                                                _order.totalShippingFee,
                                                 formatType: FormatType.custom,
                                                 currency: '￥',
                                                 format: '#,##0',
@@ -688,7 +741,7 @@ class _UpdateOrderPageWidgetState extends State<UpdateOrderPageWidget> {
                                           child: TextFormField(
                                             controller: textController8 ??=
                                                 TextEditingController(
-                                              text: containerSoldRecord.status,
+                                              text: _order.status,
                                             ),
                                             readOnly: true,
                                             obscureText: false,
@@ -946,226 +999,301 @@ class _UpdateOrderPageWidgetState extends State<UpdateOrderPageWidget> {
                               color: FlutterFlowTheme.of(context).background,
                               borderRadius: BorderRadius.circular(8),
                             ),
-                            child: Column(
-                              mainAxisSize: MainAxisSize.max,
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Padding(
-                                  padding: EdgeInsetsDirectional.fromSTEB(
-                                      16, 0, 0, 8),
-                                  child: Text(
-                                    '配送',
-                                    style:
-                                        FlutterFlowTheme.of(context).subtitle2,
-                                  ),
-                                ),
-                                Padding(
-                                  padding: EdgeInsetsDirectional.fromSTEB(
-                                      0, 0, 0, 16),
-                                  child: Row(
-                                    mainAxisSize: MainAxisSize.max,
-                                    children: [
-                                      Expanded(
-                                        flex: 2,
-                                        child: FlutterFlowDropDown(
-                                          options: ['Option 1'].toList(),
-                                          onChanged: (val) => setState(
-                                              () => dropDownValue1 = val),
-                                          textStyle:
-                                              FlutterFlowTheme.of(context)
-                                                  .bodyText1,
-                                          hintText: '配送業者',
-                                          fillColor: Colors.white,
-                                          elevation: 2,
-                                          borderColor: Colors.transparent,
-                                          borderWidth: 0,
-                                          borderRadius: 0,
-                                          margin:
-                                              EdgeInsetsDirectional.fromSTEB(
-                                                  16, 4, 16, 4),
-                                          hidesUnderline: true,
-                                        ),
+                            child: FutureBuilder<List<OrderedPlan>>(
+                              future: plans,
+                              builder: (context, snapshot) {
+                                // Customize what your widget looks like when it's loading.
+                                if (snapshot.connectionState !=
+                                    ConnectionState.done) {
+                                  return Center(
+                                    child: SizedBox(
+                                      width: 50,
+                                      height: 50,
+                                      child: SpinKitPulse(
+                                        color: FlutterFlowTheme.of(context)
+                                            .primaryColor,
+                                        size: 50,
                                       ),
-                                      Expanded(
-                                        flex: 3,
-                                        child: SwitchListTile(
-                                          value: switchListTileValue ??= false,
-                                          onChanged: (newValue) => setState(
-                                              () => switchListTileValue =
-                                                  newValue),
-                                          title: Text(
-                                            '商品別指定',
-                                            style: FlutterFlowTheme.of(context)
-                                                .bodyText1,
-                                          ),
-                                          dense: false,
-                                          controlAffinity:
-                                              ListTileControlAffinity.trailing,
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                                if (!(switchListTileValue) ?? true)
-                                  Row(
-                                    mainAxisSize: MainAxisSize.max,
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      Expanded(
-                                        flex: 4,
-                                        child: Padding(
-                                          padding:
-                                              EdgeInsetsDirectional.fromSTEB(
-                                                  16, 0, 0, 0),
-                                          child: TextFormField(
-                                            controller: textController9,
-                                            obscureText: false,
-                                            decoration: InputDecoration(
-                                              labelText: 'トラッキングコード',
-                                              enabledBorder: InputBorder.none,
-                                              focusedBorder: InputBorder.none,
-                                            ),
-                                            style: FlutterFlowTheme.of(context)
-                                                .bodyText1,
-                                          ),
-                                        ),
-                                      ),
-                                      Expanded(
-                                        flex: 3,
-                                        child: Padding(
-                                          padding:
-                                              EdgeInsetsDirectional.fromSTEB(
-                                                  16, 0, 8, 0),
-                                          child: FlutterFlowDropDown(
-                                            options: ['注文', '確認中', '発送済', '到着']
-                                                .toList(),
-                                            onChanged: (val) => setState(
-                                                () => dropDownValue2 = val),
-                                            width: 128,
-                                            height: 32,
-                                            textStyle:
-                                                FlutterFlowTheme.of(context)
-                                                    .bodyText1,
-                                            hintText: 'ステータス',
-                                            fillColor: Colors.white,
-                                            elevation: 4,
-                                            borderColor: Colors.transparent,
-                                            borderWidth: 0,
-                                            borderRadius: 0,
-                                            margin:
-                                                EdgeInsetsDirectional.fromSTEB(
-                                                    16, 4, 8, 4),
-                                            hidesUnderline: true,
-                                          ),
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                Row(
+                                    ),
+                                  );
+                                }
+                                final _plans = snapshot.data;
+                                return Column(
                                   mainAxisSize: MainAxisSize.max,
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    Expanded(
-                                      child: Padding(
-                                        padding: EdgeInsetsDirectional.fromSTEB(
-                                            0, 0, 0, 16),
-                                        child: Container(
-                                          height: 120,
-                                          decoration: BoxDecoration(),
+                                    Padding(
+                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                          16, 0, 0, 8),
+                                      child: Text(
+                                        '配送',
+                                        style: FlutterFlowTheme.of(context)
+                                            .subtitle2,
+                                      ),
+                                    ),
+                                    Padding(
+                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                          0, 0, 0, 16),
+                                      child: Row(
+                                        mainAxisSize: MainAxisSize.max,
+                                        children: [
+                                          Expanded(
+                                            flex: 2,
+                                            child: FlutterFlowDropDown(
+                                              options: [
+                                                'クロネコヤマト',
+                                                '佐川急便',
+                                                '日本郵便',
+                                              ].toList(),
+                                              onChanged: (val) => setState(
+                                                  () => dropDownValue1 = val),
+                                              textStyle:
+                                                  FlutterFlowTheme.of(context)
+                                                      .bodyText1,
+                                              hintText: '配送業者',
+                                              fillColor: Colors.white,
+                                              elevation: 2,
+                                              borderColor: Colors.transparent,
+                                              borderWidth: 0,
+                                              borderRadius: 0,
+                                              margin: EdgeInsetsDirectional
+                                                  .fromSTEB(16, 4, 16, 4),
+                                              hidesUnderline: true,
+                                            ),
+                                          ),
+                                          // if (_plans.length > 1)
+                                          Expanded(
+                                            flex: 3,
+                                            child: SwitchListTile(
+                                              value: switchListTileValue ??=
+                                                  false,
+                                              onChanged: (newValue) =>
+                                                  setState(() => {
+                                                        switchListTileValue =
+                                                            newValue,
+                                                        _setShippingStatusForm(
+                                                            _plans),
+                                                      }),
+                                              title: Text(
+                                                '商品別配送指定',
+                                                style:
+                                                    FlutterFlowTheme.of(context)
+                                                        .bodyText1,
+                                              ),
+                                              dense: false,
+                                              controlAffinity:
+                                                  ListTileControlAffinity
+                                                      .trailing,
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                    ListView(
+                                      padding: EdgeInsets.zero,
+                                      shrinkWrap: true,
+                                      scrollDirection: Axis.vertical,
+                                      physics:
+                                          const NeverScrollableScrollPhysics(),
+                                      children: [
+                                        ...status.map(
+                                          (_status) => Row(
+                                            mainAxisSize: MainAxisSize.max,
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceBetween,
+                                            children: [
+                                              if (switchListTileValue)
+                                                Expanded(
+                                                  flex: 3,
+                                                  child: Padding(
+                                                    padding:
+                                                        EdgeInsetsDirectional
+                                                            .fromSTEB(
+                                                                16, 0, 0, 0),
+                                                    child: TextFormField(
+                                                      controller:
+                                                          TextEditingController(
+                                                              text: _status
+                                                                  .planName),
+                                                      readOnly: true,
+                                                      obscureText: false,
+                                                      decoration:
+                                                          InputDecoration(
+                                                        labelText: '商品名',
+                                                        enabledBorder:
+                                                            InputBorder.none,
+                                                        focusedBorder:
+                                                            InputBorder.none,
+                                                      ),
+                                                      style:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .bodyText1,
+                                                    ),
+                                                  ),
+                                                ),
+                                              Expanded(
+                                                flex: 4,
+                                                child: Padding(
+                                                  padding: EdgeInsetsDirectional
+                                                      .fromSTEB(16, 0, 0, 0),
+                                                  child: TextFormField(
+                                                    controller:
+                                                        _status.controller,
+                                                    onChanged: (text) =>
+                                                        setState(
+                                                      () => status = status
+                                                          .map((e) => e.id ==
+                                                                  _status.id
+                                                              ? _status
+                                                                  .changeTrackingNumber(
+                                                                      text)
+                                                              : e)
+                                                          .toList(),
+                                                    ),
+                                                    obscureText: false,
+                                                    decoration: InputDecoration(
+                                                      labelText: 'トラッキングコード',
+                                                      enabledBorder:
+                                                          InputBorder.none,
+                                                      focusedBorder:
+                                                          InputBorder.none,
+                                                    ),
+                                                    style: FlutterFlowTheme.of(
+                                                            context)
+                                                        .bodyText1,
+                                                  ),
+                                                ),
+                                              ),
+                                              Expanded(
+                                                flex: 3,
+                                                child: Padding(
+                                                  padding: EdgeInsetsDirectional
+                                                      .fromSTEB(16, 0, 8, 0),
+                                                  child: FlutterFlowDropDown(
+                                                    options: ShippingStatusExt
+                                                        .labelList,
+                                                    onChanged: (val) =>
+                                                        setState(
+                                                      () => status = status
+                                                          .map((e) => e.id ==
+                                                                  _status.id
+                                                              ? _status
+                                                                  .changeStatus(
+                                                                      getShippingStatus(
+                                                                          val))
+                                                              : e)
+                                                          .toList(),
+                                                    ),
+                                                    width: 128,
+                                                    height: 32,
+                                                    textStyle:
+                                                        FlutterFlowTheme.of(
+                                                                context)
+                                                            .bodyText1,
+                                                    hintText: 'ステータス',
+                                                    fillColor: Colors.white,
+                                                    elevation: 4,
+                                                    borderColor:
+                                                        Colors.transparent,
+                                                    borderWidth: 0,
+                                                    borderRadius: 0,
+                                                    margin:
+                                                        EdgeInsetsDirectional
+                                                            .fromSTEB(
+                                                                16, 4, 8, 4),
+                                                    hidesUnderline: true,
+                                                    initialOption:
+                                                        _status.status.label,
+                                                  ),
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                    Row(
+                                      mainAxisSize: MainAxisSize.max,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Expanded(
                                           child: Padding(
                                             padding:
                                                 EdgeInsetsDirectional.fromSTEB(
-                                                    16, 0, 0, 0),
-                                            child: TextFormField(
-                                              controller: textController10 ??=
-                                                  TextEditingController(
-                                                text: containerSoldRecord.note,
-                                              ),
-                                              obscureText: false,
-                                              decoration: InputDecoration(
-                                                labelText: 'メモ',
-                                                enabledBorder:
-                                                    UnderlineInputBorder(
-                                                  borderSide: BorderSide(
-                                                    color: Color(0x00000000),
-                                                    width: 1,
+                                                    0, 0, 0, 16),
+                                            child: Container(
+                                              height: 120,
+                                              decoration: BoxDecoration(),
+                                              child: Padding(
+                                                padding: EdgeInsetsDirectional
+                                                    .fromSTEB(16, 0, 0, 0),
+                                                child: TextFormField(
+                                                  controller:
+                                                      textController10 ??=
+                                                          TextEditingController(
+                                                    text: _order.note,
                                                   ),
-                                                  borderRadius:
-                                                      const BorderRadius.only(
-                                                    topLeft:
-                                                        Radius.circular(4.0),
-                                                    topRight:
-                                                        Radius.circular(4.0),
+                                                  obscureText: false,
+                                                  decoration: InputDecoration(
+                                                    labelText: 'メモ',
+                                                    enabledBorder:
+                                                        UnderlineInputBorder(
+                                                      borderSide: BorderSide(
+                                                        color:
+                                                            Color(0x00000000),
+                                                        width: 1,
+                                                      ),
+                                                      borderRadius:
+                                                          const BorderRadius
+                                                              .only(
+                                                        topLeft:
+                                                            Radius.circular(
+                                                                4.0),
+                                                        topRight:
+                                                            Radius.circular(
+                                                                4.0),
+                                                      ),
+                                                    ),
+                                                    focusedBorder:
+                                                        UnderlineInputBorder(
+                                                      borderSide: BorderSide(
+                                                        color:
+                                                            Color(0x00000000),
+                                                        width: 1,
+                                                      ),
+                                                      borderRadius:
+                                                          const BorderRadius
+                                                              .only(
+                                                        topLeft:
+                                                            Radius.circular(
+                                                                4.0),
+                                                        topRight:
+                                                            Radius.circular(
+                                                                4.0),
+                                                      ),
+                                                    ),
                                                   ),
-                                                ),
-                                                focusedBorder:
-                                                    UnderlineInputBorder(
-                                                  borderSide: BorderSide(
-                                                    color: Color(0x00000000),
-                                                    width: 1,
-                                                  ),
-                                                  borderRadius:
-                                                      const BorderRadius.only(
-                                                    topLeft:
-                                                        Radius.circular(4.0),
-                                                    topRight:
-                                                        Radius.circular(4.0),
-                                                  ),
-                                                ),
-                                              ),
-                                              style:
-                                                  FlutterFlowTheme.of(context)
+                                                  style: FlutterFlowTheme.of(
+                                                          context)
                                                       .bodyText1
                                                       .override(
                                                         fontFamily: 'Open Sans',
                                                         lineHeight: 1.48,
                                                       ),
-                                              keyboardType:
-                                                  TextInputType.multiline,
+                                                  keyboardType:
+                                                      TextInputType.multiline,
+                                                ),
+                                              ),
                                             ),
                                           ),
                                         ),
-                                      ),
+                                      ],
                                     ),
                                   ],
-                                ),
-                                Padding(
-                                  padding: EdgeInsetsDirectional.fromSTEB(
-                                      0, 0, 0, 16),
-                                  child: Row(
-                                    mainAxisSize: MainAxisSize.max,
-                                    mainAxisAlignment: MainAxisAlignment.end,
-                                    children: [
-                                      Padding(
-                                        padding: EdgeInsetsDirectional.fromSTEB(
-                                            0, 0, 8, 0),
-                                        child: FlutterFlowDropDown(
-                                          options: ['注文', '確認中', '発送済', '到着']
-                                              .toList(),
-                                          onChanged: (val) => setState(
-                                              () => dropDownValue3 = val),
-                                          width: 180,
-                                          height: 50,
-                                          textStyle:
-                                              FlutterFlowTheme.of(context)
-                                                  .bodyText1,
-                                          hintText: 'ステータス',
-                                          fillColor: Colors.white,
-                                          elevation: 4,
-                                          borderColor: Colors.transparent,
-                                          borderWidth: 0,
-                                          borderRadius: 0,
-                                          margin:
-                                              EdgeInsetsDirectional.fromSTEB(
-                                                  16, 4, 12, 4),
-                                          hidesUnderline: true,
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ],
+                                );
+                              },
                             ),
                           ),
                         ),
@@ -1179,6 +1307,8 @@ class _UpdateOrderPageWidgetState extends State<UpdateOrderPageWidget> {
                               children: [
                                 FFButtonWidget(
                                   onPressed: () async {
+                                    // status.forEach((_status) => print(
+                                    //     '${_status.status.label} ${_status.trackingNumber}'));
                                     logFirebaseEvent('Button_ON_TAP');
                                     logFirebaseEvent('Button_Alert-Dialog');
                                     var confirmDialogResponse =
@@ -1211,14 +1341,22 @@ class _UpdateOrderPageWidgetState extends State<UpdateOrderPageWidget> {
                                     if (confirmDialogResponse) {
                                       logFirebaseEvent('Button_Backend-Call');
 
-                                      final soldUpdateData =
-                                          createSoldRecordData(
-                                        status: dropDownValue3,
-                                        note: textController10?.text ?? '',
-                                        updated: getCurrentTimestamp,
-                                        carrier: dropDownValue1,
-                                      );
-                                      await widget.order.update(soldUpdateData);
+                                      if (!switchListTileValue) {
+                                        final _trackingNumber =
+                                            status[0].trackingNumber;
+                                        final _status = status[0].status.name;
+                                        final soldUpdateData =
+                                            createSoldRecordData(
+                                          status: _status,
+                                          note: textController10?.text ?? '',
+                                          updated: getCurrentTimestamp,
+                                          carrier: dropDownValue1,
+                                          trackingIndex: 0,
+                                        );
+                                        await widget.order
+                                            .update(soldUpdateData);
+                                      }
+
                                       logFirebaseEvent('Button_Show-Snack-Bar');
                                       ScaffoldMessenger.of(context)
                                           .showSnackBar(
