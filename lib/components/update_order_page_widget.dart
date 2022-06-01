@@ -28,7 +28,6 @@ class _UpdateOrderPageWidgetState extends State<UpdateOrderPageWidget> {
   String dropDownValue2;
   TextEditingController textController9;
   TextEditingController textController10;
-  String dropDownValue3;
   TextEditingController textController1;
   TextEditingController textController2;
   TextEditingController textController3;
@@ -830,7 +829,7 @@ class _UpdateOrderPageWidgetState extends State<UpdateOrderPageWidget> {
                                       Expanded(
                                         flex: 2,
                                         child: FlutterFlowDropDown(
-                                          options: ['Option 1'].toList(),
+                                          options: ['Option 1'],
                                           onChanged: (val) => setState(
                                               () => dropDownValue1 = val),
                                           textStyle:
@@ -856,7 +855,7 @@ class _UpdateOrderPageWidgetState extends State<UpdateOrderPageWidget> {
                                               () => switchListTileValue =
                                                   newValue),
                                           title: Text(
-                                            '商品別指定',
+                                            '商品別配送指定',
                                             style: FlutterFlowTheme.of(context)
                                                 .bodyText1,
                                           ),
@@ -900,8 +899,7 @@ class _UpdateOrderPageWidgetState extends State<UpdateOrderPageWidget> {
                                               EdgeInsetsDirectional.fromSTEB(
                                                   16, 0, 8, 0),
                                           child: FlutterFlowDropDown(
-                                            options: ['注文', '確認中', '発送済', '到着']
-                                                .toList(),
+                                            options: ['注文', '確認中', '発送済', '到着'],
                                             onChanged: (val) => setState(
                                                 () => dropDownValue2 = val),
                                             width: 128,
@@ -992,41 +990,6 @@ class _UpdateOrderPageWidgetState extends State<UpdateOrderPageWidget> {
                                     ),
                                   ],
                                 ),
-                                Padding(
-                                  padding: EdgeInsetsDirectional.fromSTEB(
-                                      0, 0, 0, 16),
-                                  child: Row(
-                                    mainAxisSize: MainAxisSize.max,
-                                    mainAxisAlignment: MainAxisAlignment.end,
-                                    children: [
-                                      Padding(
-                                        padding: EdgeInsetsDirectional.fromSTEB(
-                                            0, 0, 8, 0),
-                                        child: FlutterFlowDropDown(
-                                          options: ['注文', '確認中', '発送済', '到着']
-                                              .toList(),
-                                          onChanged: (val) => setState(
-                                              () => dropDownValue3 = val),
-                                          width: 180,
-                                          height: 50,
-                                          textStyle:
-                                              FlutterFlowTheme.of(context)
-                                                  .bodyText1,
-                                          hintText: 'ステータス',
-                                          fillColor: Colors.white,
-                                          elevation: 4,
-                                          borderColor: Colors.transparent,
-                                          borderWidth: 0,
-                                          borderRadius: 0,
-                                          margin:
-                                              EdgeInsetsDirectional.fromSTEB(
-                                                  16, 4, 12, 4),
-                                          hidesUnderline: true,
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
                               ],
                             ),
                           ),
@@ -1076,7 +1039,6 @@ class _UpdateOrderPageWidgetState extends State<UpdateOrderPageWidget> {
 
                                       final soldUpdateData =
                                           createSoldRecordData(
-                                        status: dropDownValue3,
                                         note: textController10?.text ?? '',
                                         updated: getCurrentTimestamp,
                                         carrier: dropDownValue1,

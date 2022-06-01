@@ -366,8 +366,7 @@ class _CreateShopPageWidgetState extends State<CreateShopPageWidget> {
                                                       ),
                                                     ),
                                                     FlutterFlowDropDown(
-                                                      options:
-                                                          ['Option 1'].toList(),
+                                                      options: ['Option 1'],
                                                       onChanged: (val) =>
                                                           setState(() =>
                                                               dropDownValue1 =
@@ -511,8 +510,7 @@ class _CreateShopPageWidgetState extends State<CreateShopPageWidget> {
                                                       ),
                                                     ),
                                                     FlutterFlowDropDown(
-                                                      options:
-                                                          ['Option 1'].toList(),
+                                                      options: ['Option 1'],
                                                       onChanged: (val) =>
                                                           setState(() =>
                                                               dropDownValue2 =
@@ -1236,8 +1234,7 @@ class _CreateShopPageWidgetState extends State<CreateShopPageWidget> {
                                                     ),
                                                   ),
                                                   FlutterFlowDropDown(
-                                                    options:
-                                                        ['Option 1'].toList(),
+                                                    options: ['Option 1'],
                                                     onChanged: (val) =>
                                                         setState(() =>
                                                             dropDownValue3 =

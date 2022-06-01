@@ -343,8 +343,7 @@ class _CreateComPageWidgetState extends State<CreateComPageWidget> {
                                                     ),
                                                   ),
                                                   FlutterFlowDropDown(
-                                                    options:
-                                                        ['Option 1'].toList(),
+                                                    options: ['Option 1'],
                                                     onChanged: (val) =>
                                                         setState(() =>
                                                             dropDownValue =
