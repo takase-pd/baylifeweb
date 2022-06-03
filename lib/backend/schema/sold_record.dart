@@ -37,13 +37,6 @@ abstract class SoldRecord implements Built<SoldRecord, SoldRecordBuilder> {
   DateTime get updated;
 
   @nullable
-  String get carrier;
-
-  @nullable
-  @BuiltValueField(wireName: 'tracking_index')
-  int get trackingIndex;
-
-  @nullable
   @BuiltValueField(wireName: kDocumentReferenceField)
   DocumentReference get reference;
 
@@ -54,9 +47,7 @@ abstract class SoldRecord implements Built<SoldRecord, SoldRecordBuilder> {
     ..totalQuantity = 0
     ..totalShippingFee = 0
     ..status = ''
-    ..note = ''
-    ..carrier = ''
-    ..trackingIndex = 0;
+    ..note = '';
 
   static Query<Map<String, dynamic>> collection([DocumentReference parent]) =>
       parent != null
@@ -92,8 +83,6 @@ Map<String, dynamic> createSoldRecordData({
   String status,
   String note,
   DateTime updated,
-  String carrier,
-  int trackingIndex,
 }) =>
     serializers.toFirestore(
         SoldRecord.serializer,
@@ -105,6 +94,4 @@ Map<String, dynamic> createSoldRecordData({
           ..totalShippingFee = totalShippingFee
           ..status = status
           ..note = note
-          ..updated = updated
-          ..carrier = carrier
-          ..trackingIndex = trackingIndex));
+          ..updated = updated));

@@ -1041,7 +1041,6 @@ class _UpdateOrderPageWidgetState extends State<UpdateOrderPageWidget> {
                                           createSoldRecordData(
                                         note: textController10?.text ?? '',
                                         updated: getCurrentTimestamp,
-                                        carrier: dropDownValue1,
                                       );
                                       await widget.order.update(soldUpdateData);
                                       logFirebaseEvent('Button_Show-Snack-Bar');
