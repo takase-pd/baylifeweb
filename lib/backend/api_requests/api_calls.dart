@@ -288,3 +288,43 @@ class UpdateDeliveryServiceCall {
     );
   }
 }
+
+class UpdateOrderedPlanCall {
+  static Future<ApiCallResponse> call({
+    String shop = '',
+    String uid = '',
+    String paymentId = '',
+    String orders = '',
+    String date = '',
+  }) {
+    final body = '''
+{
+  "data": {
+    "shop": "${shop}",
+    "uid": "${uid}",
+    "paymentId": "${paymentId}",
+    "orders": "${orders}",
+    "date": "${date}"
+  }
+}''';
+    return ApiManager.instance.makeApiCall(
+      callName: 'Update Ordered Plan',
+      apiUrl:
+          'https://asia-northeast1-baylifedev.cloudfunctions.net/ec-updateOrderedPlansV0',
+      callType: ApiCallType.POST,
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      params: {
+        'shop': shop,
+        'uid': uid,
+        'paymentId': paymentId,
+        'orders': orders,
+        'date': date,
+      },
+      body: body,
+      bodyType: BodyType.JSON,
+      returnBody: true,
+    );
+  }
+}
