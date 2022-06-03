@@ -111,69 +111,59 @@ enum ShippingStatus {
 }
 
 extension ShippingStatusExt on ShippingStatus {
-  static final labels = {
+  static final _label = {
     ShippingStatus.contacted: '注文',
     ShippingStatus.confirming: '確認中',
     ShippingStatus.shipping: '発送済',
     ShippingStatus.shipped: '到着',
   };
 
-  String get label => labels[this];
+  static final _icon = {
+    ShippingStatus.contacted: Icons.send_rounded,
+    ShippingStatus.confirming: Icons.search_rounded,
+    ShippingStatus.shipping: FontAwesomeIcons.truckFast,
+    ShippingStatus.shipped: FontAwesomeIcons.box,
+  };
+
+  static final _size = {
+    ShippingStatus.contacted: 32.0,
+    ShippingStatus.confirming: 32.0,
+    ShippingStatus.shipping: 24.0,
+    ShippingStatus.shipped: 24.0,
+  };
 
   static List<String> get labelList =>
-      labels.entries.map((e) => labels[e.key]).toList();
-}
+      _label.entries.map((e) => _label[e.key]).toList();
 
-ShippingStatus getShippingStatus(String status) {
-  switch (status) {
-    case 'contacted':
-      return ShippingStatus.contacted;
-      break;
-    case '注文':
-      return ShippingStatus.contacted;
-      break;
-    case 'shipping':
-      return ShippingStatus.shipping;
-      break;
-    case '発送済':
-      return ShippingStatus.shipping;
-      break;
-    case 'shipped':
-      return ShippingStatus.shipped;
-      break;
-    case '到着':
-      return ShippingStatus.shipped;
-      break;
-    default:
-      return ShippingStatus.confirming;
-      break;
+  static ShippingStatus getStatus(String status) {
+    switch (status) {
+      case 'contacted':
+        return ShippingStatus.contacted;
+        break;
+      case '注文':
+        return ShippingStatus.contacted;
+        break;
+      case 'shipping':
+        return ShippingStatus.shipping;
+        break;
+      case '発送済':
+        return ShippingStatus.shipping;
+        break;
+      case 'shipped':
+        return ShippingStatus.shipped;
+        break;
+      case '到着':
+        return ShippingStatus.shipped;
+        break;
+      default:
+        return ShippingStatus.confirming;
+        break;
+    }
   }
-}
 
-FaIcon shippingStatusIcon(BuildContext context, ShippingStatus _status) {
-  IconData _icon;
-  double _size;
-  switch (_status) {
-    case ShippingStatus.contacted:
-      _icon = Icons.send_rounded;
-      _size = 32;
-      break;
-    case ShippingStatus.shipping:
-      _icon = FontAwesomeIcons.shippingFast;
-      _size = 24;
-      break;
-    case ShippingStatus.shipped:
-      _icon = FontAwesomeIcons.box;
-      _size = 24;
-      break;
-    default:
-      _icon = Icons.search_rounded;
-      _size = 32;
-      break;
-  }
-  return FaIcon(
-    _icon,
-    color: FlutterFlowTheme.of(context).secondaryColor,
-    size: _size,
-  );
+  String get label => _label[this];
+
+  IconData get icon => _icon[this];
+
+  double get size => _size[this];
 }

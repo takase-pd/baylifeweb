@@ -10,6 +10,7 @@ import '../auth/firebase_user_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:flutter_stripe/flutter_stripe.dart' as stripe;
 
 import 'package:bay_life_web/custom_code/widgets/ecommerce.dart';
@@ -28,9 +29,7 @@ class UpdateOrderPageWidget extends StatefulWidget {
 
 class _UpdateOrderPageWidgetState extends State<UpdateOrderPageWidget> {
   String dropDownValue1;
-  String dropDownValue2;
   bool switchListTileValue;
-  String dropDownValue3;
   TextEditingController textController1;
   TextEditingController textController2;
   TextEditingController textController3;
@@ -147,13 +146,14 @@ class _UpdateOrderPageWidgetState extends State<UpdateOrderPageWidget> {
         unitAmount: plan['unit_amount'],
         quantity: plan['quantity'],
         name: plan['name'],
-        status: getShippingStatus(plan['status']),
+        status: ShippingStatusExt.getStatus(plan['status']),
         trackingIndex: plan['tracking_index'],
         updated: Timestamp(
           plan['updated']['_seconds'],
           plan['updated']['_nanoseconds'],
         ).toDate(),
       ));
+      print(_plans.length);
     });
 
     return _plans;
@@ -198,7 +198,7 @@ class _UpdateOrderPageWidgetState extends State<UpdateOrderPageWidget> {
               widget.order.id.substring(3),
               '',
               await _getTrackingNumber(0),
-              getShippingStatus(_order.status),
+              ShippingStatusExt.getStatus(_order.status),
             ),
           );
 
@@ -215,7 +215,6 @@ class _UpdateOrderPageWidgetState extends State<UpdateOrderPageWidget> {
   @override
   void initState() {
     super.initState();
-
     switchListTileValue = false;
     textController9 = TextEditingController();
     shop = _getShop();
@@ -936,9 +935,16 @@ class _UpdateOrderPageWidgetState extends State<UpdateOrderPageWidget> {
                                                             ),
                                                             Expanded(
                                                               flex: 1,
-                                                              child: shippingStatusIcon(
-                                                                  context,
-                                                                  _plan.status),
+                                                              child: FaIcon(
+                                                                _plan.status
+                                                                    .icon,
+                                                                color: FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .secondaryColor,
+                                                                size: _plan
+                                                                    .status
+                                                                    .size,
+                                                              ),
                                                             ),
                                                           ],
                                                         ),
@@ -1216,8 +1222,9 @@ class _UpdateOrderPageWidgetState extends State<UpdateOrderPageWidget> {
                                                                           .id ==
                                                                       _form.id
                                                                   ? _form.changeStatus(
-                                                                      getShippingStatus(
-                                                                          val))
+                                                                      ShippingStatusExt
+                                                                          .getStatus(
+                                                                              val))
                                                                   : e)
                                                               .toList(),
                                                         ),
@@ -1357,40 +1364,36 @@ class _UpdateOrderPageWidgetState extends State<UpdateOrderPageWidget> {
 
                                     logFirebaseEvent('Button_ON_TAP');
                                     logFirebaseEvent('Button_Alert-Dialog');
-                                    // var confirmDialogResponse =
-                                    //     await showDialog<bool>(
-                                    //           context: context,
-                                    //           builder: (alertDialogContext) {
-                                    //             return AlertDialog(
-                                    //               title: Text('注文更新'),
-                                    //               content: Text('注文を更新します。'),
-                                    //               actions: [
-                                    //                 TextButton(
-                                    //                   onPressed: () =>
-                                    //                       Navigator.pop(
-                                    //                           alertDialogContext,
-                                    //                           false),
-                                    //                   child: Text('Cancel'),
-                                    //                 ),
-                                    //                 TextButton(
-                                    //                   onPressed: () =>
-                                    //                       Navigator.pop(
-                                    //                           alertDialogContext,
-                                    //                           true),
-                                    //                   child: Text('OK'),
-                                    //                 ),
-                                    //               ],
-                                    //             );
-                                    //           },
-                                    //         ) ??
-                                    //         false;
-                                    // if (confirmDialogResponse) {
-                                    if (true) {
+                                    var confirmDialogResponse =
+                                        await showDialog<bool>(
+                                              context: context,
+                                              builder: (alertDialogContext) {
+                                                return AlertDialog(
+                                                  title: Text('注文更新'),
+                                                  content: Text('注文を更新します。'),
+                                                  actions: [
+                                                    TextButton(
+                                                      onPressed: () =>
+                                                          Navigator.pop(
+                                                              alertDialogContext,
+                                                              false),
+                                                      child: Text('Cancel'),
+                                                    ),
+                                                    TextButton(
+                                                      onPressed: () =>
+                                                          Navigator.pop(
+                                                              alertDialogContext,
+                                                              true),
+                                                      child: Text('OK'),
+                                                    ),
+                                                  ],
+                                                );
+                                              },
+                                            ) ??
+                                            false;
+                                    if (confirmDialogResponse) {
                                       logFirebaseEvent('Button_Backend-Call');
-                                      // final nums = statusForms.map(
-                                      //   (e) => e.trackingNumber,
-                                      // );
-                                      Map box = {};
+                                      Map<String, int> box = {};
                                       List numbers = [];
                                       for (var i = 0;
                                           i < statusForms.length;
@@ -1408,45 +1411,58 @@ class _UpdateOrderPageWidgetState extends State<UpdateOrderPageWidget> {
                                           (value, element) =>
                                               value + ',' + element);
 
-                                      // if (!switchListTileValue) {
-                                      //   final _status =
-                                      //       statusForms[0].status.name;
-                                      //   final soldUpdateData =
-                                      //       createSoldRecordData(
-                                      //     status: _status,
-                                      //     note: textController10?.text ?? '',
-                                      //     updated: getCurrentTimestamp,
-                                      //   );
-                                      //   await widget.order
-                                      //       .update(soldUpdateData);
-                                      // }
-
-                                      // print(
-                                      //     '${_shop.reference.path} $currentUser ${widget.order.id}');
-                                      // print('$currentJwtToken $_appCheckToken');
-                                      String update = '';
-                                      statusForms.forEach((element) {
-                                        update += '''{
-                                              "id": "${element.id}",
-                                              "index": "${box[element.id]}",
-                                              "status": "${element.status}"
-                                              },''';
-                                      });
-                                      // print(update.substring(
-                                      // 0, update.length - 1));
-
-                                      // final _appCheckToken =
-                                      //     await AppCheckAgent.getToken(context);
-                                      // final apiCallOutput =
-                                      //     await UpdateDeliveryServiceCall.call(
-                                      //   shop: _shop.reference.path,
-                                      //   uid: currentUserUid,
-                                      //   paymentId: widget.order.id,
-                                      //   carrier: dropDownValue1,
-                                      //   trackingNumber: _numbers,
-                                      //   accessToken: currentJwtToken,
-                                      //   appCheckToken: _appCheckToken,
-                                      // );
+                                      final _appCheckToken =
+                                          await AppCheckAgent.getToken(context);
+                                      if (!switchListTileValue) {
+                                        final _status =
+                                            statusForms[0].status.name;
+                                        final soldUpdateData =
+                                            createSoldRecordData(
+                                          status: _status,
+                                          note: textController10?.text ?? '',
+                                          updated: getCurrentTimestamp,
+                                        );
+                                        await widget.order
+                                            .update(soldUpdateData);
+                                      } else {
+                                        final tmpUpdate = statusForms
+                                            .map(
+                                              (e) => '''{
+                                              "id": "${e.id}",
+                                              "index": ${box[e.id]},
+                                              "status": "${e.status.name}"
+                                              },''',
+                                            )
+                                            .fold(
+                                                '[',
+                                                (previousValue, element) =>
+                                                    previousValue + element);
+                                        final updateOrders =
+                                            tmpUpdate.substring(
+                                                    0, tmpUpdate.length - 1) +
+                                                ']';
+                                        final apiCallOutput =
+                                            await UpdateOrderedPlanCall.call(
+                                          shop: _shop.reference.path,
+                                          uid: currentUserUid,
+                                          paymentId: widget.order.id,
+                                          orders: updateOrders,
+                                          updated:
+                                              getCurrentTimestamp.toString(),
+                                          accessToken: currentJwtToken,
+                                          appCheckToken: _appCheckToken,
+                                        );
+                                      }
+                                      final apiCallOutput =
+                                          await UpdateDeliveryServiceCall.call(
+                                        shop: _shop.reference.path,
+                                        uid: currentUserUid,
+                                        paymentId: widget.order.id,
+                                        carrier: dropDownValue1,
+                                        trackingNumber: _numbers,
+                                        accessToken: currentJwtToken,
+                                        appCheckToken: _appCheckToken,
+                                      );
 
                                       logFirebaseEvent('Button_Show-Snack-Bar');
                                       ScaffoldMessenger.of(context)
