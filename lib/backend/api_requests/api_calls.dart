@@ -252,6 +252,8 @@ class UpdateDeliveryServiceCall {
     String paymentId = '',
     String carrier = '',
     String trackingNumber = '',
+    String accessToken = '',
+    String appCheckToken = '',
   }) {
     final body = '''
 {
@@ -281,6 +283,8 @@ class UpdateDeliveryServiceCall {
       body: body,
       bodyType: BodyType.JSON,
       returnBody: true,
+      accessToken: accessToken,
+      appCheckToken: appCheckToken,
     );
   }
 }
