@@ -42,16 +42,18 @@ class _UpdateOrderPageWidgetState extends State<UpdateOrderPageWidget> {
   TextEditingController textController9;
   TextEditingController textController10;
   TextEditingController textController11;
+  Future<ShopsRecord> shop;
   Future<SoldRecord> order;
   Future<OrderDetails> details;
   Future<List<OrderedPlan>> plans;
-  List<ShippinStatusForm> status;
+  Future<List<ShippinStatusForm>> statusHandler;
+  List<ShippinStatusForm> statusForms;
   List<String> trackingNumbers;
 
   Future<OrderDetails> _getOrderDetails() async {
     OrderDetails _details;
 
-    final _shop = await _getShop();
+    final _shop = await shop;
     if (_shop == null) return _details;
 
     if (!currentUser.loggedIn) return _details;
@@ -107,7 +109,6 @@ class _UpdateOrderPageWidgetState extends State<UpdateOrderPageWidget> {
     );
 
     trackingNumbers = _details.shipping.trackingNumber.split(',');
-    print(trackingNumbers);
 
     return _details;
   }
@@ -115,7 +116,7 @@ class _UpdateOrderPageWidgetState extends State<UpdateOrderPageWidget> {
   Future<List<OrderedPlan>> _getOrderedPlans() async {
     List<OrderedPlan> _plans = [];
 
-    final _shop = await _getShop();
+    final _shop = await shop;
     if (_shop == null) return _plans;
 
     if (!currentUser.loggedIn) return _plans;
@@ -147,15 +148,13 @@ class _UpdateOrderPageWidgetState extends State<UpdateOrderPageWidget> {
         quantity: plan['quantity'],
         name: plan['name'],
         status: getShippingStatus(plan['status']),
-        trackingIndex: int.parse(plan['tracking_index']),
+        trackingIndex: plan['tracking_index'],
         updated: Timestamp(
           plan['updated']['_seconds'],
           plan['updated']['_nanoseconds'],
         ).toDate(),
       ));
     });
-
-    _setShippingStatusForm(_plans);
 
     return _plans;
   }
@@ -179,31 +178,36 @@ class _UpdateOrderPageWidgetState extends State<UpdateOrderPageWidget> {
     return SoldRecord.getDocumentOnce(widget.order);
   }
 
-  _setShippingStatusForm(List<OrderedPlan> _plans) async {
+  Future<List<ShippinStatusForm>> _setShippingStatusForm() async {
     final _order = await order;
-    status = [];
+    final _plans = await plans;
+    List<ShippinStatusForm> _statusHandler = [];
     switchListTileValue
         ? _plans.forEach(
-            (_plan) => status.add(
+            (_plan) async => _statusHandler.add(
               ShippinStatusForm.create(
                 _plan.id,
                 _plan.name,
-                _getTrackingNumber(_plan.trackingIndex),
+                await _getTrackingNumber(_plan.trackingIndex),
                 _plan.status,
               ),
             ),
           )
-        : status.add(
+        : _statusHandler.add(
             ShippinStatusForm.create(
+              widget.order.id.substring(3),
               '',
-              '',
-              _getTrackingNumber(_order.trackingIndex),
+              await _getTrackingNumber(0),
               getShippingStatus(_order.status),
             ),
           );
+
+    statusForms = _statusHandler;
+    return _statusHandler;
   }
 
-  String _getTrackingNumber(int index) {
+  Future<String> _getTrackingNumber(int index) async {
+    await details;
     if (trackingNumbers.length == 0) return '';
     return trackingNumbers[index];
   }
@@ -211,19 +215,18 @@ class _UpdateOrderPageWidgetState extends State<UpdateOrderPageWidget> {
   @override
   void initState() {
     super.initState();
+
     switchListTileValue = false;
     textController9 = TextEditingController();
+    shop = _getShop();
     order = _getOrder();
     details = _getOrderDetails();
     plans = _getOrderedPlans();
+    statusHandler = _setShippingStatusForm();
   }
 
   @override
   void dispose() {
-    status.forEach((element) {
-      element.dispose();
-    });
-
     super.dispose();
   }
 
@@ -1071,8 +1074,8 @@ class _UpdateOrderPageWidgetState extends State<UpdateOrderPageWidget> {
                                                   setState(() => {
                                                         switchListTileValue =
                                                             newValue,
-                                                        _setShippingStatusForm(
-                                                            _plans),
+                                                        statusHandler =
+                                                            _setShippingStatusForm(),
                                                       }),
                                               title: Text(
                                                 '商品別配送指定',
@@ -1089,129 +1092,164 @@ class _UpdateOrderPageWidgetState extends State<UpdateOrderPageWidget> {
                                         ],
                                       ),
                                     ),
-                                    ListView(
-                                      padding: EdgeInsets.zero,
-                                      shrinkWrap: true,
-                                      scrollDirection: Axis.vertical,
-                                      physics:
-                                          const NeverScrollableScrollPhysics(),
-                                      children: [
-                                        ...status.map(
-                                          (_status) => Row(
-                                            mainAxisSize: MainAxisSize.max,
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.spaceBetween,
-                                            children: [
-                                              if (switchListTileValue)
-                                                Expanded(
-                                                  flex: 3,
-                                                  child: Padding(
-                                                    padding:
-                                                        EdgeInsetsDirectional
-                                                            .fromSTEB(
-                                                                16, 0, 0, 0),
-                                                    child: TextFormField(
-                                                      controller:
-                                                          TextEditingController(
-                                                              text: _status
-                                                                  .planName),
-                                                      readOnly: true,
-                                                      obscureText: false,
-                                                      decoration:
-                                                          InputDecoration(
-                                                        labelText: '商品名',
-                                                        enabledBorder:
-                                                            InputBorder.none,
-                                                        focusedBorder:
-                                                            InputBorder.none,
-                                                      ),
-                                                      style:
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .bodyText1,
-                                                    ),
-                                                  ),
-                                                ),
-                                              Expanded(
-                                                flex: 4,
-                                                child: Padding(
-                                                  padding: EdgeInsetsDirectional
-                                                      .fromSTEB(16, 0, 0, 0),
-                                                  child: TextFormField(
-                                                    controller:
-                                                        _status.controller,
-                                                    onChanged: (text) =>
-                                                        setState(
-                                                      () => status = status
-                                                          .map((e) => e.id ==
-                                                                  _status.id
-                                                              ? _status
-                                                                  .changeTrackingNumber(
-                                                                      text)
-                                                              : e)
-                                                          .toList(),
-                                                    ),
-                                                    obscureText: false,
-                                                    decoration: InputDecoration(
-                                                      labelText: 'トラッキングコード',
-                                                      enabledBorder:
-                                                          InputBorder.none,
-                                                      focusedBorder:
-                                                          InputBorder.none,
-                                                    ),
-                                                    style: FlutterFlowTheme.of(
-                                                            context)
-                                                        .bodyText1,
-                                                  ),
-                                                ),
+                                    FutureBuilder<List<ShippinStatusForm>>(
+                                      future: statusHandler,
+                                      builder: (context, snapshot) {
+                                        // Customize what your widget looks like when it's loading.
+                                        if (snapshot.connectionState !=
+                                            ConnectionState.done) {
+                                          return Center(
+                                            child: SizedBox(
+                                              width: 50,
+                                              height: 50,
+                                              child: SpinKitPulse(
+                                                color:
+                                                    FlutterFlowTheme.of(context)
+                                                        .primaryColor,
+                                                size: 50,
                                               ),
-                                              Expanded(
-                                                flex: 3,
-                                                child: Padding(
-                                                  padding: EdgeInsetsDirectional
-                                                      .fromSTEB(16, 0, 8, 0),
-                                                  child: FlutterFlowDropDown(
-                                                    options: ShippingStatusExt
-                                                        .labelList,
-                                                    onChanged: (val) =>
-                                                        setState(
-                                                      () => status = status
-                                                          .map((e) => e.id ==
-                                                                  _status.id
-                                                              ? _status
-                                                                  .changeStatus(
+                                            ),
+                                          );
+                                        }
+                                        // final _statusForms = snapshot.data;
+                                        return ListView(
+                                          padding: EdgeInsets.zero,
+                                          shrinkWrap: true,
+                                          scrollDirection: Axis.vertical,
+                                          physics:
+                                              const NeverScrollableScrollPhysics(),
+                                          children: [
+                                            ...statusForms.map(
+                                              (_form) => Row(
+                                                mainAxisSize: MainAxisSize.max,
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment
+                                                        .spaceBetween,
+                                                children: [
+                                                  if (switchListTileValue)
+                                                    Expanded(
+                                                      flex: 3,
+                                                      child: Padding(
+                                                        padding:
+                                                            EdgeInsetsDirectional
+                                                                .fromSTEB(16, 0,
+                                                                    0, 0),
+                                                        child: TextFormField(
+                                                          controller:
+                                                              TextEditingController(
+                                                                  text: _form
+                                                                      .planName),
+                                                          readOnly: true,
+                                                          obscureText: false,
+                                                          decoration:
+                                                              InputDecoration(
+                                                            labelText: '商品名',
+                                                            enabledBorder:
+                                                                InputBorder
+                                                                    .none,
+                                                            focusedBorder:
+                                                                InputBorder
+                                                                    .none,
+                                                          ),
+                                                          style: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .bodyText1,
+                                                        ),
+                                                      ),
+                                                    ),
+                                                  Expanded(
+                                                    flex: 4,
+                                                    child: Padding(
+                                                      padding:
+                                                          EdgeInsetsDirectional
+                                                              .fromSTEB(
+                                                                  16, 0, 0, 0),
+                                                      child: TextFormField(
+                                                        controller:
+                                                            _form.controller,
+                                                        onChanged: (text) => {
+                                                          setState(
+                                                            () => statusForms = statusForms
+                                                                .map((e) => e
+                                                                            .id ==
+                                                                        _form.id
+                                                                    ? _form
+                                                                        .changeTrackingNumber(
+                                                                            text)
+                                                                    : e)
+                                                                .toList(),
+                                                          ),
+                                                        },
+                                                        obscureText: false,
+                                                        decoration:
+                                                            InputDecoration(
+                                                          labelText:
+                                                              'トラッキングコード',
+                                                          enabledBorder:
+                                                              InputBorder.none,
+                                                          focusedBorder:
+                                                              InputBorder.none,
+                                                        ),
+                                                        style:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .bodyText1,
+                                                      ),
+                                                    ),
+                                                  ),
+                                                  Expanded(
+                                                    flex: 3,
+                                                    child: Padding(
+                                                      padding:
+                                                          EdgeInsetsDirectional
+                                                              .fromSTEB(
+                                                                  16, 0, 8, 0),
+                                                      child:
+                                                          FlutterFlowDropDown(
+                                                        options:
+                                                            ShippingStatusExt
+                                                                .labelList,
+                                                        onChanged: (val) =>
+                                                            setState(
+                                                          () => statusForms = statusForms
+                                                              .map((e) => e
+                                                                          .id ==
+                                                                      _form.id
+                                                                  ? _form.changeStatus(
                                                                       getShippingStatus(
                                                                           val))
-                                                              : e)
-                                                          .toList(),
+                                                                  : e)
+                                                              .toList(),
+                                                        ),
+                                                        width: 128,
+                                                        height: 32,
+                                                        textStyle:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .bodyText1,
+                                                        hintText: 'ステータス',
+                                                        fillColor: Colors.white,
+                                                        elevation: 4,
+                                                        borderColor:
+                                                            Colors.transparent,
+                                                        borderWidth: 0,
+                                                        borderRadius: 0,
+                                                        margin:
+                                                            EdgeInsetsDirectional
+                                                                .fromSTEB(16, 4,
+                                                                    8, 4),
+                                                        hidesUnderline: true,
+                                                        initialOption:
+                                                            _form.status.label,
+                                                      ),
                                                     ),
-                                                    width: 128,
-                                                    height: 32,
-                                                    textStyle:
-                                                        FlutterFlowTheme.of(
-                                                                context)
-                                                            .bodyText1,
-                                                    hintText: 'ステータス',
-                                                    fillColor: Colors.white,
-                                                    elevation: 4,
-                                                    borderColor:
-                                                        Colors.transparent,
-                                                    borderWidth: 0,
-                                                    borderRadius: 0,
-                                                    margin:
-                                                        EdgeInsetsDirectional
-                                                            .fromSTEB(
-                                                                16, 4, 8, 4),
-                                                    hidesUnderline: true,
-                                                    initialOption:
-                                                        _status.status.label,
                                                   ),
-                                                ),
+                                                ],
                                               ),
-                                            ],
-                                          ),
-                                        ),
-                                      ],
+                                            ),
+                                          ],
+                                        );
+                                      },
                                     ),
                                     Row(
                                       mainAxisSize: MainAxisSize.max,
@@ -1307,55 +1345,108 @@ class _UpdateOrderPageWidgetState extends State<UpdateOrderPageWidget> {
                               children: [
                                 FFButtonWidget(
                                   onPressed: () async {
-                                    // status.forEach((_status) => print(
-                                    //     '${_status.status.label} ${_status.trackingNumber}'));
+                                    final _shop = await shop;
+                                    if (_shop == null) {
+                                      String errorMessage = '原因不明のエラーが発生';
+                                      showSnackbar(
+                                        context,
+                                        'Error: $errorMessage',
+                                      );
+                                      return;
+                                    }
+
                                     logFirebaseEvent('Button_ON_TAP');
                                     logFirebaseEvent('Button_Alert-Dialog');
-                                    var confirmDialogResponse =
-                                        await showDialog<bool>(
-                                              context: context,
-                                              builder: (alertDialogContext) {
-                                                return AlertDialog(
-                                                  title: Text('注文更新'),
-                                                  content: Text('注文を更新します。'),
-                                                  actions: [
-                                                    TextButton(
-                                                      onPressed: () =>
-                                                          Navigator.pop(
-                                                              alertDialogContext,
-                                                              false),
-                                                      child: Text('Cancel'),
-                                                    ),
-                                                    TextButton(
-                                                      onPressed: () =>
-                                                          Navigator.pop(
-                                                              alertDialogContext,
-                                                              true),
-                                                      child: Text('OK'),
-                                                    ),
-                                                  ],
-                                                );
-                                              },
-                                            ) ??
-                                            false;
-                                    if (confirmDialogResponse) {
+                                    // var confirmDialogResponse =
+                                    //     await showDialog<bool>(
+                                    //           context: context,
+                                    //           builder: (alertDialogContext) {
+                                    //             return AlertDialog(
+                                    //               title: Text('注文更新'),
+                                    //               content: Text('注文を更新します。'),
+                                    //               actions: [
+                                    //                 TextButton(
+                                    //                   onPressed: () =>
+                                    //                       Navigator.pop(
+                                    //                           alertDialogContext,
+                                    //                           false),
+                                    //                   child: Text('Cancel'),
+                                    //                 ),
+                                    //                 TextButton(
+                                    //                   onPressed: () =>
+                                    //                       Navigator.pop(
+                                    //                           alertDialogContext,
+                                    //                           true),
+                                    //                   child: Text('OK'),
+                                    //                 ),
+                                    //               ],
+                                    //             );
+                                    //           },
+                                    //         ) ??
+                                    //         false;
+                                    // if (confirmDialogResponse) {
+                                    if (true) {
                                       logFirebaseEvent('Button_Backend-Call');
-
-                                      if (!switchListTileValue) {
-                                        final _trackingNumber =
-                                            status[0].trackingNumber;
-                                        final _status = status[0].status.name;
-                                        final soldUpdateData =
-                                            createSoldRecordData(
-                                          status: _status,
-                                          note: textController10?.text ?? '',
-                                          updated: getCurrentTimestamp,
-                                          carrier: dropDownValue1,
-                                          trackingIndex: 0,
-                                        );
-                                        await widget.order
-                                            .update(soldUpdateData);
+                                      // final nums = statusForms.map(
+                                      //   (e) => e.trackingNumber,
+                                      // );
+                                      Map box = {};
+                                      List numbers = [];
+                                      for (var i = 0;
+                                          i < statusForms.length;
+                                          i++) {
+                                        if (statusForms[i].trackingNumber ==
+                                                '' ||
+                                            statusForms[i].trackingNumber ==
+                                                null) continue;
+                                        box[statusForms[i].id] = i;
+                                        numbers
+                                            .add(statusForms[i].trackingNumber);
                                       }
+
+                                      final _numbers = numbers.reduce(
+                                          (value, element) =>
+                                              value + ',' + element);
+
+                                      // if (!switchListTileValue) {
+                                      //   final _status =
+                                      //       statusForms[0].status.name;
+                                      //   final soldUpdateData =
+                                      //       createSoldRecordData(
+                                      //     status: _status,
+                                      //     note: textController10?.text ?? '',
+                                      //     updated: getCurrentTimestamp,
+                                      //   );
+                                      //   await widget.order
+                                      //       .update(soldUpdateData);
+                                      // }
+
+                                      // print(
+                                      //     '${_shop.reference.path} $currentUser ${widget.order.id}');
+                                      // print('$currentJwtToken $_appCheckToken');
+                                      String update = '';
+                                      statusForms.forEach((element) {
+                                        update += '''{
+                                              "id": "${element.id}",
+                                              "index": "${box[element.id]}",
+                                              "status": "${element.status}"
+                                              },''';
+                                      });
+                                      // print(update.substring(
+                                      // 0, update.length - 1));
+
+                                      // final _appCheckToken =
+                                      //     await AppCheckAgent.getToken(context);
+                                      // final apiCallOutput =
+                                      //     await UpdateDeliveryServiceCall.call(
+                                      //   shop: _shop.reference.path,
+                                      //   uid: currentUserUid,
+                                      //   paymentId: widget.order.id,
+                                      //   carrier: dropDownValue1,
+                                      //   trackingNumber: _numbers,
+                                      //   accessToken: currentJwtToken,
+                                      //   appCheckToken: _appCheckToken,
+                                      // );
 
                                       logFirebaseEvent('Button_Show-Snack-Bar');
                                       ScaffoldMessenger.of(context)
