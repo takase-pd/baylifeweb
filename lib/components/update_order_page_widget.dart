@@ -47,7 +47,7 @@ class _UpdateOrderPageWidgetState extends State<UpdateOrderPageWidget> {
   Future<List<OrderedPlan>> plans;
   Future<List<ShippinStatusForm>> statusHandler;
   List<ShippinStatusForm> statusForms;
-  // String carrier;
+  String carrier;
   List<String> trackingNumbers;
 
   Future<OrderDetails> _getOrderDetails() async {
@@ -104,12 +104,12 @@ class _UpdateOrderPageWidgetState extends State<UpdateOrderPageWidget> {
         ),
         name: _apiJson['details']['shipping']['name'],
         phone: _apiJson['details']['shipping']['phone'],
-        // carrier: _apiJson['details']['shipping']['carrier'],
+        carrier: _apiJson['details']['shipping']['carrier'],
         trackingNumber: _apiJson['details']['shipping']['tracking_number'],
       ),
     );
 
-    // carrier = _details.shipping.carrier ?? '';
+    carrier = _details.shipping.carrier ?? '';
     trackingNumbers = _details.shipping.trackingNumber?.split(',') ?? [];
 
     return _details;
@@ -180,7 +180,7 @@ class _UpdateOrderPageWidgetState extends State<UpdateOrderPageWidget> {
     return SoldRecord.getDocumentOnce(widget.order);
   }
 
-  Future<List<ShippinStatusForm>> _setShippingStatusForm() async {
+  Future<List<ShippinStatusForm>> _setForm() async {
     final _order = await order;
     final _plans = await plans;
     List<ShippinStatusForm> _statusHandler = [];
@@ -223,7 +223,7 @@ class _UpdateOrderPageWidgetState extends State<UpdateOrderPageWidget> {
     order = _getOrder();
     details = _getOrderDetails();
     plans = _getOrderedPlans();
-    statusHandler = _setShippingStatusForm();
+    statusHandler = _setForm();
   }
 
   @override
@@ -1010,8 +1010,8 @@ class _UpdateOrderPageWidgetState extends State<UpdateOrderPageWidget> {
                               color: FlutterFlowTheme.of(context).background,
                               borderRadius: BorderRadius.circular(8),
                             ),
-                            child: FutureBuilder<List<OrderedPlan>>(
-                              future: plans,
+                            child: FutureBuilder<List<ShippinStatusForm>>(
+                              future: statusHandler,
                               builder: (context, snapshot) {
                                 // Customize what your widget looks like when it's loading.
                                 if (snapshot.connectionState !=
@@ -1028,7 +1028,7 @@ class _UpdateOrderPageWidgetState extends State<UpdateOrderPageWidget> {
                                     ),
                                   );
                                 }
-                                final _plans = snapshot.data;
+                                // final _plans = snapshot.data;
                                 return Column(
                                   mainAxisSize: MainAxisSize.max,
                                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -1051,12 +1051,8 @@ class _UpdateOrderPageWidgetState extends State<UpdateOrderPageWidget> {
                                           Expanded(
                                             flex: 2,
                                             child: FlutterFlowDropDown(
-                                              options: [
-                                                'クロネコヤマト',
-                                                '佐川急便',
-                                                '日本郵便',
-                                              ].toList(),
-                                              // ShippingCarrierExt.labelList,
+                                              options:
+                                                  ShippingCarrierExt.labelList,
                                               onChanged: (val) => setState(
                                                   () => dropDownValue1 = val),
                                               textStyle:
@@ -1071,7 +1067,7 @@ class _UpdateOrderPageWidgetState extends State<UpdateOrderPageWidget> {
                                               margin: EdgeInsetsDirectional
                                                   .fromSTEB(16, 4, 16, 4),
                                               hidesUnderline: true,
-                                              // initialOption: carrier,
+                                              initialOption: carrier,
                                             ),
                                           ),
                                           // if (_plans.length > 1)
@@ -1085,7 +1081,7 @@ class _UpdateOrderPageWidgetState extends State<UpdateOrderPageWidget> {
                                                         switchListTileValue =
                                                             newValue,
                                                         statusHandler =
-                                                            _setShippingStatusForm(),
+                                                            _setForm(),
                                                       }),
                                               title: Text(
                                                 '商品別配送指定',
@@ -1102,165 +1098,130 @@ class _UpdateOrderPageWidgetState extends State<UpdateOrderPageWidget> {
                                         ],
                                       ),
                                     ),
-                                    FutureBuilder<List<ShippinStatusForm>>(
-                                      future: statusHandler,
-                                      builder: (context, snapshot) {
-                                        // Customize what your widget looks like when it's loading.
-                                        if (snapshot.connectionState !=
-                                            ConnectionState.done) {
-                                          return Center(
-                                            child: SizedBox(
-                                              width: 50,
-                                              height: 50,
-                                              child: SpinKitPulse(
-                                                color:
-                                                    FlutterFlowTheme.of(context)
-                                                        .primaryColor,
-                                                size: 50,
-                                              ),
-                                            ),
-                                          );
-                                        }
-                                        // final _statusForms = snapshot.data;
-                                        return ListView(
-                                          padding: EdgeInsets.zero,
-                                          shrinkWrap: true,
-                                          scrollDirection: Axis.vertical,
-                                          physics:
-                                              const NeverScrollableScrollPhysics(),
-                                          children: [
-                                            ...statusForms.map(
-                                              (_form) => Row(
-                                                mainAxisSize: MainAxisSize.max,
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment
-                                                        .spaceBetween,
-                                                children: [
-                                                  if (switchListTileValue)
-                                                    Expanded(
-                                                      flex: 3,
-                                                      child: Padding(
-                                                        padding:
-                                                            EdgeInsetsDirectional
-                                                                .fromSTEB(16, 0,
-                                                                    0, 0),
-                                                        child: TextFormField(
-                                                          controller:
-                                                              TextEditingController(
-                                                                  text: _form
-                                                                      .planName),
-                                                          readOnly: true,
-                                                          obscureText: false,
-                                                          decoration:
-                                                              InputDecoration(
-                                                            labelText: '商品名',
-                                                            enabledBorder:
-                                                                InputBorder
-                                                                    .none,
-                                                            focusedBorder:
-                                                                InputBorder
-                                                                    .none,
-                                                          ),
-                                                          style: FlutterFlowTheme
-                                                                  .of(context)
+                                    ListView(
+                                      padding: EdgeInsets.zero,
+                                      shrinkWrap: true,
+                                      scrollDirection: Axis.vertical,
+                                      physics:
+                                          const NeverScrollableScrollPhysics(),
+                                      children: [
+                                        ...statusForms.map(
+                                          (_form) => Row(
+                                            mainAxisSize: MainAxisSize.max,
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceBetween,
+                                            children: [
+                                              if (switchListTileValue)
+                                                Expanded(
+                                                  flex: 3,
+                                                  child: Padding(
+                                                    padding:
+                                                        EdgeInsetsDirectional
+                                                            .fromSTEB(
+                                                                16, 0, 0, 0),
+                                                    child: TextFormField(
+                                                      controller:
+                                                          TextEditingController(
+                                                              text: _form
+                                                                  .planName),
+                                                      readOnly: true,
+                                                      obscureText: false,
+                                                      decoration:
+                                                          InputDecoration(
+                                                        labelText: '商品名',
+                                                        enabledBorder:
+                                                            InputBorder.none,
+                                                        focusedBorder:
+                                                            InputBorder.none,
+                                                      ),
+                                                      style:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
                                                               .bodyText1,
-                                                        ),
-                                                      ),
-                                                    ),
-                                                  Expanded(
-                                                    flex: 4,
-                                                    child: Padding(
-                                                      padding:
-                                                          EdgeInsetsDirectional
-                                                              .fromSTEB(
-                                                                  16, 0, 0, 0),
-                                                      child: TextFormField(
-                                                        controller:
-                                                            _form.controller,
-                                                        onChanged: (text) => {
-                                                          setState(
-                                                            () => statusForms = statusForms
-                                                                .map((e) => e
-                                                                            .id ==
-                                                                        _form.id
-                                                                    ? _form
-                                                                        .changeTrackingNumber(
-                                                                            text)
-                                                                    : e)
-                                                                .toList(),
-                                                          ),
-                                                        },
-                                                        obscureText: false,
-                                                        decoration:
-                                                            InputDecoration(
-                                                          labelText:
-                                                              'トラッキングコード',
-                                                          enabledBorder:
-                                                              InputBorder.none,
-                                                          focusedBorder:
-                                                              InputBorder.none,
-                                                        ),
-                                                        style:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .bodyText1,
-                                                      ),
                                                     ),
                                                   ),
-                                                  Expanded(
-                                                    flex: 3,
-                                                    child: Padding(
-                                                      padding:
-                                                          EdgeInsetsDirectional
-                                                              .fromSTEB(
-                                                                  16, 0, 8, 0),
-                                                      child:
-                                                          FlutterFlowDropDown(
-                                                        options:
-                                                            ShippingStatusExt
-                                                                .labelList,
-                                                        onChanged: (val) =>
-                                                            setState(
-                                                          () => statusForms = statusForms
-                                                              .map((e) => e
-                                                                          .id ==
-                                                                      _form.id
-                                                                  ? _form.changeStatus(
-                                                                      ShippingStatusExt
-                                                                          .getStatus(
-                                                                              val))
-                                                                  : e)
-                                                              .toList(),
-                                                        ),
-                                                        width: 128,
-                                                        height: 32,
-                                                        textStyle:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .bodyText1,
-                                                        hintText: 'ステータス',
-                                                        fillColor: Colors.white,
-                                                        elevation: 4,
-                                                        borderColor:
-                                                            Colors.transparent,
-                                                        borderWidth: 0,
-                                                        borderRadius: 0,
-                                                        margin:
-                                                            EdgeInsetsDirectional
-                                                                .fromSTEB(16, 4,
-                                                                    8, 4),
-                                                        hidesUnderline: true,
-                                                        initialOption:
-                                                            _form.status.label,
+                                                ),
+                                              Expanded(
+                                                flex: 4,
+                                                child: Padding(
+                                                  padding: EdgeInsetsDirectional
+                                                      .fromSTEB(16, 0, 0, 0),
+                                                  child: TextFormField(
+                                                    controller:
+                                                        _form.controller,
+                                                    onChanged: (text) => {
+                                                      setState(
+                                                        () => statusForms = statusForms
+                                                            .map((e) => e.id ==
+                                                                    _form.id
+                                                                ? _form
+                                                                    .changeTrackingNumber(
+                                                                        text)
+                                                                : e)
+                                                            .toList(),
                                                       ),
+                                                    },
+                                                    obscureText: false,
+                                                    decoration: InputDecoration(
+                                                      labelText: 'トラッキングコード',
+                                                      enabledBorder:
+                                                          InputBorder.none,
+                                                      focusedBorder:
+                                                          InputBorder.none,
                                                     ),
+                                                    style: FlutterFlowTheme.of(
+                                                            context)
+                                                        .bodyText1,
                                                   ),
-                                                ],
+                                                ),
                                               ),
-                                            ),
-                                          ],
-                                        );
-                                      },
+                                              Expanded(
+                                                flex: 3,
+                                                child: Padding(
+                                                  padding: EdgeInsetsDirectional
+                                                      .fromSTEB(16, 0, 8, 0),
+                                                  child: FlutterFlowDropDown(
+                                                    options: ShippingStatusExt
+                                                        .labelList,
+                                                    onChanged: (val) =>
+                                                        setState(
+                                                      () => statusForms = statusForms
+                                                          .map((e) => e.id ==
+                                                                  _form.id
+                                                              ? _form.changeStatus(
+                                                                  ShippingStatusExt
+                                                                      .getStatus(
+                                                                          val))
+                                                              : e)
+                                                          .toList(),
+                                                    ),
+                                                    width: 128,
+                                                    height: 32,
+                                                    textStyle:
+                                                        FlutterFlowTheme.of(
+                                                                context)
+                                                            .bodyText1,
+                                                    hintText: 'ステータス',
+                                                    fillColor: Colors.white,
+                                                    elevation: 4,
+                                                    borderColor:
+                                                        Colors.transparent,
+                                                    borderWidth: 0,
+                                                    borderRadius: 0,
+                                                    margin:
+                                                        EdgeInsetsDirectional
+                                                            .fromSTEB(
+                                                                16, 4, 8, 4),
+                                                    hidesUnderline: true,
+                                                    initialOption:
+                                                        _form.status.label,
+                                                  ),
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                      ],
                                     ),
                                     Row(
                                       mainAxisSize: MainAxisSize.max,

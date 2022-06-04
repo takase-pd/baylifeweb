@@ -167,3 +167,20 @@ extension ShippingStatusExt on ShippingStatus {
 
   double get size => _size[this];
 }
+
+enum ShippingCarrier {
+  yamato,
+  sagawa,
+  japanpost,
+}
+
+extension ShippingCarrierExt on ShippingCarrier {
+  static final _label = {
+    ShippingCarrier.yamato: 'クロネコヤマト',
+    ShippingCarrier.sagawa: '佐川急便',
+    ShippingCarrier.japanpost: '日本郵便',
+  };
+
+  static List<String> get labelList =>
+      _label.entries.map((e) => _label[e.key]).toList();
+}
