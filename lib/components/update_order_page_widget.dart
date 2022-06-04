@@ -47,6 +47,7 @@ class _UpdateOrderPageWidgetState extends State<UpdateOrderPageWidget> {
   Future<List<OrderedPlan>> plans;
   Future<List<ShippinStatusForm>> statusHandler;
   List<ShippinStatusForm> statusForms;
+  // String carrier;
   List<String> trackingNumbers;
 
   Future<OrderDetails> _getOrderDetails() async {
@@ -103,11 +104,13 @@ class _UpdateOrderPageWidgetState extends State<UpdateOrderPageWidget> {
         ),
         name: _apiJson['details']['shipping']['name'],
         phone: _apiJson['details']['shipping']['phone'],
+        // carrier: _apiJson['details']['shipping']['carrier'],
         trackingNumber: _apiJson['details']['shipping']['tracking_number'],
       ),
     );
 
-    trackingNumbers = _details.shipping.trackingNumber.split(',');
+    // carrier = _details.shipping.carrier ?? '';
+    trackingNumbers = _details.shipping.trackingNumber?.split(',') ?? [];
 
     return _details;
   }
@@ -153,7 +156,6 @@ class _UpdateOrderPageWidgetState extends State<UpdateOrderPageWidget> {
           plan['updated']['_nanoseconds'],
         ).toDate(),
       ));
-      print(_plans.length);
     });
 
     return _plans;
@@ -1054,6 +1056,7 @@ class _UpdateOrderPageWidgetState extends State<UpdateOrderPageWidget> {
                                                 '佐川急便',
                                                 '日本郵便',
                                               ].toList(),
+                                              // ShippingCarrierExt.labelList,
                                               onChanged: (val) => setState(
                                                   () => dropDownValue1 = val),
                                               textStyle:
@@ -1068,6 +1071,7 @@ class _UpdateOrderPageWidgetState extends State<UpdateOrderPageWidget> {
                                               margin: EdgeInsetsDirectional
                                                   .fromSTEB(16, 4, 16, 4),
                                               hidesUnderline: true,
+                                              // initialOption: carrier,
                                             ),
                                           ),
                                           // if (_plans.length > 1)
