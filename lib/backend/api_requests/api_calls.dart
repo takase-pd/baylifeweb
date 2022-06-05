@@ -295,7 +295,9 @@ class UpdateOrderedPlanCall {
     String uid = '',
     String paymentId = '',
     String orders = '',
-    String date = '',
+    String updated = '',
+    String accessToken = '',
+    String appCheckToken = '',
   }) {
     final body = '''
 {
@@ -303,8 +305,8 @@ class UpdateOrderedPlanCall {
     "shop": "${shop}",
     "uid": "${uid}",
     "paymentId": "${paymentId}",
-    "orders": "${orders}",
-    "date": "${date}"
+    "orders": ${orders},
+    "updated": "${updated}"
   }
 }''';
     return ApiManager.instance.makeApiCall(
@@ -320,11 +322,13 @@ class UpdateOrderedPlanCall {
         'uid': uid,
         'paymentId': paymentId,
         'orders': orders,
-        'date': date,
+        'date': updated,
       },
       body: body,
       bodyType: BodyType.JSON,
       returnBody: true,
+      accessToken: accessToken,
+      appCheckToken: appCheckToken,
     );
   }
 }
