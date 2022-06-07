@@ -292,7 +292,7 @@ class UpdateOrderedPlanCall {
     "uid": "${uid}",
     "paymentId": "${paymentId}",
     "orders": "${orders}",
-    "date": "${updated}"
+    "updated": "${updated}"
   }
 }''';
     return ApiManager.instance.makeApiCall(
