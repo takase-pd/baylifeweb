@@ -1238,12 +1238,15 @@ class _UpdateOrderPageWidgetState extends State<UpdateOrderPageWidget> {
                                         await widget.order
                                             .update(soldUpdateData);
                                       } else {
-                                        createSoldRecordData(
+                                        final soldUpdateData =
+                                            createSoldRecordData(
                                           indivShipping: switchListTileValue,
                                           // status: _status,
                                           note: textController10?.text ?? '',
                                           updated: getCurrentTimestamp,
                                         );
+                                        await widget.order
+                                            .update(soldUpdateData);
                                         final tmpUpdate = shippingForms
                                             .map(
                                               (e) => '''{
