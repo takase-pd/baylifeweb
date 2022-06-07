@@ -283,7 +283,7 @@ class UpdateOrderedPlanCall {
     String uid = '',
     String paymentId = '',
     String orders = '',
-    String date = '',
+    String updated = '',
   }) {
     final body = '''
 {
@@ -292,7 +292,7 @@ class UpdateOrderedPlanCall {
     "uid": "${uid}",
     "paymentId": "${paymentId}",
     "orders": "${orders}",
-    "date": "${date}"
+    "date": "${updated}"
   }
 }''';
     return ApiManager.instance.makeApiCall(
@@ -308,7 +308,7 @@ class UpdateOrderedPlanCall {
         'uid': uid,
         'paymentId': paymentId,
         'orders': orders,
-        'date': date,
+        'updated': updated,
       },
       body: body,
       bodyType: BodyType.JSON,
