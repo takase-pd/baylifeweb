@@ -322,7 +322,7 @@ class UpdateOrderedPlanCall {
         'uid': uid,
         'paymentId': paymentId,
         'orders': orders,
-        'date': updated,
+        'updated': updated,
       },
       body: body,
       bodyType: BodyType.JSON,
