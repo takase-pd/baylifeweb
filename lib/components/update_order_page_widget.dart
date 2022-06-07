@@ -6,12 +6,10 @@ import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
 import '../custom_code/widgets/index.dart';
-import '../auth/firebase_user_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:flutter_stripe/flutter_stripe.dart' as stripe;
 
 import 'package:bay_life_web/custom_code/widgets/ecommerce.dart';
 
@@ -41,189 +39,44 @@ class _UpdateOrderPageWidgetState extends State<UpdateOrderPageWidget> {
   TextEditingController textController9;
   TextEditingController textController10;
   TextEditingController textController11;
-  Future<ShopsRecord> shop;
   Future<SoldRecord> order;
   Future<OrderDetails> details;
   Future<List<OrderedPlan>> plans;
-  Future<List<ShippinStatusForm>> statusHandler;
-  List<ShippinStatusForm> statusForms;
+  Future<List<ShippingForm>> shippingHandler;
+  List<ShippingForm> shippingForms;
+  String shopPath;
   String carrier;
   List<String> trackingNumbers;
+  bool switchHanler;
 
-  Future<OrderDetails> _getOrderDetails() async {
-    OrderDetails _details;
-
-    final _shop = await shop;
-    if (_shop == null) return _details;
-
-    if (!currentUser.loggedIn) return _details;
-
-    final _appCheckToken = await AppCheckAgent.getToken(context);
-    if (_appCheckToken == null) return _details;
-
-    final apiCallOutput = await GetOrderDetailsCall.call(
-      shop: _shop.reference.path,
-      uid: currentUserUid,
-      paymentId: widget.order.id,
-      accessToken: currentJwtToken,
-      appCheckToken: _appCheckToken,
-    );
-    final _apiJson = getJsonField(apiCallOutput.jsonBody, r'''$.result''');
-    final success = _apiJson['success'] ?? false;
-    if (!success) {
-      String errorMessage = _apiJson['error'] ?? '原因不明のエラーが発生';
-      showSnackbar(
-        context,
-        'Error: $errorMessage',
-      );
-      return _details;
-    }
-    _details = OrderDetails(
-      paymentId: _apiJson['details']['paymentId'],
-      billing: stripe.BillingDetails(
-        address: stripe.Address(
-          country: _apiJson['details']['billing']['address']['country'],
-          state: _apiJson['details']['billing']['address']['state'],
-          city: _apiJson['details']['billing']['address']['city'],
-          line1: _apiJson['details']['billing']['address']['line1'],
-          line2: _apiJson['details']['billing']['address']['line2'],
-          postalCode: _apiJson['details']['billing']['address']['postal_code'],
-        ),
-        name: _apiJson['details']['billing']['name'],
-        phone: _apiJson['details']['billing']['phone'],
-        email: _apiJson['details']['billing']['email'],
-      ),
-      shipping: stripe.ShippingDetails(
-        address: stripe.Address(
-          country: _apiJson['details']['shipping']['address']['country'],
-          state: _apiJson['details']['shipping']['address']['state'],
-          city: _apiJson['details']['shipping']['address']['city'],
-          line1: _apiJson['details']['shipping']['address']['line1'],
-          line2: _apiJson['details']['shipping']['address']['line2'],
-          postalCode: _apiJson['details']['shipping']['address']['postal_code'],
-        ),
-        name: _apiJson['details']['shipping']['name'],
-        phone: _apiJson['details']['shipping']['phone'],
-        carrier: _apiJson['details']['shipping']['carrier'],
-        trackingNumber: _apiJson['details']['shipping']['tracking_number'],
-      ),
-    );
-
-    carrier = _details.shipping.carrier ?? '';
-    trackingNumbers = _details.shipping.trackingNumber?.split(',') ?? [];
-
-    return _details;
-  }
-
-  Future<List<OrderedPlan>> _getOrderedPlans() async {
-    List<OrderedPlan> _plans = [];
-
-    final _shop = await shop;
-    if (_shop == null) return _plans;
-
-    if (!currentUser.loggedIn) return _plans;
-
-    final _appCheckToken = await AppCheckAgent.getToken(context);
-    if (_appCheckToken == null) return _plans;
-
-    final apiCallOutput = await GetOrderedPlansCall.call(
-      shop: _shop.reference.path,
-      uid: currentUserUid,
-      paymentId: widget.order.id,
-      accessToken: currentJwtToken,
-      appCheckToken: _appCheckToken,
-    );
-    final _apiJson = getJsonField(apiCallOutput.jsonBody, r'''$.result''');
-    final success = _apiJson['success'] ?? false;
-    if (!success) {
-      String errorMessage = _apiJson['error'] ?? '原因不明のエラーが発生';
-      showSnackbar(
-        context,
-        'Error: $errorMessage',
-      );
-      return _plans;
-    }
-    _apiJson['plans'].forEach((plan) {
-      _plans.add(OrderedPlan(
-        path: plan['path'],
-        unitAmount: plan['unit_amount'],
-        quantity: plan['quantity'],
-        name: plan['name'],
-        status: ShippingStatusExt.getStatus(plan['status']),
-        trackingIndex: plan['tracking_index'],
-        updated: Timestamp(
-          plan['updated']['_seconds'],
-          plan['updated']['_nanoseconds'],
-        ).toDate(),
-      ));
-    });
-
-    return _plans;
-  }
-
-  Future<ShopsRecord> _getShop() async {
-    ShopsRecord _shop;
-    final containerShopsRecordList = await queryShopsRecordOnce(
-      queryBuilder: (shopsRecord) =>
-          shopsRecord.where('director', isEqualTo: currentUserReference),
-      singleRecord: true,
-    );
-    // Return an empty Container when the document does not exist.
-    if (containerShopsRecordList.isNotEmpty)
-      _shop = containerShopsRecordList.isNotEmpty
-          ? containerShopsRecordList.first
-          : null;
-    return _shop;
-  }
-
-  Future<SoldRecord> _getOrder() async {
-    return SoldRecord.getDocumentOnce(widget.order);
-  }
-
-  Future<List<ShippinStatusForm>> _setForm() async {
+  Future<List<ShippingForm>> _setForm() async {
+    final paymentId = widget.order.id;
     final _order = await order;
+    final _details = await details;
     final _plans = await plans;
-    List<ShippinStatusForm> _statusHandler = [];
-    switchListTileValue
-        ? _plans.forEach(
-            (_plan) async => _statusHandler.add(
-              ShippinStatusForm.create(
-                _plan.id,
-                _plan.name,
-                await _getTrackingNumber(_plan.trackingIndex),
-                _plan.status,
-              ),
-            ),
-          )
-        : _statusHandler.add(
-            ShippinStatusForm.create(
-              widget.order.id.substring(3),
-              '',
-              await _getTrackingNumber(0),
-              ShippingStatusExt.getStatus(_order.status),
-            ),
-          );
-
-    statusForms = _statusHandler;
-    return _statusHandler;
-  }
-
-  Future<String> _getTrackingNumber(int index) async {
-    await details;
-    if (trackingNumbers.length == 0) return '';
-    return trackingNumbers[index];
+    carrier = _details.carrier;
+    dropDownValue1 = carrier ?? '';
+    trackingNumbers = _details.trackingNumbers;
+    if (!switchHanler) switchListTileValue = true; // from API
+    shippingForms = ShippingForm.create(
+        _order, _plans, _details, switchListTileValue, paymentId);
+    return shippingForms;
   }
 
   @override
   void initState() {
     super.initState();
     switchListTileValue = false;
+    switchHanler = false;
     textController9 = TextEditingController();
-    shop = _getShop();
-    order = _getOrder();
-    details = _getOrderDetails();
-    plans = _getOrderedPlans();
-    statusHandler = _setForm();
+
+    final paymentId = widget.order.id;
+    final tmpPath = widget.order.path.split('/');
+    shopPath = '${tmpPath[0]}/${tmpPath[1]}';
+    order = SoldRecord.getDocumentOnce(widget.order);
+    details = OrderDetails.create(shopPath, paymentId, context);
+    plans = OrderedPlan.create(shopPath, paymentId, context);
+    shippingHandler = _setForm();
   }
 
   @override
@@ -1010,8 +863,8 @@ class _UpdateOrderPageWidgetState extends State<UpdateOrderPageWidget> {
                               color: FlutterFlowTheme.of(context).background,
                               borderRadius: BorderRadius.circular(8),
                             ),
-                            child: FutureBuilder<List<ShippinStatusForm>>(
-                              future: statusHandler,
+                            child: FutureBuilder<List<ShippingForm>>(
+                              future: shippingHandler,
                               builder: (context, snapshot) {
                                 // Customize what your widget looks like when it's loading.
                                 if (snapshot.connectionState !=
@@ -1080,7 +933,8 @@ class _UpdateOrderPageWidgetState extends State<UpdateOrderPageWidget> {
                                                   setState(() => {
                                                         switchListTileValue =
                                                             newValue,
-                                                        statusHandler =
+                                                        switchHanler = true,
+                                                        shippingHandler =
                                                             _setForm(),
                                                       }),
                                               title: Text(
@@ -1105,7 +959,7 @@ class _UpdateOrderPageWidgetState extends State<UpdateOrderPageWidget> {
                                       physics:
                                           const NeverScrollableScrollPhysics(),
                                       children: [
-                                        ...statusForms.map(
+                                        ...shippingForms.map(
                                           (_form) => Row(
                                             mainAxisSize: MainAxisSize.max,
                                             mainAxisAlignment:
@@ -1151,14 +1005,16 @@ class _UpdateOrderPageWidgetState extends State<UpdateOrderPageWidget> {
                                                         _form.controller,
                                                     onChanged: (text) => {
                                                       setState(
-                                                        () => statusForms = statusForms
-                                                            .map((e) => e.id ==
-                                                                    _form.id
-                                                                ? _form
-                                                                    .changeTrackingNumber(
-                                                                        text)
-                                                                : e)
-                                                            .toList(),
+                                                        () => shippingForms =
+                                                            shippingForms
+                                                                .map((e) => e
+                                                                            .id ==
+                                                                        _form.id
+                                                                    ? _form
+                                                                        .changeTrackingNumber(
+                                                                            text)
+                                                                    : e)
+                                                                .toList(),
                                                       ),
                                                     },
                                                     obscureText: false,
@@ -1185,12 +1041,12 @@ class _UpdateOrderPageWidgetState extends State<UpdateOrderPageWidget> {
                                                         .labelList,
                                                     onChanged: (val) =>
                                                         setState(
-                                                      () => statusForms = statusForms
+                                                      () => shippingForms = shippingForms
                                                           .map((e) => e.id ==
                                                                   _form.id
                                                               ? _form.changeStatus(
                                                                   ShippingStatusExt
-                                                                      .getStatus(
+                                                                      .create(
                                                                           val))
                                                               : e)
                                                           .toList(),
@@ -1317,16 +1173,6 @@ class _UpdateOrderPageWidgetState extends State<UpdateOrderPageWidget> {
                               children: [
                                 FFButtonWidget(
                                   onPressed: () async {
-                                    final _shop = await shop;
-                                    if (_shop == null) {
-                                      String errorMessage = '原因不明のエラーが発生';
-                                      showSnackbar(
-                                        context,
-                                        'Error: $errorMessage',
-                                      );
-                                      return;
-                                    }
-
                                     logFirebaseEvent('Button_ON_TAP');
                                     logFirebaseEvent('Button_Alert-Dialog');
                                     var confirmDialogResponse =
@@ -1358,18 +1204,18 @@ class _UpdateOrderPageWidgetState extends State<UpdateOrderPageWidget> {
                                             false;
                                     if (confirmDialogResponse) {
                                       logFirebaseEvent('Button_Backend-Call');
-                                      Map<String, int> box = {};
+                                      Map<String, int> indexes = {};
                                       List numbers = [];
                                       for (var i = 0;
-                                          i < statusForms.length;
+                                          i < shippingForms.length;
                                           i++) {
-                                        if (statusForms[i].trackingNumber ==
+                                        if (shippingForms[i].trackingNumber ==
                                                 '' ||
-                                            statusForms[i].trackingNumber ==
+                                            shippingForms[i].trackingNumber ==
                                                 null) continue;
-                                        box[statusForms[i].id] = i;
-                                        numbers
-                                            .add(statusForms[i].trackingNumber);
+                                        indexes[shippingForms[i].id] = i;
+                                        numbers.add(
+                                            shippingForms[i].trackingNumber);
                                       }
 
                                       final _numbers = numbers.reduce(
@@ -1380,7 +1226,7 @@ class _UpdateOrderPageWidgetState extends State<UpdateOrderPageWidget> {
                                           await AppCheckAgent.getToken(context);
                                       if (!switchListTileValue) {
                                         final _status =
-                                            statusForms[0].status.name;
+                                            shippingForms[0].status.label;
                                         final soldUpdateData =
                                             createSoldRecordData(
                                           status: _status,
@@ -1390,12 +1236,12 @@ class _UpdateOrderPageWidgetState extends State<UpdateOrderPageWidget> {
                                         await widget.order
                                             .update(soldUpdateData);
                                       } else {
-                                        final tmpUpdate = statusForms
+                                        final tmpUpdate = shippingForms
                                             .map(
                                               (e) => '''{
                                               "id": "${e.id}",
-                                              "index": ${box[e.id]},
-                                              "status": "${e.status.name}"
+                                              "index": ${indexes[e.id]},
+                                              "status": "${e.status.label}"
                                               },''',
                                             )
                                             .fold(
@@ -1408,7 +1254,7 @@ class _UpdateOrderPageWidgetState extends State<UpdateOrderPageWidget> {
                                                 ']';
                                         final apiCallOutput =
                                             await UpdateOrderedPlanCall.call(
-                                          shop: _shop.reference.path,
+                                          shop: shopPath,
                                           uid: currentUserUid,
                                           paymentId: widget.order.id,
                                           orders: updateOrders,
@@ -1420,7 +1266,7 @@ class _UpdateOrderPageWidgetState extends State<UpdateOrderPageWidget> {
                                       }
                                       final apiCallOutput =
                                           await UpdateDeliveryServiceCall.call(
-                                        shop: _shop.reference.path,
+                                        shop: shopPath,
                                         uid: currentUserUid,
                                         paymentId: widget.order.id,
                                         carrier: dropDownValue1,
