@@ -146,7 +146,7 @@ class _UpdateOrderPageWidgetState extends State<UpdateOrderPageWidget> {
                               children: [
                                 Padding(
                                   padding: EdgeInsetsDirectional.fromSTEB(
-                                      0, 0, 0, 16),
+                                      16, 0, 0, 16),
                                   child: Row(
                                     mainAxisSize: MainAxisSize.max,
                                     children: [
@@ -254,7 +254,7 @@ class _UpdateOrderPageWidgetState extends State<UpdateOrderPageWidget> {
                                 ),
                                 Padding(
                                   padding: EdgeInsetsDirectional.fromSTEB(
-                                      0, 0, 0, 16),
+                                      16, 0, 16, 16),
                                   child: Row(
                                     mainAxisSize: MainAxisSize.max,
                                     children: [
@@ -368,7 +368,7 @@ class _UpdateOrderPageWidgetState extends State<UpdateOrderPageWidget> {
                                         child: Padding(
                                           padding:
                                               EdgeInsetsDirectional.fromSTEB(
-                                                  16, 0, 16, 0),
+                                                  16, 0, 0, 0),
                                           child: TextFormField(
                                             controller: textController5 ??=
                                                 TextEditingController(
@@ -503,7 +503,7 @@ class _UpdateOrderPageWidgetState extends State<UpdateOrderPageWidget> {
                                 ),
                                 Padding(
                                   padding: EdgeInsetsDirectional.fromSTEB(
-                                      0, 0, 0, 16),
+                                      16, 0, 0, 0),
                                   child: Row(
                                     mainAxisSize: MainAxisSize.max,
                                     children: [
@@ -584,7 +584,7 @@ class _UpdateOrderPageWidgetState extends State<UpdateOrderPageWidget> {
                                 ),
                                 Padding(
                                   padding: EdgeInsetsDirectional.fromSTEB(
-                                      0, 0, 0, 16),
+                                      16, 0, 0, 16),
                                   child: Row(
                                     mainAxisSize: MainAxisSize.max,
                                     children: [
@@ -592,7 +592,7 @@ class _UpdateOrderPageWidgetState extends State<UpdateOrderPageWidget> {
                                         child: Padding(
                                           padding:
                                               EdgeInsetsDirectional.fromSTEB(
-                                                  16, 0, 0, 0),
+                                                  0, 0, 0, 0),
                                           child: TextFormField(
                                             controller: textController8 ??=
                                                 TextEditingController(
