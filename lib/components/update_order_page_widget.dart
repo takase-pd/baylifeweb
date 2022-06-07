@@ -26,19 +26,17 @@ class UpdateOrderPageWidget extends StatefulWidget {
 }
 
 class _UpdateOrderPageWidgetState extends State<UpdateOrderPageWidget> {
-  String dropDownValue1;
-  bool switchListTileValue;
-  TextEditingController textController1;
-  TextEditingController textController2;
-  TextEditingController textController3;
-  TextEditingController textController4;
-  TextEditingController textController5;
-  TextEditingController textController6;
-  TextEditingController textController7;
-  TextEditingController textController8;
-  TextEditingController textController9;
-  TextEditingController textController10;
-  TextEditingController textController11;
+  String carrierValue;
+  bool indivSwitchValue;
+  TextEditingController noteController;
+  TextEditingController textController1; // odered date
+  TextEditingController textController2; // updated date
+  TextEditingController textController3; // unit amount
+  TextEditingController textController4; // quantity
+  TextEditingController textController5; // shipping fee
+  TextEditingController textController6; // ordered name
+  TextEditingController textController7; // shipping info
+  TextEditingController textController8; // status
   Future<SoldRecord> order;
   Future<OrderDetails> details;
   Future<List<OrderedPlan>> plans;
@@ -55,21 +53,20 @@ class _UpdateOrderPageWidgetState extends State<UpdateOrderPageWidget> {
     final _details = await details;
     final _plans = await plans;
     carrier = _details.carrier;
-    dropDownValue1 = carrier ?? '';
+    carrierValue = carrier ?? '';
     trackingNumbers = _details.trackingNumbers;
     if (!switchHanler)
-      switchListTileValue = _order.indivShipping ?? false; // from API
+      indivSwitchValue = _order.indivShipping ?? false; // from API
     shippingForms = ShippingForm.createForm(
-        _order, _plans, _details, switchListTileValue, paymentId);
+        _order, _plans, _details, indivSwitchValue, paymentId);
     return shippingForms;
   }
 
   @override
   void initState() {
     super.initState();
-    switchListTileValue = false;
+    indivSwitchValue = false;
     switchHanler = false;
-    textController9 = TextEditingController();
 
     final paymentId = widget.order.id;
     final tmpPath = widget.order.path.split('/');
@@ -645,6 +642,13 @@ class _UpdateOrderPageWidgetState extends State<UpdateOrderPageWidget> {
                           ),
                         ),
                         Padding(
+                          padding: EdgeInsetsDirectional.fromSTEB(16, 0, 0, 8),
+                          child: Text(
+                            '注文商品',
+                            style: FlutterFlowTheme.of(context).subtitle2,
+                          ),
+                        ),
+                        Padding(
                           padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 16),
                           child: Container(
                             decoration: BoxDecoration(
@@ -657,16 +661,7 @@ class _UpdateOrderPageWidgetState extends State<UpdateOrderPageWidget> {
                               children: [
                                 Padding(
                                   padding: EdgeInsetsDirectional.fromSTEB(
-                                      16, 0, 0, 8),
-                                  child: Text(
-                                    '注文商品',
-                                    style:
-                                        FlutterFlowTheme.of(context).subtitle2,
-                                  ),
-                                ),
-                                Padding(
-                                  padding: EdgeInsetsDirectional.fromSTEB(
-                                      0, 0, 0, 16),
+                                      0, 16, 0, 16),
                                   child: Container(
                                     decoration: BoxDecoration(),
                                     child: Padding(
@@ -721,7 +716,7 @@ class _UpdateOrderPageWidgetState extends State<UpdateOrderPageWidget> {
                                                     padding:
                                                         EdgeInsetsDirectional
                                                             .fromSTEB(
-                                                                16, 8, 8, 8),
+                                                                16, 8, 8, 0),
                                                     child: Column(
                                                       mainAxisSize:
                                                           MainAxisSize.max,
@@ -833,9 +828,8 @@ class _UpdateOrderPageWidgetState extends State<UpdateOrderPageWidget> {
                                                                       color: FlutterFlowTheme.of(
                                                                               context)
                                                                           .sLight,
-                                                                      fontStyle:
-                                                                          FontStyle
-                                                                              .italic,
+                                                                      fontSize:
+                                                                          12,
                                                                     ),
                                                               ),
                                                             ),
@@ -858,10 +852,17 @@ class _UpdateOrderPageWidgetState extends State<UpdateOrderPageWidget> {
                           ),
                         ),
                         Padding(
+                          padding: EdgeInsetsDirectional.fromSTEB(16, 0, 0, 8),
+                          child: Text(
+                            '配送',
+                            style: FlutterFlowTheme.of(context).subtitle2,
+                          ),
+                        ),
+                        Padding(
                           padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 16),
                           child: Container(
                             decoration: BoxDecoration(
-                              color: FlutterFlowTheme.of(context).background,
+                              color: FlutterFlowTheme.of(context).tLight,
                               borderRadius: BorderRadius.circular(8),
                             ),
                             child: FutureBuilder<List<ShippingForm>>(
@@ -889,65 +890,73 @@ class _UpdateOrderPageWidgetState extends State<UpdateOrderPageWidget> {
                                   children: [
                                     Padding(
                                       padding: EdgeInsetsDirectional.fromSTEB(
-                                          16, 0, 0, 8),
-                                      child: Text(
-                                        '配送',
-                                        style: FlutterFlowTheme.of(context)
-                                            .subtitle2,
-                                      ),
-                                    ),
-                                    Padding(
-                                      padding: EdgeInsetsDirectional.fromSTEB(
-                                          0, 0, 0, 16),
+                                          16, 16, 16, 16),
                                       child: Row(
                                         mainAxisSize: MainAxisSize.max,
                                         children: [
-                                          Expanded(
-                                            flex: 2,
-                                            child: FlutterFlowDropDown(
-                                              options:
-                                                  ShippingCarrierExt.labelList,
-                                              onChanged: (val) => setState(
-                                                  () => dropDownValue1 = val),
-                                              textStyle:
-                                                  FlutterFlowTheme.of(context)
-                                                      .bodyText1,
-                                              hintText: '配送業者',
-                                              fillColor: Colors.white,
-                                              elevation: 2,
-                                              borderColor: Colors.transparent,
-                                              borderWidth: 0,
-                                              borderRadius: 0,
-                                              margin: EdgeInsetsDirectional
-                                                  .fromSTEB(16, 4, 16, 4),
-                                              hidesUnderline: true,
-                                              initialOption: carrier,
-                                            ),
-                                          ),
                                           // if (_plans.length > 1)
                                           Expanded(
+                                            flex: 4,
+                                            child: Container(
+                                              decoration: BoxDecoration(
+                                                color:
+                                                    FlutterFlowTheme.of(context)
+                                                        .background,
+                                                borderRadius:
+                                                    BorderRadius.circular(8),
+                                              ),
+                                              child: ClipRRect(
+                                                borderRadius:
+                                                    BorderRadius.circular(8),
+                                                child: SwitchListTile(
+                                                  value: indivSwitchValue ??=
+                                                      false,
+                                                  onChanged: (newValue) =>
+                                                      setState(() => {
+                                                            indivSwitchValue =
+                                                                newValue,
+                                                            switchHanler = true,
+                                                            shippingHandler =
+                                                                _setForm(),
+                                                          }),
+                                                  title: Text(
+                                                    '商品別配送指定',
+                                                    style: FlutterFlowTheme.of(
+                                                            context)
+                                                        .bodyText1,
+                                                  ),
+                                                  dense: false,
+                                                  controlAffinity:
+                                                      ListTileControlAffinity
+                                                          .trailing,
+                                                ),
+                                              ),
+                                            ),
+                                          ),
+                                          Expanded(
                                             flex: 3,
-                                            child: SwitchListTile(
-                                              value: switchListTileValue ??=
-                                                  false,
-                                              onChanged: (newValue) =>
-                                                  setState(() => {
-                                                        switchListTileValue =
-                                                            newValue,
-                                                        switchHanler = true,
-                                                        shippingHandler =
-                                                            _setForm(),
-                                                      }),
-                                              title: Text(
-                                                '商品別配送指定',
-                                                style:
+                                            child: Padding(
+                                              padding: EdgeInsetsDirectional
+                                                  .fromSTEB(16, 0, 0, 0),
+                                              child: FlutterFlowDropDown(
+                                                options: ShippingCarrierExt
+                                                    .labelList,
+                                                onChanged: (val) => setState(
+                                                    () => carrierValue = val),
+                                                textStyle:
                                                     FlutterFlowTheme.of(context)
                                                         .bodyText1,
+                                                hintText: '配送業者',
+                                                fillColor: Colors.white,
+                                                elevation: 2,
+                                                borderColor: Colors.transparent,
+                                                borderWidth: 0,
+                                                borderRadius: 0,
+                                                margin: EdgeInsetsDirectional
+                                                    .fromSTEB(16, 4, 16, 4),
+                                                hidesUnderline: true,
+                                                initialOption: carrier,
                                               ),
-                                              dense: false,
-                                              controlAffinity:
-                                                  ListTileControlAffinity
-                                                      .trailing,
                                             ),
                                           ),
                                         ],
@@ -961,53 +970,69 @@ class _UpdateOrderPageWidgetState extends State<UpdateOrderPageWidget> {
                                           const NeverScrollableScrollPhysics(),
                                       children: [
                                         ...shippingForms.map(
-                                          (_form) => Row(
-                                            mainAxisSize: MainAxisSize.max,
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.spaceBetween,
-                                            children: [
-                                              if (switchListTileValue)
-                                                Expanded(
-                                                  flex: 3,
-                                                  child: Padding(
-                                                    padding:
-                                                        EdgeInsetsDirectional
-                                                            .fromSTEB(
-                                                                16, 0, 0, 0),
-                                                    child: TextFormField(
-                                                      controller:
-                                                          TextEditingController(
-                                                              text: _form
-                                                                  .planName),
-                                                      readOnly: true,
-                                                      obscureText: false,
-                                                      decoration:
-                                                          InputDecoration(
-                                                        labelText: '商品名',
-                                                        enabledBorder:
-                                                            InputBorder.none,
-                                                        focusedBorder:
-                                                            InputBorder.none,
+                                          (_form) => Padding(
+                                            padding:
+                                                EdgeInsetsDirectional.fromSTEB(
+                                                    16, 0, 16, 16),
+                                            child: Row(
+                                              mainAxisSize: MainAxisSize.max,
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment
+                                                      .spaceBetween,
+                                              children: [
+                                                if (indivSwitchValue)
+                                                  Expanded(
+                                                    flex: 3,
+                                                    child: Padding(
+                                                      padding:
+                                                          EdgeInsetsDirectional
+                                                              .fromSTEB(
+                                                                  16, 0, 0, 0),
+                                                      child: TextFormField(
+                                                        controller:
+                                                            TextEditingController(
+                                                                text: _form
+                                                                    .planName),
+                                                        readOnly: true,
+                                                        obscureText: false,
+                                                        decoration:
+                                                            InputDecoration(
+                                                          labelText: '商品名',
+                                                          enabledBorder:
+                                                              InputBorder.none,
+                                                          focusedBorder:
+                                                              InputBorder.none,
+                                                        ),
+                                                        style:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .bodyText1,
                                                       ),
-                                                      style:
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .bodyText1,
                                                     ),
                                                   ),
-                                                ),
-                                              Expanded(
-                                                flex: 4,
-                                                child: Padding(
-                                                  padding: EdgeInsetsDirectional
-                                                      .fromSTEB(16, 0, 0, 0),
-                                                  child: TextFormField(
-                                                    controller:
-                                                        _form.controller,
-                                                    onChanged: (text) => {
-                                                      setState(
-                                                        () => shippingForms =
-                                                            shippingForms
+                                                Expanded(
+                                                  flex: 4,
+                                                  child: Container(
+                                                    decoration: BoxDecoration(
+                                                      color:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .background,
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              8),
+                                                    ),
+                                                    child: Padding(
+                                                      padding:
+                                                          EdgeInsetsDirectional
+                                                              .fromSTEB(
+                                                                  9, 0, 0, 0),
+                                                      child: TextFormField(
+                                                        controller:
+                                                            _form.controller,
+                                                        onChanged: (text) => {
+                                                          setState(
+                                                            () => shippingForms = shippingForms
                                                                 .map((e) => e
                                                                             .id ==
                                                                         _form.id
@@ -1016,90 +1041,102 @@ class _UpdateOrderPageWidgetState extends State<UpdateOrderPageWidget> {
                                                                             text)
                                                                     : e)
                                                                 .toList(),
+                                                          ),
+                                                        },
+                                                        obscureText: false,
+                                                        decoration:
+                                                            InputDecoration(
+                                                          labelText:
+                                                              'トラッキングコード',
+                                                          enabledBorder:
+                                                              InputBorder.none,
+                                                          focusedBorder:
+                                                              InputBorder.none,
+                                                        ),
+                                                        style:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .bodyText1,
                                                       ),
-                                                    },
-                                                    obscureText: false,
-                                                    decoration: InputDecoration(
-                                                      labelText: 'トラッキングコード',
-                                                      enabledBorder:
-                                                          InputBorder.none,
-                                                      focusedBorder:
-                                                          InputBorder.none,
                                                     ),
-                                                    style: FlutterFlowTheme.of(
-                                                            context)
-                                                        .bodyText1,
                                                   ),
                                                 ),
-                                              ),
-                                              Expanded(
-                                                flex: 3,
-                                                child: Padding(
-                                                  padding: EdgeInsetsDirectional
-                                                      .fromSTEB(16, 0, 8, 0),
-                                                  child: FlutterFlowDropDown(
-                                                    options: ShippingStatusExt
-                                                        .labelList,
-                                                    onChanged: (val) =>
-                                                        setState(
-                                                      () => shippingForms = shippingForms
-                                                          .map((e) => e.id ==
-                                                                  _form.id
-                                                              ? _form.changeStatus(
-                                                                  ShippingStatusExt
-                                                                      .create(
-                                                                          val))
-                                                              : e)
-                                                          .toList(),
-                                                    ),
-                                                    width: 128,
-                                                    height: 32,
-                                                    textStyle:
-                                                        FlutterFlowTheme.of(
-                                                                context)
-                                                            .bodyText1,
-                                                    hintText: 'ステータス',
-                                                    fillColor: Colors.white,
-                                                    elevation: 4,
-                                                    borderColor:
-                                                        Colors.transparent,
-                                                    borderWidth: 0,
-                                                    borderRadius: 0,
-                                                    margin:
+                                                Expanded(
+                                                  flex: 3,
+                                                  child: Padding(
+                                                    padding:
                                                         EdgeInsetsDirectional
                                                             .fromSTEB(
-                                                                16, 4, 8, 4),
-                                                    hidesUnderline: true,
-                                                    initialOption:
-                                                        _form.status.label,
+                                                                16, 0, 0, 0),
+                                                    child: FlutterFlowDropDown(
+                                                      options: ShippingStatusExt
+                                                          .labelList,
+                                                      onChanged: (val) =>
+                                                          setState(
+                                                        () => shippingForms = shippingForms
+                                                            .map((e) => e.id ==
+                                                                    _form.id
+                                                                ? _form.changeStatus(
+                                                                    ShippingStatusExt
+                                                                        .create(
+                                                                            val))
+                                                                : e)
+                                                            .toList(),
+                                                      ),
+                                                      textStyle:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .bodyText1,
+                                                      hintText: 'ステータス',
+                                                      fillColor:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .background,
+                                                      elevation: 4,
+                                                      borderColor:
+                                                          Colors.transparent,
+                                                      borderWidth: 0,
+                                                      borderRadius: 8,
+                                                      margin:
+                                                          EdgeInsetsDirectional
+                                                              .fromSTEB(
+                                                                  16, 4, 8, 4),
+                                                      hidesUnderline: true,
+                                                      initialOption:
+                                                          _form.status.label,
+                                                    ),
                                                   ),
                                                 ),
-                                              ),
-                                            ],
+                                              ],
+                                            ),
                                           ),
                                         ),
                                       ],
                                     ),
-                                    Row(
-                                      mainAxisSize: MainAxisSize.max,
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        Expanded(
-                                          child: Padding(
-                                            padding:
-                                                EdgeInsetsDirectional.fromSTEB(
-                                                    0, 0, 0, 16),
+                                    Padding(
+                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                          16, 0, 16, 16),
+                                      child: Row(
+                                        mainAxisSize: MainAxisSize.max,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Expanded(
                                             child: Container(
                                               height: 120,
-                                              decoration: BoxDecoration(),
+                                              decoration: BoxDecoration(
+                                                color:
+                                                    FlutterFlowTheme.of(context)
+                                                        .background,
+                                                borderRadius:
+                                                    BorderRadius.circular(8),
+                                              ),
                                               child: Padding(
                                                 padding: EdgeInsetsDirectional
-                                                    .fromSTEB(16, 0, 0, 0),
+                                                    .fromSTEB(8, 0, 0, 0),
                                                 child: TextFormField(
-                                                  controller:
-                                                      textController10 ??=
-                                                          TextEditingController(
+                                                  controller: noteController ??=
+                                                      TextEditingController(
                                                     text: _order.note,
                                                   ),
                                                   obscureText: false,
@@ -1155,8 +1192,8 @@ class _UpdateOrderPageWidgetState extends State<UpdateOrderPageWidget> {
                                               ),
                                             ),
                                           ),
-                                        ),
-                                      ],
+                                        ],
+                                      ),
                                     ),
                                   ],
                                 );
@@ -1225,14 +1262,14 @@ class _UpdateOrderPageWidgetState extends State<UpdateOrderPageWidget> {
 
                                       final _appCheckToken =
                                           await AppCheckAgent.getToken(context);
-                                      if (!switchListTileValue) {
+                                      if (!indivSwitchValue) {
                                         final _status =
                                             shippingForms[0].status.label;
                                         final orderUpdateData =
                                             createSoldRecordData(
-                                          indivShipping: switchListTileValue,
+                                          indivShipping: indivSwitchValue,
                                           status: _status,
-                                          note: textController10?.text ?? '',
+                                          note: noteController?.text ?? '',
                                           updated: getCurrentTimestamp,
                                         );
                                         await widget.order
@@ -1240,9 +1277,9 @@ class _UpdateOrderPageWidgetState extends State<UpdateOrderPageWidget> {
                                       } else {
                                         final orderUpdateData =
                                             createSoldRecordData(
-                                          indivShipping: switchListTileValue,
+                                          indivShipping: indivSwitchValue,
                                           // status: _status,
-                                          note: textController10?.text ?? '',
+                                          note: noteController?.text ?? '',
                                           updated: getCurrentTimestamp,
                                         );
                                         await widget.order
@@ -1280,7 +1317,7 @@ class _UpdateOrderPageWidgetState extends State<UpdateOrderPageWidget> {
                                         shop: shopPath,
                                         uid: currentUserUid,
                                         paymentId: widget.order.id,
-                                        carrier: dropDownValue1,
+                                        carrier: carrierValue,
                                         trackingNumber: _numbers,
                                         accessToken: currentJwtToken,
                                         appCheckToken: _appCheckToken,
