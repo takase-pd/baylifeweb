@@ -57,8 +57,9 @@ class _UpdateOrderPageWidgetState extends State<UpdateOrderPageWidget> {
     carrier = _details.carrier;
     dropDownValue1 = carrier ?? '';
     trackingNumbers = _details.trackingNumbers;
-    if (!switchHanler) switchListTileValue = true; // from API
-    shippingForms = ShippingForm.create(
+    if (!switchHanler)
+      switchListTileValue = _order.indivShipping ?? false; // from API
+    shippingForms = ShippingForm.createForm(
         _order, _plans, _details, switchListTileValue, paymentId);
     return shippingForms;
   }
@@ -1229,6 +1230,7 @@ class _UpdateOrderPageWidgetState extends State<UpdateOrderPageWidget> {
                                             shippingForms[0].status.label;
                                         final soldUpdateData =
                                             createSoldRecordData(
+                                          indivShipping: switchListTileValue,
                                           status: _status,
                                           note: textController10?.text ?? '',
                                           updated: getCurrentTimestamp,
@@ -1236,6 +1238,12 @@ class _UpdateOrderPageWidgetState extends State<UpdateOrderPageWidget> {
                                         await widget.order
                                             .update(soldUpdateData);
                                       } else {
+                                        createSoldRecordData(
+                                          indivShipping: switchListTileValue,
+                                          // status: _status,
+                                          note: textController10?.text ?? '',
+                                          updated: getCurrentTimestamp,
+                                        );
                                         final tmpUpdate = shippingForms
                                             .map(
                                               (e) => '''{
