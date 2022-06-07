@@ -1228,7 +1228,7 @@ class _UpdateOrderPageWidgetState extends State<UpdateOrderPageWidget> {
                                       if (!switchListTileValue) {
                                         final _status =
                                             shippingForms[0].status.label;
-                                        final soldUpdateData =
+                                        final orderUpdateData =
                                             createSoldRecordData(
                                           indivShipping: switchListTileValue,
                                           status: _status,
@@ -1236,9 +1236,9 @@ class _UpdateOrderPageWidgetState extends State<UpdateOrderPageWidget> {
                                           updated: getCurrentTimestamp,
                                         );
                                         await widget.order
-                                            .update(soldUpdateData);
+                                            .update(orderUpdateData);
                                       } else {
-                                        final soldUpdateData =
+                                        final orderUpdateData =
                                             createSoldRecordData(
                                           indivShipping: switchListTileValue,
                                           // status: _status,
@@ -1246,7 +1246,7 @@ class _UpdateOrderPageWidgetState extends State<UpdateOrderPageWidget> {
                                           updated: getCurrentTimestamp,
                                         );
                                         await widget.order
-                                            .update(soldUpdateData);
+                                            .update(orderUpdateData);
                                         final tmpUpdate = shippingForms
                                             .map(
                                               (e) => '''{
