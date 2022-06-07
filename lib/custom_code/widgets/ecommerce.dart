@@ -170,11 +170,25 @@ class ShippingForm {
     this.planName,
     this.trackingNumber,
     this.status,
-  }) {
-    this.controller = TextEditingController(text: trackingNumber);
+    this.controller,
+  });
+
+  factory ShippingForm.create(
+    final String id,
+    final String planName,
+    final String trackingNumber,
+    final ShippingStatus status,
+  ) {
+    return ShippingForm._create(
+      id: id != '' ? id : Random().nextInt(99999).toString(),
+      planName: planName,
+      trackingNumber: trackingNumber,
+      status: status,
+      controller: TextEditingController(text: trackingNumber),
+    );
   }
 
-  static List<ShippingForm> create(
+  static List<ShippingForm> createForm(
     SoldRecord order,
     List<OrderedPlan> plans,
     OrderDetails details,
@@ -186,23 +200,22 @@ class ShippingForm {
     switchListTileValue
         ? plans.forEach(
             (plan) async => statusForms.add(
-              ShippingForm._create(
-                id: plan.id,
-                planName: plan.name,
-                trackingNumber: trackingNumbers.length == 0
+              ShippingForm.create(
+                plan.id,
+                plan.name,
+                trackingNumbers.length == 0
                     ? ''
                     : trackingNumbers[plan.trackingIndex],
-                status: plan.status,
+                plan.status,
               ),
             ),
           )
         : statusForms.add(
-            ShippingForm._create(
-              id: paymentId.substring(3),
-              planName: '',
-              trackingNumber:
-                  trackingNumbers.length == 0 ? '' : trackingNumbers[0],
-              status: ShippingStatusExt.create(order.status),
+            ShippingForm.create(
+              paymentId.substring(3),
+              '',
+              trackingNumbers.length == 0 ? '' : trackingNumbers[0],
+              ShippingStatusExt.create(order.status),
             ),
           );
 
@@ -217,6 +230,7 @@ class ShippingForm {
       planName: this.planName,
       trackingNumber: trackingNumber,
       status: this.status,
+      controller: this.controller,
     );
   }
 
@@ -228,6 +242,7 @@ class ShippingForm {
       planName: this.planName,
       trackingNumber: this.trackingNumber,
       status: status,
+      controller: this.controller,
     );
   }
 
