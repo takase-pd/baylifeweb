@@ -4,6 +4,7 @@ import '../components/header_widget.dart';
 import '../components/main_menu_widget.dart';
 import '../components/update_plan_page_widget.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
+import '../flutter_flow/flutter_flow_toggle_icon.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
 import '../order_list_page/order_list_page_widget.dart';
@@ -511,6 +512,37 @@ class _PlanListPageWidgetState extends State<PlanListPageWidget> {
                                                             FlutterFlowTheme.of(
                                                                     context)
                                                                 .bodyText1,
+                                                      ),
+                                                    ),
+                                                    Expanded(
+                                                      flex: 1,
+                                                      child: ToggleIcon(
+                                                        onPressed: () async {
+                                                          final plansUpdateData =
+                                                              createPlansRecordData(
+                                                            active:
+                                                                !listViewPlansRecord
+                                                                    .active,
+                                                          );
+                                                          await listViewPlansRecord
+                                                              .reference
+                                                              .update(
+                                                                  plansUpdateData);
+                                                        },
+                                                        value:
+                                                            listViewPlansRecord
+                                                                .active,
+                                                        onIcon: Icon(
+                                                          Icons.check_box,
+                                                          color: Colors.black,
+                                                          size: 25,
+                                                        ),
+                                                        offIcon: Icon(
+                                                          Icons
+                                                              .check_box_outline_blank,
+                                                          color: Colors.black,
+                                                          size: 25,
+                                                        ),
                                                       ),
                                                     ),
                                                   ],

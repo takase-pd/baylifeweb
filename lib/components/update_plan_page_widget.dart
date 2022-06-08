@@ -73,7 +73,7 @@ class _UpdatePlanPageWidgetState extends State<UpdatePlanPageWidget> {
   Widget build(BuildContext context) {
     return Form(
       key: formKey,
-      autovalidateMode: AutovalidateMode.disabled,
+      autovalidateMode: AutovalidateMode.always,
       child: FutureBuilder<PlansRecord>(
         future: plan,
         builder: (context, snapshot) {
