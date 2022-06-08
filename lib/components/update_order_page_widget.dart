@@ -46,6 +46,7 @@ class _UpdateOrderPageWidgetState extends State<UpdateOrderPageWidget> {
   String carrier;
   List<String> trackingNumbers;
   bool switchHanler;
+  String message = '配送情報を入力ください。';
 
   Future<List<ShippingForm>> _setForm() async {
     final paymentId = widget.order.id;
@@ -60,6 +61,28 @@ class _UpdateOrderPageWidgetState extends State<UpdateOrderPageWidget> {
     shippingForms = ShippingForm.createForm(
         _order, _plans, _details, indivSwitchValue, paymentId);
     return shippingForms;
+  }
+
+  bool _validateForm() {
+    bool _validate = true;
+    String _message = '次の設定を確認してください。';
+    if (carrierValue == null || carrierValue == '') {
+      _message += '\n配送業者';
+      _validate = false;
+    }
+    final _status = shippingForms.where((element) =>
+        element.status == ShippingStatus.shipping ||
+        element.status == ShippingStatus.shipped);
+    if (_status.length > 0 && trackingNumbers.length == 0) {
+      _message += '\nトラッキングコード';
+      _validate = false;
+    }
+
+    if (_validate) _message = '';
+    setState(() {
+      message = _message;
+    });
+    return _validate;
   }
 
   @override
@@ -1218,7 +1241,6 @@ class _UpdateOrderPageWidgetState extends State<UpdateOrderPageWidget> {
                                         children: [
                                           Expanded(
                                             child: Container(
-                                              height: 120,
                                               decoration: BoxDecoration(
                                                 color:
                                                     FlutterFlowTheme.of(context)
@@ -1283,6 +1305,7 @@ class _UpdateOrderPageWidgetState extends State<UpdateOrderPageWidget> {
                                                       ),
                                                   keyboardType:
                                                       TextInputType.multiline,
+                                                  maxLines: 5,
                                                 ),
                                               ),
                                             ),
@@ -1304,13 +1327,21 @@ class _UpdateOrderPageWidgetState extends State<UpdateOrderPageWidget> {
                               mainAxisSize: MainAxisSize.max,
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                Text(
-                                  '通知用',
-                                  style: FlutterFlowTheme.of(context).bodyText1,
+                                Expanded(
+                                  child: Container(
+                                    child: Text(
+                                      message,
+                                      style: FlutterFlowTheme.of(context)
+                                          .bodyText1,
+                                      // overflow: TextOverflow.ellipsis,
+                                    ),
+                                  ),
                                 ),
                                 FFButtonWidget(
                                   onPressed: () async {
                                     logFirebaseEvent('Button_ON_TAP');
+                                    final _formValidate = _validateForm();
+                                    if (!_formValidate) return;
                                     logFirebaseEvent('Button_Alert-Dialog');
                                     var confirmDialogResponse =
                                         await showDialog<bool>(
@@ -1432,7 +1463,9 @@ class _UpdateOrderPageWidgetState extends State<UpdateOrderPageWidget> {
                                           ),
                                           duration:
                                               Duration(milliseconds: 4000),
-                                          backgroundColor: Color(0x00000000),
+                                          backgroundColor:
+                                              FlutterFlowTheme.of(context)
+                                                  .primaryColor,
                                         ),
                                       );
                                       return;
