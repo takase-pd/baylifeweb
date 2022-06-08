@@ -152,51 +152,42 @@ class _UpdateOrderPageWidgetState extends State<UpdateOrderPageWidget> {
                                     children: [
                                       Expanded(
                                         flex: 1,
-                                        child: Padding(
-                                          padding:
-                                              EdgeInsetsDirectional.fromSTEB(
-                                                  16, 0, 0, 0),
-                                          child: TextFormField(
-                                            controller: textController1 ??=
-                                                TextEditingController(
-                                              text: dateTimeFormat(
-                                                  'MMM d, y h:mm a',
-                                                  _order.purchased),
-                                            ),
-                                            readOnly: true,
-                                            obscureText: false,
-                                            decoration: InputDecoration(
-                                              labelText: '注文日時',
-                                              enabledBorder:
-                                                  UnderlineInputBorder(
-                                                borderSide: BorderSide(
-                                                  color: Color(0x00000000),
-                                                  width: 1,
-                                                ),
-                                                borderRadius:
-                                                    const BorderRadius.only(
-                                                  topLeft: Radius.circular(4.0),
-                                                  topRight:
-                                                      Radius.circular(4.0),
-                                                ),
-                                              ),
-                                              focusedBorder:
-                                                  UnderlineInputBorder(
-                                                borderSide: BorderSide(
-                                                  color: Color(0x00000000),
-                                                  width: 1,
-                                                ),
-                                                borderRadius:
-                                                    const BorderRadius.only(
-                                                  topLeft: Radius.circular(4.0),
-                                                  topRight:
-                                                      Radius.circular(4.0),
-                                                ),
-                                              ),
-                                            ),
-                                            style: FlutterFlowTheme.of(context)
-                                                .bodyText1,
+                                        child: TextFormField(
+                                          controller: textController1 ??=
+                                              TextEditingController(
+                                            text: dateTimeFormat(
+                                                'MMM d, y h:mm a',
+                                                _order.purchased),
                                           ),
+                                          readOnly: true,
+                                          obscureText: false,
+                                          decoration: InputDecoration(
+                                            labelText: '注文日時',
+                                            enabledBorder: UnderlineInputBorder(
+                                              borderSide: BorderSide(
+                                                color: Color(0x00000000),
+                                                width: 1,
+                                              ),
+                                              borderRadius:
+                                                  const BorderRadius.only(
+                                                topLeft: Radius.circular(4.0),
+                                                topRight: Radius.circular(4.0),
+                                              ),
+                                            ),
+                                            focusedBorder: UnderlineInputBorder(
+                                              borderSide: BorderSide(
+                                                color: Color(0x00000000),
+                                                width: 1,
+                                              ),
+                                              borderRadius:
+                                                  const BorderRadius.only(
+                                                topLeft: Radius.circular(4.0),
+                                                topRight: Radius.circular(4.0),
+                                              ),
+                                            ),
+                                          ),
+                                          style: FlutterFlowTheme.of(context)
+                                              .bodyText1,
                                         ),
                                       ),
                                       Expanded(
@@ -260,57 +251,48 @@ class _UpdateOrderPageWidgetState extends State<UpdateOrderPageWidget> {
                                     children: [
                                       Expanded(
                                         flex: 1,
-                                        child: Padding(
-                                          padding:
-                                              EdgeInsetsDirectional.fromSTEB(
-                                                  16, 0, 0, 0),
-                                          child: TextFormField(
-                                            controller: textController3 ??=
-                                                TextEditingController(
-                                              text: formatNumber(
-                                                _order.totalAmount,
-                                                formatType: FormatType.custom,
-                                                currency: '￥',
-                                                format: '#,##0',
-                                                locale: 'ja_JP',
-                                              ),
+                                        child: TextFormField(
+                                          controller: textController3 ??=
+                                              TextEditingController(
+                                            text: formatNumber(
+                                              _order.totalAmount,
+                                              formatType: FormatType.custom,
+                                              currency: '￥',
+                                              format: '#,##0',
+                                              locale: 'ja_JP',
                                             ),
-                                            readOnly: true,
-                                            obscureText: false,
-                                            decoration: InputDecoration(
-                                              labelText: '料金',
-                                              enabledBorder:
-                                                  UnderlineInputBorder(
-                                                borderSide: BorderSide(
-                                                  color: Color(0x00000000),
-                                                  width: 1,
-                                                ),
-                                                borderRadius:
-                                                    const BorderRadius.only(
-                                                  topLeft: Radius.circular(4.0),
-                                                  topRight:
-                                                      Radius.circular(4.0),
-                                                ),
-                                              ),
-                                              focusedBorder:
-                                                  UnderlineInputBorder(
-                                                borderSide: BorderSide(
-                                                  color: Color(0x00000000),
-                                                  width: 1,
-                                                ),
-                                                borderRadius:
-                                                    const BorderRadius.only(
-                                                  topLeft: Radius.circular(4.0),
-                                                  topRight:
-                                                      Radius.circular(4.0),
-                                                ),
-                                              ),
-                                            ),
-                                            style: FlutterFlowTheme.of(context)
-                                                .bodyText1,
-                                            textAlign: TextAlign.end,
-                                            keyboardType: TextInputType.number,
                                           ),
+                                          readOnly: true,
+                                          obscureText: false,
+                                          decoration: InputDecoration(
+                                            labelText: '料金',
+                                            enabledBorder: UnderlineInputBorder(
+                                              borderSide: BorderSide(
+                                                color: Color(0x00000000),
+                                                width: 1,
+                                              ),
+                                              borderRadius:
+                                                  const BorderRadius.only(
+                                                topLeft: Radius.circular(4.0),
+                                                topRight: Radius.circular(4.0),
+                                              ),
+                                            ),
+                                            focusedBorder: UnderlineInputBorder(
+                                              borderSide: BorderSide(
+                                                color: Color(0x00000000),
+                                                width: 1,
+                                              ),
+                                              borderRadius:
+                                                  const BorderRadius.only(
+                                                topLeft: Radius.circular(4.0),
+                                                topRight: Radius.circular(4.0),
+                                              ),
+                                            ),
+                                          ),
+                                          style: FlutterFlowTheme.of(context)
+                                              .bodyText1,
+                                          textAlign: TextAlign.end,
+                                          keyboardType: TextInputType.number,
                                         ),
                                       ),
                                       Expanded(
@@ -318,7 +300,7 @@ class _UpdateOrderPageWidgetState extends State<UpdateOrderPageWidget> {
                                         child: Padding(
                                           padding:
                                               EdgeInsetsDirectional.fromSTEB(
-                                                  16, 0, 0, 0),
+                                                  88, 0, 0, 0),
                                           child: TextFormField(
                                             controller: textController4 ??=
                                                 TextEditingController(
@@ -368,7 +350,7 @@ class _UpdateOrderPageWidgetState extends State<UpdateOrderPageWidget> {
                                         child: Padding(
                                           padding:
                                               EdgeInsetsDirectional.fromSTEB(
-                                                  16, 0, 0, 0),
+                                                  88, 0, 0, 0),
                                           child: TextFormField(
                                             controller: textController5 ??=
                                                 TextEditingController(
@@ -423,218 +405,331 @@ class _UpdateOrderPageWidgetState extends State<UpdateOrderPageWidget> {
                                 Padding(
                                   padding: EdgeInsetsDirectional.fromSTEB(
                                       0, 0, 0, 16),
-                                  child: Row(
-                                    mainAxisSize: MainAxisSize.max,
-                                    children: [
-                                      Expanded(
+                                  child: FutureBuilder<OrderDetails>(
+                                    future: details,
+                                    builder: (context, snapshot) {
+                                      // Customize what your widget looks like when it's loading.
+                                      if (snapshot.connectionState !=
+                                          ConnectionState.done) {
+                                        return Center(
+                                          child: SizedBox(
+                                            width: 50,
+                                            height: 50,
+                                            child: SpinKitPulse(
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .primaryColor,
+                                              size: 50,
+                                            ),
+                                          ),
+                                        );
+                                      }
+                                      final _details = snapshot.data;
+                                      return Container(
+                                        decoration: BoxDecoration(),
                                         child: Padding(
                                           padding:
                                               EdgeInsetsDirectional.fromSTEB(
                                                   16, 0, 0, 0),
-                                          child: FutureBuilder<OrderDetails>(
-                                            future: details,
-                                            builder: (context, snapshot) {
-                                              // Customize what your widget looks like when it's loading.
-                                              if (snapshot.connectionState !=
-                                                  ConnectionState.done) {
-                                                return Center(
-                                                  child: SizedBox(
-                                                    width: 50,
-                                                    height: 50,
-                                                    child: SpinKitPulse(
-                                                      color:
+                                          child: Column(
+                                            mainAxisSize: MainAxisSize.max,
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: [
+                                              Row(
+                                                mainAxisSize: MainAxisSize.max,
+                                                children: [
+                                                  Expanded(
+                                                    child: TextFormField(
+                                                      controller:
+                                                          textController6 ??=
+                                                              TextEditingController(
+                                                        text: _details
+                                                            .billing.name,
+                                                      ),
+                                                      readOnly: true,
+                                                      obscureText: false,
+                                                      decoration:
+                                                          InputDecoration(
+                                                        labelText: '注文者',
+                                                        enabledBorder:
+                                                            UnderlineInputBorder(
+                                                          borderSide:
+                                                              BorderSide(
+                                                            color: Color(
+                                                                0x00000000),
+                                                            width: 1,
+                                                          ),
+                                                          borderRadius:
+                                                              const BorderRadius
+                                                                  .only(
+                                                            topLeft:
+                                                                Radius.circular(
+                                                                    4.0),
+                                                            topRight:
+                                                                Radius.circular(
+                                                                    4.0),
+                                                          ),
+                                                        ),
+                                                        focusedBorder:
+                                                            UnderlineInputBorder(
+                                                          borderSide:
+                                                              BorderSide(
+                                                            color: Color(
+                                                                0x00000000),
+                                                            width: 1,
+                                                          ),
+                                                          borderRadius:
+                                                              const BorderRadius
+                                                                  .only(
+                                                            topLeft:
+                                                                Radius.circular(
+                                                                    4.0),
+                                                            topRight:
+                                                                Radius.circular(
+                                                                    4.0),
+                                                          ),
+                                                        ),
+                                                      ),
+                                                      style:
                                                           FlutterFlowTheme.of(
                                                                   context)
-                                                              .primaryColor,
-                                                      size: 50,
+                                                              .bodyText1,
                                                     ),
                                                   ),
-                                                );
-                                              }
-                                              final _details = snapshot.data;
-                                              return TextFormField(
-                                                controller: textController6 ??=
-                                                    TextEditingController(
-                                                  text: _details.billing.name,
+                                                ],
+                                              ),
+                                              Padding(
+                                                padding: EdgeInsetsDirectional
+                                                    .fromSTEB(0, 0, 0, 8),
+                                                child: Row(
+                                                  mainAxisSize:
+                                                      MainAxisSize.max,
+                                                  children: [
+                                                    Text(
+                                                      _details.billing.address
+                                                          .postalCode,
+                                                      style:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .bodyText1,
+                                                    ),
+                                                    Padding(
+                                                      padding:
+                                                          EdgeInsetsDirectional
+                                                              .fromSTEB(
+                                                                  16, 0, 0, 0),
+                                                      child: Text(
+                                                        _details.billing.address.state +
+                                                            _details.billing
+                                                                .address.city +
+                                                            _details.billing
+                                                                .address.line1 +
+                                                            _details.billing
+                                                                .address.line2,
+                                                        style:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .bodyText1,
+                                                        maxLines: 2,
+                                                        overflow: TextOverflow
+                                                            .ellipsis,
+                                                      ),
+                                                    ),
+                                                  ],
                                                 ),
-                                                readOnly: true,
-                                                obscureText: false,
-                                                decoration: InputDecoration(
-                                                  labelText: '注文者',
-                                                  enabledBorder:
-                                                      UnderlineInputBorder(
-                                                    borderSide: BorderSide(
-                                                      color: Color(0x00000000),
-                                                      width: 1,
-                                                    ),
-                                                    borderRadius:
-                                                        const BorderRadius.only(
-                                                      topLeft:
-                                                          Radius.circular(4.0),
-                                                      topRight:
-                                                          Radius.circular(4.0),
-                                                    ),
-                                                  ),
-                                                  focusedBorder:
-                                                      UnderlineInputBorder(
-                                                    borderSide: BorderSide(
-                                                      color: Color(0x00000000),
-                                                      width: 1,
-                                                    ),
-                                                    borderRadius:
-                                                        const BorderRadius.only(
-                                                      topLeft:
-                                                          Radius.circular(4.0),
-                                                      topRight:
-                                                          Radius.circular(4.0),
-                                                    ),
-                                                  ),
-                                                ),
-                                                style:
-                                                    FlutterFlowTheme.of(context)
+                                              ),
+                                              Row(
+                                                mainAxisSize: MainAxisSize.max,
+                                                children: [
+                                                  Text(
+                                                    _details.billing.phone,
+                                                    style: FlutterFlowTheme.of(
+                                                            context)
                                                         .bodyText1,
-                                              );
-                                            },
+                                                    overflow:
+                                                        TextOverflow.ellipsis,
+                                                  ),
+                                                  Padding(
+                                                    padding:
+                                                        EdgeInsetsDirectional
+                                                            .fromSTEB(
+                                                                16, 0, 0, 0),
+                                                    child: Text(
+                                                      _details.billing.email,
+                                                      style:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .bodyText1,
+                                                      overflow:
+                                                          TextOverflow.ellipsis,
+                                                    ),
+                                                  ),
+                                                ],
+                                              ),
+                                            ],
                                           ),
                                         ),
-                                      ),
-                                    ],
+                                      );
+                                    },
                                   ),
                                 ),
                                 Padding(
                                   padding: EdgeInsetsDirectional.fromSTEB(
-                                      16, 0, 0, 0),
-                                  child: Row(
-                                    mainAxisSize: MainAxisSize.max,
-                                    children: [
-                                      Expanded(
+                                      0, 0, 0, 16),
+                                  child: FutureBuilder<OrderDetails>(
+                                    future: details,
+                                    builder: (context, snapshot) {
+                                      // Customize what your widget looks like when it's loading.
+                                      if (snapshot.connectionState !=
+                                          ConnectionState.done) {
+                                        return Center(
+                                          child: SizedBox(
+                                            width: 50,
+                                            height: 50,
+                                            child: SpinKitPulse(
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .primaryColor,
+                                              size: 50,
+                                            ),
+                                          ),
+                                        );
+                                      }
+                                      final _details = snapshot.data;
+                                      return Container(
+                                        decoration: BoxDecoration(),
                                         child: Padding(
                                           padding:
                                               EdgeInsetsDirectional.fromSTEB(
                                                   16, 0, 0, 0),
-                                          child: FutureBuilder<OrderDetails>(
-                                            future: details,
-                                            builder: (context, snapshot) {
-                                              // Customize what your widget looks like when it's loading.
-                                              if (snapshot.connectionState !=
-                                                  ConnectionState.done) {
-                                                return Center(
-                                                  child: SizedBox(
-                                                    width: 50,
-                                                    height: 50,
-                                                    child: SpinKitPulse(
-                                                      color:
+                                          child: Column(
+                                            mainAxisSize: MainAxisSize.max,
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: [
+                                              Row(
+                                                mainAxisSize: MainAxisSize.max,
+                                                children: [
+                                                  Expanded(
+                                                    child: TextFormField(
+                                                      controller:
+                                                          textController7 ??=
+                                                              TextEditingController(
+                                                        text: _details
+                                                            .shipping.name,
+                                                      ),
+                                                      readOnly: true,
+                                                      obscureText: false,
+                                                      decoration:
+                                                          InputDecoration(
+                                                        labelText: '配送先',
+                                                        enabledBorder:
+                                                            UnderlineInputBorder(
+                                                          borderSide:
+                                                              BorderSide(
+                                                            color: Color(
+                                                                0x00000000),
+                                                            width: 1,
+                                                          ),
+                                                          borderRadius:
+                                                              const BorderRadius
+                                                                  .only(
+                                                            topLeft:
+                                                                Radius.circular(
+                                                                    4.0),
+                                                            topRight:
+                                                                Radius.circular(
+                                                                    4.0),
+                                                          ),
+                                                        ),
+                                                        focusedBorder:
+                                                            UnderlineInputBorder(
+                                                          borderSide:
+                                                              BorderSide(
+                                                            color: Color(
+                                                                0x00000000),
+                                                            width: 1,
+                                                          ),
+                                                          borderRadius:
+                                                              const BorderRadius
+                                                                  .only(
+                                                            topLeft:
+                                                                Radius.circular(
+                                                                    4.0),
+                                                            topRight:
+                                                                Radius.circular(
+                                                                    4.0),
+                                                          ),
+                                                        ),
+                                                      ),
+                                                      style:
                                                           FlutterFlowTheme.of(
                                                                   context)
-                                                              .primaryColor,
-                                                      size: 50,
+                                                              .bodyText1,
                                                     ),
                                                   ),
-                                                );
-                                              }
-                                              final _details = snapshot.data;
-                                              return TextFormField(
-                                                controller: textController7 ??=
-                                                    TextEditingController(
-                                                  text: _details.shipping.name,
+                                                ],
+                                              ),
+                                              Padding(
+                                                padding: EdgeInsetsDirectional
+                                                    .fromSTEB(0, 0, 0, 8),
+                                                child: Row(
+                                                  mainAxisSize:
+                                                      MainAxisSize.max,
+                                                  children: [
+                                                    Text(
+                                                      _details.shipping.address
+                                                          .postalCode,
+                                                      style:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .bodyText1,
+                                                    ),
+                                                    Padding(
+                                                      padding:
+                                                          EdgeInsetsDirectional
+                                                              .fromSTEB(
+                                                                  16, 0, 0, 0),
+                                                      child: Text(
+                                                        _details.billing.address.state +
+                                                            _details.shipping
+                                                                .address.city +
+                                                            _details.shipping
+                                                                .address.line1 +
+                                                            _details.shipping
+                                                                .address.line2,
+                                                        style:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .bodyText1,
+                                                        maxLines: 2,
+                                                        overflow: TextOverflow
+                                                            .ellipsis,
+                                                      ),
+                                                    ),
+                                                  ],
                                                 ),
-                                                readOnly: true,
-                                                obscureText: false,
-                                                decoration: InputDecoration(
-                                                  labelText: '配送先',
-                                                  enabledBorder:
-                                                      UnderlineInputBorder(
-                                                    borderSide: BorderSide(
-                                                      color: Color(0x00000000),
-                                                      width: 1,
-                                                    ),
-                                                    borderRadius:
-                                                        const BorderRadius.only(
-                                                      topLeft:
-                                                          Radius.circular(4.0),
-                                                      topRight:
-                                                          Radius.circular(4.0),
-                                                    ),
-                                                  ),
-                                                  focusedBorder:
-                                                      UnderlineInputBorder(
-                                                    borderSide: BorderSide(
-                                                      color: Color(0x00000000),
-                                                      width: 1,
-                                                    ),
-                                                    borderRadius:
-                                                        const BorderRadius.only(
-                                                      topLeft:
-                                                          Radius.circular(4.0),
-                                                      topRight:
-                                                          Radius.circular(4.0),
-                                                    ),
-                                                  ),
-                                                ),
-                                                style:
-                                                    FlutterFlowTheme.of(context)
+                                              ),
+                                              Row(
+                                                mainAxisSize: MainAxisSize.max,
+                                                children: [
+                                                  Text(
+                                                    _details.shipping.phone ??
+                                                        '',
+                                                    style: FlutterFlowTheme.of(
+                                                            context)
                                                         .bodyText1,
-                                              );
-                                            },
+                                                    overflow:
+                                                        TextOverflow.ellipsis,
+                                                  ),
+                                                ],
+                                              ),
+                                            ],
                                           ),
                                         ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                                Padding(
-                                  padding: EdgeInsetsDirectional.fromSTEB(
-                                      16, 0, 0, 16),
-                                  child: Row(
-                                    mainAxisSize: MainAxisSize.max,
-                                    children: [
-                                      Expanded(
-                                        child: Padding(
-                                          padding:
-                                              EdgeInsetsDirectional.fromSTEB(
-                                                  0, 0, 0, 0),
-                                          child: TextFormField(
-                                            controller: textController8 ??=
-                                                TextEditingController(
-                                              text: _order.status,
-                                            ),
-                                            readOnly: true,
-                                            obscureText: false,
-                                            decoration: InputDecoration(
-                                              labelText: 'ステータス',
-                                              enabledBorder:
-                                                  UnderlineInputBorder(
-                                                borderSide: BorderSide(
-                                                  color: Color(0x00000000),
-                                                  width: 1,
-                                                ),
-                                                borderRadius:
-                                                    const BorderRadius.only(
-                                                  topLeft: Radius.circular(4.0),
-                                                  topRight:
-                                                      Radius.circular(4.0),
-                                                ),
-                                              ),
-                                              focusedBorder:
-                                                  UnderlineInputBorder(
-                                                borderSide: BorderSide(
-                                                  color: Color(0x00000000),
-                                                  width: 1,
-                                                ),
-                                                borderRadius:
-                                                    const BorderRadius.only(
-                                                  topLeft: Radius.circular(4.0),
-                                                  topRight:
-                                                      Radius.circular(4.0),
-                                                ),
-                                              ),
-                                            ),
-                                            style: FlutterFlowTheme.of(context)
-                                                .bodyText1,
-                                          ),
-                                        ),
-                                      ),
-                                    ],
+                                      );
+                                    },
                                   ),
                                 ),
                               ],
