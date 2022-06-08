@@ -4,5 +4,6 @@ export 'custom_dialog.dart' show CustomDialog;
 export 'appcheck_agent.dart' show AppCheckAgent;
 export 'ecommerce.dart' show OrderedPlan;
 export 'ecommerce.dart' show ShippingStatus;
-export 'ecommerce.dart' show getShippingStatus;
-export 'ecommerce.dart' show shippingStatusIcon;
+export 'ecommerce.dart' show ShippingStatusExt;
+export 'ecommerce.dart' show ShippingForm;
+export 'ecommerce.dart' show ShippingCarrierExt;

@@ -285,8 +285,8 @@ extension ShippingStatusExt on ShippingStatus {
 
   static ShippingStatus create(String status) {
     switch (status) {
-      case '注文':
-        return ShippingStatus.contacted;
+      case '確認中':
+        return ShippingStatus.confirming;
         break;
       case '発送済':
         return ShippingStatus.shipping;
@@ -295,7 +295,7 @@ extension ShippingStatusExt on ShippingStatus {
         return ShippingStatus.shipped;
         break;
       default:
-        return ShippingStatus.confirming;
+        return ShippingStatus.contacted;
         break;
     }
   }

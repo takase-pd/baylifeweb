@@ -11,8 +11,6 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-import 'package:bay_life_web/custom_code/widgets/ecommerce.dart';
-
 class UpdateOrderPageWidget extends StatefulWidget {
   const UpdateOrderPageWidget({
     Key key,
@@ -56,8 +54,7 @@ class _UpdateOrderPageWidgetState extends State<UpdateOrderPageWidget> {
     carrier = _details.carrier;
     carrierValue = carrier ?? '';
     trackingNumbers = _details.trackingNumbers;
-    if (!switchHanler)
-      indivSwitchValue = _order.indivShipping ?? false; // from API
+    if (!switchHanler) indivSwitchValue = _order.indivShipping ?? false;
     shippingForms = ShippingForm.createForm(
         _order, _plans, _details, indivSwitchValue, paymentId);
     return shippingForms;
