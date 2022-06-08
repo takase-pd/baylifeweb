@@ -56,6 +56,9 @@ abstract class PlansRecord implements Built<PlansRecord, PlansRecordBuilder> {
   String get shippingNormal;
 
   @nullable
+  DateTime get updated;
+
+  @nullable
   @BuiltValueField(wireName: kDocumentReferenceField)
   DocumentReference get reference;
 
@@ -107,6 +110,7 @@ Map<String, dynamic> createPlansRecordData({
   int unitAmount,
   int shippingFeeNormal,
   String shippingNormal,
+  DateTime updated,
 }) =>
     serializers.toFirestore(
         PlansRecord.serializer,
@@ -123,4 +127,5 @@ Map<String, dynamic> createPlansRecordData({
           ..shop = shop
           ..unitAmount = unitAmount
           ..shippingFeeNormal = shippingFeeNormal
-          ..shippingNormal = shippingNormal));
+          ..shippingNormal = shippingNormal
+          ..updated = updated));
