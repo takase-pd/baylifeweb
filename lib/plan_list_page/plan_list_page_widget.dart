@@ -505,7 +505,7 @@ class _PlanListPageWidgetState extends State<PlanListPageWidget> {
                                                       flex: 4,
                                                       child: Text(
                                                         dateTimeFormat(
-                                                            'MMMd, y h:mm a',
+                                                            'MMM d, y h:mm a',
                                                             listViewPlansRecord
                                                                 .published),
                                                         style:
@@ -523,6 +523,8 @@ class _PlanListPageWidgetState extends State<PlanListPageWidget> {
                                                             active:
                                                                 !listViewPlansRecord
                                                                     .active,
+                                                            updated:
+                                                                getCurrentTimestamp,
                                                           );
                                                           await listViewPlansRecord
                                                               .reference
