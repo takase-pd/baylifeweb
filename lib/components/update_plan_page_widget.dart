@@ -43,7 +43,7 @@ class _UpdatePlanPageWidgetState extends State<UpdatePlanPageWidget> {
   Future<PlansRecord> plan;
 
   Future<PlansRecord> _getPlan() async {
-    PlansRecord _plan;
+    PlansRecord _plan = PlansRecord();
     if (widget.plan != null)
       _plan = await PlansRecord.getDocumentOnce(widget.plan);
     return _plan;
