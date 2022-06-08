@@ -184,13 +184,6 @@ class _UpdatePlanPageWidgetState extends State<UpdatePlanPageWidget> {
                                                       .textDark,
                                                   fontWeight: FontWeight.w500,
                                                 ),
-                                            validator: (val) {
-                                              if (val == null || val.isEmpty) {
-                                                return 'Field is required';
-                                              }
-
-                                              return null;
-                                            },
                                           ),
                                         ),
                                         FlutterFlowDropDown(
@@ -280,13 +273,6 @@ class _UpdatePlanPageWidgetState extends State<UpdatePlanPageWidget> {
                                                       .textDark,
                                               fontWeight: FontWeight.w500,
                                             ),
-                                        validator: (val) {
-                                          if (val == null || val.isEmpty) {
-                                            return 'Field is required';
-                                          }
-
-                                          return null;
-                                        },
                                       ),
                                     ),
                                   ),
@@ -357,13 +343,6 @@ class _UpdatePlanPageWidgetState extends State<UpdatePlanPageWidget> {
                                               fontWeight: FontWeight.w500,
                                             ),
                                         keyboardType: TextInputType.number,
-                                        validator: (val) {
-                                          if (val == null || val.isEmpty) {
-                                            return 'Field is required';
-                                          }
-
-                                          return null;
-                                        },
                                       ),
                                     ),
                                   ),
@@ -430,13 +409,6 @@ class _UpdatePlanPageWidgetState extends State<UpdatePlanPageWidget> {
                                               fontWeight: FontWeight.w500,
                                             ),
                                         keyboardType: TextInputType.number,
-                                        validator: (val) {
-                                          if (val == null || val.isEmpty) {
-                                            return 'Field is required';
-                                          }
-
-                                          return null;
-                                        },
                                       ),
                                     ),
                                   ),
@@ -503,13 +475,6 @@ class _UpdatePlanPageWidgetState extends State<UpdatePlanPageWidget> {
                                             ),
                                         maxLines: 10,
                                         keyboardType: TextInputType.multiline,
-                                        validator: (val) {
-                                          if (val == null || val.isEmpty) {
-                                            return 'Field is required';
-                                          }
-
-                                          return null;
-                                        },
                                       ),
                                     ),
                                   ),
@@ -573,13 +538,6 @@ class _UpdatePlanPageWidgetState extends State<UpdatePlanPageWidget> {
                                                       .textDark,
                                               fontWeight: FontWeight.w500,
                                             ),
-                                        validator: (val) {
-                                          if (val == null || val.isEmpty) {
-                                            return 'Field is required';
-                                          }
-
-                                          return null;
-                                        },
                                       ),
                                     ),
                                     FFButtonWidget(
@@ -810,13 +768,6 @@ class _UpdatePlanPageWidgetState extends State<UpdatePlanPageWidget> {
                                                       .textDark,
                                               fontWeight: FontWeight.w500,
                                             ),
-                                        validator: (val) {
-                                          if (val == null || val.isEmpty) {
-                                            return 'Field is required';
-                                          }
-
-                                          return null;
-                                        },
                                       ),
                                     ),
                                   ),
@@ -887,13 +838,6 @@ class _UpdatePlanPageWidgetState extends State<UpdatePlanPageWidget> {
                                                       .textDark,
                                               fontWeight: FontWeight.w500,
                                             ),
-                                        validator: (val) {
-                                          if (val == null || val.isEmpty) {
-                                            return 'Field is required';
-                                          }
-
-                                          return null;
-                                        },
                                       ),
                                     ),
                                   ),
