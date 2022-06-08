@@ -154,50 +154,6 @@ class _OrderListPageWidgetState extends State<OrderListPageWidget> {
                                       ),
                                     ],
                                   ),
-                                  FFButtonWidget(
-                                    onPressed: () async {
-                                      logFirebaseEvent('Button_ON_TAP');
-                                      logFirebaseEvent('Button_Bottom-Sheet');
-                                      await showModalBottomSheet(
-                                        isScrollControlled: true,
-                                        backgroundColor: Colors.transparent,
-                                        barrierColor: Color(0x8E484848),
-                                        context: context,
-                                        builder: (context) {
-                                          return Padding(
-                                            padding: MediaQuery.of(context)
-                                                .viewInsets,
-                                            child: Container(
-                                              height: MediaQuery.of(context)
-                                                      .size
-                                                      .height *
-                                                  0.96,
-                                              child: UpdatePlanPageWidget(),
-                                            ),
-                                          );
-                                        },
-                                      );
-                                    },
-                                    text: '追加',
-                                    options: FFButtonOptions(
-                                      width: 80,
-                                      height: 32,
-                                      color: FlutterFlowTheme.of(context)
-                                          .primaryColor,
-                                      textStyle: FlutterFlowTheme.of(context)
-                                          .bodyText2
-                                          .override(
-                                            fontFamily: 'Open Sans',
-                                            color: FlutterFlowTheme.of(context)
-                                                .textLight,
-                                          ),
-                                      borderSide: BorderSide(
-                                        color: Colors.transparent,
-                                        width: 1,
-                                      ),
-                                      borderRadius: 4,
-                                    ),
-                                  ),
                                 ],
                               ),
                               Divider(
