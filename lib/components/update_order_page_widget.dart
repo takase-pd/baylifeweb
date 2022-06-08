@@ -26,7 +26,7 @@ class _UpdateOrderPageWidgetState extends State<UpdateOrderPageWidget> {
   String carrierValue;
   bool indivSwitchValue;
   String dropDownValue;
-  TextEditingController textController9;
+  TextEditingController textController8;
   TextEditingController noteController;
   TextEditingController textController1;
   TextEditingController textController2;
@@ -35,12 +35,11 @@ class _UpdateOrderPageWidgetState extends State<UpdateOrderPageWidget> {
   TextEditingController textController5;
   TextEditingController textController6;
   TextEditingController textController7;
-  TextEditingController textController8;
 
   @override
   void initState() {
     super.initState();
-    textController9 = TextEditingController();
+    textController8 = TextEditingController();
   }
 
   @override
@@ -542,61 +541,6 @@ class _UpdateOrderPageWidgetState extends State<UpdateOrderPageWidget> {
                                     ],
                                   ),
                                 ),
-                                Padding(
-                                  padding: EdgeInsetsDirectional.fromSTEB(
-                                      16, 0, 0, 16),
-                                  child: Row(
-                                    mainAxisSize: MainAxisSize.max,
-                                    children: [
-                                      Expanded(
-                                        child: Padding(
-                                          padding:
-                                              EdgeInsetsDirectional.fromSTEB(
-                                                  1, 0, 0, 0),
-                                          child: TextFormField(
-                                            controller: textController8 ??=
-                                                TextEditingController(
-                                              text: containerSoldRecord.status,
-                                            ),
-                                            readOnly: true,
-                                            obscureText: false,
-                                            decoration: InputDecoration(
-                                              labelText: 'ステータス',
-                                              enabledBorder:
-                                                  UnderlineInputBorder(
-                                                borderSide: BorderSide(
-                                                  color: Color(0x00000000),
-                                                  width: 1,
-                                                ),
-                                                borderRadius:
-                                                    const BorderRadius.only(
-                                                  topLeft: Radius.circular(4.0),
-                                                  topRight:
-                                                      Radius.circular(4.0),
-                                                ),
-                                              ),
-                                              focusedBorder:
-                                                  UnderlineInputBorder(
-                                                borderSide: BorderSide(
-                                                  color: Color(0x00000000),
-                                                  width: 1,
-                                                ),
-                                                borderRadius:
-                                                    const BorderRadius.only(
-                                                  topLeft: Radius.circular(4.0),
-                                                  topRight:
-                                                      Radius.circular(4.0),
-                                                ),
-                                              ),
-                                            ),
-                                            style: FlutterFlowTheme.of(context)
-                                                .bodyText1,
-                                          ),
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
                               ],
                             ),
                           ),
@@ -891,7 +835,7 @@ class _UpdateOrderPageWidgetState extends State<UpdateOrderPageWidget> {
                                               padding: EdgeInsetsDirectional
                                                   .fromSTEB(8, 0, 0, 0),
                                               child: TextFormField(
-                                                controller: textController9,
+                                                controller: textController8,
                                                 obscureText: false,
                                                 decoration: InputDecoration(
                                                   labelText: 'トラッキングコード',
@@ -1026,8 +970,12 @@ class _UpdateOrderPageWidgetState extends State<UpdateOrderPageWidget> {
                             decoration: BoxDecoration(),
                             child: Row(
                               mainAxisSize: MainAxisSize.max,
-                              mainAxisAlignment: MainAxisAlignment.end,
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
+                                Text(
+                                  '通知用',
+                                  style: FlutterFlowTheme.of(context).bodyText1,
+                                ),
                                 FFButtonWidget(
                                   onPressed: () async {
                                     logFirebaseEvent(
