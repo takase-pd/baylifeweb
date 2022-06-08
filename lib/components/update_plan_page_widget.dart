@@ -52,7 +52,7 @@ class _UpdatePlanPageWidgetState extends State<UpdatePlanPageWidget> {
   Widget build(BuildContext context) {
     return Form(
       key: formKey,
-      autovalidateMode: AutovalidateMode.disabled,
+      autovalidateMode: AutovalidateMode.always,
       child: FutureBuilder<PlansRecord>(
         future: PlansRecord.getDocumentOnce(widget.plan),
         builder: (context, snapshot) {
@@ -105,8 +105,8 @@ class _UpdatePlanPageWidgetState extends State<UpdatePlanPageWidget> {
                           Padding(
                             padding:
                                 EdgeInsetsDirectional.fromSTEB(0, 0, 0, 16),
-                            child: StreamBuilder<List<ShopsRecord>>(
-                              stream: queryShopsRecord(
+                            child: FutureBuilder<List<ShopsRecord>>(
+                              future: queryShopsRecordOnce(
                                 queryBuilder: (shopsRecord) =>
                                     shopsRecord.where('director',
                                         isEqualTo: currentUserReference),
