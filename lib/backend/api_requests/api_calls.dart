@@ -237,46 +237,6 @@ class GetOrderedPlansCall {
   }
 }
 
-class UpdateDeliveryServiceCall {
-  static Future<ApiCallResponse> call({
-    String shop = '',
-    String uid = '',
-    String paymentId = '',
-    String carrier = '',
-    String trackingNumber = '',
-  }) {
-    final body = '''
-{
-  "data": {
-    "shop": "${shop}",
-    "uid": "${uid}",
-    "paymentId": "${paymentId}",
-    "carrier": "${carrier}",
-    "tracking_number": "${trackingNumber}"
-  }
-}''';
-    return ApiManager.instance.makeApiCall(
-      callName: 'Update Delivery Service',
-      apiUrl:
-          'https://asia-northeast1-baylifedev.cloudfunctions.net/ec-updateDeliveryServiceV0',
-      callType: ApiCallType.POST,
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      params: {
-        'shop': shop,
-        'uid': uid,
-        'paymentId': paymentId,
-        'carrier': carrier,
-        'tracking_number': trackingNumber,
-      },
-      body: body,
-      bodyType: BodyType.JSON,
-      returnBody: true,
-    );
-  }
-}
-
 class UpdateOrderedPlanCall {
   static Future<ApiCallResponse> call({
     String shop = '',
@@ -309,6 +269,46 @@ class UpdateOrderedPlanCall {
         'paymentId': paymentId,
         'orders': orders,
         'updated': updated,
+      },
+      body: body,
+      bodyType: BodyType.JSON,
+      returnBody: true,
+    );
+  }
+}
+
+class UpdateShippingCall {
+  static Future<ApiCallResponse> call({
+    String shop = '',
+    String uid = '',
+    String paymentId = '',
+    String carrier = '',
+    String trackingNumber = '',
+  }) {
+    final body = '''
+{
+  "data": {
+    "shop": "${shop}",
+    "uid": "${uid}",
+    "paymentId": "${paymentId}",
+    "carrier": "${carrier}",
+    "tracking_number": "${trackingNumber}"
+  }
+}''';
+    return ApiManager.instance.makeApiCall(
+      callName: 'Update Shipping',
+      apiUrl:
+          'https://asia-northeast1-baylifedev.cloudfunctions.net/ec-updateShippingV0',
+      callType: ApiCallType.POST,
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      params: {
+        'shop': shop,
+        'uid': uid,
+        'paymentId': paymentId,
+        'carrier': carrier,
+        'tracking_number': trackingNumber,
       },
       body: body,
       bodyType: BodyType.JSON,
