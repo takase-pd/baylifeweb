@@ -7,3 +7,4 @@ export 'ecommerce.dart' show ShippingStatus;
 export 'ecommerce.dart' show ShippingStatusExt;
 export 'ecommerce.dart' show ShippingForm;
 export 'ecommerce.dart' show ShippingCarrierExt;
+export 'ecommerce.dart' show PlansRecordExt;

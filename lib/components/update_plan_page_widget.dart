@@ -8,11 +8,10 @@ import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
 import '../flutter_flow/upload_media.dart';
 import '../plan_list_page/plan_list_page_widget.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
+import '../custom_code/widgets/index.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 class UpdatePlanPageWidget extends StatefulWidget {
   const UpdatePlanPageWidget({
@@ -42,20 +41,32 @@ class _UpdatePlanPageWidgetState extends State<UpdatePlanPageWidget> {
   final formKey = GlobalKey<FormState>();
 
   Future<PlansRecord> plan;
+  Future<List<ShopsRecord>> shops;
 
   Future<PlansRecord> _getPlan() async {
     PlansRecord _plan = PlansRecord();
-    if (widget.plan != null)
+    if (widget.plan != null) {
       _plan = await PlansRecord.getDocumentOnce(widget.plan);
+      final shopName = await _plan.getShopName();
+      textController1 = TextEditingController(text: shopName);
+    }
     return _plan;
+  }
+
+  Future<List<ShopsRecord>> _getShops() async {
+    final _shops = await queryShopsRecordOnce(
+      queryBuilder: (shopsRecord) =>
+          shopsRecord.where('director', isEqualTo: currentUserReference),
+    );
+    return _shops;
   }
 
   @override
   void initState() {
     super.initState();
-    textController1 = TextEditingController(text: dropDownValue);
     textController6 = TextEditingController(text: uploadedFileUrl);
     plan = _getPlan();
+    shops = _getShops();
   }
 
   @override
@@ -115,12 +126,8 @@ class _UpdatePlanPageWidgetState extends State<UpdatePlanPageWidget> {
                           Padding(
                             padding:
                                 EdgeInsetsDirectional.fromSTEB(0, 0, 0, 16),
-                            child: StreamBuilder<List<ShopsRecord>>(
-                              stream: queryShopsRecord(
-                                queryBuilder: (shopsRecord) =>
-                                    shopsRecord.where('director',
-                                        isEqualTo: currentUserReference),
-                              ),
+                            child: FutureBuilder<List<ShopsRecord>>(
+                              future: shops,
                               builder: (context, snapshot) {
                                 // Customize what your widget looks like when it's loading.
                                 if (!snapshot.hasData) {
@@ -138,6 +145,11 @@ class _UpdatePlanPageWidgetState extends State<UpdatePlanPageWidget> {
                                 }
                                 List<ShopsRecord> containerShopsRecordList =
                                     snapshot.data;
+                                final shopList = containerShopsRecordList
+                                    .map(
+                                      (e) => e.shopName,
+                                    )
+                                    .toList();
                                 return Container(
                                   height: 60,
                                   decoration: BoxDecoration(
@@ -153,7 +165,9 @@ class _UpdatePlanPageWidgetState extends State<UpdatePlanPageWidget> {
                                       children: [
                                         Expanded(
                                           child: TextFormField(
-                                            controller: textController1,
+                                            controller: textController1 ??=
+                                                TextEditingController(
+                                                    text: shopList[0]),
                                             readOnly: true,
                                             obscureText: false,
                                             decoration: InputDecoration(
@@ -203,30 +217,35 @@ class _UpdatePlanPageWidgetState extends State<UpdatePlanPageWidget> {
                                             },
                                           ),
                                         ),
-                                        FlutterFlowDropDown(
-                                          options: ['Option 1'],
-                                          onChanged: (val) => setState(
-                                              () => dropDownValue = val),
-                                          width: 240,
-                                          height: 50,
-                                          textStyle:
-                                              FlutterFlowTheme.of(context)
-                                                  .bodyText1
-                                                  .override(
-                                                    fontFamily: 'Open Sans',
-                                                    color: Colors.black,
-                                                  ),
-                                          hintText: 'ショップ名',
-                                          fillColor: Colors.white,
-                                          elevation: 2,
-                                          borderColor: Colors.transparent,
-                                          borderWidth: 0,
-                                          borderRadius: 0,
-                                          margin:
-                                              EdgeInsetsDirectional.fromSTEB(
-                                                  12, 4, 12, 4),
-                                          hidesUnderline: true,
-                                        ),
+                                        if (shopList.length > 1)
+                                          FlutterFlowDropDown(
+                                            options: shopList,
+                                            onChanged: (val) => setState(() => {
+                                                  dropDownValue = val,
+                                                  textController1 =
+                                                      TextEditingController(
+                                                          text: dropDownValue)
+                                                }),
+                                            width: 240,
+                                            height: 50,
+                                            textStyle:
+                                                FlutterFlowTheme.of(context)
+                                                    .bodyText1
+                                                    .override(
+                                                      fontFamily: 'Open Sans',
+                                                      color: Colors.black,
+                                                    ),
+                                            hintText: 'ショップ名',
+                                            fillColor: Colors.white,
+                                            elevation: 2,
+                                            borderColor: Colors.transparent,
+                                            borderWidth: 0,
+                                            borderRadius: 0,
+                                            margin:
+                                                EdgeInsetsDirectional.fromSTEB(
+                                                    12, 4, 12, 4),
+                                            hidesUnderline: true,
+                                          ),
                                       ],
                                     ),
                                   ),

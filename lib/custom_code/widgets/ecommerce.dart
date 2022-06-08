@@ -2,7 +2,6 @@ import '../../auth/auth_util.dart';
 import '../../backend/api_requests/api_calls.dart';
 import '../../custom_code/widgets/index.dart';
 import '../../auth/firebase_user_provider.dart';
-import '../../../flutter_flow/flutter_flow_theme.dart';
 import '../../flutter_flow/flutter_flow_util.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -322,4 +321,11 @@ extension ShippingCarrierExt on ShippingCarrier {
 
   static List<String> get labelList =>
       _label.entries.map((e) => _label[e.key]).toList();
+}
+
+extension PlansRecordExt on PlansRecord {
+  Future<String> getShopName() async {
+    final shop = await ShopsRecord.getDocumentOnce(this.shop);
+    return shop.shopName;
+  }
 }
