@@ -1302,8 +1302,12 @@ class _UpdateOrderPageWidgetState extends State<UpdateOrderPageWidget> {
                             decoration: BoxDecoration(),
                             child: Row(
                               mainAxisSize: MainAxisSize.max,
-                              mainAxisAlignment: MainAxisAlignment.end,
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
+                                Text(
+                                  '通知用',
+                                  style: FlutterFlowTheme.of(context).bodyText1,
+                                ),
                                 FFButtonWidget(
                                   onPressed: () async {
                                     logFirebaseEvent('Button_ON_TAP');
