@@ -896,7 +896,6 @@ class _UpdateOrderPageWidgetState extends State<UpdateOrderPageWidget> {
                                     children: [
                                       Expanded(
                                         child: Container(
-                                          height: 120,
                                           decoration: BoxDecoration(
                                             color: FlutterFlowTheme.of(context)
                                                 .background,
@@ -951,6 +950,7 @@ class _UpdateOrderPageWidgetState extends State<UpdateOrderPageWidget> {
                                                         fontFamily: 'Open Sans',
                                                         lineHeight: 1.48,
                                                       ),
+                                              maxLines: 5,
                                               keyboardType:
                                                   TextInputType.multiline,
                                             ),
