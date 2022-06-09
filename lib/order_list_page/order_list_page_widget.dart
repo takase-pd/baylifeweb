@@ -1,16 +1,12 @@
 import '../auth/auth_util.dart';
-import '../backend/api_requests/api_calls.dart';
 import '../backend/backend.dart';
 import '../components/header_widget.dart';
 import '../components/main_menu_widget.dart';
 import '../components/update_order_page_widget.dart';
-import '../components/update_plan_page_widget.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
-import '../flutter_flow/flutter_flow_widgets.dart';
 import '../plan_list_page/plan_list_page_widget.dart';
 import '../custom_code/widgets/index.dart';
-import '../auth/firebase_user_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -25,7 +21,7 @@ class OrderListPageWidget extends StatefulWidget {
 }
 
 class _OrderListPageWidgetState extends State<OrderListPageWidget> {
-  PagingController<DocumentSnapshot, SoldRecord> _pagingController;
+  PagingController<DocumentSnapshot, OrdersRecord> _pagingController;
   Query _pagingQuery;
   List<StreamSubscription> _streamSubscriptions = [];
   int count = 0;
@@ -209,16 +205,16 @@ class _OrderListPageWidgetState extends State<OrderListPageWidget> {
                                     borderRadius: BorderRadius.circular(8),
                                   ),
                                   child: PagedListView<DocumentSnapshot<Object>,
-                                      SoldRecord>(
+                                      OrdersRecord>(
                                     pagingController: () {
                                       final Query<Object> Function(
                                               Query<Object>) queryBuilder =
-                                          (soldRecord) => soldRecord.orderBy(
-                                              'purchased',
-                                              descending: true);
+                                          (ordersRecord) =>
+                                              ordersRecord.orderBy('purchased',
+                                                  descending: true);
                                       if (_pagingController != null) {
                                         final query = queryBuilder(
-                                            SoldRecord.collection(
+                                            OrdersRecord.collection(
                                                 containerShopsRecord
                                                     .reference));
                                         if (query != _pagingQuery) {
@@ -235,15 +231,15 @@ class _OrderListPageWidgetState extends State<OrderListPageWidget> {
                                       _pagingController =
                                           PagingController(firstPageKey: null);
                                       _pagingQuery = queryBuilder(
-                                          SoldRecord.collection(
+                                          OrdersRecord.collection(
                                               containerShopsRecord.reference));
                                       _pagingController.addPageRequestListener(
                                           (nextPageMarker) {
-                                        querySoldRecordPage(
+                                        queryOrdersRecordPage(
                                           parent:
                                               containerShopsRecord.reference,
-                                          queryBuilder: (soldRecord) =>
-                                              soldRecord.orderBy('purchased',
+                                          queryBuilder: (ordersRecord) =>
+                                              ordersRecord.orderBy('purchased',
                                                   descending: true),
                                           nextPageMarker: nextPageMarker,
                                           pageSize: 25,
@@ -281,7 +277,7 @@ class _OrderListPageWidgetState extends State<OrderListPageWidget> {
                                     shrinkWrap: true,
                                     scrollDirection: Axis.vertical,
                                     builderDelegate:
-                                        PagedChildBuilderDelegate<SoldRecord>(
+                                        PagedChildBuilderDelegate<OrdersRecord>(
                                       // Customize what your widget looks like when it's loading the first page.
                                       firstPageProgressIndicatorBuilder: (_) =>
                                           Center(
@@ -297,7 +293,7 @@ class _OrderListPageWidgetState extends State<OrderListPageWidget> {
                                       ),
 
                                       itemBuilder: (context, _, listViewIndex) {
-                                        final listViewSoldRecord =
+                                        final listViewOrdersRecord =
                                             _pagingController
                                                 .itemList[listViewIndex];
                                         return Padding(
@@ -337,7 +333,7 @@ class _OrderListPageWidgetState extends State<OrderListPageWidget> {
                                                       child:
                                                           UpdateOrderPageWidget(
                                                         order:
-                                                            listViewSoldRecord
+                                                            listViewOrdersRecord
                                                                 .reference,
                                                       ),
                                                     ),
@@ -379,7 +375,7 @@ class _OrderListPageWidgetState extends State<OrderListPageWidget> {
                                                       child: Text(
                                                         dateTimeFormat(
                                                             'MMMd, y h:mm a',
-                                                            listViewSoldRecord
+                                                            listViewOrdersRecord
                                                                 .purchased),
                                                         style:
                                                             FlutterFlowTheme.of(
@@ -391,7 +387,7 @@ class _OrderListPageWidgetState extends State<OrderListPageWidget> {
                                                       flex: 1,
                                                       child: FaIcon(
                                                         ShippingStatusExt.create(
-                                                                listViewSoldRecord
+                                                                listViewOrdersRecord
                                                                     .status)
                                                             .icon,
                                                         color:
@@ -399,7 +395,7 @@ class _OrderListPageWidgetState extends State<OrderListPageWidget> {
                                                                     context)
                                                                 .secondaryColor,
                                                         size: ShippingStatusExt.create(
-                                                                    listViewSoldRecord
+                                                                    listViewOrdersRecord
                                                                         .status)
                                                                 .size -
                                                             8,
@@ -410,9 +406,9 @@ class _OrderListPageWidgetState extends State<OrderListPageWidget> {
                                                       child: Text(
                                                         dateTimeFormat(
                                                             'MMMd, y h:mm a',
-                                                            listViewSoldRecord
+                                                            listViewOrdersRecord
                                                                     .updated ??
-                                                                listViewSoldRecord
+                                                                listViewOrdersRecord
                                                                     .purchased),
                                                         style:
                                                             FlutterFlowTheme.of(
@@ -424,7 +420,7 @@ class _OrderListPageWidgetState extends State<OrderListPageWidget> {
                                                       flex: 2,
                                                       child: Text(
                                                         formatNumber(
-                                                          listViewSoldRecord
+                                                          listViewOrdersRecord
                                                               .totalAmount,
                                                           formatType:
                                                               FormatType.custom,
@@ -441,7 +437,7 @@ class _OrderListPageWidgetState extends State<OrderListPageWidget> {
                                                     Expanded(
                                                       flex: 1,
                                                       child: Text(
-                                                        listViewSoldRecord
+                                                        listViewOrdersRecord
                                                             .totalQuantity
                                                             .toString(),
                                                         style:
@@ -454,7 +450,7 @@ class _OrderListPageWidgetState extends State<OrderListPageWidget> {
                                                       flex: 2,
                                                       child: Text(
                                                         formatNumber(
-                                                          listViewSoldRecord
+                                                          listViewOrdersRecord
                                                               .totalShippingFee,
                                                           formatType:
                                                               FormatType.custom,

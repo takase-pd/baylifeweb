@@ -188,7 +188,7 @@ class ShippingForm {
   }
 
   static List<ShippingForm> createForm(
-    SoldRecord order,
+    OrdersRecord order,
     List<OrderedPlan> plans,
     OrderDetails details,
     bool switchListTileValue,

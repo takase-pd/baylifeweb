@@ -35,7 +35,7 @@ class _UpdateOrderPageWidgetState extends State<UpdateOrderPageWidget> {
   TextEditingController textController6; // ordered name
   TextEditingController textController7; // shipping info
   TextEditingController textController8; // status
-  Future<SoldRecord> order;
+  Future<OrdersRecord> order;
   Future<OrderDetails> details;
   Future<List<OrderedPlan>> plans;
   Future<List<ShippingForm>> shippingHandler;
@@ -91,7 +91,7 @@ class _UpdateOrderPageWidgetState extends State<UpdateOrderPageWidget> {
     final paymentId = widget.order.id;
     final tmpPath = widget.order.path.split('/');
     shopPath = '${tmpPath[0]}/${tmpPath[1]}';
-    order = SoldRecord.getDocumentOnce(widget.order);
+    order = OrdersRecord.getDocumentOnce(widget.order);
     details = OrderDetails.create(shopPath, paymentId, context);
     plans = OrderedPlan.create(shopPath, paymentId, context);
     shippingHandler = _setForm();
@@ -104,7 +104,7 @@ class _UpdateOrderPageWidgetState extends State<UpdateOrderPageWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder<SoldRecord>(
+    return FutureBuilder<OrdersRecord>(
       future: order,
       builder: (context, snapshot) {
         // Customize what your widget looks like when it's loading.
@@ -1393,7 +1393,7 @@ class _UpdateOrderPageWidgetState extends State<UpdateOrderPageWidget> {
                                         final _status =
                                             shippingForms[0].status.label;
                                         final orderUpdateData =
-                                            createSoldRecordData(
+                                            createOrdersRecordData(
                                           indivShipping: indivSwitchValue,
                                           status: _status,
                                           note: noteController?.text ?? '',
@@ -1403,7 +1403,7 @@ class _UpdateOrderPageWidgetState extends State<UpdateOrderPageWidget> {
                                             .update(orderUpdateData);
                                       } else {
                                         final orderUpdateData =
-                                            createSoldRecordData(
+                                            createOrdersRecordData(
                                           indivShipping: indivSwitchValue,
                                           // status: _status,
                                           note: noteController?.text ?? '',
@@ -1440,7 +1440,7 @@ class _UpdateOrderPageWidgetState extends State<UpdateOrderPageWidget> {
                                         );
                                       }
                                       final apiCallOutput =
-                                          await UpdateDeliveryServiceCall.call(
+                                          await UpdateShippingCall.call(
                                         shop: shopPath,
                                         uid: currentUserUid,
                                         paymentId: widget.order.id,
