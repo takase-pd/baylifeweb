@@ -1337,6 +1337,24 @@ class _UpdateOrderPageWidgetState extends State<UpdateOrderPageWidget> {
                                 FFButtonWidget(
                                   onPressed: () async {
                                     logFirebaseEvent('Button_ON_TAP');
+                                    Map<String, int> indexes = {};
+                                    List<String> numbers = [];
+                                    for (var i = 0;
+                                        i < shippingForms.length;
+                                        i++) {
+                                      if (shippingForms[i].trackingNumber ==
+                                              '' ||
+                                          shippingForms[i].trackingNumber ==
+                                              null) continue;
+                                      indexes[shippingForms[i].id] = i;
+                                      numbers
+                                          .add(shippingForms[i].trackingNumber);
+                                    }
+                                    trackingNumbers = numbers;
+                                    final _numbers = numbers.reduce(
+                                        (value, element) =>
+                                            value + ',' + element);
+
                                     final _formValidate = _validateForm();
                                     if (!_formValidate) return;
                                     logFirebaseEvent('Button_Alert-Dialog');
@@ -1369,23 +1387,6 @@ class _UpdateOrderPageWidgetState extends State<UpdateOrderPageWidget> {
                                             false;
                                     if (confirmDialogResponse) {
                                       logFirebaseEvent('Button_Backend-Call');
-                                      Map<String, int> indexes = {};
-                                      List numbers = [];
-                                      for (var i = 0;
-                                          i < shippingForms.length;
-                                          i++) {
-                                        if (shippingForms[i].trackingNumber ==
-                                                '' ||
-                                            shippingForms[i].trackingNumber ==
-                                                null) continue;
-                                        indexes[shippingForms[i].id] = i;
-                                        numbers.add(
-                                            shippingForms[i].trackingNumber);
-                                      }
-
-                                      final _numbers = numbers.reduce(
-                                          (value, element) =>
-                                              value + ',' + element);
 
                                       final _appCheckToken =
                                           await AppCheckAgent.getToken(context);

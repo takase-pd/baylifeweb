@@ -306,7 +306,7 @@ class UpdateShippingCall {
     "uid": "${uid}",
     "paymentId": "${paymentId}",
     "carrier": "${carrier}",
-    "tracking_number": "${trackingNumber}"
+    "trackingNumber": "${trackingNumber}"
   }
 }''';
     return ApiManager.instance.makeApiCall(
