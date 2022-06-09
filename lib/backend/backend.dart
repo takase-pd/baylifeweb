@@ -15,7 +15,6 @@ import 'schema/shops_record.dart';
 import 'schema/cat_shop_record.dart';
 import 'schema/companies_record.dart';
 import 'schema/plans_record.dart';
-import 'schema/sold_record.dart';
 import 'schema/orders_record.dart';
 import 'schema/serializers.dart';
 
@@ -35,7 +34,6 @@ export 'schema/shops_record.dart';
 export 'schema/cat_shop_record.dart';
 export 'schema/companies_record.dart';
 export 'schema/plans_record.dart';
-export 'schema/sold_record.dart';
 export 'schema/orders_record.dart';
 
 /// Functions to query CategoriesRecords (as a Stream and as a Future).
@@ -494,51 +492,6 @@ Future<FFFirestorePage<PlansRecord>> queryPlansRecordPage({
     queryCollectionPage(
       PlansRecord.collection,
       PlansRecord.serializer,
-      queryBuilder: queryBuilder,
-      nextPageMarker: nextPageMarker,
-      pageSize: pageSize,
-      isStream: isStream,
-    );
-
-/// Functions to query SoldRecords (as a Stream and as a Future).
-Stream<List<SoldRecord>> querySoldRecord({
-  DocumentReference parent,
-  Query Function(Query) queryBuilder,
-  int limit = -1,
-  bool singleRecord = false,
-}) =>
-    queryCollection(
-      SoldRecord.collection(parent),
-      SoldRecord.serializer,
-      queryBuilder: queryBuilder,
-      limit: limit,
-      singleRecord: singleRecord,
-    );
-
-Future<List<SoldRecord>> querySoldRecordOnce({
-  DocumentReference parent,
-  Query Function(Query) queryBuilder,
-  int limit = -1,
-  bool singleRecord = false,
-}) =>
-    queryCollectionOnce(
-      SoldRecord.collection(parent),
-      SoldRecord.serializer,
-      queryBuilder: queryBuilder,
-      limit: limit,
-      singleRecord: singleRecord,
-    );
-
-Future<FFFirestorePage<SoldRecord>> querySoldRecordPage({
-  DocumentReference parent,
-  Query Function(Query) queryBuilder,
-  DocumentSnapshot nextPageMarker,
-  int pageSize,
-  bool isStream,
-}) =>
-    queryCollectionPage(
-      SoldRecord.collection(parent),
-      SoldRecord.serializer,
       queryBuilder: queryBuilder,
       nextPageMarker: nextPageMarker,
       pageSize: pageSize,

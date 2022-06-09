@@ -44,8 +44,8 @@ class _UpdateOrderPageWidgetState extends State<UpdateOrderPageWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder<SoldRecord>(
-      future: SoldRecord.getDocumentOnce(widget.order),
+    return FutureBuilder<OrdersRecord>(
+      future: OrdersRecord.getDocumentOnce(widget.order),
       builder: (context, snapshot) {
         // Customize what your widget looks like when it's loading.
         if (!snapshot.hasData) {
@@ -60,7 +60,7 @@ class _UpdateOrderPageWidgetState extends State<UpdateOrderPageWidget> {
             ),
           );
         }
-        final containerSoldRecord = snapshot.data;
+        final containerOrdersRecord = snapshot.data;
         return Container(
           decoration: BoxDecoration(
             color: FlutterFlowTheme.of(context).tertiaryColor,
@@ -115,8 +115,10 @@ class _UpdateOrderPageWidgetState extends State<UpdateOrderPageWidget> {
                                         child: TextFormField(
                                           controller: textController1 ??=
                                               TextEditingController(
-                                            text: dateTimeFormat('yMMMd',
-                                                containerSoldRecord.purchased),
+                                            text: dateTimeFormat(
+                                                'yMMMd',
+                                                containerOrdersRecord
+                                                    .purchased),
                                           ),
                                           readOnly: true,
                                           obscureText: false,
@@ -158,8 +160,10 @@ class _UpdateOrderPageWidgetState extends State<UpdateOrderPageWidget> {
                                           child: TextFormField(
                                             controller: textController2 ??=
                                                 TextEditingController(
-                                              text: dateTimeFormat('yMMMd',
-                                                  containerSoldRecord.updated),
+                                              text: dateTimeFormat(
+                                                  'yMMMd',
+                                                  containerOrdersRecord
+                                                      .updated),
                                             ),
                                             readOnly: true,
                                             obscureText: false,
@@ -213,7 +217,7 @@ class _UpdateOrderPageWidgetState extends State<UpdateOrderPageWidget> {
                                           controller: textController3 ??=
                                               TextEditingController(
                                             text: formatNumber(
-                                              containerSoldRecord.totalAmount,
+                                              containerOrdersRecord.totalAmount,
                                               formatType: FormatType.custom,
                                               currency: '￥',
                                               format: '#,##0',
@@ -262,7 +266,7 @@ class _UpdateOrderPageWidgetState extends State<UpdateOrderPageWidget> {
                                           child: TextFormField(
                                             controller: textController4 ??=
                                                 TextEditingController(
-                                              text: containerSoldRecord
+                                              text: containerOrdersRecord
                                                   .totalQuantity
                                                   .toString(),
                                             ),
@@ -314,7 +318,7 @@ class _UpdateOrderPageWidgetState extends State<UpdateOrderPageWidget> {
                                             controller: textController5 ??=
                                                 TextEditingController(
                                               text: formatNumber(
-                                                containerSoldRecord
+                                                containerOrdersRecord
                                                     .totalShippingFee,
                                                 formatType: FormatType.custom,
                                                 currency: '￥',
@@ -909,7 +913,8 @@ class _UpdateOrderPageWidgetState extends State<UpdateOrderPageWidget> {
                                             child: TextFormField(
                                               controller: noteController ??=
                                                   TextEditingController(
-                                                text: containerSoldRecord.note,
+                                                text:
+                                                    containerOrdersRecord.note,
                                               ),
                                               obscureText: false,
                                               decoration: InputDecoration(
@@ -1011,12 +1016,13 @@ class _UpdateOrderPageWidgetState extends State<UpdateOrderPageWidget> {
                                     if (confirmDialogResponse) {
                                       logFirebaseEvent('Button_Backend-Call');
 
-                                      final soldUpdateData =
-                                          createSoldRecordData(
+                                      final ordersUpdateData =
+                                          createOrdersRecordData(
                                         note: noteController?.text ?? '',
                                         updated: getCurrentTimestamp,
                                       );
-                                      await widget.order.update(soldUpdateData);
+                                      await containerOrdersRecord.reference
+                                          .update(ordersUpdateData);
                                       logFirebaseEvent('Button_Show-Snack-Bar');
                                       ScaffoldMessenger.of(context)
                                           .showSnackBar(
