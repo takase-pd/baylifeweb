@@ -44,7 +44,7 @@ class _UpdateOrderPageWidgetState extends State<UpdateOrderPageWidget> {
   String carrier;
   List<String> trackingNumbers;
   bool switchHanler;
-  String message = '配送情報を入力ください。';
+  String alert = '配送情報を入力ください。追跡番号がない場合、空欄のまま更新してください。';
 
   Future<List<ShippingForm>> _setForm() async {
     final paymentId = widget.order.id;
@@ -61,25 +61,66 @@ class _UpdateOrderPageWidgetState extends State<UpdateOrderPageWidget> {
   }
 
   bool _validateForm() {
-    bool _validate = true;
-    String _message = '次の設定を確認してください。';
-    if (carrierValue == null || carrierValue == '') {
-      _message += '\n配送業者';
-      _validate = false;
-    }
-    final _status = shippingForms.where((element) =>
-        element.status == ShippingStatus.shipping ||
-        element.status == ShippingStatus.shipped);
-    if (_status.length > 0 && trackingNumbers.length == 0) {
-      _message += '\nトラッキングコード';
-      _validate = false;
+    bool validate = true;
+    String message = '次の設定を確認してください。';
+    final status = _orderStatus();
+
+    switch (status) {
+      case ShippingStatus.ordered:
+      case ShippingStatus.confirming:
+        break;
+      case ShippingStatus.shipping:
+      case ShippingStatus.shipped:
+        if (carrierValue == null || carrierValue == '') {
+          message += '\n・配送業者が選択されていません。';
+          validate = false;
+        }
+        break;
     }
 
-    if (_validate) _message = '';
     setState(() {
-      message = _message;
+      if (!validate) alert = message;
     });
-    return _validate;
+    return validate;
+  }
+
+  ShippingStatus _orderStatus() {
+    if (!indivSwitchValue) return shippingForms[0].status;
+
+    final status = shippingForms.map((e) => e.status);
+    if (status.contains(ShippingStatus.confirming))
+      return ShippingStatus.confirming;
+    if (status.contains(ShippingStatus.shipping))
+      return ShippingStatus.shipping;
+    if (status.contains(ShippingStatus.shipped)) return ShippingStatus.shipped;
+
+    return ShippingStatus.ordered;
+  }
+
+  Future<String> _setOrders() async {
+    final _plans = await plans;
+    final ordersReq = indivSwitchValue
+        ? shippingForms
+            .map<String>(
+              (e) => '''{
+                "id": "${e.id}",
+                "index": ${e.trackingIndex},
+                "status": "${e.status.label}"
+                },''',
+            )
+            .toList()
+        : _plans
+            .map<String>(
+              (e) => '''{
+                "id": "${e.id}",
+                "index": ${shippingForms[0].trackingIndex},
+                "status": "${shippingForms[0].status.label}"
+                },''',
+            )
+            .toList();
+    final orders = ordersReq.fold<String>(
+        '[', (previousValue, element) => previousValue + element);
+    return orders.substring(0, orders.length - 1) + ']';
   }
 
   @override
@@ -861,12 +902,15 @@ class _UpdateOrderPageWidgetState extends State<UpdateOrderPageWidget> {
                                                               ),
                                                             ),
                                                             Expanded(
-                                                              flex: 3,
+                                                              flex: 4,
                                                               child: Text(
                                                                 _plan.name,
                                                                 style: FlutterFlowTheme.of(
                                                                         context)
                                                                     .bodyText1,
+                                                                overflow:
+                                                                    TextOverflow
+                                                                        .ellipsis,
                                                               ),
                                                             ),
                                                             Expanded(
@@ -900,35 +944,7 @@ class _UpdateOrderPageWidgetState extends State<UpdateOrderPageWidget> {
                                                               ),
                                                             ),
                                                             Expanded(
-                                                              flex: 1,
-                                                              child: FaIcon(
-                                                                _plan.status
-                                                                    .icon,
-                                                                color: FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .secondaryColor,
-                                                                size: _plan
-                                                                    .status
-                                                                    .size,
-                                                              ),
-                                                            ),
-                                                          ],
-                                                        ),
-                                                        Row(
-                                                          mainAxisSize:
-                                                              MainAxisSize.max,
-                                                          mainAxisAlignment:
-                                                              MainAxisAlignment
-                                                                  .end,
-                                                          children: [
-                                                            Padding(
-                                                              padding:
-                                                                  EdgeInsetsDirectional
-                                                                      .fromSTEB(
-                                                                          16,
-                                                                          0,
-                                                                          16,
-                                                                          0),
+                                                              flex: 4,
                                                               child: Text(
                                                                 dateTimeFormat(
                                                                     'MMM d, y h:mm a',
@@ -943,9 +959,20 @@ class _UpdateOrderPageWidgetState extends State<UpdateOrderPageWidget> {
                                                                       color: FlutterFlowTheme.of(
                                                                               context)
                                                                           .sLight,
-                                                                      fontSize:
-                                                                          12,
                                                                     ),
+                                                              ),
+                                                            ),
+                                                            Expanded(
+                                                              flex: 1,
+                                                              child: FaIcon(
+                                                                _plan.status
+                                                                    .icon,
+                                                                color: FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .secondaryColor,
+                                                                size: _plan
+                                                                    .status
+                                                                    .size,
                                                               ),
                                                             ),
                                                           ],
@@ -1011,7 +1038,7 @@ class _UpdateOrderPageWidgetState extends State<UpdateOrderPageWidget> {
                                         children: [
                                           // if (_plans.length > 1)
                                           Expanded(
-                                            flex: 4,
+                                            flex: 1,
                                             child: Container(
                                               decoration: BoxDecoration(
                                                 color:
@@ -1049,7 +1076,7 @@ class _UpdateOrderPageWidgetState extends State<UpdateOrderPageWidget> {
                                             ),
                                           ),
                                           Expanded(
-                                            flex: 3,
+                                            flex: 1,
                                             child: Padding(
                                               padding: EdgeInsetsDirectional
                                                   .fromSTEB(16, 0, 0, 0),
@@ -1161,8 +1188,7 @@ class _UpdateOrderPageWidgetState extends State<UpdateOrderPageWidget> {
                                                         obscureText: false,
                                                         decoration:
                                                             InputDecoration(
-                                                          labelText:
-                                                              'トラッキングコード',
+                                                          labelText: '追跡番号',
                                                           enabledBorder:
                                                               InputBorder.none,
                                                           focusedBorder:
@@ -1327,168 +1353,142 @@ class _UpdateOrderPageWidgetState extends State<UpdateOrderPageWidget> {
                                 Expanded(
                                   child: Container(
                                     child: Text(
-                                      message,
+                                      alert,
                                       style: FlutterFlowTheme.of(context)
                                           .bodyText1,
                                       // overflow: TextOverflow.ellipsis,
                                     ),
                                   ),
                                 ),
-                                FFButtonWidget(
-                                  onPressed: () async {
-                                    logFirebaseEvent('Button_ON_TAP');
-                                    Map<String, int> indexes = {};
-                                    List<String> numbers = [];
-                                    for (var i = 0;
-                                        i < shippingForms.length;
-                                        i++) {
-                                      if (shippingForms[i].trackingNumber ==
-                                              '' ||
-                                          shippingForms[i].trackingNumber ==
-                                              null) continue;
-                                      indexes[shippingForms[i].id] = i;
-                                      numbers
-                                          .add(shippingForms[i].trackingNumber);
-                                    }
-                                    trackingNumbers = numbers;
-                                    final _numbers = numbers.reduce(
-                                        (value, element) =>
-                                            value + ',' + element);
+                                Padding(
+                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                      36, 0, 0, 0),
+                                  child: FFButtonWidget(
+                                    onPressed: () async {
+                                      logFirebaseEvent('Button_ON_TAP');
+                                      final status = _orderStatus();
+                                      final numbers = shippingForms
+                                          .asMap()
+                                          .entries
+                                          .map((e) {
+                                        indivSwitchValue
+                                            ? e.value.trackingIndex = e.key
+                                            : e.value.status = status;
+                                        return e.value.trackingNumber;
+                                      }).toList();
+                                      final trackingNumber = numbers.reduce(
+                                          (value, element) =>
+                                              value + ',' + element);
 
-                                    final _formValidate = _validateForm();
-                                    if (!_formValidate) return;
-                                    logFirebaseEvent('Button_Alert-Dialog');
-                                    var confirmDialogResponse =
-                                        await showDialog<bool>(
-                                              context: context,
-                                              builder: (alertDialogContext) {
-                                                return AlertDialog(
-                                                  title: Text('注文更新'),
-                                                  content: Text('注文を更新します。'),
-                                                  actions: [
-                                                    TextButton(
-                                                      onPressed: () =>
-                                                          Navigator.pop(
-                                                              alertDialogContext,
-                                                              false),
-                                                      child: Text('Cancel'),
-                                                    ),
-                                                    TextButton(
-                                                      onPressed: () =>
-                                                          Navigator.pop(
-                                                              alertDialogContext,
-                                                              true),
-                                                      child: Text('OK'),
-                                                    ),
-                                                  ],
-                                                );
-                                              },
-                                            ) ??
-                                            false;
-                                    if (confirmDialogResponse) {
-                                      logFirebaseEvent('Button_Backend-Call');
+                                      trackingNumbers = numbers;
+                                      final formValidate = _validateForm();
+                                      if (!formValidate) return;
 
-                                      final _appCheckToken =
-                                          await AppCheckAgent.getToken(context);
-                                      if (!indivSwitchValue) {
-                                        final _status =
-                                            shippingForms[0].status.label;
+                                      logFirebaseEvent('Button_Alert-Dialog');
+                                      var confirmDialogResponse =
+                                          await showDialog<bool>(
+                                                context: context,
+                                                builder: (alertDialogContext) {
+                                                  return AlertDialog(
+                                                    title: Text('注文更新'),
+                                                    content: Text('注文を更新します。'),
+                                                    actions: [
+                                                      TextButton(
+                                                        onPressed: () =>
+                                                            Navigator.pop(
+                                                                alertDialogContext,
+                                                                false),
+                                                        child: Text('Cancel'),
+                                                      ),
+                                                      TextButton(
+                                                        onPressed: () =>
+                                                            Navigator.pop(
+                                                                alertDialogContext,
+                                                                true),
+                                                        child: Text('OK'),
+                                                      ),
+                                                    ],
+                                                  );
+                                                },
+                                              ) ??
+                                              false;
+                                      if (confirmDialogResponse) {
+                                        logFirebaseEvent('Button_Backend-Call');
                                         final orderUpdateData =
                                             createOrdersRecordData(
                                           indivShipping: indivSwitchValue,
-                                          status: _status,
+                                          status: status.label,
                                           note: noteController?.text ?? '',
                                           updated: getCurrentTimestamp,
                                         );
                                         await widget.order
                                             .update(orderUpdateData);
-                                      } else {
-                                        final orderUpdateData =
-                                            createOrdersRecordData(
-                                          indivShipping: indivSwitchValue,
-                                          // status: _status,
-                                          note: noteController?.text ?? '',
-                                          updated: getCurrentTimestamp,
-                                        );
-                                        await widget.order
-                                            .update(orderUpdateData);
-                                        final tmpUpdate = shippingForms
-                                            .map(
-                                              (e) => '''{
-                                              "id": "${e.id}",
-                                              "index": ${indexes[e.id]},
-                                              "status": "${e.status.label}"
-                                              },''',
-                                            )
-                                            .fold(
-                                                '[',
-                                                (previousValue, element) =>
-                                                    previousValue + element);
-                                        final updateOrders =
-                                            tmpUpdate.substring(
-                                                    0, tmpUpdate.length - 1) +
-                                                ']';
-                                        final apiCallOutput =
-                                            await UpdateOrderedPlanCall.call(
+
+                                        final orders = await _setOrders();
+                                        final _appCheckToken =
+                                            await AppCheckAgent.getToken(
+                                                context);
+                                        await UpdateOrderedPlanCall.call(
                                           shop: shopPath,
                                           uid: currentUserUid,
                                           paymentId: widget.order.id,
-                                          orders: updateOrders,
+                                          orders: orders,
                                           updated:
                                               getCurrentTimestamp.toString(),
                                           accessToken: currentJwtToken,
                                           appCheckToken: _appCheckToken,
                                         );
-                                      }
-                                      final apiCallOutput =
-                                          await UpdateShippingCall.call(
-                                        shop: shopPath,
-                                        uid: currentUserUid,
-                                        paymentId: widget.order.id,
-                                        carrier: carrierValue,
-                                        trackingNumber: _numbers,
-                                        accessToken: currentJwtToken,
-                                        appCheckToken: _appCheckToken,
-                                      );
 
-                                      logFirebaseEvent('Button_Show-Snack-Bar');
-                                      ScaffoldMessenger.of(context)
-                                          .showSnackBar(
-                                        SnackBar(
-                                          content: Text(
-                                            '注文を更新しました。',
-                                            style: TextStyle(),
+                                        await UpdateShippingCall.call(
+                                          shop: shopPath,
+                                          uid: currentUserUid,
+                                          paymentId: widget.order.id,
+                                          carrier: carrierValue,
+                                          trackingNumber: trackingNumber,
+                                          accessToken: currentJwtToken,
+                                          appCheckToken: _appCheckToken,
+                                        );
+
+                                        logFirebaseEvent(
+                                            'Button_Show-Snack-Bar');
+                                        ScaffoldMessenger.of(context)
+                                            .showSnackBar(
+                                          SnackBar(
+                                            content: Text(
+                                              '注文を更新しました。',
+                                              style: TextStyle(),
+                                            ),
+                                            duration:
+                                                Duration(milliseconds: 4000),
+                                            backgroundColor:
+                                                FlutterFlowTheme.of(context)
+                                                    .primaryColor,
                                           ),
-                                          duration:
-                                              Duration(milliseconds: 4000),
-                                          backgroundColor:
-                                              FlutterFlowTheme.of(context)
-                                                  .primaryColor,
-                                        ),
-                                      );
-                                      return;
-                                    } else {
-                                      return;
-                                    }
-                                  },
-                                  text: '更新',
-                                  options: FFButtonOptions(
-                                    width: 130,
-                                    height: 60,
-                                    color: FlutterFlowTheme.of(context)
-                                        .secondaryColor,
-                                    textStyle: FlutterFlowTheme.of(context)
-                                        .bodyText1
-                                        .override(
-                                          fontFamily: 'Open Sans',
-                                          color: FlutterFlowTheme.of(context)
-                                              .textLight,
-                                        ),
-                                    borderSide: BorderSide(
-                                      color: Colors.transparent,
-                                      width: 1,
+                                        );
+                                        return;
+                                      } else {
+                                        return;
+                                      }
+                                    },
+                                    text: '更新',
+                                    options: FFButtonOptions(
+                                      width: 130,
+                                      height: 60,
+                                      color: FlutterFlowTheme.of(context)
+                                          .secondaryColor,
+                                      textStyle: FlutterFlowTheme.of(context)
+                                          .bodyText1
+                                          .override(
+                                            fontFamily: 'Open Sans',
+                                            color: FlutterFlowTheme.of(context)
+                                                .textLight,
+                                          ),
+                                      borderSide: BorderSide(
+                                        color: Colors.transparent,
+                                        width: 1,
+                                      ),
+                                      borderRadius: 12,
                                     ),
-                                    borderRadius: 12,
                                   ),
                                 ),
                               ],

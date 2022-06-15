@@ -162,6 +162,7 @@ class ShippingForm {
   final String planName;
   TextEditingController controller;
   String trackingNumber;
+  int trackingIndex = 0;
   ShippingStatus status;
 
   ShippingForm._create({
@@ -251,7 +252,7 @@ class ShippingForm {
 }
 
 enum ShippingStatus {
-  contacted,
+  ordered,
   confirming,
   shipping,
   shipped,
@@ -259,21 +260,21 @@ enum ShippingStatus {
 
 extension ShippingStatusExt on ShippingStatus {
   static final _label = {
-    ShippingStatus.contacted: '注文',
+    ShippingStatus.ordered: '注文',
     ShippingStatus.confirming: '確認中',
     ShippingStatus.shipping: '発送済',
     ShippingStatus.shipped: '到着',
   };
 
   static final _icon = {
-    ShippingStatus.contacted: Icons.send_rounded,
+    ShippingStatus.ordered: Icons.send_rounded,
     ShippingStatus.confirming: Icons.search_rounded,
     ShippingStatus.shipping: FontAwesomeIcons.truckFast,
     ShippingStatus.shipped: FontAwesomeIcons.box,
   };
 
   static final _size = {
-    ShippingStatus.contacted: 32.0,
+    ShippingStatus.ordered: 32.0,
     ShippingStatus.confirming: 32.0,
     ShippingStatus.shipping: 24.0,
     ShippingStatus.shipped: 24.0,
@@ -294,7 +295,7 @@ extension ShippingStatusExt on ShippingStatus {
         return ShippingStatus.shipped;
         break;
       default:
-        return ShippingStatus.contacted;
+        return ShippingStatus.ordered;
         break;
     }
   }
@@ -310,6 +311,8 @@ enum ShippingCarrier {
   yamato,
   sagawa,
   japanpost,
+  inhouse,
+  other,
 }
 
 extension ShippingCarrierExt on ShippingCarrier {
@@ -317,6 +320,8 @@ extension ShippingCarrierExt on ShippingCarrier {
     ShippingCarrier.yamato: 'クロネコヤマト',
     ShippingCarrier.sagawa: '佐川急便',
     ShippingCarrier.japanpost: '日本郵便',
+    ShippingCarrier.inhouse: '自社配送',
+    ShippingCarrier.other: 'その他',
   };
 
   static List<String> get labelList =>
