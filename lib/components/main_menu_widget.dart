@@ -1,13 +1,17 @@
 import '../auth/auth_util.dart';
 import '../backend/api_requests/api_calls.dart';
+import '../com_list_page/com_list_page_widget.dart';
 import '../config_page/config_page_widget.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
 import '../home_page/home_page_widget.dart';
+import '../plan_list_page/plan_list_page_widget.dart';
 import '../post_page/post_page_widget.dart';
 import '../post_survey_page/post_survey_page_widget.dart';
+import '../shop_list_page/shop_list_page_widget.dart';
 import '../top_page/top_page_widget.dart';
+import '../custom_code/widgets/auth_checker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -22,6 +26,14 @@ class MainMenuWidget extends StatefulWidget {
 class _MainMenuWidgetState extends State<MainMenuWidget> {
   ApiCallResponse subscriptionConfig;
   ApiCallResponse subscriptionPost;
+
+  Future<bool> adminUser;
+
+  @override
+  void initState() {
+    super.initState();
+    adminUser = AuthChecker.checkAdmin();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -61,232 +73,432 @@ class _MainMenuWidgetState extends State<MainMenuWidget> {
                       ],
                     ),
                   ),
-                  Container(
-                    width: double.infinity,
-                    decoration: BoxDecoration(),
-                    child: ListView(
-                      padding: EdgeInsets.zero,
-                      shrinkWrap: true,
-                      scrollDirection: Axis.vertical,
-                      children: [
-                        Container(
-                          height: 48,
-                          child: Stack(
-                            children: [
-                              FFButtonWidget(
-                                onPressed: () async {
-                                  logFirebaseEvent('Button-ON_TAP');
-                                  logFirebaseEvent('Button-Navigate-To');
-                                  await Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (context) => HomePageWidget(),
-                                    ),
-                                  );
-                                },
-                                text: 'ホーム',
-                                options: FFButtonOptions(
-                                  width: 160,
-                                  height: 48,
-                                  color: FlutterFlowTheme.of(context)
-                                      .secondaryColor,
-                                  textStyle: FlutterFlowTheme.of(context)
-                                      .subtitle2
-                                      .override(
-                                        fontFamily: 'Open Sans',
-                                        color: FlutterFlowTheme.of(context)
-                                            .textLight,
-                                        fontSize: 16,
-                                      ),
-                                  elevation: 0,
-                                  borderSide: BorderSide(
-                                    color: Colors.transparent,
-                                  ),
-                                  borderRadius: 0,
-                                ),
-                              ),
-                              Align(
-                                alignment: AlignmentDirectional(-0.83, 0),
-                                child: Icon(
-                                  Icons.home_sharp,
-                                  color: FlutterFlowTheme.of(context).textLight,
-                                  size: 24,
-                                ),
-                              ),
-                            ],
+                  FutureBuilder<bool>(
+                    future: adminUser,
+                    builder: (context, snapshot) {
+                      // Customize what your widget looks like when it's loading.
+                      if (snapshot.connectionState != ConnectionState.done) {
+                        return Center(
+                          child: SizedBox(
+                            width: 50,
+                            height: 50,
+                            child: SpinKitPulse(
+                              color: FlutterFlowTheme.of(context).primaryColor,
+                              size: 50,
+                            ),
                           ),
-                        ),
-                        Container(
-                          height: 48,
-                          child: Stack(
-                            children: [
-                              FFButtonWidget(
-                                onPressed: () async {
-                                  logFirebaseEvent('Button-ON_TAP');
-                                  logFirebaseEvent('Button-Backend-Call');
-                                  subscriptionPost =
-                                      await GetSubscriptionCall.call(
-                                    uid: currentUserUid,
-                                  );
-                                  logFirebaseEvent('Button-Navigate-To');
-                                  await Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (context) => PostPageWidget(
-                                        subscription: getJsonField(
-                                          (subscriptionPost?.jsonBody ?? ''),
-                                          r'''$.result.subscription''',
-                                        ).toString(),
-                                      ),
-                                    ),
-                                  );
-
-                                  setState(() {});
-                                },
-                                text: '投稿　',
-                                options: FFButtonOptions(
-                                  width: 160,
-                                  height: 48,
-                                  color: FlutterFlowTheme.of(context)
-                                      .secondaryColor,
-                                  textStyle: FlutterFlowTheme.of(context)
-                                      .subtitle2
-                                      .override(
-                                        fontFamily: 'Open Sans',
-                                        color: FlutterFlowTheme.of(context)
-                                            .textLight,
-                                        fontSize: 16,
-                                      ),
-                                  elevation: 0,
-                                  borderSide: BorderSide(
-                                    color: Colors.transparent,
-                                  ),
-                                  borderRadius: 0,
-                                ),
-                              ),
-                              Align(
-                                alignment: AlignmentDirectional(-0.83, 0),
-                                child: Icon(
-                                  Icons.post_add_sharp,
-                                  color: FlutterFlowTheme.of(context).textLight,
-                                  size: 24,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                        Container(
-                          height: 48,
-                          child: Stack(
-                            children: [
-                              Padding(
-                                padding:
-                                    EdgeInsetsDirectional.fromSTEB(16, 0, 0, 0),
-                                child: FFButtonWidget(
-                                  onPressed: () async {
-                                    logFirebaseEvent('Button-ON_TAP');
-                                    logFirebaseEvent('Button-Navigate-To');
-                                    await Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                        builder: (context) =>
-                                            PostSurveyPageWidget(),
-                                      ),
-                                    );
-                                  },
-                                  text: 'アンケート',
-                                  options: FFButtonOptions(
-                                    width: 160,
-                                    height: 48,
-                                    color: FlutterFlowTheme.of(context)
-                                        .secondaryColor,
-                                    textStyle: FlutterFlowTheme.of(context)
-                                        .subtitle2
-                                        .override(
-                                          fontFamily: 'Open Sans',
-                                          color: FlutterFlowTheme.of(context)
-                                              .textLight,
-                                          fontSize: 16,
+                        );
+                      }
+                      final _adminUser = snapshot.data;
+                      return Container(
+                        width: double.infinity,
+                        decoration: BoxDecoration(),
+                        child: ListView(
+                          padding: EdgeInsets.zero,
+                          shrinkWrap: true,
+                          scrollDirection: Axis.vertical,
+                          children: [
+                            Container(
+                              height: 48,
+                              child: Stack(
+                                children: [
+                                  FFButtonWidget(
+                                    onPressed: () async {
+                                      logFirebaseEvent('Button_ON_TAP');
+                                      logFirebaseEvent('Button_Navigate-To');
+                                      await Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (context) =>
+                                              HomePageWidget(),
                                         ),
-                                    elevation: 0,
-                                    borderSide: BorderSide(
-                                      color: Colors.transparent,
+                                      );
+                                    },
+                                    text: 'ホーム',
+                                    options: FFButtonOptions(
+                                      width: 160,
+                                      height: 48,
+                                      color: FlutterFlowTheme.of(context)
+                                          .secondaryColor,
+                                      textStyle: FlutterFlowTheme.of(context)
+                                          .subtitle2
+                                          .override(
+                                            fontFamily: 'Open Sans',
+                                            color: FlutterFlowTheme.of(context)
+                                                .textLight,
+                                            fontSize: 16,
+                                          ),
+                                      elevation: 0,
+                                      borderSide: BorderSide(
+                                        color: Colors.transparent,
+                                      ),
+                                      borderRadius: 0,
                                     ),
-                                    borderRadius: 0,
                                   ),
-                                ),
+                                  Align(
+                                    alignment: AlignmentDirectional(-0.83, 0),
+                                    child: Icon(
+                                      Icons.home_sharp,
+                                      color: FlutterFlowTheme.of(context)
+                                          .textLight,
+                                      size: 24,
+                                    ),
+                                  ),
+                                ],
                               ),
-                              Align(
-                                alignment: AlignmentDirectional(-0.83, 0),
-                                child: Icon(
-                                  Icons.question_answer_rounded,
-                                  color: FlutterFlowTheme.of(context).textLight,
-                                  size: 24,
-                                ),
+                            ),
+                            Container(
+                              height: 48,
+                              child: Stack(
+                                children: [
+                                  FFButtonWidget(
+                                    onPressed: () async {
+                                      logFirebaseEvent('Button_ON_TAP');
+                                      logFirebaseEvent('Button_Backend-Call');
+                                      subscriptionPost =
+                                          await GetSubscriptionCall.call(
+                                        uid: currentUserUid,
+                                      );
+                                      logFirebaseEvent('Button_Navigate-To');
+                                      await Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (context) => PostPageWidget(
+                                            subscription: getJsonField(
+                                              (subscriptionPost?.jsonBody ??
+                                                  ''),
+                                              r'''$.result.subscription''',
+                                            ).toString(),
+                                          ),
+                                        ),
+                                      );
+
+                                      setState(() {});
+                                    },
+                                    text: '投稿　',
+                                    options: FFButtonOptions(
+                                      width: 160,
+                                      height: 48,
+                                      color: FlutterFlowTheme.of(context)
+                                          .secondaryColor,
+                                      textStyle: FlutterFlowTheme.of(context)
+                                          .subtitle2
+                                          .override(
+                                            fontFamily: 'Open Sans',
+                                            color: FlutterFlowTheme.of(context)
+                                                .textLight,
+                                            fontSize: 16,
+                                          ),
+                                      elevation: 0,
+                                      borderSide: BorderSide(
+                                        color: Colors.transparent,
+                                      ),
+                                      borderRadius: 0,
+                                    ),
+                                  ),
+                                  Align(
+                                    alignment: AlignmentDirectional(-0.83, 0),
+                                    child: Icon(
+                                      Icons.post_add_sharp,
+                                      color: FlutterFlowTheme.of(context)
+                                          .textLight,
+                                      size: 24,
+                                    ),
+                                  ),
+                                ],
                               ),
-                            ],
-                          ),
-                        ),
-                        Container(
-                          height: 48,
-                          child: Stack(
-                            children: [
-                              FFButtonWidget(
-                                onPressed: () async {
-                                  logFirebaseEvent('Button-ON_TAP');
-                                  logFirebaseEvent('Button-Backend-Call');
-                                  subscriptionConfig =
-                                      await GetSubscriptionCall.call(
-                                    uid: currentUserUid,
-                                  );
-                                  logFirebaseEvent('Button-Navigate-To');
-                                  await Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (context) => ConfigPageWidget(
-                                        subscription:
-                                            (subscriptionConfig?.jsonBody ??
-                                                ''),
+                            ),
+                            if (_adminUser)
+                              Container(
+                                height: 48,
+                                child: Stack(
+                                  children: [
+                                    Padding(
+                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                          16, 0, 0, 0),
+                                      child: FFButtonWidget(
+                                        onPressed: () async {
+                                          logFirebaseEvent('Button_ON_TAP');
+                                          logFirebaseEvent(
+                                              'Button_Navigate-To');
+                                          await Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                              builder: (context) =>
+                                                  PostSurveyPageWidget(),
+                                            ),
+                                          );
+                                        },
+                                        text: 'アンケート',
+                                        options: FFButtonOptions(
+                                          width: 160,
+                                          height: 48,
+                                          color: FlutterFlowTheme.of(context)
+                                              .secondaryColor,
+                                          textStyle: FlutterFlowTheme.of(
+                                                  context)
+                                              .subtitle2
+                                              .override(
+                                                fontFamily: 'Open Sans',
+                                                color:
+                                                    FlutterFlowTheme.of(context)
+                                                        .textLight,
+                                                fontSize: 16,
+                                              ),
+                                          elevation: 0,
+                                          borderSide: BorderSide(
+                                            color: Colors.transparent,
+                                          ),
+                                          borderRadius: 0,
+                                        ),
                                       ),
                                     ),
-                                  );
-
-                                  setState(() {});
-                                },
-                                text: '設定　',
-                                options: FFButtonOptions(
-                                  width: 160,
-                                  height: 48,
-                                  color: FlutterFlowTheme.of(context)
-                                      .secondaryColor,
-                                  textStyle: FlutterFlowTheme.of(context)
-                                      .subtitle2
-                                      .override(
-                                        fontFamily: 'Open Sans',
+                                    Align(
+                                      alignment: AlignmentDirectional(-0.83, 0),
+                                      child: Icon(
+                                        Icons.question_answer_rounded,
                                         color: FlutterFlowTheme.of(context)
                                             .textLight,
-                                        fontSize: 16,
+                                        size: 24,
                                       ),
-                                  elevation: 0,
-                                  borderSide: BorderSide(
-                                    color: Colors.transparent,
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            if (_adminUser)
+                              Container(
+                                height: 48,
+                                child: Stack(
+                                  children: [
+                                    Padding(
+                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                          16, 0, 0, 0),
+                                      child: FFButtonWidget(
+                                        onPressed: () async {
+                                          logFirebaseEvent('Button_ON_TAP');
+                                          logFirebaseEvent(
+                                              'Button_Navigate-To');
+                                          await Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                              builder: (context) =>
+                                                  ComListPageWidget(),
+                                            ),
+                                          );
+                                        },
+                                        text: '企業　　　',
+                                        options: FFButtonOptions(
+                                          width: 160,
+                                          height: 48,
+                                          color: FlutterFlowTheme.of(context)
+                                              .secondaryColor,
+                                          textStyle: FlutterFlowTheme.of(
+                                                  context)
+                                              .subtitle2
+                                              .override(
+                                                fontFamily: 'Open Sans',
+                                                color:
+                                                    FlutterFlowTheme.of(context)
+                                                        .textLight,
+                                                fontSize: 16,
+                                              ),
+                                          elevation: 0,
+                                          borderSide: BorderSide(
+                                            color: Colors.transparent,
+                                          ),
+                                          borderRadius: 0,
+                                        ),
+                                      ),
+                                    ),
+                                    Align(
+                                      alignment: AlignmentDirectional(-0.83, 0),
+                                      child: Icon(
+                                        Icons.corporate_fare_rounded,
+                                        color: FlutterFlowTheme.of(context)
+                                            .textLight,
+                                        size: 24,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            if (_adminUser)
+                              Container(
+                                height: 48,
+                                child: Stack(
+                                  children: [
+                                    Padding(
+                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                          16, 0, 0, 0),
+                                      child: FFButtonWidget(
+                                        onPressed: () async {
+                                          logFirebaseEvent('Button_ON_TAP');
+                                          logFirebaseEvent(
+                                              'Button_Navigate-To');
+                                          await Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                              builder: (context) =>
+                                                  ShopListPageWidget(),
+                                            ),
+                                          );
+                                        },
+                                        text: 'ショップ　',
+                                        options: FFButtonOptions(
+                                          width: 160,
+                                          height: 48,
+                                          color: FlutterFlowTheme.of(context)
+                                              .secondaryColor,
+                                          textStyle: FlutterFlowTheme.of(
+                                                  context)
+                                              .subtitle2
+                                              .override(
+                                                fontFamily: 'Open Sans',
+                                                color:
+                                                    FlutterFlowTheme.of(context)
+                                                        .textLight,
+                                                fontSize: 16,
+                                              ),
+                                          elevation: 0,
+                                          borderSide: BorderSide(
+                                            color: Colors.transparent,
+                                          ),
+                                          borderRadius: 0,
+                                        ),
+                                      ),
+                                    ),
+                                    Align(
+                                      alignment: AlignmentDirectional(-0.83, 0),
+                                      child: Icon(
+                                        Icons.store_rounded,
+                                        color: FlutterFlowTheme.of(context)
+                                            .textLight,
+                                        size: 24,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            Container(
+                              height: 48,
+                              child: Stack(
+                                children: [
+                                  Padding(
+                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                        16, 0, 0, 0),
+                                    child: FFButtonWidget(
+                                      onPressed: () async {
+                                        logFirebaseEvent('Button_ON_TAP');
+                                        logFirebaseEvent('Button_Navigate-To');
+                                        await Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                            builder: (context) =>
+                                                PlanListPageWidget(),
+                                          ),
+                                        );
+                                      },
+                                      text: '商品　　　',
+                                      options: FFButtonOptions(
+                                        width: 160,
+                                        height: 48,
+                                        color: FlutterFlowTheme.of(context)
+                                            .secondaryColor,
+                                        textStyle: FlutterFlowTheme.of(context)
+                                            .subtitle2
+                                            .override(
+                                              fontFamily: 'Open Sans',
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .textLight,
+                                              fontSize: 16,
+                                            ),
+                                        elevation: 0,
+                                        borderSide: BorderSide(
+                                          color: Colors.transparent,
+                                        ),
+                                        borderRadius: 0,
+                                      ),
+                                    ),
                                   ),
-                                  borderRadius: 0,
+                                  Align(
+                                    alignment: AlignmentDirectional(-0.83, 0),
+                                    child: Icon(
+                                      Icons.add_to_photos_rounded,
+                                      color: FlutterFlowTheme.of(context)
+                                          .textLight,
+                                      size: 24,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            if (_adminUser)
+                              Container(
+                                height: 48,
+                                child: Stack(
+                                  children: [
+                                    FFButtonWidget(
+                                      onPressed: () async {
+                                        logFirebaseEvent('Button_ON_TAP');
+                                        logFirebaseEvent('Button_Backend-Call');
+                                        subscriptionConfig =
+                                            await GetSubscriptionCall.call(
+                                          uid: currentUserUid,
+                                        );
+                                        logFirebaseEvent('Button_Navigate-To');
+                                        await Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                            builder: (context) =>
+                                                ConfigPageWidget(
+                                              subscription: (subscriptionConfig
+                                                      ?.jsonBody ??
+                                                  ''),
+                                            ),
+                                          ),
+                                        );
+
+                                        setState(() {});
+                                      },
+                                      text: '設定　',
+                                      options: FFButtonOptions(
+                                        width: 160,
+                                        height: 48,
+                                        color: FlutterFlowTheme.of(context)
+                                            .secondaryColor,
+                                        textStyle: FlutterFlowTheme.of(context)
+                                            .subtitle2
+                                            .override(
+                                              fontFamily: 'Open Sans',
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .textLight,
+                                              fontSize: 16,
+                                            ),
+                                        elevation: 0,
+                                        borderSide: BorderSide(
+                                          color: Colors.transparent,
+                                        ),
+                                        borderRadius: 0,
+                                      ),
+                                    ),
+                                    Align(
+                                      alignment: AlignmentDirectional(-0.83, 0),
+                                      child: Icon(
+                                        Icons.settings_sharp,
+                                        color: FlutterFlowTheme.of(context)
+                                            .textLight,
+                                        size: 24,
+                                      ),
+                                    ),
+                                  ],
                                 ),
                               ),
-                              Align(
-                                alignment: AlignmentDirectional(-0.83, 0),
-                                child: Icon(
-                                  Icons.settings_sharp,
-                                  color: FlutterFlowTheme.of(context).textLight,
-                                  size: 24,
-                                ),
-                              ),
-                            ],
-                          ),
+                          ],
                         ),
-                      ],
-                    ),
+                      );
+                    },
                   ),
                 ],
               ),
@@ -296,8 +508,8 @@ class _MainMenuWidgetState extends State<MainMenuWidget> {
             padding: EdgeInsetsDirectional.fromSTEB(20, 16, 16, 24),
             child: InkWell(
               onTap: () async {
-                logFirebaseEvent('Row-ON_TAP');
-                logFirebaseEvent('Row-Auth');
+                logFirebaseEvent('Row_ON_TAP');
+                logFirebaseEvent('Row_Auth');
                 await signOut();
                 await Navigator.pushAndRemoveUntil(
                   context,

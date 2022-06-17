@@ -12,8 +12,8 @@ import 'package:google_fonts/google_fonts.dart';
 const apiKey =
     'pk_test_51ITgUwGe7bJktEzT6F1RcOf7aH2lrjK1jlIne0tpyoWXbdxAa0GpTBjyJp1CIn4EElYQFA7T39wLpRzdBlBCj1zg00TPUJYvsl';
 
-class PlanPageWidget extends StatefulWidget {
-  const PlanPageWidget({
+class ServicePlanPageWidget extends StatefulWidget {
+  const ServicePlanPageWidget({
     Key key,
     this.plans,
   }) : super(key: key);
@@ -21,16 +21,17 @@ class PlanPageWidget extends StatefulWidget {
   final dynamic plans;
 
   @override
-  _PlanPageWidgetState createState() => _PlanPageWidgetState();
+  _ServicePlanPageWidgetState createState() => _ServicePlanPageWidgetState();
 }
 
-class _PlanPageWidgetState extends State<PlanPageWidget> {
+class _ServicePlanPageWidgetState extends State<ServicePlanPageWidget> {
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   void initState() {
     super.initState();
-    logFirebaseEvent('screen_view', parameters: {'screen_name': 'PlanPage'});
+    logFirebaseEvent('screen_view',
+        parameters: {'screen_name': 'ServicePlanPage'});
   }
 
   @override
@@ -168,8 +169,8 @@ class _PlanPageWidgetState extends State<PlanPageWidget> {
                               children: [
                                 InkWell(
                                   onTap: () async {
-                                    logFirebaseEvent('Text-ON_TAP');
-                                    logFirebaseEvent('Text-Launch-U-R-L');
+                                    logFirebaseEvent('Text_ON_TAP');
+                                    logFirebaseEvent('Text_Launch-U-R-L');
                                     await launchURL('https://stripe.com/');
                                   },
                                   child: Text(
@@ -181,8 +182,8 @@ class _PlanPageWidgetState extends State<PlanPageWidget> {
                                 ),
                                 InkWell(
                                   onTap: () async {
-                                    logFirebaseEvent('Text-ON_TAP');
-                                    logFirebaseEvent('Text-Launch-U-R-L');
+                                    logFirebaseEvent('Text_ON_TAP');
+                                    logFirebaseEvent('Text_Launch-U-R-L');
                                     await launchURL('https://stripe.com/');
                                   },
                                   child: Text(
@@ -202,8 +203,8 @@ class _PlanPageWidgetState extends State<PlanPageWidget> {
                                       3, 0, 3, 0),
                                   child: InkWell(
                                     onTap: () async {
-                                      logFirebaseEvent('Icon-ON_TAP');
-                                      logFirebaseEvent('Icon-Launch-U-R-L');
+                                      logFirebaseEvent('Icon_ON_TAP');
+                                      logFirebaseEvent('Icon_Launch-U-R-L');
                                       await launchURL('https://stripe.com/');
                                     },
                                     child: FaIcon(
@@ -227,8 +228,8 @@ class _PlanPageWidgetState extends State<PlanPageWidget> {
                             children: [
                               InkWell(
                                 onTap: () async {
-                                  logFirebaseEvent('Text-ON_TAP');
-                                  logFirebaseEvent('Text-Launch-U-R-L');
+                                  logFirebaseEvent('Text_ON_TAP');
+                                  logFirebaseEvent('Text_Launch-U-R-L');
                                   await launchURL(
                                       'https://baylife.particledrawing.com/terms.html');
                                 },
@@ -249,8 +250,8 @@ class _PlanPageWidgetState extends State<PlanPageWidget> {
                                     EdgeInsetsDirectional.fromSTEB(3, 0, 0, 0),
                                 child: InkWell(
                                   onTap: () async {
-                                    logFirebaseEvent('Icon-ON_TAP');
-                                    logFirebaseEvent('Icon-Launch-U-R-L');
+                                    logFirebaseEvent('Icon_ON_TAP');
+                                    logFirebaseEvent('Icon_Launch-U-R-L');
                                     await launchURL(
                                         'https://baylife.particledrawing.com/terms.html');
                                   },
@@ -268,8 +269,8 @@ class _PlanPageWidgetState extends State<PlanPageWidget> {
                               ),
                               InkWell(
                                 onTap: () async {
-                                  logFirebaseEvent('Text-ON_TAP');
-                                  logFirebaseEvent('Text-Launch-U-R-L');
+                                  logFirebaseEvent('Text_ON_TAP');
+                                  logFirebaseEvent('Text_Launch-U-R-L');
                                   await launchURL(
                                       'https://www.particledrawing.com/privacy');
                                 },
@@ -290,8 +291,8 @@ class _PlanPageWidgetState extends State<PlanPageWidget> {
                                     EdgeInsetsDirectional.fromSTEB(3, 0, 3, 0),
                                 child: InkWell(
                                   onTap: () async {
-                                    logFirebaseEvent('Icon-ON_TAP');
-                                    logFirebaseEvent('Icon-Launch-U-R-L');
+                                    logFirebaseEvent('Icon_ON_TAP');
+                                    logFirebaseEvent('Icon_Launch-U-R-L');
                                     await launchURL(
                                         'https://www.particledrawing.com/privacy');
                                   },
@@ -739,8 +740,8 @@ class _PlanPageWidgetState extends State<PlanPageWidget> {
                     children: [
                       FFButtonWidget(
                         onPressed: () async {
-                          logFirebaseEvent('Button-ON_TAP');
-                          logFirebaseEvent('Button-Alert-Dialog');
+                          logFirebaseEvent('Button_ON_TAP');
+                          logFirebaseEvent('Button_Alert-Dialog');
                           var confirmDialogResponse = await showDialog<bool>(
                                 context: context,
                                 builder: (alertDialogContext) {
@@ -764,7 +765,7 @@ class _PlanPageWidgetState extends State<PlanPageWidget> {
                               ) ??
                               false;
                           if (confirmDialogResponse) {
-                            logFirebaseEvent('Button-Launch-U-R-L');
+                            logFirebaseEvent('Button_Launch-U-R-L');
                             await launchURL(
                                 'https://www.particledrawing.com/contact');
                           }
@@ -1054,8 +1055,8 @@ class _PlanPageWidgetState extends State<PlanPageWidget> {
                     children: [
                       FFButtonWidget(
                         onPressed: () async {
-                          logFirebaseEvent('Button-ON_TAP');
-                          logFirebaseEvent('Button-Alert-Dialog');
+                          logFirebaseEvent('Button_ON_TAP');
+                          logFirebaseEvent('Button_Alert-Dialog');
                           var confirmDialogResponse = await showDialog<bool>(
                                 context: context,
                                 builder: (alertDialogContext) {
@@ -1079,7 +1080,7 @@ class _PlanPageWidgetState extends State<PlanPageWidget> {
                               ) ??
                               false;
                           if (confirmDialogResponse) {
-                            logFirebaseEvent('Button-Launch-U-R-L');
+                            logFirebaseEvent('Button_Launch-U-R-L');
                             await launchURL(
                                 'https://www.particledrawing.com/contact');
                           }

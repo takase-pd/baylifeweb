@@ -38,7 +38,7 @@ class _LoginPageWidgetState extends State<LoginPageWidget> {
     return Scaffold(
       key: scaffoldKey,
       appBar: PreferredSize(
-        preferredSize: Size.fromHeight(64),
+        preferredSize: Size.fromHeight(80),
         child: AppBar(
           backgroundColor: Colors.transparent,
           automaticallyImplyLeading: false,
@@ -200,8 +200,8 @@ class _LoginPageWidgetState extends State<LoginPageWidget> {
                         padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 24),
                         child: FFButtonWidget(
                           onPressed: () async {
-                            logFirebaseEvent('Button-ON_TAP');
-                            logFirebaseEvent('Button-Auth');
+                            logFirebaseEvent('Button_ON_TAP');
+                            logFirebaseEvent('Button_Auth');
 
                             final user = await signInWithEmail(
                               context,
@@ -243,8 +243,8 @@ class _LoginPageWidgetState extends State<LoginPageWidget> {
                         padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 36),
                         child: FFButtonWidget(
                           onPressed: () async {
-                            logFirebaseEvent('Button-ON_TAP');
-                            logFirebaseEvent('Button-Auth');
+                            logFirebaseEvent('Button_ON_TAP');
+                            logFirebaseEvent('Button_Auth');
                             if (emailAddressController.text.isEmpty) {
                               ScaffoldMessenger.of(context).showSnackBar(
                                 SnackBar(
@@ -307,19 +307,19 @@ class _LoginPageWidgetState extends State<LoginPageWidget> {
                                       0, 1, 0, 0),
                                   child: FFButtonWidget(
                                     onPressed: () async {
-                                      logFirebaseEvent('Button-ON_TAP');
-                                      logFirebaseEvent('Button-Auth');
+                                      logFirebaseEvent('Button_ON_TAP');
+                                      logFirebaseEvent('Button_Auth');
                                       final user =
                                           await signInWithGoogle(context);
                                       if (user == null) {
                                         return;
                                       }
-                                      logFirebaseEvent('Button-Backend-Call');
+                                      logFirebaseEvent('Button_Backend-Call');
                                       subscription =
                                           await GetSubscriptionCall.call(
                                         uid: currentUserUid,
                                       );
-                                      logFirebaseEvent('Button-Navigate-To');
+                                      logFirebaseEvent('Button_Navigate-To');
                                       await Navigator.push(
                                         context,
                                         MaterialPageRoute(

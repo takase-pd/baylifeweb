@@ -169,3 +169,167 @@ class GetSubscriptionCall {
     );
   }
 }
+
+class GetOrderDetailsCall {
+  static Future<ApiCallResponse> call({
+    String shop = '',
+    String uid = '',
+    String paymentId = '',
+    String accessToken = '',
+    String appCheckToken = '',
+  }) {
+    final body = '''
+{
+  "data": {
+    "shop": "${shop}",
+    "uid": "${uid}",
+    "paymentId": "${paymentId}"
+  }
+}''';
+    return ApiManager.instance.makeApiCall(
+      callName: 'Get Order Details',
+      apiUrl:
+          'https://asia-northeast1-baylifedev.cloudfunctions.net/ec-getOrderDetailsV0',
+      callType: ApiCallType.POST,
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      params: {
+        'shop': shop,
+        'uid': uid,
+        'paymentId': paymentId,
+      },
+      body: body,
+      bodyType: BodyType.JSON,
+      returnBody: true,
+      accessToken: accessToken,
+      appCheckToken: appCheckToken,
+    );
+  }
+}
+
+class GetOrderedPlansCall {
+  static Future<ApiCallResponse> call({
+    String shop = '',
+    String uid = '',
+    String paymentId = '',
+    String accessToken = '',
+    String appCheckToken = '',
+  }) {
+    final body = '''
+{
+  "data": {
+    "shop": "${shop}",
+    "uid": "${uid}",
+    "paymentId": "${paymentId}"
+  }
+}''';
+    return ApiManager.instance.makeApiCall(
+      callName: 'Get Ordered Plans',
+      apiUrl:
+          'https://asia-northeast1-baylifedev.cloudfunctions.net/ec-getOrderedPlansV0',
+      callType: ApiCallType.POST,
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      params: {
+        'shop': shop,
+        'uid': uid,
+        'paymentId': paymentId,
+      },
+      body: body,
+      bodyType: BodyType.JSON,
+      returnBody: true,
+      accessToken: accessToken,
+      appCheckToken: appCheckToken,
+    );
+  }
+}
+
+class UpdateOrderedPlanCall {
+  static Future<ApiCallResponse> call({
+    String shop = '',
+    String uid = '',
+    String paymentId = '',
+    String orders = '',
+    String updated = '',
+    String accessToken = '',
+    String appCheckToken = '',
+  }) {
+    final body = '''
+{
+  "data": {
+    "shop": "${shop}",
+    "uid": "${uid}",
+    "paymentId": "${paymentId}",
+    "orders": ${orders},
+    "updated": "${updated}"
+  }
+}''';
+    return ApiManager.instance.makeApiCall(
+      callName: 'Update Ordered Plan',
+      apiUrl:
+          'https://asia-northeast1-baylifedev.cloudfunctions.net/ec-updateOrderedPlansV0',
+      callType: ApiCallType.POST,
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      params: {
+        'shop': shop,
+        'uid': uid,
+        'paymentId': paymentId,
+        'orders': orders,
+        'updated': updated,
+      },
+      body: body,
+      bodyType: BodyType.JSON,
+      returnBody: true,
+      accessToken: accessToken,
+      appCheckToken: appCheckToken,
+    );
+  }
+}
+
+class UpdateShippingCall {
+  static Future<ApiCallResponse> call({
+    String shop = '',
+    String uid = '',
+    String paymentId = '',
+    String carrier = '',
+    String trackingNumber = '',
+    String accessToken = '',
+    String appCheckToken = '',
+  }) {
+    final body = '''
+{
+  "data": {
+    "shop": "${shop}",
+    "uid": "${uid}",
+    "paymentId": "${paymentId}",
+    "carrier": "${carrier}",
+    "trackingNumber": "${trackingNumber}"
+  }
+}''';
+    return ApiManager.instance.makeApiCall(
+      callName: 'Update Shipping',
+      apiUrl:
+          'https://asia-northeast1-baylifedev.cloudfunctions.net/ec-updateShippingV0',
+      callType: ApiCallType.POST,
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      params: {
+        'shop': shop,
+        'uid': uid,
+        'paymentId': paymentId,
+        'carrier': carrier,
+        'tracking_number': trackingNumber,
+      },
+      body: body,
+      bodyType: BodyType.JSON,
+      returnBody: true,
+      accessToken: accessToken,
+      appCheckToken: appCheckToken,
+    );
+  }
+}
