@@ -8,3 +8,4 @@ export 'ecommerce.dart' show ShippingStatusExt;
 export 'ecommerce.dart' show ShippingForm;
 export 'ecommerce.dart' show ShippingCarrierExt;
 export 'ecommerce.dart' show PlansRecordExt;
+export 'auth_checker.dart' show AuthChecker;
