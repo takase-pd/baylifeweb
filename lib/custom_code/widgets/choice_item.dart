@@ -21,7 +21,11 @@ class ChoiceItem {
   }
 
   ChoiceItem change(String text) {
-    return ChoiceItem(id: this.id, text: text, controller: this.controller);
+    return ChoiceItem(
+      id: this.id,
+      text: text,
+      controller: this.controller,
+    );
   }
 
   void dispose() {
