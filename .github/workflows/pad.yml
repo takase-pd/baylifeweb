@@ -1,4 +1,4 @@
-name: CI PadPre
+name: CI PadDev
 on:
   push:
     branches:
