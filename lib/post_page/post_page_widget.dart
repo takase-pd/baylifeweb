@@ -769,7 +769,7 @@ class _PostPageWidgetState extends State<PostPageWidget> {
                                                     FFButtonWidget(
                                                       onPressed: () async {
                                                         logFirebaseEvent(
-                                                            'POST_PAGE_PAGE_選択_BUTTON_ON_TAP');
+                                                            'POST_PAGE_PAGE_選択_BTN_ON_TAP');
                                                         logFirebaseEvent(
                                                             'Button_Upload-Photo-Video');
                                                         final selectedMedia =
@@ -1038,7 +1038,7 @@ class _PostPageWidgetState extends State<PostPageWidget> {
                                                     FFButtonWidget(
                                                       onPressed: () async {
                                                         logFirebaseEvent(
-                                                            'POST_PAGE_PAGE_日付_BUTTON_ON_TAP');
+                                                            'POST_PAGE_PAGE_日付_BTN_ON_TAP');
                                                         logFirebaseEvent(
                                                             'Button_Date-Time-Picker');
                                                         await DatePicker
@@ -1175,7 +1175,7 @@ class _PostPageWidgetState extends State<PostPageWidget> {
                                                     FFButtonWidget(
                                                       onPressed: () async {
                                                         logFirebaseEvent(
-                                                            'POST_PAGE_PAGE_日付_BUTTON_ON_TAP');
+                                                            'POST_PAGE_PAGE_日付_BTN_ON_TAP');
                                                         logFirebaseEvent(
                                                             'Button_Date-Time-Picker');
                                                         await DatePicker
@@ -2031,7 +2031,7 @@ class _PostPageWidgetState extends State<PostPageWidget> {
                                                   FFButtonWidget(
                                                     onPressed: () async {
                                                       logFirebaseEvent(
-                                                          'POST_PAGE_PAGE_確認_BUTTON_ON_TAP');
+                                                          'POST_PAGE_PAGE_確認_BTN_ON_TAP');
                                                       logFirebaseEvent(
                                                           'Button_Navigate-To');
                                                       await Navigator.push(

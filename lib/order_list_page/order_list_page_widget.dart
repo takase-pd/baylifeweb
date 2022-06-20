@@ -106,7 +106,7 @@ class _OrderListPageWidgetState extends State<OrderListPageWidget> {
                                         child: InkWell(
                                           onTap: () async {
                                             logFirebaseEvent(
-                                                'ORDER_LIST_PAGE_PAGE_Text_844r48sl_ON_TAP');
+                                                'ORDER_LIST_Text_844r48sl_ON_TAP');
                                             logFirebaseEvent(
                                                 'Text_Navigate-To');
                                             await Navigator.push(
@@ -130,7 +130,7 @@ class _OrderListPageWidgetState extends State<OrderListPageWidget> {
                                         child: InkWell(
                                           onTap: () async {
                                             logFirebaseEvent(
-                                                'ORDER_LIST_PAGE_PAGE_Text_3sgzeybv_ON_TAP');
+                                                'ORDER_LIST_Text_3sgzeybv_ON_TAP');
                                             logFirebaseEvent(
                                                 'Text_Navigate-To');
                                             await Navigator.push(
@@ -153,7 +153,7 @@ class _OrderListPageWidgetState extends State<OrderListPageWidget> {
                                   FFButtonWidget(
                                     onPressed: () async {
                                       logFirebaseEvent(
-                                          'ORDER_LIST_PAGE_PAGE_追加_BUTTON_ON_TAP');
+                                          'ORDER_LIST_PAGE_PAGE_追加_BTN_ON_TAP');
                                       logFirebaseEvent('Button_Bottom-Sheet');
                                       await showModalBottomSheet(
                                         isScrollControlled: true,
@@ -301,10 +301,18 @@ class _OrderListPageWidgetState extends State<OrderListPageWidget> {
                                             data.forEach((item) {
                                               final index = itemIndexes[
                                                   item.reference.id];
+                                              final items =
+                                                  _pagingController.itemList;
                                               if (index != null) {
+                                                items.replaceRange(
+                                                    index, index + 1, [item]);
                                                 _pagingController.itemList
                                                     .replaceRange(index,
                                                         index + 1, [item]);
+                                                _pagingController.itemList = {
+                                                  for (var item in items)
+                                                    item.reference: item
+                                                }.values.toList();
                                               }
                                             });
                                             setState(() {});
@@ -345,7 +353,7 @@ class _OrderListPageWidgetState extends State<OrderListPageWidget> {
                                           child: InkWell(
                                             onTap: () async {
                                               logFirebaseEvent(
-                                                  'ORDER_LIST_PAGE_PAGE_Container_pbgvwp6p_ON_TAP');
+                                                  'ORDER_LIST_Container_pbgvwp6p_ON_TAP');
                                               logFirebaseEvent(
                                                   'Container_Bottom-Sheet');
                                               await showModalBottomSheet(
@@ -422,6 +430,8 @@ class _OrderListPageWidgetState extends State<OrderListPageWidget> {
                                                       flex: 1,
                                                       child: Text(
                                                         'status',
+                                                        textAlign:
+                                                            TextAlign.center,
                                                         style:
                                                             FlutterFlowTheme.of(
                                                                     context)

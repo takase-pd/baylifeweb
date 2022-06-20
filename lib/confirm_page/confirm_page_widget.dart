@@ -876,7 +876,7 @@ class _ConfirmPageWidgetState extends State<ConfirmPageWidget> {
                                               child: FFButtonWidget(
                                                 onPressed: () async {
                                                   logFirebaseEvent(
-                                                      'CONFIRM_PAGE_PAGE_戻る_BUTTON_ON_TAP');
+                                                      'CONFIRM_PAGE_PAGE_戻る_BTN_ON_TAP');
                                                   logFirebaseEvent(
                                                       'Button_Navigate-Back');
                                                   Navigator.pop(context);
@@ -954,7 +954,7 @@ class _ConfirmPageWidgetState extends State<ConfirmPageWidget> {
                                                 child: FFButtonWidget(
                                                   onPressed: () async {
                                                     logFirebaseEvent(
-                                                        'CONFIRM_PAGE_PAGE_送信_BUTTON_ON_TAP');
+                                                        'CONFIRM_PAGE_PAGE_送信_BTN_ON_TAP');
                                                     logFirebaseEvent(
                                                         'Button_Backend-Call');
                                                     aaa =

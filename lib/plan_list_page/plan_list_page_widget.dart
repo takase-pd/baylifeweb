@@ -153,7 +153,7 @@ class _PlanListPageWidgetState extends State<PlanListPageWidget> {
                                   FFButtonWidget(
                                     onPressed: () async {
                                       logFirebaseEvent(
-                                          'PLAN_LIST_PAGE_PAGE_追加_BUTTON_ON_TAP');
+                                          'PLAN_LIST_PAGE_PAGE_追加_BTN_ON_TAP');
                                       logFirebaseEvent('Button_Bottom-Sheet');
                                       await showModalBottomSheet(
                                         isScrollControlled: true,
@@ -309,10 +309,18 @@ class _PlanListPageWidgetState extends State<PlanListPageWidget> {
                                             data.forEach((item) {
                                               final index = itemIndexes[
                                                   item.reference.id];
+                                              final items =
+                                                  _pagingController.itemList;
                                               if (index != null) {
+                                                items.replaceRange(
+                                                    index, index + 1, [item]);
                                                 _pagingController.itemList
                                                     .replaceRange(index,
                                                         index + 1, [item]);
+                                                _pagingController.itemList = {
+                                                  for (var item in items)
+                                                    item.reference: item
+                                                }.values.toList();
                                               }
                                             });
                                             setState(() {});
@@ -353,7 +361,7 @@ class _PlanListPageWidgetState extends State<PlanListPageWidget> {
                                           child: InkWell(
                                             onTap: () async {
                                               logFirebaseEvent(
-                                                  'PLAN_LIST_PAGE_PAGE_Container_1jxvc1nq_ON_TAP');
+                                                  'PLAN_LIST_Container_1jxvc1nq_ON_TAP');
                                               logFirebaseEvent(
                                                   'Container_Bottom-Sheet');
                                               await showModalBottomSheet(

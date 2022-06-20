@@ -220,7 +220,7 @@ class _CreateAccountPageWidgetState extends State<CreateAccountPageWidget> {
                             InkWell(
                               onTap: () async {
                                 logFirebaseEvent(
-                                    'CREATE_ACCOUNT_PAGE_PAGE_Text_mmpi8s3w_ON_TAP');
+                                    'CREATE_ACCOUNT_Text_mmpi8s3w_ON_TAP');
                                 logFirebaseEvent('Text_Launch-U-R-L');
                                 await launchURL(
                                     'https://baylife.particledrawing.com/terms.html');
@@ -242,7 +242,7 @@ class _CreateAccountPageWidgetState extends State<CreateAccountPageWidget> {
                               child: InkWell(
                                 onTap: () async {
                                   logFirebaseEvent(
-                                      'CREATE_ACCOUNT_PAGE_PAGE_Icon_yayjtti0_ON_TAP');
+                                      'CREATE_ACCOUNT_Icon_yayjtti0_ON_TAP');
                                   logFirebaseEvent('Icon_Launch-U-R-L');
                                   await launchURL(
                                       'https://baylife.particledrawing.com/terms.html');
@@ -262,7 +262,7 @@ class _CreateAccountPageWidgetState extends State<CreateAccountPageWidget> {
                             InkWell(
                               onTap: () async {
                                 logFirebaseEvent(
-                                    'CREATE_ACCOUNT_PAGE_PAGE_Text_669ks3z6_ON_TAP');
+                                    'CREATE_ACCOUNT_Text_669ks3z6_ON_TAP');
                                 logFirebaseEvent('Text_Launch-U-R-L');
                                 await launchURL(
                                     'https://www.particledrawing.com/privacy');
@@ -284,7 +284,7 @@ class _CreateAccountPageWidgetState extends State<CreateAccountPageWidget> {
                               child: InkWell(
                                 onTap: () async {
                                   logFirebaseEvent(
-                                      'CREATE_ACCOUNT_PAGE_PAGE_Icon_vwjhdwxy_ON_TAP');
+                                      'CREATE_ACCOUNT_Icon_vwjhdwxy_ON_TAP');
                                   logFirebaseEvent('Icon_Launch-U-R-L');
                                   await launchURL(
                                       'https://www.particledrawing.com/privacy');
@@ -309,7 +309,7 @@ class _CreateAccountPageWidgetState extends State<CreateAccountPageWidget> {
                         child: FFButtonWidget(
                           onPressed: () async {
                             logFirebaseEvent(
-                                'CREATE_ACCOUNT_PAGE_PAGE_上記に同意して登録_BUTTON_ON_TAP');
+                                'CREATE_ACCOUNT_上記に同意して登録_BTN_ON_TAP');
                             logFirebaseEvent('Button_Auth');
 
                             final user = await createAccountWithEmail(
@@ -383,7 +383,7 @@ class _CreateAccountPageWidgetState extends State<CreateAccountPageWidget> {
                                   child: FFButtonWidget(
                                     onPressed: () async {
                                       logFirebaseEvent(
-                                          'CREATE_ACCOUNT_PAGE_PAGE_SIGN_UP_WITH_GOOGLE_BUTTON_ON_TAP');
+                                          'CREATE_ACCOUNT_SIGN_UP_WITH_GOOGLE_BTN_O');
                                       logFirebaseEvent('Button_Auth');
                                       final user =
                                           await signInWithGoogle(context);
@@ -460,7 +460,7 @@ class _CreateAccountPageWidgetState extends State<CreateAccountPageWidget> {
                       InkWell(
                         onTap: () async {
                           logFirebaseEvent(
-                              'CREATE_ACCOUNT_PAGE_PAGE_Text_8bovwc15_ON_TAP');
+                              'CREATE_ACCOUNT_Text_8bovwc15_ON_TAP');
                           logFirebaseEvent('Text_Launch-U-R-L');
                           await launchURL(
                               'https://baylife.particledrawing.com/terms.html');
@@ -475,7 +475,7 @@ class _CreateAccountPageWidgetState extends State<CreateAccountPageWidget> {
                         child: InkWell(
                           onTap: () async {
                             logFirebaseEvent(
-                                'CREATE_ACCOUNT_PAGE_PAGE_Text_cl242siz_ON_TAP');
+                                'CREATE_ACCOUNT_Text_cl242siz_ON_TAP');
                             logFirebaseEvent('Text_Launch-U-R-L');
                             await launchURL(
                                 'https://www.particledrawing.com/privacy');

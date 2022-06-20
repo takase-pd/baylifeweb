@@ -79,7 +79,7 @@ class _MainMenuWidgetState extends State<MainMenuWidget> {
                               FFButtonWidget(
                                 onPressed: () async {
                                   logFirebaseEvent(
-                                      'MAIN_MENU_COMP_ホーム_BUTTON_ON_TAP');
+                                      'MAIN_MENU_COMP_ホーム_BTN_ON_TAP');
                                   logFirebaseEvent('Button_Navigate-To');
                                   await Navigator.push(
                                     context,
@@ -127,7 +127,7 @@ class _MainMenuWidgetState extends State<MainMenuWidget> {
                               FFButtonWidget(
                                 onPressed: () async {
                                   logFirebaseEvent(
-                                      'MAIN_MENU_COMP_投稿　_BUTTON_ON_TAP');
+                                      'MAIN_MENU_COMP_投稿　_BTN_ON_TAP');
                                   logFirebaseEvent('Button_Backend-Call');
                                   subscriptionPost =
                                       await GetSubscriptionCall.call(
@@ -190,7 +190,7 @@ class _MainMenuWidgetState extends State<MainMenuWidget> {
                                 child: FFButtonWidget(
                                   onPressed: () async {
                                     logFirebaseEvent(
-                                        'MAIN_MENU_COMP_アンケート_BUTTON_ON_TAP');
+                                        'MAIN_MENU_COMP_アンケート_BTN_ON_TAP');
                                     logFirebaseEvent('Button_Navigate-To');
                                     await Navigator.push(
                                       context,
@@ -243,7 +243,7 @@ class _MainMenuWidgetState extends State<MainMenuWidget> {
                                 child: FFButtonWidget(
                                   onPressed: () async {
                                     logFirebaseEvent(
-                                        'MAIN_MENU_COMP_企業　　　_BUTTON_ON_TAP');
+                                        'MAIN_MENU_COMP_企業　　　_BTN_ON_TAP');
                                     logFirebaseEvent('Button_Navigate-To');
                                     await Navigator.push(
                                       context,
@@ -296,7 +296,7 @@ class _MainMenuWidgetState extends State<MainMenuWidget> {
                                 child: FFButtonWidget(
                                   onPressed: () async {
                                     logFirebaseEvent(
-                                        'MAIN_MENU_COMP_ショップ　_BUTTON_ON_TAP');
+                                        'MAIN_MENU_COMP_ショップ　_BTN_ON_TAP');
                                     logFirebaseEvent('Button_Navigate-To');
                                     await Navigator.push(
                                       context,
@@ -349,7 +349,7 @@ class _MainMenuWidgetState extends State<MainMenuWidget> {
                                 child: FFButtonWidget(
                                   onPressed: () async {
                                     logFirebaseEvent(
-                                        'MAIN_MENU_COMP_商品　　　_BUTTON_ON_TAP');
+                                        'MAIN_MENU_COMP_商品　　　_BTN_ON_TAP');
                                     logFirebaseEvent('Button_Navigate-To');
                                     await Navigator.push(
                                       context,
@@ -399,7 +399,7 @@ class _MainMenuWidgetState extends State<MainMenuWidget> {
                               FFButtonWidget(
                                 onPressed: () async {
                                   logFirebaseEvent(
-                                      'MAIN_MENU_COMP_設定　_BUTTON_ON_TAP');
+                                      'MAIN_MENU_COMP_設定　_BTN_ON_TAP');
                                   logFirebaseEvent('Button_Backend-Call');
                                   subscriptionConfig =
                                       await GetSubscriptionCall.call(

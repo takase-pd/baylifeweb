@@ -757,7 +757,7 @@ class _UpdateOrderPageWidgetState extends State<UpdateOrderPageWidget> {
                                     mainAxisSize: MainAxisSize.max,
                                     children: [
                                       Expanded(
-                                        flex: 4,
+                                        flex: 1,
                                         child: Container(
                                           decoration: BoxDecoration(
                                             color: FlutterFlowTheme.of(context)
@@ -788,7 +788,7 @@ class _UpdateOrderPageWidgetState extends State<UpdateOrderPageWidget> {
                                         ),
                                       ),
                                       Expanded(
-                                        flex: 3,
+                                        flex: 1,
                                         child: Padding(
                                           padding:
                                               EdgeInsetsDirectional.fromSTEB(
@@ -984,7 +984,7 @@ class _UpdateOrderPageWidgetState extends State<UpdateOrderPageWidget> {
                                 FFButtonWidget(
                                   onPressed: () async {
                                     logFirebaseEvent(
-                                        'UPDATE_ORDER_PAGE_COMP_更新_BUTTON_ON_TAP');
+                                        'UPDATE_ORDER_PAGE_COMP_更新_BTN_ON_TAP');
                                     logFirebaseEvent('Button_Alert-Dialog');
                                     var confirmDialogResponse =
                                         await showDialog<bool>(

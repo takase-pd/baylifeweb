@@ -76,7 +76,7 @@ class _TopPageFooterWidgetState extends State<TopPageFooterWidget> {
                                   child: InkWell(
                                     onTap: () async {
                                       logFirebaseEvent(
-                                          'TOP_PAGE_FOOTER_COMP_Text_iqv8mkb0_ON_TAP');
+                                          'TOP_FOOTER_Text_iqv8mkb0_ON_TAP');
                                       logFirebaseEvent('Text_Backend-Call');
                                       plans = await GetPlanCall.call();
                                       logFirebaseEvent('Text_Navigate-To');
@@ -105,7 +105,7 @@ class _TopPageFooterWidgetState extends State<TopPageFooterWidget> {
                                   child: InkWell(
                                     onTap: () async {
                                       logFirebaseEvent(
-                                          'TOP_PAGE_FOOTER_COMP_Text_mzdwt8h7_ON_TAP');
+                                          'TOP_FOOTER_Text_mzdwt8h7_ON_TAP');
                                       logFirebaseEvent('Text_Launch-U-R-L');
                                       await launchURL(
                                           'https://particledrawing.notion.site/Use-Case-a8f406da8ffc44ab991a371c1596297b');
@@ -146,7 +146,7 @@ class _TopPageFooterWidgetState extends State<TopPageFooterWidget> {
                                   child: InkWell(
                                     onTap: () async {
                                       logFirebaseEvent(
-                                          'TOP_PAGE_FOOTER_COMP_Text_jq3rm00d_ON_TAP');
+                                          'TOP_FOOTER_Text_jq3rm00d_ON_TAP');
                                       logFirebaseEvent('Text_Navigate-To');
                                       await Navigator.push(
                                         context,
@@ -169,7 +169,7 @@ class _TopPageFooterWidgetState extends State<TopPageFooterWidget> {
                                   child: InkWell(
                                     onTap: () async {
                                       logFirebaseEvent(
-                                          'TOP_PAGE_FOOTER_COMP_Text_mk4x3l8m_ON_TAP');
+                                          'TOP_FOOTER_Text_mk4x3l8m_ON_TAP');
                                       logFirebaseEvent('Text_Launch-U-R-L');
                                       await launchURL(
                                           'https://particledrawing.notion.site/What-s-New-ce7fec05daa640a49f38e9cb29583901');
@@ -210,7 +210,7 @@ class _TopPageFooterWidgetState extends State<TopPageFooterWidget> {
                                   child: InkWell(
                                     onTap: () async {
                                       logFirebaseEvent(
-                                          'TOP_PAGE_FOOTER_COMP_Text_nscjcu9h_ON_TAP');
+                                          'TOP_FOOTER_Text_nscjcu9h_ON_TAP');
                                       logFirebaseEvent('Text_Launch-U-R-L');
                                       await launchURL(
                                           'https://www.particledrawing.com/');
@@ -228,7 +228,7 @@ class _TopPageFooterWidgetState extends State<TopPageFooterWidget> {
                                   child: InkWell(
                                     onTap: () async {
                                       logFirebaseEvent(
-                                          'TOP_PAGE_FOOTER_COMP_Text_oghvl47a_ON_TAP');
+                                          'TOP_FOOTER_Text_oghvl47a_ON_TAP');
                                       logFirebaseEvent('Text_Launch-U-R-L');
                                       await launchURL(
                                           'https://baylife.particledrawing.com/terms.html');
@@ -246,7 +246,7 @@ class _TopPageFooterWidgetState extends State<TopPageFooterWidget> {
                                   child: InkWell(
                                     onTap: () async {
                                       logFirebaseEvent(
-                                          'TOP_PAGE_FOOTER_COMP_Text_hgh8k4lq_ON_TAP');
+                                          'TOP_FOOTER_Text_hgh8k4lq_ON_TAP');
                                       logFirebaseEvent('Text_Launch-U-R-L');
                                       await launchURL(
                                           'https://www.particledrawing.com/privacy');
