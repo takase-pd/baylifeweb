@@ -66,8 +66,8 @@ class _UpdateShopPageWidgetState extends State<UpdateShopPageWidget> {
     return Form(
       key: formKey,
       autovalidateMode: AutovalidateMode.always,
-      child: FutureBuilder<PlansRecord>(
-        future: PlansRecord.getDocumentOnce(widget.plan),
+      child: FutureBuilder<ShopsRecord>(
+        future: ShopsRecord.getDocumentOnce(widget.shop),
         builder: (context, snapshot) {
           // Customize what your widget looks like when it's loading.
           if (!snapshot.hasData) {
@@ -82,7 +82,7 @@ class _UpdateShopPageWidgetState extends State<UpdateShopPageWidget> {
               ),
             );
           }
-          final containerPlansRecord = snapshot.data;
+          final containerShopsRecord = snapshot.data;
           return Container(
             decoration: BoxDecoration(
               color: FlutterFlowTheme.of(context).tertiaryColor,
