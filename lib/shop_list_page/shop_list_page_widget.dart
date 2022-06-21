@@ -270,8 +270,10 @@ class _ShopListPageWidgetState extends State<ShopListPageWidget> {
                                                                 .size
                                                                 .height *
                                                             0.96,
-                                                    child:
-                                                        UpdateShopPageWidget(),
+                                                    child: UpdateShopPageWidget(
+                                                      shop: listViewShopsRecord
+                                                          .reference,
+                                                    ),
                                                   ),
                                                 );
                                               },
