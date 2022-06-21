@@ -1,6 +1,7 @@
 import '../backend/backend.dart';
 import '../components/header_widget.dart';
 import '../components/main_menu_widget.dart';
+import '../components/update_shop_page_widget.dart';
 import '../create_shop_page/create_shop_page_widget.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
@@ -199,10 +200,18 @@ class _ShopListPageWidgetState extends State<ShopListPageWidget> {
                                             data.forEach((item) {
                                               final index = itemIndexes[
                                                   item.reference.id];
+                                              final items =
+                                                  _pagingController.itemList;
                                               if (index != null) {
+                                                items.replaceRange(
+                                                    index, index + 1, [item]);
                                                 _pagingController.itemList
                                                     .replaceRange(index,
                                                         index + 1, [item]);
+                                                _pagingController.itemList = {
+                                                  for (var item in items)
+                                                    item.reference: item
+                                                }.values.toList();
                                               }
                                             });
                                             setState(() {});
@@ -236,194 +245,228 @@ class _ShopListPageWidgetState extends State<ShopListPageWidget> {
                                         final listViewShopsRecord =
                                             _pagingController
                                                 .itemList[listViewIndex];
-                                        return Container(
-                                          height: 88,
-                                          decoration: BoxDecoration(
-                                            color: FlutterFlowTheme.of(context)
-                                                .background,
-                                            borderRadius:
-                                                BorderRadius.circular(8),
-                                          ),
-                                          child: Padding(
-                                            padding:
-                                                EdgeInsetsDirectional.fromSTEB(
-                                                    16, 0, 0, 0),
-                                            child: Row(
-                                              mainAxisSize: MainAxisSize.min,
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.start,
-                                              children: [
-                                                Expanded(
-                                                  flex: 1,
-                                                  child: Text(
-                                                    listViewIndex.toString(),
-                                                    style: FlutterFlowTheme.of(
-                                                            context)
-                                                        .bodyText1,
+                                        return InkWell(
+                                          onTap: () async {
+                                            logFirebaseEvent(
+                                                'SHOP_LIST_Container_qk04ru7n_ON_TAP');
+                                            logFirebaseEvent(
+                                                'Container_Bottom-Sheet');
+                                            await showModalBottomSheet(
+                                              isScrollControlled: true,
+                                              backgroundColor:
+                                                  Colors.transparent,
+                                              barrierColor: Color(0x8E484848),
+                                              context: context,
+                                              builder: (context) {
+                                                return Padding(
+                                                  padding:
+                                                      MediaQuery.of(context)
+                                                          .viewInsets,
+                                                  child: Container(
+                                                    height:
+                                                        MediaQuery.of(context)
+                                                                .size
+                                                                .height *
+                                                            0.96,
+                                                    child:
+                                                        UpdateShopPageWidget(),
                                                   ),
-                                                ),
-                                                Expanded(
-                                                  flex: 3,
-                                                  child: Text(
-                                                    listViewShopsRecord
-                                                        .shopName,
-                                                    style: FlutterFlowTheme.of(
-                                                            context)
-                                                        .bodyText1,
+                                                );
+                                              },
+                                            );
+                                          },
+                                          child: Container(
+                                            height: 88,
+                                            decoration: BoxDecoration(
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .background,
+                                              borderRadius:
+                                                  BorderRadius.circular(8),
+                                            ),
+                                            child: Padding(
+                                              padding: EdgeInsetsDirectional
+                                                  .fromSTEB(16, 0, 0, 0),
+                                              child: Row(
+                                                mainAxisSize: MainAxisSize.min,
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment.start,
+                                                children: [
+                                                  Expanded(
+                                                    flex: 1,
+                                                    child: Text(
+                                                      listViewIndex.toString(),
+                                                      style:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .bodyText1,
+                                                    ),
                                                   ),
-                                                ),
-                                                Expanded(
-                                                  flex: 2,
-                                                  child: StreamBuilder<
-                                                      CatShopRecord>(
-                                                    stream: CatShopRecord
-                                                        .getDocument(
-                                                            listViewShopsRecord
-                                                                .catMain),
-                                                    builder:
-                                                        (context, snapshot) {
-                                                      // Customize what your widget looks like when it's loading.
-                                                      if (!snapshot.hasData) {
-                                                        return Center(
-                                                          child: SizedBox(
-                                                            width: 50,
-                                                            height: 50,
-                                                            child: SpinKitPulse(
-                                                              color: FlutterFlowTheme
-                                                                      .of(context)
-                                                                  .primaryColor,
-                                                              size: 50,
+                                                  Expanded(
+                                                    flex: 3,
+                                                    child: Text(
+                                                      listViewShopsRecord
+                                                          .shopName,
+                                                      style:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .bodyText1,
+                                                    ),
+                                                  ),
+                                                  Expanded(
+                                                    flex: 2,
+                                                    child: StreamBuilder<
+                                                        CatShopRecord>(
+                                                      stream: CatShopRecord
+                                                          .getDocument(
+                                                              listViewShopsRecord
+                                                                  .catMain),
+                                                      builder:
+                                                          (context, snapshot) {
+                                                        // Customize what your widget looks like when it's loading.
+                                                        if (!snapshot.hasData) {
+                                                          return Center(
+                                                            child: SizedBox(
+                                                              width: 50,
+                                                              height: 50,
+                                                              child:
+                                                                  SpinKitPulse(
+                                                                color: FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .primaryColor,
+                                                                size: 50,
+                                                              ),
                                                             ),
-                                                          ),
+                                                          );
+                                                        }
+                                                        final textCatShopRecord =
+                                                            snapshot.data;
+                                                        return Text(
+                                                          textCatShopRecord
+                                                              .catName,
+                                                          style: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .bodyText1,
                                                         );
-                                                      }
-                                                      final textCatShopRecord =
-                                                          snapshot.data;
-                                                      return Text(
-                                                        textCatShopRecord
-                                                            .catName,
-                                                        style:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .bodyText1,
-                                                      );
-                                                    },
+                                                      },
+                                                    ),
                                                   ),
-                                                ),
-                                                Expanded(
-                                                  flex: 3,
-                                                  child: Text(
-                                                    'Company Name',
-                                                    style: FlutterFlowTheme.of(
-                                                            context)
-                                                        .bodyText1,
+                                                  Expanded(
+                                                    flex: 3,
+                                                    child: Text(
+                                                      'Company Name',
+                                                      style:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .bodyText1,
+                                                    ),
                                                   ),
-                                                ),
-                                                Expanded(
-                                                  flex: 3,
-                                                  child: StreamBuilder<
-                                                      UsersRecord>(
-                                                    stream:
-                                                        UsersRecord.getDocument(
-                                                            listViewShopsRecord
-                                                                .director),
-                                                    builder:
-                                                        (context, snapshot) {
-                                                      // Customize what your widget looks like when it's loading.
-                                                      if (!snapshot.hasData) {
-                                                        return Center(
-                                                          child: SizedBox(
-                                                            width: 50,
-                                                            height: 50,
-                                                            child: SpinKitPulse(
-                                                              color: FlutterFlowTheme
-                                                                      .of(context)
-                                                                  .primaryColor,
-                                                              size: 50,
+                                                  Expanded(
+                                                    flex: 3,
+                                                    child: StreamBuilder<
+                                                        UsersRecord>(
+                                                      stream: UsersRecord
+                                                          .getDocument(
+                                                              listViewShopsRecord
+                                                                  .director),
+                                                      builder:
+                                                          (context, snapshot) {
+                                                        // Customize what your widget looks like when it's loading.
+                                                        if (!snapshot.hasData) {
+                                                          return Center(
+                                                            child: SizedBox(
+                                                              width: 50,
+                                                              height: 50,
+                                                              child:
+                                                                  SpinKitPulse(
+                                                                color: FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .primaryColor,
+                                                                size: 50,
+                                                              ),
                                                             ),
-                                                          ),
+                                                          );
+                                                        }
+                                                        final textUsersRecord =
+                                                            snapshot.data;
+                                                        return Text(
+                                                          textUsersRecord
+                                                              .displayName,
+                                                          style: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .bodyText1,
                                                         );
-                                                      }
-                                                      final textUsersRecord =
-                                                          snapshot.data;
-                                                      return Text(
-                                                        textUsersRecord
-                                                            .displayName,
-                                                        style:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
+                                                      },
+                                                    ),
+                                                  ),
+                                                  Expanded(
+                                                    flex: 2,
+                                                    child: Column(
+                                                      mainAxisSize:
+                                                          MainAxisSize.max,
+                                                      mainAxisAlignment:
+                                                          MainAxisAlignment
+                                                              .spaceEvenly,
+                                                      crossAxisAlignment:
+                                                          CrossAxisAlignment
+                                                              .start,
+                                                      children: [
+                                                        InkWell(
+                                                          onTap: () async {
+                                                            logFirebaseEvent(
+                                                                'SHOP_LIST_PAGE_PAGE_Text_c4z9598m_ON_TAP');
+                                                            logFirebaseEvent(
+                                                                'Text_Launch-U-R-L');
+                                                            await launchURL(
+                                                                listViewShopsRecord
+                                                                    .instagram);
+                                                          },
+                                                          child: Text(
+                                                            'Instagram',
+                                                            style: FlutterFlowTheme
+                                                                    .of(context)
                                                                 .bodyText1,
-                                                      );
-                                                    },
+                                                          ),
+                                                        ),
+                                                        InkWell(
+                                                          onTap: () async {
+                                                            logFirebaseEvent(
+                                                                'SHOP_LIST_PAGE_PAGE_Text_9cb9dx5g_ON_TAP');
+                                                            logFirebaseEvent(
+                                                                'Text_Launch-U-R-L');
+                                                            await launchURL(
+                                                                listViewShopsRecord
+                                                                    .twitter);
+                                                          },
+                                                          child: Text(
+                                                            'Twitter',
+                                                            style: FlutterFlowTheme
+                                                                    .of(context)
+                                                                .bodyText1,
+                                                          ),
+                                                        ),
+                                                        InkWell(
+                                                          onTap: () async {
+                                                            logFirebaseEvent(
+                                                                'SHOP_LIST_PAGE_PAGE_Text_th7grjt6_ON_TAP');
+                                                            logFirebaseEvent(
+                                                                'Text_Launch-U-R-L');
+                                                            await launchURL(
+                                                                listViewShopsRecord
+                                                                    .web);
+                                                          },
+                                                          child: Text(
+                                                            'Web',
+                                                            style: FlutterFlowTheme
+                                                                    .of(context)
+                                                                .bodyText1,
+                                                          ),
+                                                        ),
+                                                      ],
+                                                    ),
                                                   ),
-                                                ),
-                                                Expanded(
-                                                  flex: 2,
-                                                  child: Column(
-                                                    mainAxisSize:
-                                                        MainAxisSize.max,
-                                                    mainAxisAlignment:
-                                                        MainAxisAlignment
-                                                            .spaceEvenly,
-                                                    crossAxisAlignment:
-                                                        CrossAxisAlignment
-                                                            .start,
-                                                    children: [
-                                                      InkWell(
-                                                        onTap: () async {
-                                                          logFirebaseEvent(
-                                                              'Text_ON_TAP');
-                                                          logFirebaseEvent(
-                                                              'Text_Launch-U-R-L');
-                                                          await launchURL(
-                                                              listViewShopsRecord
-                                                                  .instagram);
-                                                        },
-                                                        child: Text(
-                                                          'Instagram',
-                                                          style: FlutterFlowTheme
-                                                                  .of(context)
-                                                              .bodyText1,
-                                                        ),
-                                                      ),
-                                                      InkWell(
-                                                        onTap: () async {
-                                                          logFirebaseEvent(
-                                                              'Text_ON_TAP');
-                                                          logFirebaseEvent(
-                                                              'Text_Launch-U-R-L');
-                                                          await launchURL(
-                                                              listViewShopsRecord
-                                                                  .twitter);
-                                                        },
-                                                        child: Text(
-                                                          'Twitter',
-                                                          style: FlutterFlowTheme
-                                                                  .of(context)
-                                                              .bodyText1,
-                                                        ),
-                                                      ),
-                                                      InkWell(
-                                                        onTap: () async {
-                                                          logFirebaseEvent(
-                                                              'Text_ON_TAP');
-                                                          logFirebaseEvent(
-                                                              'Text_Launch-U-R-L');
-                                                          await launchURL(
-                                                              listViewShopsRecord
-                                                                  .web);
-                                                        },
-                                                        child: Text(
-                                                          'Web',
-                                                          style: FlutterFlowTheme
-                                                                  .of(context)
-                                                              .bodyText1,
-                                                        ),
-                                                      ),
-                                                    ],
-                                                  ),
-                                                ),
-                                              ],
+                                                ],
+                                              ),
                                             ),
                                           ),
                                         );

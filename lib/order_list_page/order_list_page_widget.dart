@@ -107,7 +107,8 @@ class _OrderListPageWidgetState extends State<OrderListPageWidget> {
                                             0, 0, 16, 0),
                                         child: InkWell(
                                           onTap: () async {
-                                            logFirebaseEvent('Text_ON_TAP');
+                                            logFirebaseEvent(
+                                                'ORDER_LIST_Text_844r48sl_ON_TAP');
                                             logFirebaseEvent(
                                                 'Text_Navigate-To');
                                             await Navigator.push(
@@ -130,7 +131,8 @@ class _OrderListPageWidgetState extends State<OrderListPageWidget> {
                                             0, 0, 16, 0),
                                         child: InkWell(
                                           onTap: () async {
-                                            logFirebaseEvent('Text_ON_TAP');
+                                            logFirebaseEvent(
+                                                'ORDER_LIST_Text_3sgzeybv_ON_TAP');
                                             logFirebaseEvent(
                                                 'Text_Navigate-To');
                                             await Navigator.push(
@@ -214,9 +216,7 @@ class _OrderListPageWidgetState extends State<OrderListPageWidget> {
                                                   descending: true);
                                       if (_pagingController != null) {
                                         final query = queryBuilder(
-                                            OrdersRecord.collection(
-                                                containerShopsRecord
-                                                    .reference));
+                                            OrdersRecord.collection());
                                         if (query != _pagingQuery) {
                                           // The query has changed
                                           _pagingQuery = query;
@@ -231,8 +231,7 @@ class _OrderListPageWidgetState extends State<OrderListPageWidget> {
                                       _pagingController =
                                           PagingController(firstPageKey: null);
                                       _pagingQuery = queryBuilder(
-                                          OrdersRecord.collection(
-                                              containerShopsRecord.reference));
+                                          OrdersRecord.collection());
                                       _pagingController.addPageRequestListener(
                                           (nextPageMarker) {
                                         queryOrdersRecordPage(
@@ -259,10 +258,18 @@ class _OrderListPageWidgetState extends State<OrderListPageWidget> {
                                             data.forEach((item) {
                                               final index = itemIndexes[
                                                   item.reference.id];
+                                              final items =
+                                                  _pagingController.itemList;
                                               if (index != null) {
+                                                items.replaceRange(
+                                                    index, index + 1, [item]);
                                                 _pagingController.itemList
                                                     .replaceRange(index,
                                                         index + 1, [item]);
+                                                _pagingController.itemList = {
+                                                  for (var item in items)
+                                                    item.reference: item
+                                                }.values.toList();
                                               }
                                             });
                                             setState(() {});
@@ -303,7 +310,7 @@ class _OrderListPageWidgetState extends State<OrderListPageWidget> {
                                           child: InkWell(
                                             onTap: () async {
                                               logFirebaseEvent(
-                                                  'Container_ON_TAP');
+                                                  'ORDER_LIST_Container_pbgvwp6p_ON_TAP');
                                               logFirebaseEvent(
                                                   'Container_Bottom-Sheet');
                                               await showModalBottomSheet(

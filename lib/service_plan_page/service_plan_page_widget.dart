@@ -178,7 +178,8 @@ class _ServicePlanPageWidgetState extends State<ServicePlanPageWidget> {
                               children: [
                                 InkWell(
                                   onTap: () async {
-                                    logFirebaseEvent('Text_ON_TAP');
+                                    logFirebaseEvent(
+                                        'SERVICE_PLAN_Text_7aof5leh_ON_TAP');
                                     logFirebaseEvent('Text_Launch-U-R-L');
                                     await launchURL('https://stripe.com/');
                                   },
@@ -191,7 +192,8 @@ class _ServicePlanPageWidgetState extends State<ServicePlanPageWidget> {
                                 ),
                                 InkWell(
                                   onTap: () async {
-                                    logFirebaseEvent('Text_ON_TAP');
+                                    logFirebaseEvent(
+                                        'SERVICE_PLAN_Text_s7tsxxpk_ON_TAP');
                                     logFirebaseEvent('Text_Launch-U-R-L');
                                     await launchURL('https://stripe.com/');
                                   },
@@ -212,7 +214,8 @@ class _ServicePlanPageWidgetState extends State<ServicePlanPageWidget> {
                                       3, 0, 3, 0),
                                   child: InkWell(
                                     onTap: () async {
-                                      logFirebaseEvent('Icon_ON_TAP');
+                                      logFirebaseEvent(
+                                          'SERVICE_PLAN_Icon_5mhzak1u_ON_TAP');
                                       logFirebaseEvent('Icon_Launch-U-R-L');
                                       await launchURL('https://stripe.com/');
                                     },
@@ -237,7 +240,8 @@ class _ServicePlanPageWidgetState extends State<ServicePlanPageWidget> {
                             children: [
                               InkWell(
                                 onTap: () async {
-                                  logFirebaseEvent('Text_ON_TAP');
+                                  logFirebaseEvent(
+                                      'SERVICE_PLAN_Text_yr0vcqbc_ON_TAP');
                                   logFirebaseEvent('Text_Launch-U-R-L');
                                   await launchURL(
                                       'https://baylife-ff782.web.app/terms.html');
@@ -259,7 +263,8 @@ class _ServicePlanPageWidgetState extends State<ServicePlanPageWidget> {
                                     EdgeInsetsDirectional.fromSTEB(3, 0, 0, 0),
                                 child: InkWell(
                                   onTap: () async {
-                                    logFirebaseEvent('Icon_ON_TAP');
+                                    logFirebaseEvent(
+                                        'SERVICE_PLAN_Icon_18pz9fom_ON_TAP');
                                     logFirebaseEvent('Icon_Launch-U-R-L');
                                     await launchURL(
                                         'https://baylife-ff782.web.app/terms.html');
@@ -278,7 +283,8 @@ class _ServicePlanPageWidgetState extends State<ServicePlanPageWidget> {
                               ),
                               InkWell(
                                 onTap: () async {
-                                  logFirebaseEvent('Text_ON_TAP');
+                                  logFirebaseEvent(
+                                      'SERVICE_PLAN_Text_wbc3vkrr_ON_TAP');
                                   logFirebaseEvent('Text_Launch-U-R-L');
                                   await launchURL(
                                       'https://www.particledrawing.com/privacy');
@@ -300,7 +306,8 @@ class _ServicePlanPageWidgetState extends State<ServicePlanPageWidget> {
                                     EdgeInsetsDirectional.fromSTEB(3, 0, 3, 0),
                                 child: InkWell(
                                   onTap: () async {
-                                    logFirebaseEvent('Icon_ON_TAP');
+                                    logFirebaseEvent(
+                                        'SERVICE_PLAN_Icon_b2oljwm3_ON_TAP');
                                     logFirebaseEvent('Icon_Launch-U-R-L');
                                     await launchURL(
                                         'https://www.particledrawing.com/privacy');
@@ -751,7 +758,8 @@ class _ServicePlanPageWidgetState extends State<ServicePlanPageWidget> {
                     children: [
                       FFButtonWidget(
                         onPressed: () async {
-                          logFirebaseEvent('Button_ON_TAP');
+                          logFirebaseEvent(
+                              'SERVICE_PLAN_PAGE_PAGE_問い合わせ_BTN_ON_TAP');
                           logFirebaseEvent('Button_Alert-Dialog');
                           var confirmDialogResponse = await showDialog<bool>(
                                 context: context,
@@ -1072,7 +1080,8 @@ class _ServicePlanPageWidgetState extends State<ServicePlanPageWidget> {
                     children: [
                       FFButtonWidget(
                         onPressed: () async {
-                          logFirebaseEvent('Button_ON_TAP');
+                          logFirebaseEvent(
+                              'SERVICE_PLAN_PAGE_PAGE_問い合わせ_BTN_ON_TAP');
                           logFirebaseEvent('Button_Alert-Dialog');
                           var confirmDialogResponse = await showDialog<bool>(
                                 context: context,

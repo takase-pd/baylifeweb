@@ -125,7 +125,8 @@ class _CreateShopPageWidgetState extends State<CreateShopPageWidget> {
                                             0, 0, 16, 0),
                                         child: InkWell(
                                           onTap: () async {
-                                            logFirebaseEvent('Text_ON_TAP');
+                                            logFirebaseEvent(
+                                                'CREATE_SHOP_Text_ylj2dbyt_ON_TAP');
                                             logFirebaseEvent(
                                                 'Text_Navigate-To');
                                             await Navigator.push(
@@ -145,7 +146,8 @@ class _CreateShopPageWidgetState extends State<CreateShopPageWidget> {
                                       ),
                                       InkWell(
                                         onTap: () async {
-                                          logFirebaseEvent('Text_ON_TAP');
+                                          logFirebaseEvent(
+                                              'CREATE_SHOP_Text_ju1qxbfc_ON_TAP');
                                           logFirebaseEvent('Text_Navigate-To');
                                           await Navigator.push(
                                             context,
@@ -736,7 +738,7 @@ class _CreateShopPageWidgetState extends State<CreateShopPageWidget> {
                                                 FFButtonWidget(
                                                   onPressed: () async {
                                                     logFirebaseEvent(
-                                                        'Button_ON_TAP');
+                                                        'CREATE_SHOP_PAGE_PAGE_選択_BTN_ON_TAP');
                                                     logFirebaseEvent(
                                                         'Button_Upload-Photo-Video');
                                                     final selectedMedia =
@@ -1571,7 +1573,7 @@ class _CreateShopPageWidgetState extends State<CreateShopPageWidget> {
                                               FFButtonWidget(
                                                 onPressed: () async {
                                                   logFirebaseEvent(
-                                                      'Button_ON_TAP');
+                                                      'CREATE_SHOP_PAGE_PAGE_送信_BTN_ON_TAP');
                                                   logFirebaseEvent(
                                                       'Button_Alert-Dialog');
                                                   var confirmDialogResponse =

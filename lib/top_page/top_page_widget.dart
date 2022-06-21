@@ -132,7 +132,8 @@ class _TopPageWidgetState extends State<TopPageWidget> {
                           padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 16),
                           child: FFButtonWidget(
                             onPressed: () async {
-                              logFirebaseEvent('Button_ON_TAP');
+                              logFirebaseEvent(
+                                  'TOP_PAGE_PAGE_プラン確認_BTN_ON_TAP');
                               logFirebaseEvent('Button_Backend-Call');
                               plans = await GetPlanCall.call();
                               logFirebaseEvent('Button_Navigate-To');
