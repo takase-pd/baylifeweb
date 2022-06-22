@@ -1130,7 +1130,7 @@ class _UpdateShopPageWidgetState extends State<UpdateShopPageWidget> {
                                   FFButtonWidget(
                                     onPressed: () async {
                                       logFirebaseEvent(
-                                          'UPDATE_SHOP_PAGE_COMP_送信_BTN_ON_TAP');
+                                          'UPDATE_SHOP_PAGE_COMP_更新_BTN_ON_TAP');
                                       logFirebaseEvent('Button_Alert-Dialog');
                                       var confirmDialogResponse =
                                           await showDialog<bool>(
@@ -1228,7 +1228,7 @@ class _UpdateShopPageWidgetState extends State<UpdateShopPageWidget> {
                                         return;
                                       }
                                     },
-                                    text: '送信',
+                                    text: '更新',
                                     options: FFButtonOptions(
                                       width: 130,
                                       height: 60,
