@@ -48,6 +48,8 @@ class _UpdateShopPageWidgetState extends State<UpdateShopPageWidget> {
   List<String> catShopList;
   List<CompaniesRecord> companies;
   List<String> comNameList;
+  String banner =
+      'https://firebasestorage.googleapis.com/v0/b/baylifedev.appspot.com/o/assets%2FNoImage.png?alt=media&token=16c12fc7-9de4-4531-9b81-c4b0e7a07945';
 
   Future<ShopsRecord> _getShop() async {
     catShops = await queryCatShopRecordOnce();
@@ -492,7 +494,7 @@ class _UpdateShopPageWidgetState extends State<UpdateShopPageWidget> {
                                       ),
                                     ),
                                     Image.network(
-                                      'https://firebasestorage.googleapis.com/v0/b/baylifedev.appspot.com/o/assets%2FNoImage.png?alt=media&token=16c12fc7-9de4-4531-9b81-c4b0e7a07945',
+                                      banner,
                                       fit: BoxFit.cover,
                                     ),
                                     FFButtonWidget(
@@ -528,8 +530,11 @@ class _UpdateShopPageWidgetState extends State<UpdateShopPageWidget> {
                                           if (downloadUrls != null &&
                                               downloadUrls.length ==
                                                   selectedMedia.length) {
-                                            setState(() => uploadedFileUrl =
-                                                downloadUrls.first);
+                                            setState(() => {
+                                                  uploadedFileUrl =
+                                                      downloadUrls.first,
+                                                  banner = uploadedFileUrl,
+                                                });
                                             showUploadMessage(
                                               context,
                                               'Success!',
