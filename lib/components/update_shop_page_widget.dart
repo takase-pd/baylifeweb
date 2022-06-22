@@ -71,6 +71,7 @@ class _UpdateShopPageWidgetState extends State<UpdateShopPageWidget> {
     final company =
         companies.firstWhere((element) => element.reference == _shop.company);
     textController3 = TextEditingController(text: company.name);
+    banner = _shop.banner;
 
     return _shop;
   }
@@ -1164,9 +1165,9 @@ class _UpdateShopPageWidgetState extends State<UpdateShopPageWidget> {
                                                 context: context,
                                                 builder: (alertDialogContext) {
                                                   return AlertDialog(
-                                                    title: Text('ショップ追加'),
+                                                    title: Text('ショップ更新'),
                                                     content:
-                                                        Text('ショップを追加します。'),
+                                                        Text('ショップを更新します。'),
                                                     actions: [
                                                       TextButton(
                                                         onPressed: () =>
@@ -1219,7 +1220,7 @@ class _UpdateShopPageWidgetState extends State<UpdateShopPageWidget> {
                                             .showSnackBar(
                                           SnackBar(
                                             content: Text(
-                                              'ショップを追加しました。',
+                                              'ショップを更新しました。',
                                               style: TextStyle(),
                                             ),
                                             duration:
@@ -1233,6 +1234,12 @@ class _UpdateShopPageWidgetState extends State<UpdateShopPageWidget> {
                                           backgroundColor: Colors.transparent,
                                           barrierColor: Color(0x8E484848),
                                           context: context,
+                                          constraints: BoxConstraints(
+                                            maxWidth: MediaQuery.of(context)
+                                                    .size
+                                                    .width *
+                                                0.64,
+                                          ),
                                           builder: (context) {
                                             return Padding(
                                               padding: MediaQuery.of(context)
@@ -1255,7 +1262,7 @@ class _UpdateShopPageWidgetState extends State<UpdateShopPageWidget> {
                                         return;
                                       }
                                     },
-                                    text: '送信',
+                                    text: '更新',
                                     options: FFButtonOptions(
                                       width: 130,
                                       height: 60,
