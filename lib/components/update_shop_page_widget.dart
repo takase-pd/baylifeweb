@@ -133,9 +133,9 @@ class _UpdateShopPageWidgetState extends State<UpdateShopPageWidget> {
                                   style: FlutterFlowTheme.of(context).subtitle1,
                                 ),
                                 Image.network(
-                                  'https://firebasestorage.googleapis.com/v0/b/baylifedev.appspot.com/o/assets%2FNoImage.png?alt=media&token=16c12fc7-9de4-4531-9b81-c4b0e7a07945',
-                                  width: 200,
-                                  height: 80,
+                                  banner,
+                                  width: 400,
+                                  height: 64,
                                   fit: BoxFit.cover,
                                 ),
                               ],
@@ -461,10 +461,8 @@ class _UpdateShopPageWidgetState extends State<UpdateShopPageWidget> {
                                   children: [
                                     Expanded(
                                       child: TextFormField(
-                                        controller: textController5 ??=
-                                            TextEditingController(
-                                                text: containerShopsRecord
-                                                    .banner),
+                                        controller: TextEditingController(),
+                                        readOnly: true,
                                         obscureText: false,
                                         decoration: InputDecoration(
                                           labelText: 'バナー画像',
