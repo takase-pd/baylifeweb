@@ -260,6 +260,7 @@ class _UpdateTransactionsLawPageWidgetState
                                         obscureText: false,
                                         decoration: InputDecoration(
                                           labelText: '郵便番号',
+                                          hintText: 'ハイフンなし',
                                           enabledBorder: UnderlineInputBorder(
                                             borderSide: BorderSide(
                                               color: Color(0x00000000),
@@ -289,6 +290,7 @@ class _UpdateTransactionsLawPageWidgetState
                                               fontFamily: 'Open Sans',
                                               fontWeight: FontWeight.w500,
                                             ),
+                                        keyboardType: TextInputType.number,
                                       ),
                                     ),
                                   ),
