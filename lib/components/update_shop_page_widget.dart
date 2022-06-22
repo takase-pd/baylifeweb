@@ -50,7 +50,7 @@ class _UpdateShopPageWidgetState extends State<UpdateShopPageWidget> {
     textController2 = TextEditingController(text: dropDownValue1);
     textController3 = TextEditingController(text: dropDownValue2);
     textController4 = TextEditingController();
-    textController5 = TextEditingController(text: uploadedFileUrl);
+    textController5 = TextEditingController();
     textController6 = TextEditingController();
     textController7 = TextEditingController();
     textController8 = TextEditingController();
@@ -107,10 +107,17 @@ class _UpdateShopPageWidgetState extends State<UpdateShopPageWidget> {
                                 EdgeInsetsDirectional.fromSTEB(0, 0, 0, 16),
                             child: Row(
                               mainAxisSize: MainAxisSize.max,
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 Text(
                                   'ショップ',
                                   style: FlutterFlowTheme.of(context).subtitle1,
+                                ),
+                                Image.network(
+                                  'https://firebasestorage.googleapis.com/v0/b/baylifedev.appspot.com/o/assets%2FNoImage.png?alt=media&token=16c12fc7-9de4-4531-9b81-c4b0e7a07945',
+                                  width: 200,
+                                  height: 80,
+                                  fit: BoxFit.cover,
                                 ),
                               ],
                             ),
@@ -464,10 +471,11 @@ class _UpdateShopPageWidgetState extends State<UpdateShopPageWidget> {
                                     Expanded(
                                       child: TextFormField(
                                         controller: textController5,
+                                        readOnly: true,
                                         obscureText: false,
                                         decoration: InputDecoration(
                                           labelText: 'バナー画像',
-                                          hintText: 'URLを入力、または画像を選択',
+                                          hintText: 'ページ上部に抜粋画像が表示されます。',
                                           enabledBorder: UnderlineInputBorder(
                                             borderSide: BorderSide(
                                               color: Color(0x00000000),
@@ -498,10 +506,6 @@ class _UpdateShopPageWidgetState extends State<UpdateShopPageWidget> {
                                               fontWeight: FontWeight.w500,
                                             ),
                                       ),
-                                    ),
-                                    Image.network(
-                                      'https://firebasestorage.googleapis.com/v0/b/baylifedev.appspot.com/o/assets%2FNoImage.png?alt=media&token=16c12fc7-9de4-4531-9b81-c4b0e7a07945',
-                                      fit: BoxFit.cover,
                                     ),
                                     FFButtonWidget(
                                       onPressed: () async {
@@ -1161,7 +1165,7 @@ class _UpdateShopPageWidgetState extends State<UpdateShopPageWidget> {
                                         final shopsCreateData =
                                             createShopsRecordData(
                                           banner: valueOrDefault<String>(
-                                            textController5.text,
+                                            uploadedFileUrl,
                                             'https://firebasestorage.googleapis.com/v0/b/baylife-ff782.appspot.com/o/assets%2FNoImage.png?alt=media&token=cfb3d70b-69d2-4f7f-be63-f429cc9872da',
                                           ),
                                           description: textController4.text,
