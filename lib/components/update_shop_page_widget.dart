@@ -601,7 +601,7 @@ class _UpdateShopPageWidgetState extends State<UpdateShopPageWidget> {
                                         decoration: InputDecoration(
                                           labelText: '送料上限',
                                           hintText:
-                                              '送料の合計が設定額を上回った場合、送料を設定額とする。',
+                                              '送料の合計が指定額を超えた場合、送料をこの指定額とする。',
                                           enabledBorder: UnderlineInputBorder(
                                             borderSide: BorderSide(
                                               color: Color(0x00000000),
@@ -1102,10 +1102,6 @@ class _UpdateShopPageWidgetState extends State<UpdateShopPageWidget> {
                               ),
                             ),
                           ),
-                          Text(
-                            'XXXXXXは手動で設定する必要があります。',
-                            style: FlutterFlowTheme.of(context).bodyText1,
-                          ),
                           Padding(
                             padding:
                                 EdgeInsetsDirectional.fromSTEB(0, 12, 0, 12),
@@ -1114,8 +1110,14 @@ class _UpdateShopPageWidgetState extends State<UpdateShopPageWidget> {
                               decoration: BoxDecoration(),
                               child: Row(
                                 mainAxisSize: MainAxisSize.max,
-                                mainAxisAlignment: MainAxisAlignment.end,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
                                 children: [
+                                  Text(
+                                    'XXXXXXは手動で設定する必要があります。',
+                                    style:
+                                        FlutterFlowTheme.of(context).bodyText1,
+                                  ),
                                   FFButtonWidget(
                                     onPressed: () async {
                                       logFirebaseEvent(
