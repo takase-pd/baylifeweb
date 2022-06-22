@@ -44,29 +44,37 @@ class _UpdateShopPageWidgetState extends State<UpdateShopPageWidget> {
   final formKey = GlobalKey<FormState>();
 
   Future<ShopsRecord> shop;
-  Future<CompaniesRecord> company;
+  List<CatShopRecord> catShops;
+  List<String> catShopList;
+  List<CompaniesRecord> companies;
+  List<String> comNameList;
 
   Future<ShopsRecord> _getShop() async {
+    catShops = await queryCatShopRecordOnce();
+    catShopList = catShops.map((e) => e.catName).toList();
+
+    companies = await queryCompaniesRecordOnce(
+      queryBuilder: (companiesRecord) =>
+          companiesRecord.where('director', isEqualTo: currentUserReference),
+    );
+    comNameList = companies.map((e) => e.name).toList();
+
     if (widget.shop == null) return ShopsRecord();
     final _shop = await ShopsRecord.getDocumentOnce(widget.shop);
+
+    final catShop =
+        catShops.firstWhere((element) => element.reference == _shop.catMain);
+    textController2 = TextEditingController(text: catShop.catName);
+    final company =
+        companies.firstWhere((element) => element.reference == _shop.company);
+    textController3 = TextEditingController(text: company.name);
+
     return _shop;
   }
 
   @override
   void initState() {
     super.initState();
-    textController2 = TextEditingController(text: dropDownValue1);
-    textController4 = TextEditingController();
-    textController5 = TextEditingController(text: uploadedFileUrl);
-    textController6 = TextEditingController();
-    textController7 = TextEditingController();
-    textController8 = TextEditingController();
-    textController9 = TextEditingController();
-    textController10 = TextEditingController();
-    textController11 = TextEditingController();
-    textController12 = TextEditingController();
-    textController13 = TextEditingController();
-
     shop = _getShop();
   }
 
@@ -187,254 +195,180 @@ class _UpdateShopPageWidgetState extends State<UpdateShopPageWidget> {
                           Padding(
                             padding:
                                 EdgeInsetsDirectional.fromSTEB(0, 0, 0, 16),
-                            child: StreamBuilder<List<CatShopRecord>>(
-                              stream: queryCatShopRecord(),
-                              builder: (context, snapshot) {
-                                // Customize what your widget looks like when it's loading.
-                                if (!snapshot.hasData) {
-                                  return Center(
-                                    child: SizedBox(
-                                      width: 50,
-                                      height: 50,
-                                      child: SpinKitPulse(
-                                        color: FlutterFlowTheme.of(context)
-                                            .primaryColor,
-                                        size: 50,
-                                      ),
-                                    ),
-                                  );
-                                }
-                                List<CatShopRecord> containerCatShopRecordList =
-                                    snapshot.data;
-                                final catShopList = containerCatShopRecordList
-                                    .map((e) => e.catName)
-                                    .toList();
-                                return Container(
-                                  height: 60,
-                                  decoration: BoxDecoration(
-                                    color:
-                                        FlutterFlowTheme.of(context).background,
-                                    borderRadius: BorderRadius.circular(8),
-                                  ),
-                                  child: Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
-                                        16, 0, 16, 0),
-                                    child: Row(
-                                      mainAxisSize: MainAxisSize.max,
-                                      children: [
-                                        Expanded(
-                                          child: TextFormField(
-                                            controller: textController2,
-                                            obscureText: false,
-                                            decoration: InputDecoration(
-                                              labelText: 'ショップカテゴリ',
-                                              hintText: 'Cat Shop Refを手動で貼り付け',
-                                              enabledBorder:
-                                                  UnderlineInputBorder(
-                                                borderSide: BorderSide(
-                                                  color: Color(0x00000000),
-                                                  width: 1,
-                                                ),
-                                                borderRadius:
-                                                    const BorderRadius.only(
-                                                  topLeft: Radius.circular(4.0),
-                                                  topRight:
-                                                      Radius.circular(4.0),
-                                                ),
-                                              ),
-                                              focusedBorder:
-                                                  UnderlineInputBorder(
-                                                borderSide: BorderSide(
-                                                  color: Color(0x00000000),
-                                                  width: 1,
-                                                ),
-                                                borderRadius:
-                                                    const BorderRadius.only(
-                                                  topLeft: Radius.circular(4.0),
-                                                  topRight:
-                                                      Radius.circular(4.0),
-                                                ),
-                                              ),
+                            child: Container(
+                              height: 60,
+                              decoration: BoxDecoration(
+                                color: FlutterFlowTheme.of(context).background,
+                                borderRadius: BorderRadius.circular(8),
+                              ),
+                              child: Padding(
+                                padding: EdgeInsetsDirectional.fromSTEB(
+                                    16, 0, 16, 0),
+                                child: Row(
+                                  mainAxisSize: MainAxisSize.max,
+                                  children: [
+                                    Expanded(
+                                      child: TextFormField(
+                                        controller: textController2 ??=
+                                            TextEditingController(),
+                                        obscureText: false,
+                                        decoration: InputDecoration(
+                                          labelText: 'ショップカテゴリ',
+                                          enabledBorder: UnderlineInputBorder(
+                                            borderSide: BorderSide(
+                                              color: Color(0x00000000),
+                                              width: 1,
                                             ),
-                                            style: FlutterFlowTheme.of(context)
-                                                .bodyText2
-                                                .override(
-                                                  fontFamily: 'Open Sans',
-                                                  fontWeight: FontWeight.w500,
-                                                ),
+                                            borderRadius:
+                                                const BorderRadius.only(
+                                              topLeft: Radius.circular(4.0),
+                                              topRight: Radius.circular(4.0),
+                                            ),
+                                          ),
+                                          focusedBorder: UnderlineInputBorder(
+                                            borderSide: BorderSide(
+                                              color: Color(0x00000000),
+                                              width: 1,
+                                            ),
+                                            borderRadius:
+                                                const BorderRadius.only(
+                                              topLeft: Radius.circular(4.0),
+                                              topRight: Radius.circular(4.0),
+                                            ),
                                           ),
                                         ),
-                                        FlutterFlowDropDown(
-                                          options: catShopList,
-                                          onChanged: (val) => setState(() => {
-                                                dropDownValue1 =
-                                                    containerCatShopRecordList
-                                                        .firstWhere((element) =>
-                                                            element.catName ==
-                                                            val)
-                                                        .reference
-                                                        .toString(),
-                                                textController2 =
-                                                    TextEditingController(
-                                                        text: val)
-                                              }),
-                                          width: 240,
-                                          height: 50,
-                                          textStyle:
-                                              FlutterFlowTheme.of(context)
-                                                  .bodyText2
-                                                  .override(
-                                                    fontFamily: 'Open Sans',
-                                                    fontWeight: FontWeight.w500,
-                                                  ),
-                                          hintText: 'ショップカテゴリ名',
-                                          fillColor: Colors.white,
-                                          elevation: 2,
-                                          borderColor: Colors.transparent,
-                                          borderWidth: 0,
-                                          borderRadius: 0,
-                                          margin:
-                                              EdgeInsetsDirectional.fromSTEB(
-                                                  12, 4, 12, 4),
-                                          hidesUnderline: true,
-                                        ),
-                                      ],
+                                        style: FlutterFlowTheme.of(context)
+                                            .bodyText2
+                                            .override(
+                                              fontFamily: 'Open Sans',
+                                              fontWeight: FontWeight.w500,
+                                            ),
+                                      ),
                                     ),
-                                  ),
-                                );
-                              },
+                                    FlutterFlowDropDown(
+                                      options: catShopList,
+                                      onChanged: (val) => setState(() => {
+                                            dropDownValue1 = catShops
+                                                .firstWhere((element) =>
+                                                    element.catName == val)
+                                                .reference
+                                                .toString(),
+                                            textController2 =
+                                                TextEditingController(text: val)
+                                          }),
+                                      width: 240,
+                                      height: 50,
+                                      textStyle: FlutterFlowTheme.of(context)
+                                          .bodyText2
+                                          .override(
+                                            fontFamily: 'Open Sans',
+                                            fontWeight: FontWeight.w500,
+                                          ),
+                                      hintText: 'ショップカテゴリ名',
+                                      fillColor: Colors.white,
+                                      elevation: 2,
+                                      borderColor: Colors.transparent,
+                                      borderWidth: 0,
+                                      borderRadius: 0,
+                                      margin: EdgeInsetsDirectional.fromSTEB(
+                                          12, 4, 12, 4),
+                                      hidesUnderline: true,
+                                    ),
+                                  ],
+                                ),
+                              ),
                             ),
                           ),
                           Padding(
                             padding:
                                 EdgeInsetsDirectional.fromSTEB(0, 0, 0, 16),
-                            child: FutureBuilder<List<CompaniesRecord>>(
-                              future: queryCompaniesRecordOnce(
-                                queryBuilder: (companiesRecord) =>
-                                    companiesRecord.where('director',
-                                        isEqualTo: currentUserReference),
+                            child: Container(
+                              height: 60,
+                              decoration: BoxDecoration(
+                                color: FlutterFlowTheme.of(context).background,
+                                borderRadius: BorderRadius.circular(8),
                               ),
-                              builder: (context, snapshot) {
-                                // Customize what your widget looks like when it's loading.
-                                if (!snapshot.hasData) {
-                                  return Center(
-                                    child: SizedBox(
-                                      width: 50,
-                                      height: 50,
-                                      child: SpinKitPulse(
-                                        color: FlutterFlowTheme.of(context)
-                                            .primaryColor,
-                                        size: 50,
-                                      ),
-                                    ),
-                                  );
-                                }
-                                List<CompaniesRecord>
-                                    containerCompaniesRecordList =
-                                    snapshot.data;
-                                final companiesList =
-                                    containerCompaniesRecordList
-                                        .map((e) => e.name)
-                                        .toList();
-                                return Container(
-                                  height: 60,
-                                  decoration: BoxDecoration(
-                                    color:
-                                        FlutterFlowTheme.of(context).background,
-                                    borderRadius: BorderRadius.circular(8),
-                                  ),
-                                  child: Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
-                                        16, 0, 16, 0),
-                                    child: Row(
-                                      mainAxisSize: MainAxisSize.max,
-                                      children: [
-                                        Expanded(
-                                          child: TextFormField(
-                                            controller: textController3 ??=
-                                                TextEditingController(
-                                                    text: companiesList.first),
-                                            obscureText: false,
-                                            decoration: InputDecoration(
-                                              labelText: '企業',
-                                              enabledBorder:
-                                                  UnderlineInputBorder(
-                                                borderSide: BorderSide(
-                                                  color: Color(0x00000000),
-                                                  width: 1,
-                                                ),
-                                                borderRadius:
-                                                    const BorderRadius.only(
-                                                  topLeft: Radius.circular(4.0),
-                                                  topRight:
-                                                      Radius.circular(4.0),
-                                                ),
-                                              ),
-                                              focusedBorder:
-                                                  UnderlineInputBorder(
-                                                borderSide: BorderSide(
-                                                  color: Color(0x00000000),
-                                                  width: 1,
-                                                ),
-                                                borderRadius:
-                                                    const BorderRadius.only(
-                                                  topLeft: Radius.circular(4.0),
-                                                  topRight:
-                                                      Radius.circular(4.0),
-                                                ),
-                                              ),
+                              child: Padding(
+                                padding: EdgeInsetsDirectional.fromSTEB(
+                                    16, 0, 16, 0),
+                                child: Row(
+                                  mainAxisSize: MainAxisSize.max,
+                                  children: [
+                                    Expanded(
+                                      child: TextFormField(
+                                        controller: textController3 ??=
+                                            TextEditingController(
+                                                text: comNameList.first),
+                                        obscureText: false,
+                                        decoration: InputDecoration(
+                                          labelText: '企業',
+                                          enabledBorder: UnderlineInputBorder(
+                                            borderSide: BorderSide(
+                                              color: Color(0x00000000),
+                                              width: 1,
                                             ),
-                                            style: FlutterFlowTheme.of(context)
-                                                .bodyText2
-                                                .override(
-                                                  fontFamily: 'Open Sans',
-                                                  fontWeight: FontWeight.w500,
-                                                ),
+                                            borderRadius:
+                                                const BorderRadius.only(
+                                              topLeft: Radius.circular(4.0),
+                                              topRight: Radius.circular(4.0),
+                                            ),
+                                          ),
+                                          focusedBorder: UnderlineInputBorder(
+                                            borderSide: BorderSide(
+                                              color: Color(0x00000000),
+                                              width: 1,
+                                            ),
+                                            borderRadius:
+                                                const BorderRadius.only(
+                                              topLeft: Radius.circular(4.0),
+                                              topRight: Radius.circular(4.0),
+                                            ),
                                           ),
                                         ),
-                                        if (companiesList.length > 1)
-                                          FlutterFlowDropDown(
-                                            options: companiesList,
-                                            onChanged: (val) => setState(() => {
-                                                  dropDownValue2 =
-                                                      containerCompaniesRecordList
-                                                          .firstWhere(
-                                                              (element) =>
-                                                                  element
-                                                                      .name ==
-                                                                  val)
-                                                          .reference
-                                                          .toString(),
-                                                  textController3 =
-                                                      TextEditingController(
-                                                          text: val)
-                                                }),
-                                            width: 240,
-                                            height: 50,
-                                            textStyle:
-                                                FlutterFlowTheme.of(context)
-                                                    .bodyText2
-                                                    .override(
-                                                      fontFamily: 'Open Sans',
-                                                      fontWeight:
-                                                          FontWeight.w500,
-                                                    ),
-                                            hintText: '企業名',
-                                            fillColor: Colors.white,
-                                            elevation: 2,
-                                            borderColor: Colors.transparent,
-                                            borderWidth: 0,
-                                            borderRadius: 0,
-                                            margin:
-                                                EdgeInsetsDirectional.fromSTEB(
-                                                    12, 4, 12, 4),
-                                            hidesUnderline: true,
-                                          ),
-                                      ],
+                                        style: FlutterFlowTheme.of(context)
+                                            .bodyText2
+                                            .override(
+                                              fontFamily: 'Open Sans',
+                                              fontWeight: FontWeight.w500,
+                                            ),
+                                      ),
                                     ),
-                                  ),
-                                );
-                              },
+                                    if (companies.length > 1)
+                                      FlutterFlowDropDown(
+                                        options: companies
+                                            .map((e) => e.name)
+                                            .toList(),
+                                        onChanged: (val) => setState(() => {
+                                              dropDownValue2 = companies
+                                                  .firstWhere((element) =>
+                                                      element.name == val)
+                                                  .reference
+                                                  .toString(),
+                                              textController3 =
+                                                  TextEditingController(
+                                                      text: val)
+                                            }),
+                                        width: 240,
+                                        height: 50,
+                                        textStyle: FlutterFlowTheme.of(context)
+                                            .bodyText2
+                                            .override(
+                                              fontFamily: 'Open Sans',
+                                              fontWeight: FontWeight.w500,
+                                            ),
+                                        hintText: '企業名',
+                                        fillColor: Colors.white,
+                                        elevation: 2,
+                                        borderColor: Colors.transparent,
+                                        borderWidth: 0,
+                                        borderRadius: 0,
+                                        margin: EdgeInsetsDirectional.fromSTEB(
+                                            12, 4, 12, 4),
+                                        hidesUnderline: true,
+                                      ),
+                                  ],
+                                ),
+                              ),
                             ),
                           ),
                           Padding(
@@ -454,7 +388,10 @@ class _UpdateShopPageWidgetState extends State<UpdateShopPageWidget> {
                                       padding: EdgeInsetsDirectional.fromSTEB(
                                           16, 0, 0, 0),
                                       child: TextFormField(
-                                        controller: textController4,
+                                        controller: textController4 ??=
+                                            TextEditingController(
+                                                text: containerShopsRecord
+                                                    .description),
                                         obscureText: false,
                                         decoration: InputDecoration(
                                           labelText: '説明・備考',
@@ -515,7 +452,10 @@ class _UpdateShopPageWidgetState extends State<UpdateShopPageWidget> {
                                   children: [
                                     Expanded(
                                       child: TextFormField(
-                                        controller: textController5,
+                                        controller: textController5 ??=
+                                            TextEditingController(
+                                                text: containerShopsRecord
+                                                    .banner),
                                         obscureText: false,
                                         decoration: InputDecoration(
                                           labelText: 'バナー画像',
@@ -648,12 +588,21 @@ class _UpdateShopPageWidgetState extends State<UpdateShopPageWidget> {
                                       padding: EdgeInsetsDirectional.fromSTEB(
                                           16, 0, 0, 0),
                                       child: TextFormField(
-                                        controller: textController6,
+                                        controller: textController6 ??=
+                                            TextEditingController(
+                                          text: formatNumber(
+                                            containerShopsRecord.shippingFee,
+                                            formatType: FormatType.custom,
+                                            currency: '￥',
+                                            format: '#,##0',
+                                            locale: 'ja_JP',
+                                          ),
+                                        ),
                                         obscureText: false,
                                         decoration: InputDecoration(
-                                          labelText: '送料上限',
+                                          labelText: '送料上限指定額',
                                           hintText:
-                                              '送料の合計が設定額を上回った場合、送料を設定額とする。',
+                                              '送料の合計が指定額を超えた場合、送料をこの指定額とする。',
                                           enabledBorder: UnderlineInputBorder(
                                             borderSide: BorderSide(
                                               color: Color(0x00000000),
@@ -707,7 +656,17 @@ class _UpdateShopPageWidgetState extends State<UpdateShopPageWidget> {
                                       padding: EdgeInsetsDirectional.fromSTEB(
                                           16, 0, 0, 0),
                                       child: TextFormField(
-                                        controller: textController7,
+                                        controller: textController7 ??=
+                                            TextEditingController(
+                                          text: formatNumber(
+                                            containerShopsRecord
+                                                .shippingFreeTotal,
+                                            formatType: FormatType.custom,
+                                            currency: '￥',
+                                            format: '#,##0',
+                                            locale: 'ja_JP',
+                                          ),
+                                        ),
                                         obscureText: false,
                                         decoration: InputDecoration(
                                           labelText: '送料無料適用時の合計金額',
@@ -773,7 +732,10 @@ class _UpdateShopPageWidgetState extends State<UpdateShopPageWidget> {
                                       padding: EdgeInsetsDirectional.fromSTEB(
                                           16, 0, 0, 0),
                                       child: TextFormField(
-                                        controller: textController8,
+                                        controller: textController8 ??=
+                                            TextEditingController(
+                                                text:
+                                                    containerShopsRecord.email),
                                         obscureText: false,
                                         decoration: InputDecoration(
                                           labelText: 'メールアドレス',
@@ -830,7 +792,10 @@ class _UpdateShopPageWidgetState extends State<UpdateShopPageWidget> {
                                       padding: EdgeInsetsDirectional.fromSTEB(
                                           16, 0, 0, 0),
                                       child: TextFormField(
-                                        controller: textController9,
+                                        controller: textController9 ??=
+                                            TextEditingController(
+                                                text:
+                                                    containerShopsRecord.phone),
                                         obscureText: false,
                                         decoration: InputDecoration(
                                           labelText: '電話番号',
@@ -1000,7 +965,10 @@ class _UpdateShopPageWidgetState extends State<UpdateShopPageWidget> {
                                       padding: EdgeInsetsDirectional.fromSTEB(
                                           16, 0, 0, 0),
                                       child: TextFormField(
-                                        controller: textController11,
+                                        controller: textController11 ??=
+                                            TextEditingController(
+                                                text: containerShopsRecord
+                                                    .instagram),
                                         obscureText: false,
                                         decoration: InputDecoration(
                                           labelText: 'Instagram',
@@ -1057,7 +1025,10 @@ class _UpdateShopPageWidgetState extends State<UpdateShopPageWidget> {
                                       padding: EdgeInsetsDirectional.fromSTEB(
                                           16, 0, 0, 0),
                                       child: TextFormField(
-                                        controller: textController12,
+                                        controller: textController12 ??=
+                                            TextEditingController(
+                                                text: containerShopsRecord
+                                                    .twitter),
                                         obscureText: false,
                                         decoration: InputDecoration(
                                           labelText: 'Twitter',
@@ -1114,7 +1085,9 @@ class _UpdateShopPageWidgetState extends State<UpdateShopPageWidget> {
                                       padding: EdgeInsetsDirectional.fromSTEB(
                                           16, 0, 0, 0),
                                       child: TextFormField(
-                                        controller: textController13,
+                                        controller: textController13 ??=
+                                            TextEditingController(
+                                                text: containerShopsRecord.web),
                                         obscureText: false,
                                         decoration: InputDecoration(
                                           labelText: 'Web',
@@ -1154,10 +1127,6 @@ class _UpdateShopPageWidgetState extends State<UpdateShopPageWidget> {
                               ),
                             ),
                           ),
-                          Text(
-                            'XXXXXXは手動で設定する必要があります。',
-                            style: FlutterFlowTheme.of(context).bodyText1,
-                          ),
                           Padding(
                             padding:
                                 EdgeInsetsDirectional.fromSTEB(0, 12, 0, 12),
@@ -1166,8 +1135,14 @@ class _UpdateShopPageWidgetState extends State<UpdateShopPageWidget> {
                               decoration: BoxDecoration(),
                               child: Row(
                                 mainAxisSize: MainAxisSize.max,
-                                mainAxisAlignment: MainAxisAlignment.end,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
                                 children: [
+                                  Text(
+                                    'メッセージ欄',
+                                    style:
+                                        FlutterFlowTheme.of(context).bodyText1,
+                                  ),
                                   FFButtonWidget(
                                     onPressed: () async {
                                       logFirebaseEvent(

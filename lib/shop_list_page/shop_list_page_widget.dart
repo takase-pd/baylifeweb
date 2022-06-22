@@ -76,7 +76,7 @@ class _ShopListPageWidgetState extends State<ShopListPageWidget> {
                                     style: FlutterFlowTheme.of(context).title1,
                                   ),
                                   Text(
-                                    'Adminのみ',
+                                    '',
                                     style:
                                         FlutterFlowTheme.of(context).bodyText1,
                                   ),
@@ -129,6 +129,12 @@ class _ShopListPageWidgetState extends State<ShopListPageWidget> {
                                             backgroundColor: Colors.transparent,
                                             barrierColor: Color(0x8E484848),
                                             context: context,
+                                            constraints: BoxConstraints(
+                                              maxWidth: MediaQuery.of(context)
+                                                      .size
+                                                      .width *
+                                                  0.64,
+                                            ),
                                             builder: (context) {
                                               return Padding(
                                                 padding: MediaQuery.of(context)
@@ -165,6 +171,7 @@ class _ShopListPageWidgetState extends State<ShopListPageWidget> {
                                           ),
                                           borderRadius: 4,
                                         ),
+                                        showLoadingIndicator: false,
                                       ),
                                     ],
                                   ),
