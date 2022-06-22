@@ -174,6 +174,7 @@ class _UpdateShopPageWidgetState extends State<UpdateShopPageWidget> {
                                         style: FlutterFlowTheme.of(context)
                                             .bodyText2
                                             .override(
+                                              fontFamily: 'Open Sans',
                                               fontWeight: FontWeight.w500,
                                             ),
                                       ),
@@ -258,6 +259,7 @@ class _UpdateShopPageWidgetState extends State<UpdateShopPageWidget> {
                                             style: FlutterFlowTheme.of(context)
                                                 .bodyText2
                                                 .override(
+                                                  fontFamily: 'Open Sans',
                                                   fontWeight: FontWeight.w500,
                                                 ),
                                           ),
@@ -282,6 +284,7 @@ class _UpdateShopPageWidgetState extends State<UpdateShopPageWidget> {
                                               FlutterFlowTheme.of(context)
                                                   .bodyText2
                                                   .override(
+                                                    fontFamily: 'Open Sans',
                                                     fontWeight: FontWeight.w500,
                                                   ),
                                           hintText: 'ショップカテゴリ名',
@@ -384,6 +387,7 @@ class _UpdateShopPageWidgetState extends State<UpdateShopPageWidget> {
                                             style: FlutterFlowTheme.of(context)
                                                 .bodyText2
                                                 .override(
+                                                  fontFamily: 'Open Sans',
                                                   fontWeight: FontWeight.w500,
                                                 ),
                                           ),
@@ -411,6 +415,7 @@ class _UpdateShopPageWidgetState extends State<UpdateShopPageWidget> {
                                                 FlutterFlowTheme.of(context)
                                                     .bodyText2
                                                     .override(
+                                                      fontFamily: 'Open Sans',
                                                       fontWeight:
                                                           FontWeight.w500,
                                                     ),
@@ -479,6 +484,7 @@ class _UpdateShopPageWidgetState extends State<UpdateShopPageWidget> {
                                         style: FlutterFlowTheme.of(context)
                                             .bodyText2
                                             .override(
+                                              fontFamily: 'Open Sans',
                                               fontWeight: FontWeight.w500,
                                             ),
                                         maxLines: 10,
@@ -540,6 +546,7 @@ class _UpdateShopPageWidgetState extends State<UpdateShopPageWidget> {
                                         style: FlutterFlowTheme.of(context)
                                             .bodyText2
                                             .override(
+                                              fontFamily: 'Open Sans',
                                               fontWeight: FontWeight.w500,
                                             ),
                                       ),
@@ -602,6 +609,7 @@ class _UpdateShopPageWidgetState extends State<UpdateShopPageWidget> {
                                             .subtitle2
                                             .override(
                                               color: Colors.white,
+                                              fontFamily: 'Open Sans',
                                               fontWeight: FontWeight.w500,
                                             ),
                                         borderSide: BorderSide(
@@ -672,6 +680,7 @@ class _UpdateShopPageWidgetState extends State<UpdateShopPageWidget> {
                                         style: FlutterFlowTheme.of(context)
                                             .bodyText2
                                             .override(
+                                              fontFamily: 'Open Sans',
                                               fontWeight: FontWeight.w500,
                                             ),
                                       ),
@@ -730,6 +739,7 @@ class _UpdateShopPageWidgetState extends State<UpdateShopPageWidget> {
                                         style: FlutterFlowTheme.of(context)
                                             .bodyText2
                                             .override(
+                                              fontFamily: 'Open Sans',
                                               fontWeight: FontWeight.w500,
                                             ),
                                       ),
@@ -793,6 +803,7 @@ class _UpdateShopPageWidgetState extends State<UpdateShopPageWidget> {
                                         style: FlutterFlowTheme.of(context)
                                             .bodyText2
                                             .override(
+                                              fontFamily: 'Open Sans',
                                               fontWeight: FontWeight.w500,
                                             ),
                                       ),
@@ -849,6 +860,7 @@ class _UpdateShopPageWidgetState extends State<UpdateShopPageWidget> {
                                         style: FlutterFlowTheme.of(context)
                                             .bodyText2
                                             .override(
+                                              fontFamily: 'Open Sans',
                                               fontWeight: FontWeight.w500,
                                             ),
                                       ),
@@ -930,6 +942,7 @@ class _UpdateShopPageWidgetState extends State<UpdateShopPageWidget> {
                                             style: FlutterFlowTheme.of(context)
                                                 .bodyText2
                                                 .override(
+                                                  fontFamily: 'Open Sans',
                                                   fontWeight: FontWeight.w500,
                                                 ),
                                           ),
@@ -1017,6 +1030,7 @@ class _UpdateShopPageWidgetState extends State<UpdateShopPageWidget> {
                                         style: FlutterFlowTheme.of(context)
                                             .bodyText2
                                             .override(
+                                              fontFamily: 'Open Sans',
                                               fontWeight: FontWeight.w500,
                                             ),
                                       ),
@@ -1073,6 +1087,7 @@ class _UpdateShopPageWidgetState extends State<UpdateShopPageWidget> {
                                         style: FlutterFlowTheme.of(context)
                                             .bodyText2
                                             .override(
+                                              fontFamily: 'Open Sans',
                                               fontWeight: FontWeight.w500,
                                             ),
                                       ),
@@ -1129,6 +1144,7 @@ class _UpdateShopPageWidgetState extends State<UpdateShopPageWidget> {
                                         style: FlutterFlowTheme.of(context)
                                             .bodyText2
                                             .override(
+                                              fontFamily: 'Open Sans',
                                               fontWeight: FontWeight.w500,
                                             ),
                                       ),
@@ -1239,6 +1255,7 @@ class _UpdateShopPageWidgetState extends State<UpdateShopPageWidget> {
                                       textStyle: FlutterFlowTheme.of(context)
                                           .subtitle2
                                           .override(
+                                            fontFamily: 'Open Sans',
                                             color: FlutterFlowTheme.of(context)
                                                 .textLight,
                                           ),
