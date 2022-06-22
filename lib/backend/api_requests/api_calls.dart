@@ -332,3 +332,75 @@ class UpdateShippingCall {
     );
   }
 }
+
+class UpdateTransactionsLawCall {
+  static Future<ApiCallResponse> call({
+    String shopPath = '',
+    String uid = '',
+    String address = '',
+    String company = '',
+    String delvTime = '',
+    String director = '',
+    String email = '',
+    String otherFees = '',
+    String paymentMethod = '',
+    String postalCode = '',
+    String rec = '',
+    String returnCharge = '',
+    String returnPeriod = '',
+    String tel = '',
+    String unitAmount = '',
+    String web = '',
+  }) {
+    final body = '''
+{
+  "data": {
+    "shop": "${shopPath}",
+    "uid": "${uid}",
+    "address": "${address}",
+    "company": "${company}",
+    "delvTime": "${delvTime}",
+    "director": "${director}",
+    "email": "${email}",
+    "otherFees": "${otherFees}",
+    "paymentMethod": "${paymentMethod}",
+    "postalCode": "${postalCode}",
+    "rec": "${rec}",
+    "returnCharge": "${returnCharge}",
+    "returnPeciod": "${returnPeriod}",
+    "tel": "${tel}",
+    "web": "${web}"
+  }
+}''';
+    return ApiManager.instance.makeApiCall(
+      callName: 'Update Transactions Law',
+      apiUrl:
+          'https://asia-northeast1-baylifedev.cloudfunctions.net/ec-updateTransactionsLawV0',
+      callType: ApiCallType.POST,
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      params: {
+        'shopPath': shopPath,
+        'uid': uid,
+        'address': address,
+        'company': company,
+        'delvTime': delvTime,
+        'director': director,
+        'email': email,
+        'otherFees': otherFees,
+        'paymentMethod': paymentMethod,
+        'postalCode': postalCode,
+        'rec': rec,
+        'returnCharge': returnCharge,
+        'returnPeriod': returnPeriod,
+        'tel': tel,
+        'unitAmount': unitAmount,
+        'web': web,
+      },
+      body: body,
+      bodyType: BodyType.JSON,
+      returnBody: true,
+    );
+  }
+}
