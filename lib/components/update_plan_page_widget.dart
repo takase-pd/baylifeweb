@@ -44,12 +44,11 @@ class _UpdatePlanPageWidgetState extends State<UpdatePlanPageWidget> {
   Future<List<ShopsRecord>> shops;
 
   Future<PlansRecord> _getPlan() async {
-    PlansRecord _plan = PlansRecord();
-    if (widget.plan != null) {
-      _plan = await PlansRecord.getDocumentOnce(widget.plan);
-      final shopName = await _plan.getShopName();
-      textController1 = TextEditingController(text: shopName);
-    }
+    if (widget.plan == null) return PlansRecord();
+
+    final _plan = await PlansRecord.getDocumentOnce(widget.plan);
+    final shopName = await _plan.getShopName();
+    textController1 = TextEditingController(text: shopName);
     return _plan;
   }
 
@@ -202,7 +201,7 @@ class _UpdatePlanPageWidgetState extends State<UpdatePlanPageWidget> {
                                             style: FlutterFlowTheme.of(context)
                                                 .bodyText2
                                                 .override(
-                                                  fontFamily: 'Montserrat',
+                                                  fontFamily: 'Open Sans',
                                                   color: FlutterFlowTheme.of(
                                                           context)
                                                       .textDark,
@@ -303,7 +302,7 @@ class _UpdatePlanPageWidgetState extends State<UpdatePlanPageWidget> {
                                         style: FlutterFlowTheme.of(context)
                                             .bodyText2
                                             .override(
-                                              fontFamily: 'Montserrat',
+                                              fontFamily: 'Open Sans',
                                               color:
                                                   FlutterFlowTheme.of(context)
                                                       .textDark,
@@ -379,7 +378,7 @@ class _UpdatePlanPageWidgetState extends State<UpdatePlanPageWidget> {
                                         style: FlutterFlowTheme.of(context)
                                             .bodyText2
                                             .override(
-                                              fontFamily: 'Montserrat',
+                                              fontFamily: 'Open Sans',
                                               color:
                                                   FlutterFlowTheme.of(context)
                                                       .textDark,
@@ -452,7 +451,7 @@ class _UpdatePlanPageWidgetState extends State<UpdatePlanPageWidget> {
                                         style: FlutterFlowTheme.of(context)
                                             .bodyText2
                                             .override(
-                                              fontFamily: 'Montserrat',
+                                              fontFamily: 'Open Sans',
                                               color:
                                                   FlutterFlowTheme.of(context)
                                                       .textDark,
@@ -524,7 +523,7 @@ class _UpdatePlanPageWidgetState extends State<UpdatePlanPageWidget> {
                                         style: FlutterFlowTheme.of(context)
                                             .bodyText2
                                             .override(
-                                              fontFamily: 'Montserrat',
+                                              fontFamily: 'Open Sans',
                                               color:
                                                   FlutterFlowTheme.of(context)
                                                       .textDark,
@@ -596,7 +595,7 @@ class _UpdatePlanPageWidgetState extends State<UpdatePlanPageWidget> {
                                         style: FlutterFlowTheme.of(context)
                                             .bodyText2
                                             .override(
-                                              fontFamily: 'Montserrat',
+                                              fontFamily: 'Open Sans',
                                               color:
                                                   FlutterFlowTheme.of(context)
                                                       .textDark,
@@ -833,7 +832,7 @@ class _UpdatePlanPageWidgetState extends State<UpdatePlanPageWidget> {
                                         style: FlutterFlowTheme.of(context)
                                             .bodyText2
                                             .override(
-                                              fontFamily: 'Montserrat',
+                                              fontFamily: 'Open Sans',
                                               color:
                                                   FlutterFlowTheme.of(context)
                                                       .textDark,
@@ -910,7 +909,7 @@ class _UpdatePlanPageWidgetState extends State<UpdatePlanPageWidget> {
                                         style: FlutterFlowTheme.of(context)
                                             .bodyText2
                                             .override(
-                                              fontFamily: 'Montserrat',
+                                              fontFamily: 'Open Sans',
                                               color:
                                                   FlutterFlowTheme.of(context)
                                                       .textDark,
