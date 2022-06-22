@@ -2,9 +2,9 @@ import '../backend/backend.dart';
 import '../components/header_widget.dart';
 import '../components/main_menu_widget.dart';
 import '../components/update_shop_page_widget.dart';
-import '../create_shop_page/create_shop_page_widget.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
+import '../flutter_flow/flutter_flow_widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -91,13 +91,16 @@ class _ShopListPageWidgetState extends State<ShopListPageWidget> {
                                 children: [
                                   Row(
                                     mainAxisSize: MainAxisSize.max,
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
                                     children: [
                                       Padding(
                                         padding: EdgeInsetsDirectional.fromSTEB(
                                             0, 0, 16, 0),
                                         child: InkWell(
                                           onTap: () async {
-                                            logFirebaseEvent('Text_ON_TAP');
+                                            logFirebaseEvent(
+                                                'SHOP_LIST_PAGE_PAGE_Text_4ijid09z_ON_TAP');
                                             logFirebaseEvent(
                                                 'Text_Navigate-To');
                                             await Navigator.push(
@@ -115,22 +118,52 @@ class _ShopListPageWidgetState extends State<ShopListPageWidget> {
                                           ),
                                         ),
                                       ),
-                                      InkWell(
-                                        onTap: () async {
-                                          logFirebaseEvent('Text_ON_TAP');
-                                          logFirebaseEvent('Text_Navigate-To');
-                                          await Navigator.push(
-                                            context,
-                                            MaterialPageRoute(
-                                              builder: (context) =>
-                                                  CreateShopPageWidget(),
-                                            ),
+                                      FFButtonWidget(
+                                        onPressed: () async {
+                                          logFirebaseEvent(
+                                              'SHOP_LIST_PAGE_PAGE_追加_BTN_ON_TAP');
+                                          logFirebaseEvent(
+                                              'Button_Bottom-Sheet');
+                                          await showModalBottomSheet(
+                                            isScrollControlled: true,
+                                            backgroundColor: Colors.transparent,
+                                            barrierColor: Color(0x8E484848),
+                                            context: context,
+                                            builder: (context) {
+                                              return Padding(
+                                                padding: MediaQuery.of(context)
+                                                    .viewInsets,
+                                                child: Container(
+                                                  height: MediaQuery.of(context)
+                                                          .size
+                                                          .height *
+                                                      0.96,
+                                                  child: UpdateShopPageWidget(),
+                                                ),
+                                              );
+                                            },
                                           );
                                         },
-                                        child: Text(
-                                          '追加',
-                                          style: FlutterFlowTheme.of(context)
-                                              .subtitle1,
+                                        text: '追加',
+                                        options: FFButtonOptions(
+                                          width: 80,
+                                          height: 32,
+                                          color: FlutterFlowTheme.of(context)
+                                              .primaryColor,
+                                          textStyle: FlutterFlowTheme.of(
+                                                  context)
+                                              .bodyText2
+                                              .override(
+                                                fontFamily: 'Open Sans',
+                                                color:
+                                                    FlutterFlowTheme.of(context)
+                                                        .textLight,
+                                              ),
+                                          borderSide: BorderSide(
+                                            color: Colors.transparent,
+                                            width: 1,
+                                          ),
+                                          borderRadius: 4,
                                         ),
                                       ),
                                     ],
