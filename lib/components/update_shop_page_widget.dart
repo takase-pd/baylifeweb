@@ -43,12 +43,19 @@ class _UpdateShopPageWidgetState extends State<UpdateShopPageWidget> {
   TextEditingController textController13;
   final formKey = GlobalKey<FormState>();
 
+  Future<ShopsRecord> shop;
+  Future<CompaniesRecord> company;
+
+  Future<ShopsRecord> _getShop() async {
+    if (widget.shop == null) return ShopsRecord();
+    final _shop = await ShopsRecord.getDocumentOnce(widget.shop);
+    return _shop;
+  }
+
   @override
   void initState() {
     super.initState();
-    textController1 = TextEditingController();
     textController2 = TextEditingController(text: dropDownValue1);
-    textController3 = TextEditingController(text: dropDownValue2);
     textController4 = TextEditingController();
     textController5 = TextEditingController(text: uploadedFileUrl);
     textController6 = TextEditingController();
@@ -59,6 +66,8 @@ class _UpdateShopPageWidgetState extends State<UpdateShopPageWidget> {
     textController11 = TextEditingController();
     textController12 = TextEditingController();
     textController13 = TextEditingController();
+
+    shop = _getShop();
   }
 
   @override
@@ -67,7 +76,7 @@ class _UpdateShopPageWidgetState extends State<UpdateShopPageWidget> {
       key: formKey,
       autovalidateMode: AutovalidateMode.always,
       child: FutureBuilder<ShopsRecord>(
-        future: ShopsRecord.getDocumentOnce(widget.shop),
+        future: shop,
         builder: (context, snapshot) {
           // Customize what your widget looks like when it's loading.
           if (!snapshot.hasData) {
@@ -132,7 +141,10 @@ class _UpdateShopPageWidgetState extends State<UpdateShopPageWidget> {
                                       padding: EdgeInsetsDirectional.fromSTEB(
                                           16, 0, 0, 0),
                                       child: TextFormField(
-                                        controller: textController1,
+                                        controller: textController1 ??=
+                                            TextEditingController(
+                                          text: containerShopsRecord.shopName,
+                                        ),
                                         obscureText: false,
                                         decoration: InputDecoration(
                                           labelText: 'ショップ名',
@@ -162,7 +174,7 @@ class _UpdateShopPageWidgetState extends State<UpdateShopPageWidget> {
                                         style: FlutterFlowTheme.of(context)
                                             .bodyText2
                                             .override(
-                                              fontFamily: 'Montserrat',
+                                              fontFamily: 'Open Sans',
                                               color:
                                                   FlutterFlowTheme.of(context)
                                                       .textDark,
@@ -197,6 +209,9 @@ class _UpdateShopPageWidgetState extends State<UpdateShopPageWidget> {
                                 }
                                 List<CatShopRecord> containerCatShopRecordList =
                                     snapshot.data;
+                                final catShopList = containerCatShopRecordList
+                                    .map((e) => e.catName)
+                                    .toList();
                                 return Container(
                                   height: 60,
                                   decoration: BoxDecoration(
@@ -247,7 +262,7 @@ class _UpdateShopPageWidgetState extends State<UpdateShopPageWidget> {
                                             style: FlutterFlowTheme.of(context)
                                                 .bodyText2
                                                 .override(
-                                                  fontFamily: 'Montserrat',
+                                                  fontFamily: 'Open Sans',
                                                   color: FlutterFlowTheme.of(
                                                           context)
                                                       .textDark,
@@ -256,9 +271,19 @@ class _UpdateShopPageWidgetState extends State<UpdateShopPageWidget> {
                                           ),
                                         ),
                                         FlutterFlowDropDown(
-                                          options: ['Option 1'],
-                                          onChanged: (val) => setState(
-                                              () => dropDownValue1 = val),
+                                          options: catShopList,
+                                          onChanged: (val) => setState(() => {
+                                                dropDownValue1 =
+                                                    containerCatShopRecordList
+                                                        .firstWhere((element) =>
+                                                            element.catName ==
+                                                            val)
+                                                        .reference
+                                                        .toString(),
+                                                textController2 =
+                                                    TextEditingController(
+                                                        text: val)
+                                              }),
                                           width: 240,
                                           height: 50,
                                           textStyle:
@@ -289,8 +314,12 @@ class _UpdateShopPageWidgetState extends State<UpdateShopPageWidget> {
                           Padding(
                             padding:
                                 EdgeInsetsDirectional.fromSTEB(0, 0, 0, 16),
-                            child: StreamBuilder<List<CompaniesRecord>>(
-                              stream: queryCompaniesRecord(),
+                            child: FutureBuilder<List<CompaniesRecord>>(
+                              future: queryCompaniesRecordOnce(
+                                queryBuilder: (companiesRecord) =>
+                                    companiesRecord.where('director',
+                                        isEqualTo: currentUserReference),
+                              ),
                               builder: (context, snapshot) {
                                 // Customize what your widget looks like when it's loading.
                                 if (!snapshot.hasData) {
@@ -309,6 +338,10 @@ class _UpdateShopPageWidgetState extends State<UpdateShopPageWidget> {
                                 List<CompaniesRecord>
                                     containerCompaniesRecordList =
                                     snapshot.data;
+                                final companiesList =
+                                    containerCompaniesRecordList
+                                        .map((e) => e.name)
+                                        .toList();
                                 return Container(
                                   height: 60,
                                   decoration: BoxDecoration(
@@ -324,11 +357,12 @@ class _UpdateShopPageWidgetState extends State<UpdateShopPageWidget> {
                                       children: [
                                         Expanded(
                                           child: TextFormField(
-                                            controller: textController3,
+                                            controller: textController3 ??=
+                                                TextEditingController(
+                                                    text: companiesList.first),
                                             obscureText: false,
                                             decoration: InputDecoration(
                                               labelText: '企業',
-                                              hintText: 'Comapnies Refを手動で貼り付け',
                                               enabledBorder:
                                                   UnderlineInputBorder(
                                                 borderSide: BorderSide(
@@ -359,7 +393,7 @@ class _UpdateShopPageWidgetState extends State<UpdateShopPageWidget> {
                                             style: FlutterFlowTheme.of(context)
                                                 .bodyText2
                                                 .override(
-                                                  fontFamily: 'Montserrat',
+                                                  fontFamily: 'Open Sans',
                                                   color: FlutterFlowTheme.of(
                                                           context)
                                                       .textDark,
@@ -367,30 +401,43 @@ class _UpdateShopPageWidgetState extends State<UpdateShopPageWidget> {
                                                 ),
                                           ),
                                         ),
-                                        FlutterFlowDropDown(
-                                          options: ['Option 1'],
-                                          onChanged: (val) => setState(
-                                              () => dropDownValue2 = val),
-                                          width: 240,
-                                          height: 50,
-                                          textStyle:
-                                              FlutterFlowTheme.of(context)
-                                                  .bodyText1
-                                                  .override(
-                                                    fontFamily: 'Open Sans',
-                                                    color: Colors.black,
-                                                  ),
-                                          hintText: '企業名',
-                                          fillColor: Colors.white,
-                                          elevation: 2,
-                                          borderColor: Colors.transparent,
-                                          borderWidth: 0,
-                                          borderRadius: 0,
-                                          margin:
-                                              EdgeInsetsDirectional.fromSTEB(
-                                                  12, 4, 12, 4),
-                                          hidesUnderline: true,
-                                        ),
+                                        if (companiesList.length > 1)
+                                          FlutterFlowDropDown(
+                                            options: companiesList,
+                                            onChanged: (val) => setState(() => {
+                                                  dropDownValue2 =
+                                                      containerCompaniesRecordList
+                                                          .firstWhere(
+                                                              (element) =>
+                                                                  element
+                                                                      .name ==
+                                                                  val)
+                                                          .reference
+                                                          .toString(),
+                                                  textController3 =
+                                                      TextEditingController(
+                                                          text: val)
+                                                }),
+                                            width: 240,
+                                            height: 50,
+                                            textStyle:
+                                                FlutterFlowTheme.of(context)
+                                                    .bodyText1
+                                                    .override(
+                                                      fontFamily: 'Open Sans',
+                                                      color: Colors.black,
+                                                    ),
+                                            hintText: '企業名',
+                                            fillColor: Colors.white,
+                                            elevation: 2,
+                                            borderColor: Colors.transparent,
+                                            borderWidth: 0,
+                                            borderRadius: 0,
+                                            margin:
+                                                EdgeInsetsDirectional.fromSTEB(
+                                                    12, 4, 12, 4),
+                                            hidesUnderline: true,
+                                          ),
                                       ],
                                     ),
                                   ),
@@ -445,7 +492,7 @@ class _UpdateShopPageWidgetState extends State<UpdateShopPageWidget> {
                                         style: FlutterFlowTheme.of(context)
                                             .bodyText2
                                             .override(
-                                              fontFamily: 'Montserrat',
+                                              fontFamily: 'Open Sans',
                                               color:
                                                   FlutterFlowTheme.of(context)
                                                       .textDark,
@@ -510,7 +557,7 @@ class _UpdateShopPageWidgetState extends State<UpdateShopPageWidget> {
                                         style: FlutterFlowTheme.of(context)
                                             .bodyText2
                                             .override(
-                                              fontFamily: 'Montserrat',
+                                              fontFamily: 'Open Sans',
                                               color:
                                                   FlutterFlowTheme.of(context)
                                                       .textDark,
@@ -646,7 +693,7 @@ class _UpdateShopPageWidgetState extends State<UpdateShopPageWidget> {
                                         style: FlutterFlowTheme.of(context)
                                             .bodyText2
                                             .override(
-                                              fontFamily: 'Montserrat',
+                                              fontFamily: 'Open Sans',
                                               color:
                                                   FlutterFlowTheme.of(context)
                                                       .textDark,
@@ -708,7 +755,7 @@ class _UpdateShopPageWidgetState extends State<UpdateShopPageWidget> {
                                         style: FlutterFlowTheme.of(context)
                                             .bodyText2
                                             .override(
-                                              fontFamily: 'Montserrat',
+                                              fontFamily: 'Open Sans',
                                               color:
                                                   FlutterFlowTheme.of(context)
                                                       .textDark,
@@ -775,7 +822,7 @@ class _UpdateShopPageWidgetState extends State<UpdateShopPageWidget> {
                                         style: FlutterFlowTheme.of(context)
                                             .bodyText2
                                             .override(
-                                              fontFamily: 'Montserrat',
+                                              fontFamily: 'Open Sans',
                                               color:
                                                   FlutterFlowTheme.of(context)
                                                       .textDark,
@@ -835,7 +882,7 @@ class _UpdateShopPageWidgetState extends State<UpdateShopPageWidget> {
                                         style: FlutterFlowTheme.of(context)
                                             .bodyText2
                                             .override(
-                                              fontFamily: 'Montserrat',
+                                              fontFamily: 'Open Sans',
                                               color:
                                                   FlutterFlowTheme.of(context)
                                                       .textDark,
@@ -920,7 +967,7 @@ class _UpdateShopPageWidgetState extends State<UpdateShopPageWidget> {
                                             style: FlutterFlowTheme.of(context)
                                                 .bodyText2
                                                 .override(
-                                                  fontFamily: 'Montserrat',
+                                                  fontFamily: 'Open Sans',
                                                   color: FlutterFlowTheme.of(
                                                           context)
                                                       .textDark,
@@ -1011,7 +1058,7 @@ class _UpdateShopPageWidgetState extends State<UpdateShopPageWidget> {
                                         style: FlutterFlowTheme.of(context)
                                             .bodyText2
                                             .override(
-                                              fontFamily: 'Montserrat',
+                                              fontFamily: 'Open Sans',
                                               color:
                                                   FlutterFlowTheme.of(context)
                                                       .textDark,
@@ -1071,7 +1118,7 @@ class _UpdateShopPageWidgetState extends State<UpdateShopPageWidget> {
                                         style: FlutterFlowTheme.of(context)
                                             .bodyText2
                                             .override(
-                                              fontFamily: 'Montserrat',
+                                              fontFamily: 'Open Sans',
                                               color:
                                                   FlutterFlowTheme.of(context)
                                                       .textDark,
@@ -1131,7 +1178,7 @@ class _UpdateShopPageWidgetState extends State<UpdateShopPageWidget> {
                                         style: FlutterFlowTheme.of(context)
                                             .bodyText2
                                             .override(
-                                              fontFamily: 'Montserrat',
+                                              fontFamily: 'Open Sans',
                                               color:
                                                   FlutterFlowTheme.of(context)
                                                       .textDark,

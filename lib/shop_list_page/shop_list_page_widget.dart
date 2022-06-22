@@ -257,6 +257,12 @@ class _ShopListPageWidgetState extends State<ShopListPageWidget> {
                                                   Colors.transparent,
                                               barrierColor: Color(0x8E484848),
                                               context: context,
+                                              constraints: BoxConstraints(
+                                                maxWidth: MediaQuery.of(context)
+                                                        .size
+                                                        .width *
+                                                    0.64,
+                                              ),
                                               builder: (context) {
                                                 return Padding(
                                                   padding:
