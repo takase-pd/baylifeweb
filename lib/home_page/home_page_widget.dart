@@ -122,7 +122,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                                   final contentsUpdateData =
                                                       createContentsRecordData(
                                                     display:
-                                                        !columnContentsRecord
+                                                        columnContentsRecord
                                                             .display,
                                                   );
                                                   await columnContentsRecord

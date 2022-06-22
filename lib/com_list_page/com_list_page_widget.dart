@@ -205,9 +205,6 @@ class _ComListPageWidgetState extends State<ComListPageWidget> {
                                               if (index != null) {
                                                 items.replaceRange(
                                                     index, index + 1, [item]);
-                                                _pagingController.itemList
-                                                    .replaceRange(index,
-                                                        index + 1, [item]);
                                                 _pagingController.itemList = {
                                                   for (var item in items)
                                                     item.reference: item
