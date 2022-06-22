@@ -5,7 +5,6 @@ import '../components/update_shop_page_widget.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
-import '../plan_list_page/plan_list_page_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -108,7 +107,7 @@ class _ShopListPageWidgetState extends State<ShopListPageWidget> {
                                               context,
                                               MaterialPageRoute(
                                                 builder: (context) =>
-                                                    PlanListPageWidget(),
+                                                    ShopListPageWidget(),
                                               ),
                                             );
                                           },
