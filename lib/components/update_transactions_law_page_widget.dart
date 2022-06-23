@@ -1,3 +1,5 @@
+import '../auth/auth_util.dart';
+import '../backend/api_requests/api_calls.dart';
 import '../backend/backend.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
@@ -35,6 +37,7 @@ class _UpdateTransactionsLawPageWidgetState
   TextEditingController textController11;
   TextEditingController textController12;
   TextEditingController textController13;
+  TextEditingController textController14;
   final formKey = GlobalKey<FormState>();
 
   @override
@@ -49,10 +52,11 @@ class _UpdateTransactionsLawPageWidgetState
     textController7 = TextEditingController();
     textController8 = TextEditingController();
     textController9 = TextEditingController();
-    textController10 = TextEditingController(text: 'Bay Lifeアプリの決済方法に準じます。');
-    textController11 = TextEditingController();
+    textController10 = TextEditingController();
+    textController11 = TextEditingController(text: 'Bay Lifeアプリの決済方法に準じます。');
     textController12 = TextEditingController();
     textController13 = TextEditingController();
+    textController14 = TextEditingController();
   }
 
   @override
@@ -440,7 +444,7 @@ class _UpdateTransactionsLawPageWidgetState
                                     controller: textController7,
                                     obscureText: false,
                                     decoration: InputDecoration(
-                                      labelText: '販売価格',
+                                      labelText: 'ホームページURL',
                                       enabledBorder: UnderlineInputBorder(
                                         borderSide: BorderSide(
                                           color: Color(0x00000000),
@@ -468,6 +472,7 @@ class _UpdateTransactionsLawPageWidgetState
                                           fontFamily: 'Open Sans',
                                           fontWeight: FontWeight.w500,
                                         ),
+                                    keyboardType: TextInputType.url,
                                   ),
                                 ),
                               ),
@@ -494,7 +499,7 @@ class _UpdateTransactionsLawPageWidgetState
                                     controller: textController8,
                                     obscureText: false,
                                     decoration: InputDecoration(
-                                      labelText: '商品代金以外の必要料金',
+                                      labelText: '販売価格',
                                       enabledBorder: UnderlineInputBorder(
                                         borderSide: BorderSide(
                                           color: Color(0x00000000),
@@ -548,7 +553,7 @@ class _UpdateTransactionsLawPageWidgetState
                                     controller: textController9,
                                     obscureText: false,
                                     decoration: InputDecoration(
-                                      labelText: '引き渡し時期',
+                                      labelText: '商品代金以外の必要料金',
                                       enabledBorder: UnderlineInputBorder(
                                         borderSide: BorderSide(
                                           color: Color(0x00000000),
@@ -600,10 +605,9 @@ class _UpdateTransactionsLawPageWidgetState
                                       16, 0, 0, 0),
                                   child: TextFormField(
                                     controller: textController10,
-                                    readOnly: true,
                                     obscureText: false,
                                     decoration: InputDecoration(
-                                      labelText: 'お支払い方法',
+                                      labelText: '引き渡し時期',
                                       enabledBorder: UnderlineInputBorder(
                                         borderSide: BorderSide(
                                           color: Color(0x00000000),
@@ -658,7 +662,7 @@ class _UpdateTransactionsLawPageWidgetState
                                     readOnly: true,
                                     obscureText: false,
                                     decoration: InputDecoration(
-                                      labelText: '返品・交換・キャンセル等',
+                                      labelText: 'お支払い方法',
                                       enabledBorder: UnderlineInputBorder(
                                         borderSide: BorderSide(
                                           color: Color(0x00000000),
@@ -710,7 +714,60 @@ class _UpdateTransactionsLawPageWidgetState
                                       16, 0, 0, 0),
                                   child: TextFormField(
                                     controller: textController12,
-                                    readOnly: true,
+                                    obscureText: false,
+                                    decoration: InputDecoration(
+                                      labelText: '返品・交換・キャンセル等',
+                                      enabledBorder: UnderlineInputBorder(
+                                        borderSide: BorderSide(
+                                          color: Color(0x00000000),
+                                          width: 1,
+                                        ),
+                                        borderRadius: const BorderRadius.only(
+                                          topLeft: Radius.circular(4.0),
+                                          topRight: Radius.circular(4.0),
+                                        ),
+                                      ),
+                                      focusedBorder: UnderlineInputBorder(
+                                        borderSide: BorderSide(
+                                          color: Color(0x00000000),
+                                          width: 1,
+                                        ),
+                                        borderRadius: const BorderRadius.only(
+                                          topLeft: Radius.circular(4.0),
+                                          topRight: Radius.circular(4.0),
+                                        ),
+                                      ),
+                                    ),
+                                    style: FlutterFlowTheme.of(context)
+                                        .bodyText2
+                                        .override(
+                                          fontFamily: 'Open Sans',
+                                          fontWeight: FontWeight.w500,
+                                        ),
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                      Padding(
+                        padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 16),
+                        child: Container(
+                          height: 60,
+                          decoration: BoxDecoration(
+                            color: FlutterFlowTheme.of(context).background,
+                            borderRadius: BorderRadius.circular(8),
+                          ),
+                          child: Row(
+                            mainAxisSize: MainAxisSize.max,
+                            children: [
+                              Expanded(
+                                child: Padding(
+                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                      16, 0, 0, 0),
+                                  child: TextFormField(
+                                    controller: textController13,
                                     obscureText: false,
                                     decoration: InputDecoration(
                                       labelText: '返品期限',
@@ -764,8 +821,7 @@ class _UpdateTransactionsLawPageWidgetState
                                   padding: EdgeInsetsDirectional.fromSTEB(
                                       16, 0, 0, 0),
                                   child: TextFormField(
-                                    controller: textController13,
-                                    readOnly: true,
+                                    controller: textController14,
                                     obscureText: false,
                                     decoration: InputDecoration(
                                       labelText: '返品送料',
@@ -845,6 +901,24 @@ class _UpdateTransactionsLawPageWidgetState
                                           ) ??
                                           false;
                                   if (confirmDialogResponse) {
+                                    logFirebaseEvent('Button_Backend-Call');
+                                    await UpdateTransactionsLawCall.call(
+                                      uid: currentUserUid,
+                                      address: textController4.text,
+                                      company: textController1.text,
+                                      delvTime: textController10.text,
+                                      director: textController2.text,
+                                      email: textController6.text,
+                                      otherFees: textController9.text,
+                                      paymentMethod: textController11.text,
+                                      postalCode: textController3.text,
+                                      rec: textController12.text,
+                                      returnCharge: textController14.text,
+                                      returnPeriod: textController13.text,
+                                      tel: textController5.text,
+                                      unitAmount: textController8.text,
+                                      web: textController7.text,
+                                    );
                                     logFirebaseEvent('Button_Show-Snack-Bar');
                                     ScaffoldMessenger.of(context).showSnackBar(
                                       SnackBar(
