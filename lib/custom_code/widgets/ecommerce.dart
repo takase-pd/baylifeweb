@@ -165,11 +165,11 @@ class TransactionsLaw {
   final String email;
   final String otherFees;
   final String paymentMethod;
+  final String phone;
   final String postalCode;
   final String rec; // return, exchange, cancellation
   final String returnCharge;
   final String returnPeriod;
-  final String tel;
   final String unitAmount;
   final String web;
 
@@ -181,11 +181,11 @@ class TransactionsLaw {
     this.email,
     this.otherFees,
     this.paymentMethod,
+    this.phone,
     this.postalCode,
     this.rec,
     this.returnCharge,
     this.returnPeriod,
-    this.tel,
     this.unitAmount,
     this.web,
   });
@@ -214,11 +214,11 @@ class TransactionsLaw {
       email: _apiJson['law']['email'],
       otherFees: _apiJson['law']['otherFees'],
       paymentMethod: _apiJson['law']['paymentMethod'],
+      phone: _apiJson['law']['phone'],
       postalCode: _apiJson['law']['postalCode'],
       rec: _apiJson['law']['rec'],
       returnCharge: _apiJson['law']['returnCharge'],
       returnPeriod: _apiJson['law']['returnPeriod'],
-      tel: _apiJson['law']['tel'],
       unitAmount: _apiJson['law']['unitAmount'],
       web: _apiJson['law']['web'],
     );
