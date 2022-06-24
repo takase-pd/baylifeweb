@@ -321,6 +321,42 @@ class ShippingForm {
   }
 }
 
+class CurrencyChecker {
+  final bool success;
+  final TextEditingController controller;
+  final int currency;
+
+  CurrencyChecker._create({
+    this.success,
+    this.controller,
+    this.currency,
+  });
+
+  factory CurrencyChecker.create(String text) {
+    final matches = RegExp(r'[0-9]').allMatches(text);
+    final success = matches != null && matches.length != 0 ? true : false;
+    final currency = success
+        ? int.parse(matches.map((match) => match.group(0)).toList().join())
+        : 0;
+    final controller = TextEditingController(
+        text: formatNumber(
+      currency,
+      formatType: FormatType.custom,
+      currency: '￥',
+      format: '#,##0',
+      locale: 'ja_JP',
+    ));
+    controller.selection = TextSelection.fromPosition(
+      TextPosition(offset: controller.text.length),
+    );
+    return CurrencyChecker._create(
+      success: success,
+      controller: controller,
+      currency: currency,
+    );
+  }
+}
+
 enum ShippingStatus {
   ordered,
   confirming,

@@ -2,6 +2,7 @@ import '../auth/auth_util.dart';
 import '../backend/backend.dart';
 import '../backend/firebase_storage/storage.dart';
 import '../components/update_transactions_law_page_widget.dart';
+import '../custom_code/widgets/index.dart';
 import '../flutter_flow/flutter_flow_drop_down.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
@@ -18,6 +19,7 @@ class UpdateShopPageWidget extends StatefulWidget {
     this.shop,
   }) : super(key: key);
 
+  // TODO change DocumentReference to ShopsRecord
   final DocumentReference shop;
 
   @override
@@ -51,6 +53,9 @@ class _UpdateShopPageWidgetState extends State<UpdateShopPageWidget> {
   List<String> comNameList;
   String banner =
       'https://firebasestorage.googleapis.com/v0/b/baylifedev.appspot.com/o/assets%2FNoImage.png?alt=media&token=16c12fc7-9de4-4531-9b81-c4b0e7a07945';
+  bool isNew = true;
+  int shippingFee = 0;
+  int shippingFreeTotal = 0;
 
   Future<ShopsRecord> _getShop() async {
     catShops = await queryCatShopRecordOnce();
@@ -63,6 +68,7 @@ class _UpdateShopPageWidgetState extends State<UpdateShopPageWidget> {
     comNameList = companies.map((e) => e.name).toList();
 
     if (widget.shop == null) return ShopsRecord();
+    isNew = false;
     final _shop = await ShopsRecord.getDocumentOnce(widget.shop);
 
     final catShop =
@@ -72,6 +78,8 @@ class _UpdateShopPageWidgetState extends State<UpdateShopPageWidget> {
         companies.firstWhere((element) => element.reference == _shop.company);
     textController3 = TextEditingController(text: company.name);
     banner = _shop.banner;
+    shippingFee = _shop.shippingFee;
+    shippingFreeTotal = _shop.shippingFreeTotal;
 
     return _shop;
   }
@@ -80,6 +88,12 @@ class _UpdateShopPageWidgetState extends State<UpdateShopPageWidget> {
   void initState() {
     super.initState();
     shop = _getShop();
+  }
+
+  @override
+  void dispose() {
+    textController6.dispose();
+    super.dispose();
   }
 
   @override
@@ -601,18 +615,21 @@ class _UpdateShopPageWidgetState extends State<UpdateShopPageWidget> {
                                           16, 0, 0, 0),
                                       child: TextFormField(
                                         controller: textController6 ??=
-                                            TextEditingController(
-                                          text: formatNumber(
-                                            containerShopsRecord.shippingFee,
-                                            formatType: FormatType.custom,
-                                            currency: '￥',
-                                            format: '#,##0',
-                                            locale: 'ja_JP',
-                                          ),
-                                        ),
+                                            CurrencyChecker.create(
+                                                    shippingFee.toString())
+                                                .controller,
+                                        onChanged: (text) {
+                                          final checker =
+                                              CurrencyChecker.create(text);
+                                          setState(() {
+                                            textController6 =
+                                                checker.controller;
+                                            shippingFee = checker.currency;
+                                          });
+                                        },
                                         obscureText: false,
                                         decoration: InputDecoration(
-                                          labelText: '送料上限指定額',
+                                          labelText: '送料上限指定額（半角数字）',
                                           hintText:
                                               '送料の合計が指定額を超えた場合、送料をこの指定額とする。',
                                           enabledBorder: UnderlineInputBorder(
@@ -669,19 +686,23 @@ class _UpdateShopPageWidgetState extends State<UpdateShopPageWidget> {
                                           16, 0, 0, 0),
                                       child: TextFormField(
                                         controller: textController7 ??=
-                                            TextEditingController(
-                                          text: formatNumber(
-                                            containerShopsRecord
-                                                .shippingFreeTotal,
-                                            formatType: FormatType.custom,
-                                            currency: '￥',
-                                            format: '#,##0',
-                                            locale: 'ja_JP',
-                                          ),
-                                        ),
+                                            CurrencyChecker.create(
+                                                    shippingFreeTotal
+                                                        .toString())
+                                                .controller,
+                                        onChanged: (text) {
+                                          final checker =
+                                              CurrencyChecker.create(text);
+                                          setState(() {
+                                            textController7 =
+                                                checker.controller;
+                                            shippingFreeTotal =
+                                                checker.currency;
+                                          });
+                                        },
                                         obscureText: false,
                                         decoration: InputDecoration(
-                                          labelText: '送料無料適用時の合計金額',
+                                          labelText: '送料無料適用時の合計金額（半角数字））',
                                           hintText:
                                               '設定を上回る購入額の場合、送料無料を適用します。未設定の場合、送料無料は適用されません。',
                                           enabledBorder: UnderlineInputBorder(
@@ -885,7 +906,10 @@ class _UpdateShopPageWidgetState extends State<UpdateShopPageWidget> {
                                               EdgeInsetsDirectional.fromSTEB(
                                                   16, 0, 0, 0),
                                           child: TextFormField(
-                                            controller: textController10,
+                                            controller: textController10 ??=
+                                                TextEditingController(
+                                                    text:
+                                                        '$currentUserEmail $currentUserDisplayName'),
                                             obscureText: false,
                                             decoration: InputDecoration(
                                               labelText: '管理者',
@@ -925,28 +949,31 @@ class _UpdateShopPageWidgetState extends State<UpdateShopPageWidget> {
                                           ),
                                         ),
                                       ),
-                                      FlutterFlowDropDown(
-                                        options: ['Option 1'],
-                                        onChanged: (val) => setState(
-                                            () => dropDownValue3 = val),
-                                        width: 240,
-                                        height: 50,
-                                        textStyle: FlutterFlowTheme.of(context)
-                                            .bodyText2
-                                            .override(
-                                              fontFamily: 'Open Sans',
-                                              fontWeight: FontWeight.w500,
-                                            ),
-                                        hintText: 'ユーザーID',
-                                        fillColor: Colors.white,
-                                        elevation: 2,
-                                        borderColor: Colors.transparent,
-                                        borderWidth: 0,
-                                        borderRadius: 0,
-                                        margin: EdgeInsetsDirectional.fromSTEB(
-                                            12, 4, 12, 4),
-                                        hidesUnderline: true,
-                                      ),
+                                      if (false)
+                                        FlutterFlowDropDown(
+                                          options: ['Option 1'],
+                                          onChanged: (val) => setState(
+                                              () => dropDownValue3 = val),
+                                          width: 240,
+                                          height: 50,
+                                          textStyle:
+                                              FlutterFlowTheme.of(context)
+                                                  .bodyText2
+                                                  .override(
+                                                    fontFamily: 'Open Sans',
+                                                    fontWeight: FontWeight.w500,
+                                                  ),
+                                          hintText: 'ユーザーID',
+                                          fillColor: Colors.white,
+                                          elevation: 2,
+                                          borderColor: Colors.transparent,
+                                          borderWidth: 0,
+                                          borderRadius: 0,
+                                          margin:
+                                              EdgeInsetsDirectional.fromSTEB(
+                                                  12, 4, 12, 4),
+                                          hidesUnderline: true,
+                                        ),
                                     ],
                                   ),
                                 );
@@ -1151,7 +1178,7 @@ class _UpdateShopPageWidgetState extends State<UpdateShopPageWidget> {
                                     MainAxisAlignment.spaceBetween,
                                 children: [
                                   Text(
-                                    'メッセージ欄',
+                                    '',
                                     style:
                                         FlutterFlowTheme.of(context).bodyText1,
                                   ),
@@ -1211,52 +1238,65 @@ class _UpdateShopPageWidgetState extends State<UpdateShopPageWidget> {
                                           shippingFreeTotal:
                                               int.parse(textController7.text),
                                         );
-                                        await ShopsRecord.collection
-                                            .doc()
-                                            .set(shopsCreateData);
-                                        logFirebaseEvent(
-                                            'Button_Show-Snack-Bar');
-                                        ScaffoldMessenger.of(context)
-                                            .showSnackBar(
-                                          SnackBar(
-                                            content: Text(
-                                              'ショップを更新しました。',
-                                              style: TextStyle(),
-                                            ),
-                                            duration:
-                                                Duration(milliseconds: 4000),
-                                            backgroundColor: Color(0x00000000),
-                                          ),
-                                        );
-                                        logFirebaseEvent('Button_Bottom-Sheet');
-                                        await showModalBottomSheet(
-                                          isScrollControlled: true,
-                                          backgroundColor: Colors.transparent,
-                                          barrierColor: Color(0x8E484848),
-                                          context: context,
-                                          constraints: BoxConstraints(
-                                            maxWidth: MediaQuery.of(context)
-                                                    .size
-                                                    .width *
-                                                0.64,
-                                          ),
-                                          builder: (context) {
-                                            return Padding(
-                                              padding: MediaQuery.of(context)
-                                                  .viewInsets,
-                                              child: Container(
-                                                height: MediaQuery.of(context)
-                                                        .size
-                                                        .height *
-                                                    0.96,
-                                                child:
-                                                    UpdateTransactionsLawPageWidget(
-                                                  shop: widget.shop,
-                                                ),
-                                              ),
-                                            );
-                                          },
-                                        );
+                                        if (isNew) {
+                                          final newId =
+                                              ShopsRecord.collection.doc().id;
+                                          ShopsRecord.collection
+                                              .doc(newId)
+                                              .set(shopsCreateData);
+                                        } else
+                                          await containerShopsRecord.reference
+                                              .update(shopsCreateData);
+
+                                        // logFirebaseEvent(
+                                        //     'Button_Show-Snack-Bar');
+                                        // ScaffoldMessenger.of(context)
+                                        //     .showSnackBar(
+                                        //   SnackBar(
+                                        //     content: Text(
+                                        //       'ショップを更新しました。',
+                                        //       style: TextStyle(),
+                                        //     ),
+                                        //     duration:
+                                        //         Duration(milliseconds: 4000),
+                                        //     backgroundColor: Color(0x00000000),
+                                        //   ),
+                                        // );
+                                        // logFirebaseEvent('Button_Bottom-Sheet');
+                                        // final law =
+                                        //     await TransactionsLaw.create(
+                                        //         containerShopsRecord
+                                        //             .reference.path,
+                                        //         context);
+                                        // await showModalBottomSheet(
+                                        //   isScrollControlled: true,
+                                        //   backgroundColor: Colors.transparent,
+                                        //   barrierColor: Color(0x8E484848),
+                                        //   context: context,
+                                        //   constraints: BoxConstraints(
+                                        //     maxWidth: MediaQuery.of(context)
+                                        //             .size
+                                        //             .width *
+                                        //         0.64,
+                                        //   ),
+                                        //   builder: (context) {
+                                        //     return Padding(
+                                        //       padding: MediaQuery.of(context)
+                                        //           .viewInsets,
+                                        //       child: Container(
+                                        //         height: MediaQuery.of(context)
+                                        //                 .size
+                                        //                 .height *
+                                        //             0.94,
+                                        //         child:
+                                        //             UpdateTransactionsLawPageWidget(
+                                        //           shop: containerShopsRecord,
+                                        //           law: law,
+                                        //         ),
+                                        //       ),
+                                        //     );
+                                        //   },
+                                        // );
                                         return;
                                       } else {
                                         return;
