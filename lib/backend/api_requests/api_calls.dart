@@ -351,6 +351,8 @@ class UpdateTransactionsLawCall {
     String tel = '',
     String unitAmount = '',
     String web = '',
+    String accessToken = '',
+    String appCheckToken = '',
   }) {
     final body = '''
 {
@@ -401,6 +403,8 @@ class UpdateTransactionsLawCall {
       body: body,
       bodyType: BodyType.JSON,
       returnBody: true,
+      accessToken: accessToken,
+      appCheckToken: appCheckToken,
     );
   }
 }
@@ -408,6 +412,7 @@ class UpdateTransactionsLawCall {
 class TransactionsLawCall {
   static Future<ApiCallResponse> call({
     String path = '',
+    String appCheckToken = '',
   }) {
     final body = '''
 {
@@ -429,6 +434,7 @@ class TransactionsLawCall {
       body: body,
       bodyType: BodyType.JSON,
       returnBody: true,
+      appCheckToken: appCheckToken,
     );
   }
 }
