@@ -46,16 +46,18 @@ class _UpdateShopPageWidgetState extends State<UpdateShopPageWidget> {
   TextEditingController textController13;
   final formKey = GlobalKey<FormState>();
 
+  final String NO_IMAGE =
+      'https://firebasestorage.googleapis.com/v0/b/baylifedev.appspot.com/o/assets%2FNoImage.png?alt=media&token=16c12fc7-9de4-4531-9b81-c4b0e7a07945';
   Future<ShopsRecord> shop;
   List<CatShopRecord> catShops;
   List<String> catShopList;
   List<CompaniesRecord> companies;
   List<String> comNameList;
-  String banner =
-      'https://firebasestorage.googleapis.com/v0/b/baylifedev.appspot.com/o/assets%2FNoImage.png?alt=media&token=16c12fc7-9de4-4531-9b81-c4b0e7a07945';
+  String banner;
   bool isNew = true;
   int shippingFee = 0;
   int shippingFreeTotal = 0;
+  String status = '追加';
 
   Future<ShopsRecord> _getShop() async {
     catShops = await queryCatShopRecordOnce();
@@ -67,10 +69,13 @@ class _UpdateShopPageWidgetState extends State<UpdateShopPageWidget> {
     );
     comNameList = companies.map((e) => e.name).toList();
 
-    if (widget.shop == null) return ShopsRecord();
+    if (widget.shop == null) {
+      banner = NO_IMAGE;
+      return ShopsRecord();
+    }
+
     isNew = false;
     final _shop = await ShopsRecord.getDocumentOnce(widget.shop);
-
     final catShop =
         catShops.firstWhere((element) => element.reference == _shop.catMain);
     textController2 = TextEditingController(text: catShop.catName);
@@ -80,6 +85,7 @@ class _UpdateShopPageWidgetState extends State<UpdateShopPageWidget> {
     banner = _shop.banner;
     shippingFee = _shop.shippingFee;
     shippingFreeTotal = _shop.shippingFreeTotal;
+    status = '更新';
 
     return _shop;
   }
@@ -88,12 +94,6 @@ class _UpdateShopPageWidgetState extends State<UpdateShopPageWidget> {
   void initState() {
     super.initState();
     shop = _getShop();
-  }
-
-  @override
-  void dispose() {
-    textController6.dispose();
-    super.dispose();
   }
 
   @override
@@ -236,6 +236,7 @@ class _UpdateShopPageWidgetState extends State<UpdateShopPageWidget> {
                                       child: TextFormField(
                                         controller: textController2 ??=
                                             TextEditingController(),
+                                        readOnly: true,
                                         obscureText: false,
                                         decoration: InputDecoration(
                                           labelText: 'ショップカテゴリ',
@@ -324,6 +325,7 @@ class _UpdateShopPageWidgetState extends State<UpdateShopPageWidget> {
                                         controller: textController3 ??=
                                             TextEditingController(
                                                 text: comNameList.first),
+                                        readOnly: true,
                                         obscureText: false,
                                         decoration: InputDecoration(
                                           labelText: '企業',
@@ -477,12 +479,12 @@ class _UpdateShopPageWidgetState extends State<UpdateShopPageWidget> {
                                   children: [
                                     Expanded(
                                       child: TextFormField(
-                                        controller: TextEditingController(),
-                                        readOnly: true,
+                                        controller: textController5 ??=
+                                            TextEditingController(text: banner),
                                         obscureText: false,
                                         decoration: InputDecoration(
                                           labelText: 'バナー画像',
-                                          hintText: 'ページ上部に抜粋画像が表示されます。',
+                                          // hintText: 'ページ上部に抜粋画像が表示されます。',
                                           enabledBorder: UnderlineInputBorder(
                                             borderSide: BorderSide(
                                               color: Color(0x00000000),
@@ -550,7 +552,10 @@ class _UpdateShopPageWidgetState extends State<UpdateShopPageWidget> {
                                             setState(() => {
                                                   uploadedFileUrl =
                                                       downloadUrls.first,
-                                                  banner = uploadedFileUrl,
+                                                  textController5 =
+                                                      TextEditingController(
+                                                          text:
+                                                              uploadedFileUrl),
                                                 });
                                             showUploadMessage(
                                               context,
@@ -910,6 +915,7 @@ class _UpdateShopPageWidgetState extends State<UpdateShopPageWidget> {
                                                 TextEditingController(
                                                     text:
                                                         '$currentUserEmail $currentUserDisplayName'),
+                                            readOnly: true,
                                             obscureText: false,
                                             decoration: InputDecoration(
                                               labelText: '管理者',
@@ -1185,16 +1191,17 @@ class _UpdateShopPageWidgetState extends State<UpdateShopPageWidget> {
                                   FFButtonWidget(
                                     onPressed: () async {
                                       logFirebaseEvent(
-                                          'UPDATE_SHOP_PAGE_COMP_更新_BTN_ON_TAP');
+                                          'UPDATE_SHOP_PAGE_COMP_${status}_BTN_ON_TAP');
                                       logFirebaseEvent('Button_Alert-Dialog');
                                       var confirmDialogResponse =
                                           await showDialog<bool>(
                                                 context: context,
                                                 builder: (alertDialogContext) {
                                                   return AlertDialog(
-                                                    title: Text('ショップ更新'),
-                                                    content:
-                                                        Text('ショップを更新します。'),
+                                                    title:
+                                                        Text('ショップ${status}'),
+                                                    content: Text(
+                                                        'ショップを${status}します。'),
                                                     actions: [
                                                       TextButton(
                                                         onPressed: () =>
@@ -1221,8 +1228,8 @@ class _UpdateShopPageWidgetState extends State<UpdateShopPageWidget> {
                                         final shopsCreateData =
                                             createShopsRecordData(
                                           banner: valueOrDefault<String>(
-                                            uploadedFileUrl,
-                                            'https://firebasestorage.googleapis.com/v0/b/baylife-ff782.appspot.com/o/assets%2FNoImage.png?alt=media&token=cfb3d70b-69d2-4f7f-be63-f429cc9872da',
+                                            textController5.text,
+                                            NO_IMAGE,
                                           ),
                                           description: textController4.text,
                                           display: false,
@@ -1233,76 +1240,82 @@ class _UpdateShopPageWidgetState extends State<UpdateShopPageWidget> {
                                           twitter: textController12.text,
                                           web: textController13.text,
                                           director: currentUserReference,
-                                          shippingFee:
-                                              int.parse(textController6.text),
-                                          shippingFreeTotal:
-                                              int.parse(textController7.text),
+                                          shippingFee: shippingFee,
+                                          shippingFreeTotal: shippingFreeTotal,
                                         );
+
+                                        ShopsRecord _shop;
                                         if (isNew) {
-                                          final newId =
-                                              ShopsRecord.collection.doc().id;
-                                          ShopsRecord.collection
-                                              .doc(newId)
+                                          final path =
+                                              ShopsRecord.collection.doc().path;
+                                          final id =
+                                              path.split('/').toList().last;
+                                          await ShopsRecord.collection
+                                              .doc(id)
                                               .set(shopsCreateData);
-                                        } else
+                                          _shop =
+                                              await ShopsRecord.getDocumentOnce(
+                                                  FirebaseFirestore.instance
+                                                      .doc(path));
+                                        } else {
                                           await containerShopsRecord.reference
                                               .update(shopsCreateData);
+                                          _shop = containerShopsRecord;
+                                        }
 
-                                        // logFirebaseEvent(
-                                        //     'Button_Show-Snack-Bar');
-                                        // ScaffoldMessenger.of(context)
-                                        //     .showSnackBar(
-                                        //   SnackBar(
-                                        //     content: Text(
-                                        //       'ショップを更新しました。',
-                                        //       style: TextStyle(),
-                                        //     ),
-                                        //     duration:
-                                        //         Duration(milliseconds: 4000),
-                                        //     backgroundColor: Color(0x00000000),
-                                        //   ),
-                                        // );
-                                        // logFirebaseEvent('Button_Bottom-Sheet');
-                                        // final law =
-                                        //     await TransactionsLaw.create(
-                                        //         containerShopsRecord
-                                        //             .reference.path,
-                                        //         context);
-                                        // await showModalBottomSheet(
-                                        //   isScrollControlled: true,
-                                        //   backgroundColor: Colors.transparent,
-                                        //   barrierColor: Color(0x8E484848),
-                                        //   context: context,
-                                        //   constraints: BoxConstraints(
-                                        //     maxWidth: MediaQuery.of(context)
-                                        //             .size
-                                        //             .width *
-                                        //         0.64,
-                                        //   ),
-                                        //   builder: (context) {
-                                        //     return Padding(
-                                        //       padding: MediaQuery.of(context)
-                                        //           .viewInsets,
-                                        //       child: Container(
-                                        //         height: MediaQuery.of(context)
-                                        //                 .size
-                                        //                 .height *
-                                        //             0.94,
-                                        //         child:
-                                        //             UpdateTransactionsLawPageWidget(
-                                        //           shop: containerShopsRecord,
-                                        //           law: law,
-                                        //         ),
-                                        //       ),
-                                        //     );
-                                        //   },
-                                        // );
+                                        logFirebaseEvent(
+                                            'Button_Show-Snack-Bar');
+                                        ScaffoldMessenger.of(context)
+                                            .showSnackBar(
+                                          SnackBar(
+                                            content: Text(
+                                              'ショップを${status}しました。',
+                                              style: TextStyle(),
+                                            ),
+                                            duration:
+                                                Duration(milliseconds: 4000),
+                                            backgroundColor: Color(0x00000000),
+                                          ),
+                                        );
+                                        logFirebaseEvent('Button_Bottom-Sheet');
+                                        final law =
+                                            await TransactionsLaw.create(
+                                                _shop.reference.path, context);
+                                        await showModalBottomSheet(
+                                          isScrollControlled: true,
+                                          backgroundColor: Colors.transparent,
+                                          barrierColor: Color(0x8E484848),
+                                          context: context,
+                                          constraints: BoxConstraints(
+                                            maxWidth: MediaQuery.of(context)
+                                                    .size
+                                                    .width *
+                                                0.64,
+                                          ),
+                                          builder: (context) {
+                                            return Padding(
+                                              padding: MediaQuery.of(context)
+                                                  .viewInsets,
+                                              child: Container(
+                                                height: MediaQuery.of(context)
+                                                        .size
+                                                        .height *
+                                                    0.94,
+                                                child:
+                                                    UpdateTransactionsLawPageWidget(
+                                                  shop: _shop,
+                                                  law: law,
+                                                ),
+                                              ),
+                                            );
+                                          },
+                                        );
                                         return;
                                       } else {
                                         return;
                                       }
                                     },
-                                    text: '更新',
+                                    text: status,
                                     options: FFButtonOptions(
                                       width: 130,
                                       height: 60,
