@@ -1078,9 +1078,15 @@ class _UpdatePlanPageWidgetState extends State<UpdatePlanPageWidget> {
                                           shippingNormal:
                                               textController7?.text ?? '',
                                         );
-                                        await PlansRecord.collection
-                                            .doc()
-                                            .set(plansCreateData);
+
+                                        isNew
+                                            ? await PlansRecord.collection
+                                                .doc()
+                                                .set(plansCreateData)
+                                            : await containerPlansRecord
+                                                .reference
+                                                .update(plansCreateData);
+
                                         logFirebaseEvent(
                                             'Button_Show-Snack-Bar');
                                         ScaffoldMessenger.of(context)
