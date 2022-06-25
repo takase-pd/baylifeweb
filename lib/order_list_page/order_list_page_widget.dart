@@ -423,15 +423,11 @@ class _OrderListPageWidgetState extends State<OrderListPageWidget> {
                                                     Expanded(
                                                       flex: 2,
                                                       child: Text(
-                                                        formatNumber(
-                                                          listViewOrdersRecord
-                                                              .totalAmount,
-                                                          formatType:
-                                                              FormatType.custom,
-                                                          currency: '￥',
-                                                          format: '#,##0',
-                                                          locale: 'ja_JP',
-                                                        ),
+                                                        CurrencyChecker.create(
+                                                                listViewOrdersRecord
+                                                                    .totalAmount
+                                                                    .toString())
+                                                            .formated,
                                                         style:
                                                             FlutterFlowTheme.of(
                                                                     context)
@@ -453,15 +449,11 @@ class _OrderListPageWidgetState extends State<OrderListPageWidget> {
                                                     Expanded(
                                                       flex: 2,
                                                       child: Text(
-                                                        formatNumber(
-                                                          listViewOrdersRecord
-                                                              .totalShippingFee,
-                                                          formatType:
-                                                              FormatType.custom,
-                                                          currency: '￥',
-                                                          format: '#,##0',
-                                                          locale: 'ja_JP',
-                                                        ),
+                                                        CurrencyChecker.create(
+                                                                listViewOrdersRecord
+                                                                    .totalShippingFee
+                                                                    .toString())
+                                                            .formated,
                                                         style:
                                                             FlutterFlowTheme.of(
                                                                     context)

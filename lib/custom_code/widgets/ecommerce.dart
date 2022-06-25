@@ -324,11 +324,13 @@ class CurrencyChecker {
   final bool success;
   final TextEditingController controller;
   final int currency;
+  final String formated;
 
   CurrencyChecker._create({
     this.success,
     this.controller,
     this.currency,
+    this.formated,
   });
 
   factory CurrencyChecker.create(String text) {
@@ -337,14 +339,14 @@ class CurrencyChecker {
     final currency = success
         ? int.parse(matches.map((match) => match.group(0)).toList().join())
         : 0;
-    final controller = TextEditingController(
-        text: formatNumber(
+    final formated = formatNumber(
       currency,
       formatType: FormatType.custom,
       currency: '￥',
       format: '#,##0',
       locale: 'ja_JP',
-    ));
+    );
+    final controller = TextEditingController(text: formated);
     controller.selection = TextSelection.fromPosition(
       TextPosition(offset: controller.text.length),
     );
@@ -352,6 +354,7 @@ class CurrencyChecker {
       success: success,
       controller: controller,
       currency: currency,
+      formated: formated,
     );
   }
 }

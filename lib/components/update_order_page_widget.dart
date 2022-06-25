@@ -314,15 +314,10 @@ class _UpdateOrderPageWidgetState extends State<UpdateOrderPageWidget> {
                                         flex: 1,
                                         child: TextFormField(
                                           controller: textController3 ??=
-                                              TextEditingController(
-                                            text: formatNumber(
-                                              _order.totalAmount,
-                                              formatType: FormatType.custom,
-                                              currency: '￥',
-                                              format: '#,##0',
-                                              locale: 'ja_JP',
-                                            ),
-                                          ),
+                                              CurrencyChecker.create(_order
+                                                      .totalAmount
+                                                      .toString())
+                                                  .controller,
                                           readOnly: true,
                                           obscureText: false,
                                           decoration: InputDecoration(
@@ -414,15 +409,10 @@ class _UpdateOrderPageWidgetState extends State<UpdateOrderPageWidget> {
                                                   88, 0, 0, 0),
                                           child: TextFormField(
                                             controller: textController5 ??=
-                                                TextEditingController(
-                                              text: formatNumber(
-                                                _order.totalShippingFee,
-                                                formatType: FormatType.custom,
-                                                currency: '￥',
-                                                format: '#,##0',
-                                                locale: 'ja_JP',
-                                              ),
-                                            ),
+                                                CurrencyChecker.create(_order
+                                                        .totalShippingFee
+                                                        .toString())
+                                                    .controller,
                                             readOnly: true,
                                             obscureText: false,
                                             decoration: InputDecoration(
@@ -916,18 +906,10 @@ class _UpdateOrderPageWidgetState extends State<UpdateOrderPageWidget> {
                                                             Expanded(
                                                               flex: 2,
                                                               child: Text(
-                                                                formatNumber(
-                                                                  _plan
-                                                                      .subtotal,
-                                                                  formatType:
-                                                                      FormatType
-                                                                          .custom,
-                                                                  currency: '￥',
-                                                                  format:
-                                                                      '#,##0',
-                                                                  locale:
-                                                                      'ja_JP',
-                                                                ),
+                                                                CurrencyChecker.create(_plan
+                                                                        .subtotal
+                                                                        .toString())
+                                                                    .formated,
                                                                 style: FlutterFlowTheme.of(
                                                                         context)
                                                                     .bodyText1,

@@ -3,6 +3,7 @@ import '../backend/backend.dart';
 import '../components/header_widget.dart';
 import '../components/main_menu_widget.dart';
 import '../components/update_plan_page_widget.dart';
+import '../custom_code/widgets/index.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_toggle_icon.dart';
 import '../flutter_flow/flutter_flow_util.dart';
@@ -445,15 +446,11 @@ class _PlanListPageWidgetState extends State<PlanListPageWidget> {
                                                     Expanded(
                                                       flex: 2,
                                                       child: Text(
-                                                        formatNumber(
-                                                          listViewPlansRecord
-                                                              .unitAmount,
-                                                          formatType:
-                                                              FormatType.custom,
-                                                          currency: '￥',
-                                                          format: '#,##0',
-                                                          locale: 'ja_JP',
-                                                        ),
+                                                        CurrencyChecker.create(
+                                                                listViewPlansRecord
+                                                                    .unitAmount
+                                                                    .toString())
+                                                            .formated,
                                                         textAlign:
                                                             TextAlign.center,
                                                         style:
@@ -465,15 +462,11 @@ class _PlanListPageWidgetState extends State<PlanListPageWidget> {
                                                     Expanded(
                                                       flex: 2,
                                                       child: Text(
-                                                        formatNumber(
-                                                          listViewPlansRecord
-                                                              .shippingFeeNormal,
-                                                          formatType:
-                                                              FormatType.custom,
-                                                          currency: '￥',
-                                                          format: '#,##0',
-                                                          locale: 'ja_JP',
-                                                        ),
+                                                        CurrencyChecker.create(
+                                                                listViewPlansRecord
+                                                                    .shippingFeeNormal
+                                                                    .toString())
+                                                            .formated,
                                                         textAlign:
                                                             TextAlign.center,
                                                         style:
