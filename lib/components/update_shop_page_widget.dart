@@ -46,7 +46,7 @@ class _UpdateShopPageWidgetState extends State<UpdateShopPageWidget> {
   TextEditingController textController13;
   final formKey = GlobalKey<FormState>();
 
-  final String NO_IMAGE =
+  static const NO_IMAGE =
       'https://firebasestorage.googleapis.com/v0/b/baylifedev.appspot.com/o/assets%2FNoImage.png?alt=media&token=16c12fc7-9de4-4531-9b81-c4b0e7a07945';
   Future<ShopsRecord> shop;
   List<CatShopRecord> catShops;
@@ -57,7 +57,7 @@ class _UpdateShopPageWidgetState extends State<UpdateShopPageWidget> {
   bool isNew = true;
   int shippingFee = 0;
   int shippingFreeTotal = 0;
-  String status = '追加';
+  String label = '追加';
 
   Future<ShopsRecord> _getShop() async {
     catShops = await queryCatShopRecordOnce();
@@ -85,8 +85,7 @@ class _UpdateShopPageWidgetState extends State<UpdateShopPageWidget> {
     banner = _shop.banner;
     shippingFee = _shop.shippingFee;
     shippingFreeTotal = _shop.shippingFreeTotal;
-    status = '更新';
-
+    label = '更新';
     return _shop;
   }
 
@@ -1191,17 +1190,16 @@ class _UpdateShopPageWidgetState extends State<UpdateShopPageWidget> {
                                   FFButtonWidget(
                                     onPressed: () async {
                                       logFirebaseEvent(
-                                          'UPDATE_SHOP_PAGE_COMP_${status}_BTN_ON_TAP');
+                                          'UPDATE_SHOP_PAGE_COMP_${label}_BTN_ON_TAP');
                                       logFirebaseEvent('Button_Alert-Dialog');
                                       var confirmDialogResponse =
                                           await showDialog<bool>(
                                                 context: context,
                                                 builder: (alertDialogContext) {
                                                   return AlertDialog(
-                                                    title:
-                                                        Text('ショップ${status}'),
+                                                    title: Text('ショップ${label}'),
                                                     content: Text(
-                                                        'ショップを${status}します。'),
+                                                        'ショップを${label}します。'),
                                                     actions: [
                                                       TextButton(
                                                         onPressed: () =>
@@ -1231,15 +1229,17 @@ class _UpdateShopPageWidgetState extends State<UpdateShopPageWidget> {
                                             textController5.text,
                                             NO_IMAGE,
                                           ),
-                                          description: textController4.text,
+                                          description:
+                                              textController4.text ?? '',
                                           display: false,
-                                          email: textController8.text,
-                                          instagram: textController11.text,
-                                          phone: textController9.text,
-                                          shopName: textController1.text,
-                                          twitter: textController12.text,
-                                          web: textController13.text,
-                                          director: currentUserReference,
+                                          email: textController8.text ?? '',
+                                          instagram:
+                                              textController11.text ?? '',
+                                          phone: textController9.text ?? '',
+                                          shopName: textController1.text ?? '',
+                                          twitter: textController12.text ?? '',
+                                          web: textController13.text ?? '',
+                                          director: currentUserReference ?? '',
                                           shippingFee: shippingFee,
                                           shippingFreeTotal: shippingFreeTotal,
                                         );
@@ -1269,7 +1269,7 @@ class _UpdateShopPageWidgetState extends State<UpdateShopPageWidget> {
                                             .showSnackBar(
                                           SnackBar(
                                             content: Text(
-                                              'ショップを${status}しました。',
+                                              'ショップを${label}しました。',
                                               style: TextStyle(),
                                             ),
                                             duration:
@@ -1315,7 +1315,7 @@ class _UpdateShopPageWidgetState extends State<UpdateShopPageWidget> {
                                         return;
                                       }
                                     },
-                                    text: status,
+                                    text: label,
                                     options: FFButtonOptions(
                                       width: 130,
                                       height: 60,
