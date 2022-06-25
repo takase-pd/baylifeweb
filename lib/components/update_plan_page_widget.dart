@@ -27,7 +27,7 @@ class UpdatePlanPageWidget extends StatefulWidget {
 
 class _UpdatePlanPageWidgetState extends State<UpdatePlanPageWidget> {
   DateTime datePicked;
-  String uploadedFileUrl = '';
+  // String uploadedFileUrl = '';
   String dropDownValue;
   TextEditingController textController1;
   TextEditingController textController2;
@@ -40,15 +40,28 @@ class _UpdatePlanPageWidgetState extends State<UpdatePlanPageWidget> {
   String radioButtonValue;
   final formKey = GlobalKey<FormState>();
 
+  static const NO_IMAGE =
+      'https://firebasestorage.googleapis.com/v0/b/baylifedev.appspot.com/o/assets%2FNoImage.png?alt=media&token=16c12fc7-9de4-4531-9b81-c4b0e7a07945';
   Future<PlansRecord> plan;
   Future<List<ShopsRecord>> shops;
+  String banner;
+  bool isNew = true;
+  int unitAmount = 0;
+  int shippingFeeNormal = 0;
+  String label = '追加';
 
   Future<PlansRecord> _getPlan() async {
-    if (widget.plan == null) return PlansRecord();
+    if (widget.plan == null) {
+      banner = NO_IMAGE;
+      return PlansRecord();
+    }
 
+    isNew = false;
     final _plan = await PlansRecord.getDocumentOnce(widget.plan);
     final shopName = await _plan.getShopName();
     textController1 = TextEditingController(text: shopName);
+    banner = _plan.banner;
+    label = '更新';
     return _plan;
   }
 
@@ -63,7 +76,6 @@ class _UpdatePlanPageWidgetState extends State<UpdatePlanPageWidget> {
   @override
   void initState() {
     super.initState();
-    textController6 = TextEditingController(text: uploadedFileUrl);
     plan = _getPlan();
     shops = _getShops();
   }
@@ -114,10 +126,17 @@ class _UpdatePlanPageWidgetState extends State<UpdatePlanPageWidget> {
                                 EdgeInsetsDirectional.fromSTEB(0, 0, 0, 16),
                             child: Row(
                               mainAxisSize: MainAxisSize.max,
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 Text(
                                   '商品詳細',
                                   style: FlutterFlowTheme.of(context).subtitle2,
+                                ),
+                                Image.network(
+                                  banner,
+                                  width: 400,
+                                  height: 64,
+                                  fit: BoxFit.cover,
                                 ),
                               ],
                             ),
@@ -340,18 +359,21 @@ class _UpdatePlanPageWidgetState extends State<UpdatePlanPageWidget> {
                                           16, 0, 0, 0),
                                       child: TextFormField(
                                         controller: textController3 ??=
-                                            TextEditingController(
-                                          text: formatNumber(
-                                            containerPlansRecord.unitAmount,
-                                            formatType: FormatType.custom,
-                                            currency: '￥',
-                                            format: '#,##0',
-                                            locale: 'ja_JP',
-                                          ),
-                                        ),
+                                            CurrencyChecker.create(
+                                                    unitAmount.toString())
+                                                .controller,
+                                        onChanged: (text) {
+                                          final checker =
+                                              CurrencyChecker.create(text);
+                                          setState(() {
+                                            textController3 =
+                                                checker.controller;
+                                            unitAmount = checker.currency;
+                                          });
+                                        },
                                         obscureText: false,
                                         decoration: InputDecoration(
-                                          labelText: '料金',
+                                          labelText: '料金（半角数字）',
                                           enabledBorder: UnderlineInputBorder(
                                             borderSide: BorderSide(
                                               color: Color(0x00000000),
@@ -564,7 +586,8 @@ class _UpdatePlanPageWidgetState extends State<UpdatePlanPageWidget> {
                                   children: [
                                     Expanded(
                                       child: TextFormField(
-                                        controller: textController6,
+                                        controller: textController6 ??=
+                                            TextEditingController(text: banner),
                                         obscureText: false,
                                         decoration: InputDecoration(
                                           labelText: 'バナー画像',
@@ -643,8 +666,11 @@ class _UpdatePlanPageWidgetState extends State<UpdatePlanPageWidget> {
                                           if (downloadUrls != null &&
                                               downloadUrls.length ==
                                                   selectedMedia.length) {
-                                            setState(() => uploadedFileUrl =
-                                                downloadUrls.first);
+                                            setState(
+                                              () => textController6 =
+                                                  TextEditingController(
+                                                      text: downloadUrls.first),
+                                            );
                                             showUploadMessage(
                                               context,
                                               'Success!',
@@ -870,19 +896,23 @@ class _UpdatePlanPageWidgetState extends State<UpdatePlanPageWidget> {
                                           16, 0, 0, 0),
                                       child: TextFormField(
                                         controller: textController8 ??=
-                                            TextEditingController(
-                                          text: formatNumber(
-                                            containerPlansRecord
-                                                .shippingFeeNormal,
-                                            formatType: FormatType.custom,
-                                            currency: '￥',
-                                            format: '#,##0',
-                                            locale: 'ja_JP',
-                                          ),
-                                        ),
+                                            CurrencyChecker.create(
+                                                    shippingFeeNormal
+                                                        .toString())
+                                                .controller,
+                                        onChanged: (text) {
+                                          final checker =
+                                              CurrencyChecker.create(text);
+                                          setState(() {
+                                            textController8 =
+                                                checker.controller;
+                                            shippingFeeNormal =
+                                                checker.currency;
+                                          });
+                                        },
                                         obscureText: false,
                                         decoration: InputDecoration(
-                                          labelText: '送料',
+                                          labelText: '送料（半角数字）',
                                           enabledBorder: UnderlineInputBorder(
                                             borderSide: BorderSide(
                                               color: Color(0x00000000),
@@ -979,7 +1009,7 @@ class _UpdatePlanPageWidgetState extends State<UpdatePlanPageWidget> {
                             ),
                           ),
                           Text(
-                            'は手動で設定する必要があります。',
+                            '',
                             style: FlutterFlowTheme.of(context).bodyText1,
                           ),
                           Padding(
@@ -994,15 +1024,16 @@ class _UpdatePlanPageWidgetState extends State<UpdatePlanPageWidget> {
                                   FFButtonWidget(
                                     onPressed: () async {
                                       logFirebaseEvent(
-                                          'UPDATE_PLAN_PAGE_COMP_更新_BTN_ON_TAP');
+                                          'UPDATE_PLAN_PAGE_COMP_${label}_BTN_ON_TAP');
                                       logFirebaseEvent('Button_Alert-Dialog');
                                       var confirmDialogResponse =
                                           await showDialog<bool>(
                                                 context: context,
                                                 builder: (alertDialogContext) {
                                                   return AlertDialog(
-                                                    title: Text('商品追加'),
-                                                    content: Text('商品を追加します。'),
+                                                    title: Text('商品$label'),
+                                                    content:
+                                                        Text('商品を$labelします。'),
                                                     actions: [
                                                       TextButton(
                                                         onPressed: () =>
@@ -1030,7 +1061,10 @@ class _UpdatePlanPageWidgetState extends State<UpdatePlanPageWidget> {
                                             createPlansRecordData(
                                           active: false,
                                           activeQuick: false,
-                                          banner: uploadedFileUrl,
+                                          banner: valueOrDefault<String>(
+                                            textController6.text,
+                                            NO_IMAGE,
+                                          ),
                                           description:
                                               textController7?.text ?? '',
                                           name: textController2?.text ?? '',
@@ -1039,10 +1073,8 @@ class _UpdatePlanPageWidgetState extends State<UpdatePlanPageWidget> {
                                               textController4?.text ?? ''),
                                           shippingEachFee: false,
                                           shippingQuick: '',
-                                          unitAmount: int.parse(
-                                              textController3?.text ?? ''),
-                                          shippingFeeNormal: int.parse(
-                                              textController8?.text ?? ''),
+                                          unitAmount: unitAmount,
+                                          shippingFeeNormal: shippingFeeNormal,
                                           shippingNormal:
                                               textController7?.text ?? '',
                                         );
@@ -1055,7 +1087,7 @@ class _UpdatePlanPageWidgetState extends State<UpdatePlanPageWidget> {
                                             .showSnackBar(
                                           SnackBar(
                                             content: Text(
-                                              '商品を追加しました。',
+                                              '商品を$labelしました。',
                                               style: TextStyle(),
                                             ),
                                             duration:
@@ -1076,7 +1108,7 @@ class _UpdatePlanPageWidgetState extends State<UpdatePlanPageWidget> {
                                         return;
                                       }
                                     },
-                                    text: '更新',
+                                    text: label,
                                     options: FFButtonOptions(
                                       width: 130,
                                       height: 60,
