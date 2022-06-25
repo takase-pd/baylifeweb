@@ -398,12 +398,39 @@ class _ShopListPageWidgetState extends State<ShopListPageWidget> {
                                                   ),
                                                   Expanded(
                                                     flex: 3,
-                                                    child: Text(
-                                                      'Company Name',
-                                                      style:
-                                                          FlutterFlowTheme.of(
-                                                                  context)
+                                                    child: StreamBuilder<
+                                                        CompaniesRecord>(
+                                                      stream: CompaniesRecord
+                                                          .getDocument(
+                                                              listViewShopsRecord
+                                                                  .company),
+                                                      builder:
+                                                          (context, snapshot) {
+                                                        // Customize what your widget looks like when it's loading.
+                                                        if (!snapshot.hasData) {
+                                                          return Center(
+                                                            child: SizedBox(
+                                                              width: 50,
+                                                              height: 50,
+                                                              child:
+                                                                  SpinKitPulse(
+                                                                color: FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .primaryColor,
+                                                                size: 50,
+                                                              ),
+                                                            ),
+                                                          );
+                                                        }
+                                                        final companiesRecord =
+                                                            snapshot.data;
+                                                        return Text(
+                                                          companiesRecord.name,
+                                                          style: FlutterFlowTheme
+                                                                  .of(context)
                                                               .bodyText1,
+                                                        );
+                                                      },
                                                     ),
                                                   ),
                                                   Expanded(
