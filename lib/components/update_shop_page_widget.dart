@@ -463,7 +463,6 @@ class _UpdateShopPageWidgetState extends State<UpdateShopPageWidget> {
                             padding:
                                 EdgeInsetsDirectional.fromSTEB(0, 0, 0, 16),
                             child: Container(
-                              height: 60,
                               decoration: BoxDecoration(
                                 color: FlutterFlowTheme.of(context).background,
                                 borderRadius: BorderRadius.circular(8),
@@ -480,6 +479,9 @@ class _UpdateShopPageWidgetState extends State<UpdateShopPageWidget> {
                                       child: TextFormField(
                                         controller: textController5 ??=
                                             TextEditingController(text: banner),
+                                        maxLines: 5,
+                                        minLines: 1,
+                                        keyboardType: TextInputType.multiline,
                                         obscureText: false,
                                         decoration: InputDecoration(
                                           labelText: 'バナー画像',
