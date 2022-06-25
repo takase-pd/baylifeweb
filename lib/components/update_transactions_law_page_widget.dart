@@ -1,21 +1,22 @@
 import '../auth/auth_util.dart';
 import '../backend/api_requests/api_calls.dart';
 import '../backend/backend.dart';
+import '../custom_code/widgets/index.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class UpdateTransactionsLawPageWidget extends StatefulWidget {
   const UpdateTransactionsLawPageWidget({
     Key key,
     this.shop,
+    this.law,
   }) : super(key: key);
 
   final ShopsRecord shop;
+  final TransactionsLaw law;
 
   @override
   _UpdateTransactionsLawPageWidgetState createState() =>
@@ -43,24 +44,12 @@ class _UpdateTransactionsLawPageWidgetState
   @override
   void initState() {
     super.initState();
-    textController1 = TextEditingController();
-    textController2 = TextEditingController();
-    textController3 = TextEditingController();
-    textController4 = TextEditingController();
-    textController5 = TextEditingController();
-    textController6 = TextEditingController();
-    textController7 = TextEditingController();
-    textController8 = TextEditingController();
-    textController9 = TextEditingController();
-    textController10 = TextEditingController();
     textController11 = TextEditingController(text: 'Bay Lifeアプリの決済方法に準じます。');
-    textController12 = TextEditingController();
-    textController13 = TextEditingController();
-    textController14 = TextEditingController();
   }
 
   @override
   Widget build(BuildContext context) {
+    final law = widget.law;
     return Form(
       key: formKey,
       autovalidateMode: AutovalidateMode.always,
@@ -124,7 +113,9 @@ class _UpdateTransactionsLawPageWidgetState
                                   padding: EdgeInsetsDirectional.fromSTEB(
                                       16, 0, 0, 0),
                                   child: TextFormField(
-                                    controller: textController1,
+                                    controller: textController1 ??=
+                                        TextEditingController(
+                                            text: law.company),
                                     obscureText: false,
                                     decoration: InputDecoration(
                                       labelText: '販売業者',
@@ -178,7 +169,9 @@ class _UpdateTransactionsLawPageWidgetState
                                   padding: EdgeInsetsDirectional.fromSTEB(
                                       16, 0, 0, 0),
                                   child: TextFormField(
-                                    controller: textController2,
+                                    controller: textController2 ??=
+                                        TextEditingController(
+                                            text: law.director),
                                     obscureText: false,
                                     decoration: InputDecoration(
                                       labelText: '代表責任者',
@@ -234,7 +227,9 @@ class _UpdateTransactionsLawPageWidgetState
                                   padding: EdgeInsetsDirectional.fromSTEB(
                                       16, 0, 0, 0),
                                   child: TextFormField(
-                                    controller: textController3,
+                                    controller: textController3 ??=
+                                        TextEditingController(
+                                            text: law.postalCode),
                                     obscureText: false,
                                     decoration: InputDecoration(
                                       labelText: '郵便番号',
@@ -276,7 +271,9 @@ class _UpdateTransactionsLawPageWidgetState
                                   padding: EdgeInsetsDirectional.fromSTEB(
                                       8, 0, 0, 0),
                                   child: TextFormField(
-                                    controller: textController4,
+                                    controller: textController4 ??=
+                                        TextEditingController(
+                                            text: law.address),
                                     obscureText: false,
                                     decoration: InputDecoration(
                                       labelText: '住所',
@@ -331,7 +328,8 @@ class _UpdateTransactionsLawPageWidgetState
                                   padding: EdgeInsetsDirectional.fromSTEB(
                                       16, 0, 0, 0),
                                   child: TextFormField(
-                                    controller: textController5,
+                                    controller: textController5 ??=
+                                        TextEditingController(text: law.phone),
                                     obscureText: false,
                                     decoration: InputDecoration(
                                       labelText: '電話番号',
@@ -386,7 +384,8 @@ class _UpdateTransactionsLawPageWidgetState
                                   padding: EdgeInsetsDirectional.fromSTEB(
                                       16, 0, 0, 0),
                                   child: TextFormField(
-                                    controller: textController6,
+                                    controller: textController6 ??=
+                                        TextEditingController(text: law.email),
                                     obscureText: false,
                                     decoration: InputDecoration(
                                       labelText: 'メールアドレス',
@@ -441,7 +440,8 @@ class _UpdateTransactionsLawPageWidgetState
                                   padding: EdgeInsetsDirectional.fromSTEB(
                                       16, 0, 0, 0),
                                   child: TextFormField(
-                                    controller: textController7,
+                                    controller: textController7 ??=
+                                        TextEditingController(text: law.web),
                                     obscureText: false,
                                     decoration: InputDecoration(
                                       labelText: 'ホームページURL',
@@ -496,7 +496,9 @@ class _UpdateTransactionsLawPageWidgetState
                                   padding: EdgeInsetsDirectional.fromSTEB(
                                       16, 0, 0, 0),
                                   child: TextFormField(
-                                    controller: textController8,
+                                    controller: textController8 ??=
+                                        TextEditingController(
+                                            text: law.unitAmount),
                                     obscureText: false,
                                     decoration: InputDecoration(
                                       labelText: '販売価格',
@@ -550,7 +552,9 @@ class _UpdateTransactionsLawPageWidgetState
                                   padding: EdgeInsetsDirectional.fromSTEB(
                                       16, 0, 0, 0),
                                   child: TextFormField(
-                                    controller: textController9,
+                                    controller: textController9 ??=
+                                        TextEditingController(
+                                            text: law.otherFees),
                                     obscureText: false,
                                     decoration: InputDecoration(
                                       labelText: '商品代金以外の必要料金',
@@ -604,7 +608,9 @@ class _UpdateTransactionsLawPageWidgetState
                                   padding: EdgeInsetsDirectional.fromSTEB(
                                       16, 0, 0, 0),
                                   child: TextFormField(
-                                    controller: textController10,
+                                    controller: textController10 ??=
+                                        TextEditingController(
+                                            text: law.delvTime),
                                     obscureText: false,
                                     decoration: InputDecoration(
                                       labelText: '引き渡し時期',
@@ -658,7 +664,9 @@ class _UpdateTransactionsLawPageWidgetState
                                   padding: EdgeInsetsDirectional.fromSTEB(
                                       16, 0, 0, 0),
                                   child: TextFormField(
-                                    controller: textController11,
+                                    controller: textController11 ??=
+                                        TextEditingController(
+                                            text: law.paymentMethod),
                                     readOnly: true,
                                     obscureText: false,
                                     decoration: InputDecoration(
@@ -713,7 +721,8 @@ class _UpdateTransactionsLawPageWidgetState
                                   padding: EdgeInsetsDirectional.fromSTEB(
                                       16, 0, 0, 0),
                                   child: TextFormField(
-                                    controller: textController12,
+                                    controller: textController12 ??=
+                                        TextEditingController(text: law.rec),
                                     obscureText: false,
                                     decoration: InputDecoration(
                                       labelText: '返品・交換・キャンセル等',
@@ -767,7 +776,9 @@ class _UpdateTransactionsLawPageWidgetState
                                   padding: EdgeInsetsDirectional.fromSTEB(
                                       16, 0, 0, 0),
                                   child: TextFormField(
-                                    controller: textController13,
+                                    controller: textController13 ??=
+                                        TextEditingController(
+                                            text: law.returnPeriod),
                                     obscureText: false,
                                     decoration: InputDecoration(
                                       labelText: '返品期限',
@@ -821,7 +832,9 @@ class _UpdateTransactionsLawPageWidgetState
                                   padding: EdgeInsetsDirectional.fromSTEB(
                                       16, 0, 0, 0),
                                   child: TextFormField(
-                                    controller: textController14,
+                                    controller: textController14 ??=
+                                        TextEditingController(
+                                            text: law.returnCharge),
                                     obscureText: false,
                                     decoration: InputDecoration(
                                       labelText: '返品送料',
@@ -878,8 +891,9 @@ class _UpdateTransactionsLawPageWidgetState
                                             context: context,
                                             builder: (alertDialogContext) {
                                               return AlertDialog(
-                                                title: Text('ショップ追加'),
-                                                content: Text('ショップを追加します。'),
+                                                title: Text('更新'),
+                                                content:
+                                                    Text('特定商取引法に基づく表記を更新します。'),
                                                 actions: [
                                                   TextButton(
                                                     onPressed: () =>
@@ -902,7 +916,10 @@ class _UpdateTransactionsLawPageWidgetState
                                           false;
                                   if (confirmDialogResponse) {
                                     logFirebaseEvent('Button_Backend-Call');
+                                    final _appCheckToken =
+                                        await AppCheckAgent.getToken(context);
                                     await UpdateTransactionsLawCall.call(
+                                      shopPath: law.path,
                                       uid: currentUserUid,
                                       address: textController4.text,
                                       company: textController1.text,
@@ -915,21 +932,27 @@ class _UpdateTransactionsLawPageWidgetState
                                       rec: textController12.text,
                                       returnCharge: textController14.text,
                                       returnPeriod: textController13.text,
-                                      tel: textController5.text,
+                                      phone: textController5.text,
                                       unitAmount: textController8.text,
                                       web: textController7.text,
+                                      accessToken: currentJwtToken,
+                                      appCheckToken: _appCheckToken,
                                     );
                                     logFirebaseEvent('Button_Show-Snack-Bar');
                                     ScaffoldMessenger.of(context).showSnackBar(
                                       SnackBar(
                                         content: Text(
-                                          'ショップを追加しました。',
+                                          'ショップを更新しました。',
                                           style: TextStyle(),
                                         ),
                                         duration: Duration(milliseconds: 4000),
                                         backgroundColor: Color(0x00000000),
                                       ),
                                     );
+                                    logFirebaseEvent('Button_Navigate-Back');
+                                    int count = 0;
+                                    Navigator.popUntil(
+                                        context, (_) => count++ >= 2);
                                     return;
                                   } else {
                                     return;

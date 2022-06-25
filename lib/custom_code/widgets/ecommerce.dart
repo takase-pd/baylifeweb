@@ -158,6 +158,7 @@ class OrderedPlan {
 }
 
 class TransactionsLaw {
+  final String path;
   final String address;
   final String company;
   final String delvTime;
@@ -174,6 +175,7 @@ class TransactionsLaw {
   final String web;
 
   TransactionsLaw({
+    this.path,
     this.address,
     this.company,
     this.delvTime,
@@ -194,19 +196,18 @@ class TransactionsLaw {
     String path,
     BuildContext context,
   ) async {
-    TransactionsLaw law;
-
     final _appCheckToken = await AppCheckAgent.getToken(context);
-    if (_appCheckToken == null) return law;
+    if (_appCheckToken == null) return TransactionsLaw();
 
     final apiCallOutput = await TransactionsLawCall.call(
       path: path,
       appCheckToken: _appCheckToken,
     );
     final _apiJson = getJsonField(apiCallOutput.jsonBody, r'''$.result''');
-    if (!_apiJson['success']) return law;
+    if (!_apiJson['success']) return TransactionsLaw(path: path);
 
-    law = TransactionsLaw(
+    return TransactionsLaw(
+      path: path,
       address: _apiJson['law']['address'],
       company: _apiJson['law']['company'],
       delvTime: _apiJson['law']['delvTime'],
@@ -222,8 +223,6 @@ class TransactionsLaw {
       unitAmount: _apiJson['law']['unitAmount'],
       web: _apiJson['law']['web'],
     );
-
-    return law;
   }
 }
 
