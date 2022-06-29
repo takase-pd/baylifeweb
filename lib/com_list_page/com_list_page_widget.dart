@@ -136,6 +136,12 @@ class _ComListPageWidgetState extends State<ComListPageWidget> {
                                             backgroundColor: Colors.transparent,
                                             barrierColor: Color(0x8E484848),
                                             context: context,
+                                            constraints: BoxConstraints(
+                                              maxWidth: MediaQuery.of(context)
+                                                      .size
+                                                      .width *
+                                                  0.64,
+                                            ),
                                             builder: (context) {
                                               return Padding(
                                                 padding: MediaQuery.of(context)
@@ -295,6 +301,12 @@ class _ComListPageWidgetState extends State<ComListPageWidget> {
                                                   Colors.transparent,
                                               barrierColor: Color(0x8E484848),
                                               context: context,
+                                              constraints: BoxConstraints(
+                                                maxWidth: MediaQuery.of(context)
+                                                        .size
+                                                        .width *
+                                                    0.64,
+                                              ),
                                               builder: (context) {
                                                 return Padding(
                                                   padding:
@@ -308,8 +320,7 @@ class _ComListPageWidgetState extends State<ComListPageWidget> {
                                                             0.96,
                                                     child: UpdateComPageWidget(
                                                       company:
-                                                          listViewCompaniesRecord
-                                                              .reference,
+                                                          listViewCompaniesRecord,
                                                     ),
                                                   ),
                                                 );
@@ -352,44 +363,6 @@ class _ComListPageWidgetState extends State<ComListPageWidget> {
                                                           FlutterFlowTheme.of(
                                                                   context)
                                                               .bodyText1,
-                                                    ),
-                                                  ),
-                                                  Expanded(
-                                                    flex: 3,
-                                                    child: FutureBuilder<
-                                                        UsersRecord>(
-                                                      future: UsersRecord
-                                                          .getDocumentOnce(
-                                                              listViewCompaniesRecord
-                                                                  .director),
-                                                      builder:
-                                                          (context, snapshot) {
-                                                        // Customize what your widget looks like when it's loading.
-                                                        if (!snapshot.hasData) {
-                                                          return Center(
-                                                            child: SizedBox(
-                                                              width: 50,
-                                                              height: 50,
-                                                              child:
-                                                                  SpinKitPulse(
-                                                                color: FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .primaryColor,
-                                                                size: 50,
-                                                              ),
-                                                            ),
-                                                          );
-                                                        }
-                                                        final textUsersRecord =
-                                                            snapshot.data;
-                                                        return Text(
-                                                          textUsersRecord
-                                                              .displayName,
-                                                          style: FlutterFlowTheme
-                                                                  .of(context)
-                                                              .bodyText1,
-                                                        );
-                                                      },
                                                     ),
                                                   ),
                                                   Expanded(
