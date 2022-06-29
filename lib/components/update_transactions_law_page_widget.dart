@@ -979,7 +979,7 @@ class _UpdateTransactionsLawPageWidgetState
                                           rec: textController12.text,
                                           returnCharge: textController14.text,
                                           returnPeriod: textController13.text,
-                                          tel: textController5.text,
+                                          phone: textController5.text,
                                           unitAmount: textController8.text,
                                           web: textController7.text,
                                         );
@@ -997,6 +997,9 @@ class _UpdateTransactionsLawPageWidgetState
                                             backgroundColor: Color(0x00000000),
                                           ),
                                         );
+                                        logFirebaseEvent(
+                                            'Button_Navigate-Back');
+                                        Navigator.pop(context);
                                         return;
                                       } else {
                                         return;

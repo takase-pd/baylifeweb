@@ -16,7 +16,7 @@ class _TopHeaderWidgetState extends State<TopHeaderWidget> {
   Widget build(BuildContext context) {
     return Container(
       width: double.infinity,
-      height: 16,
+      height: 24,
       decoration: BoxDecoration(
         color: FlutterFlowTheme.of(context).primaryColor,
       ),

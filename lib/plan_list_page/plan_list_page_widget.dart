@@ -421,8 +421,11 @@ class _PlanListPageWidgetState extends State<PlanListPageWidget> {
                                                     Expanded(
                                                       flex: 4,
                                                       child: Text(
-                                                        listViewPlansRecord
-                                                            .name,
+                                                        listViewPlansRecord.name
+                                                            .maybeHandleOverflow(
+                                                          maxChars: 24,
+                                                          replacement: '…',
+                                                        ),
                                                         style:
                                                             FlutterFlowTheme.of(
                                                                     context)
@@ -514,7 +517,7 @@ class _PlanListPageWidgetState extends State<PlanListPageWidget> {
                                                           final plansUpdateData =
                                                               createPlansRecordData(
                                                             active:
-                                                                listViewPlansRecord
+                                                                !listViewPlansRecord
                                                                     .active,
                                                           );
                                                           await listViewPlansRecord

@@ -771,8 +771,8 @@ class _UpdatePlanPageWidgetState extends State<UpdatePlanPageWidget> {
                                       child: TextFormField(
                                         controller: textController7 ??=
                                             TextEditingController(
-                                          text:
-                                              containerPlansRecord.description,
+                                          text: containerPlansRecord
+                                              .shippingNormal,
                                         ),
                                         obscureText: false,
                                         decoration: InputDecoration(
@@ -1013,6 +1013,7 @@ class _UpdatePlanPageWidgetState extends State<UpdatePlanPageWidget> {
                                               textController8?.text ?? ''),
                                           shippingNormal:
                                               textController7?.text ?? '',
+                                          updated: getCurrentTimestamp,
                                         );
                                         await PlansRecord.collection
                                             .doc()

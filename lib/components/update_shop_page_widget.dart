@@ -1163,29 +1163,10 @@ class _UpdateShopPageWidgetState extends State<UpdateShopPageWidget> {
                                       if (confirmDialogResponse) {
                                         logFirebaseEvent('Button_Backend-Call');
 
-                                        final shopsCreateData =
-                                            createShopsRecordData(
-                                          banner: valueOrDefault<String>(
-                                            uploadedFileUrl,
-                                            'https://firebasestorage.googleapis.com/v0/b/baylife-ff782.appspot.com/o/assets%2FNoImage.png?alt=media&token=cfb3d70b-69d2-4f7f-be63-f429cc9872da',
-                                          ),
-                                          description: textController4.text,
-                                          display: false,
-                                          email: textController8.text,
-                                          instagram: textController11.text,
-                                          phone: textController9.text,
-                                          shopName: textController1.text,
-                                          twitter: textController12.text,
-                                          web: textController13.text,
-                                          director: currentUserReference,
-                                          shippingFee:
-                                              int.parse(textController6.text),
-                                          shippingFreeTotal:
-                                              int.parse(textController7.text),
-                                        );
-                                        await ShopsRecord.collection
-                                            .doc()
-                                            .set(shopsCreateData);
+                                        final shopsUpdateData =
+                                            createShopsRecordData();
+                                        await containerShopsRecord.reference
+                                            .update(shopsUpdateData);
                                         logFirebaseEvent(
                                             'Button_Show-Snack-Bar');
                                         ScaffoldMessenger.of(context)

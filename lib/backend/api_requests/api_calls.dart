@@ -332,14 +332,14 @@ class UpdateTransactionsLawCall {
     String rec = '',
     String returnCharge = '',
     String returnPeriod = '',
-    String tel = '',
+    String phone = '',
     String unitAmount = '',
     String web = '',
   }) {
     final body = '''
 {
   "data": {
-    "shop": "${shopPath}",
+    "shopPath": "${shopPath}",
     "uid": "${uid}",
     "address": "${address}",
     "company": "${company}",
@@ -348,11 +348,12 @@ class UpdateTransactionsLawCall {
     "email": "${email}",
     "otherFees": "${otherFees}",
     "paymentMethod": "${paymentMethod}",
+    "phone": "${phone}",
     "postalCode": "${postalCode}",
     "rec": "${rec}",
     "returnCharge": "${returnCharge}",
-    "returnPeciod": "${returnPeriod}",
-    "tel": "${tel}",
+    "returnPeriod": "${returnPeriod}",
+    "unitAmount": "${unitAmount}",
     "web": "${web}"
   }
 }''';
@@ -378,7 +379,7 @@ class UpdateTransactionsLawCall {
         'rec': rec,
         'returnCharge': returnCharge,
         'returnPeriod': returnPeriod,
-        'tel': tel,
+        'phone': phone,
         'unitAmount': unitAmount,
         'web': web,
       },
