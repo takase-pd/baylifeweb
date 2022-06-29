@@ -28,22 +28,22 @@ class UpdateShopPageWidget extends StatefulWidget {
 
 class _UpdateShopPageWidgetState extends State<UpdateShopPageWidget> {
   String uploadedFileUrl = '';
-  TextEditingController textController5;
-  String dropDownValue1;
-  TextEditingController textController2;
   TextEditingController textController1;
-  String dropDownValue2;
+  TextEditingController textController2;
   TextEditingController textController3;
   TextEditingController textController4;
+  TextEditingController textController5;
   TextEditingController textController6;
   TextEditingController textController7;
   TextEditingController textController8;
   TextEditingController textController9;
-  String dropDownValue3;
   TextEditingController textController10;
   TextEditingController textController11;
   TextEditingController textController12;
   TextEditingController textController13;
+  DocumentReference catMainRef;
+  DocumentReference comRef;
+  DocumentReference directorRef;
   final formKey = GlobalKey<FormState>();
 
   static const NO_IMAGE =
@@ -80,10 +80,13 @@ class _UpdateShopPageWidgetState extends State<UpdateShopPageWidget> {
     final catShop =
         catShops.firstWhere((element) => element.reference == _shop.catMain);
     textController2 = TextEditingController(text: catShop.catName);
+    catMainRef = _shop.catMain;
     final company =
         companies.firstWhere((element) => element.reference == _shop.company);
+    comRef = _shop.company;
     textController3 = TextEditingController(text: company.name);
     banner = _shop.banner;
+    directorRef = _shop.director;
     shippingFee = _shop.shippingFee;
     shippingFreeTotal = _shop.shippingFreeTotal;
     label = '更新';
@@ -213,6 +216,17 @@ class _UpdateShopPageWidgetState extends State<UpdateShopPageWidget> {
                                             borderRadius:
                                                 BorderRadius.circular(4),
                                           ),
+                                          focusedErrorBorder:
+                                              UnderlineInputBorder(
+                                            borderSide: BorderSide(
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .primaryColor,
+                                              width: 2,
+                                            ),
+                                            borderRadius:
+                                                BorderRadius.circular(4),
+                                          ),
                                         ),
                                         style: FlutterFlowTheme.of(context)
                                             .bodyText2
@@ -223,7 +237,7 @@ class _UpdateShopPageWidgetState extends State<UpdateShopPageWidget> {
                                         autovalidateMode:
                                             AutovalidateMode.always,
                                         validator: (val) {
-                                          return val.isEmpty
+                                          return val == null || val.isEmpty
                                               ? 'ショップ名を入力してください。'
                                               : null;
                                         },
@@ -293,6 +307,17 @@ class _UpdateShopPageWidgetState extends State<UpdateShopPageWidget> {
                                             borderRadius:
                                                 BorderRadius.circular(4),
                                           ),
+                                          focusedErrorBorder:
+                                              UnderlineInputBorder(
+                                            borderSide: BorderSide(
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .primaryColor,
+                                              width: 2,
+                                            ),
+                                            borderRadius:
+                                                BorderRadius.circular(4),
+                                          ),
                                         ),
                                         style: FlutterFlowTheme.of(context)
                                             .bodyText2
@@ -303,7 +328,7 @@ class _UpdateShopPageWidgetState extends State<UpdateShopPageWidget> {
                                         autovalidateMode:
                                             AutovalidateMode.always,
                                         validator: (val) {
-                                          return val.isEmpty
+                                          return val == null || val.isEmpty
                                               ? 'ショップカテゴリを選択してください。'
                                               : null;
                                         },
@@ -312,11 +337,10 @@ class _UpdateShopPageWidgetState extends State<UpdateShopPageWidget> {
                                     FlutterFlowDropDown(
                                       options: catShopList,
                                       onChanged: (val) => setState(() => {
-                                            dropDownValue1 = catShops
+                                            catMainRef = catShops
                                                 .firstWhere((element) =>
                                                     element.catName == val)
-                                                .reference
-                                                .toString(),
+                                                .reference,
                                             textController2 =
                                                 TextEditingController(text: val)
                                           }),
@@ -389,6 +413,17 @@ class _UpdateShopPageWidgetState extends State<UpdateShopPageWidget> {
                                               topRight: Radius.circular(4.0),
                                             ),
                                           ),
+                                          focusedErrorBorder:
+                                              UnderlineInputBorder(
+                                            borderSide: BorderSide(
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .primaryColor,
+                                              width: 2,
+                                            ),
+                                            borderRadius:
+                                                BorderRadius.circular(4),
+                                          ),
                                         ),
                                         style: FlutterFlowTheme.of(context)
                                             .bodyText2
@@ -399,7 +434,7 @@ class _UpdateShopPageWidgetState extends State<UpdateShopPageWidget> {
                                         autovalidateMode:
                                             AutovalidateMode.always,
                                         validator: (val) {
-                                          return val.isEmpty
+                                          return val == null || val.isEmpty
                                               ? '企業名を選択してください。'
                                               : null;
                                         },
@@ -411,11 +446,10 @@ class _UpdateShopPageWidgetState extends State<UpdateShopPageWidget> {
                                             .map((e) => e.name)
                                             .toList(),
                                         onChanged: (val) => setState(() => {
-                                              dropDownValue2 = companies
+                                              comRef = companies
                                                   .firstWhere((element) =>
                                                       element.name == val)
-                                                  .reference
-                                                  .toString(),
+                                                  .reference,
                                               textController3 =
                                                   TextEditingController(
                                                       text: val)
@@ -447,7 +481,7 @@ class _UpdateShopPageWidgetState extends State<UpdateShopPageWidget> {
                             padding:
                                 EdgeInsetsDirectional.fromSTEB(0, 0, 0, 16),
                             child: Container(
-                              height: 120,
+                              // height: 120,
                               decoration: BoxDecoration(
                                 color: FlutterFlowTheme.of(context).background,
                                 borderRadius: BorderRadius.circular(8),
@@ -497,7 +531,8 @@ class _UpdateShopPageWidgetState extends State<UpdateShopPageWidget> {
                                               fontFamily: 'Open Sans',
                                               fontWeight: FontWeight.w500,
                                             ),
-                                        maxLines: 10,
+                                        minLines: 2,
+                                        maxLines: 5,
                                         keyboardType: TextInputType.multiline,
                                       ),
                                     ),
@@ -555,6 +590,31 @@ class _UpdateShopPageWidgetState extends State<UpdateShopPageWidget> {
                                               topRight: Radius.circular(4.0),
                                             ),
                                           ),
+                                          errorStyle: TextStyle(
+                                            color: FlutterFlowTheme.of(context)
+                                                .primaryColor,
+                                          ),
+                                          errorBorder: UnderlineInputBorder(
+                                            borderSide: BorderSide(
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .primaryColor,
+                                              width: 2,
+                                            ),
+                                            borderRadius:
+                                                BorderRadius.circular(4),
+                                          ),
+                                          focusedErrorBorder:
+                                              UnderlineInputBorder(
+                                            borderSide: BorderSide(
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .primaryColor,
+                                              width: 2,
+                                            ),
+                                            borderRadius:
+                                                BorderRadius.circular(4),
+                                          ),
                                         ),
                                         style: FlutterFlowTheme.of(context)
                                             .bodyText2
@@ -562,6 +622,13 @@ class _UpdateShopPageWidgetState extends State<UpdateShopPageWidget> {
                                               fontFamily: 'Open Sans',
                                               fontWeight: FontWeight.w500,
                                             ),
+                                        autovalidateMode:
+                                            AutovalidateMode.always,
+                                        validator: (val) {
+                                          return val == null || val.isEmpty
+                                              ? 'バナー画像を選択してください。'
+                                              : null;
+                                        },
                                       ),
                                     ),
                                     FFButtonWidget(
@@ -853,6 +920,17 @@ class _UpdateShopPageWidgetState extends State<UpdateShopPageWidget> {
                                             borderRadius:
                                                 BorderRadius.circular(4),
                                           ),
+                                          focusedErrorBorder:
+                                              UnderlineInputBorder(
+                                            borderSide: BorderSide(
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .primaryColor,
+                                              width: 2,
+                                            ),
+                                            borderRadius:
+                                                BorderRadius.circular(4),
+                                          ),
                                         ),
                                         style: FlutterFlowTheme.of(context)
                                             .bodyText2
@@ -863,7 +941,7 @@ class _UpdateShopPageWidgetState extends State<UpdateShopPageWidget> {
                                         autovalidateMode:
                                             AutovalidateMode.always,
                                         validator: (val) {
-                                          return val.isEmpty
+                                          return val == null || val.isEmpty
                                               ? 'メールアドレスを入力してください。'
                                               : null;
                                         },
@@ -934,6 +1012,17 @@ class _UpdateShopPageWidgetState extends State<UpdateShopPageWidget> {
                                             borderRadius:
                                                 BorderRadius.circular(4),
                                           ),
+                                          focusedErrorBorder:
+                                              UnderlineInputBorder(
+                                            borderSide: BorderSide(
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .primaryColor,
+                                              width: 2,
+                                            ),
+                                            borderRadius:
+                                                BorderRadius.circular(4),
+                                          ),
                                         ),
                                         style: FlutterFlowTheme.of(context)
                                             .bodyText2
@@ -944,7 +1033,7 @@ class _UpdateShopPageWidgetState extends State<UpdateShopPageWidget> {
                                         autovalidateMode:
                                             AutovalidateMode.always,
                                         validator: (val) {
-                                          return val.isEmpty
+                                          return val == null || val.isEmpty
                                               ? '電話番号を入力してください。'
                                               : null;
                                         },
@@ -1027,6 +1116,17 @@ class _UpdateShopPageWidgetState extends State<UpdateShopPageWidget> {
                                                       Radius.circular(4.0),
                                                 ),
                                               ),
+                                              focusedErrorBorder:
+                                                  UnderlineInputBorder(
+                                                borderSide: BorderSide(
+                                                  color: FlutterFlowTheme.of(
+                                                          context)
+                                                      .primaryColor,
+                                                  width: 2,
+                                                ),
+                                                borderRadius:
+                                                    BorderRadius.circular(4),
+                                              ),
                                             ),
                                             style: FlutterFlowTheme.of(context)
                                                 .bodyText2
@@ -1037,7 +1137,7 @@ class _UpdateShopPageWidgetState extends State<UpdateShopPageWidget> {
                                             autovalidateMode:
                                                 AutovalidateMode.always,
                                             validator: (val) {
-                                              return val.isEmpty
+                                              return val == null || val.isEmpty
                                                   ? '管理者名を入力してください。'
                                                   : null;
                                             },
@@ -1047,8 +1147,13 @@ class _UpdateShopPageWidgetState extends State<UpdateShopPageWidget> {
                                       if (false)
                                         FlutterFlowDropDown(
                                           options: ['Option 1'],
-                                          onChanged: (val) => setState(
-                                              () => dropDownValue3 = val),
+                                          onChanged: (val) => setState(() => {
+                                                directorRef =
+                                                    currentUserReference,
+                                                textController10 =
+                                                    TextEditingController(
+                                                        text: val)
+                                              }),
                                           width: 240,
                                           height: 50,
                                           textStyle:
@@ -1300,9 +1405,9 @@ class _UpdateShopPageWidgetState extends State<UpdateShopPageWidget> {
                                                 context: context,
                                                 builder: (alertDialogContext) {
                                                   return AlertDialog(
-                                                    title: Text('ショップ${label}'),
-                                                    content: Text(
-                                                        'ショップを${label}します。'),
+                                                    title: Text('ショップ$label'),
+                                                    content:
+                                                        Text('ショップを$labelします。'),
                                                     actions: [
                                                       TextButton(
                                                         onPressed: () =>
@@ -1332,6 +1437,8 @@ class _UpdateShopPageWidgetState extends State<UpdateShopPageWidget> {
                                             textController5.text,
                                             NO_IMAGE,
                                           ),
+                                          catMain: catMainRef,
+                                          company: comRef,
                                           description:
                                               textController4.text ?? '',
                                           display: false,
@@ -1342,7 +1449,8 @@ class _UpdateShopPageWidgetState extends State<UpdateShopPageWidget> {
                                           shopName: textController1.text ?? '',
                                           twitter: textController12.text ?? '',
                                           web: textController13.text ?? '',
-                                          director: currentUserReference ?? '',
+                                          director: directorRef ??
+                                              currentUserReference,
                                           shippingFee: shippingFee,
                                           shippingFreeTotal: shippingFreeTotal,
                                         );
@@ -1372,7 +1480,7 @@ class _UpdateShopPageWidgetState extends State<UpdateShopPageWidget> {
                                             .showSnackBar(
                                           SnackBar(
                                             content: Text(
-                                              'ショップを${label}しました。',
+                                              'ショップを$labelしました。',
                                               style: TextStyle(),
                                             ),
                                             duration:
@@ -1408,6 +1516,7 @@ class _UpdateShopPageWidgetState extends State<UpdateShopPageWidget> {
                                                     UpdateTransactionsLawPageWidget(
                                                   shop: _shop,
                                                   law: law,
+                                                  isNew: isNew,
                                                 ),
                                               ),
                                             );

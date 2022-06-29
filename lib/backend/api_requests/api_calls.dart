@@ -357,7 +357,7 @@ class UpdateTransactionsLawCall {
     final body = '''
 {
   "data": {
-    "shop": "${shopPath}",
+    "shopPath": "${shopPath}",
     "uid": "${uid}",
     "address": "${address}",
     "company": "${company}",
@@ -370,7 +370,8 @@ class UpdateTransactionsLawCall {
     "postalCode": "${postalCode}",
     "rec": "${rec}",
     "returnCharge": "${returnCharge}",
-    "returnPeciod": "${returnPeriod}",
+    "returnPeriod": "${returnPeriod}",
+    "unitAmount": "${unitAmount}",
     "web": "${web}"
   }
 }''';

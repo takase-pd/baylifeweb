@@ -1,3 +1,4 @@
+import '../auth/auth_util.dart';
 import '../backend/backend.dart';
 import '../components/header_widget.dart';
 import '../components/main_menu_widget.dart';
@@ -198,7 +199,9 @@ class _ShopListPageWidgetState extends State<ShopListPageWidget> {
                                     pagingController: () {
                                       final Query<Object> Function(
                                               Query<Object>) queryBuilder =
-                                          (shopsRecord) => shopsRecord;
+                                          (shopsRecord) => shopsRecord.where(
+                                              'director',
+                                              isEqualTo: currentUserReference);
                                       if (_pagingController != null) {
                                         final query = queryBuilder(
                                             ShopsRecord.collection);
@@ -221,7 +224,9 @@ class _ShopListPageWidgetState extends State<ShopListPageWidget> {
                                           (nextPageMarker) {
                                         queryShopsRecordPage(
                                           queryBuilder: (shopsRecord) =>
-                                              shopsRecord,
+                                              shopsRecord.where('director',
+                                                  isEqualTo:
+                                                      currentUserReference),
                                           nextPageMarker: nextPageMarker,
                                           pageSize: 25,
                                           isStream: true,

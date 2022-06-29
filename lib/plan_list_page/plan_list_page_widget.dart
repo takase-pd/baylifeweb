@@ -435,8 +435,11 @@ class _PlanListPageWidgetState extends State<PlanListPageWidget> {
                                                     Expanded(
                                                       flex: 4,
                                                       child: Text(
-                                                        listViewPlansRecord
-                                                            .name,
+                                                        listViewPlansRecord.name
+                                                            .maybeHandleOverflow(
+                                                          maxChars: 24,
+                                                          replacement: '…',
+                                                        ),
                                                         style:
                                                             FlutterFlowTheme.of(
                                                                     context)
@@ -479,7 +482,11 @@ class _PlanListPageWidgetState extends State<PlanListPageWidget> {
                                                       flex: 4,
                                                       child: Text(
                                                         listViewPlansRecord
-                                                            .shippingNormal,
+                                                            .shippingNormal
+                                                            .maybeHandleOverflow(
+                                                          maxChars: 24,
+                                                          replacement: '…',
+                                                        ),
                                                         style:
                                                             FlutterFlowTheme.of(
                                                                     context)
@@ -517,11 +524,14 @@ class _PlanListPageWidgetState extends State<PlanListPageWidget> {
                                                       flex: 1,
                                                       child: ToggleIcon(
                                                         onPressed: () async {
+                                                          final value =
+                                                              listViewPlansRecord
+                                                                      .active
+                                                                  ? false
+                                                                  : true;
                                                           final plansUpdateData =
                                                               createPlansRecordData(
-                                                            active:
-                                                                listViewPlansRecord
-                                                                    .active,
+                                                            active: value,
                                                             updated:
                                                                 getCurrentTimestamp,
                                                           );

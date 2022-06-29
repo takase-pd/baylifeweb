@@ -13,10 +13,12 @@ class UpdateTransactionsLawPageWidget extends StatefulWidget {
     Key key,
     this.shop,
     this.law,
+    this.isNew,
   }) : super(key: key);
 
   final ShopsRecord shop;
   final TransactionsLaw law;
+  final bool isNew;
 
   @override
   _UpdateTransactionsLawPageWidgetState createState() =>
@@ -25,7 +27,6 @@ class UpdateTransactionsLawPageWidget extends StatefulWidget {
 
 class _UpdateTransactionsLawPageWidgetState
     extends State<UpdateTransactionsLawPageWidget> {
-  TextEditingController textController10;
   TextEditingController textController1;
   TextEditingController textController2;
   TextEditingController textController3;
@@ -35,16 +36,22 @@ class _UpdateTransactionsLawPageWidgetState
   TextEditingController textController7;
   TextEditingController textController8;
   TextEditingController textController9;
+  TextEditingController textController10;
   TextEditingController textController11;
   TextEditingController textController12;
   TextEditingController textController13;
   TextEditingController textController14;
   final formKey = GlobalKey<FormState>();
 
+  String label = '';
+  String alert = '';
+
   @override
   void initState() {
     super.initState();
+    textController8 = TextEditingController(text: '商品紹介ページをご参照ください。');
     textController11 = TextEditingController(text: 'Bay Lifeアプリの決済方法に準じます。');
+    widget.isNew ? label = '作成' : label = '更新';
   }
 
   @override
@@ -100,7 +107,6 @@ class _UpdateTransactionsLawPageWidgetState
                       Padding(
                         padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 16),
                         child: Container(
-                          height: 60,
                           decoration: BoxDecoration(
                             color: FlutterFlowTheme.of(context).background,
                             borderRadius: BorderRadius.circular(8),
@@ -111,7 +117,7 @@ class _UpdateTransactionsLawPageWidgetState
                               Expanded(
                                 child: Padding(
                                   padding: EdgeInsetsDirectional.fromSTEB(
-                                      16, 0, 0, 0),
+                                      16, 0, 16, 8),
                                   child: TextFormField(
                                     controller: textController1 ??=
                                         TextEditingController(
@@ -119,25 +125,33 @@ class _UpdateTransactionsLawPageWidgetState
                                     obscureText: false,
                                     decoration: InputDecoration(
                                       labelText: '販売業者',
+                                      isDense: true,
                                       enabledBorder: UnderlineInputBorder(
                                         borderSide: BorderSide(
                                           color: Color(0x00000000),
                                           width: 1,
                                         ),
-                                        borderRadius: const BorderRadius.only(
-                                          topLeft: Radius.circular(4.0),
-                                          topRight: Radius.circular(4.0),
-                                        ),
+                                        borderRadius: BorderRadius.circular(4),
                                       ),
                                       focusedBorder: UnderlineInputBorder(
                                         borderSide: BorderSide(
-                                          color: Color(0x00000000),
-                                          width: 1,
+                                          color: FlutterFlowTheme.of(context)
+                                              .primaryColor,
+                                          width: 2,
                                         ),
-                                        borderRadius: const BorderRadius.only(
-                                          topLeft: Radius.circular(4.0),
-                                          topRight: Radius.circular(4.0),
+                                        borderRadius: BorderRadius.circular(4),
+                                      ),
+                                      errorStyle: TextStyle(
+                                        color: FlutterFlowTheme.of(context)
+                                            .primaryColor,
+                                      ),
+                                      errorBorder: UnderlineInputBorder(
+                                        borderSide: BorderSide(
+                                          color: FlutterFlowTheme.of(context)
+                                              .primaryColor,
+                                          width: 2,
                                         ),
+                                        borderRadius: BorderRadius.circular(4),
                                       ),
                                     ),
                                     style: FlutterFlowTheme.of(context)
@@ -146,6 +160,13 @@ class _UpdateTransactionsLawPageWidgetState
                                           fontFamily: 'Open Sans',
                                           fontWeight: FontWeight.w500,
                                         ),
+                                    maxLines: 1,
+                                    autovalidateMode: AutovalidateMode.always,
+                                    validator: (val) {
+                                      return val.isEmpty
+                                          ? '販売業者名（企業名など）を入力してください。'
+                                          : null;
+                                    },
                                   ),
                                 ),
                               ),
@@ -156,7 +177,6 @@ class _UpdateTransactionsLawPageWidgetState
                       Padding(
                         padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 16),
                         child: Container(
-                          height: 60,
                           decoration: BoxDecoration(
                             color: FlutterFlowTheme.of(context).background,
                             borderRadius: BorderRadius.circular(8),
@@ -167,7 +187,7 @@ class _UpdateTransactionsLawPageWidgetState
                               Expanded(
                                 child: Padding(
                                   padding: EdgeInsetsDirectional.fromSTEB(
-                                      16, 0, 0, 0),
+                                      16, 0, 16, 8),
                                   child: TextFormField(
                                     controller: textController2 ??=
                                         TextEditingController(
@@ -175,25 +195,33 @@ class _UpdateTransactionsLawPageWidgetState
                                     obscureText: false,
                                     decoration: InputDecoration(
                                       labelText: '代表責任者',
+                                      isDense: true,
                                       enabledBorder: UnderlineInputBorder(
                                         borderSide: BorderSide(
                                           color: Color(0x00000000),
                                           width: 1,
                                         ),
-                                        borderRadius: const BorderRadius.only(
-                                          topLeft: Radius.circular(4.0),
-                                          topRight: Radius.circular(4.0),
-                                        ),
+                                        borderRadius: BorderRadius.circular(4),
                                       ),
                                       focusedBorder: UnderlineInputBorder(
                                         borderSide: BorderSide(
-                                          color: Color(0x00000000),
-                                          width: 1,
+                                          color: FlutterFlowTheme.of(context)
+                                              .primaryColor,
+                                          width: 2,
                                         ),
-                                        borderRadius: const BorderRadius.only(
-                                          topLeft: Radius.circular(4.0),
-                                          topRight: Radius.circular(4.0),
+                                        borderRadius: BorderRadius.circular(4),
+                                      ),
+                                      errorStyle: TextStyle(
+                                        color: FlutterFlowTheme.of(context)
+                                            .primaryColor,
+                                      ),
+                                      errorBorder: UnderlineInputBorder(
+                                        borderSide: BorderSide(
+                                          color: FlutterFlowTheme.of(context)
+                                              .primaryColor,
+                                          width: 2,
                                         ),
+                                        borderRadius: BorderRadius.circular(4),
                                       ),
                                     ),
                                     style: FlutterFlowTheme.of(context)
@@ -203,6 +231,13 @@ class _UpdateTransactionsLawPageWidgetState
                                           fontWeight: FontWeight.w500,
                                         ),
                                     keyboardType: TextInputType.name,
+                                    maxLines: 1,
+                                    autovalidateMode: AutovalidateMode.always,
+                                    validator: (val) {
+                                      return val.isEmpty
+                                          ? '代表責任者名を入力してください。'
+                                          : null;
+                                    },
                                   ),
                                 ),
                               ),
@@ -213,7 +248,6 @@ class _UpdateTransactionsLawPageWidgetState
                       Padding(
                         padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 16),
                         child: Container(
-                          height: 60,
                           decoration: BoxDecoration(
                             color: FlutterFlowTheme.of(context).background,
                             borderRadius: BorderRadius.circular(8),
@@ -225,7 +259,7 @@ class _UpdateTransactionsLawPageWidgetState
                                 flex: 1,
                                 child: Padding(
                                   padding: EdgeInsetsDirectional.fromSTEB(
-                                      16, 0, 0, 0),
+                                      16, 0, 16, 8),
                                   child: TextFormField(
                                     controller: textController3 ??=
                                         TextEditingController(
@@ -234,25 +268,33 @@ class _UpdateTransactionsLawPageWidgetState
                                     decoration: InputDecoration(
                                       labelText: '郵便番号',
                                       hintText: 'ハイフンなし',
+                                      isDense: true,
                                       enabledBorder: UnderlineInputBorder(
                                         borderSide: BorderSide(
                                           color: Color(0x00000000),
                                           width: 1,
                                         ),
-                                        borderRadius: const BorderRadius.only(
-                                          topLeft: Radius.circular(4.0),
-                                          topRight: Radius.circular(4.0),
-                                        ),
+                                        borderRadius: BorderRadius.circular(4),
                                       ),
                                       focusedBorder: UnderlineInputBorder(
                                         borderSide: BorderSide(
-                                          color: Color(0x00000000),
-                                          width: 1,
+                                          color: FlutterFlowTheme.of(context)
+                                              .primaryColor,
+                                          width: 2,
                                         ),
-                                        borderRadius: const BorderRadius.only(
-                                          topLeft: Radius.circular(4.0),
-                                          topRight: Radius.circular(4.0),
+                                        borderRadius: BorderRadius.circular(4),
+                                      ),
+                                      errorStyle: TextStyle(
+                                        color: FlutterFlowTheme.of(context)
+                                            .primaryColor,
+                                      ),
+                                      errorBorder: UnderlineInputBorder(
+                                        borderSide: BorderSide(
+                                          color: FlutterFlowTheme.of(context)
+                                              .primaryColor,
+                                          width: 2,
                                         ),
+                                        borderRadius: BorderRadius.circular(4),
                                       ),
                                     ),
                                     style: FlutterFlowTheme.of(context)
@@ -262,14 +304,20 @@ class _UpdateTransactionsLawPageWidgetState
                                           fontWeight: FontWeight.w500,
                                         ),
                                     keyboardType: TextInputType.number,
+                                    autovalidateMode: AutovalidateMode.always,
+                                    validator: (val) {
+                                      return val.isEmpty
+                                          ? '郵便番号を入力してください。'
+                                          : null;
+                                    },
                                   ),
                                 ),
                               ),
                               Expanded(
-                                flex: 4,
+                                flex: 3,
                                 child: Padding(
                                   padding: EdgeInsetsDirectional.fromSTEB(
-                                      8, 0, 0, 0),
+                                      8, 0, 8, 8),
                                   child: TextFormField(
                                     controller: textController4 ??=
                                         TextEditingController(
@@ -277,25 +325,33 @@ class _UpdateTransactionsLawPageWidgetState
                                     obscureText: false,
                                     decoration: InputDecoration(
                                       labelText: '住所',
+                                      isDense: true,
                                       enabledBorder: UnderlineInputBorder(
                                         borderSide: BorderSide(
                                           color: Color(0x00000000),
                                           width: 1,
                                         ),
-                                        borderRadius: const BorderRadius.only(
-                                          topLeft: Radius.circular(4.0),
-                                          topRight: Radius.circular(4.0),
-                                        ),
+                                        borderRadius: BorderRadius.circular(4),
                                       ),
                                       focusedBorder: UnderlineInputBorder(
                                         borderSide: BorderSide(
-                                          color: Color(0x00000000),
-                                          width: 1,
+                                          color: FlutterFlowTheme.of(context)
+                                              .primaryColor,
+                                          width: 2,
                                         ),
-                                        borderRadius: const BorderRadius.only(
-                                          topLeft: Radius.circular(4.0),
-                                          topRight: Radius.circular(4.0),
+                                        borderRadius: BorderRadius.circular(4),
+                                      ),
+                                      errorStyle: TextStyle(
+                                        color: FlutterFlowTheme.of(context)
+                                            .primaryColor,
+                                      ),
+                                      errorBorder: UnderlineInputBorder(
+                                        borderSide: BorderSide(
+                                          color: FlutterFlowTheme.of(context)
+                                              .primaryColor,
+                                          width: 2,
                                         ),
+                                        borderRadius: BorderRadius.circular(4),
                                       ),
                                     ),
                                     style: FlutterFlowTheme.of(context)
@@ -305,6 +361,14 @@ class _UpdateTransactionsLawPageWidgetState
                                           fontWeight: FontWeight.w500,
                                         ),
                                     keyboardType: TextInputType.streetAddress,
+                                    minLines: 1,
+                                    maxLines: 2,
+                                    autovalidateMode: AutovalidateMode.always,
+                                    validator: (val) {
+                                      return val.isEmpty
+                                          ? '住所を入力してください。'
+                                          : null;
+                                    },
                                   ),
                                 ),
                               ),
@@ -315,7 +379,6 @@ class _UpdateTransactionsLawPageWidgetState
                       Padding(
                         padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 16),
                         child: Container(
-                          height: 60,
                           decoration: BoxDecoration(
                             color: FlutterFlowTheme.of(context).background,
                             borderRadius: BorderRadius.circular(8),
@@ -326,32 +389,40 @@ class _UpdateTransactionsLawPageWidgetState
                               Expanded(
                                 child: Padding(
                                   padding: EdgeInsetsDirectional.fromSTEB(
-                                      16, 0, 0, 0),
+                                      16, 0, 16, 8),
                                   child: TextFormField(
                                     controller: textController5 ??=
                                         TextEditingController(text: law.phone),
                                     obscureText: false,
                                     decoration: InputDecoration(
                                       labelText: '電話番号',
+                                      isDense: true,
                                       enabledBorder: UnderlineInputBorder(
                                         borderSide: BorderSide(
                                           color: Color(0x00000000),
                                           width: 1,
                                         ),
-                                        borderRadius: const BorderRadius.only(
-                                          topLeft: Radius.circular(4.0),
-                                          topRight: Radius.circular(4.0),
-                                        ),
+                                        borderRadius: BorderRadius.circular(4),
                                       ),
                                       focusedBorder: UnderlineInputBorder(
                                         borderSide: BorderSide(
-                                          color: Color(0x00000000),
-                                          width: 1,
+                                          color: FlutterFlowTheme.of(context)
+                                              .primaryColor,
+                                          width: 2,
                                         ),
-                                        borderRadius: const BorderRadius.only(
-                                          topLeft: Radius.circular(4.0),
-                                          topRight: Radius.circular(4.0),
+                                        borderRadius: BorderRadius.circular(4),
+                                      ),
+                                      errorStyle: TextStyle(
+                                        color: FlutterFlowTheme.of(context)
+                                            .primaryColor,
+                                      ),
+                                      errorBorder: UnderlineInputBorder(
+                                        borderSide: BorderSide(
+                                          color: FlutterFlowTheme.of(context)
+                                              .primaryColor,
+                                          width: 2,
                                         ),
+                                        borderRadius: BorderRadius.circular(4),
                                       ),
                                     ),
                                     style: FlutterFlowTheme.of(context)
@@ -361,6 +432,13 @@ class _UpdateTransactionsLawPageWidgetState
                                           fontWeight: FontWeight.w500,
                                         ),
                                     keyboardType: TextInputType.phone,
+                                    maxLines: 1,
+                                    autovalidateMode: AutovalidateMode.always,
+                                    validator: (val) {
+                                      return val.isEmpty
+                                          ? '電話番号を入力してください。'
+                                          : null;
+                                    },
                                   ),
                                 ),
                               ),
@@ -371,7 +449,6 @@ class _UpdateTransactionsLawPageWidgetState
                       Padding(
                         padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 16),
                         child: Container(
-                          height: 60,
                           decoration: BoxDecoration(
                             color: FlutterFlowTheme.of(context).background,
                             borderRadius: BorderRadius.circular(8),
@@ -382,32 +459,40 @@ class _UpdateTransactionsLawPageWidgetState
                               Expanded(
                                 child: Padding(
                                   padding: EdgeInsetsDirectional.fromSTEB(
-                                      16, 0, 0, 0),
+                                      16, 0, 16, 8),
                                   child: TextFormField(
                                     controller: textController6 ??=
                                         TextEditingController(text: law.email),
                                     obscureText: false,
                                     decoration: InputDecoration(
                                       labelText: 'メールアドレス',
+                                      isDense: true,
                                       enabledBorder: UnderlineInputBorder(
                                         borderSide: BorderSide(
                                           color: Color(0x00000000),
                                           width: 1,
                                         ),
-                                        borderRadius: const BorderRadius.only(
-                                          topLeft: Radius.circular(4.0),
-                                          topRight: Radius.circular(4.0),
-                                        ),
+                                        borderRadius: BorderRadius.circular(4),
                                       ),
                                       focusedBorder: UnderlineInputBorder(
                                         borderSide: BorderSide(
-                                          color: Color(0x00000000),
-                                          width: 1,
+                                          color: FlutterFlowTheme.of(context)
+                                              .primaryColor,
+                                          width: 2,
                                         ),
-                                        borderRadius: const BorderRadius.only(
-                                          topLeft: Radius.circular(4.0),
-                                          topRight: Radius.circular(4.0),
+                                        borderRadius: BorderRadius.circular(4),
+                                      ),
+                                      errorStyle: TextStyle(
+                                        color: FlutterFlowTheme.of(context)
+                                            .primaryColor,
+                                      ),
+                                      errorBorder: UnderlineInputBorder(
+                                        borderSide: BorderSide(
+                                          color: FlutterFlowTheme.of(context)
+                                              .primaryColor,
+                                          width: 2,
                                         ),
+                                        borderRadius: BorderRadius.circular(4),
                                       ),
                                     ),
                                     style: FlutterFlowTheme.of(context)
@@ -417,6 +502,13 @@ class _UpdateTransactionsLawPageWidgetState
                                           fontWeight: FontWeight.w500,
                                         ),
                                     keyboardType: TextInputType.emailAddress,
+                                    maxLines: 1,
+                                    autovalidateMode: AutovalidateMode.always,
+                                    validator: (val) {
+                                      return val.isEmpty
+                                          ? 'メールアドレスを入力してください。'
+                                          : null;
+                                    },
                                   ),
                                 ),
                               ),
@@ -427,7 +519,6 @@ class _UpdateTransactionsLawPageWidgetState
                       Padding(
                         padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 16),
                         child: Container(
-                          height: 60,
                           decoration: BoxDecoration(
                             color: FlutterFlowTheme.of(context).background,
                             borderRadius: BorderRadius.circular(8),
@@ -438,32 +529,40 @@ class _UpdateTransactionsLawPageWidgetState
                               Expanded(
                                 child: Padding(
                                   padding: EdgeInsetsDirectional.fromSTEB(
-                                      16, 0, 0, 0),
+                                      16, 0, 16, 8),
                                   child: TextFormField(
                                     controller: textController7 ??=
                                         TextEditingController(text: law.web),
                                     obscureText: false,
                                     decoration: InputDecoration(
                                       labelText: 'ホームページURL',
+                                      isDense: true,
                                       enabledBorder: UnderlineInputBorder(
                                         borderSide: BorderSide(
                                           color: Color(0x00000000),
                                           width: 1,
                                         ),
-                                        borderRadius: const BorderRadius.only(
-                                          topLeft: Radius.circular(4.0),
-                                          topRight: Radius.circular(4.0),
-                                        ),
+                                        borderRadius: BorderRadius.circular(4),
                                       ),
                                       focusedBorder: UnderlineInputBorder(
                                         borderSide: BorderSide(
-                                          color: Color(0x00000000),
-                                          width: 1,
+                                          color: FlutterFlowTheme.of(context)
+                                              .primaryColor,
+                                          width: 2,
                                         ),
-                                        borderRadius: const BorderRadius.only(
-                                          topLeft: Radius.circular(4.0),
-                                          topRight: Radius.circular(4.0),
+                                        borderRadius: BorderRadius.circular(4),
+                                      ),
+                                      errorStyle: TextStyle(
+                                        color: FlutterFlowTheme.of(context)
+                                            .primaryColor,
+                                      ),
+                                      errorBorder: UnderlineInputBorder(
+                                        borderSide: BorderSide(
+                                          color: FlutterFlowTheme.of(context)
+                                              .primaryColor,
+                                          width: 2,
                                         ),
+                                        borderRadius: BorderRadius.circular(4),
                                       ),
                                     ),
                                     style: FlutterFlowTheme.of(context)
@@ -473,6 +572,13 @@ class _UpdateTransactionsLawPageWidgetState
                                           fontWeight: FontWeight.w500,
                                         ),
                                     keyboardType: TextInputType.url,
+                                    maxLines: 1,
+                                    autovalidateMode: AutovalidateMode.always,
+                                    validator: (val) {
+                                      return val.isEmpty
+                                          ? 'ホームページURLを入力してください。'
+                                          : null;
+                                    },
                                   ),
                                 ),
                               ),
@@ -483,7 +589,6 @@ class _UpdateTransactionsLawPageWidgetState
                       Padding(
                         padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 16),
                         child: Container(
-                          height: 60,
                           decoration: BoxDecoration(
                             color: FlutterFlowTheme.of(context).background,
                             borderRadius: BorderRadius.circular(8),
@@ -494,7 +599,7 @@ class _UpdateTransactionsLawPageWidgetState
                               Expanded(
                                 child: Padding(
                                   padding: EdgeInsetsDirectional.fromSTEB(
-                                      16, 0, 0, 0),
+                                      16, 0, 16, 8),
                                   child: TextFormField(
                                     controller: textController8 ??=
                                         TextEditingController(
@@ -502,25 +607,34 @@ class _UpdateTransactionsLawPageWidgetState
                                     obscureText: false,
                                     decoration: InputDecoration(
                                       labelText: '販売価格',
+                                      hintText: '商品紹介ページをご参照ください。など',
+                                      isDense: true,
                                       enabledBorder: UnderlineInputBorder(
                                         borderSide: BorderSide(
                                           color: Color(0x00000000),
                                           width: 1,
                                         ),
-                                        borderRadius: const BorderRadius.only(
-                                          topLeft: Radius.circular(4.0),
-                                          topRight: Radius.circular(4.0),
-                                        ),
+                                        borderRadius: BorderRadius.circular(4),
                                       ),
                                       focusedBorder: UnderlineInputBorder(
                                         borderSide: BorderSide(
-                                          color: Color(0x00000000),
-                                          width: 1,
+                                          color: FlutterFlowTheme.of(context)
+                                              .primaryColor,
+                                          width: 2,
                                         ),
-                                        borderRadius: const BorderRadius.only(
-                                          topLeft: Radius.circular(4.0),
-                                          topRight: Radius.circular(4.0),
+                                        borderRadius: BorderRadius.circular(4),
+                                      ),
+                                      errorStyle: TextStyle(
+                                        color: FlutterFlowTheme.of(context)
+                                            .primaryColor,
+                                      ),
+                                      errorBorder: UnderlineInputBorder(
+                                        borderSide: BorderSide(
+                                          color: FlutterFlowTheme.of(context)
+                                              .primaryColor,
+                                          width: 2,
                                         ),
+                                        borderRadius: BorderRadius.circular(4),
                                       ),
                                     ),
                                     style: FlutterFlowTheme.of(context)
@@ -529,6 +643,12 @@ class _UpdateTransactionsLawPageWidgetState
                                           fontFamily: 'Open Sans',
                                           fontWeight: FontWeight.w500,
                                         ),
+                                    autovalidateMode: AutovalidateMode.always,
+                                    validator: (val) {
+                                      return val.isEmpty
+                                          ? '販売価格を入力してください。'
+                                          : null;
+                                    },
                                   ),
                                 ),
                               ),
@@ -539,7 +659,6 @@ class _UpdateTransactionsLawPageWidgetState
                       Padding(
                         padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 16),
                         child: Container(
-                          height: 60,
                           decoration: BoxDecoration(
                             color: FlutterFlowTheme.of(context).background,
                             borderRadius: BorderRadius.circular(8),
@@ -550,7 +669,7 @@ class _UpdateTransactionsLawPageWidgetState
                               Expanded(
                                 child: Padding(
                                   padding: EdgeInsetsDirectional.fromSTEB(
-                                      16, 0, 0, 0),
+                                      16, 0, 16, 8),
                                   child: TextFormField(
                                     controller: textController9 ??=
                                         TextEditingController(
@@ -558,25 +677,33 @@ class _UpdateTransactionsLawPageWidgetState
                                     obscureText: false,
                                     decoration: InputDecoration(
                                       labelText: '商品代金以外の必要料金',
+                                      isDense: true,
                                       enabledBorder: UnderlineInputBorder(
                                         borderSide: BorderSide(
                                           color: Color(0x00000000),
                                           width: 1,
                                         ),
-                                        borderRadius: const BorderRadius.only(
-                                          topLeft: Radius.circular(4.0),
-                                          topRight: Radius.circular(4.0),
-                                        ),
+                                        borderRadius: BorderRadius.circular(4),
                                       ),
                                       focusedBorder: UnderlineInputBorder(
                                         borderSide: BorderSide(
-                                          color: Color(0x00000000),
-                                          width: 1,
+                                          color: FlutterFlowTheme.of(context)
+                                              .primaryColor,
+                                          width: 2,
                                         ),
-                                        borderRadius: const BorderRadius.only(
-                                          topLeft: Radius.circular(4.0),
-                                          topRight: Radius.circular(4.0),
+                                        borderRadius: BorderRadius.circular(4),
+                                      ),
+                                      errorStyle: TextStyle(
+                                        color: FlutterFlowTheme.of(context)
+                                            .primaryColor,
+                                      ),
+                                      errorBorder: UnderlineInputBorder(
+                                        borderSide: BorderSide(
+                                          color: FlutterFlowTheme.of(context)
+                                              .primaryColor,
+                                          width: 2,
                                         ),
+                                        borderRadius: BorderRadius.circular(4),
                                       ),
                                     ),
                                     style: FlutterFlowTheme.of(context)
@@ -585,6 +712,14 @@ class _UpdateTransactionsLawPageWidgetState
                                           fontFamily: 'Open Sans',
                                           fontWeight: FontWeight.w500,
                                         ),
+                                    minLines: 1,
+                                    maxLines: 5,
+                                    autovalidateMode: AutovalidateMode.always,
+                                    validator: (val) {
+                                      return val.isEmpty
+                                          ? '商品代金以外の必要料金を入力してください。'
+                                          : null;
+                                    },
                                   ),
                                 ),
                               ),
@@ -595,7 +730,6 @@ class _UpdateTransactionsLawPageWidgetState
                       Padding(
                         padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 16),
                         child: Container(
-                          height: 60,
                           decoration: BoxDecoration(
                             color: FlutterFlowTheme.of(context).background,
                             borderRadius: BorderRadius.circular(8),
@@ -606,7 +740,7 @@ class _UpdateTransactionsLawPageWidgetState
                               Expanded(
                                 child: Padding(
                                   padding: EdgeInsetsDirectional.fromSTEB(
-                                      16, 0, 0, 0),
+                                      16, 0, 16, 8),
                                   child: TextFormField(
                                     controller: textController10 ??=
                                         TextEditingController(
@@ -614,25 +748,33 @@ class _UpdateTransactionsLawPageWidgetState
                                     obscureText: false,
                                     decoration: InputDecoration(
                                       labelText: '引き渡し時期',
+                                      isDense: true,
                                       enabledBorder: UnderlineInputBorder(
                                         borderSide: BorderSide(
                                           color: Color(0x00000000),
                                           width: 1,
                                         ),
-                                        borderRadius: const BorderRadius.only(
-                                          topLeft: Radius.circular(4.0),
-                                          topRight: Radius.circular(4.0),
-                                        ),
+                                        borderRadius: BorderRadius.circular(4),
                                       ),
                                       focusedBorder: UnderlineInputBorder(
                                         borderSide: BorderSide(
-                                          color: Color(0x00000000),
-                                          width: 1,
+                                          color: FlutterFlowTheme.of(context)
+                                              .primaryColor,
+                                          width: 2,
                                         ),
-                                        borderRadius: const BorderRadius.only(
-                                          topLeft: Radius.circular(4.0),
-                                          topRight: Radius.circular(4.0),
+                                        borderRadius: BorderRadius.circular(4),
+                                      ),
+                                      errorStyle: TextStyle(
+                                        color: FlutterFlowTheme.of(context)
+                                            .primaryColor,
+                                      ),
+                                      errorBorder: UnderlineInputBorder(
+                                        borderSide: BorderSide(
+                                          color: FlutterFlowTheme.of(context)
+                                              .primaryColor,
+                                          width: 2,
                                         ),
+                                        borderRadius: BorderRadius.circular(4),
                                       ),
                                     ),
                                     style: FlutterFlowTheme.of(context)
@@ -641,6 +783,14 @@ class _UpdateTransactionsLawPageWidgetState
                                           fontFamily: 'Open Sans',
                                           fontWeight: FontWeight.w500,
                                         ),
+                                    minLines: 1,
+                                    maxLines: 5,
+                                    autovalidateMode: AutovalidateMode.always,
+                                    validator: (val) {
+                                      return val.isEmpty
+                                          ? '引き渡し時期を入力してください。'
+                                          : null;
+                                    },
                                   ),
                                 ),
                               ),
@@ -651,7 +801,6 @@ class _UpdateTransactionsLawPageWidgetState
                       Padding(
                         padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 16),
                         child: Container(
-                          height: 60,
                           decoration: BoxDecoration(
                             color: FlutterFlowTheme.of(context).background,
                             borderRadius: BorderRadius.circular(8),
@@ -662,7 +811,7 @@ class _UpdateTransactionsLawPageWidgetState
                               Expanded(
                                 child: Padding(
                                   padding: EdgeInsetsDirectional.fromSTEB(
-                                      16, 0, 0, 0),
+                                      16, 0, 16, 8),
                                   child: TextFormField(
                                     controller: textController11 ??=
                                         TextEditingController(
@@ -671,25 +820,33 @@ class _UpdateTransactionsLawPageWidgetState
                                     obscureText: false,
                                     decoration: InputDecoration(
                                       labelText: 'お支払い方法',
+                                      isDense: true,
                                       enabledBorder: UnderlineInputBorder(
                                         borderSide: BorderSide(
                                           color: Color(0x00000000),
                                           width: 1,
                                         ),
-                                        borderRadius: const BorderRadius.only(
-                                          topLeft: Radius.circular(4.0),
-                                          topRight: Radius.circular(4.0),
-                                        ),
+                                        borderRadius: BorderRadius.circular(4),
                                       ),
                                       focusedBorder: UnderlineInputBorder(
                                         borderSide: BorderSide(
-                                          color: Color(0x00000000),
-                                          width: 1,
+                                          color: FlutterFlowTheme.of(context)
+                                              .primaryColor,
+                                          width: 2,
                                         ),
-                                        borderRadius: const BorderRadius.only(
-                                          topLeft: Radius.circular(4.0),
-                                          topRight: Radius.circular(4.0),
+                                        borderRadius: BorderRadius.circular(4),
+                                      ),
+                                      errorStyle: TextStyle(
+                                        color: FlutterFlowTheme.of(context)
+                                            .primaryColor,
+                                      ),
+                                      errorBorder: UnderlineInputBorder(
+                                        borderSide: BorderSide(
+                                          color: FlutterFlowTheme.of(context)
+                                              .primaryColor,
+                                          width: 2,
                                         ),
+                                        borderRadius: BorderRadius.circular(4),
                                       ),
                                     ),
                                     style: FlutterFlowTheme.of(context)
@@ -698,6 +855,14 @@ class _UpdateTransactionsLawPageWidgetState
                                           fontFamily: 'Open Sans',
                                           fontWeight: FontWeight.w500,
                                         ),
+                                    minLines: 1,
+                                    maxLines: 2,
+                                    autovalidateMode: AutovalidateMode.always,
+                                    validator: (val) {
+                                      return val.isEmpty
+                                          ? 'お支払い方法を入力してください。'
+                                          : null;
+                                    },
                                   ),
                                 ),
                               ),
@@ -708,7 +873,6 @@ class _UpdateTransactionsLawPageWidgetState
                       Padding(
                         padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 16),
                         child: Container(
-                          height: 60,
                           decoration: BoxDecoration(
                             color: FlutterFlowTheme.of(context).background,
                             borderRadius: BorderRadius.circular(8),
@@ -719,32 +883,40 @@ class _UpdateTransactionsLawPageWidgetState
                               Expanded(
                                 child: Padding(
                                   padding: EdgeInsetsDirectional.fromSTEB(
-                                      16, 0, 0, 0),
+                                      16, 0, 16, 8),
                                   child: TextFormField(
                                     controller: textController12 ??=
                                         TextEditingController(text: law.rec),
                                     obscureText: false,
                                     decoration: InputDecoration(
                                       labelText: '返品・交換・キャンセル等',
+                                      isDense: true,
                                       enabledBorder: UnderlineInputBorder(
                                         borderSide: BorderSide(
                                           color: Color(0x00000000),
                                           width: 1,
                                         ),
-                                        borderRadius: const BorderRadius.only(
-                                          topLeft: Radius.circular(4.0),
-                                          topRight: Radius.circular(4.0),
-                                        ),
+                                        borderRadius: BorderRadius.circular(4),
                                       ),
                                       focusedBorder: UnderlineInputBorder(
                                         borderSide: BorderSide(
-                                          color: Color(0x00000000),
-                                          width: 1,
+                                          color: FlutterFlowTheme.of(context)
+                                              .primaryColor,
+                                          width: 2,
                                         ),
-                                        borderRadius: const BorderRadius.only(
-                                          topLeft: Radius.circular(4.0),
-                                          topRight: Radius.circular(4.0),
+                                        borderRadius: BorderRadius.circular(4),
+                                      ),
+                                      errorStyle: TextStyle(
+                                        color: FlutterFlowTheme.of(context)
+                                            .primaryColor,
+                                      ),
+                                      errorBorder: UnderlineInputBorder(
+                                        borderSide: BorderSide(
+                                          color: FlutterFlowTheme.of(context)
+                                              .primaryColor,
+                                          width: 2,
                                         ),
+                                        borderRadius: BorderRadius.circular(4),
                                       ),
                                     ),
                                     style: FlutterFlowTheme.of(context)
@@ -753,6 +925,14 @@ class _UpdateTransactionsLawPageWidgetState
                                           fontFamily: 'Open Sans',
                                           fontWeight: FontWeight.w500,
                                         ),
+                                    minLines: 1,
+                                    maxLines: 5,
+                                    autovalidateMode: AutovalidateMode.always,
+                                    validator: (val) {
+                                      return val.isEmpty
+                                          ? '返品・交換・キャンセル等を入力してください。'
+                                          : null;
+                                    },
                                   ),
                                 ),
                               ),
@@ -763,7 +943,6 @@ class _UpdateTransactionsLawPageWidgetState
                       Padding(
                         padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 16),
                         child: Container(
-                          height: 60,
                           decoration: BoxDecoration(
                             color: FlutterFlowTheme.of(context).background,
                             borderRadius: BorderRadius.circular(8),
@@ -774,7 +953,7 @@ class _UpdateTransactionsLawPageWidgetState
                               Expanded(
                                 child: Padding(
                                   padding: EdgeInsetsDirectional.fromSTEB(
-                                      16, 0, 0, 0),
+                                      16, 0, 16, 8),
                                   child: TextFormField(
                                     controller: textController13 ??=
                                         TextEditingController(
@@ -782,25 +961,33 @@ class _UpdateTransactionsLawPageWidgetState
                                     obscureText: false,
                                     decoration: InputDecoration(
                                       labelText: '返品期限',
+                                      isDense: true,
                                       enabledBorder: UnderlineInputBorder(
                                         borderSide: BorderSide(
                                           color: Color(0x00000000),
                                           width: 1,
                                         ),
-                                        borderRadius: const BorderRadius.only(
-                                          topLeft: Radius.circular(4.0),
-                                          topRight: Radius.circular(4.0),
-                                        ),
+                                        borderRadius: BorderRadius.circular(4),
                                       ),
                                       focusedBorder: UnderlineInputBorder(
                                         borderSide: BorderSide(
-                                          color: Color(0x00000000),
-                                          width: 1,
+                                          color: FlutterFlowTheme.of(context)
+                                              .primaryColor,
+                                          width: 2,
                                         ),
-                                        borderRadius: const BorderRadius.only(
-                                          topLeft: Radius.circular(4.0),
-                                          topRight: Radius.circular(4.0),
+                                        borderRadius: BorderRadius.circular(4),
+                                      ),
+                                      errorStyle: TextStyle(
+                                        color: FlutterFlowTheme.of(context)
+                                            .primaryColor,
+                                      ),
+                                      errorBorder: UnderlineInputBorder(
+                                        borderSide: BorderSide(
+                                          color: FlutterFlowTheme.of(context)
+                                              .primaryColor,
+                                          width: 2,
                                         ),
+                                        borderRadius: BorderRadius.circular(4),
                                       ),
                                     ),
                                     style: FlutterFlowTheme.of(context)
@@ -809,6 +996,14 @@ class _UpdateTransactionsLawPageWidgetState
                                           fontFamily: 'Open Sans',
                                           fontWeight: FontWeight.w500,
                                         ),
+                                    minLines: 1,
+                                    maxLines: 5,
+                                    autovalidateMode: AutovalidateMode.always,
+                                    validator: (val) {
+                                      return val.isEmpty
+                                          ? '返品期限を入力してください。'
+                                          : null;
+                                    },
                                   ),
                                 ),
                               ),
@@ -819,7 +1014,6 @@ class _UpdateTransactionsLawPageWidgetState
                       Padding(
                         padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 16),
                         child: Container(
-                          height: 60,
                           decoration: BoxDecoration(
                             color: FlutterFlowTheme.of(context).background,
                             borderRadius: BorderRadius.circular(8),
@@ -830,7 +1024,7 @@ class _UpdateTransactionsLawPageWidgetState
                               Expanded(
                                 child: Padding(
                                   padding: EdgeInsetsDirectional.fromSTEB(
-                                      16, 0, 0, 0),
+                                      16, 0, 16, 8),
                                   child: TextFormField(
                                     controller: textController14 ??=
                                         TextEditingController(
@@ -838,25 +1032,33 @@ class _UpdateTransactionsLawPageWidgetState
                                     obscureText: false,
                                     decoration: InputDecoration(
                                       labelText: '返品送料',
+                                      isDense: true,
                                       enabledBorder: UnderlineInputBorder(
                                         borderSide: BorderSide(
                                           color: Color(0x00000000),
                                           width: 1,
                                         ),
-                                        borderRadius: const BorderRadius.only(
-                                          topLeft: Radius.circular(4.0),
-                                          topRight: Radius.circular(4.0),
-                                        ),
+                                        borderRadius: BorderRadius.circular(4),
                                       ),
                                       focusedBorder: UnderlineInputBorder(
                                         borderSide: BorderSide(
-                                          color: Color(0x00000000),
-                                          width: 1,
+                                          color: FlutterFlowTheme.of(context)
+                                              .primaryColor,
+                                          width: 2,
                                         ),
-                                        borderRadius: const BorderRadius.only(
-                                          topLeft: Radius.circular(4.0),
-                                          topRight: Radius.circular(4.0),
+                                        borderRadius: BorderRadius.circular(4),
+                                      ),
+                                      errorStyle: TextStyle(
+                                        color: FlutterFlowTheme.of(context)
+                                            .primaryColor,
+                                      ),
+                                      errorBorder: UnderlineInputBorder(
+                                        borderSide: BorderSide(
+                                          color: FlutterFlowTheme.of(context)
+                                              .primaryColor,
+                                          width: 2,
                                         ),
+                                        borderRadius: BorderRadius.circular(4),
                                       ),
                                     ),
                                     style: FlutterFlowTheme.of(context)
@@ -865,6 +1067,14 @@ class _UpdateTransactionsLawPageWidgetState
                                           fontFamily: 'Open Sans',
                                           fontWeight: FontWeight.w500,
                                         ),
+                                    minLines: 1,
+                                    maxLines: 2,
+                                    autovalidateMode: AutovalidateMode.always,
+                                    validator: (val) {
+                                      return val.isEmpty
+                                          ? '返品送料を入力してください。'
+                                          : null;
+                                    },
                                   ),
                                 ),
                               ),
@@ -881,39 +1091,54 @@ class _UpdateTransactionsLawPageWidgetState
                             mainAxisSize: MainAxisSize.max,
                             mainAxisAlignment: MainAxisAlignment.end,
                             children: [
+                              Text(
+                                alert,
+                                style: FlutterFlowTheme.of(context)
+                                    .bodyText1
+                                    .override(
+                                      fontFamily: 'Open Sans',
+                                      fontWeight: FontWeight.w500,
+                                      color: FlutterFlowTheme.of(context)
+                                          .primaryColor,
+                                    ),
+                              ),
                               FFButtonWidget(
                                 onPressed: () async {
                                   logFirebaseEvent(
-                                      'UPDATE_TRANSACTIONS_LAW_更新_BTN_ON_TAP');
+                                      'UPDATE_TRANSACTIONS_LAW_${label}_BTN_ON_TAP');
+                                  if (!formKey.currentState.validate()) {
+                                    setState(() {
+                                      alert = '必要事項を入力してください。';
+                                    });
+                                    return;
+                                  }
+                                  alert = '';
+
                                   logFirebaseEvent('Button_Alert-Dialog');
-                                  var confirmDialogResponse =
-                                      await showDialog<bool>(
-                                            context: context,
-                                            builder: (alertDialogContext) {
-                                              return AlertDialog(
-                                                title: Text('更新'),
-                                                content:
-                                                    Text('特定商取引法に基づく表記を更新します。'),
-                                                actions: [
-                                                  TextButton(
-                                                    onPressed: () =>
-                                                        Navigator.pop(
-                                                            alertDialogContext,
-                                                            false),
-                                                    child: Text('Cancel'),
-                                                  ),
-                                                  TextButton(
-                                                    onPressed: () =>
-                                                        Navigator.pop(
-                                                            alertDialogContext,
-                                                            true),
-                                                    child: Text('OK'),
-                                                  ),
-                                                ],
-                                              );
-                                            },
-                                          ) ??
-                                          false;
+                                  var confirmDialogResponse = await showDialog<
+                                          bool>(
+                                        context: context,
+                                        builder: (alertDialogContext) {
+                                          return AlertDialog(
+                                            title: Text(label),
+                                            content:
+                                                Text('特定商取引法に基づく表記を$labelします。'),
+                                            actions: [
+                                              TextButton(
+                                                onPressed: () => Navigator.pop(
+                                                    alertDialogContext, false),
+                                                child: Text('Cancel'),
+                                              ),
+                                              TextButton(
+                                                onPressed: () => Navigator.pop(
+                                                    alertDialogContext, true),
+                                                child: Text('OK'),
+                                              ),
+                                            ],
+                                          );
+                                        },
+                                      ) ??
+                                      false;
                                   if (confirmDialogResponse) {
                                     logFirebaseEvent('Button_Backend-Call');
                                     final _appCheckToken =
@@ -928,11 +1153,11 @@ class _UpdateTransactionsLawPageWidgetState
                                       email: textController6.text,
                                       otherFees: textController9.text,
                                       paymentMethod: textController11.text,
+                                      phone: textController5.text,
                                       postalCode: textController3.text,
                                       rec: textController12.text,
                                       returnCharge: textController14.text,
                                       returnPeriod: textController13.text,
-                                      phone: textController5.text,
                                       unitAmount: textController8.text,
                                       web: textController7.text,
                                       accessToken: currentJwtToken,
@@ -942,7 +1167,7 @@ class _UpdateTransactionsLawPageWidgetState
                                     ScaffoldMessenger.of(context).showSnackBar(
                                       SnackBar(
                                         content: Text(
-                                          'ショップを更新しました。',
+                                          'ショップを$labelしました。',
                                           style: TextStyle(),
                                         ),
                                         duration: Duration(milliseconds: 4000),
@@ -958,7 +1183,7 @@ class _UpdateTransactionsLawPageWidgetState
                                     return;
                                   }
                                 },
-                                text: '更新',
+                                text: label,
                                 options: FFButtonOptions(
                                   width: 130,
                                   height: 60,
