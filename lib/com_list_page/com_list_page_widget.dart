@@ -4,6 +4,7 @@ import '../components/main_menu_widget.dart';
 import '../create_com_page/create_com_page_widget.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
+import '../flutter_flow/flutter_flow_widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -89,15 +90,18 @@ class _ComListPageWidgetState extends State<ComListPageWidget> {
                                 children: [
                                   Row(
                                     mainAxisSize: MainAxisSize.max,
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
                                     children: [
                                       Padding(
                                         padding: EdgeInsetsDirectional.fromSTEB(
                                             0, 0, 16, 0),
                                         child: InkWell(
                                           onTap: () async {
-                                            logFirebaseEvent('Text_ON_TAP');
-                                            logFirebaseEvent(
-                                                'Text_Navigate-To');
+                                            // logFirebaseEvent(
+                                            //     'SHOP_LIST_PAGE_PAGE_Text_4ijid09z_ON_TAP');
+                                            // logFirebaseEvent(
+                                            //     'Text_Navigate-To');
                                             await Navigator.push(
                                               context,
                                               MaterialPageRoute(
@@ -113,23 +117,30 @@ class _ComListPageWidgetState extends State<ComListPageWidget> {
                                           ),
                                         ),
                                       ),
-                                      InkWell(
-                                        onTap: () async {
-                                          logFirebaseEvent('Text_ON_TAP');
-                                          logFirebaseEvent('Text_Navigate-To');
-                                          await Navigator.push(
-                                            context,
-                                            MaterialPageRoute(
-                                              builder: (context) =>
-                                                  CreateComPageWidget(),
-                                            ),
-                                          );
-                                        },
-                                        child: Text(
-                                          '追加',
-                                          style: FlutterFlowTheme.of(context)
-                                              .subtitle1,
+                                      FFButtonWidget(
+                                        onPressed: () async {},
+                                        text: '追加',
+                                        options: FFButtonOptions(
+                                          width: 80,
+                                          height: 32,
+                                          color: FlutterFlowTheme.of(context)
+                                              .primaryColor,
+                                          textStyle: FlutterFlowTheme.of(
+                                                  context)
+                                              .bodyText2
+                                              .override(
+                                                fontFamily: 'Open Sans',
+                                                color:
+                                                    FlutterFlowTheme.of(context)
+                                                        .textLight,
+                                              ),
+                                          borderSide: BorderSide(
+                                            color: Colors.transparent,
+                                            width: 1,
+                                          ),
+                                          borderRadius: 4,
                                         ),
+                                        showLoadingIndicator: false,
                                       ),
                                     ],
                                   ),
