@@ -8,7 +8,6 @@ import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
 import '../flutter_flow/upload_media.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -1397,7 +1396,9 @@ class _UpdateShopPageWidgetState extends State<UpdateShopPageWidget> {
                                         });
                                         return;
                                       }
-                                      alert = '';
+                                      setState(() {
+                                        alert = '';
+                                      });
 
                                       logFirebaseEvent('Button_Alert-Dialog');
                                       var confirmDialogResponse =
@@ -1474,6 +1475,10 @@ class _UpdateShopPageWidgetState extends State<UpdateShopPageWidget> {
                                           _shop = containerShopsRecord;
                                         }
 
+                                        final law =
+                                            await TransactionsLaw.create(
+                                                _shop.reference.path, context);
+
                                         logFirebaseEvent(
                                             'Button_Show-Snack-Bar');
                                         ScaffoldMessenger.of(context)
@@ -1488,10 +1493,8 @@ class _UpdateShopPageWidgetState extends State<UpdateShopPageWidget> {
                                             backgroundColor: Color(0x00000000),
                                           ),
                                         );
+
                                         logFirebaseEvent('Button_Bottom-Sheet');
-                                        final law =
-                                            await TransactionsLaw.create(
-                                                _shop.reference.path, context);
                                         await showModalBottomSheet(
                                           isScrollControlled: true,
                                           backgroundColor: Colors.transparent,

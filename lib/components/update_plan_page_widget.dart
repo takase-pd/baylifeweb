@@ -1266,7 +1266,9 @@ class _UpdatePlanPageWidgetState extends State<UpdatePlanPageWidget> {
                                         });
                                         return;
                                       }
-                                      alert = '';
+                                      setState(() {
+                                        alert = '';
+                                      });
 
                                       logFirebaseEvent('Button_Alert-Dialog');
                                       var confirmDialogResponse =

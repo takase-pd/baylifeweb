@@ -1,11 +1,8 @@
-import '../auth/auth_util.dart';
 import '../backend/backend.dart';
-import '../create_com_page/create_com_page_widget.dart';
 import '../flutter_flow/flutter_flow_drop_down.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -408,7 +405,9 @@ class _UpdateComPageWidgetState extends State<UpdateComPageWidget> {
                                   });
                                   return;
                                 }
-                                alert = '';
+                                setState(() {
+                                  alert = '';
+                                });
 
                                 logFirebaseEvent('Button_Alert-Dialog');
                                 var confirmDialogResponse =
