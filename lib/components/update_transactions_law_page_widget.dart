@@ -2,6 +2,7 @@ import '../auth/auth_util.dart';
 import '../backend/api_requests/api_calls.dart';
 import '../backend/backend.dart';
 import '../custom_code/widgets/index.dart';
+import '../flutter_flow/custom_functions.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
@@ -1112,7 +1113,9 @@ class _UpdateTransactionsLawPageWidgetState
                                     });
                                     return;
                                   }
-                                  alert = '';
+                                  setState(() {
+                                    alert = '';
+                                  });
 
                                   logFirebaseEvent('Button_Alert-Dialog');
                                   var confirmDialogResponse = await showDialog<
@@ -1148,16 +1151,22 @@ class _UpdateTransactionsLawPageWidgetState
                                       uid: currentUserUid,
                                       address: textController4.text,
                                       company: textController1.text,
-                                      delvTime: textController10.text,
+                                      delvTime: getMultilineText(
+                                          textController10.text),
                                       director: textController2.text,
                                       email: textController6.text,
-                                      otherFees: textController9.text,
-                                      paymentMethod: textController11.text,
+                                      otherFees: getMultilineText(
+                                          textController9.text),
+                                      paymentMethod: getMultilineText(
+                                          textController11.text),
                                       phone: textController5.text,
                                       postalCode: textController3.text,
-                                      rec: textController12.text,
-                                      returnCharge: textController14.text,
-                                      returnPeriod: textController13.text,
+                                      rec: getMultilineText(
+                                          textController12.text),
+                                      returnCharge: getMultilineText(
+                                          textController14.text),
+                                      returnPeriod: getMultilineText(
+                                          textController13.text),
                                       unitAmount: textController8.text,
                                       web: textController7.text,
                                       accessToken: currentJwtToken,
