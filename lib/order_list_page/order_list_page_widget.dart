@@ -337,8 +337,7 @@ class _OrderListPageWidgetState extends State<OrderListPageWidget> {
                                                       child:
                                                           UpdateOrderPageWidget(
                                                         order:
-                                                            listViewOrdersRecord
-                                                                .reference,
+                                                            listViewOrdersRecord,
                                                       ),
                                                     ),
                                                   );

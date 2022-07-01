@@ -395,8 +395,7 @@ class _PlanListPageWidgetState extends State<PlanListPageWidget> {
                                                       child:
                                                           UpdatePlanPageWidget(
                                                         plan:
-                                                            listViewPlansRecord
-                                                                .reference,
+                                                            listViewPlansRecord,
                                                       ),
                                                     ),
                                                   );

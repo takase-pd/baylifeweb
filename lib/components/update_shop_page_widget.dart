@@ -18,8 +18,7 @@ class UpdateShopPageWidget extends StatefulWidget {
     this.shop,
   }) : super(key: key);
 
-  // TODO change DocumentReference to ShopsRecord
-  final DocumentReference shop;
+  final ShopsRecord shop;
 
   @override
   _UpdateShopPageWidgetState createState() => _UpdateShopPageWidgetState();
@@ -75,7 +74,7 @@ class _UpdateShopPageWidgetState extends State<UpdateShopPageWidget> {
     }
 
     isNew = false;
-    final _shop = await ShopsRecord.getDocumentOnce(widget.shop);
+    final _shop = widget.shop;
     final catShop =
         catShops.firstWhere((element) => element.reference == _shop.catMain);
     textController2 = TextEditingController(text: catShop.catName);

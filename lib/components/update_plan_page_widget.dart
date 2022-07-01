@@ -19,7 +19,7 @@ class UpdatePlanPageWidget extends StatefulWidget {
     this.plan,
   }) : super(key: key);
 
-  final DocumentReference plan;
+  final PlansRecord plan;
 
   @override
   _UpdatePlanPageWidgetState createState() => _UpdatePlanPageWidgetState();
@@ -62,7 +62,7 @@ class _UpdatePlanPageWidgetState extends State<UpdatePlanPageWidget> {
     }
 
     isNew = false;
-    final _plan = await PlansRecord.getDocumentOnce(widget.plan);
+    final _plan = widget.plan;
     final shopName = await _plan.getShopName();
     textController1 = TextEditingController(text: shopName);
     banner = _plan.banner;
