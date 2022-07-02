@@ -11,4 +11,4 @@
 fvm flutter pub upgrade
 fvm flutter packages pub run build_runner build --delete-conflicting-outputs
 # fvm flutter run -d chrome --web-port 5000 --web-renderer html --release
-fvm flutter run
+fvm flutter run -d ipad
