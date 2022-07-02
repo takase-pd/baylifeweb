@@ -3,6 +3,7 @@ import '../backend/backend.dart';
 import '../components/header_widget.dart';
 import '../components/main_menu_widget.dart';
 import '../components/update_plan_page_widget.dart';
+import '../custom_code/widgets/index.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_toggle_icon.dart';
 import '../flutter_flow/flutter_flow_util.dart';
@@ -151,7 +152,8 @@ class _PlanListPageWidgetState extends State<PlanListPageWidget> {
                                   ),
                                   FFButtonWidget(
                                     onPressed: () async {
-                                      logFirebaseEvent('Button_ON_TAP');
+                                      logFirebaseEvent(
+                                          'PLAN_LIST_PAGE_PAGE_追加_BTN_ON_TAP');
                                       logFirebaseEvent('Button_Bottom-Sheet');
                                       await showModalBottomSheet(
                                         isScrollControlled: true,
@@ -314,10 +316,15 @@ class _PlanListPageWidgetState extends State<PlanListPageWidget> {
                                             data.forEach((item) {
                                               final index = itemIndexes[
                                                   item.reference.id];
+                                              final items =
+                                                  _pagingController.itemList;
                                               if (index != null) {
-                                                _pagingController.itemList
-                                                    .replaceRange(index,
-                                                        index + 1, [item]);
+                                                items.replaceRange(
+                                                    index, index + 1, [item]);
+                                                _pagingController.itemList = {
+                                                  for (var item in items)
+                                                    item.reference: item
+                                                }.values.toList();
                                               }
                                             });
                                             setState(() {});
@@ -358,7 +365,7 @@ class _PlanListPageWidgetState extends State<PlanListPageWidget> {
                                           child: InkWell(
                                             onTap: () async {
                                               logFirebaseEvent(
-                                                  'Container_ON_TAP');
+                                                  'PLAN_LIST_Container_1jxvc1nq_ON_TAP');
                                               logFirebaseEvent(
                                                   'Container_Bottom-Sheet');
                                               await showModalBottomSheet(
@@ -388,8 +395,7 @@ class _PlanListPageWidgetState extends State<PlanListPageWidget> {
                                                       child:
                                                           UpdatePlanPageWidget(
                                                         plan:
-                                                            listViewPlansRecord
-                                                                .reference,
+                                                            listViewPlansRecord,
                                                       ),
                                                     ),
                                                   );
@@ -428,8 +434,11 @@ class _PlanListPageWidgetState extends State<PlanListPageWidget> {
                                                     Expanded(
                                                       flex: 4,
                                                       child: Text(
-                                                        listViewPlansRecord
-                                                            .name,
+                                                        listViewPlansRecord.name
+                                                            .maybeHandleOverflow(
+                                                          maxChars: 24,
+                                                          replacement: '…',
+                                                        ),
                                                         style:
                                                             FlutterFlowTheme.of(
                                                                     context)
@@ -439,15 +448,11 @@ class _PlanListPageWidgetState extends State<PlanListPageWidget> {
                                                     Expanded(
                                                       flex: 2,
                                                       child: Text(
-                                                        formatNumber(
-                                                          listViewPlansRecord
-                                                              .unitAmount,
-                                                          formatType:
-                                                              FormatType.custom,
-                                                          currency: '￥',
-                                                          format: '#,##0',
-                                                          locale: 'ja_JP',
-                                                        ),
+                                                        CurrencyChecker.create(
+                                                                listViewPlansRecord
+                                                                    .unitAmount
+                                                                    .toString())
+                                                            .formated,
                                                         textAlign:
                                                             TextAlign.center,
                                                         style:
@@ -459,15 +464,11 @@ class _PlanListPageWidgetState extends State<PlanListPageWidget> {
                                                     Expanded(
                                                       flex: 2,
                                                       child: Text(
-                                                        formatNumber(
-                                                          listViewPlansRecord
-                                                              .shippingFeeNormal,
-                                                          formatType:
-                                                              FormatType.custom,
-                                                          currency: '￥',
-                                                          format: '#,##0',
-                                                          locale: 'ja_JP',
-                                                        ),
+                                                        CurrencyChecker.create(
+                                                                listViewPlansRecord
+                                                                    .shippingFeeNormal
+                                                                    .toString())
+                                                            .formated,
                                                         textAlign:
                                                             TextAlign.center,
                                                         style:
@@ -480,7 +481,11 @@ class _PlanListPageWidgetState extends State<PlanListPageWidget> {
                                                       flex: 4,
                                                       child: Text(
                                                         listViewPlansRecord
-                                                            .shippingNormal,
+                                                            .shippingNormal
+                                                            .maybeHandleOverflow(
+                                                          maxChars: 24,
+                                                          replacement: '…',
+                                                        ),
                                                         style:
                                                             FlutterFlowTheme.of(
                                                                     context)
@@ -518,11 +523,14 @@ class _PlanListPageWidgetState extends State<PlanListPageWidget> {
                                                       flex: 1,
                                                       child: ToggleIcon(
                                                         onPressed: () async {
+                                                          final value =
+                                                              listViewPlansRecord
+                                                                      .active
+                                                                  ? false
+                                                                  : true;
                                                           final plansUpdateData =
                                                               createPlansRecordData(
-                                                            active:
-                                                                !listViewPlansRecord
-                                                                    .active,
+                                                            active: value,
                                                             updated:
                                                                 getCurrentTimestamp,
                                                           );

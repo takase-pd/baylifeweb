@@ -9,3 +9,5 @@ export 'ecommerce.dart' show ShippingForm;
 export 'ecommerce.dart' show ShippingCarrierExt;
 export 'ecommerce.dart' show PlansRecordExt;
 export 'auth_checker.dart' show AuthChecker;
+export 'ecommerce.dart' show TransactionsLaw;
+export 'ecommerce.dart' show CurrencyChecker;

@@ -574,7 +574,7 @@ class _PostSurveyPageWidgetState extends State<PostSurveyPageWidget> {
                                                               onPressed:
                                                                   () async {
                                                                 logFirebaseEvent(
-                                                                    'Button_ON_TAP');
+                                                                    'POST_SURVEY_PAGE_PAGE_日付_BTN_ON_TAP');
                                                                 logFirebaseEvent(
                                                                     'Button_Date-Time-Picker');
                                                                 await DatePicker
@@ -721,7 +721,7 @@ class _PostSurveyPageWidgetState extends State<PostSurveyPageWidget> {
                                                             onPressed:
                                                                 () async {
                                                               logFirebaseEvent(
-                                                                  'Button_ON_TAP');
+                                                                  'POST_SURVEY_PAGE_PAGE_日付_BTN_ON_TAP');
                                                               logFirebaseEvent(
                                                                   'Button_Date-Time-Picker');
                                                               await DatePicker
@@ -806,7 +806,7 @@ class _PostSurveyPageWidgetState extends State<PostSurveyPageWidget> {
                                                         FFButtonWidget(
                                                           onPressed: () async {
                                                             logFirebaseEvent(
-                                                                'Button_ON_TAP');
+                                                                'POST_SURVEY_PAGE_PAGE_送信_BTN_ON_TAP');
                                                             logFirebaseEvent(
                                                                 'Button_Backend-Call');
 

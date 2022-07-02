@@ -98,7 +98,8 @@ class _CreateComPageWidgetState extends State<CreateComPageWidget> {
                                             0, 0, 16, 0),
                                         child: InkWell(
                                           onTap: () async {
-                                            logFirebaseEvent('Text_ON_TAP');
+                                            logFirebaseEvent(
+                                                'CREATE_COM_Text_zk8oas2d_ON_TAP');
                                             logFirebaseEvent(
                                                 'Text_Navigate-To');
                                             await Navigator.push(
@@ -118,7 +119,8 @@ class _CreateComPageWidgetState extends State<CreateComPageWidget> {
                                       ),
                                       InkWell(
                                         onTap: () async {
-                                          logFirebaseEvent('Text_ON_TAP');
+                                          logFirebaseEvent(
+                                              'CREATE_COM_Text_9x6q0tm1_ON_TAP');
                                           logFirebaseEvent('Text_Navigate-To');
                                           await Navigator.push(
                                             context,
@@ -530,7 +532,7 @@ class _CreateComPageWidgetState extends State<CreateComPageWidget> {
                                               FFButtonWidget(
                                                 onPressed: () async {
                                                   logFirebaseEvent(
-                                                      'Button_ON_TAP');
+                                                      'CREATE_COM_PAGE_PAGE_送信_BTN_ON_TAP');
                                                   logFirebaseEvent(
                                                       'Button_Alert-Dialog');
                                                   var confirmDialogResponse =

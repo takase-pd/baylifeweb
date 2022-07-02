@@ -322,63 +322,61 @@ class _MainMenuWidgetState extends State<MainMenuWidget> {
                                   ],
                                 ),
                               ),
-                            if (_adminUser)
-                              Container(
-                                height: 48,
-                                child: Stack(
-                                  children: [
-                                    Padding(
-                                      padding: EdgeInsetsDirectional.fromSTEB(
-                                          16, 0, 0, 0),
-                                      child: FFButtonWidget(
-                                        onPressed: () async {
-                                          logFirebaseEvent('Button_ON_TAP');
-                                          logFirebaseEvent(
-                                              'Button_Navigate-To');
-                                          await Navigator.push(
-                                            context,
-                                            MaterialPageRoute(
-                                              builder: (context) =>
-                                                  ShopListPageWidget(),
-                                            ),
-                                          );
-                                        },
-                                        text: 'ショップ　',
-                                        options: FFButtonOptions(
-                                          width: 160,
-                                          height: 48,
-                                          color: FlutterFlowTheme.of(context)
-                                              .secondaryColor,
-                                          textStyle: FlutterFlowTheme.of(
-                                                  context)
-                                              .subtitle2
-                                              .override(
-                                                fontFamily: 'Open Sans',
-                                                color:
-                                                    FlutterFlowTheme.of(context)
-                                                        .textLight,
-                                                fontSize: 16,
-                                              ),
-                                          elevation: 0,
-                                          borderSide: BorderSide(
-                                            color: Colors.transparent,
+                            // if (_adminUser)
+                            Container(
+                              height: 48,
+                              child: Stack(
+                                children: [
+                                  Padding(
+                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                        16, 0, 0, 0),
+                                    child: FFButtonWidget(
+                                      onPressed: () async {
+                                        logFirebaseEvent('Button_ON_TAP');
+                                        logFirebaseEvent('Button_Navigate-To');
+                                        await Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                            builder: (context) =>
+                                                ShopListPageWidget(),
                                           ),
-                                          borderRadius: 0,
-                                        ),
-                                      ),
-                                    ),
-                                    Align(
-                                      alignment: AlignmentDirectional(-0.83, 0),
-                                      child: Icon(
-                                        Icons.store_rounded,
+                                        );
+                                      },
+                                      text: 'ショップ　',
+                                      options: FFButtonOptions(
+                                        width: 160,
+                                        height: 48,
                                         color: FlutterFlowTheme.of(context)
-                                            .textLight,
-                                        size: 24,
+                                            .secondaryColor,
+                                        textStyle: FlutterFlowTheme.of(context)
+                                            .subtitle2
+                                            .override(
+                                              fontFamily: 'Open Sans',
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .textLight,
+                                              fontSize: 16,
+                                            ),
+                                        elevation: 0,
+                                        borderSide: BorderSide(
+                                          color: Colors.transparent,
+                                        ),
+                                        borderRadius: 0,
                                       ),
                                     ),
-                                  ],
-                                ),
+                                  ),
+                                  Align(
+                                    alignment: AlignmentDirectional(-0.83, 0),
+                                    child: Icon(
+                                      Icons.store_rounded,
+                                      color: FlutterFlowTheme.of(context)
+                                          .textLight,
+                                      size: 24,
+                                    ),
+                                  ),
+                                ],
                               ),
+                            ),
                             Container(
                               height: 48,
                               child: Stack(

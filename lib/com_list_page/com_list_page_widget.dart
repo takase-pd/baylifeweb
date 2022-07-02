@@ -1,9 +1,11 @@
 import '../backend/backend.dart';
 import '../components/header_widget.dart';
 import '../components/main_menu_widget.dart';
-import '../create_com_page/create_com_page_widget.dart';
+import '../components/update_com_page_widget.dart';
+import '../components/update_plan_page_widget.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
+import '../flutter_flow/flutter_flow_widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -89,47 +91,94 @@ class _ComListPageWidgetState extends State<ComListPageWidget> {
                                 children: [
                                   Row(
                                     mainAxisSize: MainAxisSize.max,
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
                                     children: [
-                                      Padding(
-                                        padding: EdgeInsetsDirectional.fromSTEB(
-                                            0, 0, 16, 0),
-                                        child: InkWell(
-                                          onTap: () async {
-                                            logFirebaseEvent('Text_ON_TAP');
-                                            logFirebaseEvent(
-                                                'Text_Navigate-To');
-                                            await Navigator.push(
-                                              context,
-                                              MaterialPageRoute(
-                                                builder: (context) =>
-                                                    ComListPageWidget(),
+                                      Row(
+                                        mainAxisSize: MainAxisSize.max,
+                                        children: [
+                                          Padding(
+                                            padding:
+                                                EdgeInsetsDirectional.fromSTEB(
+                                                    0, 0, 16, 0),
+                                            child: InkWell(
+                                              onTap: () async {
+                                                logFirebaseEvent(
+                                                    'COM_LIST_PAGE_PAGE_Text_lus0gmfg_ON_TAP');
+                                                logFirebaseEvent(
+                                                    'Text_Navigate-To');
+                                                await Navigator.push(
+                                                  context,
+                                                  MaterialPageRoute(
+                                                    builder: (context) =>
+                                                        ComListPageWidget(),
+                                                  ),
+                                                );
+                                              },
+                                              child: Text(
+                                                '一覧',
+                                                style:
+                                                    FlutterFlowTheme.of(context)
+                                                        .subtitle1,
                                               ),
-                                            );
-                                          },
-                                          child: Text(
-                                            '一覧',
-                                            style: FlutterFlowTheme.of(context)
-                                                .subtitle1,
-                                          ),
-                                        ),
-                                      ),
-                                      InkWell(
-                                        onTap: () async {
-                                          logFirebaseEvent('Text_ON_TAP');
-                                          logFirebaseEvent('Text_Navigate-To');
-                                          await Navigator.push(
-                                            context,
-                                            MaterialPageRoute(
-                                              builder: (context) =>
-                                                  CreateComPageWidget(),
                                             ),
+                                          ),
+                                        ],
+                                      ),
+                                      FFButtonWidget(
+                                        onPressed: () async {
+                                          logFirebaseEvent(
+                                              'COM_LIST_PAGE_PAGE_追加_BTN_ON_TAP');
+                                          logFirebaseEvent(
+                                              'Button_Bottom-Sheet');
+                                          await showModalBottomSheet(
+                                            isScrollControlled: true,
+                                            backgroundColor: Colors.transparent,
+                                            barrierColor: Color(0x8E484848),
+                                            context: context,
+                                            constraints: BoxConstraints(
+                                              maxWidth: MediaQuery.of(context)
+                                                      .size
+                                                      .width *
+                                                  0.64,
+                                            ),
+                                            builder: (context) {
+                                              return Padding(
+                                                padding: MediaQuery.of(context)
+                                                    .viewInsets,
+                                                child: Container(
+                                                  height: MediaQuery.of(context)
+                                                          .size
+                                                          .height *
+                                                      0.96,
+                                                  child: UpdateComPageWidget(),
+                                                ),
+                                              );
+                                            },
                                           );
                                         },
-                                        child: Text(
-                                          '追加',
-                                          style: FlutterFlowTheme.of(context)
-                                              .subtitle1,
+                                        text: '追加',
+                                        options: FFButtonOptions(
+                                          width: 80,
+                                          height: 32,
+                                          color: FlutterFlowTheme.of(context)
+                                              .primaryColor,
+                                          textStyle: FlutterFlowTheme.of(
+                                                  context)
+                                              .bodyText2
+                                              .override(
+                                                fontFamily: 'Open Sans',
+                                                color:
+                                                    FlutterFlowTheme.of(context)
+                                                        .textLight,
+                                              ),
+                                          borderSide: BorderSide(
+                                            color: Colors.transparent,
+                                            width: 1,
+                                          ),
+                                          borderRadius: 4,
                                         ),
+                                        showLoadingIndicator: false,
                                       ),
                                     ],
                                   ),
@@ -198,10 +247,15 @@ class _ComListPageWidgetState extends State<ComListPageWidget> {
                                             data.forEach((item) {
                                               final index = itemIndexes[
                                                   item.reference.id];
+                                              final items =
+                                                  _pagingController.itemList;
                                               if (index != null) {
-                                                _pagingController.itemList
-                                                    .replaceRange(index,
-                                                        index + 1, [item]);
+                                                items.replaceRange(
+                                                    index, index + 1, [item]);
+                                                _pagingController.itemList = {
+                                                  for (var item in items)
+                                                    item.reference: item
+                                                }.values.toList();
                                               }
                                             });
                                             setState(() {});
@@ -235,140 +289,143 @@ class _ComListPageWidgetState extends State<ComListPageWidget> {
                                         final listViewCompaniesRecord =
                                             _pagingController
                                                 .itemList[listViewIndex];
-                                        return Container(
-                                          height: 60,
-                                          decoration: BoxDecoration(
-                                            color: FlutterFlowTheme.of(context)
-                                                .background,
-                                            borderRadius:
-                                                BorderRadius.circular(8),
-                                          ),
-                                          child: Padding(
-                                            padding:
-                                                EdgeInsetsDirectional.fromSTEB(
-                                                    16, 0, 0, 0),
-                                            child: Row(
-                                              mainAxisSize: MainAxisSize.min,
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.start,
-                                              children: [
-                                                Expanded(
-                                                  flex: 1,
-                                                  child: Text(
-                                                    listViewIndex.toString(),
-                                                    style: FlutterFlowTheme.of(
-                                                            context)
-                                                        .bodyText1,
+                                        return InkWell(
+                                          onTap: () async {
+                                            logFirebaseEvent(
+                                                'COM_LIST_Container_7oqbaudz_ON_TAP');
+                                            logFirebaseEvent(
+                                                'Container_Bottom-Sheet');
+                                            await showModalBottomSheet(
+                                              isScrollControlled: true,
+                                              backgroundColor:
+                                                  Colors.transparent,
+                                              barrierColor: Color(0x8E484848),
+                                              context: context,
+                                              constraints: BoxConstraints(
+                                                maxWidth: MediaQuery.of(context)
+                                                        .size
+                                                        .width *
+                                                    0.64,
+                                              ),
+                                              builder: (context) {
+                                                return Padding(
+                                                  padding:
+                                                      MediaQuery.of(context)
+                                                          .viewInsets,
+                                                  child: Container(
+                                                    height:
+                                                        MediaQuery.of(context)
+                                                                .size
+                                                                .height *
+                                                            0.96,
+                                                    child: UpdateComPageWidget(
+                                                      company:
+                                                          listViewCompaniesRecord,
+                                                    ),
                                                   ),
-                                                ),
-                                                Expanded(
-                                                  flex: 4,
-                                                  child: Text(
-                                                    listViewCompaniesRecord
-                                                        .name,
-                                                    style: FlutterFlowTheme.of(
-                                                            context)
-                                                        .bodyText1,
-                                                  ),
-                                                ),
-                                                Expanded(
-                                                  flex: 3,
-                                                  child: FutureBuilder<
-                                                      UsersRecord>(
-                                                    future: UsersRecord
-                                                        .getDocumentOnce(
-                                                            listViewCompaniesRecord
-                                                                .director),
-                                                    builder:
-                                                        (context, snapshot) {
-                                                      // Customize what your widget looks like when it's loading.
-                                                      if (!snapshot.hasData) {
-                                                        return Center(
-                                                          child: SizedBox(
-                                                            width: 50,
-                                                            height: 50,
-                                                            child: SpinKitPulse(
-                                                              color: FlutterFlowTheme
-                                                                      .of(context)
-                                                                  .primaryColor,
-                                                              size: 50,
-                                                            ),
-                                                          ),
-                                                        );
-                                                      }
-                                                      final textUsersRecord =
-                                                          snapshot.data;
-                                                      return Text(
-                                                        textUsersRecord
-                                                            .displayName,
-                                                        style:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .bodyText1,
-                                                      );
-                                                    },
-                                                  ),
-                                                ),
-                                                Expanded(
-                                                  flex: 6,
-                                                  child: FutureBuilder<
-                                                      UsersRecord>(
-                                                    future: UsersRecord
-                                                        .getDocumentOnce(
-                                                            listViewCompaniesRecord
-                                                                .director),
-                                                    builder:
-                                                        (context, snapshot) {
-                                                      // Customize what your widget looks like when it's loading.
-                                                      if (!snapshot.hasData) {
-                                                        return Center(
-                                                          child: SizedBox(
-                                                            width: 50,
-                                                            height: 50,
-                                                            child: SpinKitPulse(
-                                                              color: FlutterFlowTheme
-                                                                      .of(context)
-                                                                  .primaryColor,
-                                                              size: 50,
-                                                            ),
-                                                          ),
-                                                        );
-                                                      }
-                                                      final textUsersRecord =
-                                                          snapshot.data;
-                                                      return Text(
-                                                        textUsersRecord.uid,
-                                                        style:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .bodyText1,
-                                                      );
-                                                    },
-                                                  ),
-                                                ),
-                                                Expanded(
-                                                  flex: 6,
-                                                  child: InkWell(
-                                                    onTap: () async {
-                                                      logFirebaseEvent(
-                                                          'Text_ON_TAP');
-                                                      logFirebaseEvent(
-                                                          'Text_Launch-U-R-L');
-                                                      await launchURL(
-                                                          listViewCompaniesRecord
-                                                              .web);
-                                                    },
+                                                );
+                                              },
+                                            );
+                                          },
+                                          child: Container(
+                                            height: 88,
+                                            decoration: BoxDecoration(
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .background,
+                                              borderRadius:
+                                                  BorderRadius.circular(8),
+                                            ),
+                                            child: Padding(
+                                              padding: EdgeInsetsDirectional
+                                                  .fromSTEB(16, 0, 0, 0),
+                                              child: Row(
+                                                mainAxisSize: MainAxisSize.min,
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment.start,
+                                                children: [
+                                                  Expanded(
+                                                    flex: 1,
                                                     child: Text(
-                                                      listViewCompaniesRecord
-                                                          .web,
+                                                      listViewIndex.toString(),
                                                       style:
                                                           FlutterFlowTheme.of(
                                                                   context)
                                                               .bodyText1,
                                                     ),
                                                   ),
-                                                ),
-                                              ],
+                                                  Expanded(
+                                                    flex: 4,
+                                                    child: Text(
+                                                      listViewCompaniesRecord
+                                                          .name,
+                                                      style:
+                                                          FlutterFlowTheme.of(
+                                                                  context)
+                                                              .bodyText1,
+                                                    ),
+                                                  ),
+                                                  Expanded(
+                                                    flex: 6,
+                                                    child: FutureBuilder<
+                                                        UsersRecord>(
+                                                      future: UsersRecord
+                                                          .getDocumentOnce(
+                                                              listViewCompaniesRecord
+                                                                  .director),
+                                                      builder:
+                                                          (context, snapshot) {
+                                                        // Customize what your widget looks like when it's loading.
+                                                        if (!snapshot.hasData) {
+                                                          return Center(
+                                                            child: SizedBox(
+                                                              width: 50,
+                                                              height: 50,
+                                                              child:
+                                                                  SpinKitPulse(
+                                                                color: FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .primaryColor,
+                                                                size: 50,
+                                                              ),
+                                                            ),
+                                                          );
+                                                        }
+                                                        final textUsersRecord =
+                                                            snapshot.data;
+                                                        return Text(
+                                                          textUsersRecord.uid,
+                                                          style: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .bodyText1,
+                                                        );
+                                                      },
+                                                    ),
+                                                  ),
+                                                  Expanded(
+                                                    flex: 6,
+                                                    child: InkWell(
+                                                      onTap: () async {
+                                                        logFirebaseEvent(
+                                                            'COM_LIST_PAGE_PAGE_Text_zeqvhghu_ON_TAP');
+                                                        logFirebaseEvent(
+                                                            'Text_Launch-U-R-L');
+                                                        await launchURL(
+                                                            listViewCompaniesRecord
+                                                                .web);
+                                                      },
+                                                      child: Text(
+                                                        listViewCompaniesRecord
+                                                            .web,
+                                                        style:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .bodyText1,
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ],
+                                              ),
                                             ),
                                           ),
                                         );

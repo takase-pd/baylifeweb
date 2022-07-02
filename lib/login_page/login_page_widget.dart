@@ -200,7 +200,7 @@ class _LoginPageWidgetState extends State<LoginPageWidget> {
                         padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 24),
                         child: FFButtonWidget(
                           onPressed: () async {
-                            logFirebaseEvent('Button_ON_TAP');
+                            logFirebaseEvent('LOGIN_PAGE_PAGE_ログイン_BTN_ON_TAP');
                             logFirebaseEvent('Button_Auth');
 
                             final user = await signInWithEmail(
@@ -243,7 +243,8 @@ class _LoginPageWidgetState extends State<LoginPageWidget> {
                         padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 36),
                         child: FFButtonWidget(
                           onPressed: () async {
-                            logFirebaseEvent('Button_ON_TAP');
+                            logFirebaseEvent(
+                                'LOGIN_FORGET_PASSWORD?_BTN_ON_TAP');
                             logFirebaseEvent('Button_Auth');
                             if (emailAddressController.text.isEmpty) {
                               ScaffoldMessenger.of(context).showSnackBar(
@@ -307,7 +308,8 @@ class _LoginPageWidgetState extends State<LoginPageWidget> {
                                       0, 1, 0, 0),
                                   child: FFButtonWidget(
                                     onPressed: () async {
-                                      logFirebaseEvent('Button_ON_TAP');
+                                      logFirebaseEvent(
+                                          'LOGIN_SIGN_IN_WITH_GOOGLE_BTN_ON_TAP');
                                       logFirebaseEvent('Button_Auth');
                                       final user =
                                           await signInWithGoogle(context);

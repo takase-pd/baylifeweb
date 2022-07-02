@@ -189,7 +189,7 @@ class GetOrderDetailsCall {
     return ApiManager.instance.makeApiCall(
       callName: 'Get Order Details',
       apiUrl:
-          'https://asia-northeast1-baylifedev.cloudfunctions.net/ec-getOrderDetailsV0',
+          'https://asia-northeast1-baylife-ff782.cloudfunctions.net/ec-getOrderDetailsV0',
       callType: ApiCallType.POST,
       headers: {
         'Content-Type': 'application/json',
@@ -227,7 +227,7 @@ class GetOrderedPlansCall {
     return ApiManager.instance.makeApiCall(
       callName: 'Get Ordered Plans',
       apiUrl:
-          'https://asia-northeast1-baylifedev.cloudfunctions.net/ec-getOrderedPlansV0',
+          'https://asia-northeast1-baylife-ff782.cloudfunctions.net/ec-getOrderedPlansV0',
       callType: ApiCallType.POST,
       headers: {
         'Content-Type': 'application/json',
@@ -269,7 +269,7 @@ class UpdateOrderedPlanCall {
     return ApiManager.instance.makeApiCall(
       callName: 'Update Ordered Plan',
       apiUrl:
-          'https://asia-northeast1-baylifedev.cloudfunctions.net/ec-updateOrderedPlansV0',
+          'https://asia-northeast1-baylife-ff782.cloudfunctions.net/ec-updateOrderedPlansV0',
       callType: ApiCallType.POST,
       headers: {
         'Content-Type': 'application/json',
@@ -313,7 +313,7 @@ class UpdateShippingCall {
     return ApiManager.instance.makeApiCall(
       callName: 'Update Shipping',
       apiUrl:
-          'https://asia-northeast1-baylifedev.cloudfunctions.net/ec-updateShippingV0',
+          'https://asia-northeast1-baylife-ff782.cloudfunctions.net/ec-updateShippingV0',
       callType: ApiCallType.POST,
       headers: {
         'Content-Type': 'application/json',
@@ -329,6 +329,113 @@ class UpdateShippingCall {
       bodyType: BodyType.JSON,
       returnBody: true,
       accessToken: accessToken,
+      appCheckToken: appCheckToken,
+    );
+  }
+}
+
+class UpdateTransactionsLawCall {
+  static Future<ApiCallResponse> call({
+    String shopPath = '',
+    String uid = '',
+    String address = '',
+    String company = '',
+    String delvTime = '',
+    String director = '',
+    String email = '',
+    String otherFees = '',
+    String paymentMethod = '',
+    String phone = '',
+    String postalCode = '',
+    String rec = '',
+    String returnCharge = '',
+    String returnPeriod = '',
+    String unitAmount = '',
+    String web = '',
+    String accessToken = '',
+    String appCheckToken = '',
+  }) {
+    final body = '''
+{
+  "data": {
+    "shopPath": "${shopPath}",
+    "uid": "${uid}",
+    "address": "${address}",
+    "company": "${company}",
+    "delvTime": "${delvTime}",
+    "director": "${director}",
+    "email": "${email}",
+    "otherFees": "${otherFees}",
+    "paymentMethod": "${paymentMethod}",
+    "phone": "${phone}",
+    "postalCode": "${postalCode}",
+    "rec": "${rec}",
+    "returnCharge": "${returnCharge}",
+    "returnPeriod": "${returnPeriod}",
+    "unitAmount": "${unitAmount}",
+    "web": "${web}"
+  }
+}''';
+    return ApiManager.instance.makeApiCall(
+      callName: 'Update Transactions Law',
+      apiUrl:
+          'https://asia-northeast1-baylife-ff782.cloudfunctions.net/ec-updateTransactionsLawV0',
+      callType: ApiCallType.POST,
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      params: {
+        'shopPath': shopPath,
+        'uid': uid,
+        'address': address,
+        'company': company,
+        'delvTime': delvTime,
+        'director': director,
+        'email': email,
+        'otherFees': otherFees,
+        'paymentMethod': paymentMethod,
+        'phone': phone,
+        'postalCode': postalCode,
+        'rec': rec,
+        'returnCharge': returnCharge,
+        'returnPeriod': returnPeriod,
+        'unitAmount': unitAmount,
+        'web': web,
+      },
+      body: body,
+      bodyType: BodyType.JSON,
+      returnBody: true,
+      accessToken: accessToken,
+      appCheckToken: appCheckToken,
+    );
+  }
+}
+
+class TransactionsLawCall {
+  static Future<ApiCallResponse> call({
+    String path = '',
+    String appCheckToken = '',
+  }) {
+    final body = '''
+{
+  "data": {
+    "path": "${path}"
+  }
+}''';
+    return ApiManager.instance.makeApiCall(
+      callName: 'Transactions Law',
+      apiUrl:
+          'https://asia-northeast1-baylife-ff782.cloudfunctions.net/ec-transactionsLawV0',
+      callType: ApiCallType.POST,
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      params: {
+        'path': path,
+      },
+      body: body,
+      bodyType: BodyType.JSON,
+      returnBody: true,
       appCheckToken: appCheckToken,
     );
   }

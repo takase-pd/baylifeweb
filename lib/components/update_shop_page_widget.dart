@@ -1,33 +1,31 @@
 import '../auth/auth_util.dart';
 import '../backend/backend.dart';
 import '../backend/firebase_storage/storage.dart';
+import '../components/update_transactions_law_page_widget.dart';
+import '../custom_code/widgets/index.dart';
 import '../flutter_flow/flutter_flow_drop_down.dart';
-import '../flutter_flow/flutter_flow_radio_button.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
 import '../flutter_flow/upload_media.dart';
-import '../plan_list_page/plan_list_page_widget.dart';
-import '../custom_code/widgets/index.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:google_fonts/google_fonts.dart';
 
-class UpdatePlanPageWidget extends StatefulWidget {
-  const UpdatePlanPageWidget({
+class UpdateShopPageWidget extends StatefulWidget {
+  const UpdateShopPageWidget({
     Key key,
-    this.plan,
+    this.shop,
   }) : super(key: key);
 
-  final PlansRecord plan;
+  final ShopsRecord shop;
 
   @override
-  _UpdatePlanPageWidgetState createState() => _UpdatePlanPageWidgetState();
+  _UpdateShopPageWidgetState createState() => _UpdateShopPageWidgetState();
 }
 
-class _UpdatePlanPageWidgetState extends State<UpdatePlanPageWidget> {
-  DateTime datePicked;
-  // String uploadedFileUrl = '';
+class _UpdateShopPageWidgetState extends State<UpdateShopPageWidget> {
+  String uploadedFileUrl = '';
   TextEditingController textController1;
   TextEditingController textController2;
   TextEditingController textController3;
@@ -37,57 +35,66 @@ class _UpdatePlanPageWidgetState extends State<UpdatePlanPageWidget> {
   TextEditingController textController7;
   TextEditingController textController8;
   TextEditingController textController9;
-  bool radioButtonValue;
-  String initShipping;
-  DocumentReference shopRef;
+  TextEditingController textController10;
+  TextEditingController textController11;
+  TextEditingController textController12;
+  TextEditingController textController13;
+  DocumentReference catMainRef;
+  DocumentReference comRef;
+  DocumentReference directorRef;
   final formKey = GlobalKey<FormState>();
 
   static const NO_IMAGE =
       'https://firebasestorage.googleapis.com/v0/b/baylifedev.appspot.com/o/assets%2FNoImage.png?alt=media&token=16c12fc7-9de4-4531-9b81-c4b0e7a07945';
-  Future<PlansRecord> plan;
-  Future<List<ShopsRecord>> shops;
+  Future<ShopsRecord> shop;
+  List<CatShopRecord> catShops;
+  List<String> catShopList;
+  List<CompaniesRecord> companies;
+  List<String> comNameList;
   String banner;
   bool isNew = true;
-  int unitAmount = 0;
-  int shippingFeeNormal = 0;
+  int shippingFee = 0;
+  int shippingFreeTotal = 0;
   String label = '追加';
   String alert = '';
-  final List<String> shipping = ['1個当たりの送料', '個数問わず一律の送料'];
 
-  Future<PlansRecord> _getPlan() async {
-    if (widget.plan == null) {
+  Future<ShopsRecord> _getShop() async {
+    catShops = await queryCatShopRecordOnce();
+    catShopList = catShops.map((e) => e.catName).toList();
+
+    companies = await queryCompaniesRecordOnce(
+      queryBuilder: (companiesRecord) =>
+          companiesRecord.where('director', isEqualTo: currentUserReference),
+    );
+    comNameList = companies.map((e) => e.name).toList();
+
+    if (widget.shop == null) {
       banner = NO_IMAGE;
-      initShipping = shipping.first;
-      return PlansRecord();
+      return ShopsRecord();
     }
 
     isNew = false;
-    final _plan = widget.plan;
-    final shopName = await _plan.getShopName();
-    textController1 = TextEditingController(text: shopName);
-    banner = _plan.banner;
-    datePicked = _plan.published;
-    unitAmount = _plan.unitAmount;
-    shippingFeeNormal = _plan.shippingFeeNormal;
-    initShipping = _plan.shippingEachFee ? shipping.first : shipping.last;
+    final _shop = widget.shop;
+    final catShop =
+        catShops.firstWhere((element) => element.reference == _shop.catMain);
+    textController2 = TextEditingController(text: catShop.catName);
+    catMainRef = _shop.catMain;
+    final company =
+        companies.firstWhere((element) => element.reference == _shop.company);
+    comRef = _shop.company;
+    textController3 = TextEditingController(text: company.name);
+    banner = _shop.banner;
+    directorRef = _shop.director;
+    shippingFee = _shop.shippingFee;
+    shippingFreeTotal = _shop.shippingFreeTotal;
     label = '更新';
-    return _plan;
-  }
-
-  Future<List<ShopsRecord>> _getShops() async {
-    final _shops = await queryShopsRecordOnce(
-      queryBuilder: (shopsRecord) =>
-          shopsRecord.where('director', isEqualTo: currentUserReference),
-    );
-    shopRef = _shops.first.reference;
-    return _shops;
+    return _shop;
   }
 
   @override
   void initState() {
     super.initState();
-    plan = _getPlan();
-    shops = _getShops();
+    shop = _getShop();
   }
 
   @override
@@ -95,11 +102,11 @@ class _UpdatePlanPageWidgetState extends State<UpdatePlanPageWidget> {
     return Form(
       key: formKey,
       autovalidateMode: AutovalidateMode.always,
-      child: FutureBuilder<PlansRecord>(
-        future: plan,
+      child: FutureBuilder<ShopsRecord>(
+        future: shop,
         builder: (context, snapshot) {
           // Customize what your widget looks like when it's loading.
-          if (snapshot.connectionState != ConnectionState.done) {
+          if (!snapshot.hasData) {
             return Center(
               child: SizedBox(
                 width: 50,
@@ -111,7 +118,7 @@ class _UpdatePlanPageWidgetState extends State<UpdatePlanPageWidget> {
               ),
             );
           }
-          final containerPlansRecord = snapshot.data;
+          final containerShopsRecord = snapshot.data;
           return Container(
             decoration: BoxDecoration(
               color: FlutterFlowTheme.of(context).tertiaryColor,
@@ -139,8 +146,8 @@ class _UpdatePlanPageWidgetState extends State<UpdatePlanPageWidget> {
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 Text(
-                                  '商品詳細',
-                                  style: FlutterFlowTheme.of(context).subtitle2,
+                                  'ショップ',
+                                  style: FlutterFlowTheme.of(context).subtitle1,
                                 ),
                                 Image.network(
                                   banner,
@@ -154,162 +161,6 @@ class _UpdatePlanPageWidgetState extends State<UpdatePlanPageWidget> {
                           Padding(
                             padding:
                                 EdgeInsetsDirectional.fromSTEB(0, 0, 0, 16),
-                            child: FutureBuilder<List<ShopsRecord>>(
-                              future: shops,
-                              builder: (context, snapshot) {
-                                // Customize what your widget looks like when it's loading.
-                                if (!snapshot.hasData) {
-                                  return Center(
-                                    child: SizedBox(
-                                      width: 50,
-                                      height: 50,
-                                      child: SpinKitPulse(
-                                        color: FlutterFlowTheme.of(context)
-                                            .primaryColor,
-                                        size: 50,
-                                      ),
-                                    ),
-                                  );
-                                }
-                                List<ShopsRecord> containerShopsRecordList =
-                                    snapshot.data;
-                                final shopList = containerShopsRecordList
-                                    .map(
-                                      (e) => e.shopName,
-                                    )
-                                    .toList();
-                                return Container(
-                                  decoration: BoxDecoration(
-                                    color:
-                                        FlutterFlowTheme.of(context).background,
-                                    borderRadius: BorderRadius.circular(8),
-                                  ),
-                                  child: Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
-                                        16, 0, 16, 8),
-                                    child: Row(
-                                      mainAxisSize: MainAxisSize.max,
-                                      children: [
-                                        Expanded(
-                                          child: TextFormField(
-                                            controller: textController1 ??=
-                                                TextEditingController(
-                                                    text: shopList.first),
-                                            readOnly: true,
-                                            obscureText: false,
-                                            decoration: InputDecoration(
-                                              labelText: 'ショップ',
-                                              isDense: true,
-                                              enabledBorder:
-                                                  UnderlineInputBorder(
-                                                borderSide: BorderSide(
-                                                  color: Color(0x00000000),
-                                                  width: 1,
-                                                ),
-                                                borderRadius:
-                                                    BorderRadius.circular(4),
-                                              ),
-                                              focusedBorder:
-                                                  UnderlineInputBorder(
-                                                borderSide: BorderSide(
-                                                  color: FlutterFlowTheme.of(
-                                                          context)
-                                                      .primaryColor,
-                                                  width: 2,
-                                                ),
-                                                borderRadius:
-                                                    BorderRadius.circular(4),
-                                              ),
-                                              errorStyle: TextStyle(
-                                                color:
-                                                    FlutterFlowTheme.of(context)
-                                                        .primaryColor,
-                                              ),
-                                              errorBorder: UnderlineInputBorder(
-                                                borderSide: BorderSide(
-                                                  color: FlutterFlowTheme.of(
-                                                          context)
-                                                      .primaryColor,
-                                                  width: 2,
-                                                ),
-                                                borderRadius:
-                                                    BorderRadius.circular(4),
-                                              ),
-                                              focusedErrorBorder:
-                                                  UnderlineInputBorder(
-                                                borderSide: BorderSide(
-                                                  color: FlutterFlowTheme.of(
-                                                          context)
-                                                      .primaryColor,
-                                                  width: 2,
-                                                ),
-                                                borderRadius:
-                                                    BorderRadius.circular(4),
-                                              ),
-                                            ),
-                                            style: FlutterFlowTheme.of(context)
-                                                .bodyText2
-                                                .override(
-                                                  fontFamily: 'Open Sans',
-                                                  color: FlutterFlowTheme.of(
-                                                          context)
-                                                      .textDark,
-                                                  fontWeight: FontWeight.w500,
-                                                ),
-                                            autovalidateMode:
-                                                AutovalidateMode.always,
-                                            validator: (val) {
-                                              return val == null || val.isEmpty
-                                                  ? 'ショップ名を入力してください。'
-                                                  : null;
-                                            },
-                                          ),
-                                        ),
-                                        if (shopList.length > 1)
-                                          FlutterFlowDropDown(
-                                            options: shopList,
-                                            onChanged: (val) => setState(() => {
-                                                  shopRef =
-                                                      containerShopsRecordList
-                                                          .firstWhere((element) =>
-                                                              element
-                                                                  .shopName ==
-                                                              val)
-                                                          .reference,
-                                                  textController1 =
-                                                      TextEditingController(
-                                                          text: val)
-                                                }),
-                                            width: 240,
-                                            height: 50,
-                                            textStyle:
-                                                FlutterFlowTheme.of(context)
-                                                    .bodyText1
-                                                    .override(
-                                                      fontFamily: 'Open Sans',
-                                                      color: Colors.black,
-                                                    ),
-                                            hintText: 'ショップ名',
-                                            fillColor: Colors.white,
-                                            elevation: 2,
-                                            borderColor: Colors.transparent,
-                                            borderWidth: 0,
-                                            borderRadius: 0,
-                                            margin:
-                                                EdgeInsetsDirectional.fromSTEB(
-                                                    12, 4, 12, 4),
-                                            hidesUnderline: true,
-                                          ),
-                                      ],
-                                    ),
-                                  ),
-                                );
-                              },
-                            ),
-                          ),
-                          Padding(
-                            padding:
-                                EdgeInsetsDirectional.fromSTEB(0, 0, 0, 16),
                             child: Container(
                               decoration: BoxDecoration(
                                 color: FlutterFlowTheme.of(context).background,
@@ -323,13 +174,13 @@ class _UpdatePlanPageWidgetState extends State<UpdatePlanPageWidget> {
                                       padding: EdgeInsetsDirectional.fromSTEB(
                                           16, 0, 16, 8),
                                       child: TextFormField(
-                                        controller: textController2 ??=
+                                        controller: textController1 ??=
                                             TextEditingController(
-                                          text: containerPlansRecord.name,
+                                          text: containerShopsRecord.shopName,
                                         ),
                                         obscureText: false,
                                         decoration: InputDecoration(
-                                          labelText: '商品名',
+                                          labelText: 'ショップ名',
                                           isDense: true,
                                           enabledBorder: UnderlineInputBorder(
                                             borderSide: BorderSide(
@@ -379,16 +230,13 @@ class _UpdatePlanPageWidgetState extends State<UpdatePlanPageWidget> {
                                             .bodyText2
                                             .override(
                                               fontFamily: 'Open Sans',
-                                              color:
-                                                  FlutterFlowTheme.of(context)
-                                                      .textDark,
                                               fontWeight: FontWeight.w500,
                                             ),
                                         autovalidateMode:
                                             AutovalidateMode.always,
                                         validator: (val) {
                                           return val == null || val.isEmpty
-                                              ? '商品名を入力してください。'
+                                              ? 'ショップ名を入力してください。'
                                               : null;
                                         },
                                       ),
@@ -406,30 +254,20 @@ class _UpdatePlanPageWidgetState extends State<UpdatePlanPageWidget> {
                                 color: FlutterFlowTheme.of(context).background,
                                 borderRadius: BorderRadius.circular(8),
                               ),
-                              child: Row(
-                                mainAxisSize: MainAxisSize.max,
-                                children: [
-                                  Expanded(
-                                    child: Padding(
-                                      padding: EdgeInsetsDirectional.fromSTEB(
-                                          16, 0, 16, 8),
+                              child: Padding(
+                                padding: EdgeInsetsDirectional.fromSTEB(
+                                    16, 0, 16, 8),
+                                child: Row(
+                                  mainAxisSize: MainAxisSize.max,
+                                  children: [
+                                    Expanded(
                                       child: TextFormField(
-                                        controller: textController3 ??=
-                                            CurrencyChecker.create(
-                                                    unitAmount.toString())
-                                                .controller,
-                                        onChanged: (text) {
-                                          final checker =
-                                              CurrencyChecker.create(text);
-                                          setState(() {
-                                            textController3 =
-                                                checker.controller;
-                                            unitAmount = checker.currency;
-                                          });
-                                        },
+                                        controller: textController2 ??=
+                                            TextEditingController(),
+                                        readOnly: true,
                                         obscureText: false,
                                         decoration: InputDecoration(
-                                          labelText: '料金（半角数字）',
+                                          labelText: 'ショップカテゴリ',
                                           isDense: true,
                                           enabledBorder: UnderlineInputBorder(
                                             borderSide: BorderSide(
@@ -437,17 +275,21 @@ class _UpdatePlanPageWidgetState extends State<UpdatePlanPageWidget> {
                                               width: 1,
                                             ),
                                             borderRadius:
-                                                BorderRadius.circular(4),
+                                                const BorderRadius.only(
+                                              topLeft: Radius.circular(4.0),
+                                              topRight: Radius.circular(4.0),
+                                            ),
                                           ),
                                           focusedBorder: UnderlineInputBorder(
                                             borderSide: BorderSide(
-                                              color:
-                                                  FlutterFlowTheme.of(context)
-                                                      .primaryColor,
-                                              width: 2,
+                                              color: Color(0x00000000),
+                                              width: 1,
                                             ),
                                             borderRadius:
-                                                BorderRadius.circular(4),
+                                                const BorderRadius.only(
+                                              topLeft: Radius.circular(4.0),
+                                              topRight: Radius.circular(4.0),
+                                            ),
                                           ),
                                           errorStyle: TextStyle(
                                             color: FlutterFlowTheme.of(context)
@@ -479,25 +321,47 @@ class _UpdatePlanPageWidgetState extends State<UpdatePlanPageWidget> {
                                             .bodyText2
                                             .override(
                                               fontFamily: 'Open Sans',
-                                              color:
-                                                  FlutterFlowTheme.of(context)
-                                                      .textDark,
                                               fontWeight: FontWeight.w500,
                                             ),
-                                        keyboardType: TextInputType.number,
                                         autovalidateMode:
                                             AutovalidateMode.always,
                                         validator: (val) {
-                                          return val == null ||
-                                                  val.isEmpty ||
-                                                  unitAmount == 0
-                                              ? '料金を入力してください。'
+                                          return val == null || val.isEmpty
+                                              ? 'ショップカテゴリを選択してください。'
                                               : null;
                                         },
                                       ),
                                     ),
-                                  ),
-                                ],
+                                    FlutterFlowDropDown(
+                                      options: catShopList,
+                                      onChanged: (val) => setState(() => {
+                                            catMainRef = catShops
+                                                .firstWhere((element) =>
+                                                    element.catName == val)
+                                                .reference,
+                                            textController2 =
+                                                TextEditingController(text: val)
+                                          }),
+                                      width: 240,
+                                      height: 50,
+                                      textStyle: FlutterFlowTheme.of(context)
+                                          .bodyText2
+                                          .override(
+                                            fontFamily: 'Open Sans',
+                                            fontWeight: FontWeight.w500,
+                                          ),
+                                      hintText: 'ショップカテゴリ名',
+                                      fillColor: Colors.white,
+                                      elevation: 2,
+                                      borderColor: Colors.transparent,
+                                      borderWidth: 0,
+                                      borderRadius: 0,
+                                      margin: EdgeInsetsDirectional.fromSTEB(
+                                          12, 4, 12, 4),
+                                      hidesUnderline: true,
+                                    ),
+                                  ],
+                                ),
                               ),
                             ),
                           ),
@@ -505,6 +369,117 @@ class _UpdatePlanPageWidgetState extends State<UpdatePlanPageWidget> {
                             padding:
                                 EdgeInsetsDirectional.fromSTEB(0, 0, 0, 16),
                             child: Container(
+                              decoration: BoxDecoration(
+                                color: FlutterFlowTheme.of(context).background,
+                                borderRadius: BorderRadius.circular(8),
+                              ),
+                              child: Padding(
+                                padding: EdgeInsetsDirectional.fromSTEB(
+                                    16, 0, 16, 8),
+                                child: Row(
+                                  mainAxisSize: MainAxisSize.max,
+                                  children: [
+                                    Expanded(
+                                      child: TextFormField(
+                                        controller: textController3 ??=
+                                            TextEditingController(
+                                                text: comNameList.first),
+                                        readOnly: true,
+                                        obscureText: false,
+                                        decoration: InputDecoration(
+                                          labelText: '企業',
+                                          isDense: true,
+                                          enabledBorder: UnderlineInputBorder(
+                                            borderSide: BorderSide(
+                                              color: Color(0x00000000),
+                                              width: 1,
+                                            ),
+                                            borderRadius:
+                                                const BorderRadius.only(
+                                              topLeft: Radius.circular(4.0),
+                                              topRight: Radius.circular(4.0),
+                                            ),
+                                          ),
+                                          focusedBorder: UnderlineInputBorder(
+                                            borderSide: BorderSide(
+                                              color: Color(0x00000000),
+                                              width: 1,
+                                            ),
+                                            borderRadius:
+                                                const BorderRadius.only(
+                                              topLeft: Radius.circular(4.0),
+                                              topRight: Radius.circular(4.0),
+                                            ),
+                                          ),
+                                          focusedErrorBorder:
+                                              UnderlineInputBorder(
+                                            borderSide: BorderSide(
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .primaryColor,
+                                              width: 2,
+                                            ),
+                                            borderRadius:
+                                                BorderRadius.circular(4),
+                                          ),
+                                        ),
+                                        style: FlutterFlowTheme.of(context)
+                                            .bodyText2
+                                            .override(
+                                              fontFamily: 'Open Sans',
+                                              fontWeight: FontWeight.w500,
+                                            ),
+                                        autovalidateMode:
+                                            AutovalidateMode.always,
+                                        validator: (val) {
+                                          return val == null || val.isEmpty
+                                              ? '企業名を選択してください。'
+                                              : null;
+                                        },
+                                      ),
+                                    ),
+                                    if (companies.length > 1)
+                                      FlutterFlowDropDown(
+                                        options: companies
+                                            .map((e) => e.name)
+                                            .toList(),
+                                        onChanged: (val) => setState(() => {
+                                              comRef = companies
+                                                  .firstWhere((element) =>
+                                                      element.name == val)
+                                                  .reference,
+                                              textController3 =
+                                                  TextEditingController(
+                                                      text: val)
+                                            }),
+                                        width: 240,
+                                        height: 50,
+                                        textStyle: FlutterFlowTheme.of(context)
+                                            .bodyText2
+                                            .override(
+                                              fontFamily: 'Open Sans',
+                                              fontWeight: FontWeight.w500,
+                                            ),
+                                        hintText: '企業名',
+                                        fillColor: Colors.white,
+                                        elevation: 2,
+                                        borderColor: Colors.transparent,
+                                        borderWidth: 0,
+                                        borderRadius: 0,
+                                        margin: EdgeInsetsDirectional.fromSTEB(
+                                            12, 4, 12, 4),
+                                        hidesUnderline: true,
+                                      ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                          ),
+                          Padding(
+                            padding:
+                                EdgeInsetsDirectional.fromSTEB(0, 0, 0, 16),
+                            child: Container(
+                              // height: 120,
                               decoration: BoxDecoration(
                                 color: FlutterFlowTheme.of(context).background,
                                 borderRadius: BorderRadius.circular(8),
@@ -519,105 +494,8 @@ class _UpdatePlanPageWidgetState extends State<UpdatePlanPageWidget> {
                                       child: TextFormField(
                                         controller: textController4 ??=
                                             TextEditingController(
-                                          text: containerPlansRecord.quantityMax
-                                              .toString(),
-                                        ),
-                                        obscureText: false,
-                                        decoration: InputDecoration(
-                                          labelText: '注文最大数',
-                                          hintText: '一度に注文できる最大の数',
-                                          isDense: true,
-                                          enabledBorder: UnderlineInputBorder(
-                                            borderSide: BorderSide(
-                                              color: Color(0x00000000),
-                                              width: 1,
-                                            ),
-                                            borderRadius:
-                                                BorderRadius.circular(4),
-                                          ),
-                                          focusedBorder: UnderlineInputBorder(
-                                            borderSide: BorderSide(
-                                              color:
-                                                  FlutterFlowTheme.of(context)
-                                                      .primaryColor,
-                                              width: 2,
-                                            ),
-                                            borderRadius:
-                                                BorderRadius.circular(4),
-                                          ),
-                                          errorStyle: TextStyle(
-                                            color: FlutterFlowTheme.of(context)
-                                                .primaryColor,
-                                          ),
-                                          errorBorder: UnderlineInputBorder(
-                                            borderSide: BorderSide(
-                                              color:
-                                                  FlutterFlowTheme.of(context)
-                                                      .primaryColor,
-                                              width: 2,
-                                            ),
-                                            borderRadius:
-                                                BorderRadius.circular(4),
-                                          ),
-                                          focusedErrorBorder:
-                                              UnderlineInputBorder(
-                                            borderSide: BorderSide(
-                                              color:
-                                                  FlutterFlowTheme.of(context)
-                                                      .primaryColor,
-                                              width: 2,
-                                            ),
-                                            borderRadius:
-                                                BorderRadius.circular(4),
-                                          ),
-                                        ),
-                                        style: FlutterFlowTheme.of(context)
-                                            .bodyText2
-                                            .override(
-                                              fontFamily: 'Open Sans',
-                                              color:
-                                                  FlutterFlowTheme.of(context)
-                                                      .textDark,
-                                              fontWeight: FontWeight.w500,
-                                            ),
-                                        keyboardType: TextInputType.number,
-                                        autovalidateMode:
-                                            AutovalidateMode.always,
-                                        validator: (val) {
-                                          return val == null ||
-                                                  val.isEmpty ||
-                                                  int.parse(val) == 0
-                                              ? '注文最大数を入力してください。'
-                                              : null;
-                                        },
-                                      ),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ),
-                          Padding(
-                            padding:
-                                EdgeInsetsDirectional.fromSTEB(0, 0, 0, 16),
-                            child: Container(
-                              decoration: BoxDecoration(
-                                color: FlutterFlowTheme.of(context).background,
-                                borderRadius: BorderRadius.circular(8),
-                              ),
-                              child: Row(
-                                mainAxisSize: MainAxisSize.max,
-                                children: [
-                                  Expanded(
-                                    child: Padding(
-                                      padding: EdgeInsetsDirectional.fromSTEB(
-                                          16, 0, 16, 8),
-                                      child: TextFormField(
-                                        controller: textController5 ??=
-                                            TextEditingController(
-                                          text:
-                                              containerPlansRecord.description,
-                                        ),
+                                                text: containerShopsRecord
+                                                    .description),
                                         obscureText: false,
                                         decoration: InputDecoration(
                                           labelText: '説明・備考',
@@ -628,51 +506,27 @@ class _UpdatePlanPageWidgetState extends State<UpdatePlanPageWidget> {
                                               width: 1,
                                             ),
                                             borderRadius:
-                                                BorderRadius.circular(4),
+                                                const BorderRadius.only(
+                                              topLeft: Radius.circular(4.0),
+                                              topRight: Radius.circular(4.0),
+                                            ),
                                           ),
                                           focusedBorder: UnderlineInputBorder(
                                             borderSide: BorderSide(
-                                              color:
-                                                  FlutterFlowTheme.of(context)
-                                                      .primaryColor,
-                                              width: 2,
+                                              color: Color(0x00000000),
+                                              width: 1,
                                             ),
                                             borderRadius:
-                                                BorderRadius.circular(4),
-                                          ),
-                                          errorStyle: TextStyle(
-                                            color: FlutterFlowTheme.of(context)
-                                                .primaryColor,
-                                          ),
-                                          errorBorder: UnderlineInputBorder(
-                                            borderSide: BorderSide(
-                                              color:
-                                                  FlutterFlowTheme.of(context)
-                                                      .primaryColor,
-                                              width: 2,
+                                                const BorderRadius.only(
+                                              topLeft: Radius.circular(4.0),
+                                              topRight: Radius.circular(4.0),
                                             ),
-                                            borderRadius:
-                                                BorderRadius.circular(4),
-                                          ),
-                                          focusedErrorBorder:
-                                              UnderlineInputBorder(
-                                            borderSide: BorderSide(
-                                              color:
-                                                  FlutterFlowTheme.of(context)
-                                                      .primaryColor,
-                                              width: 2,
-                                            ),
-                                            borderRadius:
-                                                BorderRadius.circular(4),
                                           ),
                                         ),
                                         style: FlutterFlowTheme.of(context)
                                             .bodyText2
                                             .override(
                                               fontFamily: 'Open Sans',
-                                              color:
-                                                  FlutterFlowTheme.of(context)
-                                                      .textDark,
                                               fontWeight: FontWeight.w500,
                                             ),
                                         minLines: 2,
@@ -703,7 +557,7 @@ class _UpdatePlanPageWidgetState extends State<UpdatePlanPageWidget> {
                                   children: [
                                     Expanded(
                                       child: TextFormField(
-                                        controller: textController6 ??=
+                                        controller: textController5 ??=
                                             TextEditingController(text: banner),
                                         maxLines: 5,
                                         minLines: 1,
@@ -711,7 +565,6 @@ class _UpdatePlanPageWidgetState extends State<UpdatePlanPageWidget> {
                                         obscureText: false,
                                         decoration: InputDecoration(
                                           labelText: 'バナー画像',
-                                          hintText: 'URLを入力、または画像を選択',
                                           isDense: true,
                                           enabledBorder: UnderlineInputBorder(
                                             borderSide: BorderSide(
@@ -719,17 +572,21 @@ class _UpdatePlanPageWidgetState extends State<UpdatePlanPageWidget> {
                                               width: 1,
                                             ),
                                             borderRadius:
-                                                BorderRadius.circular(4),
+                                                const BorderRadius.only(
+                                              topLeft: Radius.circular(4.0),
+                                              topRight: Radius.circular(4.0),
+                                            ),
                                           ),
                                           focusedBorder: UnderlineInputBorder(
                                             borderSide: BorderSide(
-                                              color:
-                                                  FlutterFlowTheme.of(context)
-                                                      .primaryColor,
-                                              width: 2,
+                                              color: Color(0x00000000),
+                                              width: 1,
                                             ),
                                             borderRadius:
-                                                BorderRadius.circular(4),
+                                                const BorderRadius.only(
+                                              topLeft: Radius.circular(4.0),
+                                              topRight: Radius.circular(4.0),
+                                            ),
                                           ),
                                           errorStyle: TextStyle(
                                             color: FlutterFlowTheme.of(context)
@@ -761,16 +618,13 @@ class _UpdatePlanPageWidgetState extends State<UpdatePlanPageWidget> {
                                             .bodyText2
                                             .override(
                                               fontFamily: 'Open Sans',
-                                              color:
-                                                  FlutterFlowTheme.of(context)
-                                                      .textDark,
                                               fontWeight: FontWeight.w500,
                                             ),
                                         autovalidateMode:
                                             AutovalidateMode.always,
                                         validator: (val) {
                                           return val == null || val.isEmpty
-                                              ? 'URLを入力、または画像を選択してください。'
+                                              ? 'バナー画像を選択してください。'
                                               : null;
                                         },
                                       ),
@@ -778,7 +632,7 @@ class _UpdatePlanPageWidgetState extends State<UpdatePlanPageWidget> {
                                     FFButtonWidget(
                                       onPressed: () async {
                                         logFirebaseEvent(
-                                            'UPDATE_PLAN_PAGE_COMP_選択_BTN_ON_TAP');
+                                            'UPDATE_SHOP_PAGE_COMP_選択_BTN_ON_TAP');
                                         logFirebaseEvent(
                                             'Button_Upload-Photo-Video');
                                         final selectedMedia =
@@ -808,11 +662,14 @@ class _UpdatePlanPageWidgetState extends State<UpdatePlanPageWidget> {
                                           if (downloadUrls != null &&
                                               downloadUrls.length ==
                                                   selectedMedia.length) {
-                                            setState(
-                                              () => textController6 =
-                                                  TextEditingController(
-                                                      text: downloadUrls.first),
-                                            );
+                                            setState(() => {
+                                                  uploadedFileUrl =
+                                                      downloadUrls.first,
+                                                  textController5 =
+                                                      TextEditingController(
+                                                          text:
+                                                              uploadedFileUrl),
+                                                });
                                             showUploadMessage(
                                               context,
                                               'Success!',
@@ -835,8 +692,9 @@ class _UpdatePlanPageWidgetState extends State<UpdatePlanPageWidget> {
                                         textStyle: FlutterFlowTheme.of(context)
                                             .subtitle2
                                             .override(
-                                              fontFamily: 'Open Sans',
                                               color: Colors.white,
+                                              fontFamily: 'Open Sans',
+                                              fontWeight: FontWeight.w500,
                                             ),
                                         borderSide: BorderSide(
                                           color: Colors.transparent,
@@ -851,6 +709,13 @@ class _UpdatePlanPageWidgetState extends State<UpdatePlanPageWidget> {
                             ),
                           ),
                           Padding(
+                            padding: EdgeInsetsDirectional.fromSTEB(0, 8, 0, 8),
+                            child: Text(
+                              '送料設定',
+                              style: FlutterFlowTheme.of(context).subtitle2,
+                            ),
+                          ),
+                          Padding(
                             padding:
                                 EdgeInsetsDirectional.fromSTEB(0, 0, 0, 16),
                             child: Container(
@@ -858,24 +723,32 @@ class _UpdatePlanPageWidgetState extends State<UpdatePlanPageWidget> {
                                 color: FlutterFlowTheme.of(context).background,
                                 borderRadius: BorderRadius.circular(8),
                               ),
-                              child: Padding(
-                                padding: EdgeInsetsDirectional.fromSTEB(
-                                    16, 8, 16, 8),
-                                child: Row(
-                                  mainAxisSize: MainAxisSize.max,
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Expanded(
+                              child: Row(
+                                mainAxisSize: MainAxisSize.max,
+                                children: [
+                                  Expanded(
+                                    child: Padding(
+                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                          16, 0, 16, 8),
                                       child: TextFormField(
-                                        controller: textController7 ??=
-                                            TextEditingController(
-                                                text: dateTimeFormat(
-                                                    'yMMMd', datePicked)),
-                                        keyboardType: TextInputType.datetime,
+                                        controller: textController6 ??=
+                                            CurrencyChecker.create(
+                                                    shippingFee.toString())
+                                                .controller,
+                                        onChanged: (text) {
+                                          final checker =
+                                              CurrencyChecker.create(text);
+                                          setState(() {
+                                            textController6 =
+                                                checker.controller;
+                                            shippingFee = checker.currency;
+                                          });
+                                        },
                                         obscureText: false,
                                         decoration: InputDecoration(
-                                          labelText: '販売開始日',
+                                          labelText: '送料上限指定額（半角数字）',
+                                          helperText:
+                                              '送料の合計が指定額を超えた場合、送料をこの指定額とする。',
                                           isDense: true,
                                           enabledBorder: UnderlineInputBorder(
                                             borderSide: BorderSide(
@@ -895,22 +768,66 @@ class _UpdatePlanPageWidgetState extends State<UpdatePlanPageWidget> {
                                             borderRadius:
                                                 BorderRadius.circular(4),
                                           ),
-                                          errorStyle: TextStyle(
-                                            color: FlutterFlowTheme.of(context)
-                                                .primaryColor,
-                                          ),
-                                          errorBorder: UnderlineInputBorder(
+                                        ),
+                                        style: FlutterFlowTheme.of(context)
+                                            .bodyText2
+                                            .override(
+                                              fontFamily: 'Open Sans',
+                                              fontWeight: FontWeight.w500,
+                                            ),
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                          Padding(
+                            padding:
+                                EdgeInsetsDirectional.fromSTEB(0, 0, 0, 16),
+                            child: Container(
+                              decoration: BoxDecoration(
+                                color: FlutterFlowTheme.of(context).background,
+                                borderRadius: BorderRadius.circular(8),
+                              ),
+                              child: Row(
+                                mainAxisSize: MainAxisSize.max,
+                                children: [
+                                  Expanded(
+                                    child: Padding(
+                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                          16, 0, 16, 8),
+                                      child: TextFormField(
+                                        controller: textController7 ??=
+                                            CurrencyChecker.create(
+                                                    shippingFreeTotal
+                                                        .toString())
+                                                .controller,
+                                        onChanged: (text) {
+                                          final checker =
+                                              CurrencyChecker.create(text);
+                                          setState(() {
+                                            textController7 =
+                                                checker.controller;
+                                            shippingFreeTotal =
+                                                checker.currency;
+                                          });
+                                        },
+                                        obscureText: false,
+                                        decoration: InputDecoration(
+                                          labelText: '送料無料適用時の合計金額（半角数字））',
+                                          helperText:
+                                              '設定を上回る購入額の場合、送料無料を適用します。未設定の場合、送料無料は適用されません。',
+                                          isDense: true,
+                                          enabledBorder: UnderlineInputBorder(
                                             borderSide: BorderSide(
-                                              color:
-                                                  FlutterFlowTheme.of(context)
-                                                      .primaryColor,
-                                              width: 2,
+                                              color: Color(0x00000000),
+                                              width: 1,
                                             ),
                                             borderRadius:
                                                 BorderRadius.circular(4),
                                           ),
-                                          focusedErrorBorder:
-                                              UnderlineInputBorder(
+                                          focusedBorder: UnderlineInputBorder(
                                             borderSide: BorderSide(
                                               color:
                                                   FlutterFlowTheme.of(context)
@@ -925,73 +842,20 @@ class _UpdatePlanPageWidgetState extends State<UpdatePlanPageWidget> {
                                             .bodyText2
                                             .override(
                                               fontFamily: 'Open Sans',
-                                              color:
-                                                  FlutterFlowTheme.of(context)
-                                                      .textDark,
                                               fontWeight: FontWeight.w500,
                                             ),
-                                        autovalidateMode:
-                                            AutovalidateMode.always,
-                                        validator: (val) {
-                                          return val == null || val.isEmpty
-                                              ? '販売開始日を選択してください。'
-                                              : null;
-                                        },
                                       ),
                                     ),
-                                    Padding(
-                                      padding: EdgeInsetsDirectional.fromSTEB(
-                                          16, 0, 0, 0),
-                                      child: FFButtonWidget(
-                                        onPressed: () async {
-                                          logFirebaseEvent(
-                                              'UPDATE_PLAN_PAGE_COMP_日付_BTN_ON_TAP');
-                                          logFirebaseEvent(
-                                              'Button_Date-Time-Picker');
-                                          await DatePicker.showDatePicker(
-                                            context,
-                                            showTitleActions: true,
-                                            onConfirm: (date) {
-                                              setState(() => {
-                                                    datePicked = date,
-                                                    textController7 =
-                                                        TextEditingController(
-                                                            text:
-                                                                dateTimeFormat(
-                                                                    'yMMMd',
-                                                                    date)),
-                                                  });
-                                            },
-                                            currentTime: getCurrentTimestamp,
-                                            minTime: DateTime(0, 0, 0),
-                                          );
-                                        },
-                                        text: '日付',
-                                        options: FFButtonOptions(
-                                          width: 130,
-                                          height: 40,
-                                          color: FlutterFlowTheme.of(context)
-                                              .secondaryColor,
-                                          textStyle: FlutterFlowTheme.of(
-                                                  context)
-                                              .subtitle2
-                                              .override(
-                                                fontFamily: 'Open Sans',
-                                                color:
-                                                    FlutterFlowTheme.of(context)
-                                                        .textLight,
-                                              ),
-                                          borderSide: BorderSide(
-                                            color: Colors.transparent,
-                                            width: 1,
-                                          ),
-                                          borderRadius: 12,
-                                        ),
-                                      ),
-                                    ),
-                                  ],
-                                ),
+                                  ),
+                                ],
                               ),
+                            ),
+                          ),
+                          Padding(
+                            padding: EdgeInsetsDirectional.fromSTEB(0, 8, 0, 8),
+                            child: Text(
+                              '連絡先',
+                              style: FlutterFlowTheme.of(context).subtitle2,
                             ),
                           ),
                           Padding(
@@ -1012,13 +876,11 @@ class _UpdatePlanPageWidgetState extends State<UpdatePlanPageWidget> {
                                       child: TextFormField(
                                         controller: textController8 ??=
                                             TextEditingController(
-                                          text: containerPlansRecord
-                                              .shippingNormal,
-                                        ),
+                                                text:
+                                                    containerShopsRecord.email),
                                         obscureText: false,
                                         decoration: InputDecoration(
-                                          labelText: '配送説明',
-                                          hintText: '「2日以内に発送」などと記載してください。',
+                                          labelText: 'メールアドレス',
                                           isDense: true,
                                           enabledBorder: UnderlineInputBorder(
                                             borderSide: BorderSide(
@@ -1026,17 +888,21 @@ class _UpdatePlanPageWidgetState extends State<UpdatePlanPageWidget> {
                                               width: 1,
                                             ),
                                             borderRadius:
-                                                BorderRadius.circular(4),
+                                                const BorderRadius.only(
+                                              topLeft: Radius.circular(4.0),
+                                              topRight: Radius.circular(4.0),
+                                            ),
                                           ),
                                           focusedBorder: UnderlineInputBorder(
                                             borderSide: BorderSide(
-                                              color:
-                                                  FlutterFlowTheme.of(context)
-                                                      .primaryColor,
-                                              width: 2,
+                                              color: Color(0x00000000),
+                                              width: 1,
                                             ),
                                             borderRadius:
-                                                BorderRadius.circular(4),
+                                                const BorderRadius.only(
+                                              topLeft: Radius.circular(4.0),
+                                              topRight: Radius.circular(4.0),
+                                            ),
                                           ),
                                           errorStyle: TextStyle(
                                             color: FlutterFlowTheme.of(context)
@@ -1068,18 +934,13 @@ class _UpdatePlanPageWidgetState extends State<UpdatePlanPageWidget> {
                                             .bodyText2
                                             .override(
                                               fontFamily: 'Open Sans',
-                                              color:
-                                                  FlutterFlowTheme.of(context)
-                                                      .textDark,
                                               fontWeight: FontWeight.w500,
                                             ),
-                                        minLines: 1,
-                                        maxLines: 5,
                                         autovalidateMode:
                                             AutovalidateMode.always,
                                         validator: (val) {
                                           return val == null || val.isEmpty
-                                              ? '配送説明を入力してください。'
+                                              ? 'メールアドレスを入力してください。'
                                               : null;
                                         },
                                       ),
@@ -1106,23 +967,12 @@ class _UpdatePlanPageWidgetState extends State<UpdatePlanPageWidget> {
                                           16, 0, 16, 8),
                                       child: TextFormField(
                                         controller: textController9 ??=
-                                            CurrencyChecker.create(
-                                                    shippingFeeNormal
-                                                        .toString())
-                                                .controller,
-                                        onChanged: (text) {
-                                          final checker =
-                                              CurrencyChecker.create(text);
-                                          setState(() {
-                                            textController9 =
-                                                checker.controller;
-                                            shippingFeeNormal =
-                                                checker.currency;
-                                          });
-                                        },
+                                            TextEditingController(
+                                                text:
+                                                    containerShopsRecord.phone),
                                         obscureText: false,
                                         decoration: InputDecoration(
-                                          labelText: '送料（半角数字）',
+                                          labelText: '電話番号',
                                           isDense: true,
                                           enabledBorder: UnderlineInputBorder(
                                             borderSide: BorderSide(
@@ -1130,17 +980,21 @@ class _UpdatePlanPageWidgetState extends State<UpdatePlanPageWidget> {
                                               width: 1,
                                             ),
                                             borderRadius:
-                                                BorderRadius.circular(4),
+                                                const BorderRadius.only(
+                                              topLeft: Radius.circular(4.0),
+                                              topRight: Radius.circular(4.0),
+                                            ),
                                           ),
                                           focusedBorder: UnderlineInputBorder(
                                             borderSide: BorderSide(
-                                              color:
-                                                  FlutterFlowTheme.of(context)
-                                                      .primaryColor,
-                                              width: 2,
+                                              color: Color(0x00000000),
+                                              width: 1,
                                             ),
                                             borderRadius:
-                                                BorderRadius.circular(4),
+                                                const BorderRadius.only(
+                                              topLeft: Radius.circular(4.0),
+                                              topRight: Radius.circular(4.0),
+                                            ),
                                           ),
                                           errorStyle: TextStyle(
                                             color: FlutterFlowTheme.of(context)
@@ -1172,16 +1026,13 @@ class _UpdatePlanPageWidgetState extends State<UpdatePlanPageWidget> {
                                             .bodyText2
                                             .override(
                                               fontFamily: 'Open Sans',
-                                              color:
-                                                  FlutterFlowTheme.of(context)
-                                                      .textDark,
                                               fontWeight: FontWeight.w500,
                                             ),
                                         autovalidateMode:
                                             AutovalidateMode.always,
                                         validator: (val) {
                                           return val == null || val.isEmpty
-                                              ? '送料を入力してください。'
+                                              ? '電話番号を入力してください。'
                                               : null;
                                         },
                                       ),
@@ -1194,58 +1045,324 @@ class _UpdatePlanPageWidgetState extends State<UpdatePlanPageWidget> {
                           Padding(
                             padding:
                                 EdgeInsetsDirectional.fromSTEB(0, 0, 0, 16),
+                            child: StreamBuilder<List<UsersRecord>>(
+                              stream: queryUsersRecord(),
+                              builder: (context, snapshot) {
+                                // Customize what your widget looks like when it's loading.
+                                if (!snapshot.hasData) {
+                                  return Center(
+                                    child: SizedBox(
+                                      width: 50,
+                                      height: 50,
+                                      child: SpinKitPulse(
+                                        color: FlutterFlowTheme.of(context)
+                                            .primaryColor,
+                                        size: 50,
+                                      ),
+                                    ),
+                                  );
+                                }
+                                List<UsersRecord> containerUsersRecordList =
+                                    snapshot.data;
+                                return Container(
+                                  decoration: BoxDecoration(
+                                    color:
+                                        FlutterFlowTheme.of(context).background,
+                                    borderRadius: BorderRadius.circular(8),
+                                  ),
+                                  child: Row(
+                                    mainAxisSize: MainAxisSize.max,
+                                    children: [
+                                      Expanded(
+                                        child: Padding(
+                                          padding:
+                                              EdgeInsetsDirectional.fromSTEB(
+                                                  16, 0, 16, 8),
+                                          child: TextFormField(
+                                            controller: textController10 ??=
+                                                TextEditingController(
+                                                    text:
+                                                        '$currentUserEmail $currentUserDisplayName'),
+                                            readOnly: true,
+                                            obscureText: false,
+                                            decoration: InputDecoration(
+                                              labelText: '管理者',
+                                              isDense: true,
+                                              enabledBorder:
+                                                  UnderlineInputBorder(
+                                                borderSide: BorderSide(
+                                                  color: Color(0x00000000),
+                                                  width: 1,
+                                                ),
+                                                borderRadius:
+                                                    const BorderRadius.only(
+                                                  topLeft: Radius.circular(4.0),
+                                                  topRight:
+                                                      Radius.circular(4.0),
+                                                ),
+                                              ),
+                                              focusedBorder:
+                                                  UnderlineInputBorder(
+                                                borderSide: BorderSide(
+                                                  color: Color(0x00000000),
+                                                  width: 1,
+                                                ),
+                                                borderRadius:
+                                                    const BorderRadius.only(
+                                                  topLeft: Radius.circular(4.0),
+                                                  topRight:
+                                                      Radius.circular(4.0),
+                                                ),
+                                              ),
+                                              focusedErrorBorder:
+                                                  UnderlineInputBorder(
+                                                borderSide: BorderSide(
+                                                  color: FlutterFlowTheme.of(
+                                                          context)
+                                                      .primaryColor,
+                                                  width: 2,
+                                                ),
+                                                borderRadius:
+                                                    BorderRadius.circular(4),
+                                              ),
+                                            ),
+                                            style: FlutterFlowTheme.of(context)
+                                                .bodyText2
+                                                .override(
+                                                  fontFamily: 'Open Sans',
+                                                  fontWeight: FontWeight.w500,
+                                                ),
+                                            autovalidateMode:
+                                                AutovalidateMode.always,
+                                            validator: (val) {
+                                              return val == null || val.isEmpty
+                                                  ? '管理者名を入力してください。'
+                                                  : null;
+                                            },
+                                          ),
+                                        ),
+                                      ),
+                                      if (false)
+                                        FlutterFlowDropDown(
+                                          options: ['Option 1'],
+                                          onChanged: (val) => setState(() => {
+                                                directorRef =
+                                                    currentUserReference,
+                                                textController10 =
+                                                    TextEditingController(
+                                                        text: val)
+                                              }),
+                                          width: 240,
+                                          height: 50,
+                                          textStyle:
+                                              FlutterFlowTheme.of(context)
+                                                  .bodyText2
+                                                  .override(
+                                                    fontFamily: 'Open Sans',
+                                                    fontWeight: FontWeight.w500,
+                                                  ),
+                                          hintText: 'ユーザーID',
+                                          fillColor: Colors.white,
+                                          elevation: 2,
+                                          borderColor: Colors.transparent,
+                                          borderWidth: 0,
+                                          borderRadius: 0,
+                                          margin:
+                                              EdgeInsetsDirectional.fromSTEB(
+                                                  12, 4, 12, 4),
+                                          hidesUnderline: true,
+                                        ),
+                                    ],
+                                  ),
+                                );
+                              },
+                            ),
+                          ),
+                          Padding(
+                            padding: EdgeInsetsDirectional.fromSTEB(0, 8, 0, 8),
+                            child: Text(
+                              'メディア',
+                              style: FlutterFlowTheme.of(context).subtitle2,
+                            ),
+                          ),
+                          Padding(
+                            padding:
+                                EdgeInsetsDirectional.fromSTEB(0, 0, 0, 16),
                             child: Container(
                               decoration: BoxDecoration(
+                                color: FlutterFlowTheme.of(context).background,
                                 borderRadius: BorderRadius.circular(8),
                               ),
                               child: Row(
                                 mainAxisSize: MainAxisSize.max,
                                 children: [
-                                  FlutterFlowRadioButton(
-                                    options: shipping,
-                                    initialValue: initShipping,
-                                    onChanged: (value) {
-                                      setState(
-                                        () => radioButtonValue =
-                                            value == shipping.first
-                                                ? true
-                                                : false,
-                                      );
-                                    },
-                                    optionHeight: 25,
-                                    textStyle: FlutterFlowTheme.of(context)
-                                        .bodyText1
-                                        .override(
-                                          fontFamily: 'Open Sans',
-                                          color: Colors.black,
+                                  Expanded(
+                                    child: Padding(
+                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                          16, 0, 16, 8),
+                                      child: TextFormField(
+                                        controller: textController11 ??=
+                                            TextEditingController(
+                                                text: containerShopsRecord
+                                                    .instagram),
+                                        obscureText: false,
+                                        decoration: InputDecoration(
+                                          labelText: 'Instagram',
+                                          isDense: true,
+                                          enabledBorder: UnderlineInputBorder(
+                                            borderSide: BorderSide(
+                                              color: Color(0x00000000),
+                                              width: 1,
+                                            ),
+                                            borderRadius:
+                                                const BorderRadius.only(
+                                              topLeft: Radius.circular(4.0),
+                                              topRight: Radius.circular(4.0),
+                                            ),
+                                          ),
+                                          focusedBorder: UnderlineInputBorder(
+                                            borderSide: BorderSide(
+                                              color: Color(0x00000000),
+                                              width: 1,
+                                            ),
+                                            borderRadius:
+                                                const BorderRadius.only(
+                                              topLeft: Radius.circular(4.0),
+                                              topRight: Radius.circular(4.0),
+                                            ),
+                                          ),
                                         ),
-                                    selectedTextStyle:
-                                        FlutterFlowTheme.of(context)
-                                            .bodyText1
+                                        style: FlutterFlowTheme.of(context)
+                                            .bodyText2
                                             .override(
                                               fontFamily: 'Open Sans',
-                                              color:
-                                                  FlutterFlowTheme.of(context)
-                                                      .textDark,
+                                              fontWeight: FontWeight.w500,
                                             ),
-                                    buttonPosition: RadioButtonPosition.left,
-                                    direction: Axis.horizontal,
-                                    radioButtonColor:
-                                        FlutterFlowTheme.of(context)
-                                            .primaryColor,
-                                    inactiveRadioButtonColor:
-                                        FlutterFlowTheme.of(context).tDark,
-                                    toggleable: false,
-                                    horizontalAlignment: WrapAlignment.start,
-                                    verticalAlignment: WrapCrossAlignment.start,
+                                      ),
+                                    ),
                                   ),
                                 ],
                               ),
                             ),
                           ),
-                          Text(
-                            alert,
-                            style: FlutterFlowTheme.of(context).bodyText1,
+                          Padding(
+                            padding:
+                                EdgeInsetsDirectional.fromSTEB(0, 0, 0, 16),
+                            child: Container(
+                              decoration: BoxDecoration(
+                                color: FlutterFlowTheme.of(context).background,
+                                borderRadius: BorderRadius.circular(8),
+                              ),
+                              child: Row(
+                                mainAxisSize: MainAxisSize.max,
+                                children: [
+                                  Expanded(
+                                    child: Padding(
+                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                          16, 0, 16, 8),
+                                      child: TextFormField(
+                                        controller: textController12 ??=
+                                            TextEditingController(
+                                                text: containerShopsRecord
+                                                    .twitter),
+                                        obscureText: false,
+                                        decoration: InputDecoration(
+                                          labelText: 'Twitter',
+                                          isDense: true,
+                                          enabledBorder: UnderlineInputBorder(
+                                            borderSide: BorderSide(
+                                              color: Color(0x00000000),
+                                              width: 1,
+                                            ),
+                                            borderRadius:
+                                                const BorderRadius.only(
+                                              topLeft: Radius.circular(4.0),
+                                              topRight: Radius.circular(4.0),
+                                            ),
+                                          ),
+                                          focusedBorder: UnderlineInputBorder(
+                                            borderSide: BorderSide(
+                                              color: Color(0x00000000),
+                                              width: 1,
+                                            ),
+                                            borderRadius:
+                                                const BorderRadius.only(
+                                              topLeft: Radius.circular(4.0),
+                                              topRight: Radius.circular(4.0),
+                                            ),
+                                          ),
+                                        ),
+                                        style: FlutterFlowTheme.of(context)
+                                            .bodyText2
+                                            .override(
+                                              fontFamily: 'Open Sans',
+                                              fontWeight: FontWeight.w500,
+                                            ),
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                          Padding(
+                            padding:
+                                EdgeInsetsDirectional.fromSTEB(0, 0, 0, 16),
+                            child: Container(
+                              decoration: BoxDecoration(
+                                color: FlutterFlowTheme.of(context).background,
+                                borderRadius: BorderRadius.circular(8),
+                              ),
+                              child: Row(
+                                mainAxisSize: MainAxisSize.max,
+                                children: [
+                                  Expanded(
+                                    child: Padding(
+                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                          16, 0, 16, 8),
+                                      child: TextFormField(
+                                        controller: textController13 ??=
+                                            TextEditingController(
+                                                text: containerShopsRecord.web),
+                                        obscureText: false,
+                                        decoration: InputDecoration(
+                                          labelText: 'Web',
+                                          isDense: true,
+                                          enabledBorder: UnderlineInputBorder(
+                                            borderSide: BorderSide(
+                                              color: Color(0x00000000),
+                                              width: 1,
+                                            ),
+                                            borderRadius:
+                                                const BorderRadius.only(
+                                              topLeft: Radius.circular(4.0),
+                                              topRight: Radius.circular(4.0),
+                                            ),
+                                          ),
+                                          focusedBorder: UnderlineInputBorder(
+                                            borderSide: BorderSide(
+                                              color: Color(0x00000000),
+                                              width: 1,
+                                            ),
+                                            borderRadius:
+                                                const BorderRadius.only(
+                                              topLeft: Radius.circular(4.0),
+                                              topRight: Radius.circular(4.0),
+                                            ),
+                                          ),
+                                        ),
+                                        style: FlutterFlowTheme.of(context)
+                                            .bodyText2
+                                            .override(
+                                              fontFamily: 'Open Sans',
+                                              fontWeight: FontWeight.w500,
+                                            ),
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
                           ),
                           Padding(
                             padding:
@@ -1254,12 +1371,24 @@ class _UpdatePlanPageWidgetState extends State<UpdatePlanPageWidget> {
                               decoration: BoxDecoration(),
                               child: Row(
                                 mainAxisSize: MainAxisSize.max,
-                                mainAxisAlignment: MainAxisAlignment.end,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
                                 children: [
+                                  Text(
+                                    alert,
+                                    style: FlutterFlowTheme.of(context)
+                                        .bodyText1
+                                        .override(
+                                          fontFamily: 'Open Sans',
+                                          fontWeight: FontWeight.w500,
+                                          color: FlutterFlowTheme.of(context)
+                                              .primaryColor,
+                                        ),
+                                  ),
                                   FFButtonWidget(
                                     onPressed: () async {
                                       logFirebaseEvent(
-                                          'UPDATE_PLAN_PAGE_COMP_${label}_BTN_ON_TAP');
+                                          'UPDATE_SHOP_PAGE_COMP_${label}_BTN_ON_TAP');
                                       if (!formKey.currentState.validate()) {
                                         setState(() {
                                           alert = '必要事項を入力してください。';
@@ -1276,9 +1405,9 @@ class _UpdatePlanPageWidgetState extends State<UpdatePlanPageWidget> {
                                                 context: context,
                                                 builder: (alertDialogContext) {
                                                   return AlertDialog(
-                                                    title: Text('商品$label'),
+                                                    title: Text('ショップ$label'),
                                                     content:
-                                                        Text('商品を$labelします。'),
+                                                        Text('ショップを$labelします。'),
                                                     actions: [
                                                       TextButton(
                                                         onPressed: () =>
@@ -1302,37 +1431,52 @@ class _UpdatePlanPageWidgetState extends State<UpdatePlanPageWidget> {
                                       if (confirmDialogResponse) {
                                         logFirebaseEvent('Button_Backend-Call');
 
-                                        final plansCreateData =
-                                            createPlansRecordData(
-                                          active: false,
-                                          activeQuick: false,
+                                        final shopsCreateData =
+                                            createShopsRecordData(
                                           banner: valueOrDefault<String>(
-                                            textController6.text,
+                                            textController5.text,
                                             NO_IMAGE,
                                           ),
+                                          catMain: catMainRef,
+                                          company: comRef,
                                           description:
-                                              textController7?.text ?? '',
-                                          name: textController2?.text ?? '',
-                                          published: datePicked,
-                                          quantityMax: int.parse(
-                                              textController4?.text ?? ''),
-                                          shippingEachFee: radioButtonValue,
-                                          shippingQuick: '',
-                                          unitAmount: unitAmount,
-                                          shippingFeeNormal: shippingFeeNormal,
-                                          shippingNormal:
-                                              textController8?.text ?? '',
-                                          shop: shopRef,
-                                          updated: getCurrentTimestamp,
+                                              textController4.text ?? '',
+                                          display: false,
+                                          email: textController8.text ?? '',
+                                          instagram:
+                                              textController11.text ?? '',
+                                          phone: textController9.text ?? '',
+                                          shopName: textController1.text ?? '',
+                                          twitter: textController12.text ?? '',
+                                          web: textController13.text ?? '',
+                                          director: directorRef ??
+                                              currentUserReference,
+                                          shippingFee: shippingFee,
+                                          shippingFreeTotal: shippingFreeTotal,
                                         );
 
-                                        isNew
-                                            ? await PlansRecord.collection
-                                                .doc()
-                                                .set(plansCreateData)
-                                            : await containerPlansRecord
-                                                .reference
-                                                .update(plansCreateData);
+                                        ShopsRecord _shop;
+                                        if (isNew) {
+                                          final path =
+                                              ShopsRecord.collection.doc().path;
+                                          final id =
+                                              path.split('/').toList().last;
+                                          await ShopsRecord.collection
+                                              .doc(id)
+                                              .set(shopsCreateData);
+                                          _shop =
+                                              await ShopsRecord.getDocumentOnce(
+                                                  FirebaseFirestore.instance
+                                                      .doc(path));
+                                        } else {
+                                          await containerShopsRecord.reference
+                                              .update(shopsCreateData);
+                                          _shop = containerShopsRecord;
+                                        }
+
+                                        final law =
+                                            await TransactionsLaw.create(
+                                                _shop.reference.path, context);
 
                                         logFirebaseEvent(
                                             'Button_Show-Snack-Bar');
@@ -1340,7 +1484,7 @@ class _UpdatePlanPageWidgetState extends State<UpdatePlanPageWidget> {
                                             .showSnackBar(
                                           SnackBar(
                                             content: Text(
-                                              '商品を$labelしました。',
+                                              'ショップを$labelしました。',
                                               style: TextStyle(),
                                             ),
                                             duration:
@@ -1348,13 +1492,37 @@ class _UpdatePlanPageWidgetState extends State<UpdatePlanPageWidget> {
                                             backgroundColor: Color(0x00000000),
                                           ),
                                         );
-                                        logFirebaseEvent('Button_Navigate-To');
-                                        await Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                            builder: (context) =>
-                                                PlanListPageWidget(),
+
+                                        logFirebaseEvent('Button_Bottom-Sheet');
+                                        await showModalBottomSheet(
+                                          isScrollControlled: true,
+                                          backgroundColor: Colors.transparent,
+                                          barrierColor: Color(0x8E484848),
+                                          context: context,
+                                          constraints: BoxConstraints(
+                                            maxWidth: MediaQuery.of(context)
+                                                    .size
+                                                    .width *
+                                                0.64,
                                           ),
+                                          builder: (context) {
+                                            return Padding(
+                                              padding: MediaQuery.of(context)
+                                                  .viewInsets,
+                                              child: Container(
+                                                height: MediaQuery.of(context)
+                                                        .size
+                                                        .height *
+                                                    0.94,
+                                                child:
+                                                    UpdateTransactionsLawPageWidget(
+                                                  shop: _shop,
+                                                  law: law,
+                                                  isNew: isNew,
+                                                ),
+                                              ),
+                                            );
+                                          },
                                         );
                                         return;
                                       } else {

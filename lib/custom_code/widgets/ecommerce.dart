@@ -157,6 +157,75 @@ class OrderedPlan {
   String get id => path.split('/').last;
 }
 
+class TransactionsLaw {
+  final String path;
+  final String address;
+  final String company;
+  final String delvTime;
+  final String director;
+  final String email;
+  final String otherFees;
+  final String paymentMethod;
+  final String phone;
+  final String postalCode;
+  final String rec; // return, exchange, cancellation
+  final String returnCharge;
+  final String returnPeriod;
+  final String unitAmount;
+  final String web;
+
+  TransactionsLaw({
+    this.path,
+    this.address,
+    this.company,
+    this.delvTime,
+    this.director,
+    this.email,
+    this.otherFees,
+    this.paymentMethod,
+    this.phone,
+    this.postalCode,
+    this.rec,
+    this.returnCharge,
+    this.returnPeriod,
+    this.unitAmount,
+    this.web,
+  });
+
+  static Future<TransactionsLaw> create(
+    String path,
+    BuildContext context,
+  ) async {
+    final _appCheckToken = await AppCheckAgent.getToken(context);
+    if (_appCheckToken == null) return TransactionsLaw();
+
+    final apiCallOutput = await TransactionsLawCall.call(
+      path: path,
+      appCheckToken: _appCheckToken,
+    );
+    final _apiJson = getJsonField(apiCallOutput.jsonBody, r'''$.result''');
+    if (!_apiJson['success']) return TransactionsLaw(path: path);
+
+    return TransactionsLaw(
+      path: path,
+      address: _apiJson['law']['address'],
+      company: _apiJson['law']['company'],
+      delvTime: _apiJson['law']['delvTime'],
+      director: _apiJson['law']['director'],
+      email: _apiJson['law']['email'],
+      otherFees: _apiJson['law']['otherFees'],
+      paymentMethod: _apiJson['law']['paymentMethod'],
+      phone: _apiJson['law']['phone'],
+      postalCode: _apiJson['law']['postalCode'],
+      rec: _apiJson['law']['rec'],
+      returnCharge: _apiJson['law']['returnCharge'],
+      returnPeriod: _apiJson['law']['returnPeriod'],
+      unitAmount: _apiJson['law']['unitAmount'],
+      web: _apiJson['law']['web'],
+    );
+  }
+}
+
 class ShippingForm {
   final String id;
   final String planName;
@@ -248,6 +317,45 @@ class ShippingForm {
 
   void dispose() {
     controller.dispose();
+  }
+}
+
+class CurrencyChecker {
+  final bool success;
+  final TextEditingController controller;
+  final int currency;
+  final String formated;
+
+  CurrencyChecker._create({
+    this.success,
+    this.controller,
+    this.currency,
+    this.formated,
+  });
+
+  factory CurrencyChecker.create(String text) {
+    final matches = RegExp(r'[0-9]').allMatches(text);
+    final success = matches != null && matches.length != 0 ? true : false;
+    final currency = success
+        ? int.parse(matches.map((match) => match.group(0)).toList().join())
+        : 0;
+    final formated = formatNumber(
+      currency,
+      formatType: FormatType.custom,
+      currency: '￥',
+      format: '#,##0',
+      locale: 'ja_JP',
+    );
+    final controller = TextEditingController(text: formated);
+    controller.selection = TextSelection.fromPosition(
+      TextPosition(offset: controller.text.length),
+    );
+    return CurrencyChecker._create(
+      success: success,
+      controller: controller,
+      currency: currency,
+      formated: formated,
+    );
   }
 }
 

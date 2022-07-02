@@ -185,6 +185,7 @@ Future<SelectedMedia> selectFile({
   final pickedFiles = await FilePicker.platform.pickFiles(
     type: FileType.custom,
     allowedExtensions: allowedExtensions,
+    withData: true,
   );
   if (pickedFiles == null || pickedFiles.files.isEmpty) {
     return null;
