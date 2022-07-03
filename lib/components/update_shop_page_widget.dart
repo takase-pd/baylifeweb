@@ -45,7 +45,7 @@ class _UpdateShopPageWidgetState extends State<UpdateShopPageWidget> {
   final formKey = GlobalKey<FormState>();
 
   static const NO_IMAGE =
-      'https://firebasestorage.googleapis.com/v0/b/baylifedev.appspot.com/o/assets%2FNoImage.png?alt=media&token=16c12fc7-9de4-4531-9b81-c4b0e7a07945';
+      'https://firebasestorage.googleapis.com/v0/b/baylife-ff782.appspot.com/o/assets%2FNoImage.png?alt=media&token=cfb3d70b-69d2-4f7f-be63-f429cc9872da';
   Future<ShopsRecord> shop;
   List<CatShopRecord> catShops;
   List<String> catShopList;
