@@ -67,6 +67,9 @@ class _UpdateShopPageWidgetState extends State<UpdateShopPageWidget> {
           companiesRecord.where('director', isEqualTo: currentUserReference),
     );
     comNameList = companies.map((e) => e.name).toList();
+    comRef = companies
+        .firstWhere((element) => element.name == comNameList.first)
+        .reference;
 
     if (widget.shop == null) {
       banner = NO_IMAGE;
