@@ -1519,7 +1519,8 @@ class _UpdateShopPageWidgetState extends State<UpdateShopPageWidget> {
                                                     0.94,
                                                 child:
                                                     UpdateTransactionsLawPageWidget(
-                                                  shop: _shop,
+                                                  shopName: shopsCreateData[
+                                                      'shop_name'],
                                                   law: law,
                                                   isNew: isNew,
                                                 ),
