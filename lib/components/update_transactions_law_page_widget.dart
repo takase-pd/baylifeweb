@@ -12,12 +12,12 @@ import 'package:google_fonts/google_fonts.dart';
 class UpdateTransactionsLawPageWidget extends StatefulWidget {
   const UpdateTransactionsLawPageWidget({
     Key key,
-    this.shop,
+    this.shopName,
     this.law,
     this.isNew,
   }) : super(key: key);
 
-  final ShopsRecord shop;
+  final String shopName;
   final TransactionsLaw law;
   final bool isNew;
 
@@ -99,7 +99,7 @@ class _UpdateTransactionsLawPageWidgetState
                           mainAxisSize: MainAxisSize.max,
                           children: [
                             Text(
-                              widget.shop.shopName,
+                              widget.shopName,
                               style: FlutterFlowTheme.of(context).bodyText1,
                             ),
                           ],
