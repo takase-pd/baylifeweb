@@ -1311,7 +1311,7 @@ class _UpdatePlanPageWidgetState extends State<UpdatePlanPageWidget> {
                                             NO_IMAGE,
                                           ),
                                           description:
-                                              textController7?.text ?? '',
+                                              textController5?.text ?? '',
                                           name: textController2?.text ?? '',
                                           published: datePicked,
                                           quantityMax: int.parse(
