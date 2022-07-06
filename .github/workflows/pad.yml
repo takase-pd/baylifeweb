@@ -66,7 +66,7 @@ jobs:
         if: github.ref == 'refs/heads/padpre'
         uses: wzieba/Firebase-Distribution-Github-Action@v1.3.3
         with:
-          appId: ${{ secrets.FIREBASE_APP_ID_IOS }}
+          appId: ${{ secrets.FIREBASE_APP_ID_PAD_PRE }}
           token: ${{ secrets.FIREBASE_TOKEN }}
           groups: Admin
           file: BayLifeWeb.ipa
