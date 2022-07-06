@@ -53,6 +53,8 @@ class _UpdatePlanPageWidgetState extends State<UpdatePlanPageWidget> {
   String label = '追加';
   String alert = '';
   final List<String> shipping = ['1個当たりの送料', '個数問わず一律の送料'];
+  bool active = false;
+  bool activeQuick = false;
 
   Future<PlansRecord> _getPlan() async {
     if (widget.plan == null) {
@@ -71,6 +73,8 @@ class _UpdatePlanPageWidgetState extends State<UpdatePlanPageWidget> {
     shippingFeeNormal = _plan.shippingFeeNormal;
     initShipping = _plan.shippingEachFee ? shipping.first : shipping.last;
     label = '更新';
+    active = _plan.active;
+    activeQuick = _plan.activeQuick;
     return _plan;
   }
 
@@ -1304,8 +1308,8 @@ class _UpdatePlanPageWidgetState extends State<UpdatePlanPageWidget> {
 
                                         final plansCreateData =
                                             createPlansRecordData(
-                                          active: false,
-                                          activeQuick: false,
+                                          active: active,
+                                          activeQuick: activeQuick,
                                           banner: valueOrDefault<String>(
                                             textController6.text,
                                             NO_IMAGE,
