@@ -60,514 +60,522 @@ class _PlanListPageWidgetState extends State<PlanListPageWidget> {
                 Expanded(
                   child: Padding(
                     padding: EdgeInsetsDirectional.fromSTEB(32, 0, 16, 0),
-                    child: Column(
-                      mainAxisSize: MainAxisSize.max,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(0, 16, 0, 16),
-                          child: Column(
-                            mainAxisSize: MainAxisSize.max,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Padding(
-                                padding:
-                                    EdgeInsetsDirectional.fromSTEB(0, 0, 0, 8),
-                                child: Text(
-                                  '商品',
-                                  style: FlutterFlowTheme.of(context).title1,
-                                ),
-                              ),
-                              Padding(
-                                padding:
-                                    EdgeInsetsDirectional.fromSTEB(0, 0, 0, 8),
-                                child: Text(
-                                  'ショップ担当者のみ',
-                                  style: FlutterFlowTheme.of(context).bodyText1,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                        Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 24),
-                          child: Column(
-                            mainAxisSize: MainAxisSize.max,
-                            children: [
-                              Row(
-                                mainAxisSize: MainAxisSize.max,
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Row(
-                                    mainAxisSize: MainAxisSize.max,
-                                    children: [
-                                      Padding(
-                                        padding: EdgeInsetsDirectional.fromSTEB(
-                                            0, 0, 16, 0),
-                                        child: InkWell(
-                                          onTap: () async {
-                                            logFirebaseEvent('Text_ON_TAP');
-                                            logFirebaseEvent(
-                                                'Text_Navigate-To');
-                                            await Navigator.push(
-                                              context,
-                                              MaterialPageRoute(
-                                                builder: (context) =>
-                                                    PlanListPageWidget(),
-                                              ),
-                                            );
-                                          },
-                                          child: Text(
-                                            '一覧',
-                                            style: FlutterFlowTheme.of(context)
-                                                .subtitle1,
-                                          ),
-                                        ),
-                                      ),
-                                      Padding(
-                                        padding: EdgeInsetsDirectional.fromSTEB(
-                                            0, 0, 16, 0),
-                                        child: InkWell(
-                                          onTap: () async {
-                                            logFirebaseEvent('Text_ON_TAP');
-                                            logFirebaseEvent(
-                                                'Text_Navigate-To');
-                                            await Navigator.push(
-                                              context,
-                                              MaterialPageRoute(
-                                                builder: (context) =>
-                                                    OrderListPageWidget(),
-                                              ),
-                                            );
-                                          },
-                                          child: Text(
-                                            '注文',
-                                            style: FlutterFlowTheme.of(context)
-                                                .subtitle1,
-                                          ),
-                                        ),
-                                      ),
-                                    ],
+                    child: SingleChildScrollView(
+                      child: Column(
+                        mainAxisSize: MainAxisSize.max,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Padding(
+                            padding:
+                                EdgeInsetsDirectional.fromSTEB(0, 16, 0, 16),
+                            child: Column(
+                              mainAxisSize: MainAxisSize.max,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Padding(
+                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                      0, 0, 0, 8),
+                                  child: Text(
+                                    '商品',
+                                    style: FlutterFlowTheme.of(context).title1,
                                   ),
-                                  FFButtonWidget(
-                                    onPressed: () async {
-                                      logFirebaseEvent(
-                                          'PLAN_LIST_PAGE_PAGE_追加_BTN_ON_TAP');
-                                      logFirebaseEvent('Button_Bottom-Sheet');
-                                      await showModalBottomSheet(
-                                        isScrollControlled: true,
-                                        backgroundColor: Colors.transparent,
-                                        barrierColor: Color(0x8E484848),
-                                        context: context,
-                                        constraints: BoxConstraints(
-                                          maxWidth: MediaQuery.of(context)
-                                                  .size
-                                                  .width *
-                                              0.64,
+                                ),
+                                Padding(
+                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                      0, 0, 0, 8),
+                                  child: Text(
+                                    'ショップ担当者のみ',
+                                    style:
+                                        FlutterFlowTheme.of(context).bodyText1,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                          Padding(
+                            padding:
+                                EdgeInsetsDirectional.fromSTEB(0, 0, 0, 24),
+                            child: Column(
+                              mainAxisSize: MainAxisSize.max,
+                              children: [
+                                Row(
+                                  mainAxisSize: MainAxisSize.max,
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Row(
+                                      mainAxisSize: MainAxisSize.max,
+                                      children: [
+                                        Padding(
+                                          padding:
+                                              EdgeInsetsDirectional.fromSTEB(
+                                                  0, 0, 16, 0),
+                                          child: InkWell(
+                                            onTap: () async {
+                                              logFirebaseEvent('Text_ON_TAP');
+                                              logFirebaseEvent(
+                                                  'Text_Navigate-To');
+                                              await Navigator.push(
+                                                context,
+                                                MaterialPageRoute(
+                                                  builder: (context) =>
+                                                      PlanListPageWidget(),
+                                                ),
+                                              );
+                                            },
+                                            child: Text(
+                                              '一覧',
+                                              style:
+                                                  FlutterFlowTheme.of(context)
+                                                      .subtitle1,
+                                            ),
+                                          ),
                                         ),
-                                        builder: (context) {
+                                        Padding(
+                                          padding:
+                                              EdgeInsetsDirectional.fromSTEB(
+                                                  0, 0, 16, 0),
+                                          child: InkWell(
+                                            onTap: () async {
+                                              logFirebaseEvent('Text_ON_TAP');
+                                              logFirebaseEvent(
+                                                  'Text_Navigate-To');
+                                              await Navigator.push(
+                                                context,
+                                                MaterialPageRoute(
+                                                  builder: (context) =>
+                                                      OrderListPageWidget(),
+                                                ),
+                                              );
+                                            },
+                                            child: Text(
+                                              '注文',
+                                              style:
+                                                  FlutterFlowTheme.of(context)
+                                                      .subtitle1,
+                                            ),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                    FFButtonWidget(
+                                      onPressed: () async {
+                                        logFirebaseEvent(
+                                            'PLAN_LIST_PAGE_PAGE_追加_BTN_ON_TAP');
+                                        logFirebaseEvent('Button_Bottom-Sheet');
+                                        await showModalBottomSheet(
+                                          isScrollControlled: true,
+                                          backgroundColor: Colors.transparent,
+                                          barrierColor: Color(0x8E484848),
+                                          context: context,
+                                          constraints: BoxConstraints(
+                                            maxWidth: MediaQuery.of(context)
+                                                    .size
+                                                    .width *
+                                                0.64,
+                                          ),
+                                          builder: (context) {
+                                            return Padding(
+                                              padding: MediaQuery.of(context)
+                                                  .viewInsets,
+                                              child: Container(
+                                                height: MediaQuery.of(context)
+                                                        .size
+                                                        .height *
+                                                    0.96,
+                                                child: UpdatePlanPageWidget(),
+                                              ),
+                                            );
+                                          },
+                                        );
+                                      },
+                                      text: '追加',
+                                      options: FFButtonOptions(
+                                        width: 80,
+                                        height: 32,
+                                        color: FlutterFlowTheme.of(context)
+                                            .primaryColor,
+                                        textStyle: FlutterFlowTheme.of(context)
+                                            .bodyText2
+                                            .override(
+                                              fontFamily: 'Open Sans',
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .textLight,
+                                            ),
+                                        borderSide: BorderSide(
+                                          color: Colors.transparent,
+                                          width: 1,
+                                        ),
+                                        borderRadius: 4,
+                                      ),
+                                      showLoadingIndicator: false,
+                                    ),
+                                  ],
+                                ),
+                                Divider(
+                                  color: FlutterFlowTheme.of(context).sLight,
+                                ),
+                              ],
+                            ),
+                          ),
+                          Row(
+                            mainAxisSize: MainAxisSize.max,
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              FutureBuilder<List<ShopsRecord>>(
+                                future: queryShopsRecordOnce(
+                                  queryBuilder: (shopsRecord) =>
+                                      shopsRecord.where('director',
+                                          isEqualTo: currentUserReference),
+                                  singleRecord: true,
+                                ),
+                                builder: (context, snapshot) {
+                                  // Customize what your widget looks like when it's loading.
+                                  if (!snapshot.hasData) {
+                                    return Center(
+                                      child: SizedBox(
+                                        width: 50,
+                                        height: 50,
+                                        child: SpinKitPulse(
+                                          color: FlutterFlowTheme.of(context)
+                                              .primaryColor,
+                                          size: 50,
+                                        ),
+                                      ),
+                                    );
+                                  }
+                                  List<ShopsRecord> containerShopsRecordList =
+                                      snapshot.data;
+                                  // Return an empty Container when the document does not exist.
+                                  if (snapshot.data.isEmpty) {
+                                    return Container();
+                                  }
+                                  final containerShopsRecord =
+                                      containerShopsRecordList.isNotEmpty
+                                          ? containerShopsRecordList.first
+                                          : null;
+                                  return Container(
+                                    width: MediaQuery.of(context).size.width *
+                                        0.72,
+                                    decoration: BoxDecoration(
+                                      color: FlutterFlowTheme.of(context)
+                                          .background,
+                                      borderRadius: BorderRadius.circular(8),
+                                    ),
+                                    child: PagedListView<
+                                        DocumentSnapshot<Object>, PlansRecord>(
+                                      pagingController: () {
+                                        final Query<Object> Function(
+                                                Query<Object>) queryBuilder =
+                                            (plansRecord) => plansRecord
+                                                .where('shop',
+                                                    isEqualTo:
+                                                        containerShopsRecord
+                                                            .reference)
+                                                .orderBy('published',
+                                                    descending: true);
+                                        if (_pagingController != null) {
+                                          final query = queryBuilder(
+                                              PlansRecord.collection);
+                                          if (query != _pagingQuery) {
+                                            // The query has changed
+                                            _pagingQuery = query;
+                                            _streamSubscriptions
+                                                .forEach((s) => s?.cancel());
+                                            _streamSubscriptions.clear();
+                                            _pagingController.refresh();
+                                          }
+                                          return _pagingController;
+                                        }
+
+                                        _pagingController = PagingController(
+                                            firstPageKey: null);
+                                        _pagingQuery = queryBuilder(
+                                            PlansRecord.collection);
+                                        _pagingController
+                                            .addPageRequestListener(
+                                                (nextPageMarker) {
+                                          queryPlansRecordPage(
+                                            queryBuilder: (plansRecord) =>
+                                                plansRecord
+                                                    .where('shop',
+                                                        isEqualTo:
+                                                            containerShopsRecord
+                                                                .reference)
+                                                    .orderBy('published',
+                                                        descending: true),
+                                            nextPageMarker: nextPageMarker,
+                                            pageSize: 25,
+                                            isStream: true,
+                                          ).then((page) {
+                                            _pagingController.appendPage(
+                                              page.data,
+                                              page.nextPageMarker,
+                                            );
+                                            final streamSubscription =
+                                                page.dataStream?.listen((data) {
+                                              final itemIndexes =
+                                                  _pagingController.itemList
+                                                      .asMap()
+                                                      .map((k, v) => MapEntry(
+                                                          v.reference.id, k));
+                                              data.forEach((item) {
+                                                final index = itemIndexes[
+                                                    item.reference.id];
+                                                final items =
+                                                    _pagingController.itemList;
+                                                if (index != null) {
+                                                  items.replaceRange(
+                                                      index, index + 1, [item]);
+                                                  _pagingController.itemList = {
+                                                    for (var item in items)
+                                                      item.reference: item
+                                                  }.values.toList();
+                                                }
+                                              });
+                                              setState(() {});
+                                            });
+                                            _streamSubscriptions
+                                                .add(streamSubscription);
+                                          });
+                                        });
+                                        return _pagingController;
+                                      }(),
+                                      padding: EdgeInsets.zero,
+                                      shrinkWrap: true,
+                                      scrollDirection: Axis.vertical,
+                                      builderDelegate:
+                                          PagedChildBuilderDelegate<
+                                              PlansRecord>(
+                                        // Customize what your widget looks like when it's loading the first page.
+                                        firstPageProgressIndicatorBuilder:
+                                            (_) => Center(
+                                          child: SizedBox(
+                                            width: 50,
+                                            height: 50,
+                                            child: SpinKitPulse(
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .primaryColor,
+                                              size: 50,
+                                            ),
+                                          ),
+                                        ),
+
+                                        itemBuilder:
+                                            (context, _, listViewIndex) {
+                                          final listViewPlansRecord =
+                                              _pagingController
+                                                  .itemList[listViewIndex];
                                           return Padding(
-                                            padding: MediaQuery.of(context)
-                                                .viewInsets,
-                                            child: Container(
-                                              height: MediaQuery.of(context)
-                                                      .size
-                                                      .height *
-                                                  0.96,
-                                              child: UpdatePlanPageWidget(),
+                                            padding:
+                                                EdgeInsetsDirectional.fromSTEB(
+                                                    0, 0, 0, 4),
+                                            child: InkWell(
+                                              onTap: () async {
+                                                logFirebaseEvent(
+                                                    'PLAN_LIST_Container_1jxvc1nq_ON_TAP');
+                                                logFirebaseEvent(
+                                                    'Container_Bottom-Sheet');
+                                                await showModalBottomSheet(
+                                                  isScrollControlled: true,
+                                                  backgroundColor:
+                                                      Colors.transparent,
+                                                  barrierColor:
+                                                      Color(0x8E484848),
+                                                  context: context,
+                                                  constraints: BoxConstraints(
+                                                    maxWidth:
+                                                        MediaQuery.of(context)
+                                                                .size
+                                                                .width *
+                                                            0.64,
+                                                  ),
+                                                  builder: (context) {
+                                                    return Padding(
+                                                      padding:
+                                                          MediaQuery.of(context)
+                                                              .viewInsets,
+                                                      child: Container(
+                                                        height: MediaQuery.of(
+                                                                    context)
+                                                                .size
+                                                                .height *
+                                                            0.96,
+                                                        child:
+                                                            UpdatePlanPageWidget(
+                                                          plan:
+                                                              listViewPlansRecord,
+                                                        ),
+                                                      ),
+                                                    );
+                                                  },
+                                                );
+                                              },
+                                              child: Container(
+                                                height: 88,
+                                                decoration: BoxDecoration(
+                                                  color: FlutterFlowTheme.of(
+                                                          context)
+                                                      .background,
+                                                  borderRadius:
+                                                      BorderRadius.circular(8),
+                                                ),
+                                                child: Padding(
+                                                  padding: EdgeInsetsDirectional
+                                                      .fromSTEB(16, 0, 0, 0),
+                                                  child: Row(
+                                                    mainAxisSize:
+                                                        MainAxisSize.min,
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment.start,
+                                                    children: [
+                                                      Expanded(
+                                                        flex: 1,
+                                                        child: Text(
+                                                          listViewIndex
+                                                              .toString(),
+                                                          style: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .bodyText1,
+                                                        ),
+                                                      ),
+                                                      Expanded(
+                                                        flex: 4,
+                                                        child: Text(
+                                                          listViewPlansRecord
+                                                              .name
+                                                              .maybeHandleOverflow(
+                                                            maxChars: 24,
+                                                            replacement: '…',
+                                                          ),
+                                                          style: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .bodyText1,
+                                                        ),
+                                                      ),
+                                                      Expanded(
+                                                        flex: 2,
+                                                        child: Text(
+                                                          CurrencyChecker.create(
+                                                                  listViewPlansRecord
+                                                                      .unitAmount
+                                                                      .toString())
+                                                              .formated,
+                                                          textAlign:
+                                                              TextAlign.center,
+                                                          style: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .bodyText1,
+                                                        ),
+                                                      ),
+                                                      Expanded(
+                                                        flex: 2,
+                                                        child: Text(
+                                                          CurrencyChecker.create(
+                                                                  listViewPlansRecord
+                                                                      .shippingFeeNormal
+                                                                      .toString())
+                                                              .formated,
+                                                          textAlign:
+                                                              TextAlign.center,
+                                                          style: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .bodyText1,
+                                                        ),
+                                                      ),
+                                                      Expanded(
+                                                        flex: 4,
+                                                        child: Text(
+                                                          listViewPlansRecord
+                                                              .shippingNormal
+                                                              .maybeHandleOverflow(
+                                                            maxChars: 24,
+                                                            replacement: '…',
+                                                          ),
+                                                          style: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .bodyText1,
+                                                        ),
+                                                      ),
+                                                      Expanded(
+                                                        flex: 1,
+                                                        child: Text(
+                                                          listViewPlansRecord
+                                                              .quantityMax
+                                                              .toString(),
+                                                          textAlign:
+                                                              TextAlign.center,
+                                                          style: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .bodyText1,
+                                                        ),
+                                                      ),
+                                                      Expanded(
+                                                        flex: 4,
+                                                        child: Text(
+                                                          dateTimeFormat(
+                                                              'MMM d, y h:mm a',
+                                                              listViewPlansRecord
+                                                                  .published),
+                                                          style: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .bodyText1,
+                                                        ),
+                                                      ),
+                                                      Expanded(
+                                                        flex: 1,
+                                                        child: ToggleIcon(
+                                                          onPressed: () async {
+                                                            final value =
+                                                                listViewPlansRecord
+                                                                        .active
+                                                                    ? false
+                                                                    : true;
+                                                            final plansUpdateData =
+                                                                createPlansRecordData(
+                                                              active: value,
+                                                              updated:
+                                                                  getCurrentTimestamp,
+                                                            );
+                                                            await listViewPlansRecord
+                                                                .reference
+                                                                .update(
+                                                                    plansUpdateData);
+                                                          },
+                                                          value:
+                                                              listViewPlansRecord
+                                                                  .active,
+                                                          onIcon: Icon(
+                                                            Icons.check_box,
+                                                            color: Colors.black,
+                                                            size: 25,
+                                                          ),
+                                                          offIcon: Icon(
+                                                            Icons
+                                                                .check_box_outline_blank,
+                                                            color: Colors.black,
+                                                            size: 25,
+                                                          ),
+                                                        ),
+                                                      ),
+                                                    ],
+                                                  ),
+                                                ),
+                                              ),
                                             ),
                                           );
                                         },
-                                      );
-                                    },
-                                    text: '追加',
-                                    options: FFButtonOptions(
-                                      width: 80,
-                                      height: 32,
-                                      color: FlutterFlowTheme.of(context)
-                                          .primaryColor,
-                                      textStyle: FlutterFlowTheme.of(context)
-                                          .bodyText2
-                                          .override(
-                                            fontFamily: 'Open Sans',
-                                            color: FlutterFlowTheme.of(context)
-                                                .textLight,
-                                          ),
-                                      borderSide: BorderSide(
-                                        color: Colors.transparent,
-                                        width: 1,
-                                      ),
-                                      borderRadius: 4,
-                                    ),
-                                    showLoadingIndicator: false,
-                                  ),
-                                ],
-                              ),
-                              Divider(
-                                color: FlutterFlowTheme.of(context).sLight,
-                              ),
-                            ],
-                          ),
-                        ),
-                        Row(
-                          mainAxisSize: MainAxisSize.max,
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            FutureBuilder<List<ShopsRecord>>(
-                              future: queryShopsRecordOnce(
-                                queryBuilder: (shopsRecord) =>
-                                    shopsRecord.where('director',
-                                        isEqualTo: currentUserReference),
-                                singleRecord: true,
-                              ),
-                              builder: (context, snapshot) {
-                                // Customize what your widget looks like when it's loading.
-                                if (!snapshot.hasData) {
-                                  return Center(
-                                    child: SizedBox(
-                                      width: 50,
-                                      height: 50,
-                                      child: SpinKitPulse(
-                                        color: FlutterFlowTheme.of(context)
-                                            .primaryColor,
-                                        size: 50,
                                       ),
                                     ),
                                   );
-                                }
-                                List<ShopsRecord> containerShopsRecordList =
-                                    snapshot.data;
-                                // Return an empty Container when the document does not exist.
-                                if (snapshot.data.isEmpty) {
-                                  return Container();
-                                }
-                                final containerShopsRecord =
-                                    containerShopsRecordList.isNotEmpty
-                                        ? containerShopsRecordList.first
-                                        : null;
-                                return Container(
-                                  width:
-                                      MediaQuery.of(context).size.width * 0.72,
-                                  decoration: BoxDecoration(
-                                    color:
-                                        FlutterFlowTheme.of(context).background,
-                                    borderRadius: BorderRadius.circular(8),
-                                  ),
-                                  child: PagedListView<DocumentSnapshot<Object>,
-                                      PlansRecord>(
-                                    pagingController: () {
-                                      final Query<Object> Function(
-                                              Query<Object>) queryBuilder =
-                                          (plansRecord) => plansRecord
-                                              .where('shop',
-                                                  isEqualTo:
-                                                      containerShopsRecord
-                                                          .reference)
-                                              .orderBy('published',
-                                                  descending: true);
-                                      if (_pagingController != null) {
-                                        final query = queryBuilder(
-                                            PlansRecord.collection);
-                                        if (query != _pagingQuery) {
-                                          // The query has changed
-                                          _pagingQuery = query;
-                                          _streamSubscriptions
-                                              .forEach((s) => s?.cancel());
-                                          _streamSubscriptions.clear();
-                                          _pagingController.refresh();
-                                        }
-                                        return _pagingController;
-                                      }
-
-                                      _pagingController =
-                                          PagingController(firstPageKey: null);
-                                      _pagingQuery =
-                                          queryBuilder(PlansRecord.collection);
-                                      _pagingController.addPageRequestListener(
-                                          (nextPageMarker) {
-                                        queryPlansRecordPage(
-                                          queryBuilder: (plansRecord) =>
-                                              plansRecord
-                                                  .where(
-                                                      'shop',
-                                                      isEqualTo:
-                                                          containerShopsRecord
-                                                              .reference)
-                                                  .orderBy('published',
-                                                      descending: true),
-                                          nextPageMarker: nextPageMarker,
-                                          pageSize: 25,
-                                          isStream: true,
-                                        ).then((page) {
-                                          _pagingController.appendPage(
-                                            page.data,
-                                            page.nextPageMarker,
-                                          );
-                                          final streamSubscription =
-                                              page.dataStream?.listen((data) {
-                                            final itemIndexes =
-                                                _pagingController.itemList
-                                                    .asMap()
-                                                    .map((k, v) => MapEntry(
-                                                        v.reference.id, k));
-                                            data.forEach((item) {
-                                              final index = itemIndexes[
-                                                  item.reference.id];
-                                              final items =
-                                                  _pagingController.itemList;
-                                              if (index != null) {
-                                                items.replaceRange(
-                                                    index, index + 1, [item]);
-                                                _pagingController.itemList = {
-                                                  for (var item in items)
-                                                    item.reference: item
-                                                }.values.toList();
-                                              }
-                                            });
-                                            setState(() {});
-                                          });
-                                          _streamSubscriptions
-                                              .add(streamSubscription);
-                                        });
-                                      });
-                                      return _pagingController;
-                                    }(),
-                                    padding: EdgeInsets.zero,
-                                    shrinkWrap: true,
-                                    scrollDirection: Axis.vertical,
-                                    builderDelegate:
-                                        PagedChildBuilderDelegate<PlansRecord>(
-                                      // Customize what your widget looks like when it's loading the first page.
-                                      firstPageProgressIndicatorBuilder: (_) =>
-                                          Center(
-                                        child: SizedBox(
-                                          width: 50,
-                                          height: 50,
-                                          child: SpinKitPulse(
-                                            color: FlutterFlowTheme.of(context)
-                                                .primaryColor,
-                                            size: 50,
-                                          ),
-                                        ),
-                                      ),
-
-                                      itemBuilder: (context, _, listViewIndex) {
-                                        final listViewPlansRecord =
-                                            _pagingController
-                                                .itemList[listViewIndex];
-                                        return Padding(
-                                          padding:
-                                              EdgeInsetsDirectional.fromSTEB(
-                                                  0, 0, 0, 4),
-                                          child: InkWell(
-                                            onTap: () async {
-                                              logFirebaseEvent(
-                                                  'PLAN_LIST_Container_1jxvc1nq_ON_TAP');
-                                              logFirebaseEvent(
-                                                  'Container_Bottom-Sheet');
-                                              await showModalBottomSheet(
-                                                isScrollControlled: true,
-                                                backgroundColor:
-                                                    Colors.transparent,
-                                                barrierColor: Color(0x8E484848),
-                                                context: context,
-                                                constraints: BoxConstraints(
-                                                  maxWidth:
-                                                      MediaQuery.of(context)
-                                                              .size
-                                                              .width *
-                                                          0.64,
-                                                ),
-                                                builder: (context) {
-                                                  return Padding(
-                                                    padding:
-                                                        MediaQuery.of(context)
-                                                            .viewInsets,
-                                                    child: Container(
-                                                      height:
-                                                          MediaQuery.of(context)
-                                                                  .size
-                                                                  .height *
-                                                              0.96,
-                                                      child:
-                                                          UpdatePlanPageWidget(
-                                                        plan:
-                                                            listViewPlansRecord,
-                                                      ),
-                                                    ),
-                                                  );
-                                                },
-                                              );
-                                            },
-                                            child: Container(
-                                              height: 88,
-                                              decoration: BoxDecoration(
-                                                color:
-                                                    FlutterFlowTheme.of(context)
-                                                        .background,
-                                                borderRadius:
-                                                    BorderRadius.circular(8),
-                                              ),
-                                              child: Padding(
-                                                padding: EdgeInsetsDirectional
-                                                    .fromSTEB(16, 0, 0, 0),
-                                                child: Row(
-                                                  mainAxisSize:
-                                                      MainAxisSize.min,
-                                                  mainAxisAlignment:
-                                                      MainAxisAlignment.start,
-                                                  children: [
-                                                    Expanded(
-                                                      flex: 1,
-                                                      child: Text(
-                                                        listViewIndex
-                                                            .toString(),
-                                                        style:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .bodyText1,
-                                                      ),
-                                                    ),
-                                                    Expanded(
-                                                      flex: 4,
-                                                      child: Text(
-                                                        listViewPlansRecord.name
-                                                            .maybeHandleOverflow(
-                                                          maxChars: 24,
-                                                          replacement: '…',
-                                                        ),
-                                                        style:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .bodyText1,
-                                                      ),
-                                                    ),
-                                                    Expanded(
-                                                      flex: 2,
-                                                      child: Text(
-                                                        CurrencyChecker.create(
-                                                                listViewPlansRecord
-                                                                    .unitAmount
-                                                                    .toString())
-                                                            .formated,
-                                                        textAlign:
-                                                            TextAlign.center,
-                                                        style:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .bodyText1,
-                                                      ),
-                                                    ),
-                                                    Expanded(
-                                                      flex: 2,
-                                                      child: Text(
-                                                        CurrencyChecker.create(
-                                                                listViewPlansRecord
-                                                                    .shippingFeeNormal
-                                                                    .toString())
-                                                            .formated,
-                                                        textAlign:
-                                                            TextAlign.center,
-                                                        style:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .bodyText1,
-                                                      ),
-                                                    ),
-                                                    Expanded(
-                                                      flex: 4,
-                                                      child: Text(
-                                                        listViewPlansRecord
-                                                            .shippingNormal
-                                                            .maybeHandleOverflow(
-                                                          maxChars: 24,
-                                                          replacement: '…',
-                                                        ),
-                                                        style:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .bodyText1,
-                                                      ),
-                                                    ),
-                                                    Expanded(
-                                                      flex: 1,
-                                                      child: Text(
-                                                        listViewPlansRecord
-                                                            .quantityMax
-                                                            .toString(),
-                                                        textAlign:
-                                                            TextAlign.center,
-                                                        style:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .bodyText1,
-                                                      ),
-                                                    ),
-                                                    Expanded(
-                                                      flex: 4,
-                                                      child: Text(
-                                                        dateTimeFormat(
-                                                            'MMM d, y h:mm a',
-                                                            listViewPlansRecord
-                                                                .published),
-                                                        style:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .bodyText1,
-                                                      ),
-                                                    ),
-                                                    Expanded(
-                                                      flex: 1,
-                                                      child: ToggleIcon(
-                                                        onPressed: () async {
-                                                          final value =
-                                                              listViewPlansRecord
-                                                                      .active
-                                                                  ? false
-                                                                  : true;
-                                                          final plansUpdateData =
-                                                              createPlansRecordData(
-                                                            active: value,
-                                                            updated:
-                                                                getCurrentTimestamp,
-                                                          );
-                                                          await listViewPlansRecord
-                                                              .reference
-                                                              .update(
-                                                                  plansUpdateData);
-                                                        },
-                                                        value:
-                                                            listViewPlansRecord
-                                                                .active,
-                                                        onIcon: Icon(
-                                                          Icons.check_box,
-                                                          color: Colors.black,
-                                                          size: 25,
-                                                        ),
-                                                        offIcon: Icon(
-                                                          Icons
-                                                              .check_box_outline_blank,
-                                                          color: Colors.black,
-                                                          size: 25,
-                                                        ),
-                                                      ),
-                                                    ),
-                                                  ],
-                                                ),
-                                              ),
-                                            ),
-                                          ),
-                                        );
-                                      },
-                                    ),
-                                  ),
-                                );
-                              },
-                            ),
-                          ],
-                        ),
-                      ],
+                                },
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
                     ),
                   ),
                 ),
