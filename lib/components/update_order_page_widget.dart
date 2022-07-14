@@ -67,7 +67,8 @@ class _UpdateOrderPageWidgetState extends State<UpdateOrderPageWidget> {
 
     switch (status) {
       case ShippingStatus.ordered:
-      case ShippingStatus.confirming:
+      case ShippingStatus.confirmed:
+      case ShippingStatus.canceled:
         break;
       case ShippingStatus.shipping:
       case ShippingStatus.shipped:
@@ -88,8 +89,8 @@ class _UpdateOrderPageWidgetState extends State<UpdateOrderPageWidget> {
     if (!indivSwitchValue) return shippingForms[0].status;
 
     final status = shippingForms.map((e) => e.status);
-    if (status.contains(ShippingStatus.confirming))
-      return ShippingStatus.confirming;
+    if (status.contains(ShippingStatus.confirmed))
+      return ShippingStatus.confirmed;
     if (status.contains(ShippingStatus.shipping))
       return ShippingStatus.shipping;
     if (status.contains(ShippingStatus.shipped)) return ShippingStatus.shipped;
@@ -291,7 +292,7 @@ class _UpdateOrderPageWidgetState extends State<UpdateOrderPageWidget> {
                                       readOnly: true,
                                       obscureText: false,
                                       decoration: InputDecoration(
-                                        labelText: '料金',
+                                        labelText: '合計額（商品＋送料）',
                                         enabledBorder: UnderlineInputBorder(
                                           borderSide: BorderSide(
                                             color: Color(0x00000000),
