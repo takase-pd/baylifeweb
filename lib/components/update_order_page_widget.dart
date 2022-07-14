@@ -292,7 +292,7 @@ class _UpdateOrderPageWidgetState extends State<UpdateOrderPageWidget> {
                                       readOnly: true,
                                       obscureText: false,
                                       decoration: InputDecoration(
-                                        labelText: '料金',
+                                        labelText: '合計額（商品＋送料）',
                                         enabledBorder: UnderlineInputBorder(
                                           borderSide: BorderSide(
                                             color: Color(0x00000000),
