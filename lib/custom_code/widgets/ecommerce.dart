@@ -267,28 +267,38 @@ class ShippingForm {
     List<ShippingForm> statusForms = [];
     final trackingNumbers = details.trackingNumbers;
     switchListTileValue
-        ? plans.forEach(
-            (plan) async => statusForms.add(
-              ShippingForm.create(
-                plan.id,
-                plan.name,
-                trackingNumbers.length == 0
-                    ? ''
-                    : trackingNumbers[plan.trackingIndex],
-                plan.status,
+        ? plans.forEach((plan) async => {
+              statusForms.add(
+                ShippingForm.create(
+                  plan.id,
+                  plan.name,
+                  _getTrackingNumber(trackingNumbers, plan.id),
+                  plan.status,
+                ),
               ),
-            ),
-          )
+            })
         : statusForms.add(
             ShippingForm.create(
               paymentId.substring(3),
               '',
-              trackingNumbers.length == 0 ? '' : trackingNumbers[0],
+              _getTrackingNumber(trackingNumbers, plans.first.id),
               ShippingStatusExt.create(order.status),
             ),
           );
 
     return statusForms;
+  }
+
+  static String _getTrackingNumber(
+    List<String> trackingNumbers,
+    String id,
+  ) {
+    if (trackingNumbers.isEmpty) return '';
+    final code = trackingNumbers.firstWhere((element) => element.contains(id),
+        orElse: () => '');
+    if (code.isEmpty) return '';
+    final trackingNumber = code.split(':').toList().last;
+    return trackingNumber;
   }
 
   ShippingForm changeTrackingNumber(

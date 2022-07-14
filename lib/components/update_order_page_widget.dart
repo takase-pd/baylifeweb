@@ -45,6 +45,7 @@ class _UpdateOrderPageWidgetState extends State<UpdateOrderPageWidget> {
   String shopPath;
   String carrier;
   List<String> trackingNumbers;
+  List<String> planIds;
   bool switchHanler = false;
   String alert = '配送情報を入力ください。追跡番号がない場合、空欄のまま更新してください。';
 
@@ -54,6 +55,7 @@ class _UpdateOrderPageWidgetState extends State<UpdateOrderPageWidget> {
     carrier = _details.carrier;
     carrierValue = carrier ?? '';
     trackingNumbers = _details.trackingNumbers;
+    planIds = _plans.map((e) => e.id).toList();
     if (!switchHanler) indivSwitchValue = order.indivShipping ?? false;
     shippingForms = ShippingForm.createForm(
         order, _plans, _details, indivSwitchValue, paymentId);
@@ -1256,13 +1258,20 @@ class _UpdateOrderPageWidgetState extends State<UpdateOrderPageWidget> {
                                 onPressed: () async {
                                   logFirebaseEvent('Button_ON_TAP');
                                   final status = _orderStatus();
-                                  final numbers =
+                                  List<String> numbers =
                                       shippingForms.asMap().entries.map((e) {
                                     indivSwitchValue
                                         ? e.value.trackingIndex = e.key
                                         : e.value.status = status;
-                                    return e.value.trackingNumber;
+                                    return '${e.value.id}:${e.value.trackingNumber}';
                                   }).toList();
+                                  if (!indivSwitchValue) {
+                                    final trackingNumber =
+                                        numbers.first.split(':').toList().last;
+                                    numbers = planIds
+                                        .map((e) => '$e:$trackingNumber')
+                                        .toList();
+                                  }
                                   final trackingNumber = numbers.reduce(
                                       (value, element) =>
                                           value + ',' + element);
