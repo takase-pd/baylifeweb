@@ -17,7 +17,6 @@ Serializers _$serializers = (new Serializers().toBuilder()
       ..add(OrdersRecord.serializer)
       ..add(PlansRecord.serializer)
       ..add(ShopsRecord.serializer)
-      ..add(SoldRecord.serializer)
       ..add(SurveyRecord.serializer)
       ..add(UsersRecord.serializer)
       ..addBuilderFactory(

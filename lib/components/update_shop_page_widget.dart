@@ -37,11 +37,12 @@ class _UpdateShopPageWidgetState extends State<UpdateShopPageWidget> {
   TextEditingController textController7;
   TextEditingController textController8;
   TextEditingController textController9;
-  String dropDownValue3;
   TextEditingController textController10;
+  String dropDownValue3;
   TextEditingController textController11;
   TextEditingController textController12;
   TextEditingController textController13;
+  TextEditingController textController14;
   final formKey = GlobalKey<FormState>();
 
   @override
@@ -60,6 +61,7 @@ class _UpdateShopPageWidgetState extends State<UpdateShopPageWidget> {
     textController11 = TextEditingController();
     textController12 = TextEditingController();
     textController13 = TextEditingController();
+    textController14 = TextEditingController();
   }
 
   @override
@@ -582,6 +584,65 @@ class _UpdateShopPageWidgetState extends State<UpdateShopPageWidget> {
                             ),
                           ),
                           Padding(
+                            padding:
+                                EdgeInsetsDirectional.fromSTEB(0, 0, 0, 16),
+                            child: Container(
+                              height: 60,
+                              decoration: BoxDecoration(
+                                color: FlutterFlowTheme.of(context).background,
+                                borderRadius: BorderRadius.circular(8),
+                              ),
+                              child: Row(
+                                mainAxisSize: MainAxisSize.max,
+                                children: [
+                                  Expanded(
+                                    child: Padding(
+                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                          16, 0, 0, 0),
+                                      child: TextFormField(
+                                        controller: textController6,
+                                        obscureText: false,
+                                        decoration: InputDecoration(
+                                          labelText: 'ショップ内メールアドレス',
+                                          hintText:
+                                              '注文受付時、ショップ内のメール送信先（半角カンマ区切りで複数可）',
+                                          enabledBorder: UnderlineInputBorder(
+                                            borderSide: BorderSide(
+                                              color: Color(0x00000000),
+                                              width: 1,
+                                            ),
+                                            borderRadius:
+                                                const BorderRadius.only(
+                                              topLeft: Radius.circular(4.0),
+                                              topRight: Radius.circular(4.0),
+                                            ),
+                                          ),
+                                          focusedBorder: UnderlineInputBorder(
+                                            borderSide: BorderSide(
+                                              color: Color(0x00000000),
+                                              width: 1,
+                                            ),
+                                            borderRadius:
+                                                const BorderRadius.only(
+                                              topLeft: Radius.circular(4.0),
+                                              topRight: Radius.circular(4.0),
+                                            ),
+                                          ),
+                                        ),
+                                        style: FlutterFlowTheme.of(context)
+                                            .bodyText2
+                                            .override(
+                                              fontFamily: 'Open Sans',
+                                              fontWeight: FontWeight.w500,
+                                            ),
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                          Padding(
                             padding: EdgeInsetsDirectional.fromSTEB(0, 8, 0, 8),
                             child: Text(
                               '送料設定',
@@ -605,7 +666,7 @@ class _UpdateShopPageWidgetState extends State<UpdateShopPageWidget> {
                                       padding: EdgeInsetsDirectional.fromSTEB(
                                           16, 0, 0, 0),
                                       child: TextFormField(
-                                        controller: textController6,
+                                        controller: textController7,
                                         obscureText: false,
                                         decoration: InputDecoration(
                                           labelText: '送料上限',
@@ -664,7 +725,7 @@ class _UpdateShopPageWidgetState extends State<UpdateShopPageWidget> {
                                       padding: EdgeInsetsDirectional.fromSTEB(
                                           16, 0, 0, 0),
                                       child: TextFormField(
-                                        controller: textController7,
+                                        controller: textController8,
                                         obscureText: false,
                                         decoration: InputDecoration(
                                           labelText: '送料無料適用時の合計金額',
@@ -730,7 +791,7 @@ class _UpdateShopPageWidgetState extends State<UpdateShopPageWidget> {
                                       padding: EdgeInsetsDirectional.fromSTEB(
                                           16, 0, 0, 0),
                                       child: TextFormField(
-                                        controller: textController8,
+                                        controller: textController9,
                                         obscureText: false,
                                         decoration: InputDecoration(
                                           labelText: 'メールアドレス',
@@ -787,7 +848,7 @@ class _UpdateShopPageWidgetState extends State<UpdateShopPageWidget> {
                                       padding: EdgeInsetsDirectional.fromSTEB(
                                           16, 0, 0, 0),
                                       child: TextFormField(
-                                        controller: textController9,
+                                        controller: textController10,
                                         obscureText: false,
                                         decoration: InputDecoration(
                                           labelText: '電話番号',
@@ -865,7 +926,7 @@ class _UpdateShopPageWidgetState extends State<UpdateShopPageWidget> {
                                               EdgeInsetsDirectional.fromSTEB(
                                                   16, 0, 0, 0),
                                           child: TextFormField(
-                                            controller: textController10,
+                                            controller: textController11,
                                             obscureText: false,
                                             decoration: InputDecoration(
                                               labelText: '管理者',
@@ -957,7 +1018,7 @@ class _UpdateShopPageWidgetState extends State<UpdateShopPageWidget> {
                                       padding: EdgeInsetsDirectional.fromSTEB(
                                           16, 0, 0, 0),
                                       child: TextFormField(
-                                        controller: textController11,
+                                        controller: textController12,
                                         obscureText: false,
                                         decoration: InputDecoration(
                                           labelText: 'Instagram',
@@ -1014,7 +1075,7 @@ class _UpdateShopPageWidgetState extends State<UpdateShopPageWidget> {
                                       padding: EdgeInsetsDirectional.fromSTEB(
                                           16, 0, 0, 0),
                                       child: TextFormField(
-                                        controller: textController12,
+                                        controller: textController13,
                                         obscureText: false,
                                         decoration: InputDecoration(
                                           labelText: 'Twitter',
@@ -1071,7 +1132,7 @@ class _UpdateShopPageWidgetState extends State<UpdateShopPageWidget> {
                                       padding: EdgeInsetsDirectional.fromSTEB(
                                           16, 0, 0, 0),
                                       child: TextFormField(
-                                        controller: textController13,
+                                        controller: textController14,
                                         obscureText: false,
                                         decoration: InputDecoration(
                                           labelText: 'Web',
