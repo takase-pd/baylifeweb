@@ -1025,7 +1025,9 @@ class _PostPageWidgetState extends State<PostPageWidget> {
                                                             Colors.transparent,
                                                         width: 1,
                                                       ),
-                                                      borderRadius: 12,
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              12),
                                                     ),
                                                   ),
                                                 ],
@@ -1160,7 +1162,9 @@ class _PostPageWidgetState extends State<PostPageWidget> {
                                                             Colors.transparent,
                                                         width: 1,
                                                       ),
-                                                      borderRadius: 12,
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              12),
                                                     ),
                                                   ),
                                                 ],
@@ -1990,7 +1994,9 @@ class _PostPageWidgetState extends State<PostPageWidget> {
                                                       color: Colors.transparent,
                                                       width: 1,
                                                     ),
-                                                    borderRadius: 12,
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            12),
                                                   ),
                                                 ),
                                               ],
