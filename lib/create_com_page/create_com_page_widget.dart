@@ -571,7 +571,8 @@ class _CreateComPageWidgetState extends State<CreateComPageWidget> {
                                                     color: Colors.transparent,
                                                     width: 1,
                                                   ),
-                                                  borderRadius: 12,
+                                                  borderRadius:
+                                                      BorderRadius.circular(12),
                                                 ),
                                               ),
                                             ],

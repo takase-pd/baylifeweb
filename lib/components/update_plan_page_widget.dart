@@ -29,15 +29,17 @@ class UpdatePlanPageWidget extends StatefulWidget {
 class _UpdatePlanPageWidgetState extends State<UpdatePlanPageWidget> {
   DateTime datePicked;
   String uploadedFileUrl = '';
-  TextEditingController textController6;
+  TextEditingController textController7;
   String dropDownValue;
   TextEditingController textController1;
   TextEditingController textController2;
   TextEditingController textController3;
+  bool switchListTileValue;
   TextEditingController textController4;
   TextEditingController textController5;
-  TextEditingController textController7;
+  TextEditingController textController6;
   TextEditingController textController8;
+  TextEditingController textController9;
   String radioButtonValue;
   final formKey = GlobalKey<FormState>();
 
@@ -45,7 +47,8 @@ class _UpdatePlanPageWidgetState extends State<UpdatePlanPageWidget> {
   void initState() {
     super.initState();
     textController1 = TextEditingController(text: dropDownValue);
-    textController6 = TextEditingController(text: uploadedFileUrl);
+    textController3 = TextEditingController();
+    textController7 = TextEditingController(text: uploadedFileUrl);
   }
 
   @override
@@ -311,7 +314,77 @@ class _UpdatePlanPageWidgetState extends State<UpdatePlanPageWidget> {
                                       padding: EdgeInsetsDirectional.fromSTEB(
                                           16, 0, 0, 0),
                                       child: TextFormField(
-                                        controller: textController3 ??=
+                                        controller: textController3,
+                                        obscureText: false,
+                                        decoration: InputDecoration(
+                                          labelText: '年齢制限商品',
+                                          enabledBorder: UnderlineInputBorder(
+                                            borderSide: BorderSide(
+                                              color: Color(0x00000000),
+                                              width: 1,
+                                            ),
+                                            borderRadius:
+                                                const BorderRadius.only(
+                                              topLeft: Radius.circular(4.0),
+                                              topRight: Radius.circular(4.0),
+                                            ),
+                                          ),
+                                          focusedBorder: UnderlineInputBorder(
+                                            borderSide: BorderSide(
+                                              color: Color(0x00000000),
+                                              width: 1,
+                                            ),
+                                            borderRadius:
+                                                const BorderRadius.only(
+                                              topLeft: Radius.circular(4.0),
+                                              topRight: Radius.circular(4.0),
+                                            ),
+                                          ),
+                                        ),
+                                        style: FlutterFlowTheme.of(context)
+                                            .bodyText2
+                                            .override(
+                                              fontFamily: 'Montserrat',
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .textDark,
+                                              fontWeight: FontWeight.w500,
+                                            ),
+                                      ),
+                                    ),
+                                  ),
+                                  Expanded(
+                                    child: SwitchListTile(
+                                      value: switchListTileValue ??= false,
+                                      onChanged: (newValue) => setState(
+                                          () => switchListTileValue = newValue),
+                                      dense: false,
+                                      controlAffinity:
+                                          ListTileControlAffinity.trailing,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                          Padding(
+                            padding:
+                                EdgeInsetsDirectional.fromSTEB(0, 0, 0, 16),
+                            child: Container(
+                              height: 60,
+                              decoration: BoxDecoration(
+                                color: FlutterFlowTheme.of(context).background,
+                                borderRadius: BorderRadius.circular(8),
+                              ),
+                              child: Row(
+                                mainAxisSize: MainAxisSize.max,
+                                children: [
+                                  Expanded(
+                                    child: Padding(
+                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                          16, 0, 0, 0),
+                                      child: TextFormField(
+                                        controller: textController4 ??=
                                             TextEditingController(
                                           text: formatNumber(
                                             containerPlansRecord.unitAmount,
@@ -388,7 +461,7 @@ class _UpdatePlanPageWidgetState extends State<UpdatePlanPageWidget> {
                                       padding: EdgeInsetsDirectional.fromSTEB(
                                           16, 0, 0, 0),
                                       child: TextFormField(
-                                        controller: textController4 ??=
+                                        controller: textController5 ??=
                                             TextEditingController(
                                           text: containerPlansRecord.quantityMax
                                               .toString(),
@@ -461,7 +534,7 @@ class _UpdatePlanPageWidgetState extends State<UpdatePlanPageWidget> {
                                       padding: EdgeInsetsDirectional.fromSTEB(
                                           16, 0, 0, 0),
                                       child: TextFormField(
-                                        controller: textController5 ??=
+                                        controller: textController6 ??=
                                             TextEditingController(
                                           text:
                                               containerPlansRecord.description,
@@ -536,7 +609,7 @@ class _UpdatePlanPageWidgetState extends State<UpdatePlanPageWidget> {
                                   children: [
                                     Expanded(
                                       child: TextFormField(
-                                        controller: textController6,
+                                        controller: textController7,
                                         obscureText: false,
                                         decoration: InputDecoration(
                                           labelText: 'バナー画像',
@@ -646,7 +719,7 @@ class _UpdatePlanPageWidgetState extends State<UpdatePlanPageWidget> {
                                           color: Colors.transparent,
                                           width: 1,
                                         ),
-                                        borderRadius: 12,
+                                        borderRadius: BorderRadius.circular(12),
                                       ),
                                     ),
                                   ],
@@ -744,7 +817,7 @@ class _UpdatePlanPageWidgetState extends State<UpdatePlanPageWidget> {
                                           color: Colors.transparent,
                                           width: 1,
                                         ),
-                                        borderRadius: 12,
+                                        borderRadius: BorderRadius.circular(12),
                                       ),
                                     ),
                                   ],
@@ -769,7 +842,7 @@ class _UpdatePlanPageWidgetState extends State<UpdatePlanPageWidget> {
                                       padding: EdgeInsetsDirectional.fromSTEB(
                                           16, 0, 0, 0),
                                       child: TextFormField(
-                                        controller: textController7 ??=
+                                        controller: textController8 ??=
                                             TextEditingController(
                                           text: containerPlansRecord
                                               .shippingNormal,
@@ -841,7 +914,7 @@ class _UpdatePlanPageWidgetState extends State<UpdatePlanPageWidget> {
                                       padding: EdgeInsetsDirectional.fromSTEB(
                                           16, 0, 0, 0),
                                       child: TextFormField(
-                                        controller: textController8 ??=
+                                        controller: textController9 ??=
                                             TextEditingController(
                                           text: formatNumber(
                                             containerPlansRecord
@@ -1004,15 +1077,15 @@ class _UpdatePlanPageWidgetState extends State<UpdatePlanPageWidget> {
                                           activeQuick: false,
                                           banner: uploadedFileUrl,
                                           description:
-                                              textController7?.text ?? '',
+                                              textController8?.text ?? '',
                                           name: textController2?.text ?? '',
                                           published: datePicked,
                                           shippingEachFee: false,
                                           shippingQuick: '',
                                           shippingFeeNormal: int.parse(
-                                              textController8?.text ?? ''),
+                                              textController9?.text ?? ''),
                                           shippingNormal:
-                                              textController7?.text ?? '',
+                                              textController8?.text ?? '',
                                           updated: getCurrentTimestamp,
                                         );
                                         await PlansRecord.collection
@@ -1062,7 +1135,7 @@ class _UpdatePlanPageWidgetState extends State<UpdatePlanPageWidget> {
                                         color: Colors.transparent,
                                         width: 1,
                                       ),
-                                      borderRadius: 12,
+                                      borderRadius: BorderRadius.circular(12),
                                     ),
                                   ),
                                 ],

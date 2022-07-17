@@ -59,6 +59,10 @@ abstract class PlansRecord implements Built<PlansRecord, PlansRecordBuilder> {
   DateTime get updated;
 
   @nullable
+  @BuiltValueField(wireName: 'verify_age')
+  bool get verifyAge;
+
+  @nullable
   @BuiltValueField(wireName: kDocumentReferenceField)
   DocumentReference get reference;
 
@@ -73,7 +77,8 @@ abstract class PlansRecord implements Built<PlansRecord, PlansRecordBuilder> {
     ..shippingQuick = ''
     ..unitAmount = 0
     ..shippingFeeNormal = 0
-    ..shippingNormal = '';
+    ..shippingNormal = ''
+    ..verifyAge = false;
 
   static CollectionReference get collection =>
       FirebaseFirestore.instance.collection('plans');
@@ -111,6 +116,7 @@ Map<String, dynamic> createPlansRecordData({
   int shippingFeeNormal,
   String shippingNormal,
   DateTime updated,
+  bool verifyAge,
 }) =>
     serializers.toFirestore(
         PlansRecord.serializer,
@@ -128,4 +134,5 @@ Map<String, dynamic> createPlansRecordData({
           ..unitAmount = unitAmount
           ..shippingFeeNormal = shippingFeeNormal
           ..shippingNormal = shippingNormal
-          ..updated = updated));
+          ..updated = updated
+          ..verifyAge = verifyAge));

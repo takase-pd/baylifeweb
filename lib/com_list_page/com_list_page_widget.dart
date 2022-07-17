@@ -169,7 +169,8 @@ class _ComListPageWidgetState extends State<ComListPageWidget> {
                                             color: Colors.transparent,
                                             width: 1,
                                           ),
-                                          borderRadius: 4,
+                                          borderRadius:
+                                              BorderRadius.circular(4),
                                         ),
                                       ),
                                     ],

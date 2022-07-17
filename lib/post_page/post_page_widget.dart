@@ -853,7 +853,9 @@ class _PostPageWidgetState extends State<PostPageWidget> {
                                                               .transparent,
                                                           width: 1,
                                                         ),
-                                                        borderRadius: 12,
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(12),
                                                       ),
                                                     ),
                                                   ],
@@ -1081,7 +1083,9 @@ class _PostPageWidgetState extends State<PostPageWidget> {
                                                               .transparent,
                                                           width: 1,
                                                         ),
-                                                        borderRadius: 12,
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(12),
                                                       ),
                                                     ),
                                                   ],
@@ -1218,7 +1222,9 @@ class _PostPageWidgetState extends State<PostPageWidget> {
                                                               .transparent,
                                                           width: 1,
                                                         ),
-                                                        borderRadius: 12,
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(12),
                                                       ),
                                                     ),
                                                   ],
@@ -2120,7 +2126,9 @@ class _PostPageWidgetState extends State<PostPageWidget> {
                                                             Colors.transparent,
                                                         width: 1,
                                                       ),
-                                                      borderRadius: 12,
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              12),
                                                     ),
                                                   ),
                                                 ],

@@ -42,6 +42,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
           Expanded(
             child: Row(
               mainAxisSize: MainAxisSize.max,
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 MainMenuWidget(),
                 Expanded(
@@ -69,109 +70,112 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                         }
                         List<ContentsRecord> columnContentsRecordList =
                             snapshot.data;
-                        return Column(
-                          mainAxisSize: MainAxisSize.max,
-                          children: List.generate(
-                              columnContentsRecordList.length, (columnIndex) {
-                            final columnContentsRecord =
-                                columnContentsRecordList[columnIndex];
-                            return Padding(
-                              padding:
-                                  EdgeInsetsDirectional.fromSTEB(0, 0, 0, 10),
-                              child: Container(
-                                decoration: BoxDecoration(
-                                  color: FlutterFlowTheme.of(context)
-                                      .tertiaryColor,
-                                ),
-                                child: Padding(
-                                  padding: EdgeInsetsDirectional.fromSTEB(
-                                      10, 5, 10, 5),
-                                  child: Column(
-                                    mainAxisSize: MainAxisSize.max,
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceEvenly,
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      Row(
-                                        mainAxisSize: MainAxisSize.max,
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
-                                        children: [
-                                          Text(
-                                            columnContentsRecord.title,
-                                            style: FlutterFlowTheme.of(context)
-                                                .subtitle2,
-                                          ),
-                                          Row(
-                                            mainAxisSize: MainAxisSize.max,
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.start,
-                                            children: [
-                                              Text(
-                                                dateTimeFormat(
-                                                    'yMMMd',
-                                                    columnContentsRecord
-                                                        .posted),
-                                                style:
-                                                    FlutterFlowTheme.of(context)
-                                                        .bodyText1,
-                                              ),
-                                              ToggleIcon(
-                                                onPressed: () async {
-                                                  final contentsUpdateData =
-                                                      createContentsRecordData(
-                                                    display:
-                                                        !columnContentsRecord
-                                                            .display,
-                                                  );
-                                                  await columnContentsRecord
-                                                      .reference
-                                                      .update(
-                                                          contentsUpdateData);
-                                                },
-                                                value: columnContentsRecord
-                                                    .display,
-                                                onIcon: Icon(
-                                                  Icons.cloud_done,
-                                                  color: FlutterFlowTheme.of(
-                                                          context)
-                                                      .pDark,
-                                                  size: 25,
-                                                ),
-                                                offIcon: Icon(
-                                                  Icons.cloud_off_outlined,
-                                                  color: FlutterFlowTheme.of(
-                                                          context)
-                                                      .pDark,
-                                                  size: 25,
-                                                ),
-                                              ),
-                                            ],
-                                          ),
-                                        ],
-                                      ),
-                                      Text(
-                                        columnContentsRecord.overview
-                                            .maybeHandleOverflow(
-                                          maxChars: 56,
-                                          replacement: '…',
-                                        ),
-                                        style: FlutterFlowTheme.of(context)
-                                            .bodyText1
-                                            .override(
-                                              fontFamily: 'Open Sans',
-                                              color:
+                        return SingleChildScrollView(
+                          child: Column(
+                            mainAxisSize: MainAxisSize.max,
+                            children: List.generate(
+                                columnContentsRecordList.length, (columnIndex) {
+                              final columnContentsRecord =
+                                  columnContentsRecordList[columnIndex];
+                              return Padding(
+                                padding:
+                                    EdgeInsetsDirectional.fromSTEB(0, 0, 0, 10),
+                                child: Container(
+                                  decoration: BoxDecoration(
+                                    color: FlutterFlowTheme.of(context)
+                                        .tertiaryColor,
+                                  ),
+                                  child: Padding(
+                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                        10, 5, 10, 5),
+                                    child: Column(
+                                      mainAxisSize: MainAxisSize.max,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceEvenly,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Row(
+                                          mainAxisSize: MainAxisSize.max,
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
+                                          children: [
+                                            Text(
+                                              columnContentsRecord.title,
+                                              style:
                                                   FlutterFlowTheme.of(context)
-                                                      .textDark,
+                                                      .subtitle2,
                                             ),
-                                      ),
-                                    ],
+                                            Row(
+                                              mainAxisSize: MainAxisSize.max,
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.start,
+                                              children: [
+                                                Text(
+                                                  dateTimeFormat(
+                                                      'yMMMd',
+                                                      columnContentsRecord
+                                                          .posted),
+                                                  style: FlutterFlowTheme.of(
+                                                          context)
+                                                      .bodyText1,
+                                                ),
+                                                ToggleIcon(
+                                                  onPressed: () async {
+                                                    final contentsUpdateData =
+                                                        createContentsRecordData(
+                                                      display:
+                                                          !columnContentsRecord
+                                                              .display,
+                                                    );
+                                                    await columnContentsRecord
+                                                        .reference
+                                                        .update(
+                                                            contentsUpdateData);
+                                                  },
+                                                  value: columnContentsRecord
+                                                      .display,
+                                                  onIcon: Icon(
+                                                    Icons.cloud_done,
+                                                    color: FlutterFlowTheme.of(
+                                                            context)
+                                                        .pDark,
+                                                    size: 25,
+                                                  ),
+                                                  offIcon: Icon(
+                                                    Icons.cloud_off_outlined,
+                                                    color: FlutterFlowTheme.of(
+                                                            context)
+                                                        .pDark,
+                                                    size: 25,
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                          ],
+                                        ),
+                                        Text(
+                                          columnContentsRecord.overview
+                                              .maybeHandleOverflow(
+                                            maxChars: 56,
+                                            replacement: '…',
+                                          ),
+                                          style: FlutterFlowTheme.of(context)
+                                              .bodyText1
+                                              .override(
+                                                fontFamily: 'Open Sans',
+                                                color:
+                                                    FlutterFlowTheme.of(context)
+                                                        .textDark,
+                                              ),
+                                        ),
+                                      ],
+                                    ),
                                   ),
                                 ),
-                              ),
-                            );
-                          }),
+                              );
+                            }),
+                          ),
                         );
                       },
                     ),
