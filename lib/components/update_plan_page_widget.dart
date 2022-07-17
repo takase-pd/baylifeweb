@@ -76,6 +76,7 @@ class _UpdatePlanPageWidgetState extends State<UpdatePlanPageWidget> {
     label = '更新';
     active = _plan.active;
     activeQuick = _plan.activeQuick;
+    switchListTileValue = _plan.verifyAge;
     return _plan;
   }
 
@@ -421,7 +422,7 @@ class _UpdatePlanPageWidgetState extends State<UpdatePlanPageWidget> {
                                           16, 0, 0, 0),
                                       child: TextFormField(
                                         initialValue:
-                                            '酒類など20才以上の方のみ注文できる商品の場合スイッチをオン',
+                                            '酒類など20才以上の方のみ注文できる商品の場合はオン',
                                         readOnly: true,
                                         obscureText: false,
                                         decoration: InputDecoration(
@@ -1397,6 +1398,7 @@ class _UpdatePlanPageWidgetState extends State<UpdatePlanPageWidget> {
                                               textController8?.text ?? '',
                                           shop: shopRef,
                                           updated: getCurrentTimestamp,
+                                          verifyAge: switchListTileValue,
                                         );
 
                                         isNew
