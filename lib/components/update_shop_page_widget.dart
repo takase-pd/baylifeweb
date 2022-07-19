@@ -59,6 +59,7 @@ class _UpdateShopPageWidgetState extends State<UpdateShopPageWidget> {
   int shippingFreeTotal = 0;
   String label = '追加';
   String alert = '';
+  bool display = false;
 
   Future<ShopsRecord> _getShop() async {
     catShops = await queryCatShopRecordOnce();
@@ -94,6 +95,7 @@ class _UpdateShopPageWidgetState extends State<UpdateShopPageWidget> {
     shippingFreeTotal = _shop.shippingFreeTotal;
     label = '更新';
     textController6 = TextEditingController(text: _shop.internal);
+    display = _shop.display;
     return _shop;
   }
 
@@ -1505,7 +1507,7 @@ class _UpdateShopPageWidgetState extends State<UpdateShopPageWidget> {
                                           company: comRef,
                                           description:
                                               textController4.text ?? '',
-                                          display: false,
+                                          display: display,
                                           email: textController9.text ?? '',
                                           instagram:
                                               textController12.text ?? '',
