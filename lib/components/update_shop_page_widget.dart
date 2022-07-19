@@ -523,7 +523,8 @@ class _UpdateShopPageWidgetState extends State<UpdateShopPageWidget> {
                                                     .description),
                                         obscureText: false,
                                         decoration: InputDecoration(
-                                          labelText: '説明・備考',
+                                          labelText:
+                                              '説明・備考（地域とのつながり・関係についてもご記載ください。）',
                                           isDense: true,
                                           enabledBorder: UnderlineInputBorder(
                                             borderSide: BorderSide(
