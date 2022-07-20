@@ -428,7 +428,10 @@ class _PostSurveyPageWidgetState extends State<PostSurveyPageWidget> {
                                                                   .transparent,
                                                               width: 1,
                                                             ),
-                                                            borderRadius: 12,
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .circular(
+                                                                        12),
                                                           ),
                                                         ),
                                                       ],
@@ -622,7 +625,9 @@ class _PostSurveyPageWidgetState extends State<PostSurveyPageWidget> {
                                                                   width: 1,
                                                                 ),
                                                                 borderRadius:
-                                                                    12,
+                                                                    BorderRadius
+                                                                        .circular(
+                                                                            12),
                                                               ),
                                                             ),
                                                           ],
@@ -766,7 +771,10 @@ class _PostSurveyPageWidgetState extends State<PostSurveyPageWidget> {
                                                                     .transparent,
                                                                 width: 1,
                                                               ),
-                                                              borderRadius: 12,
+                                                              borderRadius:
+                                                                  BorderRadius
+                                                                      .circular(
+                                                                          12),
                                                             ),
                                                           ),
                                                         ],
@@ -895,7 +903,10 @@ class _PostSurveyPageWidgetState extends State<PostSurveyPageWidget> {
                                                                   .transparent,
                                                               width: 1,
                                                             ),
-                                                            borderRadius: 12,
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .circular(
+                                                                        12),
                                                           ),
                                                         ),
                                                       ],

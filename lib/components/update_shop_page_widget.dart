@@ -11,6 +11,7 @@ import '../flutter_flow/upload_media.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:email_validator/email_validator.dart';
 
 class UpdateShopPageWidget extends StatefulWidget {
   const UpdateShopPageWidget({
@@ -39,6 +40,7 @@ class _UpdateShopPageWidgetState extends State<UpdateShopPageWidget> {
   TextEditingController textController11;
   TextEditingController textController12;
   TextEditingController textController13;
+  TextEditingController textController14;
   DocumentReference catMainRef;
   DocumentReference comRef;
   DocumentReference directorRef;
@@ -57,6 +59,7 @@ class _UpdateShopPageWidgetState extends State<UpdateShopPageWidget> {
   int shippingFreeTotal = 0;
   String label = '追加';
   String alert = '';
+  bool display = false;
 
   Future<ShopsRecord> _getShop() async {
     catShops = await queryCatShopRecordOnce();
@@ -91,7 +94,16 @@ class _UpdateShopPageWidgetState extends State<UpdateShopPageWidget> {
     shippingFee = _shop.shippingFee;
     shippingFreeTotal = _shop.shippingFreeTotal;
     label = '更新';
+    textController6 = TextEditingController(text: _shop.internal);
+    display = _shop.display;
     return _shop;
+  }
+
+  bool validateEmail(List<String> emails) {
+    final validate = emails
+        .where((email) => EmailValidator.validate(email) == false)
+        .toList();
+    return validate.isEmpty ? true : false;
   }
 
   @override
@@ -398,21 +410,31 @@ class _UpdateShopPageWidgetState extends State<UpdateShopPageWidget> {
                                               width: 1,
                                             ),
                                             borderRadius:
-                                                const BorderRadius.only(
-                                              topLeft: Radius.circular(4.0),
-                                              topRight: Radius.circular(4.0),
-                                            ),
+                                                BorderRadius.circular(4),
                                           ),
                                           focusedBorder: UnderlineInputBorder(
                                             borderSide: BorderSide(
-                                              color: Color(0x00000000),
-                                              width: 1,
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .primaryColor,
+                                              width: 2,
                                             ),
                                             borderRadius:
-                                                const BorderRadius.only(
-                                              topLeft: Radius.circular(4.0),
-                                              topRight: Radius.circular(4.0),
+                                                BorderRadius.circular(4),
+                                          ),
+                                          errorStyle: TextStyle(
+                                            color: FlutterFlowTheme.of(context)
+                                                .primaryColor,
+                                          ),
+                                          errorBorder: UnderlineInputBorder(
+                                            borderSide: BorderSide(
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .primaryColor,
+                                              width: 2,
                                             ),
+                                            borderRadius:
+                                                BorderRadius.circular(4),
                                           ),
                                           focusedErrorBorder:
                                               UnderlineInputBorder(
@@ -501,7 +523,8 @@ class _UpdateShopPageWidgetState extends State<UpdateShopPageWidget> {
                                                     .description),
                                         obscureText: false,
                                         decoration: InputDecoration(
-                                          labelText: '説明・備考',
+                                          labelText:
+                                              '説明・備考（地域とのつながり・関係についてもご記載ください。）',
                                           isDense: true,
                                           enabledBorder: UnderlineInputBorder(
                                             borderSide: BorderSide(
@@ -509,10 +532,7 @@ class _UpdateShopPageWidgetState extends State<UpdateShopPageWidget> {
                                               width: 1,
                                             ),
                                             borderRadius:
-                                                const BorderRadius.only(
-                                              topLeft: Radius.circular(4.0),
-                                              topRight: Radius.circular(4.0),
-                                            ),
+                                                BorderRadius.circular(4),
                                           ),
                                           focusedBorder: UnderlineInputBorder(
                                             borderSide: BorderSide(
@@ -520,10 +540,7 @@ class _UpdateShopPageWidgetState extends State<UpdateShopPageWidget> {
                                               width: 1,
                                             ),
                                             borderRadius:
-                                                const BorderRadius.only(
-                                              topLeft: Radius.circular(4.0),
-                                              topRight: Radius.circular(4.0),
-                                            ),
+                                                BorderRadius.circular(4),
                                           ),
                                         ),
                                         style: FlutterFlowTheme.of(context)
@@ -575,10 +592,7 @@ class _UpdateShopPageWidgetState extends State<UpdateShopPageWidget> {
                                               width: 1,
                                             ),
                                             borderRadius:
-                                                const BorderRadius.only(
-                                              topLeft: Radius.circular(4.0),
-                                              topRight: Radius.circular(4.0),
-                                            ),
+                                                BorderRadius.circular(4),
                                           ),
                                           focusedBorder: UnderlineInputBorder(
                                             borderSide: BorderSide(
@@ -586,10 +600,7 @@ class _UpdateShopPageWidgetState extends State<UpdateShopPageWidget> {
                                               width: 1,
                                             ),
                                             borderRadius:
-                                                const BorderRadius.only(
-                                              topLeft: Radius.circular(4.0),
-                                              topRight: Radius.circular(4.0),
-                                            ),
+                                                BorderRadius.circular(4),
                                           ),
                                           errorStyle: TextStyle(
                                             color: FlutterFlowTheme.of(context)
@@ -703,11 +714,102 @@ class _UpdateShopPageWidgetState extends State<UpdateShopPageWidget> {
                                           color: Colors.transparent,
                                           width: 1,
                                         ),
-                                        borderRadius: 12,
+                                        borderRadius: BorderRadius.circular(12),
                                       ),
                                     ),
                                   ],
                                 ),
+                              ),
+                            ),
+                          ),
+                          Padding(
+                            padding:
+                                EdgeInsetsDirectional.fromSTEB(0, 0, 0, 16),
+                            child: Container(
+                              decoration: BoxDecoration(
+                                color: FlutterFlowTheme.of(context).background,
+                                borderRadius: BorderRadius.circular(8),
+                              ),
+                              child: Row(
+                                mainAxisSize: MainAxisSize.max,
+                                children: [
+                                  Expanded(
+                                    child: Padding(
+                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                          16, 0, 16, 8),
+                                      child: TextFormField(
+                                        controller: textController6,
+                                        obscureText: false,
+                                        decoration: InputDecoration(
+                                          labelText: '通知用メールアドレス',
+                                          hintText:
+                                              '注文受付時、ショップ内に通知するメール送信先（半角カンマ区切りで複数可）',
+                                          hintMaxLines: 2,
+                                          isDense: true,
+                                          enabledBorder: UnderlineInputBorder(
+                                            borderSide: BorderSide(
+                                              color: Color(0x00000000),
+                                              width: 1,
+                                            ),
+                                            borderRadius:
+                                                BorderRadius.circular(4),
+                                          ),
+                                          focusedBorder: UnderlineInputBorder(
+                                            borderSide: BorderSide(
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .primaryColor,
+                                              width: 2,
+                                            ),
+                                            borderRadius:
+                                                BorderRadius.circular(4),
+                                          ),
+                                          errorStyle: TextStyle(
+                                            color: FlutterFlowTheme.of(context)
+                                                .primaryColor,
+                                          ),
+                                          errorBorder: UnderlineInputBorder(
+                                            borderSide: BorderSide(
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .primaryColor,
+                                              width: 2,
+                                            ),
+                                            borderRadius:
+                                                BorderRadius.circular(4),
+                                          ),
+                                          focusedErrorBorder:
+                                              UnderlineInputBorder(
+                                            borderSide: BorderSide(
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .primaryColor,
+                                              width: 2,
+                                            ),
+                                            borderRadius:
+                                                BorderRadius.circular(4),
+                                          ),
+                                        ),
+                                        style: FlutterFlowTheme.of(context)
+                                            .bodyText2
+                                            .override(
+                                              fontFamily: 'Open Sans',
+                                              fontWeight: FontWeight.w500,
+                                            ),
+                                        autovalidateMode:
+                                            AutovalidateMode.onUserInteraction,
+                                        validator: (val) {
+                                          final emails = val
+                                              .replaceAll(RegExp(r'\s+'), '')
+                                              .split(',');
+                                          return !validateEmail(emails)
+                                              ? '正しいメールアドレスを入力してください。'
+                                              : null;
+                                        },
+                                      ),
+                                    ),
+                                  ),
+                                ],
                               ),
                             ),
                           ),
@@ -734,7 +836,7 @@ class _UpdateShopPageWidgetState extends State<UpdateShopPageWidget> {
                                       padding: EdgeInsetsDirectional.fromSTEB(
                                           16, 0, 16, 8),
                                       child: TextFormField(
-                                        controller: textController6 ??=
+                                        controller: textController7 ??=
                                             CurrencyChecker.create(
                                                     shippingFee.toString())
                                                 .controller,
@@ -742,7 +844,7 @@ class _UpdateShopPageWidgetState extends State<UpdateShopPageWidget> {
                                           final checker =
                                               CurrencyChecker.create(text);
                                           setState(() {
-                                            textController6 =
+                                            textController7 =
                                                 checker.controller;
                                             shippingFee = checker.currency;
                                           });
@@ -801,7 +903,7 @@ class _UpdateShopPageWidgetState extends State<UpdateShopPageWidget> {
                                       padding: EdgeInsetsDirectional.fromSTEB(
                                           16, 0, 16, 8),
                                       child: TextFormField(
-                                        controller: textController7 ??=
+                                        controller: textController8 ??=
                                             CurrencyChecker.create(
                                                     shippingFreeTotal
                                                         .toString())
@@ -810,7 +912,7 @@ class _UpdateShopPageWidgetState extends State<UpdateShopPageWidget> {
                                           final checker =
                                               CurrencyChecker.create(text);
                                           setState(() {
-                                            textController7 =
+                                            textController8 =
                                                 checker.controller;
                                             shippingFreeTotal =
                                                 checker.currency;
@@ -877,7 +979,7 @@ class _UpdateShopPageWidgetState extends State<UpdateShopPageWidget> {
                                       padding: EdgeInsetsDirectional.fromSTEB(
                                           16, 0, 16, 8),
                                       child: TextFormField(
-                                        controller: textController8 ??=
+                                        controller: textController9 ??=
                                             TextEditingController(
                                                 text:
                                                     containerShopsRecord.email),
@@ -891,10 +993,7 @@ class _UpdateShopPageWidgetState extends State<UpdateShopPageWidget> {
                                               width: 1,
                                             ),
                                             borderRadius:
-                                                const BorderRadius.only(
-                                              topLeft: Radius.circular(4.0),
-                                              topRight: Radius.circular(4.0),
-                                            ),
+                                                BorderRadius.circular(4),
                                           ),
                                           focusedBorder: UnderlineInputBorder(
                                             borderSide: BorderSide(
@@ -902,10 +1001,7 @@ class _UpdateShopPageWidgetState extends State<UpdateShopPageWidget> {
                                               width: 1,
                                             ),
                                             borderRadius:
-                                                const BorderRadius.only(
-                                              topLeft: Radius.circular(4.0),
-                                              topRight: Radius.circular(4.0),
-                                            ),
+                                                BorderRadius.circular(4),
                                           ),
                                           errorStyle: TextStyle(
                                             color: FlutterFlowTheme.of(context)
@@ -969,7 +1065,7 @@ class _UpdateShopPageWidgetState extends State<UpdateShopPageWidget> {
                                       padding: EdgeInsetsDirectional.fromSTEB(
                                           16, 0, 16, 8),
                                       child: TextFormField(
-                                        controller: textController9 ??=
+                                        controller: textController10 ??=
                                             TextEditingController(
                                                 text:
                                                     containerShopsRecord.phone),
@@ -983,10 +1079,7 @@ class _UpdateShopPageWidgetState extends State<UpdateShopPageWidget> {
                                               width: 1,
                                             ),
                                             borderRadius:
-                                                const BorderRadius.only(
-                                              topLeft: Radius.circular(4.0),
-                                              topRight: Radius.circular(4.0),
-                                            ),
+                                                BorderRadius.circular(4),
                                           ),
                                           focusedBorder: UnderlineInputBorder(
                                             borderSide: BorderSide(
@@ -994,10 +1087,7 @@ class _UpdateShopPageWidgetState extends State<UpdateShopPageWidget> {
                                               width: 1,
                                             ),
                                             borderRadius:
-                                                const BorderRadius.only(
-                                              topLeft: Radius.circular(4.0),
-                                              topRight: Radius.circular(4.0),
-                                            ),
+                                                BorderRadius.circular(4),
                                           ),
                                           errorStyle: TextStyle(
                                             color: FlutterFlowTheme.of(context)
@@ -1082,7 +1172,7 @@ class _UpdateShopPageWidgetState extends State<UpdateShopPageWidget> {
                                               EdgeInsetsDirectional.fromSTEB(
                                                   16, 0, 16, 8),
                                           child: TextFormField(
-                                            controller: textController10 ??=
+                                            controller: textController11 ??=
                                                 TextEditingController(
                                                     text:
                                                         '$currentUserEmail $currentUserDisplayName'),
@@ -1098,11 +1188,7 @@ class _UpdateShopPageWidgetState extends State<UpdateShopPageWidget> {
                                                   width: 1,
                                                 ),
                                                 borderRadius:
-                                                    const BorderRadius.only(
-                                                  topLeft: Radius.circular(4.0),
-                                                  topRight:
-                                                      Radius.circular(4.0),
-                                                ),
+                                                    BorderRadius.circular(4),
                                               ),
                                               focusedBorder:
                                                   UnderlineInputBorder(
@@ -1111,11 +1197,7 @@ class _UpdateShopPageWidgetState extends State<UpdateShopPageWidget> {
                                                   width: 1,
                                                 ),
                                                 borderRadius:
-                                                    const BorderRadius.only(
-                                                  topLeft: Radius.circular(4.0),
-                                                  topRight:
-                                                      Radius.circular(4.0),
-                                                ),
+                                                    BorderRadius.circular(4),
                                               ),
                                               focusedErrorBorder:
                                                   UnderlineInputBorder(
@@ -1151,7 +1233,7 @@ class _UpdateShopPageWidgetState extends State<UpdateShopPageWidget> {
                                           onChanged: (val) => setState(() => {
                                                 directorRef =
                                                     currentUserReference,
-                                                textController10 =
+                                                textController11 =
                                                     TextEditingController(
                                                         text: val)
                                               }),
@@ -1204,7 +1286,7 @@ class _UpdateShopPageWidgetState extends State<UpdateShopPageWidget> {
                                       padding: EdgeInsetsDirectional.fromSTEB(
                                           16, 0, 16, 8),
                                       child: TextFormField(
-                                        controller: textController11 ??=
+                                        controller: textController12 ??=
                                             TextEditingController(
                                                 text: containerShopsRecord
                                                     .instagram),
@@ -1218,10 +1300,7 @@ class _UpdateShopPageWidgetState extends State<UpdateShopPageWidget> {
                                               width: 1,
                                             ),
                                             borderRadius:
-                                                const BorderRadius.only(
-                                              topLeft: Radius.circular(4.0),
-                                              topRight: Radius.circular(4.0),
-                                            ),
+                                                BorderRadius.circular(4),
                                           ),
                                           focusedBorder: UnderlineInputBorder(
                                             borderSide: BorderSide(
@@ -1229,70 +1308,7 @@ class _UpdateShopPageWidgetState extends State<UpdateShopPageWidget> {
                                               width: 1,
                                             ),
                                             borderRadius:
-                                                const BorderRadius.only(
-                                              topLeft: Radius.circular(4.0),
-                                              topRight: Radius.circular(4.0),
-                                            ),
-                                          ),
-                                        ),
-                                        style: FlutterFlowTheme.of(context)
-                                            .bodyText2
-                                            .override(
-                                              fontFamily: 'Open Sans',
-                                              fontWeight: FontWeight.w500,
-                                            ),
-                                      ),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ),
-                          Padding(
-                            padding:
-                                EdgeInsetsDirectional.fromSTEB(0, 0, 0, 16),
-                            child: Container(
-                              decoration: BoxDecoration(
-                                color: FlutterFlowTheme.of(context).background,
-                                borderRadius: BorderRadius.circular(8),
-                              ),
-                              child: Row(
-                                mainAxisSize: MainAxisSize.max,
-                                children: [
-                                  Expanded(
-                                    child: Padding(
-                                      padding: EdgeInsetsDirectional.fromSTEB(
-                                          16, 0, 16, 8),
-                                      child: TextFormField(
-                                        controller: textController12 ??=
-                                            TextEditingController(
-                                                text: containerShopsRecord
-                                                    .twitter),
-                                        obscureText: false,
-                                        decoration: InputDecoration(
-                                          labelText: 'Twitter',
-                                          isDense: true,
-                                          enabledBorder: UnderlineInputBorder(
-                                            borderSide: BorderSide(
-                                              color: Color(0x00000000),
-                                              width: 1,
-                                            ),
-                                            borderRadius:
-                                                const BorderRadius.only(
-                                              topLeft: Radius.circular(4.0),
-                                              topRight: Radius.circular(4.0),
-                                            ),
-                                          ),
-                                          focusedBorder: UnderlineInputBorder(
-                                            borderSide: BorderSide(
-                                              color: Color(0x00000000),
-                                              width: 1,
-                                            ),
-                                            borderRadius:
-                                                const BorderRadius.only(
-                                              topLeft: Radius.circular(4.0),
-                                              topRight: Radius.circular(4.0),
-                                            ),
+                                                BorderRadius.circular(4),
                                           ),
                                         ),
                                         style: FlutterFlowTheme.of(context)
@@ -1326,6 +1342,60 @@ class _UpdateShopPageWidgetState extends State<UpdateShopPageWidget> {
                                       child: TextFormField(
                                         controller: textController13 ??=
                                             TextEditingController(
+                                                text: containerShopsRecord
+                                                    .twitter),
+                                        obscureText: false,
+                                        decoration: InputDecoration(
+                                          labelText: 'Twitter',
+                                          isDense: true,
+                                          enabledBorder: UnderlineInputBorder(
+                                            borderSide: BorderSide(
+                                              color: Color(0x00000000),
+                                              width: 1,
+                                            ),
+                                            borderRadius:
+                                                BorderRadius.circular(4),
+                                          ),
+                                          focusedBorder: UnderlineInputBorder(
+                                            borderSide: BorderSide(
+                                              color: Color(0x00000000),
+                                              width: 1,
+                                            ),
+                                            borderRadius:
+                                                BorderRadius.circular(4),
+                                          ),
+                                        ),
+                                        style: FlutterFlowTheme.of(context)
+                                            .bodyText2
+                                            .override(
+                                              fontFamily: 'Open Sans',
+                                              fontWeight: FontWeight.w500,
+                                            ),
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                          Padding(
+                            padding:
+                                EdgeInsetsDirectional.fromSTEB(0, 0, 0, 16),
+                            child: Container(
+                              decoration: BoxDecoration(
+                                color: FlutterFlowTheme.of(context).background,
+                                borderRadius: BorderRadius.circular(8),
+                              ),
+                              child: Row(
+                                mainAxisSize: MainAxisSize.max,
+                                children: [
+                                  Expanded(
+                                    child: Padding(
+                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                          16, 0, 16, 8),
+                                      child: TextFormField(
+                                        controller: textController14 ??=
+                                            TextEditingController(
                                                 text: containerShopsRecord.web),
                                         obscureText: false,
                                         decoration: InputDecoration(
@@ -1337,10 +1407,7 @@ class _UpdateShopPageWidgetState extends State<UpdateShopPageWidget> {
                                               width: 1,
                                             ),
                                             borderRadius:
-                                                const BorderRadius.only(
-                                              topLeft: Radius.circular(4.0),
-                                              topRight: Radius.circular(4.0),
-                                            ),
+                                                BorderRadius.circular(4),
                                           ),
                                           focusedBorder: UnderlineInputBorder(
                                             borderSide: BorderSide(
@@ -1348,10 +1415,7 @@ class _UpdateShopPageWidgetState extends State<UpdateShopPageWidget> {
                                               width: 1,
                                             ),
                                             borderRadius:
-                                                const BorderRadius.only(
-                                              topLeft: Radius.circular(4.0),
-                                              topRight: Radius.circular(4.0),
-                                            ),
+                                                BorderRadius.circular(4),
                                           ),
                                         ),
                                         style: FlutterFlowTheme.of(context)
@@ -1444,18 +1508,20 @@ class _UpdateShopPageWidgetState extends State<UpdateShopPageWidget> {
                                           company: comRef,
                                           description:
                                               textController4.text ?? '',
-                                          display: false,
-                                          email: textController8.text ?? '',
+                                          display: display,
+                                          email: textController9.text ?? '',
                                           instagram:
-                                              textController11.text ?? '',
-                                          phone: textController9.text ?? '',
+                                              textController12.text ?? '',
+                                          phone: textController10.text ?? '',
                                           shopName: textController1.text ?? '',
-                                          twitter: textController12.text ?? '',
-                                          web: textController13.text ?? '',
+                                          twitter: textController13.text ?? '',
+                                          web: textController14.text ?? '',
                                           director: directorRef ??
                                               currentUserReference,
                                           shippingFee: shippingFee,
                                           shippingFreeTotal: shippingFreeTotal,
+                                          internal: textController6.text
+                                              .replaceAll(RegExp(r'\s+'), ''),
                                         );
 
                                         ShopsRecord _shop;
@@ -1550,7 +1616,7 @@ class _UpdateShopPageWidgetState extends State<UpdateShopPageWidget> {
                                         color: Colors.transparent,
                                         width: 1,
                                       ),
-                                      borderRadius: 12,
+                                      borderRadius: BorderRadius.circular(12),
                                     ),
                                   ),
                                 ],

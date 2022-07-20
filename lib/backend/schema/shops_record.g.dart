@@ -118,6 +118,13 @@ class _$ShopsRecordSerializer implements StructuredSerializer<ShopsRecord> {
             specifiedType: const FullType(
                 DocumentReference, const [const FullType(Object)])));
     }
+    value = object.internal;
+    if (value != null) {
+      result
+        ..add('internal')
+        ..add(serializers.serialize(value,
+            specifiedType: const FullType(String)));
+    }
     value = object.reference;
     if (value != null) {
       result
@@ -202,6 +209,10 @@ class _$ShopsRecordSerializer implements StructuredSerializer<ShopsRecord> {
                       DocumentReference, const [const FullType(Object)]))
               as DocumentReference<Object>;
           break;
+        case 'internal':
+          result.internal = serializers.deserialize(value,
+              specifiedType: const FullType(String)) as String;
+          break;
         case 'Document__Reference__Field':
           result.reference = serializers.deserialize(value,
                   specifiedType: const FullType(
@@ -245,6 +256,8 @@ class _$ShopsRecord extends ShopsRecord {
   @override
   final DocumentReference<Object> director;
   @override
+  final String internal;
+  @override
   final DocumentReference<Object> reference;
 
   factory _$ShopsRecord([void Function(ShopsRecordBuilder) updates]) =>
@@ -265,6 +278,7 @@ class _$ShopsRecord extends ShopsRecord {
       this.twitter,
       this.web,
       this.director,
+      this.internal,
       this.reference})
       : super._();
 
@@ -293,6 +307,7 @@ class _$ShopsRecord extends ShopsRecord {
         twitter == other.twitter &&
         web == other.web &&
         director == other.director &&
+        internal == other.internal &&
         reference == other.reference;
   }
 
@@ -313,22 +328,25 @@ class _$ShopsRecord extends ShopsRecord {
                                                     $jc(
                                                         $jc(
                                                             $jc(
-                                                                0,
-                                                                banner
+                                                                $jc(
+                                                                    0,
+                                                                    banner
+                                                                        .hashCode),
+                                                                catMain
                                                                     .hashCode),
-                                                            catMain.hashCode),
-                                                        company.hashCode),
-                                                    description.hashCode),
-                                                display.hashCode),
-                                            email.hashCode),
-                                        instagram.hashCode),
-                                    phone.hashCode),
-                                shippingFee.hashCode),
-                            shippingFreeTotal.hashCode),
-                        shopName.hashCode),
-                    twitter.hashCode),
-                web.hashCode),
-            director.hashCode),
+                                                            company.hashCode),
+                                                        description.hashCode),
+                                                    display.hashCode),
+                                                email.hashCode),
+                                            instagram.hashCode),
+                                        phone.hashCode),
+                                    shippingFee.hashCode),
+                                shippingFreeTotal.hashCode),
+                            shopName.hashCode),
+                        twitter.hashCode),
+                    web.hashCode),
+                director.hashCode),
+            internal.hashCode),
         reference.hashCode));
   }
 
@@ -349,6 +367,7 @@ class _$ShopsRecord extends ShopsRecord {
           ..add('twitter', twitter)
           ..add('web', web)
           ..add('director', director)
+          ..add('internal', internal)
           ..add('reference', reference))
         .toString();
   }
@@ -415,6 +434,10 @@ class ShopsRecordBuilder implements Builder<ShopsRecord, ShopsRecordBuilder> {
   set director(DocumentReference<Object> director) =>
       _$this._director = director;
 
+  String _internal;
+  String get internal => _$this._internal;
+  set internal(String internal) => _$this._internal = internal;
+
   DocumentReference<Object> _reference;
   DocumentReference<Object> get reference => _$this._reference;
   set reference(DocumentReference<Object> reference) =>
@@ -441,6 +464,7 @@ class ShopsRecordBuilder implements Builder<ShopsRecord, ShopsRecordBuilder> {
       _twitter = $v.twitter;
       _web = $v.web;
       _director = $v.director;
+      _internal = $v.internal;
       _reference = $v.reference;
       _$v = null;
     }
@@ -476,6 +500,7 @@ class ShopsRecordBuilder implements Builder<ShopsRecord, ShopsRecordBuilder> {
             twitter: twitter,
             web: web,
             director: director,
+            internal: internal,
             reference: reference);
     replace(_$result);
     return _$result;

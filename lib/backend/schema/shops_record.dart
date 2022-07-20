@@ -56,6 +56,9 @@ abstract class ShopsRecord implements Built<ShopsRecord, ShopsRecordBuilder> {
   DocumentReference get director;
 
   @nullable
+  String get internal;
+
+  @nullable
   @BuiltValueField(wireName: kDocumentReferenceField)
   DocumentReference get reference;
 
@@ -70,7 +73,8 @@ abstract class ShopsRecord implements Built<ShopsRecord, ShopsRecordBuilder> {
     ..shippingFreeTotal = 0
     ..shopName = ''
     ..twitter = ''
-    ..web = '';
+    ..web = ''
+    ..internal = '';
 
   static CollectionReference get collection =>
       FirebaseFirestore.instance.collection('shops');
@@ -108,6 +112,7 @@ Map<String, dynamic> createShopsRecordData({
   String twitter,
   String web,
   DocumentReference director,
+  String internal,
 }) =>
     serializers.toFirestore(
         ShopsRecord.serializer,
@@ -125,4 +130,5 @@ Map<String, dynamic> createShopsRecordData({
           ..shopName = shopName
           ..twitter = twitter
           ..web = web
-          ..director = director));
+          ..director = director
+          ..internal = internal));

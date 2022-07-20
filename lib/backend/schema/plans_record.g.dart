@@ -115,6 +115,13 @@ class _$PlansRecordSerializer implements StructuredSerializer<PlansRecord> {
         ..add(serializers.serialize(value,
             specifiedType: const FullType(DateTime)));
     }
+    value = object.verifyAge;
+    if (value != null) {
+      result
+        ..add('verify_age')
+        ..add(
+            serializers.serialize(value, specifiedType: const FullType(bool)));
+    }
     value = object.reference;
     if (value != null) {
       result
@@ -195,6 +202,10 @@ class _$PlansRecordSerializer implements StructuredSerializer<PlansRecord> {
           result.updated = serializers.deserialize(value,
               specifiedType: const FullType(DateTime)) as DateTime;
           break;
+        case 'verify_age':
+          result.verifyAge = serializers.deserialize(value,
+              specifiedType: const FullType(bool)) as bool;
+          break;
         case 'Document__Reference__Field':
           result.reference = serializers.deserialize(value,
                   specifiedType: const FullType(
@@ -238,6 +249,8 @@ class _$PlansRecord extends PlansRecord {
   @override
   final DateTime updated;
   @override
+  final bool verifyAge;
+  @override
   final DocumentReference<Object> reference;
 
   factory _$PlansRecord([void Function(PlansRecordBuilder) updates]) =>
@@ -258,6 +271,7 @@ class _$PlansRecord extends PlansRecord {
       this.shippingFeeNormal,
       this.shippingNormal,
       this.updated,
+      this.verifyAge,
       this.reference})
       : super._();
 
@@ -286,6 +300,7 @@ class _$PlansRecord extends PlansRecord {
         shippingFeeNormal == other.shippingFeeNormal &&
         shippingNormal == other.shippingNormal &&
         updated == other.updated &&
+        verifyAge == other.verifyAge &&
         reference == other.reference;
   }
 
@@ -306,23 +321,25 @@ class _$PlansRecord extends PlansRecord {
                                                     $jc(
                                                         $jc(
                                                             $jc(
-                                                                0,
-                                                                active
+                                                                $jc(
+                                                                    0,
+                                                                    active
+                                                                        .hashCode),
+                                                                activeQuick
                                                                     .hashCode),
-                                                            activeQuick
-                                                                .hashCode),
-                                                        banner.hashCode),
-                                                    description.hashCode),
-                                                name.hashCode),
-                                            published.hashCode),
-                                        quantityMax.hashCode),
-                                    shippingEachFee.hashCode),
-                                shippingQuick.hashCode),
-                            shop.hashCode),
-                        unitAmount.hashCode),
-                    shippingFeeNormal.hashCode),
-                shippingNormal.hashCode),
-            updated.hashCode),
+                                                            banner.hashCode),
+                                                        description.hashCode),
+                                                    name.hashCode),
+                                                published.hashCode),
+                                            quantityMax.hashCode),
+                                        shippingEachFee.hashCode),
+                                    shippingQuick.hashCode),
+                                shop.hashCode),
+                            unitAmount.hashCode),
+                        shippingFeeNormal.hashCode),
+                    shippingNormal.hashCode),
+                updated.hashCode),
+            verifyAge.hashCode),
         reference.hashCode));
   }
 
@@ -343,6 +360,7 @@ class _$PlansRecord extends PlansRecord {
           ..add('shippingFeeNormal', shippingFeeNormal)
           ..add('shippingNormal', shippingNormal)
           ..add('updated', updated)
+          ..add('verifyAge', verifyAge)
           ..add('reference', reference))
         .toString();
   }
@@ -411,6 +429,10 @@ class PlansRecordBuilder implements Builder<PlansRecord, PlansRecordBuilder> {
   DateTime get updated => _$this._updated;
   set updated(DateTime updated) => _$this._updated = updated;
 
+  bool _verifyAge;
+  bool get verifyAge => _$this._verifyAge;
+  set verifyAge(bool verifyAge) => _$this._verifyAge = verifyAge;
+
   DocumentReference<Object> _reference;
   DocumentReference<Object> get reference => _$this._reference;
   set reference(DocumentReference<Object> reference) =>
@@ -437,6 +459,7 @@ class PlansRecordBuilder implements Builder<PlansRecord, PlansRecordBuilder> {
       _shippingFeeNormal = $v.shippingFeeNormal;
       _shippingNormal = $v.shippingNormal;
       _updated = $v.updated;
+      _verifyAge = $v.verifyAge;
       _reference = $v.reference;
       _$v = null;
     }
@@ -472,6 +495,7 @@ class PlansRecordBuilder implements Builder<PlansRecord, PlansRecordBuilder> {
             shippingFeeNormal: shippingFeeNormal,
             shippingNormal: shippingNormal,
             updated: updated,
+            verifyAge: verifyAge,
             reference: reference);
     replace(_$result);
     return _$result;

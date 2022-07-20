@@ -79,15 +79,15 @@ class _MainMenuWidgetState extends State<MainMenuWidget> {
                       // Customize what your widget looks like when it's loading.
                       if (snapshot.connectionState != ConnectionState.done) {
                         return Center(
-                          child: SizedBox(
-                            width: 50,
-                            height: 50,
-                            child: SpinKitPulse(
-                              color: FlutterFlowTheme.of(context).primaryColor,
-                              size: 50,
-                            ),
-                          ),
-                        );
+                            // child: SizedBox(
+                            //   width: 50,
+                            //   height: 50,
+                            //   child: SpinKitPulse(
+                            //     color: FlutterFlowTheme.of(context).primaryColor,
+                            //     size: 50,
+                            //   ),
+                            // ),
+                            );
                       }
                       final _adminUser = snapshot.data;
                       return Container(
@@ -132,7 +132,7 @@ class _MainMenuWidgetState extends State<MainMenuWidget> {
                                       borderSide: BorderSide(
                                         color: Colors.transparent,
                                       ),
-                                      borderRadius: 0,
+                                      borderRadius: BorderRadius.circular(0),
                                     ),
                                   ),
                                   Align(
@@ -193,7 +193,7 @@ class _MainMenuWidgetState extends State<MainMenuWidget> {
                                       borderSide: BorderSide(
                                         color: Colors.transparent,
                                       ),
-                                      borderRadius: 0,
+                                      borderRadius: BorderRadius.circular(0),
                                     ),
                                   ),
                                   Align(
@@ -249,7 +249,8 @@ class _MainMenuWidgetState extends State<MainMenuWidget> {
                                           borderSide: BorderSide(
                                             color: Colors.transparent,
                                           ),
-                                          borderRadius: 0,
+                                          borderRadius:
+                                              BorderRadius.circular(0),
                                         ),
                                       ),
                                     ),
@@ -306,7 +307,8 @@ class _MainMenuWidgetState extends State<MainMenuWidget> {
                                           borderSide: BorderSide(
                                             color: Colors.transparent,
                                           ),
-                                          borderRadius: 0,
+                                          borderRadius:
+                                              BorderRadius.circular(0),
                                         ),
                                       ),
                                     ),
@@ -361,7 +363,7 @@ class _MainMenuWidgetState extends State<MainMenuWidget> {
                                         borderSide: BorderSide(
                                           color: Colors.transparent,
                                         ),
-                                        borderRadius: 0,
+                                        borderRadius: BorderRadius.circular(0),
                                       ),
                                     ),
                                   ),
@@ -415,7 +417,7 @@ class _MainMenuWidgetState extends State<MainMenuWidget> {
                                         borderSide: BorderSide(
                                           color: Colors.transparent,
                                         ),
-                                        borderRadius: 0,
+                                        borderRadius: BorderRadius.circular(0),
                                       ),
                                     ),
                                   ),
@@ -478,7 +480,7 @@ class _MainMenuWidgetState extends State<MainMenuWidget> {
                                         borderSide: BorderSide(
                                           color: Colors.transparent,
                                         ),
-                                        borderRadius: 0,
+                                        borderRadius: BorderRadius.circular(0),
                                       ),
                                     ),
                                     Align(

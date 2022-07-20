@@ -2,7 +2,6 @@ import '../backend/backend.dart';
 import '../components/header_widget.dart';
 import '../components/main_menu_widget.dart';
 import '../components/update_com_page_widget.dart';
-import '../components/update_plan_page_widget.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
@@ -176,7 +175,8 @@ class _ComListPageWidgetState extends State<ComListPageWidget> {
                                             color: Colors.transparent,
                                             width: 1,
                                           ),
-                                          borderRadius: 4,
+                                          borderRadius:
+                                              BorderRadius.circular(4),
                                         ),
                                         showLoadingIndicator: false,
                                       ),
